@@ -1,0 +1,30 @@
+{
+    "name": "myproject/mysdk",
+    "description": "Package generated from http://developer.ebay.com/webservices/latest/ebaysvc.wsdl using wsdltophp/packagegenerator",
+    "require": {
+        "roave/security-advisories": "dev-master",
+        "php": ">=5.6.9",
+        "ext-soap": "*",
+        "wsdltophp/packagebase": "~2.0",
+        "psr/log": "^1.1",
+        "monolog/monolog": "^1.24",
+        "kint-php/kint": "^3.1"
+    },
+    "config": {
+        "discard-changes": true,
+        "secure-http": false,
+        "platform": {
+            "php": "5.6.9",
+            "ext-soap": "5.6.9"
+        }
+    },
+    "autoload": {
+        "classmap": [
+            "trading.php",
+            "finding.php",
+            "base.php",
+            "src_trading/",
+            "src_finding/"
+        ]
+    }
+}
