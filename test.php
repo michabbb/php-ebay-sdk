@@ -2,6 +2,10 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use macropage\ebaysdk\finding\finding;
+use macropage\ebaysdk\shopping\shopping;
+use macropage\ebaysdk\shopping\StructType\GeteBayTimeRequestType;
+use macropage\ebaysdk\shopping\StructType\GetMultipleItemsRequestType;
+use macropage\ebaysdk\shopping\StructType\GetMultipleItemsResponseType;
 use macropage\ebaysdk\trading\trading;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -14,7 +18,26 @@ try {
 	throw new \RuntimeException($e);
 }
 
-$appid = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX			';
+$appid = 'xxxxxxxxxxxxxxxxxxxx';
+
+$ShoppingService = new shopping();
+$ShoppingService->setLogger($log);
+$ShoppingService->setCredentials($appid);
+$ShoppingService->setSiteId(77);
+$ShoppingService->setVersion(1085);
+$GetMultipleItemsRequestType = new GetMultipleItemsRequestType(['293001296773','143143295679','392082825490'],'Details');
+/** @var GetMultipleItemsResponseType $response */
+$response = $ShoppingService->GetMultipleItems($GetMultipleItemsRequestType);
+d($response);
+foreach ($response->Item as $item) {
+	echo 'ItemID: '.$item->ItemID."\n";
+	echo 'QuantitySold: '.$item->getQuantitySold()."\n";
+	echo "=================================================\n";
+}
+$GeteBayTimeRequestType = new GeteBayTimeRequestType();
+$response = $ShoppingService->GeteBayTime($GeteBayTimeRequestType);
+d($response);
+exit;
 
 $FindingService = new finding();
 $FindingService->setLogger($log);

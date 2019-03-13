@@ -1,12 +1,21 @@
-<?php
+<?php /** @noinspection ClassConstantCanBeUsedInspection */
+
 namespace macropage\ebaysdk\base;
 
+
+use DateTime;
+use DateTimeZone;
+use Exception;
+use macropage\ebaysdk\trading\ServiceType\Service;
+use Psr\Log\LoggerInterface;
+use RuntimeException;
+use SoapFault;
 
 class base {
 
 	protected $appid;
 	/**
-	 * @var \macropage\ebaysdk\trading\ServiceType\Service
+	 * @var Service
 	 */
 	protected $Service;
 	/**
@@ -14,7 +23,7 @@ class base {
 	 */
 	protected $version;
 	/**
-	 * @var \Psr\Log\LoggerInterface The logger for the service.
+	 * @var LoggerInterface The logger for the service.
 	 */
 	protected $logger;
 	protected $soap_url_location;
@@ -31,11 +40,11 @@ class base {
 
 	/**
 	 *
-	 * @param $logger \Psr\Log\LoggerInterface The logger instance the service will use.
+	 * @param $logger LoggerInterface The logger instance the service will use.
 	 *
-	 * @return \Psr\Log\LoggerInterface The logger instance or null if one hasn't been assigned.
+	 * @return LoggerInterface The logger instance or null if one hasn't been assigned.
 	 */
-	public function setLogger(\Psr\Log\LoggerInterface $logger = null) {
+	public function setLogger(LoggerInterface $logger = null) {
 		if ($logger) {
 			$this->logger = $logger;
 		}
@@ -88,9 +97,12 @@ class base {
 					return $result;
 				}
 
-				throw new \RuntimeException('unknow method ' . (string)$method);
+				throw new RuntimeException('unknow method ' . $method);
 				break;
-			case 'macropage\ebaysdk\trading\ServiceType\Service': // Trading
+			case 'macropage\ebaysdk\shopping\ServiceType\Find':    // Shopping
+			case 'macropage\ebaysdk\shopping\ServiceType\Get':     // Shopping
+			case 'macropage\ebaysdk\shopping\ServiceType\Gete':    // Shopping
+			case 'macropage\ebaysdk\trading\ServiceType\Service':  // Trading
 				if (method_exists($this->Service, $method)) {
 					try {
 						if (
@@ -104,14 +116,14 @@ class base {
 						$this->log($method);
 
 						return $result;
-					} catch (\RuntimeException $e) {
-						throw new \RuntimeException($e);
+					} catch (RuntimeException $e) {
+						throw new RuntimeException($e);
 					}
 				}
-				throw new \RuntimeException('unknow method ' . (string)$method);
+				throw new RuntimeException('unknow method ' . $method);
 				break;
 			default:
-				throw new \RuntimeException('unknown Service: ' . (string)$this->Service);
+				throw new RuntimeException('unknown Service: ' . $this->Service);
 				break;
 		}
 	}
@@ -131,10 +143,13 @@ class base {
 	/**
 	 * Logs the request details.
 	 *
-	 * @param string $name    The name of the operation.
-	 * @param string $url     API endpoint.
-	 * @param array  $headers Associative array of HTTP headers.
-	 * @param string $body    The XML body of the POST request.
+	 * @param string $url  API endpoint.
+	 * @param string $name The name of the operation.
+	 * @param        $headers_request
+	 * @param        $request_xml
+	 * @param        $headers_response
+	 * @param        $reponse_xml
+	 * @param        $last_error
 	 */
 	private function logRequest($url, $name, $headers_request, $request_xml, $headers_response, $reponse_xml, $last_error) {
 		if ($this->logger) {
@@ -142,7 +157,7 @@ class base {
 			$faulstring_detail = '';
 			if (is_array($last_error)) {
 				foreach ($last_error as $errentry) {
-					if (is_object($errentry) && $errentry instanceof \SoapFault) {
+					if (is_object($errentry) && $errentry instanceof SoapFault) {
 						$faulstring = $errentry->getMessage();
 						if (is_object($errentry->detail)) {
 							if ($errentry->detail->FaultDetail->DetailedMessage) {
@@ -169,18 +184,18 @@ class base {
 		}
 	}
 
-	function GmtTimeToLocalTime($datetime) {
+	public function GmtTimeToLocalTime($datetime) {
 		$default_timezone = date_default_timezone_get();
 		date_default_timezone_set('UTC');
 		try {
-			$new_date = new \DateTime($datetime);
-		} catch (\Exception $e) {
-			throw new \RuntimeException('unable to parese date: ' . $datetime);
+			$new_date = new DateTime($datetime);
+		} catch (Exception $e) {
+			throw new RuntimeException('unable to parese date: ' . $datetime);
 		}
-		$new_date->setTimeZone(new \DateTimeZone($default_timezone));
+		$new_date->setTimezone(new DateTimeZone($default_timezone));
 		date_default_timezone_set($default_timezone);
 
-		return $new_date->format("Y-m-d h:i:s");
+		return $new_date->format('Y-m-d h:i:s');
 	}
 
 	protected function overrideSoapWsdlOptions($default, $new) {
