@@ -1,6 +1,6 @@
-# wsdl2php-ebay-testing
+# this project is not tested, it only exists to test how well wsdltophp works
 
-`src_findinng` and `src_trading` have been created with https://github.com/WsdlToPhp/PackageGenerator 
+`src_findinng` and `src_trading` and `src_shopping` have been created with https://github.com/WsdlToPhp/PackageGenerator 
 
 `./wsdltophp-php5.phar generate:package --urlorpath="http://developer.ebay.com/webservices/latest/ebaysvc.wsdl" --destination="/app/MySdk" --composer-name="myproject/mysdk" --force`
 
