@@ -1,6 +1,6 @@
 {
-    "name": "myproject/mysdk",
-    "description": "Package generated from http://developer.ebay.com/webservices/latest/ebaysvc.wsdl using wsdltophp/packagegenerator",
+    "name": "macropage/php-ebay-sdk",
+    "description": "TESTING ONLY !!! - The Object files have been created with this wonderful project: https://github.com/WsdlToPhp/PackageGenerator",
     "require": {
         "roave/security-advisories": "dev-master",
         "php": ">=5.6.9",
@@ -22,9 +22,11 @@
         "classmap": [
             "trading.php",
             "finding.php",
+            "shopping.php",
             "base.php",
             "src_trading/",
-            "src_finding/"
+            "src_finding/",
+            "src_shopping/"
         ]
     }
 }
