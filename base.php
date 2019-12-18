@@ -128,6 +128,18 @@ class base {
 		}
 	}
 
+	protected function getDebugInfos() {
+		return [
+			'ApiEndpoint'         => $this->api_endpoint,
+			'SoapUrlLocation'     => $this->soap_url_location,
+			'LastRequestHeaders'  => $this->Service->getLastRequestHeaders(),
+			'LastRequest'         => $this->Service->getLastRequest(),
+			'LastResponseHeaders' => $this->Service->getLastResponseHeaders(),
+			'LastResponse'        => $this->Service->getLastResponse(),
+			'LastError'           => $this->Service->getLastError() ? : null
+		];
+	}
+
 	private function log($method) {
 		$this->logRequest(
 			$this->soap_url_location,
