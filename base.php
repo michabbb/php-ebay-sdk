@@ -123,7 +123,7 @@ class base {
 								if ($Error instanceof SoapFault) {
 									throw $Error;
 								}
-								throw new \RuntimeException('unknown error type: ' . get_class($this->Service->getLastError()[0]));
+								throw new \RuntimeException('unknown error type: ' . get_class($Error));
 							}
 							throw new \RuntimeException('unknown error type: please check your logs');
 						}
