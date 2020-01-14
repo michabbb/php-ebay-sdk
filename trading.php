@@ -185,6 +185,13 @@ class trading extends base {
 		}
 	}
 
+	/**
+	 * @param $name
+	 * @param $arguments
+	 *
+	 * @return mixed
+	 * @throws \SoapFault
+	 */
 	public function __call($name, $arguments) {
 		return $this->call($name,$arguments);
 	}

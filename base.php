@@ -81,6 +81,7 @@ class base {
 	 * @param $args
 	 *
 	 * @return mixed
+	 * @throws SoapFault
 	 */
 	public function call($method, $args) {
 		switch ((string)$this->Service) {
@@ -114,6 +115,18 @@ class base {
 						$this->Service->setLocation($this->api_endpoint . '?callname=' . $method . '&siteid=' . $this->siteId . '&appid=' . $this->appid . '&version=' . $this->version . '&routing=new');
 						$result = call_user_func_array([$this->Service, $method], $args);
 						$this->log($method);
+
+						if (count($this->Service->getLastError())) {
+							$Errors = $this->Service->getLastError();
+							if (is_array($Errors)) {
+								$Error = reset($Errors);
+								if ($Error instanceof SoapFault) {
+									throw $Error;
+								}
+								throw new \RuntimeException('unknown error type: ' . get_class($this->Service->getLastError()[0]));
+							}
+							throw new \RuntimeException('unknown error type: please check your logs');
+						}
 
 						return $result;
 					} catch (RuntimeException $e) {
