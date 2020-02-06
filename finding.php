@@ -3,6 +3,7 @@
 namespace macropage\ebaysdk\finding;
 
 use macropage\ebaysdk\base\base;
+use macropage\ebaysdk\base\soap_client_finding;
 use macropage\ebaysdk\finding\ClassMap as ClassMapfindingService;
 use macropage\ebaysdk\finding\ServiceType as EbayfindingSerice;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase as SoapClientBase;
@@ -47,6 +48,8 @@ class finding extends base {
 
 		$wsdlOptions = $this->overrideSoapWsdlOptions($this->SoapServicoptions, $wsdlOptions);
 		$this->Service = new EbayfindingSerice\Service($wsdlOptions);
+		$SpecialSoapClientForFinding = new soap_client_finding($this->SoapServicoptions['wsdl_url'], $wsdlOptions);
+		$this->Service->setSoapClient($SpecialSoapClientForFinding);
 		if (array_key_exists($api_endpoint, $this->api_endpoints)) {
 			$this->api_endpoint = $this->api_endpoints[$api_endpoint];
 		} else {
@@ -54,43 +57,7 @@ class finding extends base {
 		}
 	}
 
-	/**
-	 * @param $obj
-	 *
-	 * @return mixed
-	 *
-	 * @see https://stackoverflow.com/a/39931047/1092858
-	 * @see https://www.fischco.org/technica/2011/php-soap/
-	 * @see https://stackoverflow.com/a/5602699/1092858
-	 */
-	private function addNamespaceToObjects($obj) {
-		if (is_object($obj)) {
-			foreach ((new \ReflectionObject($obj))->getProperties(\ReflectionProperty::IS_PUBLIC) as $property) {
-				$property_name = $property->name;
-				if (is_object($obj->{$property->name})) {
-					$obj->$property_name = new \SoapVar(self::addNamespaceToObjects($obj->{$property->name}), SOAP_ENC_OBJECT, null, null, null, $this->soap_namespace);
-				} elseif (is_array($obj->{$property->name})) {
-					$ArrayObject = new \ArrayObject();
-					foreach ($obj->{$property->name} as $avalue) {
-						$ArrayObject->append(self::addNamespaceToObjects($avalue));
-					}
-					$obj->$property_name = (array)$ArrayObject;
-				} else {
-					if ($obj->{$property->name}) {
-						$obj->$property_name = new \SoapVar($obj->{$property->name}, XSD_STRING, null, null, null, $this->soap_namespace);
-					}
-				}
-			}
-		} else {
-			return new \SoapVar($obj, XSD_STRING, null, null, null, $this->soap_namespace);
-		}
-		return $obj;
-	}
-
 	public function __call($name, $arguments) {
-		if (is_object($arguments[0]) && strpos((string)$arguments[0],'Request')!==false) {
-			$arguments[0] = $this->addNamespaceToObjects($arguments[0]);
-		}
 		return $this->call($name, $arguments);
 	}
 

@@ -26,7 +26,8 @@
             "base.php",
             "src_trading/",
             "src_finding/",
-            "src_shopping/"
+            "src_shopping/",
+            "soap_client_finding.php"
         ]
     }
 }
