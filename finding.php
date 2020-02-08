@@ -40,7 +40,7 @@ class finding extends base {
 
 	public function __construct(array $wsdlOptions = [], $api_endpoint = 'live') {
 		$this->SoapServicoptions = [
-			SoapClientBase::WSDL_URL        => 'https://developer.ebay.com/webservices/Finding/latest/FindingService.wsdl',
+			SoapClientBase::WSDL_URL        => __DIR__.DIRECTORY_SEPARATOR.'wsdl'.DIRECTORY_SEPARATOR.'finding.wsdl',
 			SoapClientBase::WSDL_CLASSMAP   => ClassMapfindingService::get(),
 			SoapClientBase::WSDL_TRACE      => true,
 			SoapClientBase::WSDL_CACHE_WSDL => WSDL_CACHE_BOTH,
