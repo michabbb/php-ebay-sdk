@@ -169,10 +169,17 @@ class trading extends base {
 
 	public function __construct(array $wsdlOptions = [],$api_endpoint='live') {
 		$this->SoapServicoptions = [
-			AbstractSoapClientBaseAlias::WSDL_URL        => __DIR__.DIRECTORY_SEPARATOR.'wsdl'.DIRECTORY_SEPARATOR.'trading.wsdl',
-			AbstractSoapClientBaseAlias::WSDL_CLASSMAP   => ClassMapTradingService::get(),
-			AbstractSoapClientBaseAlias::WSDL_TRACE      => true,
-			AbstractSoapClientBaseAlias::WSDL_CACHE_WSDL => WSDL_CACHE_BOTH,
+			AbstractSoapClientBaseAlias::WSDL_URL            => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'trading.wsdl',
+			AbstractSoapClientBaseAlias::WSDL_CLASSMAP       => ClassMapTradingService::get(),
+			AbstractSoapClientBaseAlias::WSDL_TRACE          => true,
+			AbstractSoapClientBaseAlias::WSDL_CACHE_WSDL     => WSDL_CACHE_BOTH,
+			AbstractSoapClientBaseAlias::WSDL_STREAM_CONTEXT => stream_context_create([
+																						  'ssl' => [
+																							  'verify_peer'       => false,
+																							  'verify_host'       => false,
+																							  'allow_self_signed' => true,
+																						  ]
+																					  ])
 		];
 
 		$wsdlOptions = $this->overrideSoapWsdlOptions($this->SoapServicoptions,$wsdlOptions);

@@ -31,7 +31,6 @@ class finding extends base {
 	 * @var array
 	 */
 	private $SoapServicoptions;
-	private $soap_namespace = 'http://www.ebay.com/marketplace/search/v1/services';
 
 	private $api_endpoints = [
 		'live'    => 'https://svcs.ebay.com/services/search/FindingService/v1',
@@ -40,10 +39,17 @@ class finding extends base {
 
 	public function __construct(array $wsdlOptions = [], $api_endpoint = 'live') {
 		$this->SoapServicoptions = [
-			SoapClientBase::WSDL_URL        => __DIR__.DIRECTORY_SEPARATOR.'wsdl'.DIRECTORY_SEPARATOR.'finding.wsdl',
-			SoapClientBase::WSDL_CLASSMAP   => ClassMapfindingService::get(),
-			SoapClientBase::WSDL_TRACE      => true,
-			SoapClientBase::WSDL_CACHE_WSDL => WSDL_CACHE_BOTH,
+			SoapClientBase::WSDL_URL            => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'finding.wsdl',
+			SoapClientBase::WSDL_CLASSMAP       => ClassMapfindingService::get(),
+			SoapClientBase::WSDL_TRACE          => true,
+			SoapClientBase::WSDL_CACHE_WSDL     => WSDL_CACHE_BOTH,
+			SoapClientBase::WSDL_STREAM_CONTEXT => stream_context_create([
+																			 'ssl' => [
+																				 'verify_peer'       => false,
+																				 'verify_host'       => false,
+																				 'allow_self_signed' => true,
+																			 ]
+																		 ])
 		];
 
 		$wsdlOptions = $this->overrideSoapWsdlOptions($this->SoapServicoptions, $wsdlOptions);
