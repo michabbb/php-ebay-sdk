@@ -113,9 +113,9 @@ class base {
 							$args[0]->setVersion((string)$this->version);
 						}
 
-						$this->log($method);
 						$this->Service->setLocation($this->api_endpoint . '?callname=' . $method . '&siteid=' . $this->siteId . '&appid=' . $this->appid . '&version=' . $this->version . '&routing=new');
 						$result = call_user_func_array([$this->Service, $method], $args);
+						$this->log($method);
 
 						if (!$result && count($this->Service->getLastError())) {
 							$Errors = $this->Service->getLastError();
