@@ -56,7 +56,7 @@ class shopping extends base {
 	public function __construct($api_endpoint = 'live', array $wsdlOptions = []) {
 
 		$this->SoapServicoptions = [
-			AbstractSoapClientBaseAlias::WSDL_URL        => __DIR__ . DIRECTORY_SEPARATOR . 'ShoppingService.wsdl',
+			AbstractSoapClientBaseAlias::WSDL_URL        => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'shopping.wsdl',
 			AbstractSoapClientBaseAlias::WSDL_CLASSMAP   => ClassMapShoopingService::get(),
 			AbstractSoapClientBaseAlias::WSDL_TRACE      => true,
 			AbstractSoapClientBaseAlias::WSDL_CACHE_WSDL => WSDL_CACHE_BOTH,
