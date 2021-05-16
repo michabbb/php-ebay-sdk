@@ -1,10 +1,8 @@
-# this project is not tested, it only exists to test how well wsdltophp works
+# This is a simple SDK for the eBay APIs: trading, shopping, finding
 
-`src_findinng` and `src_trading` and `src_shopping` have been created with https://github.com/WsdlToPhp/PackageGenerator 
+`src_findinng` and `src_trading` and `src_shopping` have been created with https://github.com/WsdlToPhp/PackageGenerator
+the rest are wrappers to make this auto-generated stuff working.
 
-`./wsdltophp-php5.phar generate:package --urlorpath="http://developer.ebay.com/webservices/latest/ebaysvc.wsdl" --destination="/app/MySdk" --composer-name="myproject/mysdk" --force`
+The PHP 5 Code workes fine, but you won´t see any updates or bufixes here. 
 
-the rest are wrappers to make this auto-generated stuff working.  
-this is only for testing!
-
-see `test.php` for examples.
+**To get the latest code, please look into the branch [php8](https://github.com/michabbb/php-ebay-sdk/tree/php8)** 
