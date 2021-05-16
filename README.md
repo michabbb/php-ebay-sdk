@@ -54,7 +54,7 @@ ebayTradingwsdl2php() {
 run with: `ebayTradingwsdl2php --force`
 
 to get an idea, how it´s working, take look into `test.php`.
-``
+
 
 |API|Version|
 |----|----|
