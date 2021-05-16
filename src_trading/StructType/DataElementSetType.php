@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DataElementSetType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,32 +17,32 @@ class DataElementSetType extends AbstractStructBase
 {
     /**
      * The DataElement
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DataElement;
+    protected ?string $DataElement = null;
     /**
      * The DataElementID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DataElementID;
+    protected ?int $DataElementID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * The attributeSetID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This attribute is deprecated.
-     * @var int
+     * @var int|null
      */
-    public $attributeSetID;
+    protected ?int $attributeSetID = null;
     /**
      * Constructor method for DataElementSetType
      * @uses DataElementSetType::setDataElement()
@@ -48,10 +51,10 @@ class DataElementSetType extends AbstractStructBase
      * @uses DataElementSetType::setAttributeSetID()
      * @param string $dataElement
      * @param int $dataElementID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      * @param int $attributeSetID
      */
-    public function __construct($dataElement = null, $dataElementID = null, \DOMDocument $any = null, $attributeSetID = null)
+    public function __construct(?string $dataElement = null, ?int $dataElementID = null, $any = null, ?int $attributeSetID = null)
     {
         $this
             ->setDataElement($dataElement)
@@ -63,7 +66,7 @@ class DataElementSetType extends AbstractStructBase
      * Get DataElement value
      * @return string|null
      */
-    public function getDataElement()
+    public function getDataElement(): ?string
     {
         return $this->DataElement;
     }
@@ -72,20 +75,21 @@ class DataElementSetType extends AbstractStructBase
      * @param string $dataElement
      * @return \macropage\ebaysdk\trading\StructType\DataElementSetType
      */
-    public function setDataElement($dataElement = null)
+    public function setDataElement(?string $dataElement = null): self
     {
         // validation for constraint: string
         if (!is_null($dataElement) && !is_string($dataElement)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($dataElement)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($dataElement, true), gettype($dataElement)), __LINE__);
         }
         $this->DataElement = $dataElement;
+        
         return $this;
     }
     /**
      * Get DataElementID value
      * @return int|null
      */
-    public function getDataElementID()
+    public function getDataElementID(): ?int
     {
         return $this->DataElementID;
     }
@@ -94,52 +98,54 @@ class DataElementSetType extends AbstractStructBase
      * @param int $dataElementID
      * @return \macropage\ebaysdk\trading\StructType\DataElementSetType
      */
-    public function setDataElementID($dataElementID = null)
+    public function setDataElementID(?int $dataElementID = null): self
     {
         // validation for constraint: int
-        if (!is_null($dataElementID) && !is_numeric($dataElementID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($dataElementID)), __LINE__);
+        if (!is_null($dataElementID) && !(is_int($dataElementID) || ctype_digit($dataElementID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($dataElementID, true), gettype($dataElementID)), __LINE__);
         }
         $this->DataElementID = $dataElementID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DataElementSetType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DataElementSetType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
     }
     /**
      * Get attributeSetID value
      * @return int|null
      */
-    public function getAttributeSetID()
+    public function getAttributeSetID(): ?int
     {
         return $this->attributeSetID;
     }
@@ -148,33 +154,14 @@ class DataElementSetType extends AbstractStructBase
      * @param int $attributeSetID
      * @return \macropage\ebaysdk\trading\StructType\DataElementSetType
      */
-    public function setAttributeSetID($attributeSetID = null)
+    public function setAttributeSetID(?int $attributeSetID = null): self
     {
         // validation for constraint: int
-        if (!is_null($attributeSetID) && !is_numeric($attributeSetID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($attributeSetID)), __LINE__);
+        if (!is_null($attributeSetID) && !(is_int($attributeSetID) || ctype_digit($attributeSetID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($attributeSetID, true), gettype($attributeSetID)), __LINE__);
         }
         $this->attributeSetID = $attributeSetID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DataElementSetType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

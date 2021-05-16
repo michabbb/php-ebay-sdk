@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DispatchTimeMaxDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Details about the maximum number of business days required to ship an item to domestic buyers after receiving a cleared payment.
  * @subpackage Structs
  */
@@ -14,7 +17,7 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
 {
     /**
      * The DispatchTimeMax
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Integer value that indicates the maximum number of business days that the eBay site allows as a seller's handling time. The clock starts ticking when the buyer pays for the order. This means that if a buyer pays for the order on a
      * Wednesday, the seller would have to ship the item by the next day (Thursday) if the <b>DispatchTimeMax</b> value is set to <code>1</code>. Typical values for this field are 0, 1, 2, 3, 4, 5, 10, 15, or 20. <br/><br/> A <b>DispatchTimeMax</b> value of
      * <code>0</code> indicates <em>same day handling</em> for an item. In this case, the seller's handling time commitment depends on the <em>order cut off time</em> set in the seller's user preferences. This defaults to 2:00 PM local time on most eBay
@@ -23,47 +26,47 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * assumed to be open for business on the same days, and those days will be used when calculating total shipping time. </span> If using <b>GeteBayDetails</b> specifically to return this value, the caller sets the DetailName field in the request to
      * <b>DispatchTimeMaxDetails</b>. <br/><br/> When creating, revising, or relisting an item, the seller cannot set the <b>Item.DispatchTimeMax</b> value higher than the value returned in this field.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DispatchTimeMax;
+    protected ?int $DispatchTimeMax = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Value and unit (e.g., 10 Days) for the maximum dispatch time. Useful for display purposes.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The DetailVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the latest version number for this field. The version can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailVersion;
+    protected ?string $DetailVersion = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Gives the time in GMT that the feature flags for the details were last updated. This timestamp can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The ExtendedHandling
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A value of <code>true</code> indicates that the seller has specified a handling time of 4 business days or more (an <em>exception handling time</em>). Sellers should be aware that long handling times might adversely affect the buying
      * decisions of potential customers.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExtendedHandling;
+    protected ?bool $ExtendedHandling = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DispatchTimeMaxDetailsType
      * @uses DispatchTimeMaxDetailsType::setDispatchTimeMax()
@@ -77,9 +80,9 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @param string $updateTime
      * @param bool $extendedHandling
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($dispatchTimeMax = null, $description = null, $detailVersion = null, $updateTime = null, $extendedHandling = null, \DOMDocument $any = null)
+    public function __construct(?int $dispatchTimeMax = null, ?string $description = null, ?string $detailVersion = null, ?string $updateTime = null, ?bool $extendedHandling = null, $any = null)
     {
         $this
             ->setDispatchTimeMax($dispatchTimeMax)
@@ -93,7 +96,7 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * Get DispatchTimeMax value
      * @return int|null
      */
-    public function getDispatchTimeMax()
+    public function getDispatchTimeMax(): ?int
     {
         return $this->DispatchTimeMax;
     }
@@ -102,20 +105,21 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param int $dispatchTimeMax
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setDispatchTimeMax($dispatchTimeMax = null)
+    public function setDispatchTimeMax(?int $dispatchTimeMax = null): self
     {
         // validation for constraint: int
-        if (!is_null($dispatchTimeMax) && !is_numeric($dispatchTimeMax)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($dispatchTimeMax)), __LINE__);
+        if (!is_null($dispatchTimeMax) && !(is_int($dispatchTimeMax) || ctype_digit($dispatchTimeMax))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($dispatchTimeMax, true), gettype($dispatchTimeMax)), __LINE__);
         }
         $this->DispatchTimeMax = $dispatchTimeMax;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -124,20 +128,21 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get DetailVersion value
      * @return string|null
      */
-    public function getDetailVersion()
+    public function getDetailVersion(): ?string
     {
         return $this->DetailVersion;
     }
@@ -146,20 +151,21 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setDetailVersion($detailVersion = null)
+    public function setDetailVersion(?string $detailVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($detailVersion) && !is_string($detailVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailVersion, true), gettype($detailVersion)), __LINE__);
         }
         $this->DetailVersion = $detailVersion;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -168,20 +174,21 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get ExtendedHandling value
      * @return bool|null
      */
-    public function getExtendedHandling()
+    public function getExtendedHandling(): ?bool
     {
         return $this->ExtendedHandling;
     }
@@ -190,65 +197,47 @@ class DispatchTimeMaxDetailsType extends AbstractStructBase
      * @param bool $extendedHandling
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setExtendedHandling($extendedHandling = null)
+    public function setExtendedHandling(?bool $extendedHandling = null): self
     {
         // validation for constraint: boolean
         if (!is_null($extendedHandling) && !is_bool($extendedHandling)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($extendedHandling)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($extendedHandling, true), gettype($extendedHandling)), __LINE__);
         }
         $this->ExtendedHandling = $extendedHandling;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

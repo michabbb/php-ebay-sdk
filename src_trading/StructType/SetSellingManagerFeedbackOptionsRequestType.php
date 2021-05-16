@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SetSellingManagerFeedbackOptionsRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Enables Selling Manager Pro subscribers to store standard feedback comments that can be left for their buyers. Selling Manager Pro subscribers can also specify what events, if any, will trigger an automated feedback response to
  * buyers.
  * @subpackage Structs
@@ -15,21 +18,21 @@ class SetSellingManagerFeedbackOptionsRequestType extends AbstractRequestType
 {
     /**
      * The AutomatedLeaveFeedbackEvent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the event that will trigger automated feedback to the buyer.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AutomatedLeaveFeedbackEvent;
+    protected ?string $AutomatedLeaveFeedbackEvent = null;
     /**
      * The StoredComments
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains a set of comments from which one can be selected to leave feedback for a buyer. If automated feedback is used, a comment is selected from the set randomly. Stored comments cannot be replaced or edited individually.
      * Submitting a stored comments array replaces all existing stored comments. <br>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType|null
      */
-    public $StoredComments;
+    protected ?\macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $StoredComments = null;
     /**
      * Constructor method for SetSellingManagerFeedbackOptionsRequestType
      * @uses SetSellingManagerFeedbackOptionsRequestType::setAutomatedLeaveFeedbackEvent()
@@ -37,7 +40,7 @@ class SetSellingManagerFeedbackOptionsRequestType extends AbstractRequestType
      * @param string $automatedLeaveFeedbackEvent
      * @param \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments
      */
-    public function __construct($automatedLeaveFeedbackEvent = null, \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments = null)
+    public function __construct(?string $automatedLeaveFeedbackEvent = null, ?\macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments = null)
     {
         $this
             ->setAutomatedLeaveFeedbackEvent($automatedLeaveFeedbackEvent)
@@ -47,7 +50,7 @@ class SetSellingManagerFeedbackOptionsRequestType extends AbstractRequestType
      * Get AutomatedLeaveFeedbackEvent value
      * @return string|null
      */
-    public function getAutomatedLeaveFeedbackEvent()
+    public function getAutomatedLeaveFeedbackEvent(): ?string
     {
         return $this->AutomatedLeaveFeedbackEvent;
     }
@@ -55,24 +58,25 @@ class SetSellingManagerFeedbackOptionsRequestType extends AbstractRequestType
      * Set AutomatedLeaveFeedbackEvent value
      * @uses \macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $automatedLeaveFeedbackEvent
      * @return \macropage\ebaysdk\trading\StructType\SetSellingManagerFeedbackOptionsRequestType
      */
-    public function setAutomatedLeaveFeedbackEvent($automatedLeaveFeedbackEvent = null)
+    public function setAutomatedLeaveFeedbackEvent(?string $automatedLeaveFeedbackEvent = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType::valueIsValid($automatedLeaveFeedbackEvent)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $automatedLeaveFeedbackEvent, implode(', ', \macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType', is_array($automatedLeaveFeedbackEvent) ? implode(', ', $automatedLeaveFeedbackEvent) : var_export($automatedLeaveFeedbackEvent, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AutomatedLeaveFeedbackEventCodeType::getValidValues())), __LINE__);
         }
         $this->AutomatedLeaveFeedbackEvent = $automatedLeaveFeedbackEvent;
+        
         return $this;
     }
     /**
      * Get StoredComments value
      * @return \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType|null
      */
-    public function getStoredComments()
+    public function getStoredComments(): ?\macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType
     {
         return $this->StoredComments;
     }
@@ -81,29 +85,10 @@ class SetSellingManagerFeedbackOptionsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments
      * @return \macropage\ebaysdk\trading\StructType\SetSellingManagerFeedbackOptionsRequestType
      */
-    public function setStoredComments(\macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments = null)
+    public function setStoredComments(?\macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType $storedComments = null): self
     {
         $this->StoredComments = $storedComments;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SetSellingManagerFeedbackOptionsRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

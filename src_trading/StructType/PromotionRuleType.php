@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PromotionRuleType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,81 +17,82 @@ class PromotionRuleType extends AbstractStructBase
 {
     /**
      * The PromotedStoreCategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PromotedStoreCategoryID;
+    protected ?int $PromotedStoreCategoryID = null;
     /**
      * The PromotedeBayCategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PromotedeBayCategoryID;
+    protected ?string $PromotedeBayCategoryID = null;
     /**
      * The PromotedKeywords
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PromotedKeywords;
+    protected ?string $PromotedKeywords = null;
     /**
      * The ReferringItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReferringItemID;
+    protected ?string $ReferringItemID = null;
     /**
      * The ReferringStoreCategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ReferringStoreCategoryID;
+    protected ?int $ReferringStoreCategoryID = null;
     /**
      * The ReferringeBayCategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReferringeBayCategoryID;
+    protected ?string $ReferringeBayCategoryID = null;
     /**
      * The ReferringKeywords
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReferringKeywords;
+    protected ?string $ReferringKeywords = null;
     /**
      * The PromotionScheme
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PromotionScheme;
+    protected ?string $PromotionScheme = null;
     /**
      * The PromotionMethod
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PromotionMethod;
+    protected ?string $PromotionMethod = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PromotionRuleType
      * @uses PromotionRuleType::setPromotedStoreCategoryID()
@@ -110,9 +114,9 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $referringKeywords
      * @param string $promotionScheme
      * @param string $promotionMethod
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($promotedStoreCategoryID = null, $promotedeBayCategoryID = null, $promotedKeywords = null, $referringItemID = null, $referringStoreCategoryID = null, $referringeBayCategoryID = null, $referringKeywords = null, $promotionScheme = null, $promotionMethod = null, \DOMDocument $any = null)
+    public function __construct(?int $promotedStoreCategoryID = null, ?string $promotedeBayCategoryID = null, ?string $promotedKeywords = null, ?string $referringItemID = null, ?int $referringStoreCategoryID = null, ?string $referringeBayCategoryID = null, ?string $referringKeywords = null, ?string $promotionScheme = null, ?string $promotionMethod = null, $any = null)
     {
         $this
             ->setPromotedStoreCategoryID($promotedStoreCategoryID)
@@ -130,7 +134,7 @@ class PromotionRuleType extends AbstractStructBase
      * Get PromotedStoreCategoryID value
      * @return int|null
      */
-    public function getPromotedStoreCategoryID()
+    public function getPromotedStoreCategoryID(): ?int
     {
         return $this->PromotedStoreCategoryID;
     }
@@ -139,20 +143,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param int $promotedStoreCategoryID
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setPromotedStoreCategoryID($promotedStoreCategoryID = null)
+    public function setPromotedStoreCategoryID(?int $promotedStoreCategoryID = null): self
     {
         // validation for constraint: int
-        if (!is_null($promotedStoreCategoryID) && !is_numeric($promotedStoreCategoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($promotedStoreCategoryID)), __LINE__);
+        if (!is_null($promotedStoreCategoryID) && !(is_int($promotedStoreCategoryID) || ctype_digit($promotedStoreCategoryID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($promotedStoreCategoryID, true), gettype($promotedStoreCategoryID)), __LINE__);
         }
         $this->PromotedStoreCategoryID = $promotedStoreCategoryID;
+        
         return $this;
     }
     /**
      * Get PromotedeBayCategoryID value
      * @return string|null
      */
-    public function getPromotedeBayCategoryID()
+    public function getPromotedeBayCategoryID(): ?string
     {
         return $this->PromotedeBayCategoryID;
     }
@@ -161,20 +166,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $promotedeBayCategoryID
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setPromotedeBayCategoryID($promotedeBayCategoryID = null)
+    public function setPromotedeBayCategoryID(?string $promotedeBayCategoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($promotedeBayCategoryID) && !is_string($promotedeBayCategoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($promotedeBayCategoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($promotedeBayCategoryID, true), gettype($promotedeBayCategoryID)), __LINE__);
         }
         $this->PromotedeBayCategoryID = $promotedeBayCategoryID;
+        
         return $this;
     }
     /**
      * Get PromotedKeywords value
      * @return string|null
      */
-    public function getPromotedKeywords()
+    public function getPromotedKeywords(): ?string
     {
         return $this->PromotedKeywords;
     }
@@ -183,20 +189,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $promotedKeywords
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setPromotedKeywords($promotedKeywords = null)
+    public function setPromotedKeywords(?string $promotedKeywords = null): self
     {
         // validation for constraint: string
         if (!is_null($promotedKeywords) && !is_string($promotedKeywords)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($promotedKeywords)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($promotedKeywords, true), gettype($promotedKeywords)), __LINE__);
         }
         $this->PromotedKeywords = $promotedKeywords;
+        
         return $this;
     }
     /**
      * Get ReferringItemID value
      * @return string|null
      */
-    public function getReferringItemID()
+    public function getReferringItemID(): ?string
     {
         return $this->ReferringItemID;
     }
@@ -205,20 +212,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $referringItemID
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setReferringItemID($referringItemID = null)
+    public function setReferringItemID(?string $referringItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($referringItemID) && !is_string($referringItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($referringItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($referringItemID, true), gettype($referringItemID)), __LINE__);
         }
         $this->ReferringItemID = $referringItemID;
+        
         return $this;
     }
     /**
      * Get ReferringStoreCategoryID value
      * @return int|null
      */
-    public function getReferringStoreCategoryID()
+    public function getReferringStoreCategoryID(): ?int
     {
         return $this->ReferringStoreCategoryID;
     }
@@ -227,20 +235,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param int $referringStoreCategoryID
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setReferringStoreCategoryID($referringStoreCategoryID = null)
+    public function setReferringStoreCategoryID(?int $referringStoreCategoryID = null): self
     {
         // validation for constraint: int
-        if (!is_null($referringStoreCategoryID) && !is_numeric($referringStoreCategoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($referringStoreCategoryID)), __LINE__);
+        if (!is_null($referringStoreCategoryID) && !(is_int($referringStoreCategoryID) || ctype_digit($referringStoreCategoryID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($referringStoreCategoryID, true), gettype($referringStoreCategoryID)), __LINE__);
         }
         $this->ReferringStoreCategoryID = $referringStoreCategoryID;
+        
         return $this;
     }
     /**
      * Get ReferringeBayCategoryID value
      * @return string|null
      */
-    public function getReferringeBayCategoryID()
+    public function getReferringeBayCategoryID(): ?string
     {
         return $this->ReferringeBayCategoryID;
     }
@@ -249,20 +258,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $referringeBayCategoryID
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setReferringeBayCategoryID($referringeBayCategoryID = null)
+    public function setReferringeBayCategoryID(?string $referringeBayCategoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($referringeBayCategoryID) && !is_string($referringeBayCategoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($referringeBayCategoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($referringeBayCategoryID, true), gettype($referringeBayCategoryID)), __LINE__);
         }
         $this->ReferringeBayCategoryID = $referringeBayCategoryID;
+        
         return $this;
     }
     /**
      * Get ReferringKeywords value
      * @return string|null
      */
-    public function getReferringKeywords()
+    public function getReferringKeywords(): ?string
     {
         return $this->ReferringKeywords;
     }
@@ -271,20 +281,21 @@ class PromotionRuleType extends AbstractStructBase
      * @param string $referringKeywords
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setReferringKeywords($referringKeywords = null)
+    public function setReferringKeywords(?string $referringKeywords = null): self
     {
         // validation for constraint: string
         if (!is_null($referringKeywords) && !is_string($referringKeywords)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($referringKeywords)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($referringKeywords, true), gettype($referringKeywords)), __LINE__);
         }
         $this->ReferringKeywords = $referringKeywords;
+        
         return $this;
     }
     /**
      * Get PromotionScheme value
      * @return string|null
      */
-    public function getPromotionScheme()
+    public function getPromotionScheme(): ?string
     {
         return $this->PromotionScheme;
     }
@@ -292,24 +303,25 @@ class PromotionRuleType extends AbstractStructBase
      * Set PromotionScheme value
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $promotionScheme
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setPromotionScheme($promotionScheme = null)
+    public function setPromotionScheme(?string $promotionScheme = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::valueIsValid($promotionScheme)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $promotionScheme, implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType', is_array($promotionScheme) ? implode(', ', $promotionScheme) : var_export($promotionScheme, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues())), __LINE__);
         }
         $this->PromotionScheme = $promotionScheme;
+        
         return $this;
     }
     /**
      * Get PromotionMethod value
      * @return string|null
      */
-    public function getPromotionMethod()
+    public function getPromotionMethod(): ?string
     {
         return $this->PromotionMethod;
     }
@@ -317,69 +329,51 @@ class PromotionRuleType extends AbstractStructBase
      * Set PromotionMethod value
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $promotionMethod
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setPromotionMethod($promotionMethod = null)
+    public function setPromotionMethod(?string $promotionMethod = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::valueIsValid($promotionMethod)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $promotionMethod, implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType', is_array($promotionMethod) ? implode(', ', $promotionMethod) : var_export($promotionMethod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues())), __LINE__);
         }
         $this->PromotionMethod = $promotionMethod;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PromotionRuleType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

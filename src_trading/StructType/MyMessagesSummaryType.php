@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MyMessagesSummaryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Summary data for a given user's alerts and messages. This includes the numbers of new alerts and messages, unresolved alerts, flagged messages, and total alerts and messages.
  * @subpackage Structs
  */
@@ -14,77 +17,77 @@ class MyMessagesSummaryType extends AbstractStructBase
 {
     /**
      * The FolderSummary
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Folder summary for each folder. Always returned for detail level ReturnSummary.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[]
      */
-    public $FolderSummary;
+    protected array $FolderSummary = [];
     /**
      * The NewAlertCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field has been deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NewAlertCount;
+    protected ?int $NewAlertCount = null;
     /**
      * The NewMessageCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of new messages that a given user has. Always returned for detail level ReturnSummary.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NewMessageCount;
+    protected ?int $NewMessageCount = null;
     /**
      * The UnresolvedAlertCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $UnresolvedAlertCount;
+    protected ?int $UnresolvedAlertCount = null;
     /**
      * The FlaggedMessageCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of messages that have been flagged. Always returned for detail level ReturnSummary.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FlaggedMessageCount;
+    protected ?int $FlaggedMessageCount = null;
     /**
      * The TotalAlertCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field has been deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalAlertCount;
+    protected ?int $TotalAlertCount = null;
     /**
      * The TotalMessageCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of messages for a given user. Always returned for detail level ReturnSummary.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalMessageCount;
+    protected ?int $TotalMessageCount = null;
     /**
      * The NewHighPriorityCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of new high priority messages that a given user has.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NewHighPriorityCount;
+    protected ?int $NewHighPriorityCount = null;
     /**
      * The TotalHighPriorityCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of high priority messages that a given user has.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalHighPriorityCount;
+    protected ?int $TotalHighPriorityCount = null;
     /**
      * Constructor method for MyMessagesSummaryType
      * @uses MyMessagesSummaryType::setFolderSummary()
@@ -106,7 +109,7 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $newHighPriorityCount
      * @param int $totalHighPriorityCount
      */
-    public function __construct(array $folderSummary = array(), $newAlertCount = null, $newMessageCount = null, $unresolvedAlertCount = null, $flaggedMessageCount = null, $totalAlertCount = null, $totalMessageCount = null, $newHighPriorityCount = null, $totalHighPriorityCount = null)
+    public function __construct(array $folderSummary = [], ?int $newAlertCount = null, ?int $newMessageCount = null, ?int $unresolvedAlertCount = null, ?int $flaggedMessageCount = null, ?int $totalAlertCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null)
     {
         $this
             ->setFolderSummary($folderSummary)
@@ -121,49 +124,72 @@ class MyMessagesSummaryType extends AbstractStructBase
     }
     /**
      * Get FolderSummary value
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[]
      */
-    public function getFolderSummary()
+    public function getFolderSummary(): array
     {
         return $this->FolderSummary;
     }
     /**
+     * This method is responsible for validating the values passed to the setFolderSummary method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setFolderSummary method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateFolderSummaryForArrayConstraintsFromSetFolderSummary(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myMessagesSummaryTypeFolderSummaryItem) {
+            // validation for constraint: itemType
+            if (!$myMessagesSummaryTypeFolderSummaryItem instanceof \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType) {
+                $invalidValues[] = is_object($myMessagesSummaryTypeFolderSummaryItem) ? get_class($myMessagesSummaryTypeFolderSummaryItem) : sprintf('%s(%s)', gettype($myMessagesSummaryTypeFolderSummaryItem), var_export($myMessagesSummaryTypeFolderSummaryItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The FolderSummary property can only contain items of type \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set FolderSummary value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[] $folderSummary
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setFolderSummary(array $folderSummary = array())
+    public function setFolderSummary(array $folderSummary = []): self
     {
-        foreach ($folderSummary as $myMessagesSummaryTypeFolderSummaryItem) {
-            // validation for constraint: itemType
-            if (!$myMessagesSummaryTypeFolderSummaryItem instanceof \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType) {
-                throw new \InvalidArgumentException(sprintf('The FolderSummary property can only contain items of \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType, "%s" given', is_object($myMessagesSummaryTypeFolderSummaryItem) ? get_class($myMessagesSummaryTypeFolderSummaryItem) : gettype($myMessagesSummaryTypeFolderSummaryItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($folderSummaryArrayErrorMessage = self::validateFolderSummaryForArrayConstraintsFromSetFolderSummary($folderSummary))) {
+            throw new InvalidArgumentException($folderSummaryArrayErrorMessage, __LINE__);
         }
         $this->FolderSummary = $folderSummary;
+        
         return $this;
     }
     /**
      * Add item to FolderSummary value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType $item
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function addToFolderSummary(\macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType $item)
+    public function addToFolderSummary(\macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType) {
-            throw new \InvalidArgumentException(sprintf('The FolderSummary property can only contain items of \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The FolderSummary property can only contain items of type \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->FolderSummary[] = $item;
+        
         return $this;
     }
     /**
      * Get NewAlertCount value
      * @return int|null
      */
-    public function getNewAlertCount()
+    public function getNewAlertCount(): ?int
     {
         return $this->NewAlertCount;
     }
@@ -172,20 +198,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $newAlertCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setNewAlertCount($newAlertCount = null)
+    public function setNewAlertCount(?int $newAlertCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($newAlertCount) && !is_numeric($newAlertCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($newAlertCount)), __LINE__);
+        if (!is_null($newAlertCount) && !(is_int($newAlertCount) || ctype_digit($newAlertCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newAlertCount, true), gettype($newAlertCount)), __LINE__);
         }
         $this->NewAlertCount = $newAlertCount;
+        
         return $this;
     }
     /**
      * Get NewMessageCount value
      * @return int|null
      */
-    public function getNewMessageCount()
+    public function getNewMessageCount(): ?int
     {
         return $this->NewMessageCount;
     }
@@ -194,20 +221,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $newMessageCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setNewMessageCount($newMessageCount = null)
+    public function setNewMessageCount(?int $newMessageCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($newMessageCount) && !is_numeric($newMessageCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($newMessageCount)), __LINE__);
+        if (!is_null($newMessageCount) && !(is_int($newMessageCount) || ctype_digit($newMessageCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newMessageCount, true), gettype($newMessageCount)), __LINE__);
         }
         $this->NewMessageCount = $newMessageCount;
+        
         return $this;
     }
     /**
      * Get UnresolvedAlertCount value
      * @return int|null
      */
-    public function getUnresolvedAlertCount()
+    public function getUnresolvedAlertCount(): ?int
     {
         return $this->UnresolvedAlertCount;
     }
@@ -216,20 +244,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $unresolvedAlertCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setUnresolvedAlertCount($unresolvedAlertCount = null)
+    public function setUnresolvedAlertCount(?int $unresolvedAlertCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($unresolvedAlertCount) && !is_numeric($unresolvedAlertCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($unresolvedAlertCount)), __LINE__);
+        if (!is_null($unresolvedAlertCount) && !(is_int($unresolvedAlertCount) || ctype_digit($unresolvedAlertCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($unresolvedAlertCount, true), gettype($unresolvedAlertCount)), __LINE__);
         }
         $this->UnresolvedAlertCount = $unresolvedAlertCount;
+        
         return $this;
     }
     /**
      * Get FlaggedMessageCount value
      * @return int|null
      */
-    public function getFlaggedMessageCount()
+    public function getFlaggedMessageCount(): ?int
     {
         return $this->FlaggedMessageCount;
     }
@@ -238,20 +267,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $flaggedMessageCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setFlaggedMessageCount($flaggedMessageCount = null)
+    public function setFlaggedMessageCount(?int $flaggedMessageCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($flaggedMessageCount) && !is_numeric($flaggedMessageCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($flaggedMessageCount)), __LINE__);
+        if (!is_null($flaggedMessageCount) && !(is_int($flaggedMessageCount) || ctype_digit($flaggedMessageCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($flaggedMessageCount, true), gettype($flaggedMessageCount)), __LINE__);
         }
         $this->FlaggedMessageCount = $flaggedMessageCount;
+        
         return $this;
     }
     /**
      * Get TotalAlertCount value
      * @return int|null
      */
-    public function getTotalAlertCount()
+    public function getTotalAlertCount(): ?int
     {
         return $this->TotalAlertCount;
     }
@@ -260,20 +290,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $totalAlertCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setTotalAlertCount($totalAlertCount = null)
+    public function setTotalAlertCount(?int $totalAlertCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalAlertCount) && !is_numeric($totalAlertCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalAlertCount)), __LINE__);
+        if (!is_null($totalAlertCount) && !(is_int($totalAlertCount) || ctype_digit($totalAlertCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalAlertCount, true), gettype($totalAlertCount)), __LINE__);
         }
         $this->TotalAlertCount = $totalAlertCount;
+        
         return $this;
     }
     /**
      * Get TotalMessageCount value
      * @return int|null
      */
-    public function getTotalMessageCount()
+    public function getTotalMessageCount(): ?int
     {
         return $this->TotalMessageCount;
     }
@@ -282,20 +313,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $totalMessageCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setTotalMessageCount($totalMessageCount = null)
+    public function setTotalMessageCount(?int $totalMessageCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalMessageCount) && !is_numeric($totalMessageCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalMessageCount)), __LINE__);
+        if (!is_null($totalMessageCount) && !(is_int($totalMessageCount) || ctype_digit($totalMessageCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalMessageCount, true), gettype($totalMessageCount)), __LINE__);
         }
         $this->TotalMessageCount = $totalMessageCount;
+        
         return $this;
     }
     /**
      * Get NewHighPriorityCount value
      * @return int|null
      */
-    public function getNewHighPriorityCount()
+    public function getNewHighPriorityCount(): ?int
     {
         return $this->NewHighPriorityCount;
     }
@@ -304,20 +336,21 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $newHighPriorityCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setNewHighPriorityCount($newHighPriorityCount = null)
+    public function setNewHighPriorityCount(?int $newHighPriorityCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($newHighPriorityCount) && !is_numeric($newHighPriorityCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($newHighPriorityCount)), __LINE__);
+        if (!is_null($newHighPriorityCount) && !(is_int($newHighPriorityCount) || ctype_digit($newHighPriorityCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newHighPriorityCount, true), gettype($newHighPriorityCount)), __LINE__);
         }
         $this->NewHighPriorityCount = $newHighPriorityCount;
+        
         return $this;
     }
     /**
      * Get TotalHighPriorityCount value
      * @return int|null
      */
-    public function getTotalHighPriorityCount()
+    public function getTotalHighPriorityCount(): ?int
     {
         return $this->TotalHighPriorityCount;
     }
@@ -326,33 +359,14 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $totalHighPriorityCount
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setTotalHighPriorityCount($totalHighPriorityCount = null)
+    public function setTotalHighPriorityCount(?int $totalHighPriorityCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalHighPriorityCount) && !is_numeric($totalHighPriorityCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalHighPriorityCount)), __LINE__);
+        if (!is_null($totalHighPriorityCount) && !(is_int($totalHighPriorityCount) || ctype_digit($totalHighPriorityCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalHighPriorityCount, true), gettype($totalHighPriorityCount)), __LINE__);
         }
         $this->TotalHighPriorityCount = $totalHighPriorityCount;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

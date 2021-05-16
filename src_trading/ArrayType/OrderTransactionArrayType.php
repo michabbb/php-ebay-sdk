@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for OrderTransactionArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>OrderTransactionArray</b> container that is returned in the <b>GetMyeBaySelling</b> and <b>GetMyeBayBuying</b> calls. The <b>OrderTransactionArray</b> container consists a list of orders and each order line item
  * in that order.
  * @subpackage Arrays
@@ -15,61 +18,68 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
 {
     /**
      * The OrderTransaction
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of detailed information on a specific order and each order line item in that order.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OrderTransactionType[]
      */
-    public $OrderTransaction;
+    protected array $OrderTransaction = [];
     /**
      * Constructor method for OrderTransactionArrayType
      * @uses OrderTransactionArrayType::setOrderTransaction()
      * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType[] $orderTransaction
      */
-    public function __construct(array $orderTransaction = array())
+    public function __construct(array $orderTransaction = [])
     {
         $this
             ->setOrderTransaction($orderTransaction);
     }
     /**
      * Get OrderTransaction value
-     * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType[]
      */
-    public function getOrderTransaction()
+    public function getOrderTransaction(): array
     {
         return $this->OrderTransaction;
     }
     /**
+     * This method is responsible for validating the values passed to the setOrderTransaction method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setOrderTransaction method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateOrderTransactionForArrayConstraintsFromSetOrderTransaction(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $orderTransactionArrayTypeOrderTransactionItem) {
+            // validation for constraint: itemType
+            if (!$orderTransactionArrayTypeOrderTransactionItem instanceof \macropage\ebaysdk\trading\StructType\OrderTransactionType) {
+                $invalidValues[] = is_object($orderTransactionArrayTypeOrderTransactionItem) ? get_class($orderTransactionArrayTypeOrderTransactionItem) : sprintf('%s(%s)', gettype($orderTransactionArrayTypeOrderTransactionItem), var_export($orderTransactionArrayTypeOrderTransactionItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The OrderTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\OrderTransactionType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set OrderTransaction value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType[] $orderTransaction
      * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
      */
-    public function setOrderTransaction(array $orderTransaction = array())
+    public function setOrderTransaction(array $orderTransaction = []): self
     {
-        foreach ($orderTransaction as $orderTransactionArrayTypeOrderTransactionItem) {
-            // validation for constraint: itemType
-            if (!$orderTransactionArrayTypeOrderTransactionItem instanceof \macropage\ebaysdk\trading\StructType\OrderTransactionType) {
-                throw new \InvalidArgumentException(sprintf('The OrderTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\OrderTransactionType, "%s" given', is_object($orderTransactionArrayTypeOrderTransactionItem) ? get_class($orderTransactionArrayTypeOrderTransactionItem) : gettype($orderTransactionArrayTypeOrderTransactionItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($orderTransactionArrayErrorMessage = self::validateOrderTransactionForArrayConstraintsFromSetOrderTransaction($orderTransaction))) {
+            throw new InvalidArgumentException($orderTransactionArrayErrorMessage, __LINE__);
         }
         $this->OrderTransaction = $orderTransaction;
-        return $this;
-    }
-    /**
-     * Add item to OrderTransaction value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
-     */
-    public function addToOrderTransaction(\macropage\ebaysdk\trading\StructType\OrderTransactionType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\OrderTransactionType) {
-            throw new \InvalidArgumentException(sprintf('The OrderTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\OrderTransactionType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->OrderTransaction[] = $item;
+        
         return $this;
     }
     /**
@@ -77,7 +87,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\OrderTransactionType
     {
         return parent::current();
     }
@@ -87,7 +97,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\OrderTransactionType
     {
         return parent::item($index);
     }
@@ -96,7 +106,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\OrderTransactionType
     {
         return parent::first();
     }
@@ -105,7 +115,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\OrderTransactionType
     {
         return parent::last();
     }
@@ -115,37 +125,32 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\OrderTransactionType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\OrderTransactionType) {
+            throw new InvalidArgumentException(sprintf('The OrderTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\OrderTransactionType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string OrderTransaction
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'OrderTransaction';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

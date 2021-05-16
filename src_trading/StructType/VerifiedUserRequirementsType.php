@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VerifiedUserRequirementsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The Verified User Buyer Requirement has been deprecated, so this type is no longer applicable.
  * @subpackage Structs
  */
@@ -14,18 +17,18 @@ class VerifiedUserRequirementsType extends AbstractStructBase
 {
     /**
      * The VerifiedUser
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $VerifiedUser;
+    protected ?bool $VerifiedUser = null;
     /**
      * The MinimumFeedbackScore
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MinimumFeedbackScore;
+    protected ?int $MinimumFeedbackScore = null;
     /**
      * Constructor method for VerifiedUserRequirementsType
      * @uses VerifiedUserRequirementsType::setVerifiedUser()
@@ -33,7 +36,7 @@ class VerifiedUserRequirementsType extends AbstractStructBase
      * @param bool $verifiedUser
      * @param int $minimumFeedbackScore
      */
-    public function __construct($verifiedUser = null, $minimumFeedbackScore = null)
+    public function __construct(?bool $verifiedUser = null, ?int $minimumFeedbackScore = null)
     {
         $this
             ->setVerifiedUser($verifiedUser)
@@ -43,7 +46,7 @@ class VerifiedUserRequirementsType extends AbstractStructBase
      * Get VerifiedUser value
      * @return bool|null
      */
-    public function getVerifiedUser()
+    public function getVerifiedUser(): ?bool
     {
         return $this->VerifiedUser;
     }
@@ -52,20 +55,21 @@ class VerifiedUserRequirementsType extends AbstractStructBase
      * @param bool $verifiedUser
      * @return \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsType
      */
-    public function setVerifiedUser($verifiedUser = null)
+    public function setVerifiedUser(?bool $verifiedUser = null): self
     {
         // validation for constraint: boolean
         if (!is_null($verifiedUser) && !is_bool($verifiedUser)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($verifiedUser)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($verifiedUser, true), gettype($verifiedUser)), __LINE__);
         }
         $this->VerifiedUser = $verifiedUser;
+        
         return $this;
     }
     /**
      * Get MinimumFeedbackScore value
      * @return int|null
      */
-    public function getMinimumFeedbackScore()
+    public function getMinimumFeedbackScore(): ?int
     {
         return $this->MinimumFeedbackScore;
     }
@@ -74,33 +78,14 @@ class VerifiedUserRequirementsType extends AbstractStructBase
      * @param int $minimumFeedbackScore
      * @return \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsType
      */
-    public function setMinimumFeedbackScore($minimumFeedbackScore = null)
+    public function setMinimumFeedbackScore(?int $minimumFeedbackScore = null): self
     {
         // validation for constraint: int
-        if (!is_null($minimumFeedbackScore) && !is_numeric($minimumFeedbackScore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($minimumFeedbackScore)), __LINE__);
+        if (!is_null($minimumFeedbackScore) && !(is_int($minimumFeedbackScore) || ctype_digit($minimumFeedbackScore))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($minimumFeedbackScore, true), gettype($minimumFeedbackScore)), __LINE__);
         }
         $this->MinimumFeedbackScore = $minimumFeedbackScore;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

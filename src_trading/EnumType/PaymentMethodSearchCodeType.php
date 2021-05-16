@@ -1,50 +1,54 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for PaymentMethodSearchCodeType EnumType
- * Meta informations extracted from the WSDL
- * - documentation: Used for specifying items for which a specific payment method or methods are accepted.
+ * Meta information extracted from the WSDL
+ * - documentation: <span class="tablenote"><b>Note:</b> This enumerated type is no longer applicable, as filtering by a payment method in an advanced item search is no longer supported. </span>
  * @subpackage Enumerations
  */
-class PaymentMethodSearchCodeType
+class PaymentMethodSearchCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'PayPal'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the item may be purchased using PayPal as the payment method.
      * @return string 'PayPal'
      */
     const VALUE_PAY_PAL = 'PayPal';
     /**
      * Constant for value 'PaisaPay'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is no longer a supported payment method, so this value is no longer applicable.
      * @return string 'PaisaPay'
      */
     const VALUE_PAISA_PAY = 'PaisaPay';
     /**
      * Constant for value 'PayPalOrPaisaPay'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is no longer a supported payment method, so this value is no longer applicable.
      * @return string 'PayPalOrPaisaPay'
      */
     const VALUE_PAY_PAL_OR_PAISA_PAY = 'PayPalOrPaisaPay';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value is reserved for future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
     /**
      * Constant for value 'PaisaPayEscrowEMI'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is no longer a supported payment method, so this value is no longer applicable.
      * @return string 'PaisaPayEscrowEMI'
      */
     const VALUE_PAISA_PAY_ESCROW_EMI = 'PaisaPayEscrowEMI';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_PAY_PAL
@@ -54,22 +58,14 @@ class PaymentMethodSearchCodeType
      * @uses self::VALUE_PAISA_PAY_ESCROW_EMI
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_PAY_PAL,
             self::VALUE_PAISA_PAY,
             self::VALUE_PAY_PAL_OR_PAISA_PAY,
             self::VALUE_CUSTOM_CODE,
             self::VALUE_PAISA_PAY_ESCROW_EMI,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ListingTipMessageType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class ListingTipMessageType extends AbstractStructBase
 {
     /**
      * The ListingTipMessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingTipMessageID;
+    protected ?string $ListingTipMessageID = null;
     /**
      * The ShortMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShortMessage;
+    protected ?string $ShortMessage = null;
     /**
      * The LongMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LongMessage;
+    protected ?string $LongMessage = null;
     /**
      * The HelpURLPath
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $HelpURLPath;
+    protected ?string $HelpURLPath = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ListingTipMessageType
      * @uses ListingTipMessageType::setListingTipMessageID()
@@ -60,9 +63,9 @@ class ListingTipMessageType extends AbstractStructBase
      * @param string $shortMessage
      * @param string $longMessage
      * @param string $helpURLPath
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($listingTipMessageID = null, $shortMessage = null, $longMessage = null, $helpURLPath = null, \DOMDocument $any = null)
+    public function __construct(?string $listingTipMessageID = null, ?string $shortMessage = null, ?string $longMessage = null, ?string $helpURLPath = null, $any = null)
     {
         $this
             ->setListingTipMessageID($listingTipMessageID)
@@ -75,7 +78,7 @@ class ListingTipMessageType extends AbstractStructBase
      * Get ListingTipMessageID value
      * @return string|null
      */
-    public function getListingTipMessageID()
+    public function getListingTipMessageID(): ?string
     {
         return $this->ListingTipMessageID;
     }
@@ -84,20 +87,21 @@ class ListingTipMessageType extends AbstractStructBase
      * @param string $listingTipMessageID
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
      */
-    public function setListingTipMessageID($listingTipMessageID = null)
+    public function setListingTipMessageID(?string $listingTipMessageID = null): self
     {
         // validation for constraint: string
         if (!is_null($listingTipMessageID) && !is_string($listingTipMessageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($listingTipMessageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($listingTipMessageID, true), gettype($listingTipMessageID)), __LINE__);
         }
         $this->ListingTipMessageID = $listingTipMessageID;
+        
         return $this;
     }
     /**
      * Get ShortMessage value
      * @return string|null
      */
-    public function getShortMessage()
+    public function getShortMessage(): ?string
     {
         return $this->ShortMessage;
     }
@@ -106,20 +110,21 @@ class ListingTipMessageType extends AbstractStructBase
      * @param string $shortMessage
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
      */
-    public function setShortMessage($shortMessage = null)
+    public function setShortMessage(?string $shortMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($shortMessage) && !is_string($shortMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($shortMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($shortMessage, true), gettype($shortMessage)), __LINE__);
         }
         $this->ShortMessage = $shortMessage;
+        
         return $this;
     }
     /**
      * Get LongMessage value
      * @return string|null
      */
-    public function getLongMessage()
+    public function getLongMessage(): ?string
     {
         return $this->LongMessage;
     }
@@ -128,20 +133,21 @@ class ListingTipMessageType extends AbstractStructBase
      * @param string $longMessage
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
      */
-    public function setLongMessage($longMessage = null)
+    public function setLongMessage(?string $longMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($longMessage) && !is_string($longMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($longMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($longMessage, true), gettype($longMessage)), __LINE__);
         }
         $this->LongMessage = $longMessage;
+        
         return $this;
     }
     /**
      * Get HelpURLPath value
      * @return string|null
      */
-    public function getHelpURLPath()
+    public function getHelpURLPath(): ?string
     {
         return $this->HelpURLPath;
     }
@@ -150,65 +156,47 @@ class ListingTipMessageType extends AbstractStructBase
      * @param string $helpURLPath
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
      */
-    public function setHelpURLPath($helpURLPath = null)
+    public function setHelpURLPath(?string $helpURLPath = null): self
     {
         // validation for constraint: string
         if (!is_null($helpURLPath) && !is_string($helpURLPath)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($helpURLPath)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($helpURLPath, true), gettype($helpURLPath)), __LINE__);
         }
         $this->HelpURLPath = $helpURLPath;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ListingTipMessageType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

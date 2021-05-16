@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellerRoleMetricsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Specifies 1 year feedback metrics for a seller.
  * @subpackage Structs
  */
@@ -14,89 +17,89 @@ class SellerRoleMetricsType extends AbstractStructBase
 {
     /**
      * The PositiveFeedbackLeftCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Count of positive feedback entries given as a seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PositiveFeedbackLeftCount;
+    protected ?int $PositiveFeedbackLeftCount = null;
     /**
      * The NegativeFeedbackLeftCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Count of negative feedback entries given as a seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NegativeFeedbackLeftCount;
+    protected ?int $NegativeFeedbackLeftCount = null;
     /**
      * The NeutralFeedbackLeftCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Count of neutral feedback entries given as a seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NeutralFeedbackLeftCount;
+    protected ?int $NeutralFeedbackLeftCount = null;
     /**
      * The FeedbackLeftPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Percentage of leaving feedback as a seller.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $FeedbackLeftPercent;
+    protected ?float $FeedbackLeftPercent = null;
     /**
      * The RepeatBuyerCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Number of buyers who bought more than once from this seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RepeatBuyerCount;
+    protected ?int $RepeatBuyerCount = null;
     /**
      * The RepeatBuyerPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Percentage of repeat buyers.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $RepeatBuyerPercent;
+    protected ?float $RepeatBuyerPercent = null;
     /**
      * The UniqueBuyerCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Count of unique buyers from this seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $UniqueBuyerCount;
+    protected ?int $UniqueBuyerCount = null;
     /**
      * The TransactionPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Percentage of number of times a member has sold successfully vs. the number of times a member has bought an item in the preceding 365 days.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $TransactionPercent;
+    protected ?float $TransactionPercent = null;
     /**
      * The CrossBorderTransactionCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The count of Cross-Border Trade order line items.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CrossBorderTransactionCount;
+    protected ?int $CrossBorderTransactionCount = null;
     /**
      * The CrossBorderTransactionPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The percentage of order line items that are Cross-Border Trade order line items.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $CrossBorderTransactionPercent;
+    protected ?float $CrossBorderTransactionPercent = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellerRoleMetricsType
      * @uses SellerRoleMetricsType::setPositiveFeedbackLeftCount()
@@ -120,9 +123,9 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param float $transactionPercent
      * @param int $crossBorderTransactionCount
      * @param float $crossBorderTransactionPercent
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($positiveFeedbackLeftCount = null, $negativeFeedbackLeftCount = null, $neutralFeedbackLeftCount = null, $feedbackLeftPercent = null, $repeatBuyerCount = null, $repeatBuyerPercent = null, $uniqueBuyerCount = null, $transactionPercent = null, $crossBorderTransactionCount = null, $crossBorderTransactionPercent = null, \DOMDocument $any = null)
+    public function __construct(?int $positiveFeedbackLeftCount = null, ?int $negativeFeedbackLeftCount = null, ?int $neutralFeedbackLeftCount = null, ?float $feedbackLeftPercent = null, ?int $repeatBuyerCount = null, ?float $repeatBuyerPercent = null, ?int $uniqueBuyerCount = null, ?float $transactionPercent = null, ?int $crossBorderTransactionCount = null, ?float $crossBorderTransactionPercent = null, $any = null)
     {
         $this
             ->setPositiveFeedbackLeftCount($positiveFeedbackLeftCount)
@@ -141,7 +144,7 @@ class SellerRoleMetricsType extends AbstractStructBase
      * Get PositiveFeedbackLeftCount value
      * @return int|null
      */
-    public function getPositiveFeedbackLeftCount()
+    public function getPositiveFeedbackLeftCount(): ?int
     {
         return $this->PositiveFeedbackLeftCount;
     }
@@ -150,20 +153,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $positiveFeedbackLeftCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setPositiveFeedbackLeftCount($positiveFeedbackLeftCount = null)
+    public function setPositiveFeedbackLeftCount(?int $positiveFeedbackLeftCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($positiveFeedbackLeftCount) && !is_numeric($positiveFeedbackLeftCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($positiveFeedbackLeftCount)), __LINE__);
+        if (!is_null($positiveFeedbackLeftCount) && !(is_int($positiveFeedbackLeftCount) || ctype_digit($positiveFeedbackLeftCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($positiveFeedbackLeftCount, true), gettype($positiveFeedbackLeftCount)), __LINE__);
         }
         $this->PositiveFeedbackLeftCount = $positiveFeedbackLeftCount;
+        
         return $this;
     }
     /**
      * Get NegativeFeedbackLeftCount value
      * @return int|null
      */
-    public function getNegativeFeedbackLeftCount()
+    public function getNegativeFeedbackLeftCount(): ?int
     {
         return $this->NegativeFeedbackLeftCount;
     }
@@ -172,20 +176,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $negativeFeedbackLeftCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setNegativeFeedbackLeftCount($negativeFeedbackLeftCount = null)
+    public function setNegativeFeedbackLeftCount(?int $negativeFeedbackLeftCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($negativeFeedbackLeftCount) && !is_numeric($negativeFeedbackLeftCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($negativeFeedbackLeftCount)), __LINE__);
+        if (!is_null($negativeFeedbackLeftCount) && !(is_int($negativeFeedbackLeftCount) || ctype_digit($negativeFeedbackLeftCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($negativeFeedbackLeftCount, true), gettype($negativeFeedbackLeftCount)), __LINE__);
         }
         $this->NegativeFeedbackLeftCount = $negativeFeedbackLeftCount;
+        
         return $this;
     }
     /**
      * Get NeutralFeedbackLeftCount value
      * @return int|null
      */
-    public function getNeutralFeedbackLeftCount()
+    public function getNeutralFeedbackLeftCount(): ?int
     {
         return $this->NeutralFeedbackLeftCount;
     }
@@ -194,20 +199,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $neutralFeedbackLeftCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setNeutralFeedbackLeftCount($neutralFeedbackLeftCount = null)
+    public function setNeutralFeedbackLeftCount(?int $neutralFeedbackLeftCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($neutralFeedbackLeftCount) && !is_numeric($neutralFeedbackLeftCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($neutralFeedbackLeftCount)), __LINE__);
+        if (!is_null($neutralFeedbackLeftCount) && !(is_int($neutralFeedbackLeftCount) || ctype_digit($neutralFeedbackLeftCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($neutralFeedbackLeftCount, true), gettype($neutralFeedbackLeftCount)), __LINE__);
         }
         $this->NeutralFeedbackLeftCount = $neutralFeedbackLeftCount;
+        
         return $this;
     }
     /**
      * Get FeedbackLeftPercent value
      * @return float|null
      */
-    public function getFeedbackLeftPercent()
+    public function getFeedbackLeftPercent(): ?float
     {
         return $this->FeedbackLeftPercent;
     }
@@ -216,16 +222,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param float $feedbackLeftPercent
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setFeedbackLeftPercent($feedbackLeftPercent = null)
+    public function setFeedbackLeftPercent(?float $feedbackLeftPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($feedbackLeftPercent) && !(is_float($feedbackLeftPercent) || is_numeric($feedbackLeftPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($feedbackLeftPercent, true), gettype($feedbackLeftPercent)), __LINE__);
+        }
         $this->FeedbackLeftPercent = $feedbackLeftPercent;
+        
         return $this;
     }
     /**
      * Get RepeatBuyerCount value
      * @return int|null
      */
-    public function getRepeatBuyerCount()
+    public function getRepeatBuyerCount(): ?int
     {
         return $this->RepeatBuyerCount;
     }
@@ -234,20 +245,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $repeatBuyerCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setRepeatBuyerCount($repeatBuyerCount = null)
+    public function setRepeatBuyerCount(?int $repeatBuyerCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($repeatBuyerCount) && !is_numeric($repeatBuyerCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($repeatBuyerCount)), __LINE__);
+        if (!is_null($repeatBuyerCount) && !(is_int($repeatBuyerCount) || ctype_digit($repeatBuyerCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($repeatBuyerCount, true), gettype($repeatBuyerCount)), __LINE__);
         }
         $this->RepeatBuyerCount = $repeatBuyerCount;
+        
         return $this;
     }
     /**
      * Get RepeatBuyerPercent value
      * @return float|null
      */
-    public function getRepeatBuyerPercent()
+    public function getRepeatBuyerPercent(): ?float
     {
         return $this->RepeatBuyerPercent;
     }
@@ -256,16 +268,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param float $repeatBuyerPercent
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setRepeatBuyerPercent($repeatBuyerPercent = null)
+    public function setRepeatBuyerPercent(?float $repeatBuyerPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($repeatBuyerPercent) && !(is_float($repeatBuyerPercent) || is_numeric($repeatBuyerPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($repeatBuyerPercent, true), gettype($repeatBuyerPercent)), __LINE__);
+        }
         $this->RepeatBuyerPercent = $repeatBuyerPercent;
+        
         return $this;
     }
     /**
      * Get UniqueBuyerCount value
      * @return int|null
      */
-    public function getUniqueBuyerCount()
+    public function getUniqueBuyerCount(): ?int
     {
         return $this->UniqueBuyerCount;
     }
@@ -274,20 +291,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $uniqueBuyerCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setUniqueBuyerCount($uniqueBuyerCount = null)
+    public function setUniqueBuyerCount(?int $uniqueBuyerCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($uniqueBuyerCount) && !is_numeric($uniqueBuyerCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($uniqueBuyerCount)), __LINE__);
+        if (!is_null($uniqueBuyerCount) && !(is_int($uniqueBuyerCount) || ctype_digit($uniqueBuyerCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($uniqueBuyerCount, true), gettype($uniqueBuyerCount)), __LINE__);
         }
         $this->UniqueBuyerCount = $uniqueBuyerCount;
+        
         return $this;
     }
     /**
      * Get TransactionPercent value
      * @return float|null
      */
-    public function getTransactionPercent()
+    public function getTransactionPercent(): ?float
     {
         return $this->TransactionPercent;
     }
@@ -296,16 +314,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param float $transactionPercent
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setTransactionPercent($transactionPercent = null)
+    public function setTransactionPercent(?float $transactionPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($transactionPercent) && !(is_float($transactionPercent) || is_numeric($transactionPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($transactionPercent, true), gettype($transactionPercent)), __LINE__);
+        }
         $this->TransactionPercent = $transactionPercent;
+        
         return $this;
     }
     /**
      * Get CrossBorderTransactionCount value
      * @return int|null
      */
-    public function getCrossBorderTransactionCount()
+    public function getCrossBorderTransactionCount(): ?int
     {
         return $this->CrossBorderTransactionCount;
     }
@@ -314,20 +337,21 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param int $crossBorderTransactionCount
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setCrossBorderTransactionCount($crossBorderTransactionCount = null)
+    public function setCrossBorderTransactionCount(?int $crossBorderTransactionCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($crossBorderTransactionCount) && !is_numeric($crossBorderTransactionCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($crossBorderTransactionCount)), __LINE__);
+        if (!is_null($crossBorderTransactionCount) && !(is_int($crossBorderTransactionCount) || ctype_digit($crossBorderTransactionCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($crossBorderTransactionCount, true), gettype($crossBorderTransactionCount)), __LINE__);
         }
         $this->CrossBorderTransactionCount = $crossBorderTransactionCount;
+        
         return $this;
     }
     /**
      * Get CrossBorderTransactionPercent value
      * @return float|null
      */
-    public function getCrossBorderTransactionPercent()
+    public function getCrossBorderTransactionPercent(): ?float
     {
         return $this->CrossBorderTransactionPercent;
     }
@@ -336,61 +360,47 @@ class SellerRoleMetricsType extends AbstractStructBase
      * @param float $crossBorderTransactionPercent
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setCrossBorderTransactionPercent($crossBorderTransactionPercent = null)
+    public function setCrossBorderTransactionPercent(?float $crossBorderTransactionPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($crossBorderTransactionPercent) && !(is_float($crossBorderTransactionPercent) || is_numeric($crossBorderTransactionPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($crossBorderTransactionPercent, true), gettype($crossBorderTransactionPercent)), __LINE__);
+        }
         $this->CrossBorderTransactionPercent = $crossBorderTransactionPercent;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellerRoleMetricsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

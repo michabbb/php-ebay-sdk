@@ -1,32 +1,37 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GroupValidationRulesType StructType
- * Meta informations extracted from the WSDL
- * - documentation: This type is used to specify how many of the corresponding Product Identifier types are required to be specified at listing time.
+ * Meta information extracted from the WSDL
+ * - documentation: This type is used to specify how many of the corresponding Product Identifier types are required to be specified at listing time. <br/><br/> <span class="tablenote"><strong>Note:</strong> This type and the <b>ProductIdentifiers</b>
+ * container was originally introduced into the Trading schema with the intention of separating Global Trade Item Numbers (GTINs) and other descriptive item specifics, but <b>ProductIdentifiers</b> container was never wired on/returned in
+ * <b>GetCategorySpecifics</b>. Instead, users will still find one or more relevant GTIN types under a <b>Recommendations.NameRecommendation.Name</b> field. </span>
  * @subpackage Structs
  */
 class GroupValidationRulesType extends AbstractStructBase
 {
     /**
      * The MinRequired
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates the minimum number of the corresponding Product Identifiers are required to be specified at listing time. If two Product Identifier types are returned, and the <b>MinRequired</b> value is the <code>2</code>, the
-     * seller will be required to use both Product Identifier types at listing time. If the <b>MinRequired</b> value was <code>1</code>, only one of the two Product Identifier types would be required, but the seller could use them both if they wanted. If
-     * the <b>MinRequired</b> value was <code>0</code>, one or both of those Product Identifier types could be used, but they would not be required.
-     * @var int
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><strong>Note:</strong> <strong>GroupValidationRulesTypetype</strong> and the <b>ProductIdentifiers</b> container were originally introduced into the Trading schema with the intention of separating Global Trade
+     * Item Numbers (GTINs) and other descriptive item specifics, but these schema elements were never wired on/returned in <b>GetCategorySpecifics</b>. Instead, users will still find one or more relevant GTIN types under a
+     * <b>Recommendations.NameRecommendation.Name</b> field. </span>
+     * @var int|null
      */
-    public $MinRequired;
+    protected ?int $MinRequired = null;
     /**
      * Constructor method for GroupValidationRulesType
      * @uses GroupValidationRulesType::setMinRequired()
      * @param int $minRequired
      */
-    public function __construct($minRequired = null)
+    public function __construct(?int $minRequired = null)
     {
         $this
             ->setMinRequired($minRequired);
@@ -35,7 +40,7 @@ class GroupValidationRulesType extends AbstractStructBase
      * Get MinRequired value
      * @return int|null
      */
-    public function getMinRequired()
+    public function getMinRequired(): ?int
     {
         return $this->MinRequired;
     }
@@ -44,33 +49,14 @@ class GroupValidationRulesType extends AbstractStructBase
      * @param int $minRequired
      * @return \macropage\ebaysdk\trading\StructType\GroupValidationRulesType
      */
-    public function setMinRequired($minRequired = null)
+    public function setMinRequired(?int $minRequired = null): self
     {
         // validation for constraint: int
-        if (!is_null($minRequired) && !is_numeric($minRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($minRequired)), __LINE__);
+        if (!is_null($minRequired) && !(is_int($minRequired) || ctype_digit($minRequired))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($minRequired, true), gettype($minRequired)), __LINE__);
         }
         $this->MinRequired = $minRequired;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GroupValidationRulesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

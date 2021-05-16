@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CrossPromotionPreferencesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,65 +17,65 @@ class CrossPromotionPreferencesType extends AbstractStructBase
 {
     /**
      * The CrossPromotionEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CrossPromotionEnabled;
+    protected ?bool $CrossPromotionEnabled = null;
     /**
      * The CrossSellItemFormatSortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CrossSellItemFormatSortFilter;
+    protected ?string $CrossSellItemFormatSortFilter = null;
     /**
      * The CrossSellGallerySortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CrossSellGallerySortFilter;
+    protected ?string $CrossSellGallerySortFilter = null;
     /**
      * The CrossSellItemSortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CrossSellItemSortFilter;
+    protected ?string $CrossSellItemSortFilter = null;
     /**
      * The UpSellItemFormatSortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpSellItemFormatSortFilter;
+    protected ?string $UpSellItemFormatSortFilter = null;
     /**
      * The UpSellGallerySortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpSellGallerySortFilter;
+    protected ?string $UpSellGallerySortFilter = null;
     /**
      * The UpSellItemSortFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpSellItemSortFilter;
+    protected ?string $UpSellItemSortFilter = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CrossPromotionPreferencesType
      * @uses CrossPromotionPreferencesType::setCrossPromotionEnabled()
@@ -90,9 +93,9 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * @param string $upSellItemFormatSortFilter
      * @param string $upSellGallerySortFilter
      * @param string $upSellItemSortFilter
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($crossPromotionEnabled = null, $crossSellItemFormatSortFilter = null, $crossSellGallerySortFilter = null, $crossSellItemSortFilter = null, $upSellItemFormatSortFilter = null, $upSellGallerySortFilter = null, $upSellItemSortFilter = null, \DOMDocument $any = null)
+    public function __construct(?bool $crossPromotionEnabled = null, ?string $crossSellItemFormatSortFilter = null, ?string $crossSellGallerySortFilter = null, ?string $crossSellItemSortFilter = null, ?string $upSellItemFormatSortFilter = null, ?string $upSellGallerySortFilter = null, ?string $upSellItemSortFilter = null, $any = null)
     {
         $this
             ->setCrossPromotionEnabled($crossPromotionEnabled)
@@ -108,7 +111,7 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Get CrossPromotionEnabled value
      * @return bool|null
      */
-    public function getCrossPromotionEnabled()
+    public function getCrossPromotionEnabled(): ?bool
     {
         return $this->CrossPromotionEnabled;
     }
@@ -117,20 +120,21 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * @param bool $crossPromotionEnabled
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setCrossPromotionEnabled($crossPromotionEnabled = null)
+    public function setCrossPromotionEnabled(?bool $crossPromotionEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($crossPromotionEnabled) && !is_bool($crossPromotionEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($crossPromotionEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($crossPromotionEnabled, true), gettype($crossPromotionEnabled)), __LINE__);
         }
         $this->CrossPromotionEnabled = $crossPromotionEnabled;
+        
         return $this;
     }
     /**
      * Get CrossSellItemFormatSortFilter value
      * @return string|null
      */
-    public function getCrossSellItemFormatSortFilter()
+    public function getCrossSellItemFormatSortFilter(): ?string
     {
         return $this->CrossSellItemFormatSortFilter;
     }
@@ -138,24 +142,25 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set CrossSellItemFormatSortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $crossSellItemFormatSortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setCrossSellItemFormatSortFilter($crossSellItemFormatSortFilter = null)
+    public function setCrossSellItemFormatSortFilter(?string $crossSellItemFormatSortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::valueIsValid($crossSellItemFormatSortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $crossSellItemFormatSortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType', is_array($crossSellItemFormatSortFilter) ? implode(', ', $crossSellItemFormatSortFilter) : var_export($crossSellItemFormatSortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->CrossSellItemFormatSortFilter = $crossSellItemFormatSortFilter;
+        
         return $this;
     }
     /**
      * Get CrossSellGallerySortFilter value
      * @return string|null
      */
-    public function getCrossSellGallerySortFilter()
+    public function getCrossSellGallerySortFilter(): ?string
     {
         return $this->CrossSellGallerySortFilter;
     }
@@ -163,24 +168,25 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set CrossSellGallerySortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $crossSellGallerySortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setCrossSellGallerySortFilter($crossSellGallerySortFilter = null)
+    public function setCrossSellGallerySortFilter(?string $crossSellGallerySortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::valueIsValid($crossSellGallerySortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $crossSellGallerySortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType', is_array($crossSellGallerySortFilter) ? implode(', ', $crossSellGallerySortFilter) : var_export($crossSellGallerySortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->CrossSellGallerySortFilter = $crossSellGallerySortFilter;
+        
         return $this;
     }
     /**
      * Get CrossSellItemSortFilter value
      * @return string|null
      */
-    public function getCrossSellItemSortFilter()
+    public function getCrossSellItemSortFilter(): ?string
     {
         return $this->CrossSellItemSortFilter;
     }
@@ -188,24 +194,25 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set CrossSellItemSortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $crossSellItemSortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setCrossSellItemSortFilter($crossSellItemSortFilter = null)
+    public function setCrossSellItemSortFilter(?string $crossSellItemSortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::valueIsValid($crossSellItemSortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $crossSellItemSortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType', is_array($crossSellItemSortFilter) ? implode(', ', $crossSellItemSortFilter) : var_export($crossSellItemSortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->CrossSellItemSortFilter = $crossSellItemSortFilter;
+        
         return $this;
     }
     /**
      * Get UpSellItemFormatSortFilter value
      * @return string|null
      */
-    public function getUpSellItemFormatSortFilter()
+    public function getUpSellItemFormatSortFilter(): ?string
     {
         return $this->UpSellItemFormatSortFilter;
     }
@@ -213,24 +220,25 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set UpSellItemFormatSortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $upSellItemFormatSortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setUpSellItemFormatSortFilter($upSellItemFormatSortFilter = null)
+    public function setUpSellItemFormatSortFilter(?string $upSellItemFormatSortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::valueIsValid($upSellItemFormatSortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $upSellItemFormatSortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType', is_array($upSellItemFormatSortFilter) ? implode(', ', $upSellItemFormatSortFilter) : var_export($upSellItemFormatSortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemFormatSortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->UpSellItemFormatSortFilter = $upSellItemFormatSortFilter;
+        
         return $this;
     }
     /**
      * Get UpSellGallerySortFilter value
      * @return string|null
      */
-    public function getUpSellGallerySortFilter()
+    public function getUpSellGallerySortFilter(): ?string
     {
         return $this->UpSellGallerySortFilter;
     }
@@ -238,24 +246,25 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set UpSellGallerySortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $upSellGallerySortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setUpSellGallerySortFilter($upSellGallerySortFilter = null)
+    public function setUpSellGallerySortFilter(?string $upSellGallerySortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::valueIsValid($upSellGallerySortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $upSellGallerySortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType', is_array($upSellGallerySortFilter) ? implode(', ', $upSellGallerySortFilter) : var_export($upSellGallerySortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GallerySortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->UpSellGallerySortFilter = $upSellGallerySortFilter;
+        
         return $this;
     }
     /**
      * Get UpSellItemSortFilter value
      * @return string|null
      */
-    public function getUpSellItemSortFilter()
+    public function getUpSellItemSortFilter(): ?string
     {
         return $this->UpSellItemSortFilter;
     }
@@ -263,69 +272,51 @@ class CrossPromotionPreferencesType extends AbstractStructBase
      * Set UpSellItemSortFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $upSellItemSortFilter
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setUpSellItemSortFilter($upSellItemSortFilter = null)
+    public function setUpSellItemSortFilter(?string $upSellItemSortFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::valueIsValid($upSellItemSortFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $upSellItemSortFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType', is_array($upSellItemSortFilter) ? implode(', ', $upSellItemSortFilter) : var_export($upSellItemSortFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortFilterCodeType::getValidValues())), __LINE__);
         }
         $this->UpSellItemSortFilter = $upSellItemSortFilter;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

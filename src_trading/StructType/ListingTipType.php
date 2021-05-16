@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ListingTipType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class ListingTipType extends AbstractStructBase
 {
     /**
      * The ListingTipID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingTipID;
+    protected ?string $ListingTipID = null;
     /**
      * The Priority
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Priority;
+    protected ?int $Priority = null;
     /**
      * The Message
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingTipMessageType
+     * @var \macropage\ebaysdk\trading\StructType\ListingTipMessageType|null
      */
-    public $Message;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingTipMessageType $Message = null;
     /**
      * The Field
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingTipFieldType
+     * @var \macropage\ebaysdk\trading\StructType\ListingTipFieldType|null
      */
-    public $Field;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingTipFieldType $Field = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ListingTipType
      * @uses ListingTipType::setListingTipID()
@@ -60,9 +63,9 @@ class ListingTipType extends AbstractStructBase
      * @param int $priority
      * @param \macropage\ebaysdk\trading\StructType\ListingTipMessageType $message
      * @param \macropage\ebaysdk\trading\StructType\ListingTipFieldType $field
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($listingTipID = null, $priority = null, \macropage\ebaysdk\trading\StructType\ListingTipMessageType $message = null, \macropage\ebaysdk\trading\StructType\ListingTipFieldType $field = null, \DOMDocument $any = null)
+    public function __construct(?string $listingTipID = null, ?int $priority = null, ?\macropage\ebaysdk\trading\StructType\ListingTipMessageType $message = null, ?\macropage\ebaysdk\trading\StructType\ListingTipFieldType $field = null, $any = null)
     {
         $this
             ->setListingTipID($listingTipID)
@@ -75,7 +78,7 @@ class ListingTipType extends AbstractStructBase
      * Get ListingTipID value
      * @return string|null
      */
-    public function getListingTipID()
+    public function getListingTipID(): ?string
     {
         return $this->ListingTipID;
     }
@@ -84,20 +87,21 @@ class ListingTipType extends AbstractStructBase
      * @param string $listingTipID
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType
      */
-    public function setListingTipID($listingTipID = null)
+    public function setListingTipID(?string $listingTipID = null): self
     {
         // validation for constraint: string
         if (!is_null($listingTipID) && !is_string($listingTipID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($listingTipID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($listingTipID, true), gettype($listingTipID)), __LINE__);
         }
         $this->ListingTipID = $listingTipID;
+        
         return $this;
     }
     /**
      * Get Priority value
      * @return int|null
      */
-    public function getPriority()
+    public function getPriority(): ?int
     {
         return $this->Priority;
     }
@@ -106,20 +110,21 @@ class ListingTipType extends AbstractStructBase
      * @param int $priority
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType
      */
-    public function setPriority($priority = null)
+    public function setPriority(?int $priority = null): self
     {
         // validation for constraint: int
-        if (!is_null($priority) && !is_numeric($priority)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($priority)), __LINE__);
+        if (!is_null($priority) && !(is_int($priority) || ctype_digit($priority))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($priority, true), gettype($priority)), __LINE__);
         }
         $this->Priority = $priority;
+        
         return $this;
     }
     /**
      * Get Message value
      * @return \macropage\ebaysdk\trading\StructType\ListingTipMessageType|null
      */
-    public function getMessage()
+    public function getMessage(): ?\macropage\ebaysdk\trading\StructType\ListingTipMessageType
     {
         return $this->Message;
     }
@@ -128,16 +133,17 @@ class ListingTipType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingTipMessageType $message
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType
      */
-    public function setMessage(\macropage\ebaysdk\trading\StructType\ListingTipMessageType $message = null)
+    public function setMessage(?\macropage\ebaysdk\trading\StructType\ListingTipMessageType $message = null): self
     {
         $this->Message = $message;
+        
         return $this;
     }
     /**
      * Get Field value
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType|null
      */
-    public function getField()
+    public function getField(): ?\macropage\ebaysdk\trading\StructType\ListingTipFieldType
     {
         return $this->Field;
     }
@@ -146,61 +152,43 @@ class ListingTipType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingTipFieldType $field
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType
      */
-    public function setField(\macropage\ebaysdk\trading\StructType\ListingTipFieldType $field = null)
+    public function setField(?\macropage\ebaysdk\trading\StructType\ListingTipFieldType $field = null): self
     {
         $this->Field = $field;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ListingTipType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ListingTipType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

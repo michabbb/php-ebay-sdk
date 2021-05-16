@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VeROSiteDetailType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>VeROSiteDetailType</b> container, which is returned in <b>GetVeROReasonCodeDetails</b>. Each <b>VeROSiteDetailType</b> container will contain one or more reasons how an eBay listing could possibly infringe upon
  * the intellectual property rights of a product owner.
  * @subpackage Structs
@@ -15,27 +18,27 @@ class VeROSiteDetailType extends AbstractStructBase
 {
     /**
      * The Site
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the eBay site for which reason code details are returned.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Site;
+    protected ?string $Site = null;
     /**
      * The ReasonCodeDetail
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container includes brief and detailed text descriptions for the VeRO program intellectual property right infringement reason. There can be multiple <b>ReasonCodeDetail</b> containers returned for each eBay site. This container
      * also consists of a <b>codeID</b> attribute, which is the unique identifier of the reason code.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[]
      */
-    public $ReasonCodeDetail;
+    protected array $ReasonCodeDetail = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for VeROSiteDetailType
      * @uses VeROSiteDetailType::setSite()
@@ -43,9 +46,9 @@ class VeROSiteDetailType extends AbstractStructBase
      * @uses VeROSiteDetailType::setAny()
      * @param string $site
      * @param \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[] $reasonCodeDetail
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($site = null, array $reasonCodeDetail = array(), \DOMDocument $any = null)
+    public function __construct(?string $site = null, array $reasonCodeDetail = [], $any = null)
     {
         $this
             ->setSite($site)
@@ -56,7 +59,7 @@ class VeROSiteDetailType extends AbstractStructBase
      * Get Site value
      * @return string|null
      */
-    public function getSite()
+    public function getSite(): ?string
     {
         return $this->Site;
     }
@@ -64,109 +67,114 @@ class VeROSiteDetailType extends AbstractStructBase
      * Set Site value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $site
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
      */
-    public function setSite($site = null)
+    public function setSite(?string $site = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($site)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $site, implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($site) ? implode(', ', $site) : var_export($site, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
         }
         $this->Site = $site;
+        
         return $this;
     }
     /**
      * Get ReasonCodeDetail value
-     * @return \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[]
      */
-    public function getReasonCodeDetail()
+    public function getReasonCodeDetail(): array
     {
         return $this->ReasonCodeDetail;
     }
     /**
+     * This method is responsible for validating the values passed to the setReasonCodeDetail method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setReasonCodeDetail method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateReasonCodeDetailForArrayConstraintsFromSetReasonCodeDetail(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $veROSiteDetailTypeReasonCodeDetailItem) {
+            // validation for constraint: itemType
+            if (!$veROSiteDetailTypeReasonCodeDetailItem instanceof \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType) {
+                $invalidValues[] = is_object($veROSiteDetailTypeReasonCodeDetailItem) ? get_class($veROSiteDetailTypeReasonCodeDetailItem) : sprintf('%s(%s)', gettype($veROSiteDetailTypeReasonCodeDetailItem), var_export($veROSiteDetailTypeReasonCodeDetailItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ReasonCodeDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ReasonCodeDetail value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[] $reasonCodeDetail
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
      */
-    public function setReasonCodeDetail(array $reasonCodeDetail = array())
+    public function setReasonCodeDetail(array $reasonCodeDetail = []): self
     {
-        foreach ($reasonCodeDetail as $veROSiteDetailTypeReasonCodeDetailItem) {
-            // validation for constraint: itemType
-            if (!$veROSiteDetailTypeReasonCodeDetailItem instanceof \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType) {
-                throw new \InvalidArgumentException(sprintf('The ReasonCodeDetail property can only contain items of \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType, "%s" given', is_object($veROSiteDetailTypeReasonCodeDetailItem) ? get_class($veROSiteDetailTypeReasonCodeDetailItem) : gettype($veROSiteDetailTypeReasonCodeDetailItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($reasonCodeDetailArrayErrorMessage = self::validateReasonCodeDetailForArrayConstraintsFromSetReasonCodeDetail($reasonCodeDetail))) {
+            throw new InvalidArgumentException($reasonCodeDetailArrayErrorMessage, __LINE__);
         }
         $this->ReasonCodeDetail = $reasonCodeDetail;
+        
         return $this;
     }
     /**
      * Add item to ReasonCodeDetail value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType $item
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
      */
-    public function addToReasonCodeDetail(\macropage\ebaysdk\trading\StructType\ReasonCodeDetailType $item)
+    public function addToReasonCodeDetail(\macropage\ebaysdk\trading\StructType\ReasonCodeDetailType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType) {
-            throw new \InvalidArgumentException(sprintf('The ReasonCodeDetail property can only contain items of \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ReasonCodeDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ReasonCodeDetail[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\VeROSiteDetailType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

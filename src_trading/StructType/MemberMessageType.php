@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MemberMessageType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Container for individual message information.
  * @subpackage Structs
  */
@@ -14,118 +17,118 @@ class MemberMessageType extends AbstractStructBase
 {
     /**
      * The MessageType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Type of message being retrieved. Note that some message types can only be created via the eBay Web site.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageType;
+    protected ?string $MessageType = null;
     /**
      * The QuestionType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Context of the question (e.g. Shipping, General).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $QuestionType;
+    protected ?string $QuestionType = null;
     /**
      * The EmailCopyToSender
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if a copy of the messages is to be emailed to the sender. If omitted, this defaults to whatever the user set in preferences.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EmailCopyToSender;
+    protected ?bool $EmailCopyToSender = null;
     /**
      * The HideSendersEmailAddress
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HideSendersEmailAddress;
+    protected ?bool $HideSendersEmailAddress = null;
     /**
      * The DisplayToPublic
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if the member message is viewable in the item listing.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DisplayToPublic;
+    protected ?bool $DisplayToPublic = null;
     /**
      * The SenderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay user ID of the person who asked the question or sent the message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SenderID;
+    protected ?string $SenderID = null;
     /**
      * The SenderEmail
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: SenderEmail contains the static email address of an eBay member, used within the "reply to" email address when the eBay member sends a message. (Each eBay member is assigned a static alias. The alias is used within a static email
      * address.) SenderEmail is returned if MessageType is AskSellerQuestion. SenderEmail is also returned in the AskSellerQuestion notification. The following functionality of this field has been deprecated: return of a dynamic email address.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SenderEmail;
+    protected ?string $SenderEmail = null;
     /**
      * The RecipientID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Recipient's eBay user ID. For AddMemberMessagesAAQToBidder, it must be the seller of an item, that item's bidder, or a user who has made an offer on that item using Best Offer. Note: maxOccurs is a shared schema element and needs to
      * be unbounded for AddMemberMessagesAAQToBidder. For AddMemberMessageRTQ, this field is mandatory if ItemID is not in the request. For all other uses, there can only be one RecipientID.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $RecipientID;
+    protected array $RecipientID = [];
     /**
      * The Subject
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Subject of this email message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Subject;
+    protected ?string $Subject = null;
     /**
      * The Body
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Content of the message is input into this string field. HTML formatting is not allowed in the body of the message. If plain HTML is used, an error occurs and the message will not go through. If encoded HTML is used, the message may
      * go through but the formatting will not be successful, and the recipient of the message will just see the HTML formatting tags.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Body;
+    protected ?string $Body = null;
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID that uniquely identifies a message for a given user. <br><br> This value is not the same as the value used for the GetMyMessages MessageID. However, this MessageID value can be used as the GetMyMessages ExternalID.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageID;
+    protected ?string $MessageID = null;
     /**
      * The ParentMessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID number of the question to which this message is responding.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ParentMessageID;
+    protected ?string $ParentMessageID = null;
     /**
      * The MessageMedia
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Media details attached to the message.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public $MessageMedia;
+    protected array $MessageMedia = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MemberMessageType
      * @uses MemberMessageType::setMessageType()
@@ -155,9 +158,9 @@ class MemberMessageType extends AbstractStructBase
      * @param string $messageID
      * @param string $parentMessageID
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($messageType = null, $questionType = null, $emailCopyToSender = null, $hideSendersEmailAddress = null, $displayToPublic = null, $senderID = null, $senderEmail = null, array $recipientID = array(), $subject = null, $body = null, $messageID = null, $parentMessageID = null, array $messageMedia = array(), \DOMDocument $any = null)
+    public function __construct(?string $messageType = null, ?string $questionType = null, ?bool $emailCopyToSender = null, ?bool $hideSendersEmailAddress = null, ?bool $displayToPublic = null, ?string $senderID = null, ?string $senderEmail = null, array $recipientID = [], ?string $subject = null, ?string $body = null, ?string $messageID = null, ?string $parentMessageID = null, array $messageMedia = [], $any = null)
     {
         $this
             ->setMessageType($messageType)
@@ -179,7 +182,7 @@ class MemberMessageType extends AbstractStructBase
      * Get MessageType value
      * @return string|null
      */
-    public function getMessageType()
+    public function getMessageType(): ?string
     {
         return $this->MessageType;
     }
@@ -187,24 +190,25 @@ class MemberMessageType extends AbstractStructBase
      * Set MessageType value
      * @uses \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $messageType
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setMessageType($messageType = null)
+    public function setMessageType(?string $messageType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::valueIsValid($messageType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $messageType, implode(', ', \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType', is_array($messageType) ? implode(', ', $messageType) : var_export($messageType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues())), __LINE__);
         }
         $this->MessageType = $messageType;
+        
         return $this;
     }
     /**
      * Get QuestionType value
      * @return string|null
      */
-    public function getQuestionType()
+    public function getQuestionType(): ?string
     {
         return $this->QuestionType;
     }
@@ -212,24 +216,25 @@ class MemberMessageType extends AbstractStructBase
      * Set QuestionType value
      * @uses \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $questionType
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setQuestionType($questionType = null)
+    public function setQuestionType(?string $questionType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::valueIsValid($questionType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $questionType, implode(', ', \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType', is_array($questionType) ? implode(', ', $questionType) : var_export($questionType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues())), __LINE__);
         }
         $this->QuestionType = $questionType;
+        
         return $this;
     }
     /**
      * Get EmailCopyToSender value
      * @return bool|null
      */
-    public function getEmailCopyToSender()
+    public function getEmailCopyToSender(): ?bool
     {
         return $this->EmailCopyToSender;
     }
@@ -238,20 +243,21 @@ class MemberMessageType extends AbstractStructBase
      * @param bool $emailCopyToSender
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setEmailCopyToSender($emailCopyToSender = null)
+    public function setEmailCopyToSender(?bool $emailCopyToSender = null): self
     {
         // validation for constraint: boolean
         if (!is_null($emailCopyToSender) && !is_bool($emailCopyToSender)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($emailCopyToSender)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($emailCopyToSender, true), gettype($emailCopyToSender)), __LINE__);
         }
         $this->EmailCopyToSender = $emailCopyToSender;
+        
         return $this;
     }
     /**
      * Get HideSendersEmailAddress value
      * @return bool|null
      */
-    public function getHideSendersEmailAddress()
+    public function getHideSendersEmailAddress(): ?bool
     {
         return $this->HideSendersEmailAddress;
     }
@@ -260,20 +266,21 @@ class MemberMessageType extends AbstractStructBase
      * @param bool $hideSendersEmailAddress
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setHideSendersEmailAddress($hideSendersEmailAddress = null)
+    public function setHideSendersEmailAddress(?bool $hideSendersEmailAddress = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hideSendersEmailAddress) && !is_bool($hideSendersEmailAddress)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hideSendersEmailAddress)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hideSendersEmailAddress, true), gettype($hideSendersEmailAddress)), __LINE__);
         }
         $this->HideSendersEmailAddress = $hideSendersEmailAddress;
+        
         return $this;
     }
     /**
      * Get DisplayToPublic value
      * @return bool|null
      */
-    public function getDisplayToPublic()
+    public function getDisplayToPublic(): ?bool
     {
         return $this->DisplayToPublic;
     }
@@ -282,20 +289,21 @@ class MemberMessageType extends AbstractStructBase
      * @param bool $displayToPublic
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setDisplayToPublic($displayToPublic = null)
+    public function setDisplayToPublic(?bool $displayToPublic = null): self
     {
         // validation for constraint: boolean
         if (!is_null($displayToPublic) && !is_bool($displayToPublic)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($displayToPublic)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($displayToPublic, true), gettype($displayToPublic)), __LINE__);
         }
         $this->DisplayToPublic = $displayToPublic;
+        
         return $this;
     }
     /**
      * Get SenderID value
      * @return string|null
      */
-    public function getSenderID()
+    public function getSenderID(): ?string
     {
         return $this->SenderID;
     }
@@ -304,20 +312,21 @@ class MemberMessageType extends AbstractStructBase
      * @param string $senderID
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setSenderID($senderID = null)
+    public function setSenderID(?string $senderID = null): self
     {
         // validation for constraint: string
         if (!is_null($senderID) && !is_string($senderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($senderID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($senderID, true), gettype($senderID)), __LINE__);
         }
         $this->SenderID = $senderID;
+        
         return $this;
     }
     /**
      * Get SenderEmail value
      * @return string|null
      */
-    public function getSenderEmail()
+    public function getSenderEmail(): ?string
     {
         return $this->SenderEmail;
     }
@@ -326,60 +335,84 @@ class MemberMessageType extends AbstractStructBase
      * @param string $senderEmail
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setSenderEmail($senderEmail = null)
+    public function setSenderEmail(?string $senderEmail = null): self
     {
         // validation for constraint: string
         if (!is_null($senderEmail) && !is_string($senderEmail)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($senderEmail)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($senderEmail, true), gettype($senderEmail)), __LINE__);
         }
         $this->SenderEmail = $senderEmail;
+        
         return $this;
     }
     /**
      * Get RecipientID value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getRecipientID()
+    public function getRecipientID(): array
     {
         return $this->RecipientID;
     }
     /**
+     * This method is responsible for validating the values passed to the setRecipientID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setRecipientID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateRecipientIDForArrayConstraintsFromSetRecipientID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $memberMessageTypeRecipientIDItem) {
+            // validation for constraint: itemType
+            if (!is_string($memberMessageTypeRecipientIDItem)) {
+                $invalidValues[] = is_object($memberMessageTypeRecipientIDItem) ? get_class($memberMessageTypeRecipientIDItem) : sprintf('%s(%s)', gettype($memberMessageTypeRecipientIDItem), var_export($memberMessageTypeRecipientIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The RecipientID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set RecipientID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $recipientID
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setRecipientID(array $recipientID = array())
+    public function setRecipientID(array $recipientID = []): self
     {
-        foreach ($recipientID as $memberMessageTypeRecipientIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($memberMessageTypeRecipientIDItem)) {
-                throw new \InvalidArgumentException(sprintf('The RecipientID property can only contain items of string, "%s" given', is_object($memberMessageTypeRecipientIDItem) ? get_class($memberMessageTypeRecipientIDItem) : gettype($memberMessageTypeRecipientIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($recipientIDArrayErrorMessage = self::validateRecipientIDForArrayConstraintsFromSetRecipientID($recipientID))) {
+            throw new InvalidArgumentException($recipientIDArrayErrorMessage, __LINE__);
         }
         $this->RecipientID = $recipientID;
+        
         return $this;
     }
     /**
      * Add item to RecipientID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function addToRecipientID($item)
+    public function addToRecipientID(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The RecipientID property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The RecipientID property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->RecipientID[] = $item;
+        
         return $this;
     }
     /**
      * Get Subject value
      * @return string|null
      */
-    public function getSubject()
+    public function getSubject(): ?string
     {
         return $this->Subject;
     }
@@ -388,20 +421,21 @@ class MemberMessageType extends AbstractStructBase
      * @param string $subject
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setSubject($subject = null)
+    public function setSubject(?string $subject = null): self
     {
         // validation for constraint: string
         if (!is_null($subject) && !is_string($subject)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($subject)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($subject, true), gettype($subject)), __LINE__);
         }
         $this->Subject = $subject;
+        
         return $this;
     }
     /**
      * Get Body value
      * @return string|null
      */
-    public function getBody()
+    public function getBody(): ?string
     {
         return $this->Body;
     }
@@ -410,20 +444,21 @@ class MemberMessageType extends AbstractStructBase
      * @param string $body
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setBody($body = null)
+    public function setBody(?string $body = null): self
     {
         // validation for constraint: string
         if (!is_null($body) && !is_string($body)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($body)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($body, true), gettype($body)), __LINE__);
         }
         $this->Body = $body;
+        
         return $this;
     }
     /**
      * Get MessageID value
      * @return string|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?string
     {
         return $this->MessageID;
     }
@@ -432,20 +467,21 @@ class MemberMessageType extends AbstractStructBase
      * @param string $messageID
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?string $messageID = null): self
     {
         // validation for constraint: string
         if (!is_null($messageID) && !is_string($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get ParentMessageID value
      * @return string|null
      */
-    public function getParentMessageID()
+    public function getParentMessageID(): ?string
     {
         return $this->ParentMessageID;
     }
@@ -454,105 +490,110 @@ class MemberMessageType extends AbstractStructBase
      * @param string $parentMessageID
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setParentMessageID($parentMessageID = null)
+    public function setParentMessageID(?string $parentMessageID = null): self
     {
         // validation for constraint: string
         if (!is_null($parentMessageID) && !is_string($parentMessageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($parentMessageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($parentMessageID, true), gettype($parentMessageID)), __LINE__);
         }
         $this->ParentMessageID = $parentMessageID;
+        
         return $this;
     }
     /**
      * Get MessageMedia value
-     * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public function getMessageMedia()
+    public function getMessageMedia(): array
     {
         return $this->MessageMedia;
     }
     /**
+     * This method is responsible for validating the values passed to the setMessageMedia method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMessageMedia method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $memberMessageTypeMessageMediaItem) {
+            // validation for constraint: itemType
+            if (!$memberMessageTypeMessageMediaItem instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
+                $invalidValues[] = is_object($memberMessageTypeMessageMediaItem) ? get_class($memberMessageTypeMessageMediaItem) : sprintf('%s(%s)', gettype($memberMessageTypeMessageMediaItem), var_export($memberMessageTypeMessageMediaItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The MessageMedia property can only contain items of type \macropage\ebaysdk\trading\StructType\MessageMediaType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set MessageMedia value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setMessageMedia(array $messageMedia = array())
+    public function setMessageMedia(array $messageMedia = []): self
     {
-        foreach ($messageMedia as $memberMessageTypeMessageMediaItem) {
-            // validation for constraint: itemType
-            if (!$memberMessageTypeMessageMediaItem instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
-                throw new \InvalidArgumentException(sprintf('The MessageMedia property can only contain items of \macropage\ebaysdk\trading\StructType\MessageMediaType, "%s" given', is_object($memberMessageTypeMessageMediaItem) ? get_class($memberMessageTypeMessageMediaItem) : gettype($memberMessageTypeMessageMediaItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($messageMediaArrayErrorMessage = self::validateMessageMediaForArrayConstraintsFromSetMessageMedia($messageMedia))) {
+            throw new InvalidArgumentException($messageMediaArrayErrorMessage, __LINE__);
         }
         $this->MessageMedia = $messageMedia;
+        
         return $this;
     }
     /**
      * Add item to MessageMedia value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType $item
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function addToMessageMedia(\macropage\ebaysdk\trading\StructType\MessageMediaType $item)
+    public function addToMessageMedia(\macropage\ebaysdk\trading\StructType\MessageMediaType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
-            throw new \InvalidArgumentException(sprintf('The MessageMedia property can only contain items of \macropage\ebaysdk\trading\StructType\MessageMediaType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The MessageMedia property can only contain items of type \macropage\ebaysdk\trading\StructType\MessageMediaType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->MessageMedia[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MemberMessageType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

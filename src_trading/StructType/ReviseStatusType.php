@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviseStatusType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains data indicating whether an item has been revised since the listing became active and, if so, which among a subset of properties have been changed by the revision.
  * @subpackage Structs
  */
@@ -14,52 +17,52 @@ class ReviseStatusType extends AbstractStructBase
 {
     /**
      * The ItemRevised
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the original listing has been revised. This field is always returned with the <b>ReviseStatus</b> container.
-     * @var bool
+     * @var bool|null
      */
-    public $ItemRevised;
+    protected ?bool $ItemRevised = null;
     /**
      * The BuyItNowAdded
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if a Buy It Now price has been added to the auction listing. This field is only returned if the original auction listing did not have a Buy It Now price, but a revision to that original
      * listing included adding a Buy It Now price.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BuyItNowAdded;
+    protected ?bool $BuyItNowAdded = null;
     /**
      * The BuyItNowLowered
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the Buy It Now price on the original auction listing was lowered as part of a revision to the original auction listing. This field is only returned if the Buy It Now price on the
      * original auction listing was lowered as part of a revision to the original auction listing.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BuyItNowLowered;
+    protected ?bool $BuyItNowLowered = null;
     /**
      * The ReserveLowered
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the Reserve price on the original auction listing was lowered as part of a revision to the original auction listing. This field is only returned if the Reserve price on the original
      * auction listing was lowered as part of a revision to the original auction listing.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReserveLowered;
+    protected ?bool $ReserveLowered = null;
     /**
      * The ReserveRemoved
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the Reserve price on the original auction listing was removed as part of a revision to the original auction listing. This field is only returned if the Reserve price on the original
      * auction listing was removed as part of a revision to the original auction listing.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReserveRemoved;
+    protected ?bool $ReserveRemoved = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ReviseStatusType
      * @uses ReviseStatusType::setItemRevised()
@@ -73,9 +76,9 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $buyItNowLowered
      * @param bool $reserveLowered
      * @param bool $reserveRemoved
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemRevised = null, $buyItNowAdded = null, $buyItNowLowered = null, $reserveLowered = null, $reserveRemoved = null, \DOMDocument $any = null)
+    public function __construct(?bool $itemRevised = null, ?bool $buyItNowAdded = null, ?bool $buyItNowLowered = null, ?bool $reserveLowered = null, ?bool $reserveRemoved = null, $any = null)
     {
         $this
             ->setItemRevised($itemRevised)
@@ -89,7 +92,7 @@ class ReviseStatusType extends AbstractStructBase
      * Get ItemRevised value
      * @return bool|null
      */
-    public function getItemRevised()
+    public function getItemRevised(): ?bool
     {
         return $this->ItemRevised;
     }
@@ -98,20 +101,21 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $itemRevised
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setItemRevised($itemRevised = null)
+    public function setItemRevised(?bool $itemRevised = null): self
     {
         // validation for constraint: boolean
         if (!is_null($itemRevised) && !is_bool($itemRevised)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($itemRevised)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($itemRevised, true), gettype($itemRevised)), __LINE__);
         }
         $this->ItemRevised = $itemRevised;
+        
         return $this;
     }
     /**
      * Get BuyItNowAdded value
      * @return bool|null
      */
-    public function getBuyItNowAdded()
+    public function getBuyItNowAdded(): ?bool
     {
         return $this->BuyItNowAdded;
     }
@@ -120,20 +124,21 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $buyItNowAdded
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setBuyItNowAdded($buyItNowAdded = null)
+    public function setBuyItNowAdded(?bool $buyItNowAdded = null): self
     {
         // validation for constraint: boolean
         if (!is_null($buyItNowAdded) && !is_bool($buyItNowAdded)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($buyItNowAdded)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($buyItNowAdded, true), gettype($buyItNowAdded)), __LINE__);
         }
         $this->BuyItNowAdded = $buyItNowAdded;
+        
         return $this;
     }
     /**
      * Get BuyItNowLowered value
      * @return bool|null
      */
-    public function getBuyItNowLowered()
+    public function getBuyItNowLowered(): ?bool
     {
         return $this->BuyItNowLowered;
     }
@@ -142,20 +147,21 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $buyItNowLowered
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setBuyItNowLowered($buyItNowLowered = null)
+    public function setBuyItNowLowered(?bool $buyItNowLowered = null): self
     {
         // validation for constraint: boolean
         if (!is_null($buyItNowLowered) && !is_bool($buyItNowLowered)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($buyItNowLowered)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($buyItNowLowered, true), gettype($buyItNowLowered)), __LINE__);
         }
         $this->BuyItNowLowered = $buyItNowLowered;
+        
         return $this;
     }
     /**
      * Get ReserveLowered value
      * @return bool|null
      */
-    public function getReserveLowered()
+    public function getReserveLowered(): ?bool
     {
         return $this->ReserveLowered;
     }
@@ -164,20 +170,21 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $reserveLowered
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setReserveLowered($reserveLowered = null)
+    public function setReserveLowered(?bool $reserveLowered = null): self
     {
         // validation for constraint: boolean
         if (!is_null($reserveLowered) && !is_bool($reserveLowered)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($reserveLowered)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($reserveLowered, true), gettype($reserveLowered)), __LINE__);
         }
         $this->ReserveLowered = $reserveLowered;
+        
         return $this;
     }
     /**
      * Get ReserveRemoved value
      * @return bool|null
      */
-    public function getReserveRemoved()
+    public function getReserveRemoved(): ?bool
     {
         return $this->ReserveRemoved;
     }
@@ -186,65 +193,47 @@ class ReviseStatusType extends AbstractStructBase
      * @param bool $reserveRemoved
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setReserveRemoved($reserveRemoved = null)
+    public function setReserveRemoved(?bool $reserveRemoved = null): self
     {
         // validation for constraint: boolean
         if (!is_null($reserveRemoved) && !is_bool($reserveRemoved)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($reserveRemoved)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($reserveRemoved, true), gettype($reserveRemoved)), __LINE__);
         }
         $this->ReserveRemoved = $reserveRemoved;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ReviseStatusType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

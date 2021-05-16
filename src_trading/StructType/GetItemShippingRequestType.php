@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetItemShippingRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This is the base request type of the <b>GetItemShipping</b> call. This call takes an <b>ItemID</b> value for an item that has yet to be shipped, and then returns estimated shipping costs for every shipping service that the seller has
  * offered with the listing. This call will also return <b>PickUpInStoreDetails.EligibleForPickupDropOff</b> and <b>PickUpInStoreDetails.EligibleForPickupInStore</b> flags if the item is available for buyer pick-up through the In-Store Pickup or Click
  * and Collect features.
@@ -16,40 +19,41 @@ class GetItemShippingRequestType extends AbstractRequestType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: The unique identifier of the listing for which to retrieve estimated shipping costs for all offered shipping service options. The <b>ItemID</b> value passed into this field should be for an listing that offers at least one calculated
-     * shipping service option, and for an item that has yet to be shipped. | Type that represents the unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of the eBay listing for which to retrieve estimated shipping costs for all offered shipping service options. The <b>ItemID</b> value passed into this field should be for an listing that offers at least one
+     * calculated shipping service option, and for an item that has yet to be shipped. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The QuantitySold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used to specify the quantity of the item. The <b>QuantitySold</b> value defaults to <code>1</code> if not specified. If a value greater than <code>1</code> is specified in this field, the shipping service costs returned
-     * in the response will reflect the expense to ship multiple quantity of an item.
+     * in the response will reflect the expense to ship multiple quantity of an item. <br>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantitySold;
+    protected ?int $QuantitySold = null;
     /**
      * The DestinationPostalCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The destination postal code (or zip code for US) is supplied in this field. <b>GetItemShipping</b> requires the destination of the shipment. Some countries will require both the <b>DestinationPostalCode</b> and the
      * lt;b>DestinationCountryCode</b>, and some countries will accept either one or the other.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DestinationPostalCode;
+    protected ?string $DestinationPostalCode = null;
     /**
      * The DestinationCountryCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The destination country code is supplied in this field. <b>GetItemShipping</b> requires the destination of the shipment. Some countries will require both the <b>DestinationPostalCode</b> and the lt;b>DestinationCountryCode</b>, and
-     * some countries will accept either one or the other. <br><br> Two-digit country codes can be found in <a href="types/CountryCodeType.html">CountryCodeType</a>.
+     * some countries will accept either one or the other. <br><br> Two-digit country codes can be found in <a href="types/CountryCodeType.html">CountryCodeType</a>. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DestinationCountryCode;
+    protected ?string $DestinationCountryCode = null;
     /**
      * Constructor method for GetItemShippingRequestType
      * @uses GetItemShippingRequestType::setItemID()
@@ -61,7 +65,7 @@ class GetItemShippingRequestType extends AbstractRequestType
      * @param string $destinationPostalCode
      * @param string $destinationCountryCode
      */
-    public function __construct($itemID = null, $quantitySold = null, $destinationPostalCode = null, $destinationCountryCode = null)
+    public function __construct(?string $itemID = null, ?int $quantitySold = null, ?string $destinationPostalCode = null, ?string $destinationCountryCode = null)
     {
         $this
             ->setItemID($itemID)
@@ -73,7 +77,7 @@ class GetItemShippingRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -82,20 +86,21 @@ class GetItemShippingRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get QuantitySold value
      * @return int|null
      */
-    public function getQuantitySold()
+    public function getQuantitySold(): ?int
     {
         return $this->QuantitySold;
     }
@@ -104,20 +109,21 @@ class GetItemShippingRequestType extends AbstractRequestType
      * @param int $quantitySold
      * @return \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType
      */
-    public function setQuantitySold($quantitySold = null)
+    public function setQuantitySold(?int $quantitySold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantitySold) && !is_numeric($quantitySold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantitySold)), __LINE__);
+        if (!is_null($quantitySold) && !(is_int($quantitySold) || ctype_digit($quantitySold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantitySold, true), gettype($quantitySold)), __LINE__);
         }
         $this->QuantitySold = $quantitySold;
+        
         return $this;
     }
     /**
      * Get DestinationPostalCode value
      * @return string|null
      */
-    public function getDestinationPostalCode()
+    public function getDestinationPostalCode(): ?string
     {
         return $this->DestinationPostalCode;
     }
@@ -126,20 +132,21 @@ class GetItemShippingRequestType extends AbstractRequestType
      * @param string $destinationPostalCode
      * @return \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType
      */
-    public function setDestinationPostalCode($destinationPostalCode = null)
+    public function setDestinationPostalCode(?string $destinationPostalCode = null): self
     {
         // validation for constraint: string
         if (!is_null($destinationPostalCode) && !is_string($destinationPostalCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($destinationPostalCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($destinationPostalCode, true), gettype($destinationPostalCode)), __LINE__);
         }
         $this->DestinationPostalCode = $destinationPostalCode;
+        
         return $this;
     }
     /**
      * Get DestinationCountryCode value
      * @return string|null
      */
-    public function getDestinationCountryCode()
+    public function getDestinationCountryCode(): ?string
     {
         return $this->DestinationCountryCode;
     }
@@ -147,37 +154,18 @@ class GetItemShippingRequestType extends AbstractRequestType
      * Set DestinationCountryCode value
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $destinationCountryCode
      * @return \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType
      */
-    public function setDestinationCountryCode($destinationCountryCode = null)
+    public function setDestinationCountryCode(?string $destinationCountryCode = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($destinationCountryCode)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $destinationCountryCode, implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CountryCodeType', is_array($destinationCountryCode) ? implode(', ', $destinationCountryCode) : var_export($destinationCountryCode, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
         }
         $this->DestinationCountryCode = $destinationCountryCode;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

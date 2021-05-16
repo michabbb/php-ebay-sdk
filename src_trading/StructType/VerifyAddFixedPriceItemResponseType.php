@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VerifyAddFixedPriceItemResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Returns the listing recommendations (if applicable), the estimated fees for the proposed new listing (except the Final Value Fee, which isn't calculated until the item has sold), and other details.
  * @subpackage Structs
  */
@@ -14,84 +17,92 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: Represents the item ID for the new fixed-price listing. VerifyAddFixedPriceItem does not actually list an item, so 0 is returned instead of a normal item ID. | Type that represents the unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: With a successful <b>VerifyAddFixedPriceItem</b> call, this field is always returned, but the returned value is always <code>0</code>, since this call only validates the data passed in through the request payload and does not
+     * actually create an active listing. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The SKU
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Item-level SKU for the new listing, if the seller specified tem.SKU in the request. Variation SKUs are not returned (see GetItem instead). | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary
      * in different contexts. For usage information and rules, see the fields that reference this type.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SKU;
+    protected ?string $SKU = null;
     /**
      * The Fees
-     * Meta informations extracted from the WSDL
-     * - documentation: Child elements contain the estimated listing fees for the new item listing. The fees do not include the Final Value Fee (FVF), which cannot be determined until an item is sold.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is an array of fees that would incur if the listing defined in request payload of the <b>VerifyAddFixedPriceItem<b> call was published. The fees in this container will not include any fees that are based on the
+     * purchase price (such as Final Value Fee) and only come into play when the listing has a sale. <br> <br> All listing fee types are returned, even if those fees are not applicable for the listing and are '0.0'. <br> <br> <span
+     * class="tablenote"><b>Note:</b> The currency used for all fees returned under the <b>Fees</b> container reflects the currency used for the listing site, and not necessarily in the seller's default/home currency. For example, if a Canadian seller is
+     * using the <b>VerifyAddFixedPriceItem</b> call to verify a listing on the eBay US site, the currency type shown for each fee will be <code>USD</code> and not <code>CAD</code>. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\FeesType
+     * @var \macropage\ebaysdk\trading\StructType\FeesType|null
      */
-    public $Fees;
+    protected ?\macropage\ebaysdk\trading\StructType\FeesType $Fees = null;
     /**
      * The ExpressListing
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressListing;
+    protected ?bool $ExpressListing = null;
     /**
      * The ExpressItemRequirements
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
+     * @var \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType|null
      */
-    public $ExpressItemRequirements;
+    protected ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $ExpressItemRequirements = null;
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID of the primary category in which the item would be listed. Only returned if you set Item.CategoryMappingAllowed to true in the request and the ID you passed in PrimaryCategory was mapped to a new ID by eBay. If the primary
      * category has not changed or it has expired with no replacement, CategoryID does not return a value.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The Category2ID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID of the secondary category in which the item would be listed. Only returned if you set Item.CategoryMappingAllowed to true in the request and the ID you passed in SecondaryCategory was mapped to a new ID by eBay. If the secondary
      * category has not changed or it has expired with no replacement, Category2ID does not return a value.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Category2ID;
+    protected ?string $Category2ID = null;
     /**
      * The DiscountReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The nature of the discount, if a discount would have applied had this actually been listed at this time.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $DiscountReason;
+    protected array $DiscountReason = [];
     /**
      * The ListingRecommendations
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be improved or brought up to standard in regards to top-rated
-     * seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in a Title, and/or a recommendation to offer fast handling
-     * (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge. <br><br> This container is only returned if the <b>IncludeRecommendations</b> flag was included and set to 'true' in
-     * the <b>VerifyAddFixedPriceItem</b> request, and if at least one listing recommendation exists for the listing about to be listed. If one or more listing recommendations are returned, it will be at the seller's discretion about whether to revise the
-     * listing based on eBay's listing recommendation(s) before actually creating the listing through an <b>AddFixedPriceItem</b> call.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> This container is deprecated, and will no longer be returned after June 1, 2021. eBay recommends that you integrate with the REST-based <a href="/api-docs/sell/recommendation/overview.html"
+     * target="_blank">Recommendation API</a> to retrieve recommendations for improving your listings and sales performance, or with the <a href="/api-docs/sell/compliance/overview.html" target="_blank">Compliance API</a> to discover non-compliant listings
+     * or listings that are at risk at becoming non-compliant in the future. </span> <br><br> Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be
+     * improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in
+     * a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge. <br><br> This container is only returned if the
+     * <b>IncludeRecommendations</b> flag was included and set to 'true' in the <b>VerifyAddFixedPriceItem</b> request, and if at least one listing recommendation exists for the listing about to be listed. If one or more listing recommendations are
+     * returned, it will be at the seller's discretion about whether to revise the listing based on eBay's listing recommendation(s) before actually creating the listing through an <b>AddFixedPriceItem</b> call.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
      */
-    public $ListingRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $ListingRecommendations = null;
     /**
      * Constructor method for VerifyAddFixedPriceItemResponseType
      * @uses VerifyAddFixedPriceItemResponseType::setItemID()
@@ -113,7 +124,7 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param string[] $discountReason
      * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
      */
-    public function __construct($itemID = null, $sKU = null, \macropage\ebaysdk\trading\StructType\FeesType $fees = null, $expressListing = null, \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null, $categoryID = null, $category2ID = null, array $discountReason = array(), \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null)
+    public function __construct(?string $itemID = null, ?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?bool $expressListing = null, ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null, ?string $categoryID = null, ?string $category2ID = null, array $discountReason = [], ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null)
     {
         $this
             ->setItemID($itemID)
@@ -130,7 +141,7 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -139,20 +150,21 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get SKU value
      * @return string|null
      */
-    public function getSKU()
+    public function getSKU(): ?string
     {
         return $this->SKU;
     }
@@ -161,20 +173,21 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param string $sKU
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setSKU($sKU = null)
+    public function setSKU(?string $sKU = null): self
     {
         // validation for constraint: string
         if (!is_null($sKU) && !is_string($sKU)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sKU)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sKU, true), gettype($sKU)), __LINE__);
         }
         $this->SKU = $sKU;
+        
         return $this;
     }
     /**
      * Get Fees value
      * @return \macropage\ebaysdk\trading\StructType\FeesType|null
      */
-    public function getFees()
+    public function getFees(): ?\macropage\ebaysdk\trading\StructType\FeesType
     {
         return $this->Fees;
     }
@@ -183,16 +196,17 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\FeesType $fees
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setFees(\macropage\ebaysdk\trading\StructType\FeesType $fees = null)
+    public function setFees(?\macropage\ebaysdk\trading\StructType\FeesType $fees = null): self
     {
         $this->Fees = $fees;
+        
         return $this;
     }
     /**
      * Get ExpressListing value
      * @return bool|null
      */
-    public function getExpressListing()
+    public function getExpressListing(): ?bool
     {
         return $this->ExpressListing;
     }
@@ -201,20 +215,21 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param bool $expressListing
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setExpressListing($expressListing = null)
+    public function setExpressListing(?bool $expressListing = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressListing) && !is_bool($expressListing)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressListing)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressListing, true), gettype($expressListing)), __LINE__);
         }
         $this->ExpressListing = $expressListing;
+        
         return $this;
     }
     /**
      * Get ExpressItemRequirements value
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType|null
      */
-    public function getExpressItemRequirements()
+    public function getExpressItemRequirements(): ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
     {
         return $this->ExpressItemRequirements;
     }
@@ -223,16 +238,17 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setExpressItemRequirements(\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null)
+    public function setExpressItemRequirements(?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null): self
     {
         $this->ExpressItemRequirements = $expressItemRequirements;
+        
         return $this;
     }
     /**
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -241,20 +257,21 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get Category2ID value
      * @return string|null
      */
-    public function getCategory2ID()
+    public function getCategory2ID(): ?string
     {
         return $this->Category2ID;
     }
@@ -263,67 +280,88 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param string $category2ID
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setCategory2ID($category2ID = null)
+    public function setCategory2ID(?string $category2ID = null): self
     {
         // validation for constraint: string
         if (!is_null($category2ID) && !is_string($category2ID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($category2ID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($category2ID, true), gettype($category2ID)), __LINE__);
         }
         $this->Category2ID = $category2ID;
+        
         return $this;
     }
     /**
      * Get DiscountReason value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getDiscountReason()
+    public function getDiscountReason(): array
     {
         return $this->DiscountReason;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setDiscountReason method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setDiscountReason method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateDiscountReasonForArrayConstraintsFromSetDiscountReason(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $verifyAddFixedPriceItemResponseTypeDiscountReasonItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::valueIsValid($verifyAddFixedPriceItemResponseTypeDiscountReasonItem)) {
+                $invalidValues[] = is_object($verifyAddFixedPriceItemResponseTypeDiscountReasonItem) ? get_class($verifyAddFixedPriceItemResponseTypeDiscountReasonItem) : sprintf('%s(%s)', gettype($verifyAddFixedPriceItemResponseTypeDiscountReasonItem), var_export($verifyAddFixedPriceItemResponseTypeDiscountReasonItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set DiscountReason value
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $discountReason
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setDiscountReason(array $discountReason = array())
+    public function setDiscountReason(array $discountReason = []): self
     {
-        $invalidValues = array();
-        foreach ($discountReason as $verifyAddFixedPriceItemResponseTypeDiscountReasonItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::valueIsValid($verifyAddFixedPriceItemResponseTypeDiscountReasonItem)) {
-                $invalidValues[] = var_export($verifyAddFixedPriceItemResponseTypeDiscountReasonItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($discountReasonArrayErrorMessage = self::validateDiscountReasonForArrayConstraintsFromSetDiscountReason($discountReason))) {
+            throw new InvalidArgumentException($discountReasonArrayErrorMessage, __LINE__);
         }
         $this->DiscountReason = $discountReason;
+        
         return $this;
     }
     /**
      * Add item to DiscountReason value
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function addToDiscountReason($item)
+    public function addToDiscountReason(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues())), __LINE__);
         }
         $this->DiscountReason[] = $item;
+        
         return $this;
     }
     /**
      * Get ListingRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
      */
-    public function getListingRecommendations()
+    public function getListingRecommendations(): ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType
     {
         return $this->ListingRecommendations;
     }
@@ -332,29 +370,10 @@ class VerifyAddFixedPriceItemResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
      */
-    public function setListingRecommendations(\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null)
+    public function setListingRecommendations(?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null): self
     {
         $this->ListingRecommendations = $listingRecommendations;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

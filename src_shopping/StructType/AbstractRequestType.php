@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AbstractRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base type definition of the request payload, which can carry any type of payload content plus optional versioning information and detail level requirements. All concrete request types are derived from the abstract request type. The
  * naming convention we use for the concrete type names is the name of the service (the verb or call name) followed by "RequestType": VerbNameRequestType
  * @subpackage Structs
@@ -15,26 +18,26 @@ abstract class AbstractRequestType extends AbstractStructBase
 {
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
-     * - documentation: If you pass a value in MessageID in a request, we'll return the same value in CorrelationID in the response. If you're making a lot of calls, you can use this for tracking that a response is returned for every request and to match
-     * particular responses to particular requests. (In this case, specify a different value for each request.) You can specify any value that is useful to you.
+     * Meta information extracted from the WSDL
+     * - documentation: If you pass a value into the <b>MessageID</b> field in a request, the same value is returned in <b>CorrelationID</b> field in the response. If you're making a lot of calls, you can use this for tracking that a response is returned
+     * for every request and to match particular responses to particular requests. (In this case, specify a different value for each request.) You can specify any value that is useful to you.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageID;
+    protected ?string $MessageID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AbstractRequestType
      * @uses AbstractRequestType::setMessageID()
      * @uses AbstractRequestType::setAny()
      * @param string $messageID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($messageID = null, \DOMDocument $any = null)
+    public function __construct(?string $messageID = null, $any = null)
     {
         $this
             ->setMessageID($messageID)
@@ -44,7 +47,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * Get MessageID value
      * @return string|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?string
     {
         return $this->MessageID;
     }
@@ -53,65 +56,47 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $messageID
      * @return \macropage\ebaysdk\shopping\StructType\AbstractRequestType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?string $messageID = null): self
     {
         // validation for constraint: string
         if (!is_null($messageID) && !is_string($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\AbstractRequestType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\AbstractRequestType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\AbstractRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

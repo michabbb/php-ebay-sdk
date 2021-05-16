@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetClientAlertsAuthTokenResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Returns a Client Alerts token.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class GetClientAlertsAuthTokenResponseType extends AbstractResponseType
 {
     /**
      * The ClientAlertsAuthToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This token string is required for the Login call in the Client Alerts API. The Client Alerts GetUserAlerts call, which returns alerts about events associated with a specific user, requires Login.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ClientAlertsAuthToken;
+    protected ?string $ClientAlertsAuthToken = null;
     /**
      * The HardExpirationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A Client Alerts token expires after seven days.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $HardExpirationTime;
+    protected ?string $HardExpirationTime = null;
     /**
      * Constructor method for GetClientAlertsAuthTokenResponseType
      * @uses GetClientAlertsAuthTokenResponseType::setClientAlertsAuthToken()
@@ -35,7 +38,7 @@ class GetClientAlertsAuthTokenResponseType extends AbstractResponseType
      * @param string $clientAlertsAuthToken
      * @param string $hardExpirationTime
      */
-    public function __construct($clientAlertsAuthToken = null, $hardExpirationTime = null)
+    public function __construct(?string $clientAlertsAuthToken = null, ?string $hardExpirationTime = null)
     {
         $this
             ->setClientAlertsAuthToken($clientAlertsAuthToken)
@@ -45,7 +48,7 @@ class GetClientAlertsAuthTokenResponseType extends AbstractResponseType
      * Get ClientAlertsAuthToken value
      * @return string|null
      */
-    public function getClientAlertsAuthToken()
+    public function getClientAlertsAuthToken(): ?string
     {
         return $this->ClientAlertsAuthToken;
     }
@@ -54,20 +57,21 @@ class GetClientAlertsAuthTokenResponseType extends AbstractResponseType
      * @param string $clientAlertsAuthToken
      * @return \macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenResponseType
      */
-    public function setClientAlertsAuthToken($clientAlertsAuthToken = null)
+    public function setClientAlertsAuthToken(?string $clientAlertsAuthToken = null): self
     {
         // validation for constraint: string
         if (!is_null($clientAlertsAuthToken) && !is_string($clientAlertsAuthToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($clientAlertsAuthToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($clientAlertsAuthToken, true), gettype($clientAlertsAuthToken)), __LINE__);
         }
         $this->ClientAlertsAuthToken = $clientAlertsAuthToken;
+        
         return $this;
     }
     /**
      * Get HardExpirationTime value
      * @return string|null
      */
-    public function getHardExpirationTime()
+    public function getHardExpirationTime(): ?string
     {
         return $this->HardExpirationTime;
     }
@@ -76,33 +80,14 @@ class GetClientAlertsAuthTokenResponseType extends AbstractResponseType
      * @param string $hardExpirationTime
      * @return \macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenResponseType
      */
-    public function setHardExpirationTime($hardExpirationTime = null)
+    public function setHardExpirationTime(?string $hardExpirationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($hardExpirationTime) && !is_string($hardExpirationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($hardExpirationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($hardExpirationTime, true), gettype($hardExpirationTime)), __LINE__);
         }
         $this->HardExpirationTime = $hardExpirationTime;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

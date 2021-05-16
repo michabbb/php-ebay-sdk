@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BidGroupItemType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,33 +17,33 @@ class BidGroupItemType extends AbstractStructBase
 {
     /**
      * The Item
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemType
+     * @var \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public $Item;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemType $Item = null;
     /**
      * The BidGroupItemStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BidGroupItemStatus;
+    protected ?string $BidGroupItemStatus = null;
     /**
      * The MaxBidAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MaxBidAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MaxBidAmount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BidGroupItemType
      * @uses BidGroupItemType::setItem()
@@ -50,9 +53,9 @@ class BidGroupItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @param string $bidGroupItemStatus
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\ItemType $item = null, $bidGroupItemStatus = null, \macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?string $bidGroupItemStatus = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount = null, $any = null)
     {
         $this
             ->setItem($item)
@@ -64,7 +67,7 @@ class BidGroupItemType extends AbstractStructBase
      * Get Item value
      * @return \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public function getItem()
+    public function getItem(): ?\macropage\ebaysdk\trading\StructType\ItemType
     {
         return $this->Item;
     }
@@ -73,16 +76,17 @@ class BidGroupItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType
      */
-    public function setItem(\macropage\ebaysdk\trading\StructType\ItemType $item = null)
+    public function setItem(?\macropage\ebaysdk\trading\StructType\ItemType $item = null): self
     {
         $this->Item = $item;
+        
         return $this;
     }
     /**
      * Get BidGroupItemStatus value
      * @return string|null
      */
-    public function getBidGroupItemStatus()
+    public function getBidGroupItemStatus(): ?string
     {
         return $this->BidGroupItemStatus;
     }
@@ -90,24 +94,25 @@ class BidGroupItemType extends AbstractStructBase
      * Set BidGroupItemStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $bidGroupItemStatus
      * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType
      */
-    public function setBidGroupItemStatus($bidGroupItemStatus = null)
+    public function setBidGroupItemStatus(?string $bidGroupItemStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType::valueIsValid($bidGroupItemStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $bidGroupItemStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType', is_array($bidGroupItemStatus) ? implode(', ', $bidGroupItemStatus) : var_export($bidGroupItemStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BidGroupItemStatusCodeType::getValidValues())), __LINE__);
         }
         $this->BidGroupItemStatus = $bidGroupItemStatus;
+        
         return $this;
     }
     /**
      * Get MaxBidAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMaxBidAmount()
+    public function getMaxBidAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MaxBidAmount;
     }
@@ -116,61 +121,43 @@ class BidGroupItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount
      * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType
      */
-    public function setMaxBidAmount(\macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount = null)
+    public function setMaxBidAmount(?\macropage\ebaysdk\trading\StructType\AmountType $maxBidAmount = null): self
     {
         $this->MaxBidAmount = $maxBidAmount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BidGroupItemType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

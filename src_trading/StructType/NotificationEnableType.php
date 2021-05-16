@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for NotificationEnableType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Specifies a notification event and whether the notification is enabled or disabled.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class NotificationEnableType extends AbstractStructBase
 {
     /**
      * The EventType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of the notification event.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EventType;
+    protected ?string $EventType = null;
     /**
      * The EventEnable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Whether the event is enabled or disabled.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EventEnable;
+    protected ?string $EventEnable = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for NotificationEnableType
      * @uses NotificationEnableType::setEventType()
@@ -40,9 +43,9 @@ class NotificationEnableType extends AbstractStructBase
      * @uses NotificationEnableType::setAny()
      * @param string $eventType
      * @param string $eventEnable
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($eventType = null, $eventEnable = null, \DOMDocument $any = null)
+    public function __construct(?string $eventType = null, ?string $eventEnable = null, $any = null)
     {
         $this
             ->setEventType($eventType)
@@ -53,7 +56,7 @@ class NotificationEnableType extends AbstractStructBase
      * Get EventType value
      * @return string|null
      */
-    public function getEventType()
+    public function getEventType(): ?string
     {
         return $this->EventType;
     }
@@ -61,24 +64,25 @@ class NotificationEnableType extends AbstractStructBase
      * Set EventType value
      * @uses \macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eventType
      * @return \macropage\ebaysdk\trading\StructType\NotificationEnableType
      */
-    public function setEventType($eventType = null)
+    public function setEventType(?string $eventType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType::valueIsValid($eventType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eventType, implode(', ', \macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType', is_array($eventType) ? implode(', ', $eventType) : var_export($eventType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\NotificationEventTypeCodeType::getValidValues())), __LINE__);
         }
         $this->EventType = $eventType;
+        
         return $this;
     }
     /**
      * Get EventEnable value
      * @return string|null
      */
-    public function getEventEnable()
+    public function getEventEnable(): ?string
     {
         return $this->EventEnable;
     }
@@ -86,69 +90,51 @@ class NotificationEnableType extends AbstractStructBase
      * Set EventEnable value
      * @uses \macropage\ebaysdk\trading\EnumType\EnableCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eventEnable
      * @return \macropage\ebaysdk\trading\StructType\NotificationEnableType
      */
-    public function setEventEnable($eventEnable = null)
+    public function setEventEnable(?string $eventEnable = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\EnableCodeType::valueIsValid($eventEnable)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eventEnable, implode(', ', \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\EnableCodeType', is_array($eventEnable) ? implode(', ', $eventEnable) : var_export($eventEnable, true), implode(', ', \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues())), __LINE__);
         }
         $this->EventEnable = $eventEnable;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\NotificationEnableType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\NotificationEnableType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\NotificationEnableType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

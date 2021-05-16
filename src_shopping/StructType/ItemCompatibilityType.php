@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ItemCompatibilityType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: All information corresponding to an individual compatibility by application. <br><br> Each <b>Compatibility</b> container consists of the specifications for a motor vehicle that is compatible with the motor part or accessory.
  * @subpackage Structs
  */
@@ -14,27 +17,27 @@ class ItemCompatibilityType extends AbstractStructBase
 {
     /**
      * The NameValueList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Each <b>NameValueList</b> container will contain one aspect of a motor vehicle that is compatible with the motor vehicle part or accessory. For example, the allowed names might include 'Year', 'Make', and 'Model', 'Trim', and
      * 'Engine'.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    public $NameValueList;
+    protected array $NameValueList = [];
     /**
      * The CompatibilityNotes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field contains any notes pertaining to the compatibility being specified. This field is only returned if set for the compatible vehicle.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CompatibilityNotes;
+    protected ?string $CompatibilityNotes = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ItemCompatibilityType
      * @uses ItemCompatibilityType::setNameValueList()
@@ -42,9 +45,9 @@ class ItemCompatibilityType extends AbstractStructBase
      * @uses ItemCompatibilityType::setAny()
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType[] $nameValueList
      * @param string $compatibilityNotes
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $nameValueList = array(), $compatibilityNotes = null, \DOMDocument $any = null)
+    public function __construct(array $nameValueList = [], ?string $compatibilityNotes = null, $any = null)
     {
         $this
             ->setNameValueList($nameValueList)
@@ -53,49 +56,72 @@ class ItemCompatibilityType extends AbstractStructBase
     }
     /**
      * Get NameValueList value
-     * @return \macropage\ebaysdk\shopping\StructType\NameValueListType[]|null
+     * @return \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    public function getNameValueList()
+    public function getNameValueList(): array
     {
         return $this->NameValueList;
     }
     /**
+     * This method is responsible for validating the values passed to the setNameValueList method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setNameValueList method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemCompatibilityTypeNameValueListItem) {
+            // validation for constraint: itemType
+            if (!$itemCompatibilityTypeNameValueListItem instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
+                $invalidValues[] = is_object($itemCompatibilityTypeNameValueListItem) ? get_class($itemCompatibilityTypeNameValueListItem) : sprintf('%s(%s)', gettype($itemCompatibilityTypeNameValueListItem), var_export($itemCompatibilityTypeNameValueListItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The NameValueList property can only contain items of type \macropage\ebaysdk\shopping\StructType\NameValueListType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set NameValueList value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
      */
-    public function setNameValueList(array $nameValueList = array())
+    public function setNameValueList(array $nameValueList = []): self
     {
-        foreach ($nameValueList as $itemCompatibilityTypeNameValueListItem) {
-            // validation for constraint: itemType
-            if (!$itemCompatibilityTypeNameValueListItem instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
-                throw new \InvalidArgumentException(sprintf('The NameValueList property can only contain items of \macropage\ebaysdk\shopping\StructType\NameValueListType, "%s" given', is_object($itemCompatibilityTypeNameValueListItem) ? get_class($itemCompatibilityTypeNameValueListItem) : gettype($itemCompatibilityTypeNameValueListItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {
+            throw new InvalidArgumentException($nameValueListArrayErrorMessage, __LINE__);
         }
         $this->NameValueList = $nameValueList;
+        
         return $this;
     }
     /**
      * Add item to NameValueList value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType $item
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
      */
-    public function addToNameValueList(\macropage\ebaysdk\shopping\StructType\NameValueListType $item)
+    public function addToNameValueList(\macropage\ebaysdk\shopping\StructType\NameValueListType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
-            throw new \InvalidArgumentException(sprintf('The NameValueList property can only contain items of \macropage\ebaysdk\shopping\StructType\NameValueListType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The NameValueList property can only contain items of type \macropage\ebaysdk\shopping\StructType\NameValueListType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->NameValueList[] = $item;
+        
         return $this;
     }
     /**
      * Get CompatibilityNotes value
      * @return string|null
      */
-    public function getCompatibilityNotes()
+    public function getCompatibilityNotes(): ?string
     {
         return $this->CompatibilityNotes;
     }
@@ -104,65 +130,47 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param string $compatibilityNotes
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
      */
-    public function setCompatibilityNotes($compatibilityNotes = null)
+    public function setCompatibilityNotes(?string $compatibilityNotes = null): self
     {
         // validation for constraint: string
         if (!is_null($compatibilityNotes) && !is_string($compatibilityNotes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($compatibilityNotes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($compatibilityNotes, true), gettype($compatibilityNotes)), __LINE__);
         }
         $this->CompatibilityNotes = $compatibilityNotes;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

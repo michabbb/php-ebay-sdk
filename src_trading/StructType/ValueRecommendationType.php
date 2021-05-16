@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ValueRecommendationType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>ValueRecommendation</b> container to provide recommended names for recommended item specifics.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class ValueRecommendationType extends AbstractStructBase
 {
     /**
      * The Value
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A recommended value for the corresponding, recommended Item Specific. Only returned when a recommended value is available.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Value;
+    protected ?string $Value = null;
     /**
      * The ValidationRules
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Constraints that eBay places on this Item Specific value.<br> <br> Only returned when you configure your request to include relationships and/or confidence, and a recommended value is available. (Not returned when
      * <b>ExcludeRelationships</b> is <code>true</code> and <b>IncludeConfidence</b> is <code>false</code>.)
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType
+     * @var \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType|null
      */
-    public $ValidationRules;
+    protected ?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $ValidationRules = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ValueRecommendationType
      * @uses ValueRecommendationType::setValue()
@@ -41,9 +44,9 @@ class ValueRecommendationType extends AbstractStructBase
      * @uses ValueRecommendationType::setAny()
      * @param string $value
      * @param \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($value = null, \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null, \DOMDocument $any = null)
+    public function __construct(?string $value = null, ?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null, $any = null)
     {
         $this
             ->setValue($value)
@@ -54,7 +57,7 @@ class ValueRecommendationType extends AbstractStructBase
      * Get Value value
      * @return string|null
      */
-    public function getValue()
+    public function getValue(): ?string
     {
         return $this->Value;
     }
@@ -63,20 +66,21 @@ class ValueRecommendationType extends AbstractStructBase
      * @param string $value
      * @return \macropage\ebaysdk\trading\StructType\ValueRecommendationType
      */
-    public function setValue($value = null)
+    public function setValue(?string $value = null): self
     {
         // validation for constraint: string
         if (!is_null($value) && !is_string($value)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($value)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($value, true), gettype($value)), __LINE__);
         }
         $this->Value = $value;
+        
         return $this;
     }
     /**
      * Get ValidationRules value
      * @return \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType|null
      */
-    public function getValidationRules()
+    public function getValidationRules(): ?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType
     {
         return $this->ValidationRules;
     }
@@ -85,61 +89,43 @@ class ValueRecommendationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules
      * @return \macropage\ebaysdk\trading\StructType\ValueRecommendationType
      */
-    public function setValidationRules(\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null)
+    public function setValidationRules(?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null): self
     {
         $this->ValidationRules = $validationRules;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ValueRecommendationType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ValueRecommendationType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ValueRecommendationType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

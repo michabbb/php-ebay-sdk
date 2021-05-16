@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingSummaryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains summary information about the items the seller is selling.
  * @subpackage Structs
  */
@@ -14,60 +17,60 @@ class SellingSummaryType extends AbstractStructBase
 {
     /**
      * The ActiveAuctionCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of currently active auctions that will sell. That is, there is at least one bidder, and any reserve price has been met. Equivalent to the "Will Sell" value in My eBay.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ActiveAuctionCount;
+    protected ?int $ActiveAuctionCount = null;
     /**
      * The AuctionSellingCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of currently active auctions for a given seller. Equivalent to the "Auction Quantity" value in My eBay.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $AuctionSellingCount;
+    protected ?int $AuctionSellingCount = null;
     /**
      * The AuctionBidCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of bids made on the seller's active auction listings.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $AuctionBidCount;
+    protected ?int $AuctionBidCount = null;
     /**
      * The TotalAuctionSellingValue
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total value of all items the seller has for sale in all listings.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalAuctionSellingValue;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalAuctionSellingValue = null;
     /**
      * The TotalSoldCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of items the seller has sold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalSoldCount;
+    protected ?int $TotalSoldCount = null;
     /**
      * The TotalSoldValue
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total monetary value of the items the seller has sold.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalSoldValue;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalSoldValue = null;
     /**
      * The SoldDurationInDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The average duration, in days, of all items sold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SoldDurationInDays;
+    protected ?int $SoldDurationInDays = null;
     /**
      * Constructor method for SellingSummaryType
      * @uses SellingSummaryType::setActiveAuctionCount()
@@ -85,7 +88,7 @@ class SellingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue
      * @param int $soldDurationInDays
      */
-    public function __construct($activeAuctionCount = null, $auctionSellingCount = null, $auctionBidCount = null, \macropage\ebaysdk\trading\StructType\AmountType $totalAuctionSellingValue = null, $totalSoldCount = null, \macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue = null, $soldDurationInDays = null)
+    public function __construct(?int $activeAuctionCount = null, ?int $auctionSellingCount = null, ?int $auctionBidCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalAuctionSellingValue = null, ?int $totalSoldCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue = null, ?int $soldDurationInDays = null)
     {
         $this
             ->setActiveAuctionCount($activeAuctionCount)
@@ -100,7 +103,7 @@ class SellingSummaryType extends AbstractStructBase
      * Get ActiveAuctionCount value
      * @return int|null
      */
-    public function getActiveAuctionCount()
+    public function getActiveAuctionCount(): ?int
     {
         return $this->ActiveAuctionCount;
     }
@@ -109,20 +112,21 @@ class SellingSummaryType extends AbstractStructBase
      * @param int $activeAuctionCount
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setActiveAuctionCount($activeAuctionCount = null)
+    public function setActiveAuctionCount(?int $activeAuctionCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($activeAuctionCount) && !is_numeric($activeAuctionCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($activeAuctionCount)), __LINE__);
+        if (!is_null($activeAuctionCount) && !(is_int($activeAuctionCount) || ctype_digit($activeAuctionCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($activeAuctionCount, true), gettype($activeAuctionCount)), __LINE__);
         }
         $this->ActiveAuctionCount = $activeAuctionCount;
+        
         return $this;
     }
     /**
      * Get AuctionSellingCount value
      * @return int|null
      */
-    public function getAuctionSellingCount()
+    public function getAuctionSellingCount(): ?int
     {
         return $this->AuctionSellingCount;
     }
@@ -131,20 +135,21 @@ class SellingSummaryType extends AbstractStructBase
      * @param int $auctionSellingCount
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setAuctionSellingCount($auctionSellingCount = null)
+    public function setAuctionSellingCount(?int $auctionSellingCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($auctionSellingCount) && !is_numeric($auctionSellingCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($auctionSellingCount)), __LINE__);
+        if (!is_null($auctionSellingCount) && !(is_int($auctionSellingCount) || ctype_digit($auctionSellingCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($auctionSellingCount, true), gettype($auctionSellingCount)), __LINE__);
         }
         $this->AuctionSellingCount = $auctionSellingCount;
+        
         return $this;
     }
     /**
      * Get AuctionBidCount value
      * @return int|null
      */
-    public function getAuctionBidCount()
+    public function getAuctionBidCount(): ?int
     {
         return $this->AuctionBidCount;
     }
@@ -153,20 +158,21 @@ class SellingSummaryType extends AbstractStructBase
      * @param int $auctionBidCount
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setAuctionBidCount($auctionBidCount = null)
+    public function setAuctionBidCount(?int $auctionBidCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($auctionBidCount) && !is_numeric($auctionBidCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($auctionBidCount)), __LINE__);
+        if (!is_null($auctionBidCount) && !(is_int($auctionBidCount) || ctype_digit($auctionBidCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($auctionBidCount, true), gettype($auctionBidCount)), __LINE__);
         }
         $this->AuctionBidCount = $auctionBidCount;
+        
         return $this;
     }
     /**
      * Get TotalAuctionSellingValue value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalAuctionSellingValue()
+    public function getTotalAuctionSellingValue(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalAuctionSellingValue;
     }
@@ -175,16 +181,17 @@ class SellingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalAuctionSellingValue
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setTotalAuctionSellingValue(\macropage\ebaysdk\trading\StructType\AmountType $totalAuctionSellingValue = null)
+    public function setTotalAuctionSellingValue(?\macropage\ebaysdk\trading\StructType\AmountType $totalAuctionSellingValue = null): self
     {
         $this->TotalAuctionSellingValue = $totalAuctionSellingValue;
+        
         return $this;
     }
     /**
      * Get TotalSoldCount value
      * @return int|null
      */
-    public function getTotalSoldCount()
+    public function getTotalSoldCount(): ?int
     {
         return $this->TotalSoldCount;
     }
@@ -193,20 +200,21 @@ class SellingSummaryType extends AbstractStructBase
      * @param int $totalSoldCount
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setTotalSoldCount($totalSoldCount = null)
+    public function setTotalSoldCount(?int $totalSoldCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalSoldCount) && !is_numeric($totalSoldCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalSoldCount)), __LINE__);
+        if (!is_null($totalSoldCount) && !(is_int($totalSoldCount) || ctype_digit($totalSoldCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalSoldCount, true), gettype($totalSoldCount)), __LINE__);
         }
         $this->TotalSoldCount = $totalSoldCount;
+        
         return $this;
     }
     /**
      * Get TotalSoldValue value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalSoldValue()
+    public function getTotalSoldValue(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalSoldValue;
     }
@@ -215,16 +223,17 @@ class SellingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setTotalSoldValue(\macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue = null)
+    public function setTotalSoldValue(?\macropage\ebaysdk\trading\StructType\AmountType $totalSoldValue = null): self
     {
         $this->TotalSoldValue = $totalSoldValue;
+        
         return $this;
     }
     /**
      * Get SoldDurationInDays value
      * @return int|null
      */
-    public function getSoldDurationInDays()
+    public function getSoldDurationInDays(): ?int
     {
         return $this->SoldDurationInDays;
     }
@@ -233,33 +242,14 @@ class SellingSummaryType extends AbstractStructBase
      * @param int $soldDurationInDays
      * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
      */
-    public function setSoldDurationInDays($soldDurationInDays = null)
+    public function setSoldDurationInDays(?int $soldDurationInDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($soldDurationInDays) && !is_numeric($soldDurationInDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($soldDurationInDays)), __LINE__);
+        if (!is_null($soldDurationInDays) && !(is_int($soldDurationInDays) || ctype_digit($soldDurationInDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($soldDurationInDays, true), gettype($soldDurationInDays)), __LINE__);
         }
         $this->SoldDurationInDays = $soldDurationInDays;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingSummaryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

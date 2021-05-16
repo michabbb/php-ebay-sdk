@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PromotionalShippingDiscountDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Details of a promotional shipping discount.
  * @subpackage Structs
  */
@@ -14,42 +17,42 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
 {
     /**
      * The DiscountName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The type of promotional shipping discount that is detailed in the profile. If the discount type is <code>MaximumShippingCostPerOrder</code>, see <b>ShippingCost</b>. If the discount type is <code>ShippingCostXForAmountY</code>, see
      * <b>ShippingCost</b> and <b>OrderAmount</b>. If the discount type is <code>ShippingCostXForItemCountN</code>, see <b>ShippingCost</b> and <b>ItemCount</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DiscountName;
+    protected ?string $DiscountName = null;
     /**
      * The ShippingCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is shipping cost X when <b>DiscountName</b> is either <code>ShippingCostXForAmountY</code> or <code>ShippingCostXForItemCountN</code>, and is the maximum cost when <b>DiscountName</b> is <code>MaximumShippingCostPerOrder</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingCost = null;
     /**
      * The OrderAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the cost Y of the order (not including shipping cost) when <b>DiscountName</b> is set to <code>ShippingCostXForAmountY</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $OrderAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $OrderAmount = null;
     /**
      * The ItemCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the number of items when <b>DiscountName</b> is set to <code>ShippingCostXForItemsY</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemCount;
+    protected ?int $ItemCount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PromotionalShippingDiscountDetailsType
      * @uses PromotionalShippingDiscountDetailsType::setDiscountName()
@@ -61,9 +64,9 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingCost
      * @param \macropage\ebaysdk\trading\StructType\AmountType $orderAmount
      * @param int $itemCount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($discountName = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingCost = null, \macropage\ebaysdk\trading\StructType\AmountType $orderAmount = null, $itemCount = null, \DOMDocument $any = null)
+    public function __construct(?string $discountName = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $orderAmount = null, ?int $itemCount = null, $any = null)
     {
         $this
             ->setDiscountName($discountName)
@@ -76,7 +79,7 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * Get DiscountName value
      * @return string|null
      */
-    public function getDiscountName()
+    public function getDiscountName(): ?string
     {
         return $this->DiscountName;
     }
@@ -84,24 +87,25 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * Set DiscountName value
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountNameCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DiscountNameCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $discountName
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
      */
-    public function setDiscountName($discountName = null)
+    public function setDiscountName(?string $discountName = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DiscountNameCodeType::valueIsValid($discountName)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $discountName, implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountNameCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DiscountNameCodeType', is_array($discountName) ? implode(', ', $discountName) : var_export($discountName, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountNameCodeType::getValidValues())), __LINE__);
         }
         $this->DiscountName = $discountName;
+        
         return $this;
     }
     /**
      * Get ShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingCost()
+    public function getShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingCost;
     }
@@ -110,16 +114,17 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingCost
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
      */
-    public function setShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $shippingCost = null)
+    public function setShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingCost = null): self
     {
         $this->ShippingCost = $shippingCost;
+        
         return $this;
     }
     /**
      * Get OrderAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getOrderAmount()
+    public function getOrderAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->OrderAmount;
     }
@@ -128,16 +133,17 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $orderAmount
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
      */
-    public function setOrderAmount(\macropage\ebaysdk\trading\StructType\AmountType $orderAmount = null)
+    public function setOrderAmount(?\macropage\ebaysdk\trading\StructType\AmountType $orderAmount = null): self
     {
         $this->OrderAmount = $orderAmount;
+        
         return $this;
     }
     /**
      * Get ItemCount value
      * @return int|null
      */
-    public function getItemCount()
+    public function getItemCount(): ?int
     {
         return $this->ItemCount;
     }
@@ -146,65 +152,47 @@ class PromotionalShippingDiscountDetailsType extends AbstractStructBase
      * @param int $itemCount
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
      */
-    public function setItemCount($itemCount = null)
+    public function setItemCount(?int $itemCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemCount) && !is_numeric($itemCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemCount)), __LINE__);
+        if (!is_null($itemCount) && !(is_int($itemCount) || ctype_digit($itemCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemCount, true), gettype($itemCount)), __LINE__);
         }
         $this->ItemCount = $itemCount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

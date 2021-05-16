@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ProductInfoType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,43 +17,43 @@ class ProductInfoType extends AbstractStructBase
 {
     /**
      * The AverageStartPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AverageStartPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AverageStartPrice = null;
     /**
      * The AverageSoldPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AverageSoldPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AverageSoldPrice = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The ProductState
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductState;
+    protected ?string $ProductState = null;
     /**
      * The productInfoID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var string
+     * @var string|null
      */
-    public $productInfoID;
+    protected ?string $productInfoID = null;
     /**
      * Constructor method for ProductInfoType
      * @uses ProductInfoType::setAverageStartPrice()
@@ -64,7 +67,7 @@ class ProductInfoType extends AbstractStructBase
      * @param string $productState
      * @param string $productInfoID
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $averageStartPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $averageSoldPrice = null, $title = null, $productState = null, $productInfoID = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $averageStartPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $averageSoldPrice = null, ?string $title = null, ?string $productState = null, ?string $productInfoID = null)
     {
         $this
             ->setAverageStartPrice($averageStartPrice)
@@ -77,7 +80,7 @@ class ProductInfoType extends AbstractStructBase
      * Get AverageStartPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAverageStartPrice()
+    public function getAverageStartPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AverageStartPrice;
     }
@@ -86,16 +89,17 @@ class ProductInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $averageStartPrice
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
      */
-    public function setAverageStartPrice(\macropage\ebaysdk\trading\StructType\AmountType $averageStartPrice = null)
+    public function setAverageStartPrice(?\macropage\ebaysdk\trading\StructType\AmountType $averageStartPrice = null): self
     {
         $this->AverageStartPrice = $averageStartPrice;
+        
         return $this;
     }
     /**
      * Get AverageSoldPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAverageSoldPrice()
+    public function getAverageSoldPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AverageSoldPrice;
     }
@@ -104,16 +108,17 @@ class ProductInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $averageSoldPrice
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
      */
-    public function setAverageSoldPrice(\macropage\ebaysdk\trading\StructType\AmountType $averageSoldPrice = null)
+    public function setAverageSoldPrice(?\macropage\ebaysdk\trading\StructType\AmountType $averageSoldPrice = null): self
     {
         $this->AverageSoldPrice = $averageSoldPrice;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -122,20 +127,21 @@ class ProductInfoType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get ProductState value
      * @return string|null
      */
-    public function getProductState()
+    public function getProductState(): ?string
     {
         return $this->ProductState;
     }
@@ -143,24 +149,25 @@ class ProductInfoType extends AbstractStructBase
      * Set ProductState value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductStateCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductStateCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $productState
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
      */
-    public function setProductState($productState = null)
+    public function setProductState(?string $productState = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductStateCodeType::valueIsValid($productState)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $productState, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductStateCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductStateCodeType', is_array($productState) ? implode(', ', $productState) : var_export($productState, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductStateCodeType::getValidValues())), __LINE__);
         }
         $this->ProductState = $productState;
+        
         return $this;
     }
     /**
      * Get productInfoID value
      * @return string|null
      */
-    public function getProductInfoID()
+    public function getProductInfoID(): ?string
     {
         return $this->productInfoID;
     }
@@ -169,33 +176,14 @@ class ProductInfoType extends AbstractStructBase
      * @param string $productInfoID
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
      */
-    public function setProductInfoID($productInfoID = null)
+    public function setProductInfoID(?string $productInfoID = null): self
     {
         // validation for constraint: string
         if (!is_null($productInfoID) && !is_string($productInfoID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productInfoID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productInfoID, true), gettype($productInfoID)), __LINE__);
         }
         $this->productInfoID = $productInfoID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ProductInfoType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

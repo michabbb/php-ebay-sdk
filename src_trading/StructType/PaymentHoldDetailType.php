@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PaymentHoldDetailType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type defines the <b>PaymentHoldDetails</b> container, which consists of information related to the payment hold on the order, including the reason why the buyer's payment for the order is being held, the expected release date of
  * the funds into the seller's account, and possible action(s) the seller can take to expedite the payout of funds into their account.
  * @subpackage Structs
@@ -15,44 +18,44 @@ class PaymentHoldDetailType extends AbstractStructBase
 {
     /**
      * The ExpectedReleaseDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Timestamp that indicates the expected date in which eBay/PayPal will distribute the funds to the seller's account. This is not a firm date and is subject to change. This field is only returned after checkout is complete and if the
      * <b>PaymentHoldStatus</b> indicates a hold has been placed on payment.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExpectedReleaseDate;
+    protected ?string $ExpectedReleaseDate = null;
     /**
      * The RequiredSellerActionArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of one or more <b>RequiredSellerAction</b> fields. <b>RequiredSellerAction</b> fields provide possible actions that a seller can take to expedite the release of funds into their account.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType|null
      */
-    public $RequiredSellerActionArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $RequiredSellerActionArray = null;
     /**
      * The NumOfReqSellerActions
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Integer value that indicates the number of possible actions that a seller can take to possibly expedite the release of funds into their account. This value should equal the number of <b>RequiredSellerAction</b> fields contained in
      * the <b>RequiredSellerActionArray</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NumOfReqSellerActions;
+    protected ?int $NumOfReqSellerActions = null;
     /**
      * The PaymentHoldReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Enumerated value that indicates why the buyer's payment for the order is being held by PayPal instead of being distributed to the seller's account. A seller's funds for an order can be held by PayPal for as little as three days after
      * the buyer receives the order, but the hold can be up to 21 days based on the scenario, and in some cases, the seller's lack of action in helping to expedite the release of funds.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentHoldReason;
+    protected ?string $PaymentHoldReason = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PaymentHoldDetailType
      * @uses PaymentHoldDetailType::setExpectedReleaseDate()
@@ -64,9 +67,9 @@ class PaymentHoldDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray
      * @param int $numOfReqSellerActions
      * @param string $paymentHoldReason
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($expectedReleaseDate = null, \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray = null, $numOfReqSellerActions = null, $paymentHoldReason = null, \DOMDocument $any = null)
+    public function __construct(?string $expectedReleaseDate = null, ?\macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray = null, ?int $numOfReqSellerActions = null, ?string $paymentHoldReason = null, $any = null)
     {
         $this
             ->setExpectedReleaseDate($expectedReleaseDate)
@@ -79,7 +82,7 @@ class PaymentHoldDetailType extends AbstractStructBase
      * Get ExpectedReleaseDate value
      * @return string|null
      */
-    public function getExpectedReleaseDate()
+    public function getExpectedReleaseDate(): ?string
     {
         return $this->ExpectedReleaseDate;
     }
@@ -88,20 +91,21 @@ class PaymentHoldDetailType extends AbstractStructBase
      * @param string $expectedReleaseDate
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
      */
-    public function setExpectedReleaseDate($expectedReleaseDate = null)
+    public function setExpectedReleaseDate(?string $expectedReleaseDate = null): self
     {
         // validation for constraint: string
         if (!is_null($expectedReleaseDate) && !is_string($expectedReleaseDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($expectedReleaseDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($expectedReleaseDate, true), gettype($expectedReleaseDate)), __LINE__);
         }
         $this->ExpectedReleaseDate = $expectedReleaseDate;
+        
         return $this;
     }
     /**
      * Get RequiredSellerActionArray value
      * @return \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType|null
      */
-    public function getRequiredSellerActionArray()
+    public function getRequiredSellerActionArray(): ?\macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType
     {
         return $this->RequiredSellerActionArray;
     }
@@ -110,16 +114,17 @@ class PaymentHoldDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
      */
-    public function setRequiredSellerActionArray(\macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray = null)
+    public function setRequiredSellerActionArray(?\macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType $requiredSellerActionArray = null): self
     {
         $this->RequiredSellerActionArray = $requiredSellerActionArray;
+        
         return $this;
     }
     /**
      * Get NumOfReqSellerActions value
      * @return int|null
      */
-    public function getNumOfReqSellerActions()
+    public function getNumOfReqSellerActions(): ?int
     {
         return $this->NumOfReqSellerActions;
     }
@@ -128,20 +133,21 @@ class PaymentHoldDetailType extends AbstractStructBase
      * @param int $numOfReqSellerActions
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
      */
-    public function setNumOfReqSellerActions($numOfReqSellerActions = null)
+    public function setNumOfReqSellerActions(?int $numOfReqSellerActions = null): self
     {
         // validation for constraint: int
-        if (!is_null($numOfReqSellerActions) && !is_numeric($numOfReqSellerActions)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($numOfReqSellerActions)), __LINE__);
+        if (!is_null($numOfReqSellerActions) && !(is_int($numOfReqSellerActions) || ctype_digit($numOfReqSellerActions))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($numOfReqSellerActions, true), gettype($numOfReqSellerActions)), __LINE__);
         }
         $this->NumOfReqSellerActions = $numOfReqSellerActions;
+        
         return $this;
     }
     /**
      * Get PaymentHoldReason value
      * @return string|null
      */
-    public function getPaymentHoldReason()
+    public function getPaymentHoldReason(): ?string
     {
         return $this->PaymentHoldReason;
     }
@@ -149,69 +155,51 @@ class PaymentHoldDetailType extends AbstractStructBase
      * Set PaymentHoldReason value
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paymentHoldReason
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
      */
-    public function setPaymentHoldReason($paymentHoldReason = null)
+    public function setPaymentHoldReason(?string $paymentHoldReason = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType::valueIsValid($paymentHoldReason)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paymentHoldReason, implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType', is_array($paymentHoldReason) ? implode(', ', $paymentHoldReason) : var_export($paymentHoldReason, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentHoldReasonCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentHoldReason = $paymentHoldReason;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

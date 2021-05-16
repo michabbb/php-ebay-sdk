@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FlatShippingPreferencesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,50 +17,50 @@ class FlatShippingPreferencesType extends AbstractStructBase
 {
     /**
      * The AmountPerAdditionalItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AmountPerAdditionalItem;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AmountPerAdditionalItem = null;
     /**
      * The DeductionAmountPerAdditionalItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $DeductionAmountPerAdditionalItem;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $DeductionAmountPerAdditionalItem = null;
     /**
      * The FlatRateInsuranceRangeCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: 6
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    public $FlatRateInsuranceRangeCost;
+    protected array $FlatRateInsuranceRangeCost = [];
     /**
      * The FlatShippingRateOption
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FlatShippingRateOption;
+    protected ?string $FlatShippingRateOption = null;
     /**
      * The InsuranceOption
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InsuranceOption;
+    protected ?string $InsuranceOption = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for FlatShippingPreferencesType
      * @uses FlatShippingPreferencesType::setAmountPerAdditionalItem()
@@ -71,9 +74,9 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[] $flatRateInsuranceRangeCost
      * @param string $flatShippingRateOption
      * @param string $insuranceOption
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null, \macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null, array $flatRateInsuranceRangeCost = array(), $flatShippingRateOption = null, $insuranceOption = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null, ?\macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null, array $flatRateInsuranceRangeCost = [], ?string $flatShippingRateOption = null, ?string $insuranceOption = null, $any = null)
     {
         $this
             ->setAmountPerAdditionalItem($amountPerAdditionalItem)
@@ -87,7 +90,7 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * Get AmountPerAdditionalItem value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAmountPerAdditionalItem()
+    public function getAmountPerAdditionalItem(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AmountPerAdditionalItem;
     }
@@ -96,16 +99,17 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setAmountPerAdditionalItem(\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null)
+    public function setAmountPerAdditionalItem(?\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null): self
     {
         $this->AmountPerAdditionalItem = $amountPerAdditionalItem;
+        
         return $this;
     }
     /**
      * Get DeductionAmountPerAdditionalItem value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getDeductionAmountPerAdditionalItem()
+    public function getDeductionAmountPerAdditionalItem(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->DeductionAmountPerAdditionalItem;
     }
@@ -114,56 +118,88 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setDeductionAmountPerAdditionalItem(\macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null)
+    public function setDeductionAmountPerAdditionalItem(?\macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null): self
     {
         $this->DeductionAmountPerAdditionalItem = $deductionAmountPerAdditionalItem;
+        
         return $this;
     }
     /**
      * Get FlatRateInsuranceRangeCost value
-     * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    public function getFlatRateInsuranceRangeCost()
+    public function getFlatRateInsuranceRangeCost(): array
     {
         return $this->FlatRateInsuranceRangeCost;
     }
     /**
+     * This method is responsible for validating the values passed to the setFlatRateInsuranceRangeCost method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setFlatRateInsuranceRangeCost method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) {
+            // validation for constraint: itemType
+            if (!$flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem instanceof \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType) {
+                $invalidValues[] = is_object($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) ? get_class($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) : sprintf('%s(%s)', gettype($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem), var_export($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The FlatRateInsuranceRangeCost property can only contain items of type \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set FlatRateInsuranceRangeCost value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[] $flatRateInsuranceRangeCost
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setFlatRateInsuranceRangeCost(array $flatRateInsuranceRangeCost = array())
+    public function setFlatRateInsuranceRangeCost(array $flatRateInsuranceRangeCost = []): self
     {
-        foreach ($flatRateInsuranceRangeCost as $flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) {
-            // validation for constraint: itemType
-            if (!$flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem instanceof \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType) {
-                throw new \InvalidArgumentException(sprintf('The FlatRateInsuranceRangeCost property can only contain items of \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType, "%s" given', is_object($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) ? get_class($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) : gettype($flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($flatRateInsuranceRangeCostArrayErrorMessage = self::validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost($flatRateInsuranceRangeCost))) {
+            throw new InvalidArgumentException($flatRateInsuranceRangeCostArrayErrorMessage, __LINE__);
+        }
+        // validation for constraint: maxOccurs(6)
+        if (is_array($flatRateInsuranceRangeCost) && count($flatRateInsuranceRangeCost) > 6) {
+            throw new InvalidArgumentException(sprintf('Invalid count of %s, the number of elements contained by the property must be less than or equal to 6', count($flatRateInsuranceRangeCost)), __LINE__);
         }
         $this->FlatRateInsuranceRangeCost = $flatRateInsuranceRangeCost;
+        
         return $this;
     }
     /**
      * Add item to FlatRateInsuranceRangeCost value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType $item
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function addToFlatRateInsuranceRangeCost(\macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType $item)
+    public function addToFlatRateInsuranceRangeCost(\macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType) {
-            throw new \InvalidArgumentException(sprintf('The FlatRateInsuranceRangeCost property can only contain items of \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The FlatRateInsuranceRangeCost property can only contain items of type \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        // validation for constraint: maxOccurs(6)
+        if (is_array($this->FlatRateInsuranceRangeCost) && count($this->FlatRateInsuranceRangeCost) >= 6) {
+            throw new InvalidArgumentException(sprintf('You can\'t add anymore element to this property that already contains %s elements, the number of elements contained by the property must be less than or equal to 6', count($this->FlatRateInsuranceRangeCost)), __LINE__);
         }
         $this->FlatRateInsuranceRangeCost[] = $item;
+        
         return $this;
     }
     /**
      * Get FlatShippingRateOption value
      * @return string|null
      */
-    public function getFlatShippingRateOption()
+    public function getFlatShippingRateOption(): ?string
     {
         return $this->FlatShippingRateOption;
     }
@@ -171,24 +207,25 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * Set FlatShippingRateOption value
      * @uses \macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $flatShippingRateOption
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setFlatShippingRateOption($flatShippingRateOption = null)
+    public function setFlatShippingRateOption(?string $flatShippingRateOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType::valueIsValid($flatShippingRateOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $flatShippingRateOption, implode(', ', \macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType', is_array($flatShippingRateOption) ? implode(', ', $flatShippingRateOption) : var_export($flatShippingRateOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\FlatShippingRateOptionCodeType::getValidValues())), __LINE__);
         }
         $this->FlatShippingRateOption = $flatShippingRateOption;
+        
         return $this;
     }
     /**
      * Get InsuranceOption value
      * @return string|null
      */
-    public function getInsuranceOption()
+    public function getInsuranceOption(): ?string
     {
         return $this->InsuranceOption;
     }
@@ -196,69 +233,51 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * Set InsuranceOption value
      * @uses \macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $insuranceOption
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setInsuranceOption($insuranceOption = null)
+    public function setInsuranceOption(?string $insuranceOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType::valueIsValid($insuranceOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $insuranceOption, implode(', ', \macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType', is_array($insuranceOption) ? implode(', ', $insuranceOption) : var_export($insuranceOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\InsuranceOptionCodeType::getValidValues())), __LINE__);
         }
         $this->InsuranceOption = $insuranceOption;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

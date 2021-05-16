@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ProductSearchType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,105 +17,105 @@ class ProductSearchType extends AbstractStructBase
 {
     /**
      * The ProductSearchID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductSearchID;
+    protected ?string $ProductSearchID = null;
     /**
      * The AttributeSetID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var int
+     * @var int|null
      */
-    public $AttributeSetID;
+    protected ?int $AttributeSetID = null;
     /**
      * The ProductFinderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ProductFinderID;
+    protected ?int $ProductFinderID = null;
     /**
      * The ProductID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductID;
+    protected ?string $ProductID = null;
     /**
      * The SortAttributeID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SortAttributeID;
+    protected ?int $SortAttributeID = null;
     /**
      * The MaxChildrenPerFamily
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxChildrenPerFamily;
+    protected ?int $MaxChildrenPerFamily = null;
     /**
      * The SearchAttributes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SearchAttributesType[]
      */
-    public $SearchAttributes;
+    protected array $SearchAttributes = [];
     /**
      * The Pagination
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public $Pagination;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationType $Pagination = null;
     /**
      * The AvailableItemsOnly
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AvailableItemsOnly;
+    protected ?bool $AvailableItemsOnly = null;
     /**
      * The QueryKeywords
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $QueryKeywords;
+    protected ?string $QueryKeywords = null;
     /**
      * The CharacteristicSetIDs
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
+     * @var \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType|null
      */
-    public $CharacteristicSetIDs;
+    protected ?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $CharacteristicSetIDs = null;
     /**
      * The ProductReferenceID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductReferenceID;
+    protected ?string $ProductReferenceID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ProductSearchType
      * @uses ProductSearchType::setProductSearchID()
@@ -140,9 +143,9 @@ class ProductSearchType extends AbstractStructBase
      * @param string $queryKeywords
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs
      * @param string $productReferenceID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($productSearchID = null, $attributeSetID = null, $productFinderID = null, $productID = null, $sortAttributeID = null, $maxChildrenPerFamily = null, array $searchAttributes = array(), \macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, $availableItemsOnly = null, $queryKeywords = null, \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null, $productReferenceID = null, \DOMDocument $any = null)
+    public function __construct(?string $productSearchID = null, ?int $attributeSetID = null, ?int $productFinderID = null, ?string $productID = null, ?int $sortAttributeID = null, ?int $maxChildrenPerFamily = null, array $searchAttributes = [], ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?bool $availableItemsOnly = null, ?string $queryKeywords = null, ?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null, ?string $productReferenceID = null, $any = null)
     {
         $this
             ->setProductSearchID($productSearchID)
@@ -163,7 +166,7 @@ class ProductSearchType extends AbstractStructBase
      * Get ProductSearchID value
      * @return string|null
      */
-    public function getProductSearchID()
+    public function getProductSearchID(): ?string
     {
         return $this->ProductSearchID;
     }
@@ -172,20 +175,21 @@ class ProductSearchType extends AbstractStructBase
      * @param string $productSearchID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setProductSearchID($productSearchID = null)
+    public function setProductSearchID(?string $productSearchID = null): self
     {
         // validation for constraint: string
         if (!is_null($productSearchID) && !is_string($productSearchID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productSearchID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productSearchID, true), gettype($productSearchID)), __LINE__);
         }
         $this->ProductSearchID = $productSearchID;
+        
         return $this;
     }
     /**
      * Get AttributeSetID value
      * @return int|null
      */
-    public function getAttributeSetID()
+    public function getAttributeSetID(): ?int
     {
         return $this->AttributeSetID;
     }
@@ -194,20 +198,21 @@ class ProductSearchType extends AbstractStructBase
      * @param int $attributeSetID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setAttributeSetID($attributeSetID = null)
+    public function setAttributeSetID(?int $attributeSetID = null): self
     {
         // validation for constraint: int
-        if (!is_null($attributeSetID) && !is_numeric($attributeSetID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($attributeSetID)), __LINE__);
+        if (!is_null($attributeSetID) && !(is_int($attributeSetID) || ctype_digit($attributeSetID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($attributeSetID, true), gettype($attributeSetID)), __LINE__);
         }
         $this->AttributeSetID = $attributeSetID;
+        
         return $this;
     }
     /**
      * Get ProductFinderID value
      * @return int|null
      */
-    public function getProductFinderID()
+    public function getProductFinderID(): ?int
     {
         return $this->ProductFinderID;
     }
@@ -216,20 +221,21 @@ class ProductSearchType extends AbstractStructBase
      * @param int $productFinderID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setProductFinderID($productFinderID = null)
+    public function setProductFinderID(?int $productFinderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($productFinderID) && !is_numeric($productFinderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($productFinderID)), __LINE__);
+        if (!is_null($productFinderID) && !(is_int($productFinderID) || ctype_digit($productFinderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($productFinderID, true), gettype($productFinderID)), __LINE__);
         }
         $this->ProductFinderID = $productFinderID;
+        
         return $this;
     }
     /**
      * Get ProductID value
      * @return string|null
      */
-    public function getProductID()
+    public function getProductID(): ?string
     {
         return $this->ProductID;
     }
@@ -238,20 +244,21 @@ class ProductSearchType extends AbstractStructBase
      * @param string $productID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setProductID($productID = null)
+    public function setProductID(?string $productID = null): self
     {
         // validation for constraint: string
         if (!is_null($productID) && !is_string($productID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productID, true), gettype($productID)), __LINE__);
         }
         $this->ProductID = $productID;
+        
         return $this;
     }
     /**
      * Get SortAttributeID value
      * @return int|null
      */
-    public function getSortAttributeID()
+    public function getSortAttributeID(): ?int
     {
         return $this->SortAttributeID;
     }
@@ -260,20 +267,21 @@ class ProductSearchType extends AbstractStructBase
      * @param int $sortAttributeID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setSortAttributeID($sortAttributeID = null)
+    public function setSortAttributeID(?int $sortAttributeID = null): self
     {
         // validation for constraint: int
-        if (!is_null($sortAttributeID) && !is_numeric($sortAttributeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($sortAttributeID)), __LINE__);
+        if (!is_null($sortAttributeID) && !(is_int($sortAttributeID) || ctype_digit($sortAttributeID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($sortAttributeID, true), gettype($sortAttributeID)), __LINE__);
         }
         $this->SortAttributeID = $sortAttributeID;
+        
         return $this;
     }
     /**
      * Get MaxChildrenPerFamily value
      * @return int|null
      */
-    public function getMaxChildrenPerFamily()
+    public function getMaxChildrenPerFamily(): ?int
     {
         return $this->MaxChildrenPerFamily;
     }
@@ -282,60 +290,84 @@ class ProductSearchType extends AbstractStructBase
      * @param int $maxChildrenPerFamily
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setMaxChildrenPerFamily($maxChildrenPerFamily = null)
+    public function setMaxChildrenPerFamily(?int $maxChildrenPerFamily = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxChildrenPerFamily) && !is_numeric($maxChildrenPerFamily)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxChildrenPerFamily)), __LINE__);
+        if (!is_null($maxChildrenPerFamily) && !(is_int($maxChildrenPerFamily) || ctype_digit($maxChildrenPerFamily))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxChildrenPerFamily, true), gettype($maxChildrenPerFamily)), __LINE__);
         }
         $this->MaxChildrenPerFamily = $maxChildrenPerFamily;
+        
         return $this;
     }
     /**
      * Get SearchAttributes value
-     * @return \macropage\ebaysdk\trading\StructType\SearchAttributesType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\SearchAttributesType[]
      */
-    public function getSearchAttributes()
+    public function getSearchAttributes(): array
     {
         return $this->SearchAttributes;
     }
     /**
+     * This method is responsible for validating the values passed to the setSearchAttributes method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setSearchAttributes method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateSearchAttributesForArrayConstraintsFromSetSearchAttributes(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $productSearchTypeSearchAttributesItem) {
+            // validation for constraint: itemType
+            if (!$productSearchTypeSearchAttributesItem instanceof \macropage\ebaysdk\trading\StructType\SearchAttributesType) {
+                $invalidValues[] = is_object($productSearchTypeSearchAttributesItem) ? get_class($productSearchTypeSearchAttributesItem) : sprintf('%s(%s)', gettype($productSearchTypeSearchAttributesItem), var_export($productSearchTypeSearchAttributesItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The SearchAttributes property can only contain items of type \macropage\ebaysdk\trading\StructType\SearchAttributesType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set SearchAttributes value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SearchAttributesType[] $searchAttributes
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setSearchAttributes(array $searchAttributes = array())
+    public function setSearchAttributes(array $searchAttributes = []): self
     {
-        foreach ($searchAttributes as $productSearchTypeSearchAttributesItem) {
-            // validation for constraint: itemType
-            if (!$productSearchTypeSearchAttributesItem instanceof \macropage\ebaysdk\trading\StructType\SearchAttributesType) {
-                throw new \InvalidArgumentException(sprintf('The SearchAttributes property can only contain items of \macropage\ebaysdk\trading\StructType\SearchAttributesType, "%s" given', is_object($productSearchTypeSearchAttributesItem) ? get_class($productSearchTypeSearchAttributesItem) : gettype($productSearchTypeSearchAttributesItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($searchAttributesArrayErrorMessage = self::validateSearchAttributesForArrayConstraintsFromSetSearchAttributes($searchAttributes))) {
+            throw new InvalidArgumentException($searchAttributesArrayErrorMessage, __LINE__);
         }
         $this->SearchAttributes = $searchAttributes;
+        
         return $this;
     }
     /**
      * Add item to SearchAttributes value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SearchAttributesType $item
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function addToSearchAttributes(\macropage\ebaysdk\trading\StructType\SearchAttributesType $item)
+    public function addToSearchAttributes(\macropage\ebaysdk\trading\StructType\SearchAttributesType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\SearchAttributesType) {
-            throw new \InvalidArgumentException(sprintf('The SearchAttributes property can only contain items of \macropage\ebaysdk\trading\StructType\SearchAttributesType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The SearchAttributes property can only contain items of type \macropage\ebaysdk\trading\StructType\SearchAttributesType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->SearchAttributes[] = $item;
+        
         return $this;
     }
     /**
      * Get Pagination value
      * @return \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public function getPagination()
+    public function getPagination(): ?\macropage\ebaysdk\trading\StructType\PaginationType
     {
         return $this->Pagination;
     }
@@ -344,16 +376,17 @@ class ProductSearchType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setPagination(\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function setPagination(?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null): self
     {
         $this->Pagination = $pagination;
+        
         return $this;
     }
     /**
      * Get AvailableItemsOnly value
      * @return bool|null
      */
-    public function getAvailableItemsOnly()
+    public function getAvailableItemsOnly(): ?bool
     {
         return $this->AvailableItemsOnly;
     }
@@ -362,20 +395,21 @@ class ProductSearchType extends AbstractStructBase
      * @param bool $availableItemsOnly
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setAvailableItemsOnly($availableItemsOnly = null)
+    public function setAvailableItemsOnly(?bool $availableItemsOnly = null): self
     {
         // validation for constraint: boolean
         if (!is_null($availableItemsOnly) && !is_bool($availableItemsOnly)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($availableItemsOnly)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($availableItemsOnly, true), gettype($availableItemsOnly)), __LINE__);
         }
         $this->AvailableItemsOnly = $availableItemsOnly;
+        
         return $this;
     }
     /**
      * Get QueryKeywords value
      * @return string|null
      */
-    public function getQueryKeywords()
+    public function getQueryKeywords(): ?string
     {
         return $this->QueryKeywords;
     }
@@ -384,20 +418,21 @@ class ProductSearchType extends AbstractStructBase
      * @param string $queryKeywords
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setQueryKeywords($queryKeywords = null)
+    public function setQueryKeywords(?string $queryKeywords = null): self
     {
         // validation for constraint: string
         if (!is_null($queryKeywords) && !is_string($queryKeywords)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($queryKeywords)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($queryKeywords, true), gettype($queryKeywords)), __LINE__);
         }
         $this->QueryKeywords = $queryKeywords;
+        
         return $this;
     }
     /**
      * Get CharacteristicSetIDs value
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType|null
      */
-    public function getCharacteristicSetIDs()
+    public function getCharacteristicSetIDs(): ?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
     {
         return $this->CharacteristicSetIDs;
     }
@@ -406,16 +441,17 @@ class ProductSearchType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setCharacteristicSetIDs(\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null)
+    public function setCharacteristicSetIDs(?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null): self
     {
         $this->CharacteristicSetIDs = $characteristicSetIDs;
+        
         return $this;
     }
     /**
      * Get ProductReferenceID value
      * @return string|null
      */
-    public function getProductReferenceID()
+    public function getProductReferenceID(): ?string
     {
         return $this->ProductReferenceID;
     }
@@ -424,65 +460,47 @@ class ProductSearchType extends AbstractStructBase
      * @param string $productReferenceID
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setProductReferenceID($productReferenceID = null)
+    public function setProductReferenceID(?string $productReferenceID = null): self
     {
         // validation for constraint: string
         if (!is_null($productReferenceID) && !is_string($productReferenceID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productReferenceID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productReferenceID, true), gettype($productReferenceID)), __LINE__);
         }
         $this->ProductReferenceID = $productReferenceID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ProductSearchType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

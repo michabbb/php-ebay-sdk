@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DiscountPriceInfoType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Using this container, a seller can supply original retail price and discount price for an item to clarify the discount treatment (also known as strike-through pricing). This only applies to fixed-price listings and auction listings
  * with the Buy It Now option. This feature is available for large enterprise sellers via white list. A seller can provide discount treatment regardless of whether the listing includes a SKU.
  * @subpackage Structs
@@ -15,77 +18,77 @@ class DiscountPriceInfoType extends AbstractStructBase
 {
     /**
      * The OriginalRetailPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The actual retail price set by the manufacturer (OEM). eBay does not maintain or validate the <b>OriginalRetailPrice</b> supplied by the seller. <b>OriginalRetailPrice</b> should always be more than <b>StartPrice</b>. Compare the
      * <b>StartPrice</b>/<b>BuyItNowPrice</b> to <b>OriginalRetailPrice</b> to determine the amount of savings to the buyer.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $OriginalRetailPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $OriginalRetailPrice = null;
     /**
      * The MinimumAdvertisedPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Minimum Advertised Price (MAP) is an agreement between suppliers (or manufacturers (OEM)) and the retailers (sellers) stipulating the lowest price an item is allowed to be advertised at. Sellers can offer prices below MAP by means of
      * other discounts. This only applies to fixed-price listings and auction listings with the Buy It Now option.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MinimumAdvertisedPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MinimumAdvertisedPrice = null;
     /**
      * The MinimumAdvertisedPriceExposure
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: For MinimumAdvertisedPrice (MAP) listings only. A seller cannot show the actual discounted price on eBay's View Item page. Instead, the buyer can either click on a pop-up on eBay's View Item page, or the discount price will be shown
      * during checkout.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MinimumAdvertisedPriceExposure;
+    protected ?string $MinimumAdvertisedPriceExposure = null;
     /**
      * The PricingTreatment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Based on <b>OriginalRetailPrice</b>, <b>MinimumAdvertisedPrice</b>, and <b>StartPrice</b> values, eBay identifies whether the listing falls under MAP or STP (aka <b>OriginalRetailPrice</b>). <b>GetItem</b> returns this for items
      * listed with one of these discount pricing treatments. <b>GetSellerList</b> returns the <b>DiscountPriceInfo</b> container. This field is not applicable for Add/Revise/Relist calls.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PricingTreatment;
+    protected ?string $PricingTreatment = null;
     /**
      * The SoldOneBay
-     * Meta informations extracted from the WSDL
-     * - default: false
+     * Meta information extracted from the WSDL
      * - documentation: Used by the eBay UK and eBay Germany (DE) sites, this flag indicates that the discount price (specified as <b>StartPrice</b>) is the price for which the seller offered the same (or similar) item for sale on eBay within the previous
      * 30 days. The discount price is always in reference to the seller's own price for the item. <br><br> If this field is set to <code>true</code>, eBay displays 'Was' in the UK and 'Ursprunglich' in Germany, next to the discounted price of the item. In
      * the event both <b>SoldOffeBay</b> and <b>SoldOneBay</b> fields are set to <code>true</code>, <b>SoldOneBay</b> takes precedence. <br>
+     * - default: false
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SoldOneBay;
+    protected ?bool $SoldOneBay = null;
     /**
      * The SoldOffeBay
-     * Meta informations extracted from the WSDL
-     * - default: false
+     * Meta information extracted from the WSDL
      * - documentation: Used by the eBay UK and eBay Germany (DE) sites, this flag indicates that the discount price (specified as StartPrice) is the price for which the seller offered the same (or similar) item for sale on a Web site or offline store other
      * than eBay in the previous 30 days. The discount price is always in reference to the seller's own price for the item. <br><br> If this field is set to <code>true</code>, eBay displays 'Was*' in the UK and 'Ursprunglich*' in Germany, next to the
      * discounted price of the item. In the event both <b>SoldOffeBay</b> and <b>SoldOneBay</b> fields are set to <code>true</code>, <b>SoldOneBay</b> takes precedence. <br>
+     * - default: false
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SoldOffeBay;
+    protected ?bool $SoldOffeBay = null;
     /**
      * The MadeForOutletComparisonPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Applicable only if the item was specifically made for sale through dedicated eBay outlet pages (e.g., eBay Fashion Outlet).<br> <br> The comparison price is the price of a comparable product sold through non-outlet channels on eBay
      * (or elsewhere), or not specifically made for the outlet.<br> <br> In fashion, a "comparable" product shares the same design, but is not considered an identical product. Some products are specifically made for outlets, and may have a different SKU
      * than the "comparable" product. These made-for-outlet products may be manufactured in a different place, with different materials, or according to different specifications (i.e. different stitch pattern, seam reinforcement, button quality, etc.)
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MadeForOutletComparisonPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MadeForOutletComparisonPrice = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DiscountPriceInfoType
      * @uses DiscountPriceInfoType::setOriginalRetailPrice()
@@ -103,9 +106,9 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param bool $soldOneBay
      * @param bool $soldOffeBay
      * @param \macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $originalRetailPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $minimumAdvertisedPrice = null, $minimumAdvertisedPriceExposure = null, $pricingTreatment = null, $soldOneBay = false, $soldOffeBay = false, \macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $originalRetailPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minimumAdvertisedPrice = null, ?string $minimumAdvertisedPriceExposure = null, ?string $pricingTreatment = null, ?bool $soldOneBay = false, ?bool $soldOffeBay = false, ?\macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice = null, $any = null)
     {
         $this
             ->setOriginalRetailPrice($originalRetailPrice)
@@ -121,7 +124,7 @@ class DiscountPriceInfoType extends AbstractStructBase
      * Get OriginalRetailPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getOriginalRetailPrice()
+    public function getOriginalRetailPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->OriginalRetailPrice;
     }
@@ -130,16 +133,17 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $originalRetailPrice
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setOriginalRetailPrice(\macropage\ebaysdk\trading\StructType\AmountType $originalRetailPrice = null)
+    public function setOriginalRetailPrice(?\macropage\ebaysdk\trading\StructType\AmountType $originalRetailPrice = null): self
     {
         $this->OriginalRetailPrice = $originalRetailPrice;
+        
         return $this;
     }
     /**
      * Get MinimumAdvertisedPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMinimumAdvertisedPrice()
+    public function getMinimumAdvertisedPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MinimumAdvertisedPrice;
     }
@@ -148,16 +152,17 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $minimumAdvertisedPrice
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setMinimumAdvertisedPrice(\macropage\ebaysdk\trading\StructType\AmountType $minimumAdvertisedPrice = null)
+    public function setMinimumAdvertisedPrice(?\macropage\ebaysdk\trading\StructType\AmountType $minimumAdvertisedPrice = null): self
     {
         $this->MinimumAdvertisedPrice = $minimumAdvertisedPrice;
+        
         return $this;
     }
     /**
      * Get MinimumAdvertisedPriceExposure value
      * @return string|null
      */
-    public function getMinimumAdvertisedPriceExposure()
+    public function getMinimumAdvertisedPriceExposure(): ?string
     {
         return $this->MinimumAdvertisedPriceExposure;
     }
@@ -165,24 +170,25 @@ class DiscountPriceInfoType extends AbstractStructBase
      * Set MinimumAdvertisedPriceExposure value
      * @uses \macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $minimumAdvertisedPriceExposure
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setMinimumAdvertisedPriceExposure($minimumAdvertisedPriceExposure = null)
+    public function setMinimumAdvertisedPriceExposure(?string $minimumAdvertisedPriceExposure = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType::valueIsValid($minimumAdvertisedPriceExposure)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $minimumAdvertisedPriceExposure, implode(', ', \macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType', is_array($minimumAdvertisedPriceExposure) ? implode(', ', $minimumAdvertisedPriceExposure) : var_export($minimumAdvertisedPriceExposure, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MinimumAdvertisedPriceExposureCodeType::getValidValues())), __LINE__);
         }
         $this->MinimumAdvertisedPriceExposure = $minimumAdvertisedPriceExposure;
+        
         return $this;
     }
     /**
      * Get PricingTreatment value
      * @return string|null
      */
-    public function getPricingTreatment()
+    public function getPricingTreatment(): ?string
     {
         return $this->PricingTreatment;
     }
@@ -190,24 +196,25 @@ class DiscountPriceInfoType extends AbstractStructBase
      * Set PricingTreatment value
      * @uses \macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $pricingTreatment
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setPricingTreatment($pricingTreatment = null)
+    public function setPricingTreatment(?string $pricingTreatment = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType::valueIsValid($pricingTreatment)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $pricingTreatment, implode(', ', \macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType', is_array($pricingTreatment) ? implode(', ', $pricingTreatment) : var_export($pricingTreatment, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PricingTreatmentCodeType::getValidValues())), __LINE__);
         }
         $this->PricingTreatment = $pricingTreatment;
+        
         return $this;
     }
     /**
      * Get SoldOneBay value
      * @return bool|null
      */
-    public function getSoldOneBay()
+    public function getSoldOneBay(): ?bool
     {
         return $this->SoldOneBay;
     }
@@ -216,20 +223,21 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param bool $soldOneBay
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setSoldOneBay($soldOneBay = false)
+    public function setSoldOneBay(?bool $soldOneBay = false): self
     {
         // validation for constraint: boolean
         if (!is_null($soldOneBay) && !is_bool($soldOneBay)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($soldOneBay)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($soldOneBay, true), gettype($soldOneBay)), __LINE__);
         }
         $this->SoldOneBay = $soldOneBay;
+        
         return $this;
     }
     /**
      * Get SoldOffeBay value
      * @return bool|null
      */
-    public function getSoldOffeBay()
+    public function getSoldOffeBay(): ?bool
     {
         return $this->SoldOffeBay;
     }
@@ -238,20 +246,21 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param bool $soldOffeBay
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setSoldOffeBay($soldOffeBay = false)
+    public function setSoldOffeBay(?bool $soldOffeBay = false): self
     {
         // validation for constraint: boolean
         if (!is_null($soldOffeBay) && !is_bool($soldOffeBay)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($soldOffeBay)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($soldOffeBay, true), gettype($soldOffeBay)), __LINE__);
         }
         $this->SoldOffeBay = $soldOffeBay;
+        
         return $this;
     }
     /**
      * Get MadeForOutletComparisonPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMadeForOutletComparisonPrice()
+    public function getMadeForOutletComparisonPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MadeForOutletComparisonPrice;
     }
@@ -260,61 +269,43 @@ class DiscountPriceInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setMadeForOutletComparisonPrice(\macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice = null)
+    public function setMadeForOutletComparisonPrice(?\macropage\ebaysdk\trading\StructType\AmountType $madeForOutletComparisonPrice = null): self
     {
         $this->MadeForOutletComparisonPrice = $madeForOutletComparisonPrice;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

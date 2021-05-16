@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VariationsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Variations are multiple similar (but not identical) items in a fixed-price listing. For example, a single listing could contain multiple items of the same brand and model that vary by color and size (like "Blue, Large" and "Black,
  * Medium"). Each variation can have its own quantity and price. For example, a listing could include 10 "Blue, Large" variations and 20 "Black, Medium" variations.
  * @subpackage Structs
@@ -15,7 +18,7 @@ class VariationsType extends AbstractStructBase
 {
     /**
      * The Variation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains data that distinguishes one item variation from another. For example, if an item varies by color and size, each <b>Variation</b> node specifies a combination of one of those colors and sizes.<br> <br> When listing or
      * relisting an item, you are allowed to create a listing with only one item variation, and you might have a plan to add more item variations to the listing in the future. However, if you don't plan to add other item variations in the future, we
      * recommend that you avoid listing with only one variation, so that you avoid confusing buyers. <br> <br> If you specify multiple <b>Variation</b> containers in an add/revise/relist/verify add call to define multiple item variations, the
@@ -28,10 +31,10 @@ class VariationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationType[]
      */
-    public $Variation;
+    protected array $Variation = [];
     /**
      * The Pictures
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains a set of pictures that correspond to one of the variation specifics, such as Color. For example, if a listing has blue and black color variations, you could choose Color for all the pictures, and then include a set of
      * pictures for the blue variations and another set of pictures for the black variations.<br> <br> We strongly recommend that you also include shared pictures in Item.PictureDetails, as this results in a better experience for buyers.<br> <br> <b>For
      * ReviseFixedPriceItem only:</b> To replace or delete individual pictures, pass in the entire Pictures node with the complete set of variation pictures that you want in the listing. If the applicable variations have purchases or the listing ends in
@@ -41,10 +44,10 @@ class VariationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PicturesType[]
      */
-    public $Pictures;
+    protected array $Pictures = [];
     /**
      * The VariationSpecificsSet
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The set of all variation specific names and values that can be applicable to the listing (at any time in its life cycle). This must include all names and values specified in the VariationSpecifics nodes.<br> <br> Required when
      * Variations are specified in a new listing, and when you modify the name of a variation by using ModifyNameList. When you modify variation specific names, VariationSpecificsSet must include the new names plus the names that are not changing (but omit
      * the old names), <br> <br> This set configures variation selection widgets that appear on eBay's View Item page. For example, if you specify Color and Size names in the set, eBay's View Item page displays Color and Size drop-down lists to enable a
@@ -53,24 +56,24 @@ class VariationsType extends AbstractStructBase
      * GetCategorySpecifics to retrieve recommendations for names, values, and order.<br> <br> Required when Variations are specified in a new listing (e.g., in AddFixedPriceItem). Also required when you change variation specific names or values in
      * ReviseFixedPriceItem and RelistFixedPriceItem.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public $VariationSpecificsSet;
+    protected ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $VariationSpecificsSet = null;
     /**
      * The ModifyNameList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Modifies variation specific names when you revise or relist items.<br> <br> You can modify a variation specific name regardless of the quantity sold (i.e., no restrictions on whether the item has orders or order line items
      * (transactions)).<br> <br> (Use VariationSpecifics to modify variation specific values.)<br> <br> You are not required to specify SKU, VariationSpecifics, and other variation details in the request when you are only modifying a variation specific
      * name. <br> <br> Variation, Pictures, VariationSpecificsSet, or ModifyNameList (or all) need to be specified when the Variations node is specified in listing requests.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType|null
      */
-    public $ModifyNameList;
+    protected ?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $ModifyNameList = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for VariationsType
      * @uses VariationsType::setVariation()
@@ -82,9 +85,9 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PicturesType[] $pictures
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet
      * @param \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $variation = array(), array $pictures = array(), \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null, \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null, \DOMDocument $any = null)
+    public function __construct(array $variation = [], array $pictures = [], ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null, ?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null, $any = null)
     {
         $this
             ->setVariation($variation)
@@ -95,89 +98,135 @@ class VariationsType extends AbstractStructBase
     }
     /**
      * Get Variation value
-     * @return \macropage\ebaysdk\trading\StructType\VariationType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\VariationType[]
      */
-    public function getVariation()
+    public function getVariation(): array
     {
         return $this->Variation;
     }
     /**
+     * This method is responsible for validating the values passed to the setVariation method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setVariation method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateVariationForArrayConstraintsFromSetVariation(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $variationsTypeVariationItem) {
+            // validation for constraint: itemType
+            if (!$variationsTypeVariationItem instanceof \macropage\ebaysdk\trading\StructType\VariationType) {
+                $invalidValues[] = is_object($variationsTypeVariationItem) ? get_class($variationsTypeVariationItem) : sprintf('%s(%s)', gettype($variationsTypeVariationItem), var_export($variationsTypeVariationItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Variation property can only contain items of type \macropage\ebaysdk\trading\StructType\VariationType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Variation value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\VariationType[] $variation
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setVariation(array $variation = array())
+    public function setVariation(array $variation = []): self
     {
-        foreach ($variation as $variationsTypeVariationItem) {
-            // validation for constraint: itemType
-            if (!$variationsTypeVariationItem instanceof \macropage\ebaysdk\trading\StructType\VariationType) {
-                throw new \InvalidArgumentException(sprintf('The Variation property can only contain items of \macropage\ebaysdk\trading\StructType\VariationType, "%s" given', is_object($variationsTypeVariationItem) ? get_class($variationsTypeVariationItem) : gettype($variationsTypeVariationItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($variationArrayErrorMessage = self::validateVariationForArrayConstraintsFromSetVariation($variation))) {
+            throw new InvalidArgumentException($variationArrayErrorMessage, __LINE__);
         }
         $this->Variation = $variation;
+        
         return $this;
     }
     /**
      * Add item to Variation value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\VariationType $item
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function addToVariation(\macropage\ebaysdk\trading\StructType\VariationType $item)
+    public function addToVariation(\macropage\ebaysdk\trading\StructType\VariationType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\VariationType) {
-            throw new \InvalidArgumentException(sprintf('The Variation property can only contain items of \macropage\ebaysdk\trading\StructType\VariationType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Variation property can only contain items of type \macropage\ebaysdk\trading\StructType\VariationType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Variation[] = $item;
+        
         return $this;
     }
     /**
      * Get Pictures value
-     * @return \macropage\ebaysdk\trading\StructType\PicturesType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\PicturesType[]
      */
-    public function getPictures()
+    public function getPictures(): array
     {
         return $this->Pictures;
     }
     /**
+     * This method is responsible for validating the values passed to the setPictures method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPictures method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePicturesForArrayConstraintsFromSetPictures(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $variationsTypePicturesItem) {
+            // validation for constraint: itemType
+            if (!$variationsTypePicturesItem instanceof \macropage\ebaysdk\trading\StructType\PicturesType) {
+                $invalidValues[] = is_object($variationsTypePicturesItem) ? get_class($variationsTypePicturesItem) : sprintf('%s(%s)', gettype($variationsTypePicturesItem), var_export($variationsTypePicturesItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Pictures property can only contain items of type \macropage\ebaysdk\trading\StructType\PicturesType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Pictures value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PicturesType[] $pictures
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setPictures(array $pictures = array())
+    public function setPictures(array $pictures = []): self
     {
-        foreach ($pictures as $variationsTypePicturesItem) {
-            // validation for constraint: itemType
-            if (!$variationsTypePicturesItem instanceof \macropage\ebaysdk\trading\StructType\PicturesType) {
-                throw new \InvalidArgumentException(sprintf('The Pictures property can only contain items of \macropage\ebaysdk\trading\StructType\PicturesType, "%s" given', is_object($variationsTypePicturesItem) ? get_class($variationsTypePicturesItem) : gettype($variationsTypePicturesItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($picturesArrayErrorMessage = self::validatePicturesForArrayConstraintsFromSetPictures($pictures))) {
+            throw new InvalidArgumentException($picturesArrayErrorMessage, __LINE__);
         }
         $this->Pictures = $pictures;
+        
         return $this;
     }
     /**
      * Add item to Pictures value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PicturesType $item
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function addToPictures(\macropage\ebaysdk\trading\StructType\PicturesType $item)
+    public function addToPictures(\macropage\ebaysdk\trading\StructType\PicturesType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\PicturesType) {
-            throw new \InvalidArgumentException(sprintf('The Pictures property can only contain items of \macropage\ebaysdk\trading\StructType\PicturesType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Pictures property can only contain items of type \macropage\ebaysdk\trading\StructType\PicturesType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Pictures[] = $item;
+        
         return $this;
     }
     /**
      * Get VariationSpecificsSet value
      * @return \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public function getVariationSpecificsSet()
+    public function getVariationSpecificsSet(): ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
     {
         return $this->VariationSpecificsSet;
     }
@@ -186,16 +235,17 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setVariationSpecificsSet(\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null)
+    public function setVariationSpecificsSet(?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null): self
     {
         $this->VariationSpecificsSet = $variationSpecificsSet;
+        
         return $this;
     }
     /**
      * Get ModifyNameList value
      * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType|null
      */
-    public function getModifyNameList()
+    public function getModifyNameList(): ?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
     {
         return $this->ModifyNameList;
     }
@@ -204,61 +254,43 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setModifyNameList(\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null)
+    public function setModifyNameList(?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null): self
     {
         $this->ModifyNameList = $modifyNameList;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\VariationsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VariationsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

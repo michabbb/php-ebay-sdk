@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MaximumBuyerPolicyViolationsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated as sellers can no longer set a buyer policy violation threshold Buyer Requirement at the listing-level in Add/Revise/Relist calls.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class MaximumBuyerPolicyViolationsType extends AbstractStructBase
 {
     /**
      * The Count
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Count;
+    protected ?int $Count = null;
     /**
      * The Period
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Period;
+    protected ?string $Period = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MaximumBuyerPolicyViolationsType
      * @uses MaximumBuyerPolicyViolationsType::setCount()
@@ -40,9 +43,9 @@ class MaximumBuyerPolicyViolationsType extends AbstractStructBase
      * @uses MaximumBuyerPolicyViolationsType::setAny()
      * @param int $count
      * @param string $period
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($count = null, $period = null, \DOMDocument $any = null)
+    public function __construct(?int $count = null, ?string $period = null, $any = null)
     {
         $this
             ->setCount($count)
@@ -53,7 +56,7 @@ class MaximumBuyerPolicyViolationsType extends AbstractStructBase
      * Get Count value
      * @return int|null
      */
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->Count;
     }
@@ -62,20 +65,21 @@ class MaximumBuyerPolicyViolationsType extends AbstractStructBase
      * @param int $count
      * @return \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsType
      */
-    public function setCount($count = null)
+    public function setCount(?int $count = null): self
     {
         // validation for constraint: int
-        if (!is_null($count) && !is_numeric($count)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($count)), __LINE__);
+        if (!is_null($count) && !(is_int($count) || ctype_digit($count))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($count, true), gettype($count)), __LINE__);
         }
         $this->Count = $count;
+        
         return $this;
     }
     /**
      * Get Period value
      * @return string|null
      */
-    public function getPeriod()
+    public function getPeriod(): ?string
     {
         return $this->Period;
     }
@@ -83,69 +87,51 @@ class MaximumBuyerPolicyViolationsType extends AbstractStructBase
      * Set Period value
      * @uses \macropage\ebaysdk\trading\EnumType\PeriodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PeriodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $period
      * @return \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsType
      */
-    public function setPeriod($period = null)
+    public function setPeriod(?string $period = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PeriodCodeType::valueIsValid($period)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $period, implode(', ', \macropage\ebaysdk\trading\EnumType\PeriodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PeriodCodeType', is_array($period) ? implode(', ', $period) : var_export($period, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PeriodCodeType::getValidValues())), __LINE__);
         }
         $this->Period = $period;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PaymentsInformationCodeType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class PaymentsInformationCodeType extends AbstractStructBase
 {
     /**
      * The Payments
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType
+     * @var \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType|null
      */
-    public $Payments;
+    protected ?\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $Payments = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PaymentsInformationCodeType
      * @uses PaymentsInformationCodeType::setPayments()
      * @uses PaymentsInformationCodeType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments = null, $any = null)
     {
         $this
             ->setPayments($payments)
@@ -42,7 +45,7 @@ class PaymentsInformationCodeType extends AbstractStructBase
      * Get Payments value
      * @return \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType|null
      */
-    public function getPayments()
+    public function getPayments(): ?\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType
     {
         return $this->Payments;
     }
@@ -51,61 +54,43 @@ class PaymentsInformationCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments
      * @return \macropage\ebaysdk\trading\StructType\PaymentsInformationCodeType
      */
-    public function setPayments(\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments = null)
+    public function setPayments(?\macropage\ebaysdk\trading\StructType\PaymentInformationCodeType $payments = null): self
     {
         $this->Payments = $payments;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PaymentsInformationCodeType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PaymentsInformationCodeType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PaymentsInformationCodeType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

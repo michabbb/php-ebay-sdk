@@ -1,40 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ConditionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>ConditionValues.Condition</b> container that is returned at the category level in the <b>GetCategoryFeatures</b> response if 'ConditionValues' is specified as a <b>FeatureID</b> value, or if no <b>FeatureID</b>
- * values are specified. A <b>ConditionValues.Condition</b> container is returned for each supported item condition value for each eBay category returned in the response.
+ * values are specified. A <b>ConditionValues.Condition</b> container is returned for each supported item condition value for each eBay category returned in the response. <br> <br> <span class="tablenote"><strong>Note:</strong> Starting in mid-September
+ * 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished'
+ * item condition (Condition ID 2500). Once this change happens, if a seller attempts to create a new listing or revise an existing listing with the Inventory or Trading APIs using the 'Manufacturer Refurbished' item condition, the listing or revision
+ * will be blocked. </span>
  * @subpackage Structs
  */
 class ConditionType extends AbstractStructBase
 {
     /**
      * The ID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The numeric ID of a condition (e.g., 1000). Use the ID in AddItem and related calls.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ID;
+    protected ?int $ID = null;
     /**
      * The DisplayName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The human-readable label for the condition (e.g., "New"). This value is typically localized for each site. The display name can vary by category. For example, condition ID 1000 could be called "New: with Tags" in one category and
      * "Brand New" in another.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisplayName;
+    protected ?string $DisplayName = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ConditionType
      * @uses ConditionType::setID()
@@ -42,9 +48,9 @@ class ConditionType extends AbstractStructBase
      * @uses ConditionType::setAny()
      * @param int $iD
      * @param string $displayName
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($iD = null, $displayName = null, \DOMDocument $any = null)
+    public function __construct(?int $iD = null, ?string $displayName = null, $any = null)
     {
         $this
             ->setID($iD)
@@ -55,7 +61,7 @@ class ConditionType extends AbstractStructBase
      * Get ID value
      * @return int|null
      */
-    public function getID()
+    public function getID(): ?int
     {
         return $this->ID;
     }
@@ -64,20 +70,21 @@ class ConditionType extends AbstractStructBase
      * @param int $iD
      * @return \macropage\ebaysdk\trading\StructType\ConditionType
      */
-    public function setID($iD = null)
+    public function setID(?int $iD = null): self
     {
         // validation for constraint: int
-        if (!is_null($iD) && !is_numeric($iD)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($iD)), __LINE__);
+        if (!is_null($iD) && !(is_int($iD) || ctype_digit($iD))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($iD, true), gettype($iD)), __LINE__);
         }
         $this->ID = $iD;
+        
         return $this;
     }
     /**
      * Get DisplayName value
      * @return string|null
      */
-    public function getDisplayName()
+    public function getDisplayName(): ?string
     {
         return $this->DisplayName;
     }
@@ -86,65 +93,47 @@ class ConditionType extends AbstractStructBase
      * @param string $displayName
      * @return \macropage\ebaysdk\trading\StructType\ConditionType
      */
-    public function setDisplayName($displayName = null)
+    public function setDisplayName(?string $displayName = null): self
     {
         // validation for constraint: string
         if (!is_null($displayName) && !is_string($displayName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($displayName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($displayName, true), gettype($displayName)), __LINE__);
         }
         $this->DisplayName = $displayName;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ConditionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ConditionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ConditionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

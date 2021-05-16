@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for RegionDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is no longer used; replaced by <b>ShippingLocationDetails</b>.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class RegionDetailsType extends AbstractStructBase
 {
     /**
      * The RegionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RegionID;
+    protected ?string $RegionID = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The DetailVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailVersion;
+    protected ?string $DetailVersion = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for RegionDetailsType
      * @uses RegionDetailsType::setRegionID()
@@ -60,9 +63,9 @@ class RegionDetailsType extends AbstractStructBase
      * @param string $description
      * @param string $detailVersion
      * @param string $updateTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($regionID = null, $description = null, $detailVersion = null, $updateTime = null, \DOMDocument $any = null)
+    public function __construct(?string $regionID = null, ?string $description = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setRegionID($regionID)
@@ -75,7 +78,7 @@ class RegionDetailsType extends AbstractStructBase
      * Get RegionID value
      * @return string|null
      */
-    public function getRegionID()
+    public function getRegionID(): ?string
     {
         return $this->RegionID;
     }
@@ -84,20 +87,21 @@ class RegionDetailsType extends AbstractStructBase
      * @param string $regionID
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
      */
-    public function setRegionID($regionID = null)
+    public function setRegionID(?string $regionID = null): self
     {
         // validation for constraint: string
         if (!is_null($regionID) && !is_string($regionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($regionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($regionID, true), gettype($regionID)), __LINE__);
         }
         $this->RegionID = $regionID;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -106,20 +110,21 @@ class RegionDetailsType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get DetailVersion value
      * @return string|null
      */
-    public function getDetailVersion()
+    public function getDetailVersion(): ?string
     {
         return $this->DetailVersion;
     }
@@ -128,20 +133,21 @@ class RegionDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
      */
-    public function setDetailVersion($detailVersion = null)
+    public function setDetailVersion(?string $detailVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($detailVersion) && !is_string($detailVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailVersion, true), gettype($detailVersion)), __LINE__);
         }
         $this->DetailVersion = $detailVersion;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -150,65 +156,47 @@ class RegionDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\RegionDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddItemFromSellingManagerTemplateResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Returns the item ID, the estimated fees for the new listing (except the Final Value Fee, which isn't calculated until the item has sold), the start and end times of the listing, and other details.
  * @subpackage Structs
  */
@@ -14,55 +17,69 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for the new listing. This field is returned as long as the listing was successfully created. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The StartTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Starting date and time for the new listing. This value is based on the time the listing was received and processed, or the time the item will be listed if the seller included the <b>ScheduleTime</b> field in the request and set a
      * custom start time of the listing (in the future).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTime;
+    protected ?string $StartTime = null;
     /**
      * The EndTime
-     * Meta informations extracted from the WSDL
-     * - documentation: Date and time when the new listing is scheduled to end based on the start time and the listing duration that was set at listing time.
+     * Meta information extracted from the WSDL
+     * - documentation: Date and time when the new listing is scheduled to end based on the start time and the listing duration value that was set in the <b>ListingDuration</b> field at listing time. If the value of <b>ListingDuration</b> was set to
+     * <code>GTC</code> (Good 'Til Cancelled) this value will be set one month ahead of the start time, and this value will continue to be updated one month ahead each time the GTC listing needs to be renewed. Fixed-price listings get renewed automatically
+     * as long as there is still a quantity of <code>1</code> or above, or even if the quantity is <code>0</code>, but the 'out-of-stock control' feature is enabled. <br><br> Note that <code>GTC</code> is not a supported listing duration for auction
+     * listings, but is the only supported listing duration for fixed-price listings except for a few motor vehicle categories on eBay Motors US, eBay UK, and eBay Italy. <br><br> <span class="tablenote"><b>Note: </b> As of July 1, 2019, the Good 'Til
+     * Cancelled renewal schedule has been modified from every 30 days to once per calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the
+     * following month only has 30 days, the renewal will happen on the 30th in the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
+     * change. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTime;
+    protected ?string $EndTime = null;
     /**
      * The Fees
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is an array of fees associated with the creation of the listing. The fees do not include the Final Value Fee (FVF), which cannot be determined until an item is sold.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is an array of fees associated with the creation of the listing. The fees in this container will not include any fees that are based on the purchase price (such as Final Value Fee) and only come into play when the
+     * listing has a sale. <br> <br> <span class="tablenote"><b>Note:</b> The currency used for all fees returned under the <b>Fees</b> container reflects the currency used for the listing site, and not necessarily in the seller's default/home currency. For
+     * example, if a Canadian seller is using the <b>AddItemFromSellingManagerTemplate</b> call to list an item on the eBay US site, the currency type shown for each fee will be <code>USD</code> and not <code>CAD</code>. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\FeesType
+     * @var \macropage\ebaysdk\trading\StructType\FeesType|null
      */
-    public $Fees;
+    protected ?\macropage\ebaysdk\trading\StructType\FeesType $Fees = null;
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
-     * - documentation: The unique identifier of the primary category in which the item was listed. This field is only returned if the seller enabled the Category Mapping feature for the listing, and the Category ID passed in as the primary listing category
-     * was mapped to a new Category ID by eBay. If the primary category has not changed, or if it has expired with no replacement, this field is not returned.
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of the primary category in which the item was listed. This field is only returned if the <b>Item.CategoryMappingAllowed</b> boolean field is set to <code>true</code> in the request (or omitted) and the Category
+     * ID passed in as the primary listing category was automatically mapped to a new Category ID by eBay. If the primary category ID passed in the request is still active/valid, this field is not returned. <br/><br/> <span class="tablenote"><b>Note: </b>
+     * The <b>Item.CategoryMappingAllowed</b> field value in the request now defaults to <code>true</code> if omitted. Previously, the default value was <code>false</code>, so a user had to include this field and set it to <code>true</code> in order for
+     * eBay to map an outdated Primary or Secondary Category ID to the updated Category ID. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The Category2ID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier of the secondary category in which the item was listed. This field is only returned if a secondary category was used, the seller enabled the Category Mapping feature for the listing, and the Category ID passed in as
-     * the secondary listing category was mapped to a new Category ID by eBay. If the secondary category has not changed or it has expired with no replacement, this field is not returned.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier of the secondary category in which the item was listed. This field is only returned if the <b>Item.CategoryMappingAllowed</b> boolean field is set to <code>true</code> in the request (or omitted) and the Category ID
+     * passed in as the secondary listing category was automatically mapped to a new Category ID by eBay. If the secondary category ID passed in the request is still active/valid, this field is not returned. <br/><br/> <span class="tablenote"><b>Note: </b>
+     * The <b>Item.CategoryMappingAllowed</b> field value in the request now defaults to <code>true</code> if omitted. Previously, the default value was <code>false</code>, so a user had to include this field and set it to <code>true</code> in order for
+     * eBay to map an outdated Primary or Secondary Category ID to the updated Category ID. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Category2ID;
+    protected ?string $Category2ID = null;
     /**
      * Constructor method for AddItemFromSellingManagerTemplateResponseType
      * @uses AddItemFromSellingManagerTemplateResponseType::setItemID()
@@ -78,7 +95,7 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $categoryID
      * @param string $category2ID
      */
-    public function __construct($itemID = null, $startTime = null, $endTime = null, \macropage\ebaysdk\trading\StructType\FeesType $fees = null, $categoryID = null, $category2ID = null)
+    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null)
     {
         $this
             ->setItemID($itemID)
@@ -92,7 +109,7 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -101,20 +118,21 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get StartTime value
      * @return string|null
      */
-    public function getStartTime()
+    public function getStartTime(): ?string
     {
         return $this->StartTime;
     }
@@ -123,20 +141,21 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $startTime
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setStartTime($startTime = null)
+    public function setStartTime(?string $startTime = null): self
     {
         // validation for constraint: string
         if (!is_null($startTime) && !is_string($startTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTime, true), gettype($startTime)), __LINE__);
         }
         $this->StartTime = $startTime;
+        
         return $this;
     }
     /**
      * Get EndTime value
      * @return string|null
      */
-    public function getEndTime()
+    public function getEndTime(): ?string
     {
         return $this->EndTime;
     }
@@ -145,20 +164,21 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $endTime
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setEndTime($endTime = null)
+    public function setEndTime(?string $endTime = null): self
     {
         // validation for constraint: string
         if (!is_null($endTime) && !is_string($endTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTime, true), gettype($endTime)), __LINE__);
         }
         $this->EndTime = $endTime;
+        
         return $this;
     }
     /**
      * Get Fees value
      * @return \macropage\ebaysdk\trading\StructType\FeesType|null
      */
-    public function getFees()
+    public function getFees(): ?\macropage\ebaysdk\trading\StructType\FeesType
     {
         return $this->Fees;
     }
@@ -167,16 +187,17 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\FeesType $fees
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setFees(\macropage\ebaysdk\trading\StructType\FeesType $fees = null)
+    public function setFees(?\macropage\ebaysdk\trading\StructType\FeesType $fees = null): self
     {
         $this->Fees = $fees;
+        
         return $this;
     }
     /**
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -185,20 +206,21 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get Category2ID value
      * @return string|null
      */
-    public function getCategory2ID()
+    public function getCategory2ID(): ?string
     {
         return $this->Category2ID;
     }
@@ -207,33 +229,14 @@ class AddItemFromSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $category2ID
      * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
      */
-    public function setCategory2ID($category2ID = null)
+    public function setCategory2ID(?string $category2ID = null): self
     {
         // validation for constraint: string
         if (!is_null($category2ID) && !is_string($category2ID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($category2ID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($category2ID, true), gettype($category2ID)), __LINE__);
         }
         $this->Category2ID = $category2ID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AddItemFromSellingManagerTemplateResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

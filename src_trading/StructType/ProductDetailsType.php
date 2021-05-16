@@ -1,38 +1,44 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ProductDetailsType StructType
- * Meta informations extracted from the WSDL
- * - documentation: This type defines the <b>ProductDetails</b> container that is returned in the <b>GeteBayDetails</b> response if product identifiers (EANs, ISBNs, UPCs, MPN/Brand) are not supported for a category.
+ * Meta information extracted from the WSDL
+ * - documentation: This type defines the <b>ProductDetails</b> container that is returned in the <b>GeteBayDetails</b> response if the <code>ProductDetails</code> value is used in a <b>DetailName</b> field (or no <b>DetailName</b> fields are used).
+ * <br><br> The <b>ProductDetails</b> container shows the substitute text that can be used in place of an actual product identifier (e.g. EAN, ISBNs, UPC, or MPN) in case the product does not have a product identifier and/or the product identifier is
+ * not known by the seller.
  * @subpackage Structs
  */
 class ProductDetailsType extends AbstractStructBase
 {
     /**
      * The ProductIdentifierUnavailableText
-     * Meta informations extracted from the WSDL
-     * - documentation: This field contains the actual text that should be passed into the relevant product identification fields when creating a listing.
+     * Meta information extracted from the WSDL
+     * - documentation: This field contains the actual text that should be passed into the relevant product identifier fields (e.g. <b>ProductListingDetails.UPC</b> in an <b>AddItem<.b> call) when creating a listing. Some eBay categories require one or more
+     * Global Trade Item Numbers (GTINs), so either the actual GTIN or this substitute text must be passed into the relevant fields.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductIdentifierUnavailableText;
+    protected ?string $ProductIdentifierUnavailableText = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ProductDetailsType
      * @uses ProductDetailsType::setProductIdentifierUnavailableText()
      * @uses ProductDetailsType::setAny()
      * @param string $productIdentifierUnavailableText
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($productIdentifierUnavailableText = null, \DOMDocument $any = null)
+    public function __construct(?string $productIdentifierUnavailableText = null, $any = null)
     {
         $this
             ->setProductIdentifierUnavailableText($productIdentifierUnavailableText)
@@ -42,7 +48,7 @@ class ProductDetailsType extends AbstractStructBase
      * Get ProductIdentifierUnavailableText value
      * @return string|null
      */
-    public function getProductIdentifierUnavailableText()
+    public function getProductIdentifierUnavailableText(): ?string
     {
         return $this->ProductIdentifierUnavailableText;
     }
@@ -51,65 +57,47 @@ class ProductDetailsType extends AbstractStructBase
      * @param string $productIdentifierUnavailableText
      * @return \macropage\ebaysdk\trading\StructType\ProductDetailsType
      */
-    public function setProductIdentifierUnavailableText($productIdentifierUnavailableText = null)
+    public function setProductIdentifierUnavailableText(?string $productIdentifierUnavailableText = null): self
     {
         // validation for constraint: string
         if (!is_null($productIdentifierUnavailableText) && !is_string($productIdentifierUnavailableText)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productIdentifierUnavailableText)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productIdentifierUnavailableText, true), gettype($productIdentifierUnavailableText)), __LINE__);
         }
         $this->ProductIdentifierUnavailableText = $productIdentifierUnavailableText;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ProductDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ProductDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ProductDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

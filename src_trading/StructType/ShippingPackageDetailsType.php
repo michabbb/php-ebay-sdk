@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ShippingPackageDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Details about type of package used to ship an item.
  * @subpackage Structs
  */
@@ -14,65 +17,65 @@ class ShippingPackageDetailsType extends AbstractStructBase
 {
     /**
      * The PackageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Numeric identifier. Some applications use this ID to look up shipping packages more efficiently.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PackageID;
+    protected ?int $PackageID = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Display string that applications can use to present a list of shipping package options in a more user-friendly format (such as in a drop-down list).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The ShippingPackage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A supported value for the site that can be used in the <b>Item.ShippingPackageDetails.ShippingPackage</b> or <b>Item.ShippingDetails.CalculatedShippingRate.ShippingPackage</b> fields of an Add/Revise/Relist API call.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShippingPackage;
+    protected ?string $ShippingPackage = null;
     /**
      * The DefaultValue
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if the package type is the default for the specified site.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DefaultValue;
+    protected ?bool $DefaultValue = null;
     /**
      * The DimensionsSupported
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as 'true' if the shipping package supports the use of package dimensions.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DimensionsSupported;
+    protected ?bool $DimensionsSupported = null;
     /**
      * The DetailVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the latest version number for this field. The version can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailVersion;
+    protected ?string $DetailVersion = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Gives the time in GMT that the feature flags for the details were last updated. This timestamp can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ShippingPackageDetailsType
      * @uses ShippingPackageDetailsType::setPackageID()
@@ -90,9 +93,9 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param bool $dimensionsSupported
      * @param string $detailVersion
      * @param string $updateTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($packageID = null, $description = null, $shippingPackage = null, $defaultValue = null, $dimensionsSupported = null, $detailVersion = null, $updateTime = null, \DOMDocument $any = null)
+    public function __construct(?int $packageID = null, ?string $description = null, ?string $shippingPackage = null, ?bool $defaultValue = null, ?bool $dimensionsSupported = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setPackageID($packageID)
@@ -108,7 +111,7 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * Get PackageID value
      * @return int|null
      */
-    public function getPackageID()
+    public function getPackageID(): ?int
     {
         return $this->PackageID;
     }
@@ -117,20 +120,21 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param int $packageID
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setPackageID($packageID = null)
+    public function setPackageID(?int $packageID = null): self
     {
         // validation for constraint: int
-        if (!is_null($packageID) && !is_numeric($packageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($packageID)), __LINE__);
+        if (!is_null($packageID) && !(is_int($packageID) || ctype_digit($packageID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($packageID, true), gettype($packageID)), __LINE__);
         }
         $this->PackageID = $packageID;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -139,20 +143,21 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get ShippingPackage value
      * @return string|null
      */
-    public function getShippingPackage()
+    public function getShippingPackage(): ?string
     {
         return $this->ShippingPackage;
     }
@@ -160,24 +165,25 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * Set ShippingPackage value
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $shippingPackage
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setShippingPackage($shippingPackage = null)
+    public function setShippingPackage(?string $shippingPackage = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType::valueIsValid($shippingPackage)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $shippingPackage, implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType', is_array($shippingPackage) ? implode(', ', $shippingPackage) : var_export($shippingPackage, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingPackageCodeType::getValidValues())), __LINE__);
         }
         $this->ShippingPackage = $shippingPackage;
+        
         return $this;
     }
     /**
      * Get DefaultValue value
      * @return bool|null
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): ?bool
     {
         return $this->DefaultValue;
     }
@@ -186,20 +192,21 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param bool $defaultValue
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setDefaultValue($defaultValue = null)
+    public function setDefaultValue(?bool $defaultValue = null): self
     {
         // validation for constraint: boolean
         if (!is_null($defaultValue) && !is_bool($defaultValue)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($defaultValue)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($defaultValue, true), gettype($defaultValue)), __LINE__);
         }
         $this->DefaultValue = $defaultValue;
+        
         return $this;
     }
     /**
      * Get DimensionsSupported value
      * @return bool|null
      */
-    public function getDimensionsSupported()
+    public function getDimensionsSupported(): ?bool
     {
         return $this->DimensionsSupported;
     }
@@ -208,20 +215,21 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param bool $dimensionsSupported
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setDimensionsSupported($dimensionsSupported = null)
+    public function setDimensionsSupported(?bool $dimensionsSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($dimensionsSupported) && !is_bool($dimensionsSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($dimensionsSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($dimensionsSupported, true), gettype($dimensionsSupported)), __LINE__);
         }
         $this->DimensionsSupported = $dimensionsSupported;
+        
         return $this;
     }
     /**
      * Get DetailVersion value
      * @return string|null
      */
-    public function getDetailVersion()
+    public function getDetailVersion(): ?string
     {
         return $this->DetailVersion;
     }
@@ -230,20 +238,21 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setDetailVersion($detailVersion = null)
+    public function setDetailVersion(?string $detailVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($detailVersion) && !is_string($detailVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailVersion, true), gettype($detailVersion)), __LINE__);
         }
         $this->DetailVersion = $detailVersion;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -252,65 +261,47 @@ class ShippingPackageDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

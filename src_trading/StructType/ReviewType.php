@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviewType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,59 +17,60 @@ class ReviewType extends AbstractStructBase
 {
     /**
      * The URL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $URL;
+    protected ?string $URL = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The Rating
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Rating;
+    protected ?int $Rating = null;
     /**
      * The Text
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Text;
+    protected ?string $Text = null;
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders,
      * OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API
      * call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The CreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreationTime;
+    protected ?string $CreationTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ReviewType
      * @uses ReviewType::setURL()
@@ -82,9 +86,9 @@ class ReviewType extends AbstractStructBase
      * @param string $text
      * @param string $userID
      * @param string $creationTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($uRL = null, $title = null, $rating = null, $text = null, $userID = null, $creationTime = null, \DOMDocument $any = null)
+    public function __construct(?string $uRL = null, ?string $title = null, ?int $rating = null, ?string $text = null, ?string $userID = null, ?string $creationTime = null, $any = null)
     {
         $this
             ->setURL($uRL)
@@ -99,7 +103,7 @@ class ReviewType extends AbstractStructBase
      * Get URL value
      * @return string|null
      */
-    public function getURL()
+    public function getURL(): ?string
     {
         return $this->URL;
     }
@@ -108,20 +112,21 @@ class ReviewType extends AbstractStructBase
      * @param string $uRL
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setURL($uRL = null)
+    public function setURL(?string $uRL = null): self
     {
         // validation for constraint: string
         if (!is_null($uRL) && !is_string($uRL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($uRL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($uRL, true), gettype($uRL)), __LINE__);
         }
         $this->URL = $uRL;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -130,20 +135,21 @@ class ReviewType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get Rating value
      * @return int|null
      */
-    public function getRating()
+    public function getRating(): ?int
     {
         return $this->Rating;
     }
@@ -152,20 +158,21 @@ class ReviewType extends AbstractStructBase
      * @param int $rating
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setRating($rating = null)
+    public function setRating(?int $rating = null): self
     {
         // validation for constraint: int
-        if (!is_null($rating) && !is_numeric($rating)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($rating)), __LINE__);
+        if (!is_null($rating) && !(is_int($rating) || ctype_digit($rating))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($rating, true), gettype($rating)), __LINE__);
         }
         $this->Rating = $rating;
+        
         return $this;
     }
     /**
      * Get Text value
      * @return string|null
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->Text;
     }
@@ -174,20 +181,21 @@ class ReviewType extends AbstractStructBase
      * @param string $text
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setText($text = null)
+    public function setText(?string $text = null): self
     {
         // validation for constraint: string
         if (!is_null($text) && !is_string($text)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($text)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($text, true), gettype($text)), __LINE__);
         }
         $this->Text = $text;
+        
         return $this;
     }
     /**
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -196,20 +204,21 @@ class ReviewType extends AbstractStructBase
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get CreationTime value
      * @return string|null
      */
-    public function getCreationTime()
+    public function getCreationTime(): ?string
     {
         return $this->CreationTime;
     }
@@ -218,65 +227,47 @@ class ReviewType extends AbstractStructBase
      * @param string $creationTime
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setCreationTime($creationTime = null)
+    public function setCreationTime(?string $creationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($creationTime) && !is_string($creationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($creationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationTime, true), gettype($creationTime)), __LINE__);
         }
         $this->CreationTime = $creationTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ReviewType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ReviewType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviewType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

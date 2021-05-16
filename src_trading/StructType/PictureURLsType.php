@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PictureURLsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This container returns the URLs of the seller's self-hosted (hosted outside of eBay) pictures and the URL for the corresponding eBay Picture Services (EPS), that was generated when the picture was uploaded.
  * @subpackage Structs
  */
@@ -14,27 +17,27 @@ class PictureURLsType extends AbstractStructBase
 {
     /**
      * The eBayPictureURL
-     * Meta informations extracted from the WSDL
-     * - documentation: The URL of an eBay Picture Services (EPS) image. This image is created when a seller uploads a self-hosted image using the <b>UploadSiteHostedPictures</b>, <b>AddItem</b> or <b>AddFixedPriceItem</b> call.
+     * Meta information extracted from the WSDL
+     * - documentation: The URL of an eBay Picture Services (EPS) image. This image is created when a seller uploads a self-hosted image using the <b>UploadSiteHostedPictures</b>, <b>AddItem</b> or <b>AddFixedPriceItem</b> call. <br>
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayPictureURL;
+    protected ?string $eBayPictureURL = null;
     /**
      * The ExternalPictureURL
-     * Meta informations extracted from the WSDL
-     * - documentation: The URL of seller's self-hosted image.
+     * Meta information extracted from the WSDL
+     * - documentation: The URL of a seller's self-hosted image(s). <br>
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalPictureURL;
+    protected ?string $ExternalPictureURL = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PictureURLsType
      * @uses PictureURLsType::setEBayPictureURL()
@@ -42,9 +45,9 @@ class PictureURLsType extends AbstractStructBase
      * @uses PictureURLsType::setAny()
      * @param string $eBayPictureURL
      * @param string $externalPictureURL
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($eBayPictureURL = null, $externalPictureURL = null, \DOMDocument $any = null)
+    public function __construct(?string $eBayPictureURL = null, ?string $externalPictureURL = null, $any = null)
     {
         $this
             ->setEBayPictureURL($eBayPictureURL)
@@ -55,7 +58,7 @@ class PictureURLsType extends AbstractStructBase
      * Get eBayPictureURL value
      * @return string|null
      */
-    public function getEBayPictureURL()
+    public function getEBayPictureURL(): ?string
     {
         return $this->eBayPictureURL;
     }
@@ -64,20 +67,21 @@ class PictureURLsType extends AbstractStructBase
      * @param string $eBayPictureURL
      * @return \macropage\ebaysdk\trading\StructType\PictureURLsType
      */
-    public function setEBayPictureURL($eBayPictureURL = null)
+    public function setEBayPictureURL(?string $eBayPictureURL = null): self
     {
         // validation for constraint: string
         if (!is_null($eBayPictureURL) && !is_string($eBayPictureURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eBayPictureURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eBayPictureURL, true), gettype($eBayPictureURL)), __LINE__);
         }
         $this->eBayPictureURL = $eBayPictureURL;
+        
         return $this;
     }
     /**
      * Get ExternalPictureURL value
      * @return string|null
      */
-    public function getExternalPictureURL()
+    public function getExternalPictureURL(): ?string
     {
         return $this->ExternalPictureURL;
     }
@@ -86,65 +90,47 @@ class PictureURLsType extends AbstractStructBase
      * @param string $externalPictureURL
      * @return \macropage\ebaysdk\trading\StructType\PictureURLsType
      */
-    public function setExternalPictureURL($externalPictureURL = null)
+    public function setExternalPictureURL(?string $externalPictureURL = null): self
     {
         // validation for constraint: string
         if (!is_null($externalPictureURL) && !is_string($externalPictureURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalPictureURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalPictureURL, true), gettype($externalPictureURL)), __LINE__);
         }
         $this->ExternalPictureURL = $externalPictureURL;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PictureURLsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PictureURLsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PictureURLsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

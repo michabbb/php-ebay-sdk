@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for QuantityType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Basic type for specifying quantities.
  * @subpackage Structs
  */
@@ -14,16 +17,16 @@ class QuantityType extends AbstractStructBase
 {
     /**
      * The _
-     * @var float
+     * @var float|null
      */
-    public $_;
+    protected ?float $_ = null;
     /**
      * The unit
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - use: optional
-     * @var string
+     * @var string|null
      */
-    public $unit;
+    protected ?string $unit = null;
     /**
      * Constructor method for QuantityType
      * @uses QuantityType::set_()
@@ -31,7 +34,7 @@ class QuantityType extends AbstractStructBase
      * @param float $_
      * @param string $unit
      */
-    public function __construct($_ = null, $unit = null)
+    public function __construct(?float $_ = null, ?string $unit = null)
     {
         $this
             ->set_($_)
@@ -41,7 +44,7 @@ class QuantityType extends AbstractStructBase
      * Get _ value
      * @return float|null
      */
-    public function get_()
+    public function get_(): ?float
     {
         return $this->_;
     }
@@ -50,16 +53,21 @@ class QuantityType extends AbstractStructBase
      * @param float $_
      * @return \macropage\ebaysdk\trading\StructType\QuantityType
      */
-    public function set_($_ = null)
+    public function set_(?float $_ = null): self
     {
+        // validation for constraint: float
+        if (!is_null($_) && !(is_float($_) || is_numeric($_))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($_, true), gettype($_)), __LINE__);
+        }
         $this->_ = $_;
+        
         return $this;
     }
     /**
      * Get unit value
      * @return string|null
      */
-    public function getUnit()
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
@@ -68,33 +76,14 @@ class QuantityType extends AbstractStructBase
      * @param string $unit
      * @return \macropage\ebaysdk\trading\StructType\QuantityType
      */
-    public function setUnit($unit = null)
+    public function setUnit(?string $unit = null): self
     {
         // validation for constraint: string
         if (!is_null($unit) && !is_string($unit)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($unit)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($unit, true), gettype($unit)), __LINE__);
         }
         $this->unit = $unit;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\QuantityType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

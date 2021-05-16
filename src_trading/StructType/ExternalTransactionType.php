@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ExternalTransactionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Container consisting of details related to payment of an eBay order on an external system such as PayPal. This container is only returned if payment has been made on an order. For <b>GetSellerTransaactions</b> and
  * <b>GetItemTransactions</b>, this container is not returned for multiple line item orders.
  * @subpackage Structs
@@ -15,52 +18,59 @@ class ExternalTransactionType extends AbstractStructBase
 {
     /**
      * The ExternalTransactionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for a PayPal payment of an eBay order. If the order was purchased with a payment method other than PayPal, "SIS" is returned, which stands for "Send Information To Seller." This field is only returned after payment
      * has been made.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalTransactionID;
+    protected ?string $ExternalTransactionID = null;
     /**
      * The ExternalTransactionTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Timestamp for payment transaction.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalTransactionTime;
+    protected ?string $ExternalTransactionTime = null;
     /**
      * The FeeOrCreditAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Fee Amount is a positive value and Credit Amount is a negative value.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $FeeOrCreditAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $FeeOrCreditAmount = null;
     /**
      * The PaymentOrRefundAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If this dollar value is a positive amount, this is the amount that the buyer pays the seller through PayPal for purchase of the order. If this dollar value is a negative amount, this is the amount refunded to the buyer. <br><br>
-     * <span class="tablenote"><b>Note: </b> If a refund is due to the buyer, the amount in this field will not include any Australia import tax charged to the buyer for one or more order line items, since this tax is collected by eBay and not by the
-     * seller. Australia import tax is only applicable to the Australia site. </span>
+     * <span class="tablenote"><b>Note: </b> If a refund is due to the buyer, the amount in this field will not include any 'Collect and Remit' tax (mandated US state sales tax or 'Goods and Services' tax in Australia or New Zealand) charged to the buyer
+     * for one or more order line items, since this tax is collected by eBay and not by the seller. </span> <br> <span class="tablenote"><b>Note: </b> As of November 2019, for orders subject to eBay 'Collect and Remit' taxes, PayPal has begun distributing
+     * order funds to the seller's account with the sales tax included. eBay 'Collect and Remit' tax includes US sales tax for numerous states, and 'Good and Services' tax that is applicable to Australian and New Zealand sellers. This 'Collect and Remit'
+     * tax amount for the order will be included in the <b>PaymentOrRefundAmount</b> value (for the payment scenario). To determine if 'Collect and Remit' taxes were added into <b>PaymentOrRefundAmount</b> value, the user can check for the
+     * <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> and the <b>Transaction.Taxes.TaxDetails</b> containers in the response. If both of these containers appear in the response with a <b>TaxDetails.TaxDescription</b> value of <code>SalesTax</code>
+     * (in US) or <code>GST</code> (in Australia or New Zealand), the tax amount that the buyer paid is in this amount. <br><br> Sellers should be aware that the sales tax that the buyer pays for the order will initially be included when the order funds are
+     * distributed to their PayPal account, but that PayPal will pull out the sales tax amount shortly after the payment clears, and will distribute the sales tax to the appropriate taxing authority. Previous to this change, PayPal would strip out the
+     * 'Collect and Remit' tax before distributing order funds to the seller's account. <br><br> This logic change does not apply to sellers who are in eBay managed payments, so the amount in this field will never reflect any 'Collect and Remit' tax, even
+     * if the order is subject to 'Collect and Remit' tax. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $PaymentOrRefundAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $PaymentOrRefundAmount = null;
     /**
      * The ExternalTransactionStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The current processing status of a PayPal payment for an eBay order.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalTransactionStatus;
+    protected ?string $ExternalTransactionStatus = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ExternalTransactionType
      * @uses ExternalTransactionType::setExternalTransactionID()
@@ -74,9 +84,9 @@ class ExternalTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount
      * @param \macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount
      * @param string $externalTransactionStatus
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($externalTransactionID = null, $externalTransactionTime = null, \macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, \macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount = null, $externalTransactionStatus = null, \DOMDocument $any = null)
+    public function __construct(?string $externalTransactionID = null, ?string $externalTransactionTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount = null, ?string $externalTransactionStatus = null, $any = null)
     {
         $this
             ->setExternalTransactionID($externalTransactionID)
@@ -90,7 +100,7 @@ class ExternalTransactionType extends AbstractStructBase
      * Get ExternalTransactionID value
      * @return string|null
      */
-    public function getExternalTransactionID()
+    public function getExternalTransactionID(): ?string
     {
         return $this->ExternalTransactionID;
     }
@@ -99,20 +109,21 @@ class ExternalTransactionType extends AbstractStructBase
      * @param string $externalTransactionID
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setExternalTransactionID($externalTransactionID = null)
+    public function setExternalTransactionID(?string $externalTransactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($externalTransactionID) && !is_string($externalTransactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalTransactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalTransactionID, true), gettype($externalTransactionID)), __LINE__);
         }
         $this->ExternalTransactionID = $externalTransactionID;
+        
         return $this;
     }
     /**
      * Get ExternalTransactionTime value
      * @return string|null
      */
-    public function getExternalTransactionTime()
+    public function getExternalTransactionTime(): ?string
     {
         return $this->ExternalTransactionTime;
     }
@@ -121,20 +132,21 @@ class ExternalTransactionType extends AbstractStructBase
      * @param string $externalTransactionTime
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setExternalTransactionTime($externalTransactionTime = null)
+    public function setExternalTransactionTime(?string $externalTransactionTime = null): self
     {
         // validation for constraint: string
         if (!is_null($externalTransactionTime) && !is_string($externalTransactionTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalTransactionTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalTransactionTime, true), gettype($externalTransactionTime)), __LINE__);
         }
         $this->ExternalTransactionTime = $externalTransactionTime;
+        
         return $this;
     }
     /**
      * Get FeeOrCreditAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getFeeOrCreditAmount()
+    public function getFeeOrCreditAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->FeeOrCreditAmount;
     }
@@ -143,16 +155,17 @@ class ExternalTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setFeeOrCreditAmount(\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null)
+    public function setFeeOrCreditAmount(?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null): self
     {
         $this->FeeOrCreditAmount = $feeOrCreditAmount;
+        
         return $this;
     }
     /**
      * Get PaymentOrRefundAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getPaymentOrRefundAmount()
+    public function getPaymentOrRefundAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->PaymentOrRefundAmount;
     }
@@ -161,16 +174,17 @@ class ExternalTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setPaymentOrRefundAmount(\macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount = null)
+    public function setPaymentOrRefundAmount(?\macropage\ebaysdk\trading\StructType\AmountType $paymentOrRefundAmount = null): self
     {
         $this->PaymentOrRefundAmount = $paymentOrRefundAmount;
+        
         return $this;
     }
     /**
      * Get ExternalTransactionStatus value
      * @return string|null
      */
-    public function getExternalTransactionStatus()
+    public function getExternalTransactionStatus(): ?string
     {
         return $this->ExternalTransactionStatus;
     }
@@ -178,69 +192,51 @@ class ExternalTransactionType extends AbstractStructBase
      * Set ExternalTransactionStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $externalTransactionStatus
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setExternalTransactionStatus($externalTransactionStatus = null)
+    public function setExternalTransactionStatus(?string $externalTransactionStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::valueIsValid($externalTransactionStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $externalTransactionStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType', is_array($externalTransactionStatus) ? implode(', ', $externalTransactionStatus) : var_export($externalTransactionStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::getValidValues())), __LINE__);
         }
         $this->ExternalTransactionStatus = $externalTransactionStatus;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ExternalTransactionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

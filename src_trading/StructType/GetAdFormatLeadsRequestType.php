@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetAdFormatLeadsRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves sales lead information for a lead generation listing.
  * @subpackage Structs
  */
@@ -14,44 +17,45 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of an item listed on the eBay site. Returned by eBay when the item is created. This ID must correspond to an ad format item. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The Status
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Filters the leads based on their status.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Status;
+    protected ?string $Status = null;
     /**
      * The IncludeMemberMessages
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Boolean which indicates whether to return mail messages for this lead in a MemberMessage node.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeMemberMessages;
+    protected ?bool $IncludeMemberMessages = null;
     /**
      * The StartCreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used with EndCreationTime to limit the returned leads for a user to only those with a creation date greater than or equal to the specified date and time.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartCreationTime;
+    protected ?string $StartCreationTime = null;
     /**
      * The EndCreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used with StartCreationTime to limit the returned leads for a user to only those with a creation date less than or equal to the specified date and time.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndCreationTime;
+    protected ?string $EndCreationTime = null;
     /**
      * Constructor method for GetAdFormatLeadsRequestType
      * @uses GetAdFormatLeadsRequestType::setItemID()
@@ -65,7 +69,7 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * @param string $startCreationTime
      * @param string $endCreationTime
      */
-    public function __construct($itemID = null, $status = null, $includeMemberMessages = null, $startCreationTime = null, $endCreationTime = null)
+    public function __construct(?string $itemID = null, ?string $status = null, ?bool $includeMemberMessages = null, ?string $startCreationTime = null, ?string $endCreationTime = null)
     {
         $this
             ->setItemID($itemID)
@@ -78,7 +82,7 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -87,20 +91,21 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get Status value
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->Status;
     }
@@ -108,24 +113,25 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * Set Status value
      * @uses \macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $status
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
      */
-    public function setStatus($status = null)
+    public function setStatus(?string $status = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType::valueIsValid($status)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $status, implode(', ', \macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType', is_array($status) ? implode(', ', $status) : var_export($status, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MessageStatusTypeCodeType::getValidValues())), __LINE__);
         }
         $this->Status = $status;
+        
         return $this;
     }
     /**
      * Get IncludeMemberMessages value
      * @return bool|null
      */
-    public function getIncludeMemberMessages()
+    public function getIncludeMemberMessages(): ?bool
     {
         return $this->IncludeMemberMessages;
     }
@@ -134,20 +140,21 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * @param bool $includeMemberMessages
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
      */
-    public function setIncludeMemberMessages($includeMemberMessages = null)
+    public function setIncludeMemberMessages(?bool $includeMemberMessages = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeMemberMessages) && !is_bool($includeMemberMessages)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeMemberMessages)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeMemberMessages, true), gettype($includeMemberMessages)), __LINE__);
         }
         $this->IncludeMemberMessages = $includeMemberMessages;
+        
         return $this;
     }
     /**
      * Get StartCreationTime value
      * @return string|null
      */
-    public function getStartCreationTime()
+    public function getStartCreationTime(): ?string
     {
         return $this->StartCreationTime;
     }
@@ -156,20 +163,21 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * @param string $startCreationTime
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
      */
-    public function setStartCreationTime($startCreationTime = null)
+    public function setStartCreationTime(?string $startCreationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($startCreationTime) && !is_string($startCreationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startCreationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startCreationTime, true), gettype($startCreationTime)), __LINE__);
         }
         $this->StartCreationTime = $startCreationTime;
+        
         return $this;
     }
     /**
      * Get EndCreationTime value
      * @return string|null
      */
-    public function getEndCreationTime()
+    public function getEndCreationTime(): ?string
     {
         return $this->EndCreationTime;
     }
@@ -178,33 +186,14 @@ class GetAdFormatLeadsRequestType extends AbstractRequestType
      * @param string $endCreationTime
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
      */
-    public function setEndCreationTime($endCreationTime = null)
+    public function setEndCreationTime(?string $endCreationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($endCreationTime) && !is_string($endCreationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endCreationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endCreationTime, true), gettype($endCreationTime)), __LINE__);
         }
         $this->EndCreationTime = $endCreationTime;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

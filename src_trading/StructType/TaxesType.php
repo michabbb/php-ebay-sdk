@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for TaxesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the Taxes container, which contains detailed sales tax information for an order line item. The Taxes container is only returned if the seller is using the Vertex- based Premium Sales Tax Engine solution. The information
  * in this container supercedes/overrides the sales tax information in the ShippingDetails.SalesTax container.
  * @subpackage Structs
@@ -15,26 +18,32 @@ class TaxesType extends AbstractStructBase
 {
     /**
      * The TotalTaxAmount
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates the total tax amount for the order line item, including the sales tax on the item, the sales tax on shipping and handling, and any electronic waste recycling fee.
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the total tax amount for the order line item, for all tax types, which may include sales tax (seller-applied or 'eBay Collect and Remit'), 'Goods and Services' tax (for Australian or New Zealand sellers), or
+     * other fees like an electronic waste recycling fee. <br><br> <span class="tablenote"><b>Note: </b> If the corresponding tax type is <code>GST</code> or <code>SalesTax</code> (if found under both the <b>eBayCollectAndRemitTaxes</b> and <b>Taxes</b>
+     * containers), the order is subject to 'eBay Collect and Remit' tax, and a change in logic has rolled out as of early November 2019. For orders that are subject to eBay 'Collect and Remit' tax, which includes US sales tax for numerous states, and 'Good
+     * and Services' tax that is applicable to Australian and New Zealand sellers, the tax amount in this field will be included in the <b>Order.Total</b>, <b>Order.AmountPaid</b>, and <b>Transaction.AmountPaid</b> fields. <br><br> Sellers should be aware
+     * that the sales tax that the buyer pays for the order will initially be included when the order funds are distributed to their PayPal account, but that PayPal will pull out the sales tax amount shortly after the payment clears, and will distribute the
+     * sales tax to the appropriate taxing authority. Previous to this change, PayPal would strip out the 'Collect and Remit' tax before distributing order funds to the seller's account. <br><br> This logic change does not apply to sellers who are in eBay
+     * managed payments, so the amount in this field will never reflect any 'Collect and Remit' tax, even if the order is subject to 'Collect and Remit' tax. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalTaxAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalTaxAmount = null;
     /**
      * The TaxDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of detailed sales tax information for an order line item, including the tax type and description, sales tax on the item cost, and sales tax related to shipping and handling.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxDetailsType[]
      */
-    public $TaxDetails;
+    protected array $TaxDetails = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for TaxesType
      * @uses TaxesType::setTotalTaxAmount()
@@ -42,9 +51,9 @@ class TaxesType extends AbstractStructBase
      * @uses TaxesType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount
      * @param \macropage\ebaysdk\trading\StructType\TaxDetailsType[] $taxDetails
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, array $taxDetails = array(), \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, array $taxDetails = [], $any = null)
     {
         $this
             ->setTotalTaxAmount($totalTaxAmount)
@@ -55,7 +64,7 @@ class TaxesType extends AbstractStructBase
      * Get TotalTaxAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalTaxAmount()
+    public function getTotalTaxAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalTaxAmount;
     }
@@ -64,101 +73,106 @@ class TaxesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount
      * @return \macropage\ebaysdk\trading\StructType\TaxesType
      */
-    public function setTotalTaxAmount(\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null)
+    public function setTotalTaxAmount(?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null): self
     {
         $this->TotalTaxAmount = $totalTaxAmount;
+        
         return $this;
     }
     /**
      * Get TaxDetails value
-     * @return \macropage\ebaysdk\trading\StructType\TaxDetailsType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\TaxDetailsType[]
      */
-    public function getTaxDetails()
+    public function getTaxDetails(): array
     {
         return $this->TaxDetails;
     }
     /**
+     * This method is responsible for validating the values passed to the setTaxDetails method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setTaxDetails method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateTaxDetailsForArrayConstraintsFromSetTaxDetails(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $taxesTypeTaxDetailsItem) {
+            // validation for constraint: itemType
+            if (!$taxesTypeTaxDetailsItem instanceof \macropage\ebaysdk\trading\StructType\TaxDetailsType) {
+                $invalidValues[] = is_object($taxesTypeTaxDetailsItem) ? get_class($taxesTypeTaxDetailsItem) : sprintf('%s(%s)', gettype($taxesTypeTaxDetailsItem), var_export($taxesTypeTaxDetailsItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The TaxDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\TaxDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set TaxDetails value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\TaxDetailsType[] $taxDetails
      * @return \macropage\ebaysdk\trading\StructType\TaxesType
      */
-    public function setTaxDetails(array $taxDetails = array())
+    public function setTaxDetails(array $taxDetails = []): self
     {
-        foreach ($taxDetails as $taxesTypeTaxDetailsItem) {
-            // validation for constraint: itemType
-            if (!$taxesTypeTaxDetailsItem instanceof \macropage\ebaysdk\trading\StructType\TaxDetailsType) {
-                throw new \InvalidArgumentException(sprintf('The TaxDetails property can only contain items of \macropage\ebaysdk\trading\StructType\TaxDetailsType, "%s" given', is_object($taxesTypeTaxDetailsItem) ? get_class($taxesTypeTaxDetailsItem) : gettype($taxesTypeTaxDetailsItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($taxDetailsArrayErrorMessage = self::validateTaxDetailsForArrayConstraintsFromSetTaxDetails($taxDetails))) {
+            throw new InvalidArgumentException($taxDetailsArrayErrorMessage, __LINE__);
         }
         $this->TaxDetails = $taxDetails;
+        
         return $this;
     }
     /**
      * Add item to TaxDetails value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\TaxDetailsType $item
      * @return \macropage\ebaysdk\trading\StructType\TaxesType
      */
-    public function addToTaxDetails(\macropage\ebaysdk\trading\StructType\TaxDetailsType $item)
+    public function addToTaxDetails(\macropage\ebaysdk\trading\StructType\TaxDetailsType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\TaxDetailsType) {
-            throw new \InvalidArgumentException(sprintf('The TaxDetails property can only contain items of \macropage\ebaysdk\trading\StructType\TaxDetailsType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The TaxDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\TaxDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->TaxDetails[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\TaxesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\TaxesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\TaxesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for NonProfitSocialAddressType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>NonProfitSocialAddress</b> container, which identifies the nonprofit organization's social networking site account ID. A <b>NonProfitSocialAddress</b> container will exist for each social networking site that the
  * charity organization is associated with.
  * @subpackage Structs
@@ -15,20 +18,20 @@ class NonProfitSocialAddressType extends AbstractStructBase
 {
     /**
      * The SocialAddressType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Enumeration value that indicates the social networking site that the nonprofit charity organization is associated with. This is a required field for each social networking account associated with the nonprofit organization.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SocialAddressType;
+    protected ?string $SocialAddressType = null;
     /**
      * The SocialAddressId
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The account ID/handle associated with the nonprofit charity organization's social networking site. This is a required field for each social networking account associated with the nonprofit organization.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SocialAddressId;
+    protected ?string $SocialAddressId = null;
     /**
      * Constructor method for NonProfitSocialAddressType
      * @uses NonProfitSocialAddressType::setSocialAddressType()
@@ -36,7 +39,7 @@ class NonProfitSocialAddressType extends AbstractStructBase
      * @param string $socialAddressType
      * @param string $socialAddressId
      */
-    public function __construct($socialAddressType = null, $socialAddressId = null)
+    public function __construct(?string $socialAddressType = null, ?string $socialAddressId = null)
     {
         $this
             ->setSocialAddressType($socialAddressType)
@@ -46,7 +49,7 @@ class NonProfitSocialAddressType extends AbstractStructBase
      * Get SocialAddressType value
      * @return string|null
      */
-    public function getSocialAddressType()
+    public function getSocialAddressType(): ?string
     {
         return $this->SocialAddressType;
     }
@@ -54,24 +57,25 @@ class NonProfitSocialAddressType extends AbstractStructBase
      * Set SocialAddressType value
      * @uses \macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $socialAddressType
      * @return \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType
      */
-    public function setSocialAddressType($socialAddressType = null)
+    public function setSocialAddressType(?string $socialAddressType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType::valueIsValid($socialAddressType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $socialAddressType, implode(', ', \macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType', is_array($socialAddressType) ? implode(', ', $socialAddressType) : var_export($socialAddressType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SocialAddressTypeCodeType::getValidValues())), __LINE__);
         }
         $this->SocialAddressType = $socialAddressType;
+        
         return $this;
     }
     /**
      * Get SocialAddressId value
      * @return string|null
      */
-    public function getSocialAddressId()
+    public function getSocialAddressId(): ?string
     {
         return $this->SocialAddressId;
     }
@@ -80,33 +84,14 @@ class NonProfitSocialAddressType extends AbstractStructBase
      * @param string $socialAddressId
      * @return \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType
      */
-    public function setSocialAddressId($socialAddressId = null)
+    public function setSocialAddressId(?string $socialAddressId = null): self
     {
         // validation for constraint: string
         if (!is_null($socialAddressId) && !is_string($socialAddressId)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($socialAddressId)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($socialAddressId, true), gettype($socialAddressId)), __LINE__);
         }
         $this->SocialAddressId = $socialAddressId;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

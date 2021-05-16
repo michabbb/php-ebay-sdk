@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AbstractRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base type definition of the request payload, which can carry any type of payload content plus optional versioning information and detail level requirements. All concrete request types (e.g., AddItemRequestType) are derived from the
  * abstract request type. The naming convention we use for the concrete type names is the name of the service (the verb or call name) followed by "RequestType": VerbNameRequestType
  * @subpackage Structs
@@ -15,7 +18,7 @@ abstract class AbstractRequestType extends AbstractStructBase
 {
     /**
      * The DetailLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Detail levels are instructions that define standard subsets of data to return for particular data components (e.g., each Item, Transaction, or User) within the response payload. For example, a particular detail level might cause the
      * response to include buyer-related data in every result (e.g., for every Item), but no seller-related data. <br/><br/> Specifying a detail level is like using a predefined attribute list in the SELECT clause of an SQL query. Use the <b>DetailLevel</b>
      * element to specify the required detail level that the client application needs pertaining to the data components that are applicable to the request. <br><br> The <b>DetailLevelCodeType</b> defines the global list of available detail levels for all
@@ -27,73 +30,74 @@ abstract class AbstractRequestType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    public $DetailLevel;
+    protected array $DetailLevel = [];
     /**
      * The ErrorLanguage
-     * Meta informations extracted from the WSDL
-     * - documentation: Use <b>ErrorLanguage</b> to return error strings for the call in a different language from the language commonly associated with the site that the requesting user is registered with. Specify the standard RFC 3066 language
-     * identification tag (e.g., en_US). <br><br> <table border="0"> <tr> <th>ID</th> <th>Country</th> </tr> <tr> <td>en_AU</td> <td>Australia</td> </tr> <tr> <td>de_AT</td> <td>Austria</td> </tr> <tr> <td>nl_BE</td> <td>Belgium (Dutch)</td> </tr> <tr>
-     * <td>fr_BE</td> <td>Belgium (French)</td> </tr> <tr> <td>en_CA</td> <td>Canada</td> </tr> <tr> <td>fr_CA</td> <td>Canada (French)</td> </tr> <tr> <td>zh_CN</td> <td>China</td> </tr> <tr> <td>fr_FR</td> <td>France</td> </tr> <tr> <td>de_DE</td>
-     * <td>Germany</td> </tr> <tr> <td>zh_HK</td> <td>Hong Kong</td> </tr> <tr> <td>en_IN</td> <td>India</td> </tr> <tr> <td>en_IE</td> <td>Ireland</td> </tr> <tr> <td>it_IT</td> <td>Italy</td> </tr> <tr> <td>nl_NL</td> <td>Netherlands</td> </tr> <tr>
-     * <td>en_SG</td> <td>Singapore</td> </tr> <tr> <td>es_ES</td> <td>Spain</td> </tr> <tr> <td>de_CH</td> <td>Switzerland</td> </tr> <tr> <td>en_GB</td> <td>United Kingdom</td> </tr> <tr> <td>en_US</td> <td> United States</td> </tr> </table>
+     * Meta information extracted from the WSDL
+     * - documentation: Use <b>ErrorLanguage</b> to return error strings for the call in a different language from the language commonly associated with the site that the requesting user is registered with. Below are some examples from different countries.
+     * <br><br> <table border="0"> <tr> <th>ID</th> <th>Country</th> </tr> <tr> <td>en_AU</td> <td>Australia</td> </tr> <tr> <td>de_AT</td> <td>Austria</td> </tr> <tr> <td>nl_BE</td> <td>Belgium (Dutch)</td> </tr> <tr> <td>fr_BE</td> <td>Belgium
+     * (French)</td> </tr> <tr> <td>en_CA</td> <td>Canada</td> </tr> <tr> <td>fr_CA</td> <td>Canada (French)</td> </tr> <tr> <td>zh_CN</td> <td>China</td> </tr> <tr> <td>fr_FR</td> <td>France</td> </tr> <tr> <td>de_DE</td> <td>Germany</td> </tr> <tr>
+     * <td>zh_HK</td> <td>Hong Kong</td> </tr> <tr> <td>en_IN</td> <td>India</td> </tr> <tr> <td>en_IE</td> <td>Ireland</td> </tr> <tr> <td>it_IT</td> <td>Italy</td> </tr> <tr> <td>nl_NL</td> <td>Netherlands</td> </tr> <tr> <td>en_SG</td> <td>Singapore</td>
+     * </tr> <tr> <td>es_ES</td> <td>Spain</td> </tr> <tr> <td>de_CH</td> <td>Switzerland</td> </tr> <tr> <td>en_GB</td> <td>United Kingdom</td> </tr> <tr> <td>en_US</td> <td> United States</td> </tr> </table>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ErrorLanguage;
+    protected ?string $ErrorLanguage = null;
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Most Trading API calls support a <b>MessageID</b> element in the request and a <b>CorrelationID</b> element in the response. If you pass in a <b>MessageID</b> in a request, the same value will be returned in the <b>CorrelationID</b>
      * field in the response. Pairing these values can help you track and confirm that a response is returned for every request and to match specific responses to specific requests. If you do not pass a <b>MessageID</b> value in the request,
      * <b>CorrelationID</b> is not returned.<br> <br> <span class="tablenote"><b>Note:</b> <b>GetCategories</b> is designed to retrieve very large sets of metadata that change once a day or less often. To improve performance, these calls return cached
      * responses when you request all available data (with no filters). When this occurs, the <b>MessageID</b> and <b>CorrelationID</b> fields aren't applicable. However, if you specify an input filter to reduce the amount of data returned, the calls
      * retrieve the latest data (not cached). When this occurs, <b>MessageID</b> and <b>CorrelationID</b> are applicable. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageID;
+    protected ?string $MessageID = null;
     /**
      * The Version
-     * Meta informations extracted from the WSDL
-     * - documentation: The version number of the API code that you are programming against (e.g., 859). The version you specify for a call has these basic effects: <b></b> <ul> <li>It indicates the version of the code lists and other data that eBay should
+     * Meta information extracted from the WSDL
+     * - documentation: The version number of the API code that you are programming against (e.g., 1149). The version you specify for a call has these basic effects: <b></b> <ul> <li>It indicates the version of the code lists and other data that eBay should
      * use to process your request.</li> <li>It indicates the schema version you are using.</li> </ul> You need to use a version that is greater than or equal to the lowest supported version. <br> <b>For the SOAP API:</b> If you are using the SOAP API, this
      * field is required. Specify the version of the WSDL your application is using.<br> <br> <b>For the XML API:</b> If you are using the XML API, this field has no effect. Instead, specify the version in the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP
      * header. (If you specify <b>Version</b> in the body of an XML API request and it is different from the value in the HTTP header, eBay returns an informational warning that the value in the HTTP header was used instead.)
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Version;
+    protected ?string $Version = null;
     /**
      * The EndUserIP
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The public IP address of the machine from which the request is sent. Your application captures that IP address and includes it in a call request. eBay evaluates requests for safety (also see the <b>BotBlock</b> container in the
      * request and response of this call).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndUserIP;
+    protected ?string $EndUserIP = null;
     /**
      * The ErrorHandling
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Error tolerance level for the call. This is a preference that specifies how eBay should handle requests that contain invalid data or that could partially fail. This gives you some control over whether eBay returns warnings or
      * blocking errors and how eBay processes the invalid data.<br> <br> This field is only applicable to <b>AddItem</b> and related calls, and only when the listing includes <b>ProductListingDetails</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ErrorHandling;
+    protected ?string $ErrorHandling = null;
     /**
      * The InvocationID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A unique identifier for a particular call. If the same <b>InvocationID</b> is passed in after it has been passed in once on a call that succeeded for a particular application and user, then an error will be returned. The identifier
      * can only contain digits from 0-9 and letters from A-F. The identifier must be 32 characters long. For example, 1FB02B2-9D27-3acb-ABA2-9D539C374228. | Specifies a universally unique identifier for an item. This is used to ensure that you only list a
      * particular item once, particularly if you are listing many items at once. The identifier can contain only digits from 0-9 and letters from A-F. The identifier must be 32 characters long. For example, 9CEBD9A6825644EC8D06C436D6CF494B.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InvocationID;
+    protected ?string $InvocationID = null;
     /**
      * The OutputSelector
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: You can use the <b>OutputSelector</b> field to restrict the data returned by a call. This field can make the call response easier to manage, especially when a large payload is returned. If you use the <b>OutputSelector</b> field, the
      * output data will only include the field(s) you specified in the request, as well as all of its child fields (if a field is a container) and its parent fields (if any). Note that it is possible that a field included through an <b>OutputSelector</b>
      * field may still not be returned if it is not applicable, or if it is not found based on other criteria set up in the request payload. <br> <br> For example, if you are using <b>GetItem</b> and you only want to retrieve the URL of the View Item page
@@ -105,32 +109,32 @@ abstract class AbstractRequestType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    public $OutputSelector;
+    protected array $OutputSelector = [];
     /**
      * The WarningLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Controls whether or not to return warnings when the application passes unrecognized or deprecated elements in a request.<br> <br> An unrecognized element is one that is not defined in any supported version of the schema. Schema
      * element names are case-sensitive, so using <b>WarningLevel</b> can also help you remove any potential hidden bugs within your application due to incorrect case or spelling in field names before you put your application into the Production
      * environment.<br> <br> <b>WarningLevel</b> only validates elements; it doesn't validate XML attributes. It also doesn't control warnings related to user-entered strings or numbers, or warnings for logical errors.<br> <br> We recommend that you only
      * use this during development and debugging. Do not use this in requests performed in the Production environment.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $WarningLevel;
+    protected ?string $WarningLevel = null;
     /**
      * The BotBlock
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is only used by the <b>PlaceOffer</b> call request if the previous <b>PlaceOffer</b> call resulted in a <b>BotBlock</b> container in the response. If the caller receives this container in the response, that caller must
      * make another <b>PlaceOffer</b> call, this time, passing in the encrypted token and URL that is returned in the <b>BotBlock</b> container in the response. This safeguard lets eBay know that a real user is making a <b>PlaceOffer</b> call and not a bot.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BotBlockRequestType
+     * @var \macropage\ebaysdk\trading\StructType\BotBlockRequestType|null
      */
-    public $BotBlock;
+    protected ?\macropage\ebaysdk\trading\StructType\BotBlockRequestType $BotBlock = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AbstractRequestType
      * @uses AbstractRequestType::setDetailLevel()
@@ -154,9 +158,9 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string[] $outputSelector
      * @param string $warningLevel
      * @param \macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $detailLevel = array(), $errorLanguage = null, $messageID = null, $version = null, $endUserIP = null, $errorHandling = null, $invocationID = null, array $outputSelector = array(), $warningLevel = null, \macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null, \DOMDocument $any = null)
+    public function __construct(array $detailLevel = [], ?string $errorLanguage = null, ?string $messageID = null, ?string $version = null, ?string $endUserIP = null, ?string $errorHandling = null, ?string $invocationID = null, array $outputSelector = [], ?string $warningLevel = null, ?\macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null, $any = null)
     {
         $this
             ->setDetailLevel($detailLevel)
@@ -173,56 +177,76 @@ abstract class AbstractRequestType extends AbstractStructBase
     }
     /**
      * Get DetailLevel value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getDetailLevel()
+    public function getDetailLevel(): array
     {
         return $this->DetailLevel;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setDetailLevel method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setDetailLevel method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateDetailLevelForArrayConstraintsFromSetDetailLevel(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $abstractRequestTypeDetailLevelItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::valueIsValid($abstractRequestTypeDetailLevelItem)) {
+                $invalidValues[] = is_object($abstractRequestTypeDetailLevelItem) ? get_class($abstractRequestTypeDetailLevelItem) : sprintf('%s(%s)', gettype($abstractRequestTypeDetailLevelItem), var_export($abstractRequestTypeDetailLevelItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set DetailLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $detailLevel
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setDetailLevel(array $detailLevel = array())
+    public function setDetailLevel(array $detailLevel = []): self
     {
-        $invalidValues = array();
-        foreach ($detailLevel as $abstractRequestTypeDetailLevelItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::valueIsValid($abstractRequestTypeDetailLevelItem)) {
-                $invalidValues[] = var_export($abstractRequestTypeDetailLevelItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($detailLevelArrayErrorMessage = self::validateDetailLevelForArrayConstraintsFromSetDetailLevel($detailLevel))) {
+            throw new InvalidArgumentException($detailLevelArrayErrorMessage, __LINE__);
         }
         $this->DetailLevel = $detailLevel;
+        
         return $this;
     }
     /**
      * Add item to DetailLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function addToDetailLevel($item)
+    public function addToDetailLevel(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DetailLevelCodeType::getValidValues())), __LINE__);
         }
         $this->DetailLevel[] = $item;
+        
         return $this;
     }
     /**
      * Get ErrorLanguage value
      * @return string|null
      */
-    public function getErrorLanguage()
+    public function getErrorLanguage(): ?string
     {
         return $this->ErrorLanguage;
     }
@@ -231,20 +255,21 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $errorLanguage
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setErrorLanguage($errorLanguage = null)
+    public function setErrorLanguage(?string $errorLanguage = null): self
     {
         // validation for constraint: string
         if (!is_null($errorLanguage) && !is_string($errorLanguage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($errorLanguage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($errorLanguage, true), gettype($errorLanguage)), __LINE__);
         }
         $this->ErrorLanguage = $errorLanguage;
+        
         return $this;
     }
     /**
      * Get MessageID value
      * @return string|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?string
     {
         return $this->MessageID;
     }
@@ -253,20 +278,21 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $messageID
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?string $messageID = null): self
     {
         // validation for constraint: string
         if (!is_null($messageID) && !is_string($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get Version value
      * @return string|null
      */
-    public function getVersion()
+    public function getVersion(): ?string
     {
         return $this->Version;
     }
@@ -275,20 +301,21 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $version
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setVersion($version = null)
+    public function setVersion(?string $version = null): self
     {
         // validation for constraint: string
         if (!is_null($version) && !is_string($version)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($version)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($version, true), gettype($version)), __LINE__);
         }
         $this->Version = $version;
+        
         return $this;
     }
     /**
      * Get EndUserIP value
      * @return string|null
      */
-    public function getEndUserIP()
+    public function getEndUserIP(): ?string
     {
         return $this->EndUserIP;
     }
@@ -297,20 +324,21 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $endUserIP
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setEndUserIP($endUserIP = null)
+    public function setEndUserIP(?string $endUserIP = null): self
     {
         // validation for constraint: string
         if (!is_null($endUserIP) && !is_string($endUserIP)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endUserIP)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endUserIP, true), gettype($endUserIP)), __LINE__);
         }
         $this->EndUserIP = $endUserIP;
+        
         return $this;
     }
     /**
      * Get ErrorHandling value
      * @return string|null
      */
-    public function getErrorHandling()
+    public function getErrorHandling(): ?string
     {
         return $this->ErrorHandling;
     }
@@ -318,24 +346,25 @@ abstract class AbstractRequestType extends AbstractStructBase
      * Set ErrorHandling value
      * @uses \macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $errorHandling
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setErrorHandling($errorHandling = null)
+    public function setErrorHandling(?string $errorHandling = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType::valueIsValid($errorHandling)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $errorHandling, implode(', ', \macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType', is_array($errorHandling) ? implode(', ', $errorHandling) : var_export($errorHandling, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ErrorHandlingCodeType::getValidValues())), __LINE__);
         }
         $this->ErrorHandling = $errorHandling;
+        
         return $this;
     }
     /**
      * Get InvocationID value
      * @return string|null
      */
-    public function getInvocationID()
+    public function getInvocationID(): ?string
     {
         return $this->InvocationID;
     }
@@ -344,60 +373,84 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string $invocationID
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setInvocationID($invocationID = null)
+    public function setInvocationID(?string $invocationID = null): self
     {
         // validation for constraint: string
         if (!is_null($invocationID) && !is_string($invocationID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($invocationID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($invocationID, true), gettype($invocationID)), __LINE__);
         }
         $this->InvocationID = $invocationID;
+        
         return $this;
     }
     /**
      * Get OutputSelector value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getOutputSelector()
+    public function getOutputSelector(): array
     {
         return $this->OutputSelector;
     }
     /**
+     * This method is responsible for validating the values passed to the setOutputSelector method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setOutputSelector method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateOutputSelectorForArrayConstraintsFromSetOutputSelector(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $abstractRequestTypeOutputSelectorItem) {
+            // validation for constraint: itemType
+            if (!is_string($abstractRequestTypeOutputSelectorItem)) {
+                $invalidValues[] = is_object($abstractRequestTypeOutputSelectorItem) ? get_class($abstractRequestTypeOutputSelectorItem) : sprintf('%s(%s)', gettype($abstractRequestTypeOutputSelectorItem), var_export($abstractRequestTypeOutputSelectorItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The OutputSelector property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set OutputSelector value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $outputSelector
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setOutputSelector(array $outputSelector = array())
+    public function setOutputSelector(array $outputSelector = []): self
     {
-        foreach ($outputSelector as $abstractRequestTypeOutputSelectorItem) {
-            // validation for constraint: itemType
-            if (!is_string($abstractRequestTypeOutputSelectorItem)) {
-                throw new \InvalidArgumentException(sprintf('The OutputSelector property can only contain items of string, "%s" given', is_object($abstractRequestTypeOutputSelectorItem) ? get_class($abstractRequestTypeOutputSelectorItem) : gettype($abstractRequestTypeOutputSelectorItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($outputSelectorArrayErrorMessage = self::validateOutputSelectorForArrayConstraintsFromSetOutputSelector($outputSelector))) {
+            throw new InvalidArgumentException($outputSelectorArrayErrorMessage, __LINE__);
         }
         $this->OutputSelector = $outputSelector;
+        
         return $this;
     }
     /**
      * Add item to OutputSelector value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function addToOutputSelector($item)
+    public function addToOutputSelector(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The OutputSelector property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The OutputSelector property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->OutputSelector[] = $item;
+        
         return $this;
     }
     /**
      * Get WarningLevel value
      * @return string|null
      */
-    public function getWarningLevel()
+    public function getWarningLevel(): ?string
     {
         return $this->WarningLevel;
     }
@@ -405,24 +458,25 @@ abstract class AbstractRequestType extends AbstractStructBase
      * Set WarningLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\WarningLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\WarningLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $warningLevel
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setWarningLevel($warningLevel = null)
+    public function setWarningLevel(?string $warningLevel = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\WarningLevelCodeType::valueIsValid($warningLevel)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $warningLevel, implode(', ', \macropage\ebaysdk\trading\EnumType\WarningLevelCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\WarningLevelCodeType', is_array($warningLevel) ? implode(', ', $warningLevel) : var_export($warningLevel, true), implode(', ', \macropage\ebaysdk\trading\EnumType\WarningLevelCodeType::getValidValues())), __LINE__);
         }
         $this->WarningLevel = $warningLevel;
+        
         return $this;
     }
     /**
      * Get BotBlock value
      * @return \macropage\ebaysdk\trading\StructType\BotBlockRequestType|null
      */
-    public function getBotBlock()
+    public function getBotBlock(): ?\macropage\ebaysdk\trading\StructType\BotBlockRequestType
     {
         return $this->BotBlock;
     }
@@ -431,61 +485,43 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setBotBlock(\macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null)
+    public function setBotBlock(?\macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null): self
     {
         $this->BotBlock = $botBlock;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\AbstractRequestType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

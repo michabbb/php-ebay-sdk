@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for UploadSiteHostedPicturesResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains information about a picture upload (i.e., information about a picture upload containing a binary attachment of an image).
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class UploadSiteHostedPicturesResponseType extends AbstractResponseType
 {
     /**
      * The PictureSystemVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the picture system version that was used to upload pictures. Only version 2 is valid.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PictureSystemVersion;
+    protected ?int $PictureSystemVersion = null;
     /**
      * The SiteHostedPictureDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The information about an <b>UploadSiteHostedPictures</b> upload, including the URL of the uploaded picture.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType|null
      */
-    public $SiteHostedPictureDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $SiteHostedPictureDetails = null;
     /**
      * Constructor method for UploadSiteHostedPicturesResponseType
      * @uses UploadSiteHostedPicturesResponseType::setPictureSystemVersion()
@@ -35,7 +38,7 @@ class UploadSiteHostedPicturesResponseType extends AbstractResponseType
      * @param int $pictureSystemVersion
      * @param \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails
      */
-    public function __construct($pictureSystemVersion = null, \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails = null)
+    public function __construct(?int $pictureSystemVersion = null, ?\macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails = null)
     {
         $this
             ->setPictureSystemVersion($pictureSystemVersion)
@@ -45,7 +48,7 @@ class UploadSiteHostedPicturesResponseType extends AbstractResponseType
      * Get PictureSystemVersion value
      * @return int|null
      */
-    public function getPictureSystemVersion()
+    public function getPictureSystemVersion(): ?int
     {
         return $this->PictureSystemVersion;
     }
@@ -54,20 +57,21 @@ class UploadSiteHostedPicturesResponseType extends AbstractResponseType
      * @param int $pictureSystemVersion
      * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType
      */
-    public function setPictureSystemVersion($pictureSystemVersion = null)
+    public function setPictureSystemVersion(?int $pictureSystemVersion = null): self
     {
         // validation for constraint: int
-        if (!is_null($pictureSystemVersion) && !is_numeric($pictureSystemVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pictureSystemVersion)), __LINE__);
+        if (!is_null($pictureSystemVersion) && !(is_int($pictureSystemVersion) || ctype_digit($pictureSystemVersion))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pictureSystemVersion, true), gettype($pictureSystemVersion)), __LINE__);
         }
         $this->PictureSystemVersion = $pictureSystemVersion;
+        
         return $this;
     }
     /**
      * Get SiteHostedPictureDetails value
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType|null
      */
-    public function getSiteHostedPictureDetails()
+    public function getSiteHostedPictureDetails(): ?\macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
     {
         return $this->SiteHostedPictureDetails;
     }
@@ -76,29 +80,10 @@ class UploadSiteHostedPicturesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails
      * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType
      */
-    public function setSiteHostedPictureDetails(\macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails = null)
+    public function setSiteHostedPictureDetails(?\macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType $siteHostedPictureDetails = null): self
     {
         $this->SiteHostedPictureDetails = $siteHostedPictureDetails;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

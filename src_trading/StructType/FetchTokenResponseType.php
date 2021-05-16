@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FetchTokenResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Includes the authentication token for the user and the date it expires.
  * @subpackage Structs
  */
@@ -14,28 +17,28 @@ class FetchTokenResponseType extends AbstractResponseType
 {
     /**
      * The eBayAuthToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The authentication token for the user.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayAuthToken;
+    protected ?string $eBayAuthToken = null;
     /**
      * The HardExpirationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date and time at which the token returned in eBayAuthToken expires and can no longer be used to authenticate the user for that application.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $HardExpirationTime;
+    protected ?string $HardExpirationTime = null;
     /**
      * The RESTToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The REST authentication token for the user.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RESTToken;
+    protected ?string $RESTToken = null;
     /**
      * Constructor method for FetchTokenResponseType
      * @uses FetchTokenResponseType::setEBayAuthToken()
@@ -45,7 +48,7 @@ class FetchTokenResponseType extends AbstractResponseType
      * @param string $hardExpirationTime
      * @param string $rESTToken
      */
-    public function __construct($eBayAuthToken = null, $hardExpirationTime = null, $rESTToken = null)
+    public function __construct(?string $eBayAuthToken = null, ?string $hardExpirationTime = null, ?string $rESTToken = null)
     {
         $this
             ->setEBayAuthToken($eBayAuthToken)
@@ -56,7 +59,7 @@ class FetchTokenResponseType extends AbstractResponseType
      * Get eBayAuthToken value
      * @return string|null
      */
-    public function getEBayAuthToken()
+    public function getEBayAuthToken(): ?string
     {
         return $this->eBayAuthToken;
     }
@@ -65,20 +68,21 @@ class FetchTokenResponseType extends AbstractResponseType
      * @param string $eBayAuthToken
      * @return \macropage\ebaysdk\trading\StructType\FetchTokenResponseType
      */
-    public function setEBayAuthToken($eBayAuthToken = null)
+    public function setEBayAuthToken(?string $eBayAuthToken = null): self
     {
         // validation for constraint: string
         if (!is_null($eBayAuthToken) && !is_string($eBayAuthToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eBayAuthToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eBayAuthToken, true), gettype($eBayAuthToken)), __LINE__);
         }
         $this->eBayAuthToken = $eBayAuthToken;
+        
         return $this;
     }
     /**
      * Get HardExpirationTime value
      * @return string|null
      */
-    public function getHardExpirationTime()
+    public function getHardExpirationTime(): ?string
     {
         return $this->HardExpirationTime;
     }
@@ -87,20 +91,21 @@ class FetchTokenResponseType extends AbstractResponseType
      * @param string $hardExpirationTime
      * @return \macropage\ebaysdk\trading\StructType\FetchTokenResponseType
      */
-    public function setHardExpirationTime($hardExpirationTime = null)
+    public function setHardExpirationTime(?string $hardExpirationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($hardExpirationTime) && !is_string($hardExpirationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($hardExpirationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($hardExpirationTime, true), gettype($hardExpirationTime)), __LINE__);
         }
         $this->HardExpirationTime = $hardExpirationTime;
+        
         return $this;
     }
     /**
      * Get RESTToken value
      * @return string|null
      */
-    public function getRESTToken()
+    public function getRESTToken(): ?string
     {
         return $this->RESTToken;
     }
@@ -109,33 +114,14 @@ class FetchTokenResponseType extends AbstractResponseType
      * @param string $rESTToken
      * @return \macropage\ebaysdk\trading\StructType\FetchTokenResponseType
      */
-    public function setRESTToken($rESTToken = null)
+    public function setRESTToken(?string $rESTToken = null): self
     {
         // validation for constraint: string
         if (!is_null($rESTToken) && !is_string($rESTToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($rESTToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($rESTToken, true), gettype($rESTToken)), __LINE__);
         }
         $this->RESTToken = $rESTToken;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\FetchTokenResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

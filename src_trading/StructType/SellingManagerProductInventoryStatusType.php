@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerProductInventoryStatusType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Describes the inventory status of a specific Selling Manager Product
  * @subpackage Structs
  */
@@ -14,57 +17,57 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
 {
     /**
      * The QuantityScheduled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Quantity of products scheduled to be listed.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantityScheduled;
+    protected ?int $QuantityScheduled = null;
     /**
      * The QuantityActive
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Quantity of products actively listed.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantityActive;
+    protected ?int $QuantityActive = null;
     /**
      * The QuantitySold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Quantity of products sold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantitySold;
+    protected ?int $QuantitySold = null;
     /**
      * The QuantityUnsold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Quantity of product unsold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantityUnsold;
+    protected ?int $QuantityUnsold = null;
     /**
      * The SuccessPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Percentage of ended listings that sold.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $SuccessPercent;
+    protected ?float $SuccessPercent = null;
     /**
      * The AverageSellingPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Average selling price for the product.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AverageSellingPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AverageSellingPrice = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerProductInventoryStatusType
      * @uses SellingManagerProductInventoryStatusType::setQuantityScheduled()
@@ -80,9 +83,9 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param int $quantityUnsold
      * @param float $successPercent
      * @param \macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($quantityScheduled = null, $quantityActive = null, $quantitySold = null, $quantityUnsold = null, $successPercent = null, \macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice = null, \DOMDocument $any = null)
+    public function __construct(?int $quantityScheduled = null, ?int $quantityActive = null, ?int $quantitySold = null, ?int $quantityUnsold = null, ?float $successPercent = null, ?\macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice = null, $any = null)
     {
         $this
             ->setQuantityScheduled($quantityScheduled)
@@ -97,7 +100,7 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * Get QuantityScheduled value
      * @return int|null
      */
-    public function getQuantityScheduled()
+    public function getQuantityScheduled(): ?int
     {
         return $this->QuantityScheduled;
     }
@@ -106,20 +109,21 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param int $quantityScheduled
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setQuantityScheduled($quantityScheduled = null)
+    public function setQuantityScheduled(?int $quantityScheduled = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantityScheduled) && !is_numeric($quantityScheduled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantityScheduled)), __LINE__);
+        if (!is_null($quantityScheduled) && !(is_int($quantityScheduled) || ctype_digit($quantityScheduled))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantityScheduled, true), gettype($quantityScheduled)), __LINE__);
         }
         $this->QuantityScheduled = $quantityScheduled;
+        
         return $this;
     }
     /**
      * Get QuantityActive value
      * @return int|null
      */
-    public function getQuantityActive()
+    public function getQuantityActive(): ?int
     {
         return $this->QuantityActive;
     }
@@ -128,20 +132,21 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param int $quantityActive
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setQuantityActive($quantityActive = null)
+    public function setQuantityActive(?int $quantityActive = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantityActive) && !is_numeric($quantityActive)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantityActive)), __LINE__);
+        if (!is_null($quantityActive) && !(is_int($quantityActive) || ctype_digit($quantityActive))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantityActive, true), gettype($quantityActive)), __LINE__);
         }
         $this->QuantityActive = $quantityActive;
+        
         return $this;
     }
     /**
      * Get QuantitySold value
      * @return int|null
      */
-    public function getQuantitySold()
+    public function getQuantitySold(): ?int
     {
         return $this->QuantitySold;
     }
@@ -150,20 +155,21 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param int $quantitySold
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setQuantitySold($quantitySold = null)
+    public function setQuantitySold(?int $quantitySold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantitySold) && !is_numeric($quantitySold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantitySold)), __LINE__);
+        if (!is_null($quantitySold) && !(is_int($quantitySold) || ctype_digit($quantitySold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantitySold, true), gettype($quantitySold)), __LINE__);
         }
         $this->QuantitySold = $quantitySold;
+        
         return $this;
     }
     /**
      * Get QuantityUnsold value
      * @return int|null
      */
-    public function getQuantityUnsold()
+    public function getQuantityUnsold(): ?int
     {
         return $this->QuantityUnsold;
     }
@@ -172,20 +178,21 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param int $quantityUnsold
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setQuantityUnsold($quantityUnsold = null)
+    public function setQuantityUnsold(?int $quantityUnsold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantityUnsold) && !is_numeric($quantityUnsold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantityUnsold)), __LINE__);
+        if (!is_null($quantityUnsold) && !(is_int($quantityUnsold) || ctype_digit($quantityUnsold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantityUnsold, true), gettype($quantityUnsold)), __LINE__);
         }
         $this->QuantityUnsold = $quantityUnsold;
+        
         return $this;
     }
     /**
      * Get SuccessPercent value
      * @return float|null
      */
-    public function getSuccessPercent()
+    public function getSuccessPercent(): ?float
     {
         return $this->SuccessPercent;
     }
@@ -194,16 +201,21 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param float $successPercent
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setSuccessPercent($successPercent = null)
+    public function setSuccessPercent(?float $successPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($successPercent) && !(is_float($successPercent) || is_numeric($successPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($successPercent, true), gettype($successPercent)), __LINE__);
+        }
         $this->SuccessPercent = $successPercent;
+        
         return $this;
     }
     /**
      * Get AverageSellingPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAverageSellingPrice()
+    public function getAverageSellingPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AverageSellingPrice;
     }
@@ -212,61 +224,43 @@ class SellingManagerProductInventoryStatusType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setAverageSellingPrice(\macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice = null)
+    public function setAverageSellingPrice(?\macropage\ebaysdk\trading\StructType\AmountType $averageSellingPrice = null): self
     {
         $this->AverageSellingPrice = $averageSellingPrice;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

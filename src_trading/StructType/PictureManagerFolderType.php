@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PictureManagerFolderType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,34 +17,34 @@ class PictureManagerFolderType extends AbstractStructBase
 {
     /**
      * The FolderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FolderID;
+    protected ?int $FolderID = null;
     /**
      * The Name
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The Picture
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[]
      */
-    public $Picture;
+    protected array $Picture = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PictureManagerFolderType
      * @uses PictureManagerFolderType::setFolderID()
@@ -51,9 +54,9 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param int $folderID
      * @param string $name
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[] $picture
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($folderID = null, $name = null, array $picture = array(), \DOMDocument $any = null)
+    public function __construct(?int $folderID = null, ?string $name = null, array $picture = [], $any = null)
     {
         $this
             ->setFolderID($folderID)
@@ -65,7 +68,7 @@ class PictureManagerFolderType extends AbstractStructBase
      * Get FolderID value
      * @return int|null
      */
-    public function getFolderID()
+    public function getFolderID(): ?int
     {
         return $this->FolderID;
     }
@@ -74,20 +77,21 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param int $folderID
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function setFolderID($folderID = null)
+    public function setFolderID(?int $folderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($folderID) && !is_numeric($folderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($folderID)), __LINE__);
+        if (!is_null($folderID) && !(is_int($folderID) || ctype_digit($folderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($folderID, true), gettype($folderID)), __LINE__);
         }
         $this->FolderID = $folderID;
+        
         return $this;
     }
     /**
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -96,105 +100,110 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get Picture value
-     * @return \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[]
      */
-    public function getPicture()
+    public function getPicture(): array
     {
         return $this->Picture;
     }
     /**
+     * This method is responsible for validating the values passed to the setPicture method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPicture method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePictureForArrayConstraintsFromSetPicture(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $pictureManagerFolderTypePictureItem) {
+            // validation for constraint: itemType
+            if (!$pictureManagerFolderTypePictureItem instanceof \macropage\ebaysdk\trading\StructType\PictureManagerPictureType) {
+                $invalidValues[] = is_object($pictureManagerFolderTypePictureItem) ? get_class($pictureManagerFolderTypePictureItem) : sprintf('%s(%s)', gettype($pictureManagerFolderTypePictureItem), var_export($pictureManagerFolderTypePictureItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Picture property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureManagerPictureType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Picture value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[] $picture
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function setPicture(array $picture = array())
+    public function setPicture(array $picture = []): self
     {
-        foreach ($picture as $pictureManagerFolderTypePictureItem) {
-            // validation for constraint: itemType
-            if (!$pictureManagerFolderTypePictureItem instanceof \macropage\ebaysdk\trading\StructType\PictureManagerPictureType) {
-                throw new \InvalidArgumentException(sprintf('The Picture property can only contain items of \macropage\ebaysdk\trading\StructType\PictureManagerPictureType, "%s" given', is_object($pictureManagerFolderTypePictureItem) ? get_class($pictureManagerFolderTypePictureItem) : gettype($pictureManagerFolderTypePictureItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($pictureArrayErrorMessage = self::validatePictureForArrayConstraintsFromSetPicture($picture))) {
+            throw new InvalidArgumentException($pictureArrayErrorMessage, __LINE__);
         }
         $this->Picture = $picture;
+        
         return $this;
     }
     /**
      * Add item to Picture value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureType $item
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function addToPicture(\macropage\ebaysdk\trading\StructType\PictureManagerPictureType $item)
+    public function addToPicture(\macropage\ebaysdk\trading\StructType\PictureManagerPictureType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\PictureManagerPictureType) {
-            throw new \InvalidArgumentException(sprintf('The Picture property can only contain items of \macropage\ebaysdk\trading\StructType\PictureManagerPictureType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Picture property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureManagerPictureType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Picture[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PictureManagerFolderType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

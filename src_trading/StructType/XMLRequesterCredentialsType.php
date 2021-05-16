@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for XMLRequesterCredentialsType StructType
@@ -12,35 +15,35 @@ class XMLRequesterCredentialsType extends AbstractStructBase
 {
     /**
      * The Username
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: eBay user ID (i.e., eBay.com Web site login name) for the user the application is retrieving a token for. This is typically the application's end-user (not the developer).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Username;
+    protected ?string $Username = null;
     /**
      * The Password
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Password for the user specified in Username.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Password;
+    protected ?string $Password = null;
     /**
      * The eBayAuthToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Authentication token representing the user who is making the request. The user's token must be retrieved from eBay. To determine a user's authentication token, see the Authentication and Authorization information in the eBay Web
      * Services guide. For calls that list or retrieve item or transaction data, the user usually needs to be the seller of the item in question or, in some cases, the buyer. Similarly, calls that retrieve user or account data may be restricted to the user
      * whose data is being requested. The documentation for each call includes information about such restrictions.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayAuthToken;
+    protected ?string $eBayAuthToken = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for XMLRequesterCredentialsType
      * @uses XMLRequesterCredentialsType::setUsername()
@@ -50,9 +53,9 @@ class XMLRequesterCredentialsType extends AbstractStructBase
      * @param string $username
      * @param string $password
      * @param string $eBayAuthToken
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($username = null, $password = null, $eBayAuthToken = null, \DOMDocument $any = null)
+    public function __construct(?string $username = null, ?string $password = null, ?string $eBayAuthToken = null, $any = null)
     {
         $this
             ->setUsername($username)
@@ -64,7 +67,7 @@ class XMLRequesterCredentialsType extends AbstractStructBase
      * Get Username value
      * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->Username;
     }
@@ -73,20 +76,21 @@ class XMLRequesterCredentialsType extends AbstractStructBase
      * @param string $username
      * @return \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType
      */
-    public function setUsername($username = null)
+    public function setUsername(?string $username = null): self
     {
         // validation for constraint: string
         if (!is_null($username) && !is_string($username)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($username)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($username, true), gettype($username)), __LINE__);
         }
         $this->Username = $username;
+        
         return $this;
     }
     /**
      * Get Password value
      * @return string|null
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->Password;
     }
@@ -95,20 +99,21 @@ class XMLRequesterCredentialsType extends AbstractStructBase
      * @param string $password
      * @return \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType
      */
-    public function setPassword($password = null)
+    public function setPassword(?string $password = null): self
     {
         // validation for constraint: string
         if (!is_null($password) && !is_string($password)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($password)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($password, true), gettype($password)), __LINE__);
         }
         $this->Password = $password;
+        
         return $this;
     }
     /**
      * Get eBayAuthToken value
      * @return string|null
      */
-    public function getEBayAuthToken()
+    public function getEBayAuthToken(): ?string
     {
         return $this->eBayAuthToken;
     }
@@ -117,65 +122,47 @@ class XMLRequesterCredentialsType extends AbstractStructBase
      * @param string $eBayAuthToken
      * @return \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType
      */
-    public function setEBayAuthToken($eBayAuthToken = null)
+    public function setEBayAuthToken(?string $eBayAuthToken = null): self
     {
         // validation for constraint: string
         if (!is_null($eBayAuthToken) && !is_string($eBayAuthToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eBayAuthToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eBayAuthToken, true), gettype($eBayAuthToken)), __LINE__);
         }
         $this->eBayAuthToken = $eBayAuthToken;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\XMLRequesterCredentialsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

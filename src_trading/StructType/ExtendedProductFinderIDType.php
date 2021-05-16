@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ExtendedProductFinderIDType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class ExtendedProductFinderIDType extends AbstractStructBase
 {
     /**
      * The ProductFinderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ProductFinderID;
+    protected ?int $ProductFinderID = null;
     /**
      * The ProductFinderBuySide
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ProductFinderBuySide;
+    protected ?bool $ProductFinderBuySide = null;
     /**
      * Constructor method for ExtendedProductFinderIDType
      * @uses ExtendedProductFinderIDType::setProductFinderID()
@@ -35,7 +38,7 @@ class ExtendedProductFinderIDType extends AbstractStructBase
      * @param int $productFinderID
      * @param bool $productFinderBuySide
      */
-    public function __construct($productFinderID = null, $productFinderBuySide = null)
+    public function __construct(?int $productFinderID = null, ?bool $productFinderBuySide = null)
     {
         $this
             ->setProductFinderID($productFinderID)
@@ -45,7 +48,7 @@ class ExtendedProductFinderIDType extends AbstractStructBase
      * Get ProductFinderID value
      * @return int|null
      */
-    public function getProductFinderID()
+    public function getProductFinderID(): ?int
     {
         return $this->ProductFinderID;
     }
@@ -54,20 +57,21 @@ class ExtendedProductFinderIDType extends AbstractStructBase
      * @param int $productFinderID
      * @return \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType
      */
-    public function setProductFinderID($productFinderID = null)
+    public function setProductFinderID(?int $productFinderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($productFinderID) && !is_numeric($productFinderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($productFinderID)), __LINE__);
+        if (!is_null($productFinderID) && !(is_int($productFinderID) || ctype_digit($productFinderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($productFinderID, true), gettype($productFinderID)), __LINE__);
         }
         $this->ProductFinderID = $productFinderID;
+        
         return $this;
     }
     /**
      * Get ProductFinderBuySide value
      * @return bool|null
      */
-    public function getProductFinderBuySide()
+    public function getProductFinderBuySide(): ?bool
     {
         return $this->ProductFinderBuySide;
     }
@@ -76,33 +80,14 @@ class ExtendedProductFinderIDType extends AbstractStructBase
      * @param bool $productFinderBuySide
      * @return \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType
      */
-    public function setProductFinderBuySide($productFinderBuySide = null)
+    public function setProductFinderBuySide(?bool $productFinderBuySide = null): self
     {
         // validation for constraint: boolean
         if (!is_null($productFinderBuySide) && !is_bool($productFinderBuySide)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($productFinderBuySide)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($productFinderBuySide, true), gettype($productFinderBuySide)), __LINE__);
         }
         $this->ProductFinderBuySide = $productFinderBuySide;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

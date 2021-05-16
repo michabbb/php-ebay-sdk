@@ -1,33 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetBidderListResponseType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Response to a <b>GetBidderList</b> call, which retrieves all items the user is currently bidding on, or has won or purchased. | Response to GetBidderListRequest.
+ * Meta information extracted from the WSDL
+ * - documentation: Response to GetBidderListRequest. | Response to a <b>GetBidderList</b> call, which retrieves all items the user is currently bidding on, or has won or purchased.
  * @subpackage Structs
  */
 class GetBidderListResponseType extends AbstractResponseType
 {
     /**
      * The Bidder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Data for one eBay bidder.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UserType
+     * @var \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public $Bidder;
+    protected ?\macropage\ebaysdk\trading\StructType\UserType $Bidder = null;
     /**
      * The BidItemArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Array of items the bidder has bid on, has won or has lost.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public $BidItemArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $BidItemArray = null;
     /**
      * Constructor method for GetBidderListResponseType
      * @uses GetBidderListResponseType::setBidder()
@@ -35,7 +38,7 @@ class GetBidderListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\UserType $bidder
      * @param \macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\UserType $bidder = null, \macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\UserType $bidder = null, ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray = null)
     {
         $this
             ->setBidder($bidder)
@@ -45,7 +48,7 @@ class GetBidderListResponseType extends AbstractResponseType
      * Get Bidder value
      * @return \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public function getBidder()
+    public function getBidder(): ?\macropage\ebaysdk\trading\StructType\UserType
     {
         return $this->Bidder;
     }
@@ -54,16 +57,17 @@ class GetBidderListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\UserType $bidder
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListResponseType
      */
-    public function setBidder(\macropage\ebaysdk\trading\StructType\UserType $bidder = null)
+    public function setBidder(?\macropage\ebaysdk\trading\StructType\UserType $bidder = null): self
     {
         $this->Bidder = $bidder;
+        
         return $this;
     }
     /**
      * Get BidItemArray value
      * @return \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public function getBidItemArray()
+    public function getBidItemArray(): ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType
     {
         return $this->BidItemArray;
     }
@@ -72,29 +76,10 @@ class GetBidderListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListResponseType
      */
-    public function setBidItemArray(\macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray = null)
+    public function setBidItemArray(?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $bidItemArray = null): self
     {
         $this->BidItemArray = $bidItemArray;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetBidderListResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

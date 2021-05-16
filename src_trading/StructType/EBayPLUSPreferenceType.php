@@ -1,51 +1,55 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for eBayPLUSPreferenceType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains information about a country where a specified seller is eligible to offer eBay Plus on listings, as well as the seller's opt-in status and listing preference for that country. <br/><br/> eBay Plus is a premium account option
  * for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top Rated eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Sellers must commit to next-day delivery
- * of those items. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany (DE). </span> For more details about eBay Plus, see <a
- * href="../../../../guides/ebayfeatures/Development/Feature-eBayPlus.html">Offering eBay Plus</a>.
+ * of those items. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany and Australia. In Australia, the seller has no control/responsibility over setting the eBay Plus feature for a
+ * listing. Instead, eBay will evaluate/determine whether a listing is eligible for eBay Plus. </span> For more details about eBay Plus, see <a href="../../../../guides/features-guide/default.html#development/Feature-eBayPlus.html">Offering eBay
+ * Plus</a>.
  * @subpackage Structs
  */
 class EBayPLUSPreferenceType extends AbstractStructBase
 {
     /**
      * The Country
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An ISO 3166 standard two-letter code that identifies a country where the seller is eligible to offer eBay Plus on fixed price listings. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Currently, eBay Plus is available only
-     * to buyers in Germany (<code>DE</code>). </span>
+     * to buyers in Germany and Australia. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Country;
+    protected ?string $Country = null;
     /**
      * The OptInStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A value of <code>true</code> indicates that the seller has opted in to eBay Plus for listings in the specified country.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $OptInStatus;
+    protected ?bool $OptInStatus = null;
     /**
      * The ListingPreference
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A value of <code>true</code> indicates that if <strong>OptInStatus</strong> is also <code>true</code>, the seller will offer eBay Plus by default for new listings in the specified country. If this field's value is <code>false</code>
      * (and <strong>OptInStatus</strong> is <code>true</code>), the seller will offer eBay Plus on a listing by listing basis in the specified country.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ListingPreference;
+    protected ?bool $ListingPreference = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for eBayPLUSPreferenceType
      * @uses EBayPLUSPreferenceType::setCountry()
@@ -55,9 +59,9 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      * @param string $country
      * @param bool $optInStatus
      * @param bool $listingPreference
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($country = null, $optInStatus = null, $listingPreference = null, \DOMDocument $any = null)
+    public function __construct(?string $country = null, ?bool $optInStatus = null, ?bool $listingPreference = null, $any = null)
     {
         $this
             ->setCountry($country)
@@ -69,7 +73,7 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      * Get Country value
      * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->Country;
     }
@@ -77,24 +81,25 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      * Set Country value
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $country
      * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType
      */
-    public function setCountry($country = null)
+    public function setCountry(?string $country = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($country)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $country, implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CountryCodeType', is_array($country) ? implode(', ', $country) : var_export($country, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
         }
         $this->Country = $country;
+        
         return $this;
     }
     /**
      * Get OptInStatus value
      * @return bool|null
      */
-    public function getOptInStatus()
+    public function getOptInStatus(): ?bool
     {
         return $this->OptInStatus;
     }
@@ -103,20 +108,21 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      * @param bool $optInStatus
      * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType
      */
-    public function setOptInStatus($optInStatus = null)
+    public function setOptInStatus(?bool $optInStatus = null): self
     {
         // validation for constraint: boolean
         if (!is_null($optInStatus) && !is_bool($optInStatus)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($optInStatus)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($optInStatus, true), gettype($optInStatus)), __LINE__);
         }
         $this->OptInStatus = $optInStatus;
+        
         return $this;
     }
     /**
      * Get ListingPreference value
      * @return bool|null
      */
-    public function getListingPreference()
+    public function getListingPreference(): ?bool
     {
         return $this->ListingPreference;
     }
@@ -125,65 +131,47 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      * @param bool $listingPreference
      * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType
      */
-    public function setListingPreference($listingPreference = null)
+    public function setListingPreference(?bool $listingPreference = null): self
     {
         // validation for constraint: boolean
         if (!is_null($listingPreference) && !is_bool($listingPreference)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($listingPreference)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($listingPreference, true), gettype($listingPreference)), __LINE__);
         }
         $this->ListingPreference = $listingPreference;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PlaceOfferRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Enables the authenticated user to to make a bid on an auction item, propose a Best Offer, or purchase a fixed-price/Buy It Now item. Note that this call cannot be used to purchase items that require immediate payment.
  * @subpackage Structs
  */
@@ -14,48 +17,49 @@ class PlaceOfferRequestType extends AbstractRequestType
 {
     /**
      * The Offer
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used to specifies the type of offer being made for the listing specified in the <b>ItemID</b> field. The <b>Offer.Action</b> is used to set the action that is being taken on the listing.
+     * Meta information extracted from the WSDL
+     * - documentation: This container specifies the type of offer being made for the listing specified in the <b>ItemID</b> field. The <b>Offer.Action</b> is used to set the action that is being taken on the listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\OfferType
+     * @var \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public $Offer;
+    protected ?\macropage\ebaysdk\trading\StructType\OfferType $Offer = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier that identifies the listing for which the action is being submitted. <br><br> For a multiple-variation listing, you must also identify the specific variation within that listing using the <b>VariationSpecifics</b>
      * container. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The BlockOnWarning
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If a warning message is generated when the call is made, this <b>BlockOnWarning</b> will block the bid/buy action if set to <code>true</code>. If <b>BlockOnWarning</b> is <code>false</code> or omitted, the bid/buy action is allowed,
      * regardless of whether or not a warning message occurs. <br>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BlockOnWarning;
+    protected ?bool $BlockOnWarning = null;
     /**
      * The AffiliateTrackingDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container for affiliate-related tags, which enable the tracking of user activity. If you include the <b>AffiliateTrackingDetails</b> container in your <b>PlaceOffer</b> call, then it is possible to receive affiliate commissions based
      * on calls made by your application. (See the <a href= "http://www.ebaypartnernetwork.com/" target="_blank">eBay Partner Network</a> for information about commissions.) Please note that affiliate tracking is not available in the Sandbox environment,
      * and that affiliate tracking is not available when you make a Best Offer.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType|null
      */
-    public $AffiliateTrackingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $AffiliateTrackingDetails = null;
     /**
      * The VariationSpecifics
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used to identify a specific variation within a multiple-variation listing identified by the <b>ItemID</b> value. This container is required when attempting to perform an action on a multiple-variation listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public $VariationSpecifics;
+    protected ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $VariationSpecifics = null;
     /**
      * Constructor method for PlaceOfferRequestType
      * @uses PlaceOfferRequestType::setOffer()
@@ -69,7 +73,7 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\OfferType $offer = null, $itemID = null, $blockOnWarning = null, \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails = null, \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\OfferType $offer = null, ?string $itemID = null, ?bool $blockOnWarning = null, ?\macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null)
     {
         $this
             ->setOffer($offer)
@@ -82,7 +86,7 @@ class PlaceOfferRequestType extends AbstractRequestType
      * Get Offer value
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function getOffer()
+    public function getOffer(): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return $this->Offer;
     }
@@ -91,16 +95,17 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\OfferType $offer
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
      */
-    public function setOffer(\macropage\ebaysdk\trading\StructType\OfferType $offer = null)
+    public function setOffer(?\macropage\ebaysdk\trading\StructType\OfferType $offer = null): self
     {
         $this->Offer = $offer;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -109,20 +114,21 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get BlockOnWarning value
      * @return bool|null
      */
-    public function getBlockOnWarning()
+    public function getBlockOnWarning(): ?bool
     {
         return $this->BlockOnWarning;
     }
@@ -131,20 +137,21 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param bool $blockOnWarning
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
      */
-    public function setBlockOnWarning($blockOnWarning = null)
+    public function setBlockOnWarning(?bool $blockOnWarning = null): self
     {
         // validation for constraint: boolean
         if (!is_null($blockOnWarning) && !is_bool($blockOnWarning)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($blockOnWarning)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($blockOnWarning, true), gettype($blockOnWarning)), __LINE__);
         }
         $this->BlockOnWarning = $blockOnWarning;
+        
         return $this;
     }
     /**
      * Get AffiliateTrackingDetails value
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType|null
      */
-    public function getAffiliateTrackingDetails()
+    public function getAffiliateTrackingDetails(): ?\macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
     {
         return $this->AffiliateTrackingDetails;
     }
@@ -153,16 +160,17 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
      */
-    public function setAffiliateTrackingDetails(\macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails = null)
+    public function setAffiliateTrackingDetails(?\macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType $affiliateTrackingDetails = null): self
     {
         $this->AffiliateTrackingDetails = $affiliateTrackingDetails;
+        
         return $this;
     }
     /**
      * Get VariationSpecifics value
      * @return \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public function getVariationSpecifics()
+    public function getVariationSpecifics(): ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
     {
         return $this->VariationSpecifics;
     }
@@ -171,29 +179,10 @@ class PlaceOfferRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
      */
-    public function setVariationSpecifics(\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null)
+    public function setVariationSpecifics(?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null): self
     {
         $this->VariationSpecifics = $variationSpecifics;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FlatRateInsuranceRangeCostType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated, as shipping insurance is no longer applicable or supported in eBay APIs.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class FlatRateInsuranceRangeCostType extends AbstractStructBase
 {
     /**
      * The FlatRateInsuranceRange
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FlatRateInsuranceRange;
+    protected ?string $FlatRateInsuranceRange = null;
     /**
      * The InsuranceCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $InsuranceCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $InsuranceCost = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for FlatRateInsuranceRangeCostType
      * @uses FlatRateInsuranceRangeCostType::setFlatRateInsuranceRange()
@@ -40,9 +43,9 @@ class FlatRateInsuranceRangeCostType extends AbstractStructBase
      * @uses FlatRateInsuranceRangeCostType::setAny()
      * @param string $flatRateInsuranceRange
      * @param \macropage\ebaysdk\trading\StructType\AmountType $insuranceCost
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($flatRateInsuranceRange = null, \macropage\ebaysdk\trading\StructType\AmountType $insuranceCost = null, \DOMDocument $any = null)
+    public function __construct(?string $flatRateInsuranceRange = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuranceCost = null, $any = null)
     {
         $this
             ->setFlatRateInsuranceRange($flatRateInsuranceRange)
@@ -53,7 +56,7 @@ class FlatRateInsuranceRangeCostType extends AbstractStructBase
      * Get FlatRateInsuranceRange value
      * @return string|null
      */
-    public function getFlatRateInsuranceRange()
+    public function getFlatRateInsuranceRange(): ?string
     {
         return $this->FlatRateInsuranceRange;
     }
@@ -61,24 +64,25 @@ class FlatRateInsuranceRangeCostType extends AbstractStructBase
      * Set FlatRateInsuranceRange value
      * @uses \macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $flatRateInsuranceRange
      * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType
      */
-    public function setFlatRateInsuranceRange($flatRateInsuranceRange = null)
+    public function setFlatRateInsuranceRange(?string $flatRateInsuranceRange = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType::valueIsValid($flatRateInsuranceRange)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $flatRateInsuranceRange, implode(', ', \macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType', is_array($flatRateInsuranceRange) ? implode(', ', $flatRateInsuranceRange) : var_export($flatRateInsuranceRange, true), implode(', ', \macropage\ebaysdk\trading\EnumType\FlatRateInsuranceRangeCodeType::getValidValues())), __LINE__);
         }
         $this->FlatRateInsuranceRange = $flatRateInsuranceRange;
+        
         return $this;
     }
     /**
      * Get InsuranceCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getInsuranceCost()
+    public function getInsuranceCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->InsuranceCost;
     }
@@ -87,61 +91,43 @@ class FlatRateInsuranceRangeCostType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $insuranceCost
      * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType
      */
-    public function setInsuranceCost(\macropage\ebaysdk\trading\StructType\AmountType $insuranceCost = null)
+    public function setInsuranceCost(?\macropage\ebaysdk\trading\StructType\AmountType $insuranceCost = null): self
     {
         $this->InsuranceCost = $insuranceCost;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BidderDetailType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,59 +17,60 @@ class BidderDetailType extends AbstractStructBase
 {
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders,
      * OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API
      * call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The Email
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Email;
+    protected ?string $Email = null;
     /**
      * The FeedbackScore
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FeedbackScore;
+    protected ?int $FeedbackScore = null;
     /**
      * The UniqueNegativeFeedbackCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $UniqueNegativeFeedbackCount;
+    protected ?int $UniqueNegativeFeedbackCount = null;
     /**
      * The UniquePositiveFeedbackCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $UniquePositiveFeedbackCount;
+    protected ?int $UniquePositiveFeedbackCount = null;
     /**
      * The UniqueNeutralFeedbackCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $UniqueNeutralFeedbackCount;
+    protected ?int $UniqueNeutralFeedbackCount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BidderDetailType
      * @uses BidderDetailType::setUserID()
@@ -82,9 +86,9 @@ class BidderDetailType extends AbstractStructBase
      * @param int $uniqueNegativeFeedbackCount
      * @param int $uniquePositiveFeedbackCount
      * @param int $uniqueNeutralFeedbackCount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($userID = null, $email = null, $feedbackScore = null, $uniqueNegativeFeedbackCount = null, $uniquePositiveFeedbackCount = null, $uniqueNeutralFeedbackCount = null, \DOMDocument $any = null)
+    public function __construct(?string $userID = null, ?string $email = null, ?int $feedbackScore = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?int $uniqueNeutralFeedbackCount = null, $any = null)
     {
         $this
             ->setUserID($userID)
@@ -99,7 +103,7 @@ class BidderDetailType extends AbstractStructBase
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -108,20 +112,21 @@ class BidderDetailType extends AbstractStructBase
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get Email value
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->Email;
     }
@@ -130,20 +135,21 @@ class BidderDetailType extends AbstractStructBase
      * @param string $email
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setEmail($email = null)
+    public function setEmail(?string $email = null): self
     {
         // validation for constraint: string
         if (!is_null($email) && !is_string($email)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($email)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($email, true), gettype($email)), __LINE__);
         }
         $this->Email = $email;
+        
         return $this;
     }
     /**
      * Get FeedbackScore value
      * @return int|null
      */
-    public function getFeedbackScore()
+    public function getFeedbackScore(): ?int
     {
         return $this->FeedbackScore;
     }
@@ -152,20 +158,21 @@ class BidderDetailType extends AbstractStructBase
      * @param int $feedbackScore
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setFeedbackScore($feedbackScore = null)
+    public function setFeedbackScore(?int $feedbackScore = null): self
     {
         // validation for constraint: int
-        if (!is_null($feedbackScore) && !is_numeric($feedbackScore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($feedbackScore)), __LINE__);
+        if (!is_null($feedbackScore) && !(is_int($feedbackScore) || ctype_digit($feedbackScore))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($feedbackScore, true), gettype($feedbackScore)), __LINE__);
         }
         $this->FeedbackScore = $feedbackScore;
+        
         return $this;
     }
     /**
      * Get UniqueNegativeFeedbackCount value
      * @return int|null
      */
-    public function getUniqueNegativeFeedbackCount()
+    public function getUniqueNegativeFeedbackCount(): ?int
     {
         return $this->UniqueNegativeFeedbackCount;
     }
@@ -174,20 +181,21 @@ class BidderDetailType extends AbstractStructBase
      * @param int $uniqueNegativeFeedbackCount
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setUniqueNegativeFeedbackCount($uniqueNegativeFeedbackCount = null)
+    public function setUniqueNegativeFeedbackCount(?int $uniqueNegativeFeedbackCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($uniqueNegativeFeedbackCount) && !is_numeric($uniqueNegativeFeedbackCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($uniqueNegativeFeedbackCount)), __LINE__);
+        if (!is_null($uniqueNegativeFeedbackCount) && !(is_int($uniqueNegativeFeedbackCount) || ctype_digit($uniqueNegativeFeedbackCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($uniqueNegativeFeedbackCount, true), gettype($uniqueNegativeFeedbackCount)), __LINE__);
         }
         $this->UniqueNegativeFeedbackCount = $uniqueNegativeFeedbackCount;
+        
         return $this;
     }
     /**
      * Get UniquePositiveFeedbackCount value
      * @return int|null
      */
-    public function getUniquePositiveFeedbackCount()
+    public function getUniquePositiveFeedbackCount(): ?int
     {
         return $this->UniquePositiveFeedbackCount;
     }
@@ -196,20 +204,21 @@ class BidderDetailType extends AbstractStructBase
      * @param int $uniquePositiveFeedbackCount
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setUniquePositiveFeedbackCount($uniquePositiveFeedbackCount = null)
+    public function setUniquePositiveFeedbackCount(?int $uniquePositiveFeedbackCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($uniquePositiveFeedbackCount) && !is_numeric($uniquePositiveFeedbackCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($uniquePositiveFeedbackCount)), __LINE__);
+        if (!is_null($uniquePositiveFeedbackCount) && !(is_int($uniquePositiveFeedbackCount) || ctype_digit($uniquePositiveFeedbackCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($uniquePositiveFeedbackCount, true), gettype($uniquePositiveFeedbackCount)), __LINE__);
         }
         $this->UniquePositiveFeedbackCount = $uniquePositiveFeedbackCount;
+        
         return $this;
     }
     /**
      * Get UniqueNeutralFeedbackCount value
      * @return int|null
      */
-    public function getUniqueNeutralFeedbackCount()
+    public function getUniqueNeutralFeedbackCount(): ?int
     {
         return $this->UniqueNeutralFeedbackCount;
     }
@@ -218,65 +227,47 @@ class BidderDetailType extends AbstractStructBase
      * @param int $uniqueNeutralFeedbackCount
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setUniqueNeutralFeedbackCount($uniqueNeutralFeedbackCount = null)
+    public function setUniqueNeutralFeedbackCount(?int $uniqueNeutralFeedbackCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($uniqueNeutralFeedbackCount) && !is_numeric($uniqueNeutralFeedbackCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($uniqueNeutralFeedbackCount)), __LINE__);
+        if (!is_null($uniqueNeutralFeedbackCount) && !(is_int($uniqueNeutralFeedbackCount) || ctype_digit($uniqueNeutralFeedbackCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($uniqueNeutralFeedbackCount, true), gettype($uniqueNeutralFeedbackCount)), __LINE__);
         }
         $this->UniqueNeutralFeedbackCount = $uniqueNeutralFeedbackCount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BidderDetailType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BidderDetailType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

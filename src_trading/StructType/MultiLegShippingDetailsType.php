@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MultiLegShippingDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type provides information about the domestic leg of a Global Shipping Program shipment. <br/><br/> <span class="tablenote"> <strong>Note:</strong> The <strong>LogisticsProviderShipmentToBuyer</strong> field is reserved for the
  * exclusive use of the international shipping provider. </span>
  * @subpackage Structs
@@ -15,28 +18,28 @@ class MultiLegShippingDetailsType extends AbstractStructBase
 {
     /**
      * The SellerShipmentToLogisticsProvider
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains information about the domestic leg of a Global Shipping Programn shipment, including the seller-selected shipping service, the domestic shipping cost, the domestic address of the international shipping provider, and the
      * estimated shipping time range.
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MultiLegShipmentType
+     * @var \macropage\ebaysdk\trading\StructType\MultiLegShipmentType|null
      */
-    public $SellerShipmentToLogisticsProvider;
+    protected ?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $SellerShipmentToLogisticsProvider = null;
     /**
      * The LogisticsProviderShipmentToBuyer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserved for use by the international shipping provider.
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MultiLegShipmentType
+     * @var \macropage\ebaysdk\trading\StructType\MultiLegShipmentType|null
      */
-    public $LogisticsProviderShipmentToBuyer;
+    protected ?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $LogisticsProviderShipmentToBuyer = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MultiLegShippingDetailsType
      * @uses MultiLegShippingDetailsType::setSellerShipmentToLogisticsProvider()
@@ -44,9 +47,9 @@ class MultiLegShippingDetailsType extends AbstractStructBase
      * @uses MultiLegShippingDetailsType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider
      * @param \macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider = null, \macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider = null, ?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer = null, $any = null)
     {
         $this
             ->setSellerShipmentToLogisticsProvider($sellerShipmentToLogisticsProvider)
@@ -57,7 +60,7 @@ class MultiLegShippingDetailsType extends AbstractStructBase
      * Get SellerShipmentToLogisticsProvider value
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShipmentType|null
      */
-    public function getSellerShipmentToLogisticsProvider()
+    public function getSellerShipmentToLogisticsProvider(): ?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType
     {
         return $this->SellerShipmentToLogisticsProvider;
     }
@@ -66,16 +69,17 @@ class MultiLegShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
      */
-    public function setSellerShipmentToLogisticsProvider(\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider = null)
+    public function setSellerShipmentToLogisticsProvider(?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $sellerShipmentToLogisticsProvider = null): self
     {
         $this->SellerShipmentToLogisticsProvider = $sellerShipmentToLogisticsProvider;
+        
         return $this;
     }
     /**
      * Get LogisticsProviderShipmentToBuyer value
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShipmentType|null
      */
-    public function getLogisticsProviderShipmentToBuyer()
+    public function getLogisticsProviderShipmentToBuyer(): ?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType
     {
         return $this->LogisticsProviderShipmentToBuyer;
     }
@@ -84,61 +88,43 @@ class MultiLegShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
      */
-    public function setLogisticsProviderShipmentToBuyer(\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer = null)
+    public function setLogisticsProviderShipmentToBuyer(?\macropage\ebaysdk\trading\StructType\MultiLegShipmentType $logisticsProviderShipmentToBuyer = null): self
     {
         $this->LogisticsProviderShipmentToBuyer = $logisticsProviderShipmentToBuyer;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

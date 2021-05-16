@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for EndOfAuctionEmailPreferencesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains the seller's preferences for the email that can be sent to the winner of an auction listing.
  * @subpackage Structs
  */
@@ -14,73 +17,73 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
 {
     /**
      * The TemplateText
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The seller can customize the text of the email that is sent to the winner of an auction listing. The text of the email is provided in this field. If the seller is going to customize the text of the email through this field, the
      * seller must also include the <b>TextCustomized</b> field and set its value to <code>true</code>.The text of the custom message for the email. <br> <br> This field is only returned if set for the account.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TemplateText;
+    protected ?string $TemplateText = null;
     /**
      * The LogoURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The seller can include a customized logo in the email that is sent to the winner of an auction listing. The full URI to this logo image should be applied in this field. If the seller is going to include a customized logo in the email
      * through this field, the seller must also include the <b>LogoCustomized</b> field and set its value to <code>true</code>, and include the <b>LogoType</b> field and set its value to <code>Customized</code>. <br> <br> This field is only returned if a
      * customized logo is being used for the customized email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LogoURL;
+    protected ?string $LogoURL = null;
     /**
      * The LogoType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is needed in the <b>SetUserPreferences</b> call if the seller would like to use a customized or eBay Store logo. If the seller would like to use a customized logo, this field's value will be set to <code>Customized</code>.
      * If the seller would like to use their eBay Store logo (if it exists), this field's value will be set to <code>Store</code>. <br> <br> This field is always returned, and its value will be <code>None</code> if no logo is used in the customized email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LogoType;
+    protected ?string $LogoType = null;
     /**
      * The EmailCustomized
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used in a <b>SetUserPreferences</b> call to set/change the setting of whether a customized email will be sent to the winning bidder or not. <br> <br> This field is always returned to indicate whether or not a customized
      * email will be sent to the winning bidder.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EmailCustomized;
+    protected ?bool $EmailCustomized = null;
     /**
      * The TextCustomized
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used in a <b>SetUserPreferences</b> call to set/change the setting of whether customized text will be used or not in the customized email that is sent to the winning bidder. Customized text is provided through the
      * <b>LogoURL</b> field. <br> <br> This field is always returned to indicate whether or not customized text is used in a customized email that is sent to the winning bidder.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $TextCustomized;
+    protected ?bool $TextCustomized = null;
     /**
      * The LogoCustomized
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used in a <b>SetUserPreferences</b> call to set/change the setting of whether a customized logo will be used or not in the customized email that is sent to the winning bidder. The URI to a customized logo is provided
      * through the <b>TemplateText</b> field. If the seller would like to use a customized logo, the <b>LogoType</b> field must also be included, and its value will be set to <code>Customized</code>. <br> <br> This field is always returned to indicate
      * whether or not a customized logo is used in a customized email that is sent to the winning bidder.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LogoCustomized;
+    protected ?bool $LogoCustomized = null;
     /**
      * The CopyEmail
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CopyEmail;
+    protected ?bool $CopyEmail = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for EndOfAuctionEmailPreferencesType
      * @uses EndOfAuctionEmailPreferencesType::setTemplateText()
@@ -98,9 +101,9 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param bool $textCustomized
      * @param bool $logoCustomized
      * @param bool $copyEmail
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($templateText = null, $logoURL = null, $logoType = null, $emailCustomized = null, $textCustomized = null, $logoCustomized = null, $copyEmail = null, \DOMDocument $any = null)
+    public function __construct(?string $templateText = null, ?string $logoURL = null, ?string $logoType = null, ?bool $emailCustomized = null, ?bool $textCustomized = null, ?bool $logoCustomized = null, ?bool $copyEmail = null, $any = null)
     {
         $this
             ->setTemplateText($templateText)
@@ -116,7 +119,7 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * Get TemplateText value
      * @return string|null
      */
-    public function getTemplateText()
+    public function getTemplateText(): ?string
     {
         return $this->TemplateText;
     }
@@ -125,20 +128,21 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param string $templateText
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setTemplateText($templateText = null)
+    public function setTemplateText(?string $templateText = null): self
     {
         // validation for constraint: string
         if (!is_null($templateText) && !is_string($templateText)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($templateText)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($templateText, true), gettype($templateText)), __LINE__);
         }
         $this->TemplateText = $templateText;
+        
         return $this;
     }
     /**
      * Get LogoURL value
      * @return string|null
      */
-    public function getLogoURL()
+    public function getLogoURL(): ?string
     {
         return $this->LogoURL;
     }
@@ -147,20 +151,21 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param string $logoURL
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setLogoURL($logoURL = null)
+    public function setLogoURL(?string $logoURL = null): self
     {
         // validation for constraint: string
         if (!is_null($logoURL) && !is_string($logoURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($logoURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($logoURL, true), gettype($logoURL)), __LINE__);
         }
         $this->LogoURL = $logoURL;
+        
         return $this;
     }
     /**
      * Get LogoType value
      * @return string|null
      */
-    public function getLogoType()
+    public function getLogoType(): ?string
     {
         return $this->LogoType;
     }
@@ -168,24 +173,25 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * Set LogoType value
      * @uses \macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $logoType
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setLogoType($logoType = null)
+    public function setLogoType(?string $logoType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType::valueIsValid($logoType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $logoType, implode(', ', \macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType', is_array($logoType) ? implode(', ', $logoType) : var_export($logoType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\EndOfAuctionLogoTypeCodeType::getValidValues())), __LINE__);
         }
         $this->LogoType = $logoType;
+        
         return $this;
     }
     /**
      * Get EmailCustomized value
      * @return bool|null
      */
-    public function getEmailCustomized()
+    public function getEmailCustomized(): ?bool
     {
         return $this->EmailCustomized;
     }
@@ -194,20 +200,21 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param bool $emailCustomized
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setEmailCustomized($emailCustomized = null)
+    public function setEmailCustomized(?bool $emailCustomized = null): self
     {
         // validation for constraint: boolean
         if (!is_null($emailCustomized) && !is_bool($emailCustomized)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($emailCustomized)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($emailCustomized, true), gettype($emailCustomized)), __LINE__);
         }
         $this->EmailCustomized = $emailCustomized;
+        
         return $this;
     }
     /**
      * Get TextCustomized value
      * @return bool|null
      */
-    public function getTextCustomized()
+    public function getTextCustomized(): ?bool
     {
         return $this->TextCustomized;
     }
@@ -216,20 +223,21 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param bool $textCustomized
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setTextCustomized($textCustomized = null)
+    public function setTextCustomized(?bool $textCustomized = null): self
     {
         // validation for constraint: boolean
         if (!is_null($textCustomized) && !is_bool($textCustomized)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($textCustomized)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($textCustomized, true), gettype($textCustomized)), __LINE__);
         }
         $this->TextCustomized = $textCustomized;
+        
         return $this;
     }
     /**
      * Get LogoCustomized value
      * @return bool|null
      */
-    public function getLogoCustomized()
+    public function getLogoCustomized(): ?bool
     {
         return $this->LogoCustomized;
     }
@@ -238,20 +246,21 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param bool $logoCustomized
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setLogoCustomized($logoCustomized = null)
+    public function setLogoCustomized(?bool $logoCustomized = null): self
     {
         // validation for constraint: boolean
         if (!is_null($logoCustomized) && !is_bool($logoCustomized)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($logoCustomized)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($logoCustomized, true), gettype($logoCustomized)), __LINE__);
         }
         $this->LogoCustomized = $logoCustomized;
+        
         return $this;
     }
     /**
      * Get CopyEmail value
      * @return bool|null
      */
-    public function getCopyEmail()
+    public function getCopyEmail(): ?bool
     {
         return $this->CopyEmail;
     }
@@ -260,65 +269,47 @@ class EndOfAuctionEmailPreferencesType extends AbstractStructBase
      * @param bool $copyEmail
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setCopyEmail($copyEmail = null)
+    public function setCopyEmail(?bool $copyEmail = null): self
     {
         // validation for constraint: boolean
         if (!is_null($copyEmail) && !is_bool($copyEmail)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($copyEmail)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($copyEmail, true), gettype($copyEmail)), __LINE__);
         }
         $this->CopyEmail = $copyEmail;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

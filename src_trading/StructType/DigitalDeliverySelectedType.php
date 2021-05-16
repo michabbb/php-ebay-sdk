@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DigitalDeliverySelectedType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>DigitalDeliverySelected</b> container that is returned by <b>GetOrders</b> and other order management calls. The <b>DigitalDeliverySelected</b> container is only applicable and returned if the buyer
  * purchased a digital gift card for themselves, or is giving the digital gift card to someone else as a gift.
  * @subpackage Structs
@@ -15,34 +18,34 @@ class DigitalDeliverySelectedType extends AbstractStructBase
 {
     /**
      * The DeliveryMethod
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the method in which the digital gift card will be delivered to the buyer or to the person whom the purchaser is giving the digital gift card to. Currently, the only supported delivery method is by email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DeliveryMethod;
+    protected ?string $DeliveryMethod = null;
     /**
      * The DeliveryStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of the current status of whatever delivery method is being used (indicated in the <b>DigitalDeliverySelected.DeliveryMethod</b> field). Currently, the only supported delivery method is by email.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DeliveryStatusType
+     * @var \macropage\ebaysdk\trading\StructType\DeliveryStatusType|null
      */
-    public $DeliveryStatus;
+    protected ?\macropage\ebaysdk\trading\StructType\DeliveryStatusType $DeliveryStatus = null;
     /**
      * The DeliveryDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is returned by <b>GetOrders</b> and other order management calls to provide details on the recipient of a digital gift card that was purchased. The <b>DeliveryDetails</b> container is only returned if the buyer is
      * buying a digital gift card and giving that gift card to another person.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DeliveryDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\DeliveryDetailsType|null
      */
-    public $DeliveryDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\DeliveryDetailsType $DeliveryDetails = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DigitalDeliverySelectedType
      * @uses DigitalDeliverySelectedType::setDeliveryMethod()
@@ -52,9 +55,9 @@ class DigitalDeliverySelectedType extends AbstractStructBase
      * @param string $deliveryMethod
      * @param \macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus
      * @param \macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($deliveryMethod = null, \macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus = null, \macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails = null, \DOMDocument $any = null)
+    public function __construct(?string $deliveryMethod = null, ?\macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus = null, ?\macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails = null, $any = null)
     {
         $this
             ->setDeliveryMethod($deliveryMethod)
@@ -66,7 +69,7 @@ class DigitalDeliverySelectedType extends AbstractStructBase
      * Get DeliveryMethod value
      * @return string|null
      */
-    public function getDeliveryMethod()
+    public function getDeliveryMethod(): ?string
     {
         return $this->DeliveryMethod;
     }
@@ -75,20 +78,21 @@ class DigitalDeliverySelectedType extends AbstractStructBase
      * @param string $deliveryMethod
      * @return \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType
      */
-    public function setDeliveryMethod($deliveryMethod = null)
+    public function setDeliveryMethod(?string $deliveryMethod = null): self
     {
         // validation for constraint: string
         if (!is_null($deliveryMethod) && !is_string($deliveryMethod)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($deliveryMethod)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($deliveryMethod, true), gettype($deliveryMethod)), __LINE__);
         }
         $this->DeliveryMethod = $deliveryMethod;
+        
         return $this;
     }
     /**
      * Get DeliveryStatus value
      * @return \macropage\ebaysdk\trading\StructType\DeliveryStatusType|null
      */
-    public function getDeliveryStatus()
+    public function getDeliveryStatus(): ?\macropage\ebaysdk\trading\StructType\DeliveryStatusType
     {
         return $this->DeliveryStatus;
     }
@@ -97,16 +101,17 @@ class DigitalDeliverySelectedType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus
      * @return \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType
      */
-    public function setDeliveryStatus(\macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus = null)
+    public function setDeliveryStatus(?\macropage\ebaysdk\trading\StructType\DeliveryStatusType $deliveryStatus = null): self
     {
         $this->DeliveryStatus = $deliveryStatus;
+        
         return $this;
     }
     /**
      * Get DeliveryDetails value
      * @return \macropage\ebaysdk\trading\StructType\DeliveryDetailsType|null
      */
-    public function getDeliveryDetails()
+    public function getDeliveryDetails(): ?\macropage\ebaysdk\trading\StructType\DeliveryDetailsType
     {
         return $this->DeliveryDetails;
     }
@@ -115,61 +120,43 @@ class DigitalDeliverySelectedType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails
      * @return \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType
      */
-    public function setDeliveryDetails(\macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails = null)
+    public function setDeliveryDetails(?\macropage\ebaysdk\trading\StructType\DeliveryDetailsType $deliveryDetails = null): self
     {
         $this->DeliveryDetails = $deliveryDetails;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

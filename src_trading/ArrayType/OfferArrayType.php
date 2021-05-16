@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for OfferArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>BidArray</b> container that is returned in the <b>GetAllBidders</b> response. The <b>BidArray</b> container is an array of all bids made on an auction listing that is specified in the call request.
  * @subpackage Arrays
  */
@@ -14,62 +17,69 @@ class OfferArrayType extends AbstractStructArrayBase
 {
     /**
      * The Offer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Each <b>Offer</b> container consists of detailed information on each bid made on an auction listing that is specified in the call request. Information in this container includes the amount of the bid, the time of the bid, and data
      * for the user making the bid.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OfferType[]
      */
-    public $Offer;
+    protected array $Offer = [];
     /**
      * Constructor method for OfferArrayType
      * @uses OfferArrayType::setOffer()
      * @param \macropage\ebaysdk\trading\StructType\OfferType[] $offer
      */
-    public function __construct(array $offer = array())
+    public function __construct(array $offer = [])
     {
         $this
             ->setOffer($offer);
     }
     /**
      * Get Offer value
-     * @return \macropage\ebaysdk\trading\StructType\OfferType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\OfferType[]
      */
-    public function getOffer()
+    public function getOffer(): array
     {
         return $this->Offer;
     }
     /**
+     * This method is responsible for validating the values passed to the setOffer method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setOffer method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateOfferForArrayConstraintsFromSetOffer(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $offerArrayTypeOfferItem) {
+            // validation for constraint: itemType
+            if (!$offerArrayTypeOfferItem instanceof \macropage\ebaysdk\trading\StructType\OfferType) {
+                $invalidValues[] = is_object($offerArrayTypeOfferItem) ? get_class($offerArrayTypeOfferItem) : sprintf('%s(%s)', gettype($offerArrayTypeOfferItem), var_export($offerArrayTypeOfferItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Offer property can only contain items of type \macropage\ebaysdk\trading\StructType\OfferType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Offer value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\OfferType[] $offer
      * @return \macropage\ebaysdk\trading\ArrayType\OfferArrayType
      */
-    public function setOffer(array $offer = array())
+    public function setOffer(array $offer = []): self
     {
-        foreach ($offer as $offerArrayTypeOfferItem) {
-            // validation for constraint: itemType
-            if (!$offerArrayTypeOfferItem instanceof \macropage\ebaysdk\trading\StructType\OfferType) {
-                throw new \InvalidArgumentException(sprintf('The Offer property can only contain items of \macropage\ebaysdk\trading\StructType\OfferType, "%s" given', is_object($offerArrayTypeOfferItem) ? get_class($offerArrayTypeOfferItem) : gettype($offerArrayTypeOfferItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($offerArrayErrorMessage = self::validateOfferForArrayConstraintsFromSetOffer($offer))) {
+            throw new InvalidArgumentException($offerArrayErrorMessage, __LINE__);
         }
         $this->Offer = $offer;
-        return $this;
-    }
-    /**
-     * Add item to Offer value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\OfferType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\OfferArrayType
-     */
-    public function addToOffer(\macropage\ebaysdk\trading\StructType\OfferType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\OfferType) {
-            throw new \InvalidArgumentException(sprintf('The Offer property can only contain items of \macropage\ebaysdk\trading\StructType\OfferType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->Offer[] = $item;
+        
         return $this;
     }
     /**
@@ -77,7 +87,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return parent::current();
     }
@@ -87,7 +97,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return parent::item($index);
     }
@@ -96,7 +106,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return parent::first();
     }
@@ -105,7 +115,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return parent::last();
     }
@@ -115,37 +125,32 @@ class OfferArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\OfferType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\OfferArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\OfferType) {
+            throw new InvalidArgumentException(sprintf('The Offer property can only contain items of type \macropage\ebaysdk\trading\StructType\OfferType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string Offer
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'Offer';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\OfferArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MyeBayFavoriteSearchListType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: A list of favorite searches a user has saved on the My eBay page.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
 {
     /**
      * The TotalAvailable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total number of favorite searches saved.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalAvailable;
+    protected ?int $TotalAvailable = null;
     /**
      * The FavoriteSearch
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A favorite search the user has saved, with a name and a search query.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[]
      */
-    public $FavoriteSearch;
+    protected array $FavoriteSearch = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MyeBayFavoriteSearchListType
      * @uses MyeBayFavoriteSearchListType::setTotalAvailable()
@@ -41,9 +44,9 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * @uses MyeBayFavoriteSearchListType::setAny()
      * @param int $totalAvailable
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[] $favoriteSearch
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($totalAvailable = null, array $favoriteSearch = array(), \DOMDocument $any = null)
+    public function __construct(?int $totalAvailable = null, array $favoriteSearch = [], $any = null)
     {
         $this
             ->setTotalAvailable($totalAvailable)
@@ -54,7 +57,7 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * Get TotalAvailable value
      * @return int|null
      */
-    public function getTotalAvailable()
+    public function getTotalAvailable(): ?int
     {
         return $this->TotalAvailable;
     }
@@ -63,105 +66,110 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * @param int $totalAvailable
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
      */
-    public function setTotalAvailable($totalAvailable = null)
+    public function setTotalAvailable(?int $totalAvailable = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalAvailable) && !is_numeric($totalAvailable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalAvailable)), __LINE__);
+        if (!is_null($totalAvailable) && !(is_int($totalAvailable) || ctype_digit($totalAvailable))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalAvailable, true), gettype($totalAvailable)), __LINE__);
         }
         $this->TotalAvailable = $totalAvailable;
+        
         return $this;
     }
     /**
      * Get FavoriteSearch value
-     * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[]
      */
-    public function getFavoriteSearch()
+    public function getFavoriteSearch(): array
     {
         return $this->FavoriteSearch;
     }
     /**
+     * This method is responsible for validating the values passed to the setFavoriteSearch method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setFavoriteSearch method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateFavoriteSearchForArrayConstraintsFromSetFavoriteSearch(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myeBayFavoriteSearchListTypeFavoriteSearchItem) {
+            // validation for constraint: itemType
+            if (!$myeBayFavoriteSearchListTypeFavoriteSearchItem instanceof \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType) {
+                $invalidValues[] = is_object($myeBayFavoriteSearchListTypeFavoriteSearchItem) ? get_class($myeBayFavoriteSearchListTypeFavoriteSearchItem) : sprintf('%s(%s)', gettype($myeBayFavoriteSearchListTypeFavoriteSearchItem), var_export($myeBayFavoriteSearchListTypeFavoriteSearchItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The FavoriteSearch property can only contain items of type \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set FavoriteSearch value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[] $favoriteSearch
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
      */
-    public function setFavoriteSearch(array $favoriteSearch = array())
+    public function setFavoriteSearch(array $favoriteSearch = []): self
     {
-        foreach ($favoriteSearch as $myeBayFavoriteSearchListTypeFavoriteSearchItem) {
-            // validation for constraint: itemType
-            if (!$myeBayFavoriteSearchListTypeFavoriteSearchItem instanceof \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType) {
-                throw new \InvalidArgumentException(sprintf('The FavoriteSearch property can only contain items of \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType, "%s" given', is_object($myeBayFavoriteSearchListTypeFavoriteSearchItem) ? get_class($myeBayFavoriteSearchListTypeFavoriteSearchItem) : gettype($myeBayFavoriteSearchListTypeFavoriteSearchItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($favoriteSearchArrayErrorMessage = self::validateFavoriteSearchForArrayConstraintsFromSetFavoriteSearch($favoriteSearch))) {
+            throw new InvalidArgumentException($favoriteSearchArrayErrorMessage, __LINE__);
         }
         $this->FavoriteSearch = $favoriteSearch;
+        
         return $this;
     }
     /**
      * Add item to FavoriteSearch value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType $item
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
      */
-    public function addToFavoriteSearch(\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType $item)
+    public function addToFavoriteSearch(\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType) {
-            throw new \InvalidArgumentException(sprintf('The FavoriteSearch property can only contain items of \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The FavoriteSearch property can only contain items of type \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->FavoriteSearch[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

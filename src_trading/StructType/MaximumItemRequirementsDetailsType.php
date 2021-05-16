@@ -1,40 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MaximumItemRequirementsDetailsType StructType
- * Meta informations extracted from the WSDL
- * - documentation: A means of limiting unpaying or low feedback bidders.
+ * Meta information extracted from the WSDL
+ * - documentation: This type is used by the <b>MaximumItemRequirements</b> container that is returned under the <b>BuyerRequirementDetails</b> in the <b>GeteBayDetails</b>. The Maximum Item Requirement settings of Buyer Requirements allow a seller to
+ * restrict the quantity of a line item that may be purchased during a consecutive 10-day period.
  * @subpackage Structs
  */
 class MaximumItemRequirementsDetailsType extends AbstractStructBase
 {
     /**
      * The MaximumItemCount
-     * Meta informations extracted from the WSDL
-     * - documentation: The maximum number of items allowed for this buyer.
+     * Meta information extracted from the WSDL
+     * - documentation: Values returned in this field indicate the maximum quantity of an order line item that one buyer can purchase during a consecutive 10-day period.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var int[]
      */
-    public $MaximumItemCount;
+    protected array $MaximumItemCount = [];
     /**
      * The MinimumFeedbackScore
-     * Meta informations extracted from the WSDL
-     * - documentation: The Minimum Feedback Score required for a buyer who wants to purchase this item.
+     * Meta information extracted from the WSDL
+     * - documentation: A Minimum Feedback Score threshold can be added to the Maximum Item Requirement rule if the seller only wishes to restrict possible buyers with low Feedback scores. The values returned in this field indicate the minimum Feedback
+     * Score thresholds that can be used.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var int[]
      */
-    public $MinimumFeedbackScore;
+    protected array $MinimumFeedbackScore = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MaximumItemRequirementsDetailsType
      * @uses MaximumItemRequirementsDetailsType::setMaximumItemCount()
@@ -42,9 +47,9 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @uses MaximumItemRequirementsDetailsType::setAny()
      * @param int[] $maximumItemCount
      * @param int[] $minimumFeedbackScore
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $maximumItemCount = array(), array $minimumFeedbackScore = array(), \DOMDocument $any = null)
+    public function __construct(array $maximumItemCount = [], array $minimumFeedbackScore = [], $any = null)
     {
         $this
             ->setMaximumItemCount($maximumItemCount)
@@ -53,134 +58,161 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
     }
     /**
      * Get MaximumItemCount value
-     * @return int[]|null
+     * @return int[]
      */
-    public function getMaximumItemCount()
+    public function getMaximumItemCount(): array
     {
         return $this->MaximumItemCount;
     }
     /**
+     * This method is responsible for validating the values passed to the setMaximumItemCount method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMaximumItemCount method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMaximumItemCountForArrayConstraintsFromSetMaximumItemCount(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $maximumItemRequirementsDetailsTypeMaximumItemCountItem) {
+            // validation for constraint: itemType
+            if (!(is_int($maximumItemRequirementsDetailsTypeMaximumItemCountItem) || ctype_digit($maximumItemRequirementsDetailsTypeMaximumItemCountItem))) {
+                $invalidValues[] = is_object($maximumItemRequirementsDetailsTypeMaximumItemCountItem) ? get_class($maximumItemRequirementsDetailsTypeMaximumItemCountItem) : sprintf('%s(%s)', gettype($maximumItemRequirementsDetailsTypeMaximumItemCountItem), var_export($maximumItemRequirementsDetailsTypeMaximumItemCountItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The MaximumItemCount property can only contain items of type int, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set MaximumItemCount value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param int[] $maximumItemCount
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function setMaximumItemCount(array $maximumItemCount = array())
+    public function setMaximumItemCount(array $maximumItemCount = []): self
     {
-        foreach ($maximumItemCount as $maximumItemRequirementsDetailsTypeMaximumItemCountItem) {
-            // validation for constraint: itemType
-            if (!is_numeric($maximumItemRequirementsDetailsTypeMaximumItemCountItem)) {
-                throw new \InvalidArgumentException(sprintf('The MaximumItemCount property can only contain items of int, "%s" given', is_object($maximumItemRequirementsDetailsTypeMaximumItemCountItem) ? get_class($maximumItemRequirementsDetailsTypeMaximumItemCountItem) : gettype($maximumItemRequirementsDetailsTypeMaximumItemCountItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($maximumItemCountArrayErrorMessage = self::validateMaximumItemCountForArrayConstraintsFromSetMaximumItemCount($maximumItemCount))) {
+            throw new InvalidArgumentException($maximumItemCountArrayErrorMessage, __LINE__);
         }
         $this->MaximumItemCount = $maximumItemCount;
+        
         return $this;
     }
     /**
      * Add item to MaximumItemCount value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param int $item
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function addToMaximumItemCount($item)
+    public function addToMaximumItemCount(int $item): self
     {
         // validation for constraint: itemType
-        if (!is_numeric($item)) {
-            throw new \InvalidArgumentException(sprintf('The MaximumItemCount property can only contain items of int, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+        if (!(is_int($item) || ctype_digit($item))) {
+            throw new InvalidArgumentException(sprintf('The MaximumItemCount property can only contain items of type int, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->MaximumItemCount[] = $item;
+        
         return $this;
     }
     /**
      * Get MinimumFeedbackScore value
-     * @return int[]|null
+     * @return int[]
      */
-    public function getMinimumFeedbackScore()
+    public function getMinimumFeedbackScore(): array
     {
         return $this->MinimumFeedbackScore;
     }
     /**
+     * This method is responsible for validating the values passed to the setMinimumFeedbackScore method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMinimumFeedbackScore method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMinimumFeedbackScoreForArrayConstraintsFromSetMinimumFeedbackScore(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) {
+            // validation for constraint: itemType
+            if (!(is_int($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) || ctype_digit($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem))) {
+                $invalidValues[] = is_object($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) ? get_class($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) : sprintf('%s(%s)', gettype($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem), var_export($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The MinimumFeedbackScore property can only contain items of type int, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set MinimumFeedbackScore value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param int[] $minimumFeedbackScore
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function setMinimumFeedbackScore(array $minimumFeedbackScore = array())
+    public function setMinimumFeedbackScore(array $minimumFeedbackScore = []): self
     {
-        foreach ($minimumFeedbackScore as $maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) {
-            // validation for constraint: itemType
-            if (!is_numeric($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem)) {
-                throw new \InvalidArgumentException(sprintf('The MinimumFeedbackScore property can only contain items of int, "%s" given', is_object($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) ? get_class($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) : gettype($maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($minimumFeedbackScoreArrayErrorMessage = self::validateMinimumFeedbackScoreForArrayConstraintsFromSetMinimumFeedbackScore($minimumFeedbackScore))) {
+            throw new InvalidArgumentException($minimumFeedbackScoreArrayErrorMessage, __LINE__);
         }
         $this->MinimumFeedbackScore = $minimumFeedbackScore;
+        
         return $this;
     }
     /**
      * Add item to MinimumFeedbackScore value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param int $item
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function addToMinimumFeedbackScore($item)
+    public function addToMinimumFeedbackScore(int $item): self
     {
         // validation for constraint: itemType
-        if (!is_numeric($item)) {
-            throw new \InvalidArgumentException(sprintf('The MinimumFeedbackScore property can only contain items of int, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+        if (!(is_int($item) || ctype_digit($item))) {
+            throw new InvalidArgumentException(sprintf('The MinimumFeedbackScore property can only contain items of type int, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->MinimumFeedbackScore[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

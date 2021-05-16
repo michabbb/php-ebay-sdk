@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PurchaseReminderEmailPreferencesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains a seller's preference for sending a "Payment Reminder Email" to buyers.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class PurchaseReminderEmailPreferencesType extends AbstractStructBase
 {
     /**
      * The PurchaseReminderEmailPreferences
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If true, a payment reminder Email is sent to buyers.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PurchaseReminderEmailPreferences;
+    protected ?bool $PurchaseReminderEmailPreferences = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PurchaseReminderEmailPreferencesType
      * @uses PurchaseReminderEmailPreferencesType::setPurchaseReminderEmailPreferences()
      * @uses PurchaseReminderEmailPreferencesType::setAny()
      * @param bool $purchaseReminderEmailPreferences
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($purchaseReminderEmailPreferences = null, \DOMDocument $any = null)
+    public function __construct(?bool $purchaseReminderEmailPreferences = null, $any = null)
     {
         $this
             ->setPurchaseReminderEmailPreferences($purchaseReminderEmailPreferences)
@@ -42,7 +45,7 @@ class PurchaseReminderEmailPreferencesType extends AbstractStructBase
      * Get PurchaseReminderEmailPreferences value
      * @return bool|null
      */
-    public function getPurchaseReminderEmailPreferences()
+    public function getPurchaseReminderEmailPreferences(): ?bool
     {
         return $this->PurchaseReminderEmailPreferences;
     }
@@ -51,65 +54,47 @@ class PurchaseReminderEmailPreferencesType extends AbstractStructBase
      * @param bool $purchaseReminderEmailPreferences
      * @return \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType
      */
-    public function setPurchaseReminderEmailPreferences($purchaseReminderEmailPreferences = null)
+    public function setPurchaseReminderEmailPreferences(?bool $purchaseReminderEmailPreferences = null): self
     {
         // validation for constraint: boolean
         if (!is_null($purchaseReminderEmailPreferences) && !is_bool($purchaseReminderEmailPreferences)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($purchaseReminderEmailPreferences)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($purchaseReminderEmailPreferences, true), gettype($purchaseReminderEmailPreferences)), __LINE__);
         }
         $this->PurchaseReminderEmailPreferences = $purchaseReminderEmailPreferences;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BusinessSellerDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>BusinessSellerDetails</b> container, which is returned if an item's seller is registered on eBay as a Business Seller. Note that this type is only applicable for eBay sites that support Business Seller accounts.
  * @subpackage Structs
  */
@@ -14,74 +17,74 @@ class BusinessSellerDetailsType extends AbstractStructBase
 {
     /**
      * The Address
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field shows the address on file for the Business Seller.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\shopping\StructType\AddressType
+     * @var \macropage\ebaysdk\shopping\StructType\AddressType|null
      */
-    public $Address;
+    protected ?\macropage\ebaysdk\shopping\StructType\AddressType $Address = null;
     /**
      * The Fax
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field shows the Fax number on file for the Business Seller. This field is only returned if known and available.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Fax;
+    protected ?string $Fax = null;
     /**
      * The Email
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field shows the email address on file for the Business Seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Email;
+    protected ?string $Email = null;
     /**
      * The AdditionalContactInformation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field shows any additional contact for the Business Seller in free-form text. This field is only returned if known and available.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AdditionalContactInformation;
+    protected ?string $AdditionalContactInformation = null;
     /**
      * The TradeRegistrationNumber
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field shows the Trade Registration Number for the Business Seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TradeRegistrationNumber;
+    protected ?string $TradeRegistrationNumber = null;
     /**
      * The LegalInvoice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the Business Seller provides legal invoices to buyers.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LegalInvoice;
+    protected ?bool $LegalInvoice = null;
     /**
      * The TermsAndConditions
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This free-form text field provides the Business Seller's terms and conditions for doing business. This field is returned if available.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TermsAndConditions;
+    protected ?string $TermsAndConditions = null;
     /**
      * The VATDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container provides Value-Added Tax (VAT) details for the Business Seller, including the seller's VAT ID and the VAT percentage rate applicable to the item. VAT is similar to a sales and/or consumption tax, and it is only
      * applicable to sellers selling on European sites.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\shopping\StructType\VATDetailsType
+     * @var \macropage\ebaysdk\shopping\StructType\VATDetailsType|null
      */
-    public $VATDetails;
+    protected ?\macropage\ebaysdk\shopping\StructType\VATDetailsType $VATDetails = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BusinessSellerDetailsType
      * @uses BusinessSellerDetailsType::setAddress()
@@ -101,9 +104,9 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param bool $legalInvoice
      * @param string $termsAndConditions
      * @param \macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\shopping\StructType\AddressType $address = null, $fax = null, $email = null, $additionalContactInformation = null, $tradeRegistrationNumber = null, $legalInvoice = null, $termsAndConditions = null, \macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\shopping\StructType\AddressType $address = null, ?string $fax = null, ?string $email = null, ?string $additionalContactInformation = null, ?string $tradeRegistrationNumber = null, ?bool $legalInvoice = null, ?string $termsAndConditions = null, ?\macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails = null, $any = null)
     {
         $this
             ->setAddress($address)
@@ -120,7 +123,7 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * Get Address value
      * @return \macropage\ebaysdk\shopping\StructType\AddressType|null
      */
-    public function getAddress()
+    public function getAddress(): ?\macropage\ebaysdk\shopping\StructType\AddressType
     {
         return $this->Address;
     }
@@ -129,16 +132,17 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AddressType $address
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setAddress(\macropage\ebaysdk\shopping\StructType\AddressType $address = null)
+    public function setAddress(?\macropage\ebaysdk\shopping\StructType\AddressType $address = null): self
     {
         $this->Address = $address;
+        
         return $this;
     }
     /**
      * Get Fax value
      * @return string|null
      */
-    public function getFax()
+    public function getFax(): ?string
     {
         return $this->Fax;
     }
@@ -147,20 +151,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param string $fax
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setFax($fax = null)
+    public function setFax(?string $fax = null): self
     {
         // validation for constraint: string
         if (!is_null($fax) && !is_string($fax)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($fax)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($fax, true), gettype($fax)), __LINE__);
         }
         $this->Fax = $fax;
+        
         return $this;
     }
     /**
      * Get Email value
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->Email;
     }
@@ -169,20 +174,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param string $email
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setEmail($email = null)
+    public function setEmail(?string $email = null): self
     {
         // validation for constraint: string
         if (!is_null($email) && !is_string($email)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($email)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($email, true), gettype($email)), __LINE__);
         }
         $this->Email = $email;
+        
         return $this;
     }
     /**
      * Get AdditionalContactInformation value
      * @return string|null
      */
-    public function getAdditionalContactInformation()
+    public function getAdditionalContactInformation(): ?string
     {
         return $this->AdditionalContactInformation;
     }
@@ -191,20 +197,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param string $additionalContactInformation
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setAdditionalContactInformation($additionalContactInformation = null)
+    public function setAdditionalContactInformation(?string $additionalContactInformation = null): self
     {
         // validation for constraint: string
         if (!is_null($additionalContactInformation) && !is_string($additionalContactInformation)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($additionalContactInformation)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($additionalContactInformation, true), gettype($additionalContactInformation)), __LINE__);
         }
         $this->AdditionalContactInformation = $additionalContactInformation;
+        
         return $this;
     }
     /**
      * Get TradeRegistrationNumber value
      * @return string|null
      */
-    public function getTradeRegistrationNumber()
+    public function getTradeRegistrationNumber(): ?string
     {
         return $this->TradeRegistrationNumber;
     }
@@ -213,20 +220,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param string $tradeRegistrationNumber
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setTradeRegistrationNumber($tradeRegistrationNumber = null)
+    public function setTradeRegistrationNumber(?string $tradeRegistrationNumber = null): self
     {
         // validation for constraint: string
         if (!is_null($tradeRegistrationNumber) && !is_string($tradeRegistrationNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($tradeRegistrationNumber)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($tradeRegistrationNumber, true), gettype($tradeRegistrationNumber)), __LINE__);
         }
         $this->TradeRegistrationNumber = $tradeRegistrationNumber;
+        
         return $this;
     }
     /**
      * Get LegalInvoice value
      * @return bool|null
      */
-    public function getLegalInvoice()
+    public function getLegalInvoice(): ?bool
     {
         return $this->LegalInvoice;
     }
@@ -235,20 +243,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param bool $legalInvoice
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setLegalInvoice($legalInvoice = null)
+    public function setLegalInvoice(?bool $legalInvoice = null): self
     {
         // validation for constraint: boolean
         if (!is_null($legalInvoice) && !is_bool($legalInvoice)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($legalInvoice)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($legalInvoice, true), gettype($legalInvoice)), __LINE__);
         }
         $this->LegalInvoice = $legalInvoice;
+        
         return $this;
     }
     /**
      * Get TermsAndConditions value
      * @return string|null
      */
-    public function getTermsAndConditions()
+    public function getTermsAndConditions(): ?string
     {
         return $this->TermsAndConditions;
     }
@@ -257,20 +266,21 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param string $termsAndConditions
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setTermsAndConditions($termsAndConditions = null)
+    public function setTermsAndConditions(?string $termsAndConditions = null): self
     {
         // validation for constraint: string
         if (!is_null($termsAndConditions) && !is_string($termsAndConditions)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($termsAndConditions)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($termsAndConditions, true), gettype($termsAndConditions)), __LINE__);
         }
         $this->TermsAndConditions = $termsAndConditions;
+        
         return $this;
     }
     /**
      * Get VATDetails value
      * @return \macropage\ebaysdk\shopping\StructType\VATDetailsType|null
      */
-    public function getVATDetails()
+    public function getVATDetails(): ?\macropage\ebaysdk\shopping\StructType\VATDetailsType
     {
         return $this->VATDetails;
     }
@@ -279,61 +289,43 @@ class BusinessSellerDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setVATDetails(\macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails = null)
+    public function setVATDetails(?\macropage\ebaysdk\shopping\StructType\VATDetailsType $vATDetails = null): self
     {
         $this->VATDetails = $vATDetails;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

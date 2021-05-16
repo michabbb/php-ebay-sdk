@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CharacteristicType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,65 +17,65 @@ class CharacteristicType extends AbstractStructBase
 {
     /**
      * The AttributeID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var int
+     * @var int|null
      */
-    public $AttributeID;
+    protected ?int $AttributeID = null;
     /**
      * The DateFormat
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DateFormat;
+    protected ?string $DateFormat = null;
     /**
      * The DisplaySequence
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisplaySequence;
+    protected ?string $DisplaySequence = null;
     /**
      * The DisplayUOM
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisplayUOM;
+    protected ?string $DisplayUOM = null;
     /**
      * The Label
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\LabelType
+     * @var \macropage\ebaysdk\trading\StructType\LabelType|null
      */
-    public $Label;
+    protected ?\macropage\ebaysdk\trading\StructType\LabelType $Label = null;
     /**
      * The SortOrder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SortOrder;
+    protected ?string $SortOrder = null;
     /**
      * The ValueList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public $ValueList;
+    protected array $ValueList = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CharacteristicType
      * @uses CharacteristicType::setAttributeID()
@@ -90,9 +93,9 @@ class CharacteristicType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\LabelType $label
      * @param string $sortOrder
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($attributeID = null, $dateFormat = null, $displaySequence = null, $displayUOM = null, \macropage\ebaysdk\trading\StructType\LabelType $label = null, $sortOrder = null, array $valueList = array(), \DOMDocument $any = null)
+    public function __construct(?int $attributeID = null, ?string $dateFormat = null, ?string $displaySequence = null, ?string $displayUOM = null, ?\macropage\ebaysdk\trading\StructType\LabelType $label = null, ?string $sortOrder = null, array $valueList = [], $any = null)
     {
         $this
             ->setAttributeID($attributeID)
@@ -108,7 +111,7 @@ class CharacteristicType extends AbstractStructBase
      * Get AttributeID value
      * @return int|null
      */
-    public function getAttributeID()
+    public function getAttributeID(): ?int
     {
         return $this->AttributeID;
     }
@@ -117,20 +120,21 @@ class CharacteristicType extends AbstractStructBase
      * @param int $attributeID
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setAttributeID($attributeID = null)
+    public function setAttributeID(?int $attributeID = null): self
     {
         // validation for constraint: int
-        if (!is_null($attributeID) && !is_numeric($attributeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($attributeID)), __LINE__);
+        if (!is_null($attributeID) && !(is_int($attributeID) || ctype_digit($attributeID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($attributeID, true), gettype($attributeID)), __LINE__);
         }
         $this->AttributeID = $attributeID;
+        
         return $this;
     }
     /**
      * Get DateFormat value
      * @return string|null
      */
-    public function getDateFormat()
+    public function getDateFormat(): ?string
     {
         return $this->DateFormat;
     }
@@ -139,20 +143,21 @@ class CharacteristicType extends AbstractStructBase
      * @param string $dateFormat
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setDateFormat($dateFormat = null)
+    public function setDateFormat(?string $dateFormat = null): self
     {
         // validation for constraint: string
         if (!is_null($dateFormat) && !is_string($dateFormat)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($dateFormat)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($dateFormat, true), gettype($dateFormat)), __LINE__);
         }
         $this->DateFormat = $dateFormat;
+        
         return $this;
     }
     /**
      * Get DisplaySequence value
      * @return string|null
      */
-    public function getDisplaySequence()
+    public function getDisplaySequence(): ?string
     {
         return $this->DisplaySequence;
     }
@@ -161,20 +166,21 @@ class CharacteristicType extends AbstractStructBase
      * @param string $displaySequence
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setDisplaySequence($displaySequence = null)
+    public function setDisplaySequence(?string $displaySequence = null): self
     {
         // validation for constraint: string
         if (!is_null($displaySequence) && !is_string($displaySequence)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($displaySequence)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($displaySequence, true), gettype($displaySequence)), __LINE__);
         }
         $this->DisplaySequence = $displaySequence;
+        
         return $this;
     }
     /**
      * Get DisplayUOM value
      * @return string|null
      */
-    public function getDisplayUOM()
+    public function getDisplayUOM(): ?string
     {
         return $this->DisplayUOM;
     }
@@ -183,20 +189,21 @@ class CharacteristicType extends AbstractStructBase
      * @param string $displayUOM
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setDisplayUOM($displayUOM = null)
+    public function setDisplayUOM(?string $displayUOM = null): self
     {
         // validation for constraint: string
         if (!is_null($displayUOM) && !is_string($displayUOM)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($displayUOM)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($displayUOM, true), gettype($displayUOM)), __LINE__);
         }
         $this->DisplayUOM = $displayUOM;
+        
         return $this;
     }
     /**
      * Get Label value
      * @return \macropage\ebaysdk\trading\StructType\LabelType|null
      */
-    public function getLabel()
+    public function getLabel(): ?\macropage\ebaysdk\trading\StructType\LabelType
     {
         return $this->Label;
     }
@@ -205,16 +212,17 @@ class CharacteristicType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\LabelType $label
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setLabel(\macropage\ebaysdk\trading\StructType\LabelType $label = null)
+    public function setLabel(?\macropage\ebaysdk\trading\StructType\LabelType $label = null): self
     {
         $this->Label = $label;
+        
         return $this;
     }
     /**
      * Get SortOrder value
      * @return string|null
      */
-    public function getSortOrder()
+    public function getSortOrder(): ?string
     {
         return $this->SortOrder;
     }
@@ -222,109 +230,114 @@ class CharacteristicType extends AbstractStructBase
      * Set SortOrder value
      * @uses \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $sortOrder
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setSortOrder($sortOrder = null)
+    public function setSortOrder(?string $sortOrder = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SortOrderCodeType::valueIsValid($sortOrder)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $sortOrder, implode(', ', \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SortOrderCodeType', is_array($sortOrder) ? implode(', ', $sortOrder) : var_export($sortOrder, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues())), __LINE__);
         }
         $this->SortOrder = $sortOrder;
+        
         return $this;
     }
     /**
      * Get ValueList value
-     * @return \macropage\ebaysdk\trading\StructType\ValType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public function getValueList()
+    public function getValueList(): array
     {
         return $this->ValueList;
     }
     /**
+     * This method is responsible for validating the values passed to the setValueList method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setValueList method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateValueListForArrayConstraintsFromSetValueList(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $characteristicTypeValueListItem) {
+            // validation for constraint: itemType
+            if (!$characteristicTypeValueListItem instanceof \macropage\ebaysdk\trading\StructType\ValType) {
+                $invalidValues[] = is_object($characteristicTypeValueListItem) ? get_class($characteristicTypeValueListItem) : sprintf('%s(%s)', gettype($characteristicTypeValueListItem), var_export($characteristicTypeValueListItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ValueList property can only contain items of type \macropage\ebaysdk\trading\StructType\ValType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ValueList value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setValueList(array $valueList = array())
+    public function setValueList(array $valueList = []): self
     {
-        foreach ($valueList as $characteristicTypeValueListItem) {
-            // validation for constraint: itemType
-            if (!$characteristicTypeValueListItem instanceof \macropage\ebaysdk\trading\StructType\ValType) {
-                throw new \InvalidArgumentException(sprintf('The ValueList property can only contain items of \macropage\ebaysdk\trading\StructType\ValType, "%s" given', is_object($characteristicTypeValueListItem) ? get_class($characteristicTypeValueListItem) : gettype($characteristicTypeValueListItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($valueListArrayErrorMessage = self::validateValueListForArrayConstraintsFromSetValueList($valueList))) {
+            throw new InvalidArgumentException($valueListArrayErrorMessage, __LINE__);
         }
         $this->ValueList = $valueList;
+        
         return $this;
     }
     /**
      * Add item to ValueList value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ValType $item
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function addToValueList(\macropage\ebaysdk\trading\StructType\ValType $item)
+    public function addToValueList(\macropage\ebaysdk\trading\StructType\ValType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ValType) {
-            throw new \InvalidArgumentException(sprintf('The ValueList property can only contain items of \macropage\ebaysdk\trading\StructType\ValType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ValueList property can only contain items of type \macropage\ebaysdk\trading\StructType\ValType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ValueList[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CharacteristicType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

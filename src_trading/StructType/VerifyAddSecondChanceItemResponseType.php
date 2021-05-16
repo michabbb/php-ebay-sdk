@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VerifyAddSecondChanceItemResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base response of the <b>VerifyAddSecondChanceItem</b> call.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class VerifyAddSecondChanceItemResponseType extends AbstractResponseType
 {
     /**
      * The StartTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the date and time when the the new Second Chance Offer listing became active and the recipient user could purchase the item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTime;
+    protected ?string $StartTime = null;
     /**
      * The EndTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the date and time when the Second Chance Offer listing expires, at which time the listing ends (if the recipient user does not purchase the item first).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTime;
+    protected ?string $EndTime = null;
     /**
      * Constructor method for VerifyAddSecondChanceItemResponseType
      * @uses VerifyAddSecondChanceItemResponseType::setStartTime()
@@ -35,7 +38,7 @@ class VerifyAddSecondChanceItemResponseType extends AbstractResponseType
      * @param string $startTime
      * @param string $endTime
      */
-    public function __construct($startTime = null, $endTime = null)
+    public function __construct(?string $startTime = null, ?string $endTime = null)
     {
         $this
             ->setStartTime($startTime)
@@ -45,7 +48,7 @@ class VerifyAddSecondChanceItemResponseType extends AbstractResponseType
      * Get StartTime value
      * @return string|null
      */
-    public function getStartTime()
+    public function getStartTime(): ?string
     {
         return $this->StartTime;
     }
@@ -54,20 +57,21 @@ class VerifyAddSecondChanceItemResponseType extends AbstractResponseType
      * @param string $startTime
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType
      */
-    public function setStartTime($startTime = null)
+    public function setStartTime(?string $startTime = null): self
     {
         // validation for constraint: string
         if (!is_null($startTime) && !is_string($startTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTime, true), gettype($startTime)), __LINE__);
         }
         $this->StartTime = $startTime;
+        
         return $this;
     }
     /**
      * Get EndTime value
      * @return string|null
      */
-    public function getEndTime()
+    public function getEndTime(): ?string
     {
         return $this->EndTime;
     }
@@ -76,33 +80,14 @@ class VerifyAddSecondChanceItemResponseType extends AbstractResponseType
      * @param string $endTime
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType
      */
-    public function setEndTime($endTime = null)
+    public function setEndTime(?string $endTime = null): self
     {
         // validation for constraint: string
         if (!is_null($endTime) && !is_string($endTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTime, true), gettype($endTime)), __LINE__);
         }
         $this->EndTime = $endTime;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

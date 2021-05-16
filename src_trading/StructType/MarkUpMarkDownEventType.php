@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MarkUpMarkDownEventType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Describes an individual mark-up or mark-down event. eBay will automatically mark an application as down if attempts to deliver a notification fail repeatedly. eBay may mark an application down manually under certain circumstances.
  * @subpackage Structs
  */
@@ -14,34 +17,34 @@ class MarkUpMarkDownEventType extends AbstractStructBase
 {
     /**
      * The Type
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Whether the application has been marked up or marked down.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Type;
+    protected ?string $Type = null;
     /**
      * The Time
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Time when the application was marked up or marked down.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Time;
+    protected ?string $Time = null;
     /**
      * The Reason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Describes how the application was marked down, automatically or manually. When an application is automatically marked down, eBay will ping the application periodically, and if communication is restored, eBay will automatically mark
      * the application up. If your application is marked down manually, you must contact eBay Developer Support to get your application marked up. A Reason is not provided for mark up events.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Reason;
+    protected ?string $Reason = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MarkUpMarkDownEventType
      * @uses MarkUpMarkDownEventType::setType()
@@ -51,9 +54,9 @@ class MarkUpMarkDownEventType extends AbstractStructBase
      * @param string $type
      * @param string $time
      * @param string $reason
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($type = null, $time = null, $reason = null, \DOMDocument $any = null)
+    public function __construct(?string $type = null, ?string $time = null, ?string $reason = null, $any = null)
     {
         $this
             ->setType($type)
@@ -65,7 +68,7 @@ class MarkUpMarkDownEventType extends AbstractStructBase
      * Get Type value
      * @return string|null
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->Type;
     }
@@ -73,24 +76,25 @@ class MarkUpMarkDownEventType extends AbstractStructBase
      * Set Type value
      * @uses \macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $type
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType
      */
-    public function setType($type = null)
+    public function setType(?string $type = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType::valueIsValid($type)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $type, implode(', ', \macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType', is_array($type) ? implode(', ', $type) : var_export($type, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MarkUpMarkDownEventTypeCodeType::getValidValues())), __LINE__);
         }
         $this->Type = $type;
+        
         return $this;
     }
     /**
      * Get Time value
      * @return string|null
      */
-    public function getTime()
+    public function getTime(): ?string
     {
         return $this->Time;
     }
@@ -99,20 +103,21 @@ class MarkUpMarkDownEventType extends AbstractStructBase
      * @param string $time
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType
      */
-    public function setTime($time = null)
+    public function setTime(?string $time = null): self
     {
         // validation for constraint: string
         if (!is_null($time) && !is_string($time)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($time)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($time, true), gettype($time)), __LINE__);
         }
         $this->Time = $time;
+        
         return $this;
     }
     /**
      * Get Reason value
      * @return string|null
      */
-    public function getReason()
+    public function getReason(): ?string
     {
         return $this->Reason;
     }
@@ -121,65 +126,47 @@ class MarkUpMarkDownEventType extends AbstractStructBase
      * @param string $reason
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType
      */
-    public function setReason($reason = null)
+    public function setReason(?string $reason = null): self
     {
         // validation for constraint: string
         if (!is_null($reason) && !is_string($reason)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($reason)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($reason, true), gettype($reason)), __LINE__);
         }
         $this->Reason = $reason;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

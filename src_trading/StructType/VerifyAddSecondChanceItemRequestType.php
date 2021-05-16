@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VerifyAddSecondChanceItemRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Simulates the creation of a new Second Chance Offer listing of an item without actually creating a listing.
  * @subpackage Structs
  */
@@ -14,48 +17,51 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
 {
     /**
      * The RecipientBidderUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the bidder from the original, ended listing to whom the seller is extending the second chance offer. Specify only one <b>RecipientBidderUserID</b> per call. If multiple users are specified (each in a
      * <b>RecipientBidderUserID</b> node), only the last one specified receives the offer. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
      * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
      * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RecipientBidderUserID;
+    protected ?string $RecipientBidderUserID = null;
     /**
      * The BuyItNowPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the amount the offer recipient must pay to purchase the item from the Second Chance Offer listing. Use only when the original item was an eBay Motors (or in some categories on U.S. and international sites for high-priced
      * items, such as items in many U.S. and Canada Business and Industrial categories) and it ended unsold because the reserve price was not met. Call fails with an error for any other item conditions.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $BuyItNowPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $BuyItNowPrice = null;
     /**
      * The Duration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the length of time the Second Chance Offer listing will be active. The recipient bidder has that much time to purchase the item or the listing expires.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Duration;
+    protected ?string $Duration = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the item ID for the original, ended listing from which the second chance offer item comes. A new <b>ItemID</b> is returned for the Second Chance Offer item. | Type that represents the unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is used to identify the recently-ended auction listing for which a Second Chance Offer will be made to one of the non-winning bidders on the recently-ended auction listing. | Type that represents the unique identifier for
+     * an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The SellerMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Message content. Cannot contain HTML, asterisks, or quotes. This content is included in the Second Chance Offer email sent to the recipient, which can be retrieved with <b>GetMyMessages</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerMessage;
+    protected ?string $SellerMessage = null;
     /**
      * Constructor method for VerifyAddSecondChanceItemRequestType
      * @uses VerifyAddSecondChanceItemRequestType::setRecipientBidderUserID()
@@ -69,7 +75,7 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * @param string $itemID
      * @param string $sellerMessage
      */
-    public function __construct($recipientBidderUserID = null, \macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null, $duration = null, $itemID = null, $sellerMessage = null)
+    public function __construct(?string $recipientBidderUserID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null, ?string $duration = null, ?string $itemID = null, ?string $sellerMessage = null)
     {
         $this
             ->setRecipientBidderUserID($recipientBidderUserID)
@@ -82,7 +88,7 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * Get RecipientBidderUserID value
      * @return string|null
      */
-    public function getRecipientBidderUserID()
+    public function getRecipientBidderUserID(): ?string
     {
         return $this->RecipientBidderUserID;
     }
@@ -91,20 +97,21 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * @param string $recipientBidderUserID
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
      */
-    public function setRecipientBidderUserID($recipientBidderUserID = null)
+    public function setRecipientBidderUserID(?string $recipientBidderUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($recipientBidderUserID) && !is_string($recipientBidderUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($recipientBidderUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($recipientBidderUserID, true), gettype($recipientBidderUserID)), __LINE__);
         }
         $this->RecipientBidderUserID = $recipientBidderUserID;
+        
         return $this;
     }
     /**
      * Get BuyItNowPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getBuyItNowPrice()
+    public function getBuyItNowPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->BuyItNowPrice;
     }
@@ -113,16 +120,17 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
      */
-    public function setBuyItNowPrice(\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null)
+    public function setBuyItNowPrice(?\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null): self
     {
         $this->BuyItNowPrice = $buyItNowPrice;
+        
         return $this;
     }
     /**
      * Get Duration value
      * @return string|null
      */
-    public function getDuration()
+    public function getDuration(): ?string
     {
         return $this->Duration;
     }
@@ -130,24 +138,25 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * Set Duration value
      * @uses \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $duration
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
      */
-    public function setDuration($duration = null)
+    public function setDuration(?string $duration = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::valueIsValid($duration)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $duration, implode(', ', \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType', is_array($duration) ? implode(', ', $duration) : var_export($duration, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues())), __LINE__);
         }
         $this->Duration = $duration;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -156,20 +165,21 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get SellerMessage value
      * @return string|null
      */
-    public function getSellerMessage()
+    public function getSellerMessage(): ?string
     {
         return $this->SellerMessage;
     }
@@ -178,33 +188,14 @@ class VerifyAddSecondChanceItemRequestType extends AbstractRequestType
      * @param string $sellerMessage
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
      */
-    public function setSellerMessage($sellerMessage = null)
+    public function setSellerMessage(?string $sellerMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerMessage) && !is_string($sellerMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerMessage, true), gettype($sellerMessage)), __LINE__);
         }
         $this->SellerMessage = $sellerMessage;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

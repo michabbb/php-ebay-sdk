@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ListingRecommendationType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>Recommendation</b> container(s) that are conditionally returned in all Add/Revise/Relist/Verify API calls. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be improved or
  * brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in a Title,
  * and/or a recommendation to use Fast 'N Free shipping. <br><br> One or more <b>Recommendation</b> containers can be returned for each listing.
@@ -16,7 +19,7 @@ class ListingRecommendationType extends AbstractStructBase
 {
     /**
      * The Type
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the specific type of listing recommendation being provided to the seller. Possible values include the following: <ul> <li>eTRS - this recommendation type advises the seller that the listing is not meeting a
      * specific Top-Rated listing requirement, such as same-day or 1-day handling or a 14-day (or longer) Money Back Return Policy;</li> <li>ItemSpecifics - this recommendation type advises the seller that the listing is missing a required or recommended
      * Item Specifics name/value pair;</li> <li>Picture - this recommendation type advises the seller that a specific picture in the listing is not meeting a specific picture qualityrequirement;</li> <li>Price - this recommendation type provides a
@@ -26,21 +29,21 @@ class ListingRecommendationType extends AbstractStructBase
      * recommendation type is currently only supported on the US, UK, DE, and AU sites; and</li> <li>FnF - this recommendation type advises the seller to offer expedited shipping for the item (same-day shipping or handling time of 1 day) and/or offer at
      * least one free shipping service option.</li> </ul>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Type;
+    protected ?string $Type = null;
     /**
      * The Group
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the group that a specific listing recommendation belongs to. There may be multiple groups for each listing recommendation type. For example, two groups of the <b>eTRS</b> listing recommendation type are
      * 'SHIPPING' and 'RETURNS'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Group;
+    protected ?string $Group = null;
     /**
      * The FieldName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The <b>FieldName</b> value will vary based on the recommendation type. The <b>FieldName</b> values for each recommendation type are summarized below: <br><br> For <b>eTRS</b> listing recommendations, the <b>FieldName</b> value will
      * indicate the specific Trading API field that the seller needs to update to bring the listing up to top-rated listing standards. For example, if the <b>Recommendation.Type</b> value is 'eTRS' and the <b>Recommendation.Group</b> value is 'SHIPPING',
      * the <b>FieldName</b> value may be 'DispatchTimeMax'. If the seller is returned a listing recommendation like this, it would most likely indicate that the seller must reduce the handling time (<b>DispatchTimeMax</b> value) in the listing to '0'
@@ -64,22 +67,22 @@ class ListingRecommendationType extends AbstractStructBase
      * <strong>ReviseItem</strong>/<strong>ReviseFixedPriceItem</strong> call, passing in one or more <b>ShippingDetails.ShippingServiceOptions</b> containers where the shipping service is free (<b>ShippingServiceOptions.FreeShipping</b> boolean value set
      * to 'true').</li> </ul> <br><br> This <b>FieldName</b> field is always returned with each <b>Recommendation</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FieldName;
+    protected ?string $FieldName = null;
     /**
      * The Code
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This code value provides a generic, "human-friendly" message summarizing what is wrong with the listing, or how it can be improved. These values include: <ul> <li>FIELD_VALUE_INCORRECT</li> <li>FIELD_VALUE_RECOMMENDATION</li>
      * <li>MANDATED_FIELD_VALUE_MISSING</li> <li>MANDATORY_STANDARDS_NOT_MET</li> <li>RECOMMENDED_FIELD_VALUE_MISSING</li> <li>RECOMMENDED_FIELD_VALUE_TO_REMOVE</li> <li>RECOMMENDED_STANDARDS_NOT_MET</li> </ul> This field is always returned with each
      * <b>recommendation</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Code;
+    protected ?string $Code = null;
     /**
      * The Value
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The <b>Value</b> field is only applicable for <b>ItemSpecifics</b>, <b>Pricing</b>, and <b>Title</b> listing recommendation types, and it is only returned for these recommendation types. <br><br> For the <b>ItemSpecifics</b>
      * recommendation type, the value in the <b>Value</b> field is a recommended value for the recommended Item Specific name found in the <b>Recommendation.FieldName</b> field. Each Item Specific name can have more than one recommended value, so it is
      * possible to have multiple <b>Recommendation.Value</b> fields for that recommendation. It is also possible that a recommended Item Specific name will have no recommended values, hence no <b>Recommendation.FieldName</b> values are returned. <br><br>
@@ -92,32 +95,32 @@ class ListingRecommendationType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    public $Value;
+    protected array $Value = [];
     /**
      * The Message
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This textual message is the detailed description of a specific action that a seller can take to improve the quality of the listing, or bring it up to Picture or eTRS standards. For some recommendations, the fields may be revised on
      * an active listing through a <b>ReviseItem</b> or <b>ReviseFixedPriceItem</b> call of the Trading API. For other recommendations, it may not be possible to revise the fields on an active listing. <br><br> This field is returned in the
      * <b>Recommendation</b> container when available/applicable.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Message;
+    protected ?string $Message = null;
     /**
      * The Metadata
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container contains price guidance information, which includes the minimum and maximum recommended prices for the item, which are based on recent sales of similar items. This container is only returned for price recommendations
      * and when the pricing data is available. <br><br> A <b>Metadata</b> container is returned for each price guidance parameter that is applicable/available for the pricing recommendation.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MetadataType[]
      */
-    public $Metadata;
+    protected array $Metadata = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ListingRecommendationType
      * @uses ListingRecommendationType::setType()
@@ -135,9 +138,9 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string[] $value
      * @param string $message
      * @param \macropage\ebaysdk\trading\StructType\MetadataType[] $metadata
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($type = null, $group = null, $fieldName = null, $code = null, array $value = array(), $message = null, array $metadata = array(), \DOMDocument $any = null)
+    public function __construct(?string $type = null, ?string $group = null, ?string $fieldName = null, ?string $code = null, array $value = [], ?string $message = null, array $metadata = [], $any = null)
     {
         $this
             ->setType($type)
@@ -153,7 +156,7 @@ class ListingRecommendationType extends AbstractStructBase
      * Get Type value
      * @return string|null
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->Type;
     }
@@ -162,20 +165,21 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string $type
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setType($type = null)
+    public function setType(?string $type = null): self
     {
         // validation for constraint: string
         if (!is_null($type) && !is_string($type)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($type)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($type, true), gettype($type)), __LINE__);
         }
         $this->Type = $type;
+        
         return $this;
     }
     /**
      * Get Group value
      * @return string|null
      */
-    public function getGroup()
+    public function getGroup(): ?string
     {
         return $this->Group;
     }
@@ -184,20 +188,21 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string $group
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setGroup($group = null)
+    public function setGroup(?string $group = null): self
     {
         // validation for constraint: string
         if (!is_null($group) && !is_string($group)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($group)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($group, true), gettype($group)), __LINE__);
         }
         $this->Group = $group;
+        
         return $this;
     }
     /**
      * Get FieldName value
      * @return string|null
      */
-    public function getFieldName()
+    public function getFieldName(): ?string
     {
         return $this->FieldName;
     }
@@ -206,20 +211,21 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string $fieldName
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setFieldName($fieldName = null)
+    public function setFieldName(?string $fieldName = null): self
     {
         // validation for constraint: string
         if (!is_null($fieldName) && !is_string($fieldName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($fieldName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($fieldName, true), gettype($fieldName)), __LINE__);
         }
         $this->FieldName = $fieldName;
+        
         return $this;
     }
     /**
      * Get Code value
      * @return string|null
      */
-    public function getCode()
+    public function getCode(): ?string
     {
         return $this->Code;
     }
@@ -228,60 +234,84 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string $code
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setCode($code = null)
+    public function setCode(?string $code = null): self
     {
         // validation for constraint: string
         if (!is_null($code) && !is_string($code)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($code)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($code, true), gettype($code)), __LINE__);
         }
         $this->Code = $code;
+        
         return $this;
     }
     /**
      * Get Value value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getValue()
+    public function getValue(): array
     {
         return $this->Value;
     }
     /**
+     * This method is responsible for validating the values passed to the setValue method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setValue method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateValueForArrayConstraintsFromSetValue(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $listingRecommendationTypeValueItem) {
+            // validation for constraint: itemType
+            if (!is_string($listingRecommendationTypeValueItem)) {
+                $invalidValues[] = is_object($listingRecommendationTypeValueItem) ? get_class($listingRecommendationTypeValueItem) : sprintf('%s(%s)', gettype($listingRecommendationTypeValueItem), var_export($listingRecommendationTypeValueItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Value property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Value value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $value
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setValue(array $value = array())
+    public function setValue(array $value = []): self
     {
-        foreach ($value as $listingRecommendationTypeValueItem) {
-            // validation for constraint: itemType
-            if (!is_string($listingRecommendationTypeValueItem)) {
-                throw new \InvalidArgumentException(sprintf('The Value property can only contain items of string, "%s" given', is_object($listingRecommendationTypeValueItem) ? get_class($listingRecommendationTypeValueItem) : gettype($listingRecommendationTypeValueItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($valueArrayErrorMessage = self::validateValueForArrayConstraintsFromSetValue($value))) {
+            throw new InvalidArgumentException($valueArrayErrorMessage, __LINE__);
         }
         $this->Value = $value;
+        
         return $this;
     }
     /**
      * Add item to Value value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function addToValue($item)
+    public function addToValue(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The Value property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Value property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Value[] = $item;
+        
         return $this;
     }
     /**
      * Get Message value
      * @return string|null
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->Message;
     }
@@ -290,105 +320,110 @@ class ListingRecommendationType extends AbstractStructBase
      * @param string $message
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setMessage($message = null)
+    public function setMessage(?string $message = null): self
     {
         // validation for constraint: string
         if (!is_null($message) && !is_string($message)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($message)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($message, true), gettype($message)), __LINE__);
         }
         $this->Message = $message;
+        
         return $this;
     }
     /**
      * Get Metadata value
-     * @return \macropage\ebaysdk\trading\StructType\MetadataType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MetadataType[]
      */
-    public function getMetadata()
+    public function getMetadata(): array
     {
         return $this->Metadata;
     }
     /**
+     * This method is responsible for validating the values passed to the setMetadata method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMetadata method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMetadataForArrayConstraintsFromSetMetadata(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $listingRecommendationTypeMetadataItem) {
+            // validation for constraint: itemType
+            if (!$listingRecommendationTypeMetadataItem instanceof \macropage\ebaysdk\trading\StructType\MetadataType) {
+                $invalidValues[] = is_object($listingRecommendationTypeMetadataItem) ? get_class($listingRecommendationTypeMetadataItem) : sprintf('%s(%s)', gettype($listingRecommendationTypeMetadataItem), var_export($listingRecommendationTypeMetadataItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Metadata property can only contain items of type \macropage\ebaysdk\trading\StructType\MetadataType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Metadata value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MetadataType[] $metadata
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setMetadata(array $metadata = array())
+    public function setMetadata(array $metadata = []): self
     {
-        foreach ($metadata as $listingRecommendationTypeMetadataItem) {
-            // validation for constraint: itemType
-            if (!$listingRecommendationTypeMetadataItem instanceof \macropage\ebaysdk\trading\StructType\MetadataType) {
-                throw new \InvalidArgumentException(sprintf('The Metadata property can only contain items of \macropage\ebaysdk\trading\StructType\MetadataType, "%s" given', is_object($listingRecommendationTypeMetadataItem) ? get_class($listingRecommendationTypeMetadataItem) : gettype($listingRecommendationTypeMetadataItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($metadataArrayErrorMessage = self::validateMetadataForArrayConstraintsFromSetMetadata($metadata))) {
+            throw new InvalidArgumentException($metadataArrayErrorMessage, __LINE__);
         }
         $this->Metadata = $metadata;
+        
         return $this;
     }
     /**
      * Add item to Metadata value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MetadataType $item
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function addToMetadata(\macropage\ebaysdk\trading\StructType\MetadataType $item)
+    public function addToMetadata(\macropage\ebaysdk\trading\StructType\MetadataType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\MetadataType) {
-            throw new \InvalidArgumentException(sprintf('The Metadata property can only contain items of \macropage\ebaysdk\trading\StructType\MetadataType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Metadata property can only contain items of type \macropage\ebaysdk\trading\StructType\MetadataType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Metadata[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ListingRecommendationType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

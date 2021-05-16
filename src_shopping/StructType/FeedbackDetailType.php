@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FeedbackDetailType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>FeedbackDetails</b> containers that are returned in the <b>GetUserProfile</b> response. Each <b>FeedbackDetails</b> container consists of detailed information on one Feedback entry for the specified eBay user.
  * <b>FeedbackDetails</b> containers are only returned if an <b>IncludeSelector</b> field is included in the request with a value set to <code>FeedbackDetails</code>.
  * @subpackage Structs
@@ -15,162 +18,162 @@ class FeedbackDetailType extends AbstractStructBase
 {
     /**
      * The FeedbackRatingStar
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value provides the Feedback Rating Star of the user indicated in the <b>CommentingUser</b> field. See <a href="types/FeedbackRatingStarCodeType.html">FeedbackRatingStarCodeType</a> for the full list of Feedback
      * Rating Stars, and the Feedback score ranges associated with those stars.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FeedbackRatingStar;
+    protected ?string $FeedbackRatingStar = null;
     /**
      * The CommentingUser
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay User ID of the user who left the Feedback entry.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CommentingUser;
+    protected ?string $CommentingUser = null;
     /**
      * The CommentingUserScore
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value is the Feedback score of the user indicated in the <b>CommentingUser</b> field.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CommentingUserScore;
+    protected ?int $CommentingUserScore = null;
     /**
      * The CommentText
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This free-form text is the actual comment that the commenting user left for their order partner. The Feedback comment's purpose is to explain, clarify, or justify the Feedback rating specified in the <b>CommentType</b> field.
      * <br><br> The comment is returned as text in the language that the comment was originally left in. This comment will still be displayed even if a submitted Feedback entry is withdrawn.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CommentText;
+    protected ?string $CommentText = null;
     /**
      * The CommentTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This timestamp (in GMT) indicates the date/time that the Feedback entry was submitted to eBay.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CommentTime;
+    protected ?string $CommentTime = null;
     /**
      * The CommentType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the rating of the Feedback left by the user identified in the <b>CommentingUser</b> field. <br><br> A <b>Positive</b> rating increases a user's Feedback score by a value of 1, a <b>Negative</b> rating decreases a
      * user's Feedback score by a value of 1, and a <b>Neutral</b> rating does not affect a user's Feedback score. <br><br> Sellers cannot leave <b>Neutral</b> or <b>Negative</b> ratings for buyers.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CommentType;
+    protected ?string $CommentType = null;
     /**
      * The FeedbackResponse
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This free-form text is the comment that the recipient of the Feedback may leave in response or rebuttal to the Feedback. Responses to Feedback comments cannot be submitted or edited via the API. This field is returned as an empty tag
      * if no response to the Feedback entry has been submitted.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FeedbackResponse;
+    protected ?string $FeedbackResponse = null;
     /**
      * The FollowUp
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This free-form text is the explanation that a user can give to a submitted Feedback response. Follow-ups to Feedback comments cannot be submitted or edited via the API. This field is returned as an empty tag if no Follow-Up to the
      * Feedback response has been submitted.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FollowUp;
+    protected ?string $FollowUp = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the listing associated with the Feedback entry. For Feedback entries that were left for the buyer by the seller, an <b>ItemID</b> value will not be returned to a user that was not involved in the transaction
      * as either the buyer or seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The Role
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates whether the specified eBay user (and recipient of the Feedback entry) was the buyer or the seller for the corresponding order line item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Role;
+    protected ?string $Role = null;
     /**
      * The ItemTitle
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The title of the listing for which Feedback was provided. This field may not be returned for a listing that ended more than 90 days ago. For Feedback entries that were left for the buyer by the seller, an <b>ItemTitle</b> value will
      * not be returned to a user that was not involved in the transaction as either the buyer or seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemTitle;
+    protected ?string $ItemTitle = null;
     /**
      * The ItemPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The purchase price for the order line item associated with the Feedback entry. This field may not be returned for a listing that ended more than 90 days ago. For Feedback entries that were left for the buyer by the seller, an
      * <b>ItemPrice</b> value will not be returned to a user that was not involved in the transaction as either the buyer or seller.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\shopping\StructType\AmountType
+     * @var \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public $ItemPrice;
+    protected ?\macropage\ebaysdk\shopping\StructType\AmountType $ItemPrice = null;
     /**
      * The FeedbackID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for the Feedback entry. This identifier is auto-generated by eBay at the time of Feedback submittal.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FeedbackID;
+    protected ?string $FeedbackID = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for the order line item for which the Feedback entry was left. The value of this field is always '0' for auction listings since auctions only have one winner/buyer, and only the <b>ItemID</b> value is needed to
      * identify the transaction. For Feedback entries that were left for the buyer by the seller, a <b>TransactionID</b> value will not be returned to a user that was not involved in the transaction as either the buyer or seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The CommentReplaced
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean value indicates whether or not eBay replaced the Feedback comment with a message that the Feedback comment was removed.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CommentReplaced;
+    protected ?bool $CommentReplaced = null;
     /**
      * The ResponseReplaced
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean value indicates whether or not eBay replaced the response to the Feedback comment with a message that the response to the Feedback comment was removed.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ResponseReplaced;
+    protected ?bool $ResponseReplaced = null;
     /**
      * The FollowUpReplaced
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean value indicates whether or not eBay replaced the follow-up to the Feedback comment with a message that the follow-up to the Feedback comment was removed.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $FollowUpReplaced;
+    protected ?bool $FollowUpReplaced = null;
     /**
      * The Countable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean value indicates whether or not the Feedback entry will affect the user's Feedback score.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Countable;
+    protected ?bool $Countable = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for FeedbackDetailType
      * @uses FeedbackDetailType::setFeedbackRatingStar()
@@ -210,9 +213,9 @@ class FeedbackDetailType extends AbstractStructBase
      * @param bool $responseReplaced
      * @param bool $followUpReplaced
      * @param bool $countable
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($feedbackRatingStar = null, $commentingUser = null, $commentingUserScore = null, $commentText = null, $commentTime = null, $commentType = null, $feedbackResponse = null, $followUp = null, $itemID = null, $role = null, $itemTitle = null, \macropage\ebaysdk\shopping\StructType\AmountType $itemPrice = null, $feedbackID = null, $transactionID = null, $commentReplaced = null, $responseReplaced = null, $followUpReplaced = null, $countable = null, \DOMDocument $any = null)
+    public function __construct(?string $feedbackRatingStar = null, ?string $commentingUser = null, ?int $commentingUserScore = null, ?string $commentText = null, ?string $commentTime = null, ?string $commentType = null, ?string $feedbackResponse = null, ?string $followUp = null, ?string $itemID = null, ?string $role = null, ?string $itemTitle = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $itemPrice = null, ?string $feedbackID = null, ?string $transactionID = null, ?bool $commentReplaced = null, ?bool $responseReplaced = null, ?bool $followUpReplaced = null, ?bool $countable = null, $any = null)
     {
         $this
             ->setFeedbackRatingStar($feedbackRatingStar)
@@ -239,7 +242,7 @@ class FeedbackDetailType extends AbstractStructBase
      * Get FeedbackRatingStar value
      * @return string|null
      */
-    public function getFeedbackRatingStar()
+    public function getFeedbackRatingStar(): ?string
     {
         return $this->FeedbackRatingStar;
     }
@@ -247,24 +250,25 @@ class FeedbackDetailType extends AbstractStructBase
      * Set FeedbackRatingStar value
      * @uses \macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $feedbackRatingStar
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setFeedbackRatingStar($feedbackRatingStar = null)
+    public function setFeedbackRatingStar(?string $feedbackRatingStar = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType::valueIsValid($feedbackRatingStar)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $feedbackRatingStar, implode(', ', \macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType', is_array($feedbackRatingStar) ? implode(', ', $feedbackRatingStar) : var_export($feedbackRatingStar, true), implode(', ', \macropage\ebaysdk\shopping\EnumType\FeedbackRatingStarCodeType::getValidValues())), __LINE__);
         }
         $this->FeedbackRatingStar = $feedbackRatingStar;
+        
         return $this;
     }
     /**
      * Get CommentingUser value
      * @return string|null
      */
-    public function getCommentingUser()
+    public function getCommentingUser(): ?string
     {
         return $this->CommentingUser;
     }
@@ -273,20 +277,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $commentingUser
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentingUser($commentingUser = null)
+    public function setCommentingUser(?string $commentingUser = null): self
     {
         // validation for constraint: string
         if (!is_null($commentingUser) && !is_string($commentingUser)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($commentingUser)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($commentingUser, true), gettype($commentingUser)), __LINE__);
         }
         $this->CommentingUser = $commentingUser;
+        
         return $this;
     }
     /**
      * Get CommentingUserScore value
      * @return int|null
      */
-    public function getCommentingUserScore()
+    public function getCommentingUserScore(): ?int
     {
         return $this->CommentingUserScore;
     }
@@ -295,20 +300,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param int $commentingUserScore
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentingUserScore($commentingUserScore = null)
+    public function setCommentingUserScore(?int $commentingUserScore = null): self
     {
         // validation for constraint: int
-        if (!is_null($commentingUserScore) && !is_numeric($commentingUserScore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($commentingUserScore)), __LINE__);
+        if (!is_null($commentingUserScore) && !(is_int($commentingUserScore) || ctype_digit($commentingUserScore))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($commentingUserScore, true), gettype($commentingUserScore)), __LINE__);
         }
         $this->CommentingUserScore = $commentingUserScore;
+        
         return $this;
     }
     /**
      * Get CommentText value
      * @return string|null
      */
-    public function getCommentText()
+    public function getCommentText(): ?string
     {
         return $this->CommentText;
     }
@@ -317,20 +323,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $commentText
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentText($commentText = null)
+    public function setCommentText(?string $commentText = null): self
     {
         // validation for constraint: string
         if (!is_null($commentText) && !is_string($commentText)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($commentText)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($commentText, true), gettype($commentText)), __LINE__);
         }
         $this->CommentText = $commentText;
+        
         return $this;
     }
     /**
      * Get CommentTime value
      * @return string|null
      */
-    public function getCommentTime()
+    public function getCommentTime(): ?string
     {
         return $this->CommentTime;
     }
@@ -339,20 +346,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $commentTime
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentTime($commentTime = null)
+    public function setCommentTime(?string $commentTime = null): self
     {
         // validation for constraint: string
         if (!is_null($commentTime) && !is_string($commentTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($commentTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($commentTime, true), gettype($commentTime)), __LINE__);
         }
         $this->CommentTime = $commentTime;
+        
         return $this;
     }
     /**
      * Get CommentType value
      * @return string|null
      */
-    public function getCommentType()
+    public function getCommentType(): ?string
     {
         return $this->CommentType;
     }
@@ -360,24 +368,25 @@ class FeedbackDetailType extends AbstractStructBase
      * Set CommentType value
      * @uses \macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $commentType
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentType($commentType = null)
+    public function setCommentType(?string $commentType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType::valueIsValid($commentType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $commentType, implode(', ', \macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType', is_array($commentType) ? implode(', ', $commentType) : var_export($commentType, true), implode(', ', \macropage\ebaysdk\shopping\EnumType\CommentTypeCodeType::getValidValues())), __LINE__);
         }
         $this->CommentType = $commentType;
+        
         return $this;
     }
     /**
      * Get FeedbackResponse value
      * @return string|null
      */
-    public function getFeedbackResponse()
+    public function getFeedbackResponse(): ?string
     {
         return $this->FeedbackResponse;
     }
@@ -386,20 +395,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $feedbackResponse
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setFeedbackResponse($feedbackResponse = null)
+    public function setFeedbackResponse(?string $feedbackResponse = null): self
     {
         // validation for constraint: string
         if (!is_null($feedbackResponse) && !is_string($feedbackResponse)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($feedbackResponse)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($feedbackResponse, true), gettype($feedbackResponse)), __LINE__);
         }
         $this->FeedbackResponse = $feedbackResponse;
+        
         return $this;
     }
     /**
      * Get FollowUp value
      * @return string|null
      */
-    public function getFollowUp()
+    public function getFollowUp(): ?string
     {
         return $this->FollowUp;
     }
@@ -408,20 +418,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $followUp
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setFollowUp($followUp = null)
+    public function setFollowUp(?string $followUp = null): self
     {
         // validation for constraint: string
         if (!is_null($followUp) && !is_string($followUp)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($followUp)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($followUp, true), gettype($followUp)), __LINE__);
         }
         $this->FollowUp = $followUp;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -430,20 +441,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get Role value
      * @return string|null
      */
-    public function getRole()
+    public function getRole(): ?string
     {
         return $this->Role;
     }
@@ -451,24 +463,25 @@ class FeedbackDetailType extends AbstractStructBase
      * Set Role value
      * @uses \macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $role
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setRole($role = null)
+    public function setRole(?string $role = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType::valueIsValid($role)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $role, implode(', ', \macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType', is_array($role) ? implode(', ', $role) : var_export($role, true), implode(', ', \macropage\ebaysdk\shopping\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
         }
         $this->Role = $role;
+        
         return $this;
     }
     /**
      * Get ItemTitle value
      * @return string|null
      */
-    public function getItemTitle()
+    public function getItemTitle(): ?string
     {
         return $this->ItemTitle;
     }
@@ -477,20 +490,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $itemTitle
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setItemTitle($itemTitle = null)
+    public function setItemTitle(?string $itemTitle = null): self
     {
         // validation for constraint: string
         if (!is_null($itemTitle) && !is_string($itemTitle)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemTitle)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemTitle, true), gettype($itemTitle)), __LINE__);
         }
         $this->ItemTitle = $itemTitle;
+        
         return $this;
     }
     /**
      * Get ItemPrice value
      * @return \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public function getItemPrice()
+    public function getItemPrice(): ?\macropage\ebaysdk\shopping\StructType\AmountType
     {
         return $this->ItemPrice;
     }
@@ -499,16 +513,17 @@ class FeedbackDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AmountType $itemPrice
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setItemPrice(\macropage\ebaysdk\shopping\StructType\AmountType $itemPrice = null)
+    public function setItemPrice(?\macropage\ebaysdk\shopping\StructType\AmountType $itemPrice = null): self
     {
         $this->ItemPrice = $itemPrice;
+        
         return $this;
     }
     /**
      * Get FeedbackID value
      * @return string|null
      */
-    public function getFeedbackID()
+    public function getFeedbackID(): ?string
     {
         return $this->FeedbackID;
     }
@@ -517,20 +532,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $feedbackID
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setFeedbackID($feedbackID = null)
+    public function setFeedbackID(?string $feedbackID = null): self
     {
         // validation for constraint: string
         if (!is_null($feedbackID) && !is_string($feedbackID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($feedbackID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($feedbackID, true), gettype($feedbackID)), __LINE__);
         }
         $this->FeedbackID = $feedbackID;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -539,20 +555,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param string $transactionID
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get CommentReplaced value
      * @return bool|null
      */
-    public function getCommentReplaced()
+    public function getCommentReplaced(): ?bool
     {
         return $this->CommentReplaced;
     }
@@ -561,20 +578,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param bool $commentReplaced
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCommentReplaced($commentReplaced = null)
+    public function setCommentReplaced(?bool $commentReplaced = null): self
     {
         // validation for constraint: boolean
         if (!is_null($commentReplaced) && !is_bool($commentReplaced)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($commentReplaced)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($commentReplaced, true), gettype($commentReplaced)), __LINE__);
         }
         $this->CommentReplaced = $commentReplaced;
+        
         return $this;
     }
     /**
      * Get ResponseReplaced value
      * @return bool|null
      */
-    public function getResponseReplaced()
+    public function getResponseReplaced(): ?bool
     {
         return $this->ResponseReplaced;
     }
@@ -583,20 +601,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param bool $responseReplaced
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setResponseReplaced($responseReplaced = null)
+    public function setResponseReplaced(?bool $responseReplaced = null): self
     {
         // validation for constraint: boolean
         if (!is_null($responseReplaced) && !is_bool($responseReplaced)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($responseReplaced)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($responseReplaced, true), gettype($responseReplaced)), __LINE__);
         }
         $this->ResponseReplaced = $responseReplaced;
+        
         return $this;
     }
     /**
      * Get FollowUpReplaced value
      * @return bool|null
      */
-    public function getFollowUpReplaced()
+    public function getFollowUpReplaced(): ?bool
     {
         return $this->FollowUpReplaced;
     }
@@ -605,20 +624,21 @@ class FeedbackDetailType extends AbstractStructBase
      * @param bool $followUpReplaced
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setFollowUpReplaced($followUpReplaced = null)
+    public function setFollowUpReplaced(?bool $followUpReplaced = null): self
     {
         // validation for constraint: boolean
         if (!is_null($followUpReplaced) && !is_bool($followUpReplaced)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($followUpReplaced)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($followUpReplaced, true), gettype($followUpReplaced)), __LINE__);
         }
         $this->FollowUpReplaced = $followUpReplaced;
+        
         return $this;
     }
     /**
      * Get Countable value
      * @return bool|null
      */
-    public function getCountable()
+    public function getCountable(): ?bool
     {
         return $this->Countable;
     }
@@ -627,65 +647,47 @@ class FeedbackDetailType extends AbstractStructBase
      * @param bool $countable
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setCountable($countable = null)
+    public function setCountable(?bool $countable = null): self
     {
         // validation for constraint: boolean
         if (!is_null($countable) && !is_bool($countable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($countable)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($countable, true), gettype($countable)), __LINE__);
         }
         $this->Countable = $countable;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\FeedbackDetailType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

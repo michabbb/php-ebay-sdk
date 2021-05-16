@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetVeROReportStatusRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves status information about VeRO reported items you have submitted. You can receive the status of individual items you have reported or, by specifying <strong>VeROReportPacketID</strong>, you can retrieve status for all items
  * reported with a given <strong>VeROReportItems</strong> request. You can also retrieve items that were reported during a given time period. If no input parameters are specified, status is returned on all items you have reported in the last two years.
  * You must be a member of the Verified Rights Owner (VeRO) Program to use this call.
@@ -16,58 +19,59 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
 {
     /**
      * The VeROReportPacketID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Packet identifier associated with the reported items for which you want to retrieve status. By default, reported item details are not returned when you specify the packet ID in the request. Applies only to items reported with the
      * <strong>VeROReportItems</strong> call.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $VeROReportPacketID;
+    protected ?int $VeROReportPacketID = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay listing reported for alleged infringement. Applies to items reported with the <strong>VeROReportItems</strong> call or by other means (e.g., through the Web flow). | Type that represents the unique
      * identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The IncludeReportedItemDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Set to true to return reported item details when you specify <strong>VeROReportPacketID</strong> in the request.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeReportedItemDetails;
+    protected ?bool $IncludeReportedItemDetails = null;
     /**
      * The TimeFrom
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Limits returned items to only those that were submited on or after the date-time specified. If specified, TimeTo must also be specified. Express the date-time in the format YYYY-MM-DD HH:MM:SS, and in GMT. (For information on how to
      * convert between your local time zone and GMT, see Time Values Note.) Applies to items reported with VeROReportItems or by other means (e.g., through the web flow). Infringement reporting data is maintained for two years after the date of submission.
      * This field is ignored if <strong>VeROReportPacketID</strong> or <strong>ItemID</strong> is specified.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TimeFrom;
+    protected ?string $TimeFrom = null;
     /**
      * The TimeTo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Limits returned items to only those that were submited on or before the date-time specified. If specified, TimeFrom must also be specified. Express date-time in the format YYYY-MM-DD HH:MM:SS, and in GMT. (For information on how to
      * convert between your local time zone and GMT, see Time Values Note.) Applies to items reported with VeROReportItems or by other means (e.g., through the web flow). Infringement reporting data is maintained for two years after the date of submission.
      * This field is ignored if <strong>VeROReportPacketID</strong> or <strong>ItemID</strong> is specified.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TimeTo;
+    protected ?string $TimeTo = null;
     /**
      * The Pagination
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the data controlling the pagination of the returned values: how many items are returned per page of data (per call) and the number of the page to return with the current call.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public $Pagination;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationType $Pagination = null;
     /**
      * Constructor method for GetVeROReportStatusRequestType
      * @uses GetVeROReportStatusRequestType::setVeROReportPacketID()
@@ -83,7 +87,7 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param string $timeTo
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      */
-    public function __construct($veROReportPacketID = null, $itemID = null, $includeReportedItemDetails = null, $timeFrom = null, $timeTo = null, \macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function __construct(?int $veROReportPacketID = null, ?string $itemID = null, ?bool $includeReportedItemDetails = null, ?string $timeFrom = null, ?string $timeTo = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
     {
         $this
             ->setVeROReportPacketID($veROReportPacketID)
@@ -97,7 +101,7 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * Get VeROReportPacketID value
      * @return int|null
      */
-    public function getVeROReportPacketID()
+    public function getVeROReportPacketID(): ?int
     {
         return $this->VeROReportPacketID;
     }
@@ -106,20 +110,21 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param int $veROReportPacketID
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setVeROReportPacketID($veROReportPacketID = null)
+    public function setVeROReportPacketID(?int $veROReportPacketID = null): self
     {
         // validation for constraint: int
-        if (!is_null($veROReportPacketID) && !is_numeric($veROReportPacketID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($veROReportPacketID)), __LINE__);
+        if (!is_null($veROReportPacketID) && !(is_int($veROReportPacketID) || ctype_digit($veROReportPacketID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($veROReportPacketID, true), gettype($veROReportPacketID)), __LINE__);
         }
         $this->VeROReportPacketID = $veROReportPacketID;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -128,20 +133,21 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get IncludeReportedItemDetails value
      * @return bool|null
      */
-    public function getIncludeReportedItemDetails()
+    public function getIncludeReportedItemDetails(): ?bool
     {
         return $this->IncludeReportedItemDetails;
     }
@@ -150,20 +156,21 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param bool $includeReportedItemDetails
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setIncludeReportedItemDetails($includeReportedItemDetails = null)
+    public function setIncludeReportedItemDetails(?bool $includeReportedItemDetails = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeReportedItemDetails) && !is_bool($includeReportedItemDetails)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeReportedItemDetails)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeReportedItemDetails, true), gettype($includeReportedItemDetails)), __LINE__);
         }
         $this->IncludeReportedItemDetails = $includeReportedItemDetails;
+        
         return $this;
     }
     /**
      * Get TimeFrom value
      * @return string|null
      */
-    public function getTimeFrom()
+    public function getTimeFrom(): ?string
     {
         return $this->TimeFrom;
     }
@@ -172,20 +179,21 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param string $timeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setTimeFrom($timeFrom = null)
+    public function setTimeFrom(?string $timeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($timeFrom) && !is_string($timeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($timeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($timeFrom, true), gettype($timeFrom)), __LINE__);
         }
         $this->TimeFrom = $timeFrom;
+        
         return $this;
     }
     /**
      * Get TimeTo value
      * @return string|null
      */
-    public function getTimeTo()
+    public function getTimeTo(): ?string
     {
         return $this->TimeTo;
     }
@@ -194,20 +202,21 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param string $timeTo
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setTimeTo($timeTo = null)
+    public function setTimeTo(?string $timeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($timeTo) && !is_string($timeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($timeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($timeTo, true), gettype($timeTo)), __LINE__);
         }
         $this->TimeTo = $timeTo;
+        
         return $this;
     }
     /**
      * Get Pagination value
      * @return \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public function getPagination()
+    public function getPagination(): ?\macropage\ebaysdk\trading\StructType\PaginationType
     {
         return $this->Pagination;
     }
@@ -216,29 +225,10 @@ class GetVeROReportStatusRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
      */
-    public function setPagination(\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function setPagination(?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null): self
     {
         $this->Pagination = $pagination;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

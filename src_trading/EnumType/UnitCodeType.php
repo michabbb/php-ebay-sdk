@@ -1,70 +1,82 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for UnitCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Units of measure that you can use to specify properties such as weight and size dimensions.
  * @subpackage Enumerations
  */
-class UnitCodeType
+class UnitCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'kg'
+     * Meta information extracted from the WSDL
+     * - documentation: Kilograms
      * @return string 'kg'
      */
     const VALUE_KG = 'kg';
     /**
      * Constant for value 'gm'
+     * Meta information extracted from the WSDL
+     * - documentation: Grams
      * @return string 'gm'
      */
     const VALUE_GM = 'gm';
     /**
      * Constant for value 'lbs'
+     * Meta information extracted from the WSDL
+     * - documentation: Pounds
      * @return string 'lbs'
      */
     const VALUE_LBS = 'lbs';
     /**
      * Constant for value 'oz'
+     * Meta information extracted from the WSDL
+     * - documentation: Ounces
      * @return string 'oz'
      */
     const VALUE_OZ = 'oz';
     /**
      * Constant for value 'cm'
+     * Meta information extracted from the WSDL
+     * - documentation: Centimeters
      * @return string 'cm'
      */
     const VALUE_CM = 'cm';
     /**
      * Constant for value 'mm'
+     * Meta information extracted from the WSDL
+     * - documentation: Milimeters
      * @return string 'mm'
      */
     const VALUE_MM = 'mm';
     /**
      * Constant for value 'inches'
+     * Meta information extracted from the WSDL
+     * - documentation: Inches
      * @return string 'inches'
      */
     const VALUE_INCHES = 'inches';
     /**
      * Constant for value 'ft'
+     * Meta information extracted from the WSDL
+     * - documentation: Feet
      * @return string 'ft'
      */
     const VALUE_FT = 'ft';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: Reserved for internal or future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_KG
@@ -78,9 +90,9 @@ class UnitCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_KG,
             self::VALUE_GM,
             self::VALUE_LBS,
@@ -90,14 +102,6 @@ class UnitCodeType
             self::VALUE_INCHES,
             self::VALUE_FT,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

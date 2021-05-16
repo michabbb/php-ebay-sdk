@@ -1,95 +1,110 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellerPaymentPreferencesType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>SellerPaymentPreferences</b> container, which consists of the seller's payment preferences. Payment preferences specified in a <b>SetUserPreferences</b> call override the settings in My eBay payment preferences.
+ * <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control some of the settings under the <b>SellerPaymentPreferences</b> container, and although some of these fields can still be set in
+ * <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the settings will not have any affect on any current or future listings for the seller. eBay managed payments is currently available to a select set of sellers. For the current list
+ * of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. </span> <br>
  * @subpackage Structs
  */
 class SellerPaymentPreferencesType extends AbstractStructBase
 {
     /**
      * The AlwaysUseThisPaymentAddress
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Sellers include this field and set it to <code>true</code> if they want buyers to mail payment to the payment address specified in the <b>SellerPaymentPreferences.SellerPaymentAddress</b> field. A payment address only comes into play
      * if the item's category allows offline payments, and the seller has allowed the buyer to mail a payment. This payment address will only be displayed to winning bidders and buyers.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AlwaysUseThisPaymentAddress;
+    protected ?bool $AlwaysUseThisPaymentAddress = null;
     /**
      * The DisplayPayNowButton
-     * Meta informations extracted from the WSDL
-     * - documentation: If set, this field determines whether a Pay Now button is displayed for all of the user's listings. The user has the option of using a PayPal only version of the Pay Now button or a Pay Now button for all payment methods.
+     * Meta information extracted from the WSDL
+     * - documentation: If set, this field determines whether a Pay Now button is displayed for all of the user's listings. The user has the option of using a PayPal only version of the Pay Now button or a Pay Now button for all payment methods. <br><br>
+     * <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the display of the "Buy It Now" button in listings, and although the <b>DisplayPayNowButton</b> value can still be set in <b>SetUserPreferences</b> and
+     * returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. eBay managed payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which
+     * eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. </span> <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisplayPayNowButton;
+    protected ?string $DisplayPayNowButton = null;
     /**
      * The PayPalPreferred
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether a seller wants to let buyers know that PayPal payments are preferred.
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether a seller wants to let buyers know that PayPal payments are preferred. <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the display of the "PayPal Preferred"
+     * setting in listings, and although the <b>PayPalPreferred</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller.
+     * eBay managed payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay
+     * Managed Payments</a> landing page. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalPreferred;
+    protected ?bool $PayPalPreferred = null;
     /**
      * The DefaultPayPalEmailAddress
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the default email address the seller uses for receiving PayPal payments.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DefaultPayPalEmailAddress;
+    protected ?string $DefaultPayPalEmailAddress = null;
     /**
      * The PayPalAlwaysOn
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether PayPal is always accepted for the seller's listings.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether PayPal is always accepted for the seller's listings. <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the "PayPal Always On" setting in listings, and although
+     * the <b>PayPalAlwaysOn</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. eBay managed payments is currently
+     * available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalAlwaysOn;
+    protected ?bool $PayPalAlwaysOn = null;
     /**
      * The SellerPaymentAddress
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the address the seller uses to receive mailed payments from buyers.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AddressType
+     * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public $SellerPaymentAddress;
+    protected ?\macropage\ebaysdk\trading\StructType\AddressType $SellerPaymentAddress = null;
     /**
      * The UPSRateOption
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the type of United Parcel Service rates to use.
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the type of UPS shipping rates that are available to the seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UPSRateOption;
+    protected ?string $UPSRateOption = null;
     /**
      * The FedExRateOption
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the type of FedEx rates to use.
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the type of FedEx shipping rates that are available to the seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FedExRateOption;
+    protected ?string $FedExRateOption = null;
     /**
      * The USPSRateOption
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the type of USPS rates to use.
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the type of US Postal Service shipping rates that are available to the seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $USPSRateOption;
+    protected ?string $USPSRateOption = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellerPaymentPreferencesType
      * @uses SellerPaymentPreferencesType::setAlwaysUseThisPaymentAddress()
@@ -111,9 +126,9 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param string $uPSRateOption
      * @param string $fedExRateOption
      * @param string $uSPSRateOption
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($alwaysUseThisPaymentAddress = null, $displayPayNowButton = null, $payPalPreferred = null, $defaultPayPalEmailAddress = null, $payPalAlwaysOn = null, \macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null, $uPSRateOption = null, $fedExRateOption = null, $uSPSRateOption = null, \DOMDocument $any = null)
+    public function __construct(?bool $alwaysUseThisPaymentAddress = null, ?string $displayPayNowButton = null, ?bool $payPalPreferred = null, ?string $defaultPayPalEmailAddress = null, ?bool $payPalAlwaysOn = null, ?\macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null, ?string $uPSRateOption = null, ?string $fedExRateOption = null, ?string $uSPSRateOption = null, $any = null)
     {
         $this
             ->setAlwaysUseThisPaymentAddress($alwaysUseThisPaymentAddress)
@@ -131,7 +146,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * Get AlwaysUseThisPaymentAddress value
      * @return bool|null
      */
-    public function getAlwaysUseThisPaymentAddress()
+    public function getAlwaysUseThisPaymentAddress(): ?bool
     {
         return $this->AlwaysUseThisPaymentAddress;
     }
@@ -140,20 +155,21 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param bool $alwaysUseThisPaymentAddress
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setAlwaysUseThisPaymentAddress($alwaysUseThisPaymentAddress = null)
+    public function setAlwaysUseThisPaymentAddress(?bool $alwaysUseThisPaymentAddress = null): self
     {
         // validation for constraint: boolean
         if (!is_null($alwaysUseThisPaymentAddress) && !is_bool($alwaysUseThisPaymentAddress)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($alwaysUseThisPaymentAddress)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($alwaysUseThisPaymentAddress, true), gettype($alwaysUseThisPaymentAddress)), __LINE__);
         }
         $this->AlwaysUseThisPaymentAddress = $alwaysUseThisPaymentAddress;
+        
         return $this;
     }
     /**
      * Get DisplayPayNowButton value
      * @return string|null
      */
-    public function getDisplayPayNowButton()
+    public function getDisplayPayNowButton(): ?string
     {
         return $this->DisplayPayNowButton;
     }
@@ -161,24 +177,25 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * Set DisplayPayNowButton value
      * @uses \macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $displayPayNowButton
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setDisplayPayNowButton($displayPayNowButton = null)
+    public function setDisplayPayNowButton(?string $displayPayNowButton = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType::valueIsValid($displayPayNowButton)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $displayPayNowButton, implode(', ', \macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType', is_array($displayPayNowButton) ? implode(', ', $displayPayNowButton) : var_export($displayPayNowButton, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisplayPayNowButtonCodeType::getValidValues())), __LINE__);
         }
         $this->DisplayPayNowButton = $displayPayNowButton;
+        
         return $this;
     }
     /**
      * Get PayPalPreferred value
      * @return bool|null
      */
-    public function getPayPalPreferred()
+    public function getPayPalPreferred(): ?bool
     {
         return $this->PayPalPreferred;
     }
@@ -187,20 +204,21 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param bool $payPalPreferred
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setPayPalPreferred($payPalPreferred = null)
+    public function setPayPalPreferred(?bool $payPalPreferred = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalPreferred) && !is_bool($payPalPreferred)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalPreferred)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalPreferred, true), gettype($payPalPreferred)), __LINE__);
         }
         $this->PayPalPreferred = $payPalPreferred;
+        
         return $this;
     }
     /**
      * Get DefaultPayPalEmailAddress value
      * @return string|null
      */
-    public function getDefaultPayPalEmailAddress()
+    public function getDefaultPayPalEmailAddress(): ?string
     {
         return $this->DefaultPayPalEmailAddress;
     }
@@ -209,20 +227,21 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param string $defaultPayPalEmailAddress
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setDefaultPayPalEmailAddress($defaultPayPalEmailAddress = null)
+    public function setDefaultPayPalEmailAddress(?string $defaultPayPalEmailAddress = null): self
     {
         // validation for constraint: string
         if (!is_null($defaultPayPalEmailAddress) && !is_string($defaultPayPalEmailAddress)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($defaultPayPalEmailAddress)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($defaultPayPalEmailAddress, true), gettype($defaultPayPalEmailAddress)), __LINE__);
         }
         $this->DefaultPayPalEmailAddress = $defaultPayPalEmailAddress;
+        
         return $this;
     }
     /**
      * Get PayPalAlwaysOn value
      * @return bool|null
      */
-    public function getPayPalAlwaysOn()
+    public function getPayPalAlwaysOn(): ?bool
     {
         return $this->PayPalAlwaysOn;
     }
@@ -231,20 +250,21 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param bool $payPalAlwaysOn
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setPayPalAlwaysOn($payPalAlwaysOn = null)
+    public function setPayPalAlwaysOn(?bool $payPalAlwaysOn = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalAlwaysOn) && !is_bool($payPalAlwaysOn)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalAlwaysOn)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalAlwaysOn, true), gettype($payPalAlwaysOn)), __LINE__);
         }
         $this->PayPalAlwaysOn = $payPalAlwaysOn;
+        
         return $this;
     }
     /**
      * Get SellerPaymentAddress value
      * @return \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public function getSellerPaymentAddress()
+    public function getSellerPaymentAddress(): ?\macropage\ebaysdk\trading\StructType\AddressType
     {
         return $this->SellerPaymentAddress;
     }
@@ -253,16 +273,17 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setSellerPaymentAddress(\macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null)
+    public function setSellerPaymentAddress(?\macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null): self
     {
         $this->SellerPaymentAddress = $sellerPaymentAddress;
+        
         return $this;
     }
     /**
      * Get UPSRateOption value
      * @return string|null
      */
-    public function getUPSRateOption()
+    public function getUPSRateOption(): ?string
     {
         return $this->UPSRateOption;
     }
@@ -270,24 +291,25 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * Set UPSRateOption value
      * @uses \macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $uPSRateOption
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setUPSRateOption($uPSRateOption = null)
+    public function setUPSRateOption(?string $uPSRateOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType::valueIsValid($uPSRateOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $uPSRateOption, implode(', ', \macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType', is_array($uPSRateOption) ? implode(', ', $uPSRateOption) : var_export($uPSRateOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\UPSRateOptionCodeType::getValidValues())), __LINE__);
         }
         $this->UPSRateOption = $uPSRateOption;
+        
         return $this;
     }
     /**
      * Get FedExRateOption value
      * @return string|null
      */
-    public function getFedExRateOption()
+    public function getFedExRateOption(): ?string
     {
         return $this->FedExRateOption;
     }
@@ -295,24 +317,25 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * Set FedExRateOption value
      * @uses \macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $fedExRateOption
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setFedExRateOption($fedExRateOption = null)
+    public function setFedExRateOption(?string $fedExRateOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType::valueIsValid($fedExRateOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $fedExRateOption, implode(', ', \macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType', is_array($fedExRateOption) ? implode(', ', $fedExRateOption) : var_export($fedExRateOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\FedExRateOptionCodeType::getValidValues())), __LINE__);
         }
         $this->FedExRateOption = $fedExRateOption;
+        
         return $this;
     }
     /**
      * Get USPSRateOption value
      * @return string|null
      */
-    public function getUSPSRateOption()
+    public function getUSPSRateOption(): ?string
     {
         return $this->USPSRateOption;
     }
@@ -320,69 +343,51 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * Set USPSRateOption value
      * @uses \macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $uSPSRateOption
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setUSPSRateOption($uSPSRateOption = null)
+    public function setUSPSRateOption(?string $uSPSRateOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType::valueIsValid($uSPSRateOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $uSPSRateOption, implode(', ', \macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType', is_array($uSPSRateOption) ? implode(', ', $uSPSRateOption) : var_export($uSPSRateOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\USPSRateOptionCodeType::getValidValues())), __LINE__);
         }
         $this->USPSRateOption = $uSPSRateOption;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

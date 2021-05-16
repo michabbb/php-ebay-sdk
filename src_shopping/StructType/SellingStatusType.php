@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingStatusType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type indicates the quantity sold for each variation within a multiple-variation listing. This type is only applicable for multiple-variation listings, and is not returned at the listing level. To return data on individual
  * variations within the listing, you must include the <b>IncludeSelector</b> field and set its value to <code>Variations</code>.
  * @subpackage Structs
@@ -15,45 +18,46 @@ class SellingStatusType extends AbstractStructBase
 {
     /**
      * The ConvertedCurrentPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is no longer returned.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\shopping\StructType\AmountType
+     * @var \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public $ConvertedCurrentPrice;
+    protected ?\macropage\ebaysdk\shopping\StructType\AmountType $ConvertedCurrentPrice = null;
     /**
      * The CurrentPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is no longer returned. See <b>Variation.StartPrice</b> instead.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\shopping\StructType\AmountType
+     * @var \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public $CurrentPrice;
+    protected ?\macropage\ebaysdk\shopping\StructType\AmountType $CurrentPrice = null;
     /**
      * The QuantitySold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the quantity sold for the corresponding variation. You can subtract this integer value from the value in the <b>Variation.Quantity</b> field to determine the quantity of the variation that is still
      * available for purchase.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantitySold;
+    protected ?int $QuantitySold = null;
     /**
      * The QuantitySoldByPickupInStore
-     * Meta informations extracted from the WSDL
-     * - documentation: This field indicates the total quantity of the corresponding variation sold and picked up by buyers using the In-Store Pickup option. This value is the total quantity of this variation purchased by one or more buyers using the
-     * In-Store Pickup option, and is not the total number of In-Store Pickup orders for that ivariation. So, if two buyers selected the In-Store Pickup option, but each of these buyers bought a quantity of five of these variations (in same purchase), the
-     * <b>Item.Variations.Variation.SellingStatus.QuantitySoldByPickupInStore</b> value would be <code>10</code> and not <code>2</code>. <br> <br> This field will only be returned if the listing is eligible for In-Store Pickup. <br/><br/> <span
-     * class="tablenote"> <strong>Note:</strong> At this time, the In-Store Pickup feature is generally only available to large retail merchants in US, and can only be applied to multiple-quantity, fixed-price listings. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This field indicates the total quantity of the corresponding variation sold and picked up by buyers using the In-Store Pickup or Click and Collect option. This value is the total quantity of this variation purchased by one or more
+     * buyers using the In-Store Pickup or Click and Collect option, and is not the total number of In-Store Pickup or Click and Collect orders for that variation. So, if two buyers selected the In-Store Pickup or Click and Collect option, but each of these
+     * buyers bought a quantity of five of these variations (in same purchase), the <b>Item.Variations.Variation.SellingStatus.QuantitySoldByPickupInStore</b> value would be <code>10</code> and not <code>2</code>. <br> <br> This field will only be returned
+     * if the listing is eligible for In-Store Pickup or Click and Collect. <br/><br/> <span class="tablenote"> <strong>Note:</strong> The In-Store Pickup feature is generally only available to large retail merchants in US, Canada, UK, Germany, and
+     * Australia marketplaces, and the In-Store Pickup feature is generally only available to large retail merchants in UK, Australia, and Germany marketplaces. Both of these features can only be applied to multiple-quantity, fixed-price listings. </span>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantitySoldByPickupInStore;
+    protected ?int $QuantitySoldByPickupInStore = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingStatusType
      * @uses SellingStatusType::setConvertedCurrentPrice()
@@ -65,9 +69,9 @@ class SellingStatusType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AmountType $currentPrice
      * @param int $quantitySold
      * @param int $quantitySoldByPickupInStore
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null, \macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null, $quantitySold = null, $quantitySoldByPickupInStore = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null, ?int $quantitySold = null, ?int $quantitySoldByPickupInStore = null, $any = null)
     {
         $this
             ->setConvertedCurrentPrice($convertedCurrentPrice)
@@ -80,7 +84,7 @@ class SellingStatusType extends AbstractStructBase
      * Get ConvertedCurrentPrice value
      * @return \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public function getConvertedCurrentPrice()
+    public function getConvertedCurrentPrice(): ?\macropage\ebaysdk\shopping\StructType\AmountType
     {
         return $this->ConvertedCurrentPrice;
     }
@@ -89,16 +93,17 @@ class SellingStatusType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice
      * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
      */
-    public function setConvertedCurrentPrice(\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null)
+    public function setConvertedCurrentPrice(?\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null): self
     {
         $this->ConvertedCurrentPrice = $convertedCurrentPrice;
+        
         return $this;
     }
     /**
      * Get CurrentPrice value
      * @return \macropage\ebaysdk\shopping\StructType\AmountType|null
      */
-    public function getCurrentPrice()
+    public function getCurrentPrice(): ?\macropage\ebaysdk\shopping\StructType\AmountType
     {
         return $this->CurrentPrice;
     }
@@ -107,16 +112,17 @@ class SellingStatusType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AmountType $currentPrice
      * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
      */
-    public function setCurrentPrice(\macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null)
+    public function setCurrentPrice(?\macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null): self
     {
         $this->CurrentPrice = $currentPrice;
+        
         return $this;
     }
     /**
      * Get QuantitySold value
      * @return int|null
      */
-    public function getQuantitySold()
+    public function getQuantitySold(): ?int
     {
         return $this->QuantitySold;
     }
@@ -125,20 +131,21 @@ class SellingStatusType extends AbstractStructBase
      * @param int $quantitySold
      * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
      */
-    public function setQuantitySold($quantitySold = null)
+    public function setQuantitySold(?int $quantitySold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantitySold) && !is_numeric($quantitySold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantitySold)), __LINE__);
+        if (!is_null($quantitySold) && !(is_int($quantitySold) || ctype_digit($quantitySold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantitySold, true), gettype($quantitySold)), __LINE__);
         }
         $this->QuantitySold = $quantitySold;
+        
         return $this;
     }
     /**
      * Get QuantitySoldByPickupInStore value
      * @return int|null
      */
-    public function getQuantitySoldByPickupInStore()
+    public function getQuantitySoldByPickupInStore(): ?int
     {
         return $this->QuantitySoldByPickupInStore;
     }
@@ -147,65 +154,47 @@ class SellingStatusType extends AbstractStructBase
      * @param int $quantitySoldByPickupInStore
      * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
      */
-    public function setQuantitySoldByPickupInStore($quantitySoldByPickupInStore = null)
+    public function setQuantitySoldByPickupInStore(?int $quantitySoldByPickupInStore = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantitySoldByPickupInStore) && !is_numeric($quantitySoldByPickupInStore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantitySoldByPickupInStore)), __LINE__);
+        if (!is_null($quantitySoldByPickupInStore) && !(is_int($quantitySoldByPickupInStore) || ctype_digit($quantitySoldByPickupInStore))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantitySoldByPickupInStore, true), gettype($quantitySoldByPickupInStore)), __LINE__);
         }
         $this->QuantitySoldByPickupInStore = $quantitySoldByPickupInStore;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\SellingStatusType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\SellingStatusType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

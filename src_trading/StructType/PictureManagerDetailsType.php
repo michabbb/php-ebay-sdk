@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PictureManagerDetailsType StructType
@@ -12,66 +15,66 @@ class PictureManagerDetailsType extends AbstractStructBase
 {
     /**
      * The SubscriptionLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This type is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SubscriptionLevel;
+    protected ?string $SubscriptionLevel = null;
     /**
      * The StorageUsed
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $StorageUsed;
+    protected ?int $StorageUsed = null;
     /**
      * The TotalStorageAvailable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalStorageAvailable;
+    protected ?int $TotalStorageAvailable = null;
     /**
      * The KeepOriginal
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $KeepOriginal;
+    protected ?bool $KeepOriginal = null;
     /**
      * The WatermarkEPS
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $WatermarkEPS;
+    protected ?bool $WatermarkEPS = null;
     /**
      * The WatermarkUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $WatermarkUserID;
+    protected ?bool $WatermarkUserID = null;
     /**
      * The Folder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[]
      */
-    public $Folder;
+    protected array $Folder = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PictureManagerDetailsType
      * @uses PictureManagerDetailsType::setSubscriptionLevel()
@@ -89,9 +92,9 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param bool $watermarkEPS
      * @param bool $watermarkUserID
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[] $folder
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($subscriptionLevel = null, $storageUsed = null, $totalStorageAvailable = null, $keepOriginal = null, $watermarkEPS = null, $watermarkUserID = null, array $folder = array(), \DOMDocument $any = null)
+    public function __construct(?string $subscriptionLevel = null, ?int $storageUsed = null, ?int $totalStorageAvailable = null, ?bool $keepOriginal = null, ?bool $watermarkEPS = null, ?bool $watermarkUserID = null, array $folder = [], $any = null)
     {
         $this
             ->setSubscriptionLevel($subscriptionLevel)
@@ -107,7 +110,7 @@ class PictureManagerDetailsType extends AbstractStructBase
      * Get SubscriptionLevel value
      * @return string|null
      */
-    public function getSubscriptionLevel()
+    public function getSubscriptionLevel(): ?string
     {
         return $this->SubscriptionLevel;
     }
@@ -115,24 +118,25 @@ class PictureManagerDetailsType extends AbstractStructBase
      * Set SubscriptionLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $subscriptionLevel
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setSubscriptionLevel($subscriptionLevel = null)
+    public function setSubscriptionLevel(?string $subscriptionLevel = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType::valueIsValid($subscriptionLevel)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $subscriptionLevel, implode(', ', \macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType', is_array($subscriptionLevel) ? implode(', ', $subscriptionLevel) : var_export($subscriptionLevel, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PictureManagerSubscriptionLevelCodeType::getValidValues())), __LINE__);
         }
         $this->SubscriptionLevel = $subscriptionLevel;
+        
         return $this;
     }
     /**
      * Get StorageUsed value
      * @return int|null
      */
-    public function getStorageUsed()
+    public function getStorageUsed(): ?int
     {
         return $this->StorageUsed;
     }
@@ -141,20 +145,21 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param int $storageUsed
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setStorageUsed($storageUsed = null)
+    public function setStorageUsed(?int $storageUsed = null): self
     {
         // validation for constraint: int
-        if (!is_null($storageUsed) && !is_numeric($storageUsed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($storageUsed)), __LINE__);
+        if (!is_null($storageUsed) && !(is_int($storageUsed) || ctype_digit($storageUsed))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($storageUsed, true), gettype($storageUsed)), __LINE__);
         }
         $this->StorageUsed = $storageUsed;
+        
         return $this;
     }
     /**
      * Get TotalStorageAvailable value
      * @return int|null
      */
-    public function getTotalStorageAvailable()
+    public function getTotalStorageAvailable(): ?int
     {
         return $this->TotalStorageAvailable;
     }
@@ -163,20 +168,21 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param int $totalStorageAvailable
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setTotalStorageAvailable($totalStorageAvailable = null)
+    public function setTotalStorageAvailable(?int $totalStorageAvailable = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalStorageAvailable) && !is_numeric($totalStorageAvailable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalStorageAvailable)), __LINE__);
+        if (!is_null($totalStorageAvailable) && !(is_int($totalStorageAvailable) || ctype_digit($totalStorageAvailable))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalStorageAvailable, true), gettype($totalStorageAvailable)), __LINE__);
         }
         $this->TotalStorageAvailable = $totalStorageAvailable;
+        
         return $this;
     }
     /**
      * Get KeepOriginal value
      * @return bool|null
      */
-    public function getKeepOriginal()
+    public function getKeepOriginal(): ?bool
     {
         return $this->KeepOriginal;
     }
@@ -185,20 +191,21 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param bool $keepOriginal
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setKeepOriginal($keepOriginal = null)
+    public function setKeepOriginal(?bool $keepOriginal = null): self
     {
         // validation for constraint: boolean
         if (!is_null($keepOriginal) && !is_bool($keepOriginal)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($keepOriginal)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($keepOriginal, true), gettype($keepOriginal)), __LINE__);
         }
         $this->KeepOriginal = $keepOriginal;
+        
         return $this;
     }
     /**
      * Get WatermarkEPS value
      * @return bool|null
      */
-    public function getWatermarkEPS()
+    public function getWatermarkEPS(): ?bool
     {
         return $this->WatermarkEPS;
     }
@@ -207,20 +214,21 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param bool $watermarkEPS
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setWatermarkEPS($watermarkEPS = null)
+    public function setWatermarkEPS(?bool $watermarkEPS = null): self
     {
         // validation for constraint: boolean
         if (!is_null($watermarkEPS) && !is_bool($watermarkEPS)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($watermarkEPS)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($watermarkEPS, true), gettype($watermarkEPS)), __LINE__);
         }
         $this->WatermarkEPS = $watermarkEPS;
+        
         return $this;
     }
     /**
      * Get WatermarkUserID value
      * @return bool|null
      */
-    public function getWatermarkUserID()
+    public function getWatermarkUserID(): ?bool
     {
         return $this->WatermarkUserID;
     }
@@ -229,105 +237,110 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param bool $watermarkUserID
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setWatermarkUserID($watermarkUserID = null)
+    public function setWatermarkUserID(?bool $watermarkUserID = null): self
     {
         // validation for constraint: boolean
         if (!is_null($watermarkUserID) && !is_bool($watermarkUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($watermarkUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($watermarkUserID, true), gettype($watermarkUserID)), __LINE__);
         }
         $this->WatermarkUserID = $watermarkUserID;
+        
         return $this;
     }
     /**
      * Get Folder value
-     * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[]
      */
-    public function getFolder()
+    public function getFolder(): array
     {
         return $this->Folder;
     }
     /**
+     * This method is responsible for validating the values passed to the setFolder method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setFolder method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateFolderForArrayConstraintsFromSetFolder(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $pictureManagerDetailsTypeFolderItem) {
+            // validation for constraint: itemType
+            if (!$pictureManagerDetailsTypeFolderItem instanceof \macropage\ebaysdk\trading\StructType\PictureManagerFolderType) {
+                $invalidValues[] = is_object($pictureManagerDetailsTypeFolderItem) ? get_class($pictureManagerDetailsTypeFolderItem) : sprintf('%s(%s)', gettype($pictureManagerDetailsTypeFolderItem), var_export($pictureManagerDetailsTypeFolderItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Folder property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureManagerFolderType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Folder value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[] $folder
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setFolder(array $folder = array())
+    public function setFolder(array $folder = []): self
     {
-        foreach ($folder as $pictureManagerDetailsTypeFolderItem) {
-            // validation for constraint: itemType
-            if (!$pictureManagerDetailsTypeFolderItem instanceof \macropage\ebaysdk\trading\StructType\PictureManagerFolderType) {
-                throw new \InvalidArgumentException(sprintf('The Folder property can only contain items of \macropage\ebaysdk\trading\StructType\PictureManagerFolderType, "%s" given', is_object($pictureManagerDetailsTypeFolderItem) ? get_class($pictureManagerDetailsTypeFolderItem) : gettype($pictureManagerDetailsTypeFolderItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($folderArrayErrorMessage = self::validateFolderForArrayConstraintsFromSetFolder($folder))) {
+            throw new InvalidArgumentException($folderArrayErrorMessage, __LINE__);
         }
         $this->Folder = $folder;
+        
         return $this;
     }
     /**
      * Add item to Folder value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerFolderType $item
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function addToFolder(\macropage\ebaysdk\trading\StructType\PictureManagerFolderType $item)
+    public function addToFolder(\macropage\ebaysdk\trading\StructType\PictureManagerFolderType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\PictureManagerFolderType) {
-            throw new \InvalidArgumentException(sprintf('The Folder property can only contain items of \macropage\ebaysdk\trading\StructType\PictureManagerFolderType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Folder property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureManagerFolderType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Folder[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

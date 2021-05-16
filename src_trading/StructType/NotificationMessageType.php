@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for NotificationMessageType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: A template for an SMS notification message.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class NotificationMessageType extends AbstractResponseType
 {
     /**
      * The MessageBody
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The SMS message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageBody;
+    protected ?string $MessageBody = null;
     /**
      * The EIAS
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The EIAS userId.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EIAS;
+    protected ?string $EIAS = null;
     /**
      * Constructor method for NotificationMessageType
      * @uses NotificationMessageType::setMessageBody()
@@ -35,7 +38,7 @@ class NotificationMessageType extends AbstractResponseType
      * @param string $messageBody
      * @param string $eIAS
      */
-    public function __construct($messageBody = null, $eIAS = null)
+    public function __construct(?string $messageBody = null, ?string $eIAS = null)
     {
         $this
             ->setMessageBody($messageBody)
@@ -45,7 +48,7 @@ class NotificationMessageType extends AbstractResponseType
      * Get MessageBody value
      * @return string|null
      */
-    public function getMessageBody()
+    public function getMessageBody(): ?string
     {
         return $this->MessageBody;
     }
@@ -54,20 +57,21 @@ class NotificationMessageType extends AbstractResponseType
      * @param string $messageBody
      * @return \macropage\ebaysdk\trading\StructType\NotificationMessageType
      */
-    public function setMessageBody($messageBody = null)
+    public function setMessageBody(?string $messageBody = null): self
     {
         // validation for constraint: string
         if (!is_null($messageBody) && !is_string($messageBody)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageBody)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageBody, true), gettype($messageBody)), __LINE__);
         }
         $this->MessageBody = $messageBody;
+        
         return $this;
     }
     /**
      * Get EIAS value
      * @return string|null
      */
-    public function getEIAS()
+    public function getEIAS(): ?string
     {
         return $this->EIAS;
     }
@@ -76,33 +80,14 @@ class NotificationMessageType extends AbstractResponseType
      * @param string $eIAS
      * @return \macropage\ebaysdk\trading\StructType\NotificationMessageType
      */
-    public function setEIAS($eIAS = null)
+    public function setEIAS(?string $eIAS = null): self
     {
         // validation for constraint: string
         if (!is_null($eIAS) && !is_string($eIAS)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eIAS)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eIAS, true), gettype($eIAS)), __LINE__);
         }
         $this->EIAS = $eIAS;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\NotificationMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

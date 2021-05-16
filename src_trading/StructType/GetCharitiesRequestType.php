@@ -1,101 +1,102 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetCharitiesRequestType StructType
- * Meta informations extracted from the WSDL
- * - documentation: This is the base request type for the <b>GetCharities</b> call. This call is used to search for eBay for Charity nonprofit organizations. This call allows users to search for a specific nonprofit organization, or to search for
- * multiple nonprofit organizations from a particular category and/or geographical region, or by using a search string.
+ * Meta information extracted from the WSDL
+ * - documentation: The <b>GetCharities</b> call is used to search for nonprofit organizations that are registered with the eBay for Charity program. This call allows users to search for a specific nonprofit organization, or to search for multiple
+ * nonprofit organizations from a particular charitable domain, and/or geographical region, or by using a search string.
  * @subpackage Structs
  */
 class GetCharitiesRequestType extends AbstractRequestType
 {
     /**
      * The CharityID
-     * Meta informations extracted from the WSDL
-     * - documentation: A unique identification number assigned to a nonprofit organization when that organization registers with the PayPal Giving Fund. If a <b>CharityID</b> value is used in the request, all other search filters set in the call request
-     * will be ignored, as the call will only search for the specified nonprofit organization.
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier that eBay creates and assigns to each nonprofit organization. This is NOT the unique identifier used by the PayPal Giving Fund. This eBay unique identifier is returned in the <b>Charity.CharityID</b> field of a
+     * <b>GetItem</b> call for charitable listings. <br><br> If a <b>CharityID</b> value is used in the request, all other search filters set in the call request will be ignored, as the call will only search for the specified nonprofit organization.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CharityID;
+    protected ?string $CharityID = null;
     /**
      * The CharityName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field will accept the full or partial name of a registered nonprofit organization. For example, if you pass in a value of <b>heart</b>, all registered nonprofit organizations with "heart" in their name may be returned in the
-     * response. If the <b>MatchType</b> field is used and set to <code>StartsWith</code>, the phrase "heart" must come at the beginning of the nonprofit organization's name. However, if the <b>MatchType</b> field is used and set to <code>Contains</code>,
-     * or is not used at all, all registered nonprofit organizations with "heart" in their name should be returned in the response. The string passed in this field is not case-sensitive. <br/><br/>
+     * response. If the <b>MatchType</b> field is used and set to <code>StartsWith</code> (default value), or is not used at all, the phrase "heart" must come at the beginning of the nonprofit organization's name to be returned. However, if the
+     * <b>MatchType</b> field is used and set to <code>Contains</code>, all registered nonprofit organizations with "heart" in their name should be returned in the response. The string passed in this field is not case-sensitive. <br/>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CharityName;
+    protected ?string $CharityName = null;
     /**
      * The Query
-     * Meta informations extracted from the WSDL
-     * - documentation: This field accept any string up to 350 characters in length. The functionality of this field is similar to the <b>CharityName</b> field, except that the call will also search for the supplied query string within the charity's mission
-     * statement (which is returned under the <b>Charity.Mission</b> field in the response) as long as the <b>IncludeDescription</b> field is included in the call request and set to <code>true</code>. If you pass in a value of <b>heart</b>, all registered
-     * nonprofit organizations with "heart" in their name or in their mission statement may be returned in the response. <br/><br/> The string passed in this field is not case-sensitive. The <b>MatchType</b> field will have no effect if the <b>Query</b>
-     * field is used, as the <b>MatchType</b> field will only have an effect if a <b>CharityName</b> string field is included. <br/><br/>
+     * Meta information extracted from the WSDL
+     * - documentation: This field accepts any string up to 350 characters in length. The functionality of this field is similar to the <b>CharityName</b> field, except that the call will also search for the supplied query string within the charity's
+     * mission statement (which is returned under the <b>Charity.Mission</b> field in the response). If you pass in a value of <b>heart</b>, all registered nonprofit organizations with "heart" in their name or in their mission statement may be returned in
+     * the response. <br/><br/> The string passed in this field is not case-sensitive. The <b>MatchType</b> field will have no effect if the <b>Query</b> field is used, as the <b>MatchType</b> field will only have an effect if a <b>CharityName</b> string
+     * field is included. <br/>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Query;
+    protected ?string $Query = null;
     /**
      * The CharityRegion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field can be used to search for registered nonprofit organizations within a specified geographical region. Each geographical region will have an integer value associated with it. This integer value is what is passed in to this
      * field.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CharityRegion;
+    protected ?int $CharityRegion = null;
     /**
      * The CharityDomain
-     * Meta informations extracted from the WSDL
-     * - documentation: This field can be used to search for registered nonprofit organizations within a specified charity domain or category. Each charity domain will have an integer value associated with it. This integer value is what is passed in to this
-     * field. Nonprofit organizations can be associated with multiple charity domains.
+     * Meta information extracted from the WSDL
+     * - documentation: This field can be used to search for registered nonprofit organizations within a specified charitable domain. Each charitable domain will have an integer value associated with it. This integer value is what is passed in to this
+     * field. Nonprofit organizations can be associated with multiple charitable domains.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CharityDomain;
+    protected ?int $CharityDomain = null;
     /**
      * The IncludeDescription
-     * Meta informations extracted from the WSDL
-     * - documentation: This field should be included and set to <code>true</code> if the <b>Query</b> field is used, and the user wishes to search the charity's name and its mission statement. If this field is omitted or included and set to
-     * <code>false</code>, the call will only search charity names for the specified string in the <b>Query</b> field.
+     * Meta information extracted from the WSDL
+     * - documentation: This field should be included and set to <code>true</code> if a user wants the charity's description to appear in the response. Note that not all charitable organizations will have defined descriptions. <br/>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeDescription;
+    protected ?bool $IncludeDescription = null;
     /**
      * The MatchType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This filter is used if the user wants to specify where to look for the string specified in the <b>CharityName</b> field. The enumeration value input into this field controls the type of string matching to use when a value is
-     * submitted in the <b>CharityName</b> field. If this field is omitted, and a <b>CharityName</b> string is used, this parameter value defaults to <code>StartsWith</code>. <br/><br/> This field is no applicable when a <b>Query</b> value is used.
-     * <br/><br/>
+     * submitted in the <b>CharityName</b> field. If this field is omitted, and a <b>CharityName</b> string is used, this parameter value defaults to <code>StartsWith</code>. <br/><br/> This field is not applicable when a <b>Query</b> value is used. <br/>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MatchType;
+    protected ?string $MatchType = null;
     /**
      * The Featured
-     * Meta informations extracted from the WSDL
-     * - documentation: This boolean field is used and set to <code>true</code> if the user wants to search for nonprofit organizations currently featured on the eBay for Charity site.
+     * Meta information extracted from the WSDL
+     * - documentation: This boolean field is used and set to <code>true</code> if the user wants to search for nonprofit organizations currently featured on the eBay for Charity site. <br/>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Featured;
+    protected ?bool $Featured = null;
     /**
      * The CampaignID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserved for future use.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CampaignID;
+    protected ?int $CampaignID = null;
     /**
      * Constructor method for GetCharitiesRequestType
      * @uses GetCharitiesRequestType::setCharityID()
@@ -117,7 +118,7 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param bool $featured
      * @param int $campaignID
      */
-    public function __construct($charityID = null, $charityName = null, $query = null, $charityRegion = null, $charityDomain = null, $includeDescription = null, $matchType = null, $featured = null, $campaignID = null)
+    public function __construct(?string $charityID = null, ?string $charityName = null, ?string $query = null, ?int $charityRegion = null, ?int $charityDomain = null, ?bool $includeDescription = null, ?string $matchType = null, ?bool $featured = null, ?int $campaignID = null)
     {
         $this
             ->setCharityID($charityID)
@@ -134,7 +135,7 @@ class GetCharitiesRequestType extends AbstractRequestType
      * Get CharityID value
      * @return string|null
      */
-    public function getCharityID()
+    public function getCharityID(): ?string
     {
         return $this->CharityID;
     }
@@ -143,20 +144,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param string $charityID
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setCharityID($charityID = null)
+    public function setCharityID(?string $charityID = null): self
     {
         // validation for constraint: string
         if (!is_null($charityID) && !is_string($charityID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($charityID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($charityID, true), gettype($charityID)), __LINE__);
         }
         $this->CharityID = $charityID;
+        
         return $this;
     }
     /**
      * Get CharityName value
      * @return string|null
      */
-    public function getCharityName()
+    public function getCharityName(): ?string
     {
         return $this->CharityName;
     }
@@ -165,20 +167,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param string $charityName
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setCharityName($charityName = null)
+    public function setCharityName(?string $charityName = null): self
     {
         // validation for constraint: string
         if (!is_null($charityName) && !is_string($charityName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($charityName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($charityName, true), gettype($charityName)), __LINE__);
         }
         $this->CharityName = $charityName;
+        
         return $this;
     }
     /**
      * Get Query value
      * @return string|null
      */
-    public function getQuery()
+    public function getQuery(): ?string
     {
         return $this->Query;
     }
@@ -187,20 +190,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param string $query
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setQuery($query = null)
+    public function setQuery(?string $query = null): self
     {
         // validation for constraint: string
         if (!is_null($query) && !is_string($query)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($query)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($query, true), gettype($query)), __LINE__);
         }
         $this->Query = $query;
+        
         return $this;
     }
     /**
      * Get CharityRegion value
      * @return int|null
      */
-    public function getCharityRegion()
+    public function getCharityRegion(): ?int
     {
         return $this->CharityRegion;
     }
@@ -209,20 +213,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param int $charityRegion
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setCharityRegion($charityRegion = null)
+    public function setCharityRegion(?int $charityRegion = null): self
     {
         // validation for constraint: int
-        if (!is_null($charityRegion) && !is_numeric($charityRegion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($charityRegion)), __LINE__);
+        if (!is_null($charityRegion) && !(is_int($charityRegion) || ctype_digit($charityRegion))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($charityRegion, true), gettype($charityRegion)), __LINE__);
         }
         $this->CharityRegion = $charityRegion;
+        
         return $this;
     }
     /**
      * Get CharityDomain value
      * @return int|null
      */
-    public function getCharityDomain()
+    public function getCharityDomain(): ?int
     {
         return $this->CharityDomain;
     }
@@ -231,20 +236,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param int $charityDomain
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setCharityDomain($charityDomain = null)
+    public function setCharityDomain(?int $charityDomain = null): self
     {
         // validation for constraint: int
-        if (!is_null($charityDomain) && !is_numeric($charityDomain)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($charityDomain)), __LINE__);
+        if (!is_null($charityDomain) && !(is_int($charityDomain) || ctype_digit($charityDomain))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($charityDomain, true), gettype($charityDomain)), __LINE__);
         }
         $this->CharityDomain = $charityDomain;
+        
         return $this;
     }
     /**
      * Get IncludeDescription value
      * @return bool|null
      */
-    public function getIncludeDescription()
+    public function getIncludeDescription(): ?bool
     {
         return $this->IncludeDescription;
     }
@@ -253,20 +259,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param bool $includeDescription
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setIncludeDescription($includeDescription = null)
+    public function setIncludeDescription(?bool $includeDescription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeDescription) && !is_bool($includeDescription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeDescription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeDescription, true), gettype($includeDescription)), __LINE__);
         }
         $this->IncludeDescription = $includeDescription;
+        
         return $this;
     }
     /**
      * Get MatchType value
      * @return string|null
      */
-    public function getMatchType()
+    public function getMatchType(): ?string
     {
         return $this->MatchType;
     }
@@ -274,24 +281,25 @@ class GetCharitiesRequestType extends AbstractRequestType
      * Set MatchType value
      * @uses \macropage\ebaysdk\trading\EnumType\StringMatchCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StringMatchCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $matchType
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setMatchType($matchType = null)
+    public function setMatchType(?string $matchType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StringMatchCodeType::valueIsValid($matchType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $matchType, implode(', ', \macropage\ebaysdk\trading\EnumType\StringMatchCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StringMatchCodeType', is_array($matchType) ? implode(', ', $matchType) : var_export($matchType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StringMatchCodeType::getValidValues())), __LINE__);
         }
         $this->MatchType = $matchType;
+        
         return $this;
     }
     /**
      * Get Featured value
      * @return bool|null
      */
-    public function getFeatured()
+    public function getFeatured(): ?bool
     {
         return $this->Featured;
     }
@@ -300,20 +308,21 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param bool $featured
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setFeatured($featured = null)
+    public function setFeatured(?bool $featured = null): self
     {
         // validation for constraint: boolean
         if (!is_null($featured) && !is_bool($featured)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($featured)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($featured, true), gettype($featured)), __LINE__);
         }
         $this->Featured = $featured;
+        
         return $this;
     }
     /**
      * Get CampaignID value
      * @return int|null
      */
-    public function getCampaignID()
+    public function getCampaignID(): ?int
     {
         return $this->CampaignID;
     }
@@ -322,33 +331,14 @@ class GetCharitiesRequestType extends AbstractRequestType
      * @param int $campaignID
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
      */
-    public function setCampaignID($campaignID = null)
+    public function setCampaignID(?int $campaignID = null): self
     {
         // validation for constraint: int
-        if (!is_null($campaignID) && !is_numeric($campaignID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($campaignID)), __LINE__);
+        if (!is_null($campaignID) && !(is_int($campaignID) || ctype_digit($campaignID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($campaignID, true), gettype($campaignID)), __LINE__);
         }
         $this->CampaignID = $campaignID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

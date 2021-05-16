@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PaymentDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>PaymentDetails</b> container, which is used by the seller to specify amounts and due dates for deposits and full payment on motor vehicle listings.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class PaymentDetailsType extends AbstractStructBase
 {
     /**
      * The HoursToDeposit
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the number of hours that a buyer has (after he/she commits to buy) to make a deposit to the seller as a down payment on a motor vehicle. <b>Valid values:</b> 24, 48 (default), and 72. <br/><br/> The
      * deposit amount is specified in the <b>DepositAmount</b> field. If not specified, the <b>DepositAmount</b> value defaults to 0.0, in which case, a deposit on the vehicle is not required. <br>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $HoursToDeposit;
+    protected ?int $HoursToDeposit = null;
     /**
      * The DaysToFullPayment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the number of days that a buyer has (after he/she commits to buy) to make full payment to the seller and close the remaining balance on a motor vehicle. <b>Valid values:</b> 3, 7 (default), 10, and 14.
      * <br/><br/> In order for a buyer to make a full payment on an US or CA motor vehicle, at least one of the following <b>PaymentMethods</b> values must be specified for the listing: <ul> <li>CashInPerson</li> <li>LoanCheck</li> <li>MOCC (money order or
      * cashier's check)</li> <li><b>PaymentSeeDescription</b> (indicates to prospective buyers that payment instructions are in the item's description</li> <li>PersonalCheck</li> </ul>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DaysToFullPayment;
+    protected ?int $DaysToFullPayment = null;
     /**
      * The DepositAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This dollar value indicates the amount of the deposit that a buyer must make on a purchased motor vehicle (eBay Motors US and CA). The deposit amount can be as high as $2,000.00. <br/><br/> If not specified, this value defaults to
      * '0.0'. If the seller is requiring that the buyer put down a deposit on the vehicle, the seller must include and set the <b>DepositType</b> field to <code>OtherMethod</code> and specify an <b>HoursToDeposit</b> value. If specified, then also specify
      * <b>HoursToDeposit</b> <br> <br> Deposits can only be paid using PayPal, so if <b>DepositAmount</b> is specified (and not '0.0'), then the listing must offer 'PayPal' as a payment method (in addition to the payment methods offered for the full
@@ -42,23 +45,23 @@ class PaymentDetailsType extends AbstractStructBase
      * deposit if the listing doesn't require Immediate Payment. The seller can also remove the Immediate Payment option (if any). If the listing has bids, the seller can only lower an existing deposit; but not add or increase a deposit. The seller can't
      * remove Immediate Payment when a listing with a deposit has bids. <br>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $DepositAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $DepositAmount = null;
     /**
      * The DepositType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field applies to eBay Motors (US and CA) vehicles listings. If the seller is requiring that the buyer make a deposit on the vehicle, the <b>DepositType</b> value must be included and set to <code>OtherMethod</code>. Otherwise,
      * specify <code>None</code> (or don't pass in <b>DepositType</b>).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DepositType;
+    protected ?string $DepositType = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PaymentDetailsType
      * @uses PaymentDetailsType::setHoursToDeposit()
@@ -70,9 +73,9 @@ class PaymentDetailsType extends AbstractStructBase
      * @param int $daysToFullPayment
      * @param \macropage\ebaysdk\trading\StructType\AmountType $depositAmount
      * @param string $depositType
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($hoursToDeposit = null, $daysToFullPayment = null, \macropage\ebaysdk\trading\StructType\AmountType $depositAmount = null, $depositType = null, \DOMDocument $any = null)
+    public function __construct(?int $hoursToDeposit = null, ?int $daysToFullPayment = null, ?\macropage\ebaysdk\trading\StructType\AmountType $depositAmount = null, ?string $depositType = null, $any = null)
     {
         $this
             ->setHoursToDeposit($hoursToDeposit)
@@ -85,7 +88,7 @@ class PaymentDetailsType extends AbstractStructBase
      * Get HoursToDeposit value
      * @return int|null
      */
-    public function getHoursToDeposit()
+    public function getHoursToDeposit(): ?int
     {
         return $this->HoursToDeposit;
     }
@@ -94,20 +97,21 @@ class PaymentDetailsType extends AbstractStructBase
      * @param int $hoursToDeposit
      * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
      */
-    public function setHoursToDeposit($hoursToDeposit = null)
+    public function setHoursToDeposit(?int $hoursToDeposit = null): self
     {
         // validation for constraint: int
-        if (!is_null($hoursToDeposit) && !is_numeric($hoursToDeposit)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($hoursToDeposit)), __LINE__);
+        if (!is_null($hoursToDeposit) && !(is_int($hoursToDeposit) || ctype_digit($hoursToDeposit))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($hoursToDeposit, true), gettype($hoursToDeposit)), __LINE__);
         }
         $this->HoursToDeposit = $hoursToDeposit;
+        
         return $this;
     }
     /**
      * Get DaysToFullPayment value
      * @return int|null
      */
-    public function getDaysToFullPayment()
+    public function getDaysToFullPayment(): ?int
     {
         return $this->DaysToFullPayment;
     }
@@ -116,20 +120,21 @@ class PaymentDetailsType extends AbstractStructBase
      * @param int $daysToFullPayment
      * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
      */
-    public function setDaysToFullPayment($daysToFullPayment = null)
+    public function setDaysToFullPayment(?int $daysToFullPayment = null): self
     {
         // validation for constraint: int
-        if (!is_null($daysToFullPayment) && !is_numeric($daysToFullPayment)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($daysToFullPayment)), __LINE__);
+        if (!is_null($daysToFullPayment) && !(is_int($daysToFullPayment) || ctype_digit($daysToFullPayment))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($daysToFullPayment, true), gettype($daysToFullPayment)), __LINE__);
         }
         $this->DaysToFullPayment = $daysToFullPayment;
+        
         return $this;
     }
     /**
      * Get DepositAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getDepositAmount()
+    public function getDepositAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->DepositAmount;
     }
@@ -138,16 +143,17 @@ class PaymentDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $depositAmount
      * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
      */
-    public function setDepositAmount(\macropage\ebaysdk\trading\StructType\AmountType $depositAmount = null)
+    public function setDepositAmount(?\macropage\ebaysdk\trading\StructType\AmountType $depositAmount = null): self
     {
         $this->DepositAmount = $depositAmount;
+        
         return $this;
     }
     /**
      * Get DepositType value
      * @return string|null
      */
-    public function getDepositType()
+    public function getDepositType(): ?string
     {
         return $this->DepositType;
     }
@@ -155,69 +161,51 @@ class PaymentDetailsType extends AbstractStructBase
      * Set DepositType value
      * @uses \macropage\ebaysdk\trading\EnumType\DepositTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DepositTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $depositType
      * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
      */
-    public function setDepositType($depositType = null)
+    public function setDepositType(?string $depositType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DepositTypeCodeType::valueIsValid($depositType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $depositType, implode(', ', \macropage\ebaysdk\trading\EnumType\DepositTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DepositTypeCodeType', is_array($depositType) ? implode(', ', $depositType) : var_export($depositType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DepositTypeCodeType::getValidValues())), __LINE__);
         }
         $this->DepositType = $depositType;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PaymentDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

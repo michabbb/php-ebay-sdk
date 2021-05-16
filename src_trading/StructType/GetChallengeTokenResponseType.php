@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetChallengeTokenResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This is the base response type for the <b>GetChallengeToken</b> call. This call retrieves a botblock token and URLs for an image or audio clip that the user is to match.
  * @subpackage Structs
  */
@@ -14,28 +17,28 @@ class GetChallengeTokenResponseType extends AbstractResponseType
 {
     /**
      * The ChallengeToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Botblock token that is used to validate that the user is a human and not a bot.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ChallengeToken;
+    protected ?string $ChallengeToken = null;
     /**
      * The ImageChallengeURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The URL of the image your application should display to the user for a botblock challenge.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ImageChallengeURL;
+    protected ?string $ImageChallengeURL = null;
     /**
      * The AudioChallengeURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The URL of the audio clip your application should provide for sight-impaired users. The audio clip corresponds to the image.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AudioChallengeURL;
+    protected ?string $AudioChallengeURL = null;
     /**
      * Constructor method for GetChallengeTokenResponseType
      * @uses GetChallengeTokenResponseType::setChallengeToken()
@@ -45,7 +48,7 @@ class GetChallengeTokenResponseType extends AbstractResponseType
      * @param string $imageChallengeURL
      * @param string $audioChallengeURL
      */
-    public function __construct($challengeToken = null, $imageChallengeURL = null, $audioChallengeURL = null)
+    public function __construct(?string $challengeToken = null, ?string $imageChallengeURL = null, ?string $audioChallengeURL = null)
     {
         $this
             ->setChallengeToken($challengeToken)
@@ -56,7 +59,7 @@ class GetChallengeTokenResponseType extends AbstractResponseType
      * Get ChallengeToken value
      * @return string|null
      */
-    public function getChallengeToken()
+    public function getChallengeToken(): ?string
     {
         return $this->ChallengeToken;
     }
@@ -65,20 +68,21 @@ class GetChallengeTokenResponseType extends AbstractResponseType
      * @param string $challengeToken
      * @return \macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType
      */
-    public function setChallengeToken($challengeToken = null)
+    public function setChallengeToken(?string $challengeToken = null): self
     {
         // validation for constraint: string
         if (!is_null($challengeToken) && !is_string($challengeToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($challengeToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($challengeToken, true), gettype($challengeToken)), __LINE__);
         }
         $this->ChallengeToken = $challengeToken;
+        
         return $this;
     }
     /**
      * Get ImageChallengeURL value
      * @return string|null
      */
-    public function getImageChallengeURL()
+    public function getImageChallengeURL(): ?string
     {
         return $this->ImageChallengeURL;
     }
@@ -87,20 +91,21 @@ class GetChallengeTokenResponseType extends AbstractResponseType
      * @param string $imageChallengeURL
      * @return \macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType
      */
-    public function setImageChallengeURL($imageChallengeURL = null)
+    public function setImageChallengeURL(?string $imageChallengeURL = null): self
     {
         // validation for constraint: string
         if (!is_null($imageChallengeURL) && !is_string($imageChallengeURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($imageChallengeURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($imageChallengeURL, true), gettype($imageChallengeURL)), __LINE__);
         }
         $this->ImageChallengeURL = $imageChallengeURL;
+        
         return $this;
     }
     /**
      * Get AudioChallengeURL value
      * @return string|null
      */
-    public function getAudioChallengeURL()
+    public function getAudioChallengeURL(): ?string
     {
         return $this->AudioChallengeURL;
     }
@@ -109,33 +114,14 @@ class GetChallengeTokenResponseType extends AbstractResponseType
      * @param string $audioChallengeURL
      * @return \macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType
      */
-    public function setAudioChallengeURL($audioChallengeURL = null)
+    public function setAudioChallengeURL(?string $audioChallengeURL = null): self
     {
         // validation for constraint: string
         if (!is_null($audioChallengeURL) && !is_string($audioChallengeURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($audioChallengeURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($audioChallengeURL, true), gettype($audioChallengeURL)), __LINE__);
         }
         $this->AudioChallengeURL = $audioChallengeURL;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

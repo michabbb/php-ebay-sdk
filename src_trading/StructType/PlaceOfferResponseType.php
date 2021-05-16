@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PlaceOfferResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The <b>PlaceOffer</b> response notifies you about the success and result of the call.
  * @subpackage Structs
  */
@@ -14,40 +17,40 @@ class PlaceOfferResponseType extends AbstractResponseType
 {
     /**
      * The SellingStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container indicates the current bidding/purchase state of the order line item regarding the offer extended using <b>PlaceOffer</b>. The fields that are returned under this container will depend on the attempted action and the
      * results of that action.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingStatusType
+     * @var \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
-    public $SellingStatus;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingStatusType $SellingStatus = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay order line item. The <b>TransactionID</b> field is only returned if the <b>Offer.Action</b> field was set to <b>Purchase</b> in the input and the purchase was successful. A Purchase action in
-     * <b>PlaceOffer</b> can be used for a fixed-price listing, or for an auction listing where the Buy It Now option is available.
+     * <b>PlaceOffer</b> can be used for a fixed-price listing, or for an auction listing where the Buy It Now option is available. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning
+     * bidder/one sale for an auction listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The BestOffer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of the status for a Best Offer. This container is only returned if applicable based on the listing and the value set for <b>Offer.Action</b> field in the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BestOfferType
+     * @var \macropage\ebaysdk\trading\StructType\BestOfferType|null
      */
-    public $BestOffer;
+    protected ?\macropage\ebaysdk\trading\StructType\BestOfferType $BestOffer = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two IDs. The <b>OrderLineItemID</b> field is only
-     * returned if the <b>Offer.Action</b> field is set to <b>Purchase</b> in the input and the purchase is successful. A Purchase action in <b>PlaceOffer</b> can be used for a fixed-price listing, or for an auction listing where the Buy It Now option is
-     * available. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. The <b>OrderLineItemID</b> field is only returned if the <b>Offer.Action</b> field is set to <b>Purchase</b> in the input and the purchase is successful. A
+     * Purchase action in <b>PlaceOffer</b> can be used for a fixed-price listing, or for an auction listing where the Buy It Now option is available. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * Constructor method for PlaceOfferResponseType
      * @uses PlaceOfferResponseType::setSellingStatus()
@@ -59,7 +62,7 @@ class PlaceOfferResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer
      * @param string $orderLineItemID
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, $transactionID = null, \macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer = null, $orderLineItemID = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer = null, ?string $orderLineItemID = null)
     {
         $this
             ->setSellingStatus($sellingStatus)
@@ -71,7 +74,7 @@ class PlaceOfferResponseType extends AbstractResponseType
      * Get SellingStatus value
      * @return \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
-    public function getSellingStatus()
+    public function getSellingStatus(): ?\macropage\ebaysdk\trading\StructType\SellingStatusType
     {
         return $this->SellingStatus;
     }
@@ -80,16 +83,17 @@ class PlaceOfferResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType
      */
-    public function setSellingStatus(\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null)
+    public function setSellingStatus(?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null): self
     {
         $this->SellingStatus = $sellingStatus;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -98,20 +102,21 @@ class PlaceOfferResponseType extends AbstractResponseType
      * @param string $transactionID
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get BestOffer value
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType|null
      */
-    public function getBestOffer()
+    public function getBestOffer(): ?\macropage\ebaysdk\trading\StructType\BestOfferType
     {
         return $this->BestOffer;
     }
@@ -120,16 +125,17 @@ class PlaceOfferResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType
      */
-    public function setBestOffer(\macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer = null)
+    public function setBestOffer(?\macropage\ebaysdk\trading\StructType\BestOfferType $bestOffer = null): self
     {
         $this->BestOffer = $bestOffer;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -138,33 +144,14 @@ class PlaceOfferResponseType extends AbstractResponseType
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VeROReportedItemDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Container for a list of reported items. Can contain zero, one, or multiple VeROReportedItemType objects, each of which conveys the data for one item listing.
  * @subpackage Structs
  */
@@ -14,81 +17,84 @@ class VeROReportedItemDetailsType extends AbstractStructBase
 {
     /**
      * The ReportedItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the data and status of a reported item.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VeROReportedItemType[]
      */
-    public $ReportedItem;
+    protected array $ReportedItem = [];
     /**
      * Constructor method for VeROReportedItemDetailsType
      * @uses VeROReportedItemDetailsType::setReportedItem()
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemType[] $reportedItem
      */
-    public function __construct(array $reportedItem = array())
+    public function __construct(array $reportedItem = [])
     {
         $this
             ->setReportedItem($reportedItem);
     }
     /**
      * Get ReportedItem value
-     * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemType[]
      */
-    public function getReportedItem()
+    public function getReportedItem(): array
     {
         return $this->ReportedItem;
     }
     /**
+     * This method is responsible for validating the values passed to the setReportedItem method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setReportedItem method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateReportedItemForArrayConstraintsFromSetReportedItem(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $veROReportedItemDetailsTypeReportedItemItem) {
+            // validation for constraint: itemType
+            if (!$veROReportedItemDetailsTypeReportedItemItem instanceof \macropage\ebaysdk\trading\StructType\VeROReportedItemType) {
+                $invalidValues[] = is_object($veROReportedItemDetailsTypeReportedItemItem) ? get_class($veROReportedItemDetailsTypeReportedItemItem) : sprintf('%s(%s)', gettype($veROReportedItemDetailsTypeReportedItemItem), var_export($veROReportedItemDetailsTypeReportedItemItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ReportedItem property can only contain items of type \macropage\ebaysdk\trading\StructType\VeROReportedItemType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ReportedItem value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemType[] $reportedItem
      * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
      */
-    public function setReportedItem(array $reportedItem = array())
+    public function setReportedItem(array $reportedItem = []): self
     {
-        foreach ($reportedItem as $veROReportedItemDetailsTypeReportedItemItem) {
-            // validation for constraint: itemType
-            if (!$veROReportedItemDetailsTypeReportedItemItem instanceof \macropage\ebaysdk\trading\StructType\VeROReportedItemType) {
-                throw new \InvalidArgumentException(sprintf('The ReportedItem property can only contain items of \macropage\ebaysdk\trading\StructType\VeROReportedItemType, "%s" given', is_object($veROReportedItemDetailsTypeReportedItemItem) ? get_class($veROReportedItemDetailsTypeReportedItemItem) : gettype($veROReportedItemDetailsTypeReportedItemItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($reportedItemArrayErrorMessage = self::validateReportedItemForArrayConstraintsFromSetReportedItem($reportedItem))) {
+            throw new InvalidArgumentException($reportedItemArrayErrorMessage, __LINE__);
         }
         $this->ReportedItem = $reportedItem;
+        
         return $this;
     }
     /**
      * Add item to ReportedItem value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemType $item
      * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
      */
-    public function addToReportedItem(\macropage\ebaysdk\trading\StructType\VeROReportedItemType $item)
+    public function addToReportedItem(\macropage\ebaysdk\trading\StructType\VeROReportedItemType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\VeROReportedItemType) {
-            throw new \InvalidArgumentException(sprintf('The ReportedItem property can only contain items of \macropage\ebaysdk\trading\StructType\VeROReportedItemType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ReportedItem property can only contain items of type \macropage\ebaysdk\trading\StructType\VeROReportedItemType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ReportedItem[] = $item;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

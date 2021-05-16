@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AnnouncementMessageType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>ShippingServiceDetails.DeprecationDetails</b> container that is returned in the <b>GeteBayDetails</b> response. The <b>ShippingServiceDetails.DeprecationDetails</b> container consists of information related to a
  * deprecated shipping service.
  * @subpackage Structs
@@ -15,33 +18,33 @@ class AnnouncementMessageType extends AbstractStructBase
 {
     /**
      * The AnnouncementStartTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date on which an upcoming event can start to be announced.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AnnouncementStartTime;
+    protected ?string $AnnouncementStartTime = null;
     /**
      * The EventTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date on which the event occurs. This is also the ending date of the announcement that lead up to the event (see <b>AnnouncementStartTime</b>).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EventTime;
+    protected ?string $EventTime = null;
     /**
      * The MessageType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Control of what messages to display.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageType;
+    protected ?string $MessageType = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AnnouncementMessageType
      * @uses AnnouncementMessageType::setAnnouncementStartTime()
@@ -51,9 +54,9 @@ class AnnouncementMessageType extends AbstractStructBase
      * @param string $announcementStartTime
      * @param string $eventTime
      * @param string $messageType
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($announcementStartTime = null, $eventTime = null, $messageType = null, \DOMDocument $any = null)
+    public function __construct(?string $announcementStartTime = null, ?string $eventTime = null, ?string $messageType = null, $any = null)
     {
         $this
             ->setAnnouncementStartTime($announcementStartTime)
@@ -65,7 +68,7 @@ class AnnouncementMessageType extends AbstractStructBase
      * Get AnnouncementStartTime value
      * @return string|null
      */
-    public function getAnnouncementStartTime()
+    public function getAnnouncementStartTime(): ?string
     {
         return $this->AnnouncementStartTime;
     }
@@ -74,20 +77,21 @@ class AnnouncementMessageType extends AbstractStructBase
      * @param string $announcementStartTime
      * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType
      */
-    public function setAnnouncementStartTime($announcementStartTime = null)
+    public function setAnnouncementStartTime(?string $announcementStartTime = null): self
     {
         // validation for constraint: string
         if (!is_null($announcementStartTime) && !is_string($announcementStartTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($announcementStartTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($announcementStartTime, true), gettype($announcementStartTime)), __LINE__);
         }
         $this->AnnouncementStartTime = $announcementStartTime;
+        
         return $this;
     }
     /**
      * Get EventTime value
      * @return string|null
      */
-    public function getEventTime()
+    public function getEventTime(): ?string
     {
         return $this->EventTime;
     }
@@ -96,20 +100,21 @@ class AnnouncementMessageType extends AbstractStructBase
      * @param string $eventTime
      * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType
      */
-    public function setEventTime($eventTime = null)
+    public function setEventTime(?string $eventTime = null): self
     {
         // validation for constraint: string
         if (!is_null($eventTime) && !is_string($eventTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eventTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eventTime, true), gettype($eventTime)), __LINE__);
         }
         $this->EventTime = $eventTime;
+        
         return $this;
     }
     /**
      * Get MessageType value
      * @return string|null
      */
-    public function getMessageType()
+    public function getMessageType(): ?string
     {
         return $this->MessageType;
     }
@@ -117,69 +122,51 @@ class AnnouncementMessageType extends AbstractStructBase
      * Set MessageType value
      * @uses \macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $messageType
      * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType
      */
-    public function setMessageType($messageType = null)
+    public function setMessageType(?string $messageType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType::valueIsValid($messageType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $messageType, implode(', ', \macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType', is_array($messageType) ? implode(', ', $messageType) : var_export($messageType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AnnouncementMessageCodeType::getValidValues())), __LINE__);
         }
         $this->MessageType = $messageType;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\AnnouncementMessageType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

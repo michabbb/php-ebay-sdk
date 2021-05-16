@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MyMessagesAlertType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,177 +17,179 @@ class MyMessagesAlertType extends AbstractStructBase
 {
     /**
      * The Sender
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Sender;
+    protected ?string $Sender = null;
     /**
      * The RecipientUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RecipientUserID;
+    protected ?string $RecipientUserID = null;
     /**
      * The Subject
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Subject;
+    protected ?string $Subject = null;
     /**
      * The Priority
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Priority;
+    protected ?string $Priority = null;
     /**
      * The AlertID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | This type is deprecated.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AlertID;
+    protected ?string $AlertID = null;
     /**
      * The ExternalAlertID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalAlertID;
+    protected ?string $ExternalAlertID = null;
     /**
      * The ContentType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ContentType;
+    protected ?string $ContentType = null;
     /**
      * The Text
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Text;
+    protected ?string $Text = null;
     /**
      * The ResolutionStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ResolutionStatus;
+    protected ?string $ResolutionStatus = null;
     /**
      * The Read
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Read;
+    protected ?bool $Read = null;
     /**
      * The CreationDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreationDate;
+    protected ?string $CreationDate = null;
     /**
      * The ReceiveDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReceiveDate;
+    protected ?string $ReceiveDate = null;
     /**
      * The ExpirationDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExpirationDate;
+    protected ?string $ExpirationDate = null;
     /**
      * The ResolutionDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ResolutionDate;
+    protected ?string $ResolutionDate = null;
     /**
      * The LastReadDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LastReadDate;
+    protected ?string $LastReadDate = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The IsTimedResolution
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IsTimedResolution;
+    protected ?bool $IsTimedResolution = null;
     /**
      * The ActionURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ActionURL;
+    protected ?string $ActionURL = null;
     /**
      * The ResponseDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType|null
      */
-    public $ResponseDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $ResponseDetails = null;
     /**
      * The ForwardDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
      */
-    public $ForwardDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $ForwardDetails = null;
     /**
      * The Folder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderType|null
      */
-    public $Folder;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $Folder = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MyMessagesAlertType
      * @uses MyMessagesAlertType::setSender()
@@ -230,9 +235,9 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sender = null, $recipientUserID = null, $subject = null, $priority = null, $alertID = null, $externalAlertID = null, $contentType = null, $text = null, $resolutionStatus = null, $read = null, $creationDate = null, $receiveDate = null, $expirationDate = null, $resolutionDate = null, $lastReadDate = null, $itemID = null, $isTimedResolution = null, $actionURL = null, \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, \DOMDocument $any = null)
+    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $subject = null, ?string $priority = null, ?string $alertID = null, ?string $externalAlertID = null, ?string $contentType = null, ?string $text = null, ?string $resolutionStatus = null, ?bool $read = null, ?string $creationDate = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $resolutionDate = null, ?string $lastReadDate = null, ?string $itemID = null, ?bool $isTimedResolution = null, ?string $actionURL = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, $any = null)
     {
         $this
             ->setSender($sender)
@@ -262,7 +267,7 @@ class MyMessagesAlertType extends AbstractStructBase
      * Get Sender value
      * @return string|null
      */
-    public function getSender()
+    public function getSender(): ?string
     {
         return $this->Sender;
     }
@@ -271,20 +276,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $sender
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setSender($sender = null)
+    public function setSender(?string $sender = null): self
     {
         // validation for constraint: string
         if (!is_null($sender) && !is_string($sender)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sender)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sender, true), gettype($sender)), __LINE__);
         }
         $this->Sender = $sender;
+        
         return $this;
     }
     /**
      * Get RecipientUserID value
      * @return string|null
      */
-    public function getRecipientUserID()
+    public function getRecipientUserID(): ?string
     {
         return $this->RecipientUserID;
     }
@@ -293,20 +299,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $recipientUserID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setRecipientUserID($recipientUserID = null)
+    public function setRecipientUserID(?string $recipientUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($recipientUserID) && !is_string($recipientUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($recipientUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($recipientUserID, true), gettype($recipientUserID)), __LINE__);
         }
         $this->RecipientUserID = $recipientUserID;
+        
         return $this;
     }
     /**
      * Get Subject value
      * @return string|null
      */
-    public function getSubject()
+    public function getSubject(): ?string
     {
         return $this->Subject;
     }
@@ -315,20 +322,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $subject
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setSubject($subject = null)
+    public function setSubject(?string $subject = null): self
     {
         // validation for constraint: string
         if (!is_null($subject) && !is_string($subject)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($subject)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($subject, true), gettype($subject)), __LINE__);
         }
         $this->Subject = $subject;
+        
         return $this;
     }
     /**
      * Get Priority value
      * @return string|null
      */
-    public function getPriority()
+    public function getPriority(): ?string
     {
         return $this->Priority;
     }
@@ -337,20 +345,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $priority
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setPriority($priority = null)
+    public function setPriority(?string $priority = null): self
     {
         // validation for constraint: string
         if (!is_null($priority) && !is_string($priority)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($priority)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($priority, true), gettype($priority)), __LINE__);
         }
         $this->Priority = $priority;
+        
         return $this;
     }
     /**
      * Get AlertID value
      * @return string|null
      */
-    public function getAlertID()
+    public function getAlertID(): ?string
     {
         return $this->AlertID;
     }
@@ -359,20 +368,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $alertID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setAlertID($alertID = null)
+    public function setAlertID(?string $alertID = null): self
     {
         // validation for constraint: string
         if (!is_null($alertID) && !is_string($alertID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($alertID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($alertID, true), gettype($alertID)), __LINE__);
         }
         $this->AlertID = $alertID;
+        
         return $this;
     }
     /**
      * Get ExternalAlertID value
      * @return string|null
      */
-    public function getExternalAlertID()
+    public function getExternalAlertID(): ?string
     {
         return $this->ExternalAlertID;
     }
@@ -381,20 +391,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $externalAlertID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setExternalAlertID($externalAlertID = null)
+    public function setExternalAlertID(?string $externalAlertID = null): self
     {
         // validation for constraint: string
         if (!is_null($externalAlertID) && !is_string($externalAlertID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalAlertID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalAlertID, true), gettype($externalAlertID)), __LINE__);
         }
         $this->ExternalAlertID = $externalAlertID;
+        
         return $this;
     }
     /**
      * Get ContentType value
      * @return string|null
      */
-    public function getContentType()
+    public function getContentType(): ?string
     {
         return $this->ContentType;
     }
@@ -403,20 +414,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $contentType
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setContentType($contentType = null)
+    public function setContentType(?string $contentType = null): self
     {
         // validation for constraint: string
         if (!is_null($contentType) && !is_string($contentType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($contentType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($contentType, true), gettype($contentType)), __LINE__);
         }
         $this->ContentType = $contentType;
+        
         return $this;
     }
     /**
      * Get Text value
      * @return string|null
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->Text;
     }
@@ -425,20 +437,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $text
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setText($text = null)
+    public function setText(?string $text = null): self
     {
         // validation for constraint: string
         if (!is_null($text) && !is_string($text)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($text)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($text, true), gettype($text)), __LINE__);
         }
         $this->Text = $text;
+        
         return $this;
     }
     /**
      * Get ResolutionStatus value
      * @return string|null
      */
-    public function getResolutionStatus()
+    public function getResolutionStatus(): ?string
     {
         return $this->ResolutionStatus;
     }
@@ -446,24 +459,25 @@ class MyMessagesAlertType extends AbstractStructBase
      * Set ResolutionStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $resolutionStatus
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setResolutionStatus($resolutionStatus = null)
+    public function setResolutionStatus(?string $resolutionStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode::valueIsValid($resolutionStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $resolutionStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode', is_array($resolutionStatus) ? implode(', ', $resolutionStatus) : var_export($resolutionStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MyMessagesAlertResolutionStatusCode::getValidValues())), __LINE__);
         }
         $this->ResolutionStatus = $resolutionStatus;
+        
         return $this;
     }
     /**
      * Get Read value
      * @return bool|null
      */
-    public function getRead()
+    public function getRead(): ?bool
     {
         return $this->Read;
     }
@@ -472,20 +486,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param bool $read
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setRead($read = null)
+    public function setRead(?bool $read = null): self
     {
         // validation for constraint: boolean
         if (!is_null($read) && !is_bool($read)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($read)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($read, true), gettype($read)), __LINE__);
         }
         $this->Read = $read;
+        
         return $this;
     }
     /**
      * Get CreationDate value
      * @return string|null
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?string
     {
         return $this->CreationDate;
     }
@@ -494,20 +509,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $creationDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setCreationDate($creationDate = null)
+    public function setCreationDate(?string $creationDate = null): self
     {
         // validation for constraint: string
         if (!is_null($creationDate) && !is_string($creationDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($creationDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationDate, true), gettype($creationDate)), __LINE__);
         }
         $this->CreationDate = $creationDate;
+        
         return $this;
     }
     /**
      * Get ReceiveDate value
      * @return string|null
      */
-    public function getReceiveDate()
+    public function getReceiveDate(): ?string
     {
         return $this->ReceiveDate;
     }
@@ -516,20 +532,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $receiveDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setReceiveDate($receiveDate = null)
+    public function setReceiveDate(?string $receiveDate = null): self
     {
         // validation for constraint: string
         if (!is_null($receiveDate) && !is_string($receiveDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($receiveDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($receiveDate, true), gettype($receiveDate)), __LINE__);
         }
         $this->ReceiveDate = $receiveDate;
+        
         return $this;
     }
     /**
      * Get ExpirationDate value
      * @return string|null
      */
-    public function getExpirationDate()
+    public function getExpirationDate(): ?string
     {
         return $this->ExpirationDate;
     }
@@ -538,20 +555,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $expirationDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setExpirationDate($expirationDate = null)
+    public function setExpirationDate(?string $expirationDate = null): self
     {
         // validation for constraint: string
         if (!is_null($expirationDate) && !is_string($expirationDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($expirationDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($expirationDate, true), gettype($expirationDate)), __LINE__);
         }
         $this->ExpirationDate = $expirationDate;
+        
         return $this;
     }
     /**
      * Get ResolutionDate value
      * @return string|null
      */
-    public function getResolutionDate()
+    public function getResolutionDate(): ?string
     {
         return $this->ResolutionDate;
     }
@@ -560,20 +578,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $resolutionDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setResolutionDate($resolutionDate = null)
+    public function setResolutionDate(?string $resolutionDate = null): self
     {
         // validation for constraint: string
         if (!is_null($resolutionDate) && !is_string($resolutionDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($resolutionDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($resolutionDate, true), gettype($resolutionDate)), __LINE__);
         }
         $this->ResolutionDate = $resolutionDate;
+        
         return $this;
     }
     /**
      * Get LastReadDate value
      * @return string|null
      */
-    public function getLastReadDate()
+    public function getLastReadDate(): ?string
     {
         return $this->LastReadDate;
     }
@@ -582,20 +601,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $lastReadDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setLastReadDate($lastReadDate = null)
+    public function setLastReadDate(?string $lastReadDate = null): self
     {
         // validation for constraint: string
         if (!is_null($lastReadDate) && !is_string($lastReadDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($lastReadDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($lastReadDate, true), gettype($lastReadDate)), __LINE__);
         }
         $this->LastReadDate = $lastReadDate;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -604,20 +624,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get IsTimedResolution value
      * @return bool|null
      */
-    public function getIsTimedResolution()
+    public function getIsTimedResolution(): ?bool
     {
         return $this->IsTimedResolution;
     }
@@ -626,20 +647,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param bool $isTimedResolution
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setIsTimedResolution($isTimedResolution = null)
+    public function setIsTimedResolution(?bool $isTimedResolution = null): self
     {
         // validation for constraint: boolean
         if (!is_null($isTimedResolution) && !is_bool($isTimedResolution)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($isTimedResolution)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($isTimedResolution, true), gettype($isTimedResolution)), __LINE__);
         }
         $this->IsTimedResolution = $isTimedResolution;
+        
         return $this;
     }
     /**
      * Get ActionURL value
      * @return string|null
      */
-    public function getActionURL()
+    public function getActionURL(): ?string
     {
         return $this->ActionURL;
     }
@@ -648,20 +670,21 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param string $actionURL
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setActionURL($actionURL = null)
+    public function setActionURL(?string $actionURL = null): self
     {
         // validation for constraint: string
         if (!is_null($actionURL) && !is_string($actionURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($actionURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($actionURL, true), gettype($actionURL)), __LINE__);
         }
         $this->ActionURL = $actionURL;
+        
         return $this;
     }
     /**
      * Get ResponseDetails value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType|null
      */
-    public function getResponseDetails()
+    public function getResponseDetails(): ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType
     {
         return $this->ResponseDetails;
     }
@@ -670,16 +693,17 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setResponseDetails(\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null)
+    public function setResponseDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null): self
     {
         $this->ResponseDetails = $responseDetails;
+        
         return $this;
     }
     /**
      * Get ForwardDetails value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
      */
-    public function getForwardDetails()
+    public function getForwardDetails(): ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType
     {
         return $this->ForwardDetails;
     }
@@ -688,16 +712,17 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setForwardDetails(\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null)
+    public function setForwardDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null): self
     {
         $this->ForwardDetails = $forwardDetails;
+        
         return $this;
     }
     /**
      * Get Folder value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderType|null
      */
-    public function getFolder()
+    public function getFolder(): ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType
     {
         return $this->Folder;
     }
@@ -706,61 +731,43 @@ class MyMessagesAlertType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setFolder(\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null)
+    public function setFolder(?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null): self
     {
         $this->Folder = $folder;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MyMessagesAlertType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

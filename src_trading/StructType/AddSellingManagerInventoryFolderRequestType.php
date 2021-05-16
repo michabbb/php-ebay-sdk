@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddSellingManagerInventoryFolderRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Adds a new product folder to a user's Selling Manager account.
  * @subpackage Structs
  */
@@ -14,28 +17,28 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
 {
     /**
      * The FolderName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Name of the new Selling Manager inventory folder.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FolderName;
+    protected ?string $FolderName = null;
     /**
      * The ParentFolderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier of the parent Selling Manager inventory folder. If no <b>ParentFolderID</b> is submitted, the folder is added at the root level.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ParentFolderID;
+    protected ?int $ParentFolderID = null;
     /**
      * The Comment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains comments that will be associated with this folder.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Comment;
+    protected ?string $Comment = null;
     /**
      * Constructor method for AddSellingManagerInventoryFolderRequestType
      * @uses AddSellingManagerInventoryFolderRequestType::setFolderName()
@@ -45,7 +48,7 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * @param int $parentFolderID
      * @param string $comment
      */
-    public function __construct($folderName = null, $parentFolderID = null, $comment = null)
+    public function __construct(?string $folderName = null, ?int $parentFolderID = null, ?string $comment = null)
     {
         $this
             ->setFolderName($folderName)
@@ -56,7 +59,7 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * Get FolderName value
      * @return string|null
      */
-    public function getFolderName()
+    public function getFolderName(): ?string
     {
         return $this->FolderName;
     }
@@ -65,20 +68,21 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * @param string $folderName
      * @return \macropage\ebaysdk\trading\StructType\AddSellingManagerInventoryFolderRequestType
      */
-    public function setFolderName($folderName = null)
+    public function setFolderName(?string $folderName = null): self
     {
         // validation for constraint: string
         if (!is_null($folderName) && !is_string($folderName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($folderName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($folderName, true), gettype($folderName)), __LINE__);
         }
         $this->FolderName = $folderName;
+        
         return $this;
     }
     /**
      * Get ParentFolderID value
      * @return int|null
      */
-    public function getParentFolderID()
+    public function getParentFolderID(): ?int
     {
         return $this->ParentFolderID;
     }
@@ -87,20 +91,21 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * @param int $parentFolderID
      * @return \macropage\ebaysdk\trading\StructType\AddSellingManagerInventoryFolderRequestType
      */
-    public function setParentFolderID($parentFolderID = null)
+    public function setParentFolderID(?int $parentFolderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($parentFolderID) && !is_numeric($parentFolderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($parentFolderID)), __LINE__);
+        if (!is_null($parentFolderID) && !(is_int($parentFolderID) || ctype_digit($parentFolderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($parentFolderID, true), gettype($parentFolderID)), __LINE__);
         }
         $this->ParentFolderID = $parentFolderID;
+        
         return $this;
     }
     /**
      * Get Comment value
      * @return string|null
      */
-    public function getComment()
+    public function getComment(): ?string
     {
         return $this->Comment;
     }
@@ -109,33 +114,14 @@ class AddSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * @param string $comment
      * @return \macropage\ebaysdk\trading\StructType\AddSellingManagerInventoryFolderRequestType
      */
-    public function setComment($comment = null)
+    public function setComment(?string $comment = null): self
     {
         // validation for constraint: string
         if (!is_null($comment) && !is_string($comment)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($comment)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($comment, true), gettype($comment)), __LINE__);
         }
         $this->Comment = $comment;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AddSellingManagerInventoryFolderRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetFeedbackResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The <b>GetFeedback</b> response contains the feedback summary if a <b>TransactionID</b> or <b>ItemID</b> is specified, and contains the specified user's total feedback score and feedback summary data if a <b>UserID</b> is specified.
  * If no value is supplied, the feedback score and feedback summary for the requesting user will be returned. <br> If a detail level value of <b>ReturnAll</b> is specified, an array of all feedback records will be returned.
  * @subpackage Structs
@@ -15,62 +18,66 @@ class GetFeedbackResponseType extends AbstractResponseType
 {
     /**
      * The FeedbackDetailArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the individual Feedback records for the user or order line item specified in the request. There is one <b>FeedbackDetail</b> container returned for each Feedback record. Only populated with data when a detail level of
      * <code>ReturnAll</code> is specified in the request. Not returned if you specify a <b>FeedbackID</b> in the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType|null
      */
-    public $FeedbackDetailArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $FeedbackDetailArray = null;
     /**
      * The FeedbackDetailItemTotal
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the total number of Feedback records returned in the the response. Only applicable if Feedback details are returned.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FeedbackDetailItemTotal;
+    protected ?int $FeedbackDetailItemTotal = null;
     /**
      * The FeedbackSummary
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Summary Feedback data for the user. Contains counts of positive, neutral, and negative Feedback for pre-defined time periods. Only applicable if Feedback details are returned.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\FeedbackSummaryType
+     * @var \macropage\ebaysdk\trading\StructType\FeedbackSummaryType|null
      */
-    public $FeedbackSummary;
+    protected ?\macropage\ebaysdk\trading\StructType\FeedbackSummaryType $FeedbackSummary = null;
     /**
      * The FeedbackScore
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the total feedback score for the user.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the total Feedback score for the user.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FeedbackScore;
+    protected ?int $FeedbackScore = null;
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains information regarding the pagination of data (if pagination is used), including total number of pages and total number of entries. This is only applicable when a User ID or no ID (requester option) is specified.
+     * Meta information extracted from the WSDL
+     * - documentation: Contains information regarding the pagination of data, including the total number of Feedback entries and the total number of pages required to show all of these Feedback entries. The total number of pages is dependent on the
+     * <b>Pagination.EntriesPerPage</b> value (if set). The <b>EntriesPerPage</b> value defaults to <code>25</code> if the <b>Pagination.EntriesPerPage</b> field is not used. <br><br> If the call request returns no Feedback entries because there are none,
+     * or because the <b>DetailLevel</b> field was not included and set to <code>ReturnAll</code>, the <b>PaginationResult.TotalNumberOfPages</b> and <b>PaginationResult.TotalNumberOfEntries</b> fields are still returned, but with values of <code>0</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The EntriesPerPage
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the number of Feedback records that are being returned per page of data (i.e., per call). Only returned if entries are returned.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the number of Feedback records that are set to be returned per page of data (i.e., per call). The <b>EntriesPerPage</b> value defaults to <code>25</code> if the <b>Pagination.EntriesPerPage</b> field is not set in the
+     * request. <br><br> This field is always returned even if the response is not showing any Feedback entries.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $EntriesPerPage;
+    protected ?int $EntriesPerPage = null;
     /**
      * The PageNumber
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which page of data was just returned. Will be the same as the value specified in Pagination.PageNumber. (If the input is higher than the total number of pages, the call fails with an error.) Only returned if items are
-     * returned.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the page of data that is currently displaying. The page number to display is set in the <b>Pagination.PageNumber</b> field in the request. If this field is omitted, the <b>PageNumber</b> value defaults to <code>1</code>
+     * (first page of Feedback entries). If the integer value input into the <b>Pagination.PageNumber</b> field in the request is higher than the total number of available pages, the call fails with an error. <br><br> This field is always returned even if
+     * the response is not showing any Feedback entries.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PageNumber;
+    protected ?int $PageNumber = null;
     /**
      * Constructor method for GetFeedbackResponseType
      * @uses GetFeedbackResponseType::setFeedbackDetailArray()
@@ -88,7 +95,7 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param int $entriesPerPage
      * @param int $pageNumber
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $feedbackDetailArray = null, $feedbackDetailItemTotal = null, \macropage\ebaysdk\trading\StructType\FeedbackSummaryType $feedbackSummary = null, $feedbackScore = null, \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $entriesPerPage = null, $pageNumber = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $feedbackDetailArray = null, ?int $feedbackDetailItemTotal = null, ?\macropage\ebaysdk\trading\StructType\FeedbackSummaryType $feedbackSummary = null, ?int $feedbackScore = null, ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?int $entriesPerPage = null, ?int $pageNumber = null)
     {
         $this
             ->setFeedbackDetailArray($feedbackDetailArray)
@@ -103,7 +110,7 @@ class GetFeedbackResponseType extends AbstractResponseType
      * Get FeedbackDetailArray value
      * @return \macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType|null
      */
-    public function getFeedbackDetailArray()
+    public function getFeedbackDetailArray(): ?\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType
     {
         return $this->FeedbackDetailArray;
     }
@@ -112,16 +119,17 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $feedbackDetailArray
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setFeedbackDetailArray(\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $feedbackDetailArray = null)
+    public function setFeedbackDetailArray(?\macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType $feedbackDetailArray = null): self
     {
         $this->FeedbackDetailArray = $feedbackDetailArray;
+        
         return $this;
     }
     /**
      * Get FeedbackDetailItemTotal value
      * @return int|null
      */
-    public function getFeedbackDetailItemTotal()
+    public function getFeedbackDetailItemTotal(): ?int
     {
         return $this->FeedbackDetailItemTotal;
     }
@@ -130,20 +138,21 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param int $feedbackDetailItemTotal
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setFeedbackDetailItemTotal($feedbackDetailItemTotal = null)
+    public function setFeedbackDetailItemTotal(?int $feedbackDetailItemTotal = null): self
     {
         // validation for constraint: int
-        if (!is_null($feedbackDetailItemTotal) && !is_numeric($feedbackDetailItemTotal)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($feedbackDetailItemTotal)), __LINE__);
+        if (!is_null($feedbackDetailItemTotal) && !(is_int($feedbackDetailItemTotal) || ctype_digit($feedbackDetailItemTotal))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($feedbackDetailItemTotal, true), gettype($feedbackDetailItemTotal)), __LINE__);
         }
         $this->FeedbackDetailItemTotal = $feedbackDetailItemTotal;
+        
         return $this;
     }
     /**
      * Get FeedbackSummary value
      * @return \macropage\ebaysdk\trading\StructType\FeedbackSummaryType|null
      */
-    public function getFeedbackSummary()
+    public function getFeedbackSummary(): ?\macropage\ebaysdk\trading\StructType\FeedbackSummaryType
     {
         return $this->FeedbackSummary;
     }
@@ -152,16 +161,17 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\FeedbackSummaryType $feedbackSummary
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setFeedbackSummary(\macropage\ebaysdk\trading\StructType\FeedbackSummaryType $feedbackSummary = null)
+    public function setFeedbackSummary(?\macropage\ebaysdk\trading\StructType\FeedbackSummaryType $feedbackSummary = null): self
     {
         $this->FeedbackSummary = $feedbackSummary;
+        
         return $this;
     }
     /**
      * Get FeedbackScore value
      * @return int|null
      */
-    public function getFeedbackScore()
+    public function getFeedbackScore(): ?int
     {
         return $this->FeedbackScore;
     }
@@ -170,20 +180,21 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param int $feedbackScore
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setFeedbackScore($feedbackScore = null)
+    public function setFeedbackScore(?int $feedbackScore = null): self
     {
         // validation for constraint: int
-        if (!is_null($feedbackScore) && !is_numeric($feedbackScore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($feedbackScore)), __LINE__);
+        if (!is_null($feedbackScore) && !(is_int($feedbackScore) || ctype_digit($feedbackScore))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($feedbackScore, true), gettype($feedbackScore)), __LINE__);
         }
         $this->FeedbackScore = $feedbackScore;
+        
         return $this;
     }
     /**
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -192,16 +203,17 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get EntriesPerPage value
      * @return int|null
      */
-    public function getEntriesPerPage()
+    public function getEntriesPerPage(): ?int
     {
         return $this->EntriesPerPage;
     }
@@ -210,20 +222,21 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param int $entriesPerPage
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setEntriesPerPage($entriesPerPage = null)
+    public function setEntriesPerPage(?int $entriesPerPage = null): self
     {
         // validation for constraint: int
-        if (!is_null($entriesPerPage) && !is_numeric($entriesPerPage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($entriesPerPage)), __LINE__);
+        if (!is_null($entriesPerPage) && !(is_int($entriesPerPage) || ctype_digit($entriesPerPage))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($entriesPerPage, true), gettype($entriesPerPage)), __LINE__);
         }
         $this->EntriesPerPage = $entriesPerPage;
+        
         return $this;
     }
     /**
      * Get PageNumber value
      * @return int|null
      */
-    public function getPageNumber()
+    public function getPageNumber(): ?int
     {
         return $this->PageNumber;
     }
@@ -232,33 +245,14 @@ class GetFeedbackResponseType extends AbstractResponseType
      * @param int $pageNumber
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
      */
-    public function setPageNumber($pageNumber = null)
+    public function setPageNumber(?int $pageNumber = null): self
     {
         // validation for constraint: int
-        if (!is_null($pageNumber) && !is_numeric($pageNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pageNumber)), __LINE__);
+        if (!is_null($pageNumber) && !(is_int($pageNumber) || ctype_digit($pageNumber))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pageNumber, true), gettype($pageNumber)), __LINE__);
         }
         $this->PageNumber = $pageNumber;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

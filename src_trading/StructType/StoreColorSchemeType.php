@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreColorSchemeType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Store color scheme.
  * @subpackage Structs
  */
@@ -14,42 +17,42 @@ class StoreColorSchemeType extends AbstractStructBase
 {
     /**
      * The ColorSchemeID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Store color scheme ID. (use GetStoreOptions to get the list of valid theme color scheme IDs).
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ColorSchemeID;
+    protected ?int $ColorSchemeID = null;
     /**
      * The Name
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Store color scheme name. Provides a user-friendly name for the color scheme.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The Color
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Store color set.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\StoreColorType
+     * @var \macropage\ebaysdk\trading\StructType\StoreColorType|null
      */
-    public $Color;
+    protected ?\macropage\ebaysdk\trading\StructType\StoreColorType $Color = null;
     /**
      * The Font
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of the Store's font properties. This container is not returned if an eBay predefined store theme is used 'as is'. Use the <b>GetStoreOptions</b> call to retrieve the complete set of data for the list of
      * predefined eBay Stores options, including the themes and color schemes.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\StoreFontType
+     * @var \macropage\ebaysdk\trading\StructType\StoreFontType|null
      */
-    public $Font;
+    protected ?\macropage\ebaysdk\trading\StructType\StoreFontType $Font = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreColorSchemeType
      * @uses StoreColorSchemeType::setColorSchemeID()
@@ -61,9 +64,9 @@ class StoreColorSchemeType extends AbstractStructBase
      * @param string $name
      * @param \macropage\ebaysdk\trading\StructType\StoreColorType $color
      * @param \macropage\ebaysdk\trading\StructType\StoreFontType $font
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($colorSchemeID = null, $name = null, \macropage\ebaysdk\trading\StructType\StoreColorType $color = null, \macropage\ebaysdk\trading\StructType\StoreFontType $font = null, \DOMDocument $any = null)
+    public function __construct(?int $colorSchemeID = null, ?string $name = null, ?\macropage\ebaysdk\trading\StructType\StoreColorType $color = null, ?\macropage\ebaysdk\trading\StructType\StoreFontType $font = null, $any = null)
     {
         $this
             ->setColorSchemeID($colorSchemeID)
@@ -76,7 +79,7 @@ class StoreColorSchemeType extends AbstractStructBase
      * Get ColorSchemeID value
      * @return int|null
      */
-    public function getColorSchemeID()
+    public function getColorSchemeID(): ?int
     {
         return $this->ColorSchemeID;
     }
@@ -85,20 +88,21 @@ class StoreColorSchemeType extends AbstractStructBase
      * @param int $colorSchemeID
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
      */
-    public function setColorSchemeID($colorSchemeID = null)
+    public function setColorSchemeID(?int $colorSchemeID = null): self
     {
         // validation for constraint: int
-        if (!is_null($colorSchemeID) && !is_numeric($colorSchemeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($colorSchemeID)), __LINE__);
+        if (!is_null($colorSchemeID) && !(is_int($colorSchemeID) || ctype_digit($colorSchemeID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($colorSchemeID, true), gettype($colorSchemeID)), __LINE__);
         }
         $this->ColorSchemeID = $colorSchemeID;
+        
         return $this;
     }
     /**
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -107,20 +111,21 @@ class StoreColorSchemeType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get Color value
      * @return \macropage\ebaysdk\trading\StructType\StoreColorType|null
      */
-    public function getColor()
+    public function getColor(): ?\macropage\ebaysdk\trading\StructType\StoreColorType
     {
         return $this->Color;
     }
@@ -129,16 +134,17 @@ class StoreColorSchemeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreColorType $color
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
      */
-    public function setColor(\macropage\ebaysdk\trading\StructType\StoreColorType $color = null)
+    public function setColor(?\macropage\ebaysdk\trading\StructType\StoreColorType $color = null): self
     {
         $this->Color = $color;
+        
         return $this;
     }
     /**
      * Get Font value
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType|null
      */
-    public function getFont()
+    public function getFont(): ?\macropage\ebaysdk\trading\StructType\StoreFontType
     {
         return $this->Font;
     }
@@ -147,61 +153,43 @@ class StoreColorSchemeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreFontType $font
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
      */
-    public function setFont(\macropage\ebaysdk\trading\StructType\StoreFontType $font = null)
+    public function setFont(?\macropage\ebaysdk\trading\StructType\StoreFontType $font = null): self
     {
         $this->Font = $font;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreColorSchemeType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

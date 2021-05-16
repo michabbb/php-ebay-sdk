@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellerDashboardAlertType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: A message to help the you understand your status as a seller (PowerSeller status, policy compliance status, etc.).
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class SellerDashboardAlertType extends AbstractStructBase
 {
     /**
      * The Severity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The severity level helps you understand whether the alert is identifying a problem (a warning or strong warning) or if it is informational in nature. This field is present if an alert has been issued to your account.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Severity;
+    protected ?string $Severity = null;
     /**
      * The Text
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The warning or informational alert text. When you parse this text, note that some alerts may use plain text while others can include HTML. Returned only if the seller has been issued an alert.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Text;
+    protected ?string $Text = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellerDashboardAlertType
      * @uses SellerDashboardAlertType::setSeverity()
@@ -40,9 +43,9 @@ class SellerDashboardAlertType extends AbstractStructBase
      * @uses SellerDashboardAlertType::setAny()
      * @param string $severity
      * @param string $text
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($severity = null, $text = null, \DOMDocument $any = null)
+    public function __construct(?string $severity = null, ?string $text = null, $any = null)
     {
         $this
             ->setSeverity($severity)
@@ -53,7 +56,7 @@ class SellerDashboardAlertType extends AbstractStructBase
      * Get Severity value
      * @return string|null
      */
-    public function getSeverity()
+    public function getSeverity(): ?string
     {
         return $this->Severity;
     }
@@ -61,24 +64,25 @@ class SellerDashboardAlertType extends AbstractStructBase
      * Set Severity value
      * @uses \macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $severity
      * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType
      */
-    public function setSeverity($severity = null)
+    public function setSeverity(?string $severity = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType::valueIsValid($severity)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $severity, implode(', ', \macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType', is_array($severity) ? implode(', ', $severity) : var_export($severity, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellerDashboardAlertSeverityCodeType::getValidValues())), __LINE__);
         }
         $this->Severity = $severity;
+        
         return $this;
     }
     /**
      * Get Text value
      * @return string|null
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->Text;
     }
@@ -87,65 +91,47 @@ class SellerDashboardAlertType extends AbstractStructBase
      * @param string $text
      * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType
      */
-    public function setText($text = null)
+    public function setText(?string $text = null): self
     {
         // validation for constraint: string
         if (!is_null($text) && !is_string($text)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($text)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($text, true), gettype($text)), __LINE__);
         }
         $this->Text = $text;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

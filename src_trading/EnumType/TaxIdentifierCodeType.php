@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for TaxIdentifierCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is not currently used.
  * @subpackage Enumerations
  */
-class TaxIdentifierCodeType
+class TaxIdentifierCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'CodiceFiscale'
@@ -37,19 +41,11 @@ class TaxIdentifierCodeType
     const VALUE_TURKEY_ID = 'TurkeyID';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: Reserved for internal or future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_CODICE_FISCALE
@@ -60,23 +56,15 @@ class TaxIdentifierCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_CODICE_FISCALE,
             self::VALUE_DNI,
             self::VALUE_RUSSIAN_PASSPORT,
             self::VALUE_CPFTAX_ID,
             self::VALUE_TURKEY_ID,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

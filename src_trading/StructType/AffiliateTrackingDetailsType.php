@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AffiliateTrackingDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>AffiliateTrackingDetails</b> container, which is included in the <b>PlaceOffer</b> call to pass in eBay Partner Network affiliate-related data, so affiliates can earn commissions based on user activity and the
  * number of calls made by the user's application.
  * @subpackage Structs
@@ -15,45 +18,45 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
 {
     /**
      * The TrackingID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> If you are using affiliate tracking, this field is required. </span><br> The value you specify in this field is obtained from your tracking partner. For the eBay Partner Network, the
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> If you are using affiliate tracking, this field is required. </span> The value you specify in this field is obtained from your tracking partner. For the eBay Partner Network, the
      * <b>TrackingID</b> is the Campaign ID ("campid") provided by the eBay Partner Network. A Campaign ID is a 10-digit, unique number for associating traffic. A Campaign ID is valid across all programs to which you have been accepted.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TrackingID;
+    protected ?string $TrackingID = null;
     /**
      * The TrackingPartnerCode
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> If you are using affiliate tracking, this field is required. </span><br> Specifies your tracking partner for affiliate commissions. Depending on your tracking partner, specify one of the
-     * following values. Not all partners are valid for all sites. For <b>PlaceOffer</b>, only eBay Partner Network and Mediaplex are valid: <br> <br>2 = Be Free <br>3 = Affilinet <br>4 = TradeDoubler <br>5 = Mediaplex <br>6 = DoubleClick <br>7 = Allyes
-     * <br>8 = BJMT <br>9 = eBay Partner Network <br> <br> For information about the eBay Partner Network, see <a href="https://www.ebaypartnernetwork.com" target="_blank">eBay Partner Network</a>.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> If you are using affiliate tracking, this field is required. </span> Specifies your tracking partner for affiliate commissions. Depending on your tracking partner, specify one of the following
+     * values. Not all partners are valid for all sites. For <b>PlaceOffer</b>, only eBay Partner Network is valid: <br> <br>9 = eBay Partner Network <br> <br> For information about the eBay Partner Network, see <a href="https://www.ebaypartnernetwork.com"
+     * target="_blank">eBay Partner Network</a>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TrackingPartnerCode;
+    protected ?string $TrackingPartnerCode = null;
     /**
      * The ApplicationDeviceType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> If you are using affiliate tracking, this field is required. </span> Type of device or platform from which the call originated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ApplicationDeviceType;
+    protected ?string $ApplicationDeviceType = null;
     /**
      * The AffiliateUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is not required, but an affiliate may want to use this identifier to better monitor marketing efforts. If you are using the eBay Partner Network, and you provide an <b>AffiliateUserID</b>, the tracking URL returned by eBay
      * Partner Network will contain the <b>AffiliateUserID</b>, but it will be referred to as a "customid".
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AffiliateUserID;
+    protected ?string $AffiliateUserID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AffiliateTrackingDetailsType
      * @uses AffiliateTrackingDetailsType::setTrackingID()
@@ -65,9 +68,9 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * @param string $trackingPartnerCode
      * @param string $applicationDeviceType
      * @param string $affiliateUserID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($trackingID = null, $trackingPartnerCode = null, $applicationDeviceType = null, $affiliateUserID = null, \DOMDocument $any = null)
+    public function __construct(?string $trackingID = null, ?string $trackingPartnerCode = null, ?string $applicationDeviceType = null, ?string $affiliateUserID = null, $any = null)
     {
         $this
             ->setTrackingID($trackingID)
@@ -80,7 +83,7 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * Get TrackingID value
      * @return string|null
      */
-    public function getTrackingID()
+    public function getTrackingID(): ?string
     {
         return $this->TrackingID;
     }
@@ -89,20 +92,21 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * @param string $trackingID
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
      */
-    public function setTrackingID($trackingID = null)
+    public function setTrackingID(?string $trackingID = null): self
     {
         // validation for constraint: string
         if (!is_null($trackingID) && !is_string($trackingID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($trackingID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trackingID, true), gettype($trackingID)), __LINE__);
         }
         $this->TrackingID = $trackingID;
+        
         return $this;
     }
     /**
      * Get TrackingPartnerCode value
      * @return string|null
      */
-    public function getTrackingPartnerCode()
+    public function getTrackingPartnerCode(): ?string
     {
         return $this->TrackingPartnerCode;
     }
@@ -111,20 +115,21 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * @param string $trackingPartnerCode
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
      */
-    public function setTrackingPartnerCode($trackingPartnerCode = null)
+    public function setTrackingPartnerCode(?string $trackingPartnerCode = null): self
     {
         // validation for constraint: string
         if (!is_null($trackingPartnerCode) && !is_string($trackingPartnerCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($trackingPartnerCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($trackingPartnerCode, true), gettype($trackingPartnerCode)), __LINE__);
         }
         $this->TrackingPartnerCode = $trackingPartnerCode;
+        
         return $this;
     }
     /**
      * Get ApplicationDeviceType value
      * @return string|null
      */
-    public function getApplicationDeviceType()
+    public function getApplicationDeviceType(): ?string
     {
         return $this->ApplicationDeviceType;
     }
@@ -132,24 +137,25 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * Set ApplicationDeviceType value
      * @uses \macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $applicationDeviceType
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
      */
-    public function setApplicationDeviceType($applicationDeviceType = null)
+    public function setApplicationDeviceType(?string $applicationDeviceType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType::valueIsValid($applicationDeviceType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $applicationDeviceType, implode(', ', \macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType', is_array($applicationDeviceType) ? implode(', ', $applicationDeviceType) : var_export($applicationDeviceType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ApplicationDeviceTypeCodeType::getValidValues())), __LINE__);
         }
         $this->ApplicationDeviceType = $applicationDeviceType;
+        
         return $this;
     }
     /**
      * Get AffiliateUserID value
      * @return string|null
      */
-    public function getAffiliateUserID()
+    public function getAffiliateUserID(): ?string
     {
         return $this->AffiliateUserID;
     }
@@ -158,65 +164,47 @@ class AffiliateTrackingDetailsType extends AbstractStructBase
      * @param string $affiliateUserID
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
      */
-    public function setAffiliateUserID($affiliateUserID = null)
+    public function setAffiliateUserID(?string $affiliateUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($affiliateUserID) && !is_string($affiliateUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($affiliateUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($affiliateUserID, true), gettype($affiliateUserID)), __LINE__);
         }
         $this->AffiliateUserID = $affiliateUserID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AffiliateTrackingDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

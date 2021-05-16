@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CharacteristicSetIDsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,81 +17,84 @@ class CharacteristicSetIDsType extends AbstractStructBase
 {
     /**
      * The ID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $ID;
+    protected array $ID = [];
     /**
      * Constructor method for CharacteristicSetIDsType
      * @uses CharacteristicSetIDsType::setID()
      * @param string[] $iD
      */
-    public function __construct(array $iD = array())
+    public function __construct(array $iD = [])
     {
         $this
             ->setID($iD);
     }
     /**
      * Get ID value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getID()
+    public function getID(): array
     {
         return $this->ID;
     }
     /**
+     * This method is responsible for validating the values passed to the setID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateIDForArrayConstraintsFromSetID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $characteristicSetIDsTypeIDItem) {
+            // validation for constraint: itemType
+            if (!is_string($characteristicSetIDsTypeIDItem)) {
+                $invalidValues[] = is_object($characteristicSetIDsTypeIDItem) ? get_class($characteristicSetIDsTypeIDItem) : sprintf('%s(%s)', gettype($characteristicSetIDsTypeIDItem), var_export($characteristicSetIDsTypeIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $iD
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
      */
-    public function setID(array $iD = array())
+    public function setID(array $iD = []): self
     {
-        foreach ($iD as $characteristicSetIDsTypeIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($characteristicSetIDsTypeIDItem)) {
-                throw new \InvalidArgumentException(sprintf('The ID property can only contain items of string, "%s" given', is_object($characteristicSetIDsTypeIDItem) ? get_class($characteristicSetIDsTypeIDItem) : gettype($characteristicSetIDsTypeIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($iDArrayErrorMessage = self::validateIDForArrayConstraintsFromSetID($iD))) {
+            throw new InvalidArgumentException($iDArrayErrorMessage, __LINE__);
         }
         $this->ID = $iD;
+        
         return $this;
     }
     /**
      * Add item to ID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
      */
-    public function addToID($item)
+    public function addToID(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The ID property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ID property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ID[] = $item;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

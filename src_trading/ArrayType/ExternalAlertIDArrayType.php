@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for ExternalAlertIDArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Arrays
  */
@@ -14,61 +17,68 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
 {
     /**
      * The ExternalAlertID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $ExternalAlertID;
+    protected array $ExternalAlertID = [];
     /**
      * Constructor method for ExternalAlertIDArrayType
      * @uses ExternalAlertIDArrayType::setExternalAlertID()
      * @param string[] $externalAlertID
      */
-    public function __construct(array $externalAlertID = array())
+    public function __construct(array $externalAlertID = [])
     {
         $this
             ->setExternalAlertID($externalAlertID);
     }
     /**
      * Get ExternalAlertID value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getExternalAlertID()
+    public function getExternalAlertID(): array
     {
         return $this->ExternalAlertID;
     }
     /**
+     * This method is responsible for validating the values passed to the setExternalAlertID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setExternalAlertID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateExternalAlertIDForArrayConstraintsFromSetExternalAlertID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $externalAlertIDArrayTypeExternalAlertIDItem) {
+            // validation for constraint: itemType
+            if (!is_string($externalAlertIDArrayTypeExternalAlertIDItem)) {
+                $invalidValues[] = is_object($externalAlertIDArrayTypeExternalAlertIDItem) ? get_class($externalAlertIDArrayTypeExternalAlertIDItem) : sprintf('%s(%s)', gettype($externalAlertIDArrayTypeExternalAlertIDItem), var_export($externalAlertIDArrayTypeExternalAlertIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ExternalAlertID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ExternalAlertID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $externalAlertID
      * @return \macropage\ebaysdk\trading\ArrayType\ExternalAlertIDArrayType
      */
-    public function setExternalAlertID(array $externalAlertID = array())
+    public function setExternalAlertID(array $externalAlertID = []): self
     {
-        foreach ($externalAlertID as $externalAlertIDArrayTypeExternalAlertIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($externalAlertIDArrayTypeExternalAlertIDItem)) {
-                throw new \InvalidArgumentException(sprintf('The ExternalAlertID property can only contain items of string, "%s" given', is_object($externalAlertIDArrayTypeExternalAlertIDItem) ? get_class($externalAlertIDArrayTypeExternalAlertIDItem) : gettype($externalAlertIDArrayTypeExternalAlertIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($externalAlertIDArrayErrorMessage = self::validateExternalAlertIDForArrayConstraintsFromSetExternalAlertID($externalAlertID))) {
+            throw new InvalidArgumentException($externalAlertIDArrayErrorMessage, __LINE__);
         }
         $this->ExternalAlertID = $externalAlertID;
-        return $this;
-    }
-    /**
-     * Add item to ExternalAlertID value
-     * @throws \InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\ArrayType\ExternalAlertIDArrayType
-     */
-    public function addToExternalAlertID($item)
-    {
-        // validation for constraint: itemType
-        if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The ExternalAlertID property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->ExternalAlertID[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +86,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return string|null
      */
-    public function current()
+    public function current(): ?string
     {
         return parent::current();
     }
@@ -86,7 +96,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return string|null
      */
-    public function item($index)
+    public function item($index): ?string
     {
         return parent::item($index);
     }
@@ -95,7 +105,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return string|null
      */
-    public function first()
+    public function first(): ?string
     {
         return parent::first();
     }
@@ -104,7 +114,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return string|null
      */
-    public function last()
+    public function last(): ?string
     {
         return parent::last();
     }
@@ -114,7 +124,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return string|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?string
     {
         return parent::offsetGet($offset);
     }
@@ -123,28 +133,8 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string ExternalAlertID
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'ExternalAlertID';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\ExternalAlertIDArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

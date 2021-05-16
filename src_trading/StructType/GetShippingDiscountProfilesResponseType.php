@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetShippingDiscountProfilesResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The base response of the <b>GetShippingDiscountProfiles</b> call.
  * @subpackage Structs
  */
@@ -14,83 +17,83 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
 {
     /**
      * The CurrencyID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The three-digit code of the currency to be used for shipping cost discounts. A discount profile can only be associated with a listing if the <b>CurrencyID</b> value of the profile matches the <b>Item.Currency</b> value specified in a
      * listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CurrencyID;
+    protected ?string $CurrencyID = null;
     /**
      * The FlatShippingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of one or more flat-rate shipping discount rules that are set up for a seller's account. This container is returned as an empty element if no flat-rate shipping discount rules are currently set for the
      * seller's account.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType
+     * @var \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType|null
      */
-    public $FlatShippingDiscount;
+    protected ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $FlatShippingDiscount = null;
     /**
      * The CalculatedShippingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of one or more calculated shipping discount rules that are set up for a seller's account. This container is returned as an empty element if no calculated shipping discount rules are currently set for the
      * seller's account.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType
+     * @var \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType|null
      */
-    public $CalculatedShippingDiscount;
+    protected ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $CalculatedShippingDiscount = null;
     /**
      * The PromotionalShippingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field indicates whether or not a seller has set up a promotional shipping discount rule in the seller's account. Only one promotional shipping discount may be defined for a seller's account at any given time. This field is
      * returned whether <code>false</code> or <code>true</code>. If <code>true</code>, details of the rule can be found in the <b>PromotionalShippingDiscountDetails</b> container.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PromotionalShippingDiscount;
+    protected ?bool $PromotionalShippingDiscount = null;
     /**
      * The CalculatedHandlingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of the handling discount applicable to a calculated shipping discount rule that is set up for a seller's account. This container is not returned if no calculated shipping discount rules are currently set for
      * the seller's account.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
+     * @var \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType|null
      */
-    public $CalculatedHandlingDiscount;
+    protected ?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $CalculatedHandlingDiscount = null;
     /**
      * The PromotionalShippingDiscountDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of information related to the promotional shipping discount rule that is set up for a seller's account. This container is not returned if no promotional shipping discount rule is set up for the seller's
      * account.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType|null
      */
-    public $PromotionalShippingDiscountDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $PromotionalShippingDiscountDetails = null;
     /**
      * The ShippingInsurance
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
      */
-    public $ShippingInsurance;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $ShippingInsurance = null;
     /**
      * The InternationalShippingInsurance
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
      */
-    public $InternationalShippingInsurance;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $InternationalShippingInsurance = null;
     /**
      * The CombinedDuration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field indicates the number of days after the sale of an item in which the buyer or seller can combine multiple and mutual order line items into one Combined Invoice order. In a Combined Invoice order, the buyer makes one payment
      * for all order line items, hence only unpaid order line items can be combined into a Combined Invoice order.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CombinedDuration;
+    protected ?string $CombinedDuration = null;
     /**
      * Constructor method for GetShippingDiscountProfilesResponseType
      * @uses GetShippingDiscountProfilesResponseType::setCurrencyID()
@@ -112,7 +115,7 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance
      * @param string $combinedDuration
      */
-    public function __construct($currencyID = null, \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, $promotionalShippingDiscount = null, \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null, \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null, \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null, $combinedDuration = null)
+    public function __construct(?string $currencyID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?bool $promotionalShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null, ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null, ?string $combinedDuration = null)
     {
         $this
             ->setCurrencyID($currencyID)
@@ -129,7 +132,7 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * Get CurrencyID value
      * @return string|null
      */
-    public function getCurrencyID()
+    public function getCurrencyID(): ?string
     {
         return $this->CurrencyID;
     }
@@ -137,24 +140,25 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * Set CurrencyID value
      * @uses \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $currencyID
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setCurrencyID($currencyID = null)
+    public function setCurrencyID(?string $currencyID = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CurrencyCodeType::valueIsValid($currencyID)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $currencyID, implode(', ', \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CurrencyCodeType', is_array($currencyID) ? implode(', ', $currencyID) : var_export($currencyID, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues())), __LINE__);
         }
         $this->CurrencyID = $currencyID;
+        
         return $this;
     }
     /**
      * Get FlatShippingDiscount value
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType|null
      */
-    public function getFlatShippingDiscount()
+    public function getFlatShippingDiscount(): ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType
     {
         return $this->FlatShippingDiscount;
     }
@@ -163,16 +167,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setFlatShippingDiscount(\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null)
+    public function setFlatShippingDiscount(?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null): self
     {
         $this->FlatShippingDiscount = $flatShippingDiscount;
+        
         return $this;
     }
     /**
      * Get CalculatedShippingDiscount value
      * @return \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType|null
      */
-    public function getCalculatedShippingDiscount()
+    public function getCalculatedShippingDiscount(): ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType
     {
         return $this->CalculatedShippingDiscount;
     }
@@ -181,16 +186,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setCalculatedShippingDiscount(\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null)
+    public function setCalculatedShippingDiscount(?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null): self
     {
         $this->CalculatedShippingDiscount = $calculatedShippingDiscount;
+        
         return $this;
     }
     /**
      * Get PromotionalShippingDiscount value
      * @return bool|null
      */
-    public function getPromotionalShippingDiscount()
+    public function getPromotionalShippingDiscount(): ?bool
     {
         return $this->PromotionalShippingDiscount;
     }
@@ -199,20 +205,21 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param bool $promotionalShippingDiscount
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setPromotionalShippingDiscount($promotionalShippingDiscount = null)
+    public function setPromotionalShippingDiscount(?bool $promotionalShippingDiscount = null): self
     {
         // validation for constraint: boolean
         if (!is_null($promotionalShippingDiscount) && !is_bool($promotionalShippingDiscount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($promotionalShippingDiscount)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($promotionalShippingDiscount, true), gettype($promotionalShippingDiscount)), __LINE__);
         }
         $this->PromotionalShippingDiscount = $promotionalShippingDiscount;
+        
         return $this;
     }
     /**
      * Get CalculatedHandlingDiscount value
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType|null
      */
-    public function getCalculatedHandlingDiscount()
+    public function getCalculatedHandlingDiscount(): ?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
     {
         return $this->CalculatedHandlingDiscount;
     }
@@ -221,16 +228,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setCalculatedHandlingDiscount(\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null)
+    public function setCalculatedHandlingDiscount(?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null): self
     {
         $this->CalculatedHandlingDiscount = $calculatedHandlingDiscount;
+        
         return $this;
     }
     /**
      * Get PromotionalShippingDiscountDetails value
      * @return \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType|null
      */
-    public function getPromotionalShippingDiscountDetails()
+    public function getPromotionalShippingDiscountDetails(): ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType
     {
         return $this->PromotionalShippingDiscountDetails;
     }
@@ -239,16 +247,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setPromotionalShippingDiscountDetails(\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null)
+    public function setPromotionalShippingDiscountDetails(?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null): self
     {
         $this->PromotionalShippingDiscountDetails = $promotionalShippingDiscountDetails;
+        
         return $this;
     }
     /**
      * Get ShippingInsurance value
      * @return \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
      */
-    public function getShippingInsurance()
+    public function getShippingInsurance(): ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType
     {
         return $this->ShippingInsurance;
     }
@@ -257,16 +266,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setShippingInsurance(\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null)
+    public function setShippingInsurance(?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null): self
     {
         $this->ShippingInsurance = $shippingInsurance;
+        
         return $this;
     }
     /**
      * Get InternationalShippingInsurance value
      * @return \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
      */
-    public function getInternationalShippingInsurance()
+    public function getInternationalShippingInsurance(): ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType
     {
         return $this->InternationalShippingInsurance;
     }
@@ -275,16 +285,17 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setInternationalShippingInsurance(\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null)
+    public function setInternationalShippingInsurance(?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null): self
     {
         $this->InternationalShippingInsurance = $internationalShippingInsurance;
+        
         return $this;
     }
     /**
      * Get CombinedDuration value
      * @return string|null
      */
-    public function getCombinedDuration()
+    public function getCombinedDuration(): ?string
     {
         return $this->CombinedDuration;
     }
@@ -292,37 +303,18 @@ class GetShippingDiscountProfilesResponseType extends AbstractResponseType
      * Set CombinedDuration value
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $combinedDuration
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
      */
-    public function setCombinedDuration($combinedDuration = null)
+    public function setCombinedDuration(?string $combinedDuration = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::valueIsValid($combinedDuration)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $combinedDuration, implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType', is_array($combinedDuration) ? implode(', ', $combinedDuration) : var_export($combinedDuration, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues())), __LINE__);
         }
         $this->CombinedDuration = $combinedDuration;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

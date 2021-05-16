@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CheckoutOrderDetailType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class CheckoutOrderDetailType extends AbstractStructBase
 {
     /**
      * The TotalCartMerchandiseCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalCartMerchandiseCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalCartMerchandiseCost = null;
     /**
      * The TotalCartShippingCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalCartShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalCartShippingCost = null;
     /**
      * The TotalTaxAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalTaxAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalTaxAmount = null;
     /**
      * The TotalAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalAmount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CheckoutOrderDetailType
      * @uses CheckoutOrderDetailType::setTotalCartMerchandiseCost()
@@ -60,9 +63,9 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalAmount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $totalCartMerchandiseCost = null, \macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost = null, \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, \macropage\ebaysdk\trading\StructType\AmountType $totalAmount = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $totalCartMerchandiseCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalAmount = null, $any = null)
     {
         $this
             ->setTotalCartMerchandiseCost($totalCartMerchandiseCost)
@@ -75,7 +78,7 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * Get TotalCartMerchandiseCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalCartMerchandiseCost()
+    public function getTotalCartMerchandiseCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalCartMerchandiseCost;
     }
@@ -84,16 +87,17 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalCartMerchandiseCost
      * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
      */
-    public function setTotalCartMerchandiseCost(\macropage\ebaysdk\trading\StructType\AmountType $totalCartMerchandiseCost = null)
+    public function setTotalCartMerchandiseCost(?\macropage\ebaysdk\trading\StructType\AmountType $totalCartMerchandiseCost = null): self
     {
         $this->TotalCartMerchandiseCost = $totalCartMerchandiseCost;
+        
         return $this;
     }
     /**
      * Get TotalCartShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalCartShippingCost()
+    public function getTotalCartShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalCartShippingCost;
     }
@@ -102,16 +106,17 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost
      * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
      */
-    public function setTotalCartShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost = null)
+    public function setTotalCartShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $totalCartShippingCost = null): self
     {
         $this->TotalCartShippingCost = $totalCartShippingCost;
+        
         return $this;
     }
     /**
      * Get TotalTaxAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalTaxAmount()
+    public function getTotalTaxAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalTaxAmount;
     }
@@ -120,16 +125,17 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount
      * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
      */
-    public function setTotalTaxAmount(\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null)
+    public function setTotalTaxAmount(?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null): self
     {
         $this->TotalTaxAmount = $totalTaxAmount;
+        
         return $this;
     }
     /**
      * Get TotalAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalAmount()
+    public function getTotalAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalAmount;
     }
@@ -138,61 +144,43 @@ class CheckoutOrderDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalAmount
      * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
      */
-    public function setTotalAmount(\macropage\ebaysdk\trading\StructType\AmountType $totalAmount = null)
+    public function setTotalAmount(?\macropage\ebaysdk\trading\StructType\AmountType $totalAmount = null): self
     {
         $this->TotalAmount = $totalAmount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CheckoutOrderDetailType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

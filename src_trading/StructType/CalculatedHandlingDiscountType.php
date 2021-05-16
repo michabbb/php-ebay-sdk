@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CalculatedHandlingDiscountType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>CalculatedHandlingDiscount</b> container that is used in the <b>SetShippingDiscountProfiles</b> call to specify the rules used to determine package handling costs for an order in which calculated shipping is
  * used.
  * @subpackage Structs
@@ -15,58 +18,58 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
 {
     /**
      * The DiscountName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The type of discount that is detailed in the profile. If the selection is <code>EachAdditionalAmount</code>, <code>EachAdditionalAmountOff</code> or <code>EachAdditionalPercentOff</code>, the value is set in the child element of same
      * name in <b>CalculatedHandlingDiscount</b>. If the selection is <code>CombinedHandlingFee</code>, specify the amount in <b>CalculatedHandlingDiscount.OrderHandlingAmount</b>. If the selection is <code>IndividualHandlingFee</code>, the amount is
      * determined by eBay by adding the fees of the individual items.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DiscountName;
+    protected ?string $DiscountName = null;
     /**
      * The OrderHandlingAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If specified, this is the fixed shipping cost to charge for an order, regardless of the number of items in the order. This field is mutually exclusive with the other amount and percentage fields within this type. This field only
      * applies when the specified <b>DiscountName</b> value is <code>CombinedHandlingFee</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $OrderHandlingAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $OrderHandlingAmount = null;
     /**
      * The EachAdditionalAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The packaging/handling cost for each item beyond the first item (where the item with the highest packaging/handling cost is selected by eBay as the first item). Let's say the buyer purchases three items, each assigned a
      * packaging/handling cost of $8, and the seller set <b>EachAdditionalAmount</b> to $6. The packaging/handling cost for three items would normally be $24, but since the seller specified $6, the total packaging/handling cost would be $8 + $6 + $6, or
      * $20. This field is mutually exclusive with the other amount and percentage fields within this type. This field only applies when the <b>DiscountName</b> value is <code>EachAdditionalAmount</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $EachAdditionalAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $EachAdditionalAmount = null;
     /**
      * The EachAdditionalOffAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The amount by which to reduce the packaging/handling cost for each item beyond the first item (where the item with the highest packaging/handling cost is selected by eBay as the first item). Let's say the buyer purchases three items,
      * each assigned a packaging/handling cost of $8, and the seller set <b>EachAdditionalAmountOff</b> to $2. The packaging/handling cost for three items would normally be $24, but since the seller specified $2, the total packaging/handling cost would be
      * $24 - (two additional items x $2), or $20. This field is mutually exclusive with the other amount and percentage fields within this type. This field only applies when the <b>DiscountName</b> value is <code>EachAdditionalOffAmount</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $EachAdditionalOffAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $EachAdditionalOffAmount = null;
     /**
      * The EachAdditionalPercentOff
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The percentage by which to reduce the packaging/handling cost for each item beyond the first item (where the item with the highest packaging/handling cost is selected by eBay as the first item). Let's say the buyer purchases three
      * items, each assigned a packaging/handling cost of $8, and the seller set <b>EachAdditionalPercentOff</b> to 0.25. The packaging/handling cost for three items would normally be $24, but since the seller specified 0.25 ($2 out of 8), the total
      * packaging/handling cost would be $24 - (two additional items x $2), or $20. This field is mutually exclusive with the amount fields within this type. This field only applies when the <b>DiscountName</b> value is <code>EachAdditionalPercentOff</code>.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $EachAdditionalPercentOff;
+    protected ?float $EachAdditionalPercentOff = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CalculatedHandlingDiscountType
      * @uses CalculatedHandlingDiscountType::setDiscountName()
@@ -80,9 +83,9 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount
      * @param \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount
      * @param float $eachAdditionalPercentOff
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($discountName = null, \macropage\ebaysdk\trading\StructType\AmountType $orderHandlingAmount = null, \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount = null, \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount = null, $eachAdditionalPercentOff = null, \DOMDocument $any = null)
+    public function __construct(?string $discountName = null, ?\macropage\ebaysdk\trading\StructType\AmountType $orderHandlingAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount = null, ?float $eachAdditionalPercentOff = null, $any = null)
     {
         $this
             ->setDiscountName($discountName)
@@ -96,7 +99,7 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * Get DiscountName value
      * @return string|null
      */
-    public function getDiscountName()
+    public function getDiscountName(): ?string
     {
         return $this->DiscountName;
     }
@@ -104,24 +107,25 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * Set DiscountName value
      * @uses \macropage\ebaysdk\trading\EnumType\HandlingNameCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\HandlingNameCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $discountName
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setDiscountName($discountName = null)
+    public function setDiscountName(?string $discountName = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\HandlingNameCodeType::valueIsValid($discountName)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $discountName, implode(', ', \macropage\ebaysdk\trading\EnumType\HandlingNameCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\HandlingNameCodeType', is_array($discountName) ? implode(', ', $discountName) : var_export($discountName, true), implode(', ', \macropage\ebaysdk\trading\EnumType\HandlingNameCodeType::getValidValues())), __LINE__);
         }
         $this->DiscountName = $discountName;
+        
         return $this;
     }
     /**
      * Get OrderHandlingAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getOrderHandlingAmount()
+    public function getOrderHandlingAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->OrderHandlingAmount;
     }
@@ -130,16 +134,17 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $orderHandlingAmount
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setOrderHandlingAmount(\macropage\ebaysdk\trading\StructType\AmountType $orderHandlingAmount = null)
+    public function setOrderHandlingAmount(?\macropage\ebaysdk\trading\StructType\AmountType $orderHandlingAmount = null): self
     {
         $this->OrderHandlingAmount = $orderHandlingAmount;
+        
         return $this;
     }
     /**
      * Get EachAdditionalAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getEachAdditionalAmount()
+    public function getEachAdditionalAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->EachAdditionalAmount;
     }
@@ -148,16 +153,17 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setEachAdditionalAmount(\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount = null)
+    public function setEachAdditionalAmount(?\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalAmount = null): self
     {
         $this->EachAdditionalAmount = $eachAdditionalAmount;
+        
         return $this;
     }
     /**
      * Get EachAdditionalOffAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getEachAdditionalOffAmount()
+    public function getEachAdditionalOffAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->EachAdditionalOffAmount;
     }
@@ -166,16 +172,17 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setEachAdditionalOffAmount(\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount = null)
+    public function setEachAdditionalOffAmount(?\macropage\ebaysdk\trading\StructType\AmountType $eachAdditionalOffAmount = null): self
     {
         $this->EachAdditionalOffAmount = $eachAdditionalOffAmount;
+        
         return $this;
     }
     /**
      * Get EachAdditionalPercentOff value
      * @return float|null
      */
-    public function getEachAdditionalPercentOff()
+    public function getEachAdditionalPercentOff(): ?float
     {
         return $this->EachAdditionalPercentOff;
     }
@@ -184,61 +191,47 @@ class CalculatedHandlingDiscountType extends AbstractStructBase
      * @param float $eachAdditionalPercentOff
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setEachAdditionalPercentOff($eachAdditionalPercentOff = null)
+    public function setEachAdditionalPercentOff(?float $eachAdditionalPercentOff = null): self
     {
+        // validation for constraint: float
+        if (!is_null($eachAdditionalPercentOff) && !(is_float($eachAdditionalPercentOff) || is_numeric($eachAdditionalPercentOff))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($eachAdditionalPercentOff, true), gettype($eachAdditionalPercentOff)), __LINE__);
+        }
         $this->EachAdditionalPercentOff = $eachAdditionalPercentOff;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

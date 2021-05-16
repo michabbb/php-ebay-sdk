@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading;
 
 /**
  * Class which returns the class map definition
- * @package
  */
 class ClassMap
 {
@@ -13,9 +14,9 @@ class ClassMap
      * This array is sent to the \SoapClient when calling the WS
      * @return string[]
      */
-    final public static function get()
+    final public static function get(): array
     {
-        return array(
+        return [
             'AddDisputeRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\AddDisputeRequestType',
             'AddDisputeResponseType' => '\\macropage\\ebaysdk\\trading\\StructType\\AddDisputeResponseType',
             'AddDisputeResponseRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\AddDisputeResponseRequestType',
@@ -236,8 +237,6 @@ class ClassMap
             'ReviseSellingManagerInventoryFolderResponseType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerInventoryFolderResponseType',
             'ReviseSellingManagerProductRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerProductRequestType',
             'ReviseSellingManagerProductResponseType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerProductResponseType',
-            'ReviseSellingManagerSaleRecordRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerSaleRecordRequestType',
-            'ReviseSellingManagerSaleRecordResponseType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerSaleRecordResponseType',
             'ReviseSellingManagerTemplateRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerTemplateRequestType',
             'ReviseSellingManagerTemplateResponseType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReviseSellingManagerTemplateResponseType',
             'RevokeTokenRequestType' => '\\macropage\\ebaysdk\\trading\\StructType\\RevokeTokenRequestType',
@@ -336,6 +335,7 @@ class ClassMap
             'AttributeSetArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\AttributeSetArrayType',
             'AttributeSetType' => '\\macropage\\ebaysdk\\trading\\StructType\\AttributeSetType',
             'AttributeType' => '\\macropage\\ebaysdk\\trading\\StructType\\AttributeType',
+            'AuthenticityVerificationType' => '\\macropage\\ebaysdk\\trading\\StructType\\AuthenticityVerificationType',
             'AverageRatingDetailArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\AverageRatingDetailArrayType',
             'AverageRatingDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\AverageRatingDetailsType',
             'AverageRatingSummaryType' => '\\macropage\\ebaysdk\\trading\\StructType\\AverageRatingSummaryType',
@@ -444,8 +444,10 @@ class ClassMap
             'DigitalDeliveryUserType' => '\\macropage\\ebaysdk\\trading\\StructType\\DigitalDeliveryUserType',
             'DigitalGoodDeliveryEnabledDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\DigitalGoodDeliveryEnabledDefinitionType',
             'DigitalGoodInfoType' => '\\macropage\\ebaysdk\\trading\\StructType\\DigitalGoodInfoType',
+            'DiscountDetailType' => '\\macropage\\ebaysdk\\trading\\StructType\\DiscountDetailType',
             'DiscountPriceInfoType' => '\\macropage\\ebaysdk\\trading\\StructType\\DiscountPriceInfoType',
             'DiscountProfileType' => '\\macropage\\ebaysdk\\trading\\StructType\\DiscountProfileType',
+            'DiscountType' => '\\macropage\\ebaysdk\\trading\\StructType\\DiscountType',
             'DispatchCutoffTimePreferencesType' => '\\macropage\\ebaysdk\\trading\\StructType\\DispatchCutoffTimePreferencesType',
             'DispatchTimeMaxDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\DispatchTimeMaxDetailsType',
             'DisputeArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\DisputeArrayType',
@@ -493,6 +495,7 @@ class ClassMap
             'FlatShippingPreferencesType' => '\\macropage\\ebaysdk\\trading\\StructType\\FlatShippingPreferencesType',
             'FreeGalleryPlusEnabledDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\FreeGalleryPlusEnabledDefinitionType',
             'FreePicturePackEnabledDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\FreePicturePackEnabledDefinitionType',
+            'FulfillmentType' => '\\macropage\\ebaysdk\\trading\\StructType\\FulfillmentType',
             'GetRecommendationsRequestContainerType' => '\\macropage\\ebaysdk\\trading\\StructType\\GetRecommendationsRequestContainerType',
             'GetRecommendationsResponseContainerType' => '\\macropage\\ebaysdk\\trading\\StructType\\GetRecommendationsResponseContainerType',
             'GiftSummaryType' => '\\macropage\\ebaysdk\\trading\\StructType\\GiftSummaryType',
@@ -636,6 +639,7 @@ class ClassMap
             'NameValueListArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\NameValueListArrayType',
             'NameValueListType' => '\\macropage\\ebaysdk\\trading\\StructType\\NameValueListType',
             'NameValueRelationshipType' => '\\macropage\\ebaysdk\\trading\\StructType\\NameValueRelationshipType',
+            'NettedTransactionSummaryType' => '\\macropage\\ebaysdk\\trading\\StructType\\NettedTransactionSummaryType',
             'NonProfitAddressType' => '\\macropage\\ebaysdk\\trading\\StructType\\NonProfitAddressType',
             'NonSubscriptionDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\NonSubscriptionDefinitionType',
             'NotificationDetailsArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\NotificationDetailsArrayType',
@@ -648,6 +652,7 @@ class ClassMap
             'NotificationUserDataType' => '\\macropage\\ebaysdk\\trading\\StructType\\NotificationUserDataType',
             'NumberOfPolicyViolationsDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\NumberOfPolicyViolationsDetailsType',
             'OfferArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\OfferArrayType',
+            'OfferDiscountsType' => '\\macropage\\ebaysdk\\trading\\StructType\\OfferDiscountsType',
             'OfferType' => '\\macropage\\ebaysdk\\trading\\StructType\\OfferType',
             'OrderArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\OrderArrayType',
             'OrderIDArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\OrderIDArrayType',
@@ -745,6 +750,7 @@ class ClassMap
             'RegionDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\RegionDetailsType',
             'RegionOfOriginDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\RegionOfOriginDetailsType',
             'RegularSubscriptionDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\RegularSubscriptionDefinitionType',
+            'RelevanceIndicatorType' => '\\macropage\\ebaysdk\\trading\\StructType\\RelevanceIndicatorType',
             'ReminderCustomizationType' => '\\macropage\\ebaysdk\\trading\\StructType\\ReminderCustomizationType',
             'RemindersType' => '\\macropage\\ebaysdk\\trading\\StructType\\RemindersType',
             'RequiredSellerActionArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\RequiredSellerActionArrayType',
@@ -889,6 +895,7 @@ class ClassMap
             'TokenStatusType' => '\\macropage\\ebaysdk\\trading\\StructType\\TokenStatusType',
             'TopRatedSellerDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\TopRatedSellerDetailsType',
             'TransactionArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\TransactionArrayType',
+            'TransactionProgramType' => '\\macropage\\ebaysdk\\trading\\StructType\\TransactionProgramType',
             'TransactionReferenceType' => '\\macropage\\ebaysdk\\trading\\StructType\\TransactionReferenceType',
             'TransactionStatusType' => '\\macropage\\ebaysdk\\trading\\StructType\\TransactionStatusType',
             'TransactionType' => '\\macropage\\ebaysdk\\trading\\StructType\\TransactionType',
@@ -929,6 +936,7 @@ class ClassMap
             'VeROSiteDetailType' => '\\macropage\\ebaysdk\\trading\\StructType\\VeROSiteDetailType',
             'VerifiedUserRequirementsDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\VerifiedUserRequirementsDetailsType',
             'VerifiedUserRequirementsType' => '\\macropage\\ebaysdk\\trading\\StructType\\VerifiedUserRequirementsType',
+            'VideoDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\VideoDetailsType',
             'WantItNowPostArrayType' => '\\macropage\\ebaysdk\\trading\\ArrayType\\WantItNowPostArrayType',
             'WantItNowPostType' => '\\macropage\\ebaysdk\\trading\\StructType\\WantItNowPostType',
             'WarrantyDurationDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\WarrantyDurationDetailsType',
@@ -951,6 +959,6 @@ class ClassMap
             'eBayMotorsProStreetCountDefinitionType' => '\\macropage\\ebaysdk\\trading\\StructType\\EBayMotorsProStreetCountDefinitionType',
             'eBayPLUSPreferenceType' => '\\macropage\\ebaysdk\\trading\\StructType\\EBayPLUSPreferenceType',
             'eBayPaymentMismatchDetailsType' => '\\macropage\\ebaysdk\\trading\\StructType\\EBayPaymentMismatchDetailsType',
-        );
+        ];
     }
 }

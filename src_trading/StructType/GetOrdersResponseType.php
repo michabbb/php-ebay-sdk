@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetOrdersResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Returns the set of orders that match the order IDs or filter criteria specified.
  * @subpackage Structs
  */
@@ -14,54 +17,54 @@ class GetOrdersResponseType extends AbstractResponseType
 {
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains information regarding the pagination of data, including the total number of pages and the total number of orders.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The HasMoreOrders
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A true value indicates that there are more orders to be retrieved. Additional <b>GetOrders</b> calls with higher page numbers or more entries per page must be made to retrieve these orders. If false, no more orders are available or
      * no orders match the request (based on the input filters).
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HasMoreOrders;
+    protected ?bool $HasMoreOrders = null;
     /**
      * The OrderArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The set of orders that match the order IDs or filter criteria specified.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
      */
-    public $OrderArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $OrderArray = null;
     /**
      * The OrdersPerPage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the number of orders that can be returned per page of data (i.e., per call). This is the same value specified in the <b>Pagination.EntriesPerPage</b> input (or the default value, if <b>EntriesPerPage</b> was not specified).
      * This is not necessarily the actual number of orders returned per page (see <b>ReturnedOrderCountActual</b>).
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $OrdersPerPage;
+    protected ?int $OrdersPerPage = null;
     /**
      * The PageNumber
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the page number of data returned in the response. This is the same value specified in the <b>Pagination.PageNumber</b> input. If orders are returned, the first page is 1.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PageNumber;
+    protected ?int $PageNumber = null;
     /**
      * The ReturnedOrderCountActual
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the total number of orders returned.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ReturnedOrderCountActual;
+    protected ?int $ReturnedOrderCountActual = null;
     /**
      * Constructor method for GetOrdersResponseType
      * @uses GetOrdersResponseType::setPaginationResult()
@@ -77,7 +80,7 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param int $pageNumber
      * @param int $returnedOrderCountActual
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $hasMoreOrders = null, \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null, $ordersPerPage = null, $pageNumber = null, $returnedOrderCountActual = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreOrders = null, ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null, ?int $ordersPerPage = null, ?int $pageNumber = null, ?int $returnedOrderCountActual = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -91,7 +94,7 @@ class GetOrdersResponseType extends AbstractResponseType
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -100,16 +103,17 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get HasMoreOrders value
      * @return bool|null
      */
-    public function getHasMoreOrders()
+    public function getHasMoreOrders(): ?bool
     {
         return $this->HasMoreOrders;
     }
@@ -118,20 +122,21 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param bool $hasMoreOrders
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setHasMoreOrders($hasMoreOrders = null)
+    public function setHasMoreOrders(?bool $hasMoreOrders = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hasMoreOrders) && !is_bool($hasMoreOrders)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hasMoreOrders)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hasMoreOrders, true), gettype($hasMoreOrders)), __LINE__);
         }
         $this->HasMoreOrders = $hasMoreOrders;
+        
         return $this;
     }
     /**
      * Get OrderArray value
      * @return \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
      */
-    public function getOrderArray()
+    public function getOrderArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType
     {
         return $this->OrderArray;
     }
@@ -140,16 +145,17 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setOrderArray(\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null)
+    public function setOrderArray(?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null): self
     {
         $this->OrderArray = $orderArray;
+        
         return $this;
     }
     /**
      * Get OrdersPerPage value
      * @return int|null
      */
-    public function getOrdersPerPage()
+    public function getOrdersPerPage(): ?int
     {
         return $this->OrdersPerPage;
     }
@@ -158,20 +164,21 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param int $ordersPerPage
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setOrdersPerPage($ordersPerPage = null)
+    public function setOrdersPerPage(?int $ordersPerPage = null): self
     {
         // validation for constraint: int
-        if (!is_null($ordersPerPage) && !is_numeric($ordersPerPage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($ordersPerPage)), __LINE__);
+        if (!is_null($ordersPerPage) && !(is_int($ordersPerPage) || ctype_digit($ordersPerPage))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($ordersPerPage, true), gettype($ordersPerPage)), __LINE__);
         }
         $this->OrdersPerPage = $ordersPerPage;
+        
         return $this;
     }
     /**
      * Get PageNumber value
      * @return int|null
      */
-    public function getPageNumber()
+    public function getPageNumber(): ?int
     {
         return $this->PageNumber;
     }
@@ -180,20 +187,21 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param int $pageNumber
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setPageNumber($pageNumber = null)
+    public function setPageNumber(?int $pageNumber = null): self
     {
         // validation for constraint: int
-        if (!is_null($pageNumber) && !is_numeric($pageNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pageNumber)), __LINE__);
+        if (!is_null($pageNumber) && !(is_int($pageNumber) || ctype_digit($pageNumber))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pageNumber, true), gettype($pageNumber)), __LINE__);
         }
         $this->PageNumber = $pageNumber;
+        
         return $this;
     }
     /**
      * Get ReturnedOrderCountActual value
      * @return int|null
      */
-    public function getReturnedOrderCountActual()
+    public function getReturnedOrderCountActual(): ?int
     {
         return $this->ReturnedOrderCountActual;
     }
@@ -202,33 +210,14 @@ class GetOrdersResponseType extends AbstractResponseType
      * @param int $returnedOrderCountActual
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setReturnedOrderCountActual($returnedOrderCountActual = null)
+    public function setReturnedOrderCountActual(?int $returnedOrderCountActual = null): self
     {
         // validation for constraint: int
-        if (!is_null($returnedOrderCountActual) && !is_numeric($returnedOrderCountActual)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($returnedOrderCountActual)), __LINE__);
+        if (!is_null($returnedOrderCountActual) && !(is_int($returnedOrderCountActual) || ctype_digit($returnedOrderCountActual))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($returnedOrderCountActual, true), gettype($returnedOrderCountActual)), __LINE__);
         }
         $this->ReturnedOrderCountActual = $returnedOrderCountActual;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

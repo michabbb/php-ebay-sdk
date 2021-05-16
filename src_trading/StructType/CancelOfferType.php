@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CancelOfferType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class CancelOfferType extends AbstractStructBase
 {
     /**
      * The Offer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\OfferType
+     * @var \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public $Offer;
+    protected ?\macropage\ebaysdk\trading\StructType\OfferType $Offer = null;
     /**
      * The Explanation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Explanation;
+    protected ?string $Explanation = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CancelOfferType
      * @uses CancelOfferType::setOffer()
@@ -40,9 +43,9 @@ class CancelOfferType extends AbstractStructBase
      * @uses CancelOfferType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\OfferType $offer
      * @param string $explanation
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\OfferType $offer = null, $explanation = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\OfferType $offer = null, ?string $explanation = null, $any = null)
     {
         $this
             ->setOffer($offer)
@@ -53,7 +56,7 @@ class CancelOfferType extends AbstractStructBase
      * Get Offer value
      * @return \macropage\ebaysdk\trading\StructType\OfferType|null
      */
-    public function getOffer()
+    public function getOffer(): ?\macropage\ebaysdk\trading\StructType\OfferType
     {
         return $this->Offer;
     }
@@ -62,16 +65,17 @@ class CancelOfferType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\OfferType $offer
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferType
      */
-    public function setOffer(\macropage\ebaysdk\trading\StructType\OfferType $offer = null)
+    public function setOffer(?\macropage\ebaysdk\trading\StructType\OfferType $offer = null): self
     {
         $this->Offer = $offer;
+        
         return $this;
     }
     /**
      * Get Explanation value
      * @return string|null
      */
-    public function getExplanation()
+    public function getExplanation(): ?string
     {
         return $this->Explanation;
     }
@@ -80,65 +84,47 @@ class CancelOfferType extends AbstractStructBase
      * @param string $explanation
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferType
      */
-    public function setExplanation($explanation = null)
+    public function setExplanation(?string $explanation = null): self
     {
         // validation for constraint: string
         if (!is_null($explanation) && !is_string($explanation)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($explanation)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($explanation, true), gettype($explanation)), __LINE__);
         }
         $this->Explanation = $explanation;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CancelOfferType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CancelOfferType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

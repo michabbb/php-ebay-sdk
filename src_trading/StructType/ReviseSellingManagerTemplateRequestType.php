@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviseSellingManagerTemplateRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Revises a Selling Manager template. This call is subject to change without notice; the deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to use this call.
  * @subpackage Structs
  */
@@ -14,40 +17,40 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
 {
     /**
      * The SaleTemplateID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the Selling Manager template. You can obtain a <b>SaleTemplateID</b> value by calling <b>GetSellingManagerInventory</b>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SaleTemplateID;
+    protected ?int $SaleTemplateID = null;
     /**
      * The ProductID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserved for future use.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ProductID;
+    protected ?int $ProductID = null;
     /**
      * The SaleTemplateName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of the Selling Manager template.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SaleTemplateName;
+    protected ?string $SaleTemplateName = null;
     /**
      * The Item
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used to modify the Selling Manager template. In the <b>Item.ItemID</b> field, you specify the same value as the one specified in <b>SaleTemplateID</b>. Other child elements hold the values for properties that are
      * being changed. Set values in the Item object only for those properties that are changing. Use <b>DeletedField</b> to remove a property.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemType
+     * @var \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public $Item;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemType $Item = null;
     /**
      * The DeletedField
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the name of a field to remove from a template. See the eBay Web Services guide for rules on removing values when revising items. Also see the relevant field descriptions to determine when to use DeletedField (and potential
      * consequences). The request can contain zero, one, or many instances of DeletedField (one for each field to be removed). DeletedField accepts the following path names, which remove the corresponding fields: <br><br> Item.ApplicationData<br>
      * Item.AttributeSetArray<br> Item.ConditionID<br> Item.ItemSpecifics<br> Item.ListingCheckoutRedirectPreference.ProStoresStoreName<br> Item.ListingCheckoutRedirectPreference.SellerThirdPartyUsername<br> Item.ListingDesigner.LayoutID<br>
@@ -60,15 +63,15 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    public $DeletedField;
+    protected array $DeletedField = [];
     /**
      * The VerifyOnly
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Use this field to verify the template instead of revising it.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $VerifyOnly;
+    protected ?bool $VerifyOnly = null;
     /**
      * Constructor method for ReviseSellingManagerTemplateRequestType
      * @uses ReviseSellingManagerTemplateRequestType::setSaleTemplateID()
@@ -84,7 +87,7 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param string[] $deletedField
      * @param bool $verifyOnly
      */
-    public function __construct($saleTemplateID = null, $productID = null, $saleTemplateName = null, \macropage\ebaysdk\trading\StructType\ItemType $item = null, array $deletedField = array(), $verifyOnly = null)
+    public function __construct(?int $saleTemplateID = null, ?int $productID = null, ?string $saleTemplateName = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, array $deletedField = [], ?bool $verifyOnly = null)
     {
         $this
             ->setSaleTemplateID($saleTemplateID)
@@ -98,7 +101,7 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * Get SaleTemplateID value
      * @return int|null
      */
-    public function getSaleTemplateID()
+    public function getSaleTemplateID(): ?int
     {
         return $this->SaleTemplateID;
     }
@@ -107,20 +110,21 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param int $saleTemplateID
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setSaleTemplateID($saleTemplateID = null)
+    public function setSaleTemplateID(?int $saleTemplateID = null): self
     {
         // validation for constraint: int
-        if (!is_null($saleTemplateID) && !is_numeric($saleTemplateID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($saleTemplateID)), __LINE__);
+        if (!is_null($saleTemplateID) && !(is_int($saleTemplateID) || ctype_digit($saleTemplateID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($saleTemplateID, true), gettype($saleTemplateID)), __LINE__);
         }
         $this->SaleTemplateID = $saleTemplateID;
+        
         return $this;
     }
     /**
      * Get ProductID value
      * @return int|null
      */
-    public function getProductID()
+    public function getProductID(): ?int
     {
         return $this->ProductID;
     }
@@ -129,20 +133,21 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param int $productID
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setProductID($productID = null)
+    public function setProductID(?int $productID = null): self
     {
         // validation for constraint: int
-        if (!is_null($productID) && !is_numeric($productID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($productID)), __LINE__);
+        if (!is_null($productID) && !(is_int($productID) || ctype_digit($productID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($productID, true), gettype($productID)), __LINE__);
         }
         $this->ProductID = $productID;
+        
         return $this;
     }
     /**
      * Get SaleTemplateName value
      * @return string|null
      */
-    public function getSaleTemplateName()
+    public function getSaleTemplateName(): ?string
     {
         return $this->SaleTemplateName;
     }
@@ -151,20 +156,21 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param string $saleTemplateName
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setSaleTemplateName($saleTemplateName = null)
+    public function setSaleTemplateName(?string $saleTemplateName = null): self
     {
         // validation for constraint: string
         if (!is_null($saleTemplateName) && !is_string($saleTemplateName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($saleTemplateName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($saleTemplateName, true), gettype($saleTemplateName)), __LINE__);
         }
         $this->SaleTemplateName = $saleTemplateName;
+        
         return $this;
     }
     /**
      * Get Item value
      * @return \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public function getItem()
+    public function getItem(): ?\macropage\ebaysdk\trading\StructType\ItemType
     {
         return $this->Item;
     }
@@ -173,56 +179,80 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setItem(\macropage\ebaysdk\trading\StructType\ItemType $item = null)
+    public function setItem(?\macropage\ebaysdk\trading\StructType\ItemType $item = null): self
     {
         $this->Item = $item;
+        
         return $this;
     }
     /**
      * Get DeletedField value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getDeletedField()
+    public function getDeletedField(): array
     {
         return $this->DeletedField;
     }
     /**
+     * This method is responsible for validating the values passed to the setDeletedField method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setDeletedField method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $reviseSellingManagerTemplateRequestTypeDeletedFieldItem) {
+            // validation for constraint: itemType
+            if (!is_string($reviseSellingManagerTemplateRequestTypeDeletedFieldItem)) {
+                $invalidValues[] = is_object($reviseSellingManagerTemplateRequestTypeDeletedFieldItem) ? get_class($reviseSellingManagerTemplateRequestTypeDeletedFieldItem) : sprintf('%s(%s)', gettype($reviseSellingManagerTemplateRequestTypeDeletedFieldItem), var_export($reviseSellingManagerTemplateRequestTypeDeletedFieldItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The DeletedField property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set DeletedField value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $deletedField
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setDeletedField(array $deletedField = array())
+    public function setDeletedField(array $deletedField = []): self
     {
-        foreach ($deletedField as $reviseSellingManagerTemplateRequestTypeDeletedFieldItem) {
-            // validation for constraint: itemType
-            if (!is_string($reviseSellingManagerTemplateRequestTypeDeletedFieldItem)) {
-                throw new \InvalidArgumentException(sprintf('The DeletedField property can only contain items of string, "%s" given', is_object($reviseSellingManagerTemplateRequestTypeDeletedFieldItem) ? get_class($reviseSellingManagerTemplateRequestTypeDeletedFieldItem) : gettype($reviseSellingManagerTemplateRequestTypeDeletedFieldItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($deletedFieldArrayErrorMessage = self::validateDeletedFieldForArrayConstraintsFromSetDeletedField($deletedField))) {
+            throw new InvalidArgumentException($deletedFieldArrayErrorMessage, __LINE__);
         }
         $this->DeletedField = $deletedField;
+        
         return $this;
     }
     /**
      * Add item to DeletedField value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function addToDeletedField($item)
+    public function addToDeletedField(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The DeletedField property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The DeletedField property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->DeletedField[] = $item;
+        
         return $this;
     }
     /**
      * Get VerifyOnly value
      * @return bool|null
      */
-    public function getVerifyOnly()
+    public function getVerifyOnly(): ?bool
     {
         return $this->VerifyOnly;
     }
@@ -231,33 +261,14 @@ class ReviseSellingManagerTemplateRequestType extends AbstractRequestType
      * @param bool $verifyOnly
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
      */
-    public function setVerifyOnly($verifyOnly = null)
+    public function setVerifyOnly(?bool $verifyOnly = null): self
     {
         // validation for constraint: boolean
         if (!is_null($verifyOnly) && !is_bool($verifyOnly)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($verifyOnly)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($verifyOnly, true), gettype($verifyOnly)), __LINE__);
         }
         $this->VerifyOnly = $verifyOnly;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

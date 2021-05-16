@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ExpressItemRequirementsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,153 +17,153 @@ class ExpressItemRequirementsType extends AbstractStructBase
 {
     /**
      * The SellerExpressEligible
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SellerExpressEligible;
+    protected ?bool $SellerExpressEligible = null;
     /**
      * The ExpressOptOut
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressOptOut;
+    protected ?bool $ExpressOptOut = null;
     /**
      * The ExpressApproved
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressApproved;
+    protected ?bool $ExpressApproved = null;
     /**
      * The ExpressEligibleListingType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressEligibleListingType;
+    protected ?bool $ExpressEligibleListingType = null;
     /**
      * The ExpressEnabledCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressEnabledCategory;
+    protected ?bool $ExpressEnabledCategory = null;
     /**
      * The EligiblePayPalAccount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligiblePayPalAccount;
+    protected ?bool $EligiblePayPalAccount = null;
     /**
      * The DomesticShippingCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DomesticShippingCost;
+    protected ?bool $DomesticShippingCost = null;
     /**
      * The EligibleReturnPolicy
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligibleReturnPolicy;
+    protected ?bool $EligibleReturnPolicy = null;
     /**
      * The Picture
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Picture;
+    protected ?bool $Picture = null;
     /**
      * The EligibleItemCondition
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligibleItemCondition;
+    protected ?bool $EligibleItemCondition = null;
     /**
      * The PriceAboveMinimum
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PriceAboveMinimum;
+    protected ?bool $PriceAboveMinimum = null;
     /**
      * The PriceBelowMaximum
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PriceBelowMaximum;
+    protected ?bool $PriceBelowMaximum = null;
     /**
      * The EligibleCheckout
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligibleCheckout;
+    protected ?bool $EligibleCheckout = null;
     /**
      * The NoPreapprovedBidderList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $NoPreapprovedBidderList;
+    protected ?bool $NoPreapprovedBidderList = null;
     /**
      * The NoCharity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $NoCharity;
+    protected ?bool $NoCharity = null;
     /**
      * The CombinedShippingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CombinedShippingDiscount;
+    protected ?bool $CombinedShippingDiscount = null;
     /**
      * The ShipFromEligibleCountry
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ShipFromEligibleCountry;
+    protected ?bool $ShipFromEligibleCountry = null;
     /**
      * The PayPalAccountAcceptsUnconfirmedAddress
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalAccountAcceptsUnconfirmedAddress;
+    protected ?bool $PayPalAccountAcceptsUnconfirmedAddress = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ExpressItemRequirementsType
      * @uses ExpressItemRequirementsType::setSellerExpressEligible()
@@ -200,9 +203,9 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $combinedShippingDiscount
      * @param bool $shipFromEligibleCountry
      * @param bool $payPalAccountAcceptsUnconfirmedAddress
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sellerExpressEligible = null, $expressOptOut = null, $expressApproved = null, $expressEligibleListingType = null, $expressEnabledCategory = null, $eligiblePayPalAccount = null, $domesticShippingCost = null, $eligibleReturnPolicy = null, $picture = null, $eligibleItemCondition = null, $priceAboveMinimum = null, $priceBelowMaximum = null, $eligibleCheckout = null, $noPreapprovedBidderList = null, $noCharity = null, $combinedShippingDiscount = null, $shipFromEligibleCountry = null, $payPalAccountAcceptsUnconfirmedAddress = null, \DOMDocument $any = null)
+    public function __construct(?bool $sellerExpressEligible = null, ?bool $expressOptOut = null, ?bool $expressApproved = null, ?bool $expressEligibleListingType = null, ?bool $expressEnabledCategory = null, ?bool $eligiblePayPalAccount = null, ?bool $domesticShippingCost = null, ?bool $eligibleReturnPolicy = null, ?bool $picture = null, ?bool $eligibleItemCondition = null, ?bool $priceAboveMinimum = null, ?bool $priceBelowMaximum = null, ?bool $eligibleCheckout = null, ?bool $noPreapprovedBidderList = null, ?bool $noCharity = null, ?bool $combinedShippingDiscount = null, ?bool $shipFromEligibleCountry = null, ?bool $payPalAccountAcceptsUnconfirmedAddress = null, $any = null)
     {
         $this
             ->setSellerExpressEligible($sellerExpressEligible)
@@ -229,7 +232,7 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * Get SellerExpressEligible value
      * @return bool|null
      */
-    public function getSellerExpressEligible()
+    public function getSellerExpressEligible(): ?bool
     {
         return $this->SellerExpressEligible;
     }
@@ -238,20 +241,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $sellerExpressEligible
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setSellerExpressEligible($sellerExpressEligible = null)
+    public function setSellerExpressEligible(?bool $sellerExpressEligible = null): self
     {
         // validation for constraint: boolean
         if (!is_null($sellerExpressEligible) && !is_bool($sellerExpressEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($sellerExpressEligible)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($sellerExpressEligible, true), gettype($sellerExpressEligible)), __LINE__);
         }
         $this->SellerExpressEligible = $sellerExpressEligible;
+        
         return $this;
     }
     /**
      * Get ExpressOptOut value
      * @return bool|null
      */
-    public function getExpressOptOut()
+    public function getExpressOptOut(): ?bool
     {
         return $this->ExpressOptOut;
     }
@@ -260,20 +264,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $expressOptOut
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setExpressOptOut($expressOptOut = null)
+    public function setExpressOptOut(?bool $expressOptOut = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressOptOut) && !is_bool($expressOptOut)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressOptOut)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressOptOut, true), gettype($expressOptOut)), __LINE__);
         }
         $this->ExpressOptOut = $expressOptOut;
+        
         return $this;
     }
     /**
      * Get ExpressApproved value
      * @return bool|null
      */
-    public function getExpressApproved()
+    public function getExpressApproved(): ?bool
     {
         return $this->ExpressApproved;
     }
@@ -282,20 +287,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $expressApproved
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setExpressApproved($expressApproved = null)
+    public function setExpressApproved(?bool $expressApproved = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressApproved) && !is_bool($expressApproved)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressApproved)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressApproved, true), gettype($expressApproved)), __LINE__);
         }
         $this->ExpressApproved = $expressApproved;
+        
         return $this;
     }
     /**
      * Get ExpressEligibleListingType value
      * @return bool|null
      */
-    public function getExpressEligibleListingType()
+    public function getExpressEligibleListingType(): ?bool
     {
         return $this->ExpressEligibleListingType;
     }
@@ -304,20 +310,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $expressEligibleListingType
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setExpressEligibleListingType($expressEligibleListingType = null)
+    public function setExpressEligibleListingType(?bool $expressEligibleListingType = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressEligibleListingType) && !is_bool($expressEligibleListingType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressEligibleListingType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressEligibleListingType, true), gettype($expressEligibleListingType)), __LINE__);
         }
         $this->ExpressEligibleListingType = $expressEligibleListingType;
+        
         return $this;
     }
     /**
      * Get ExpressEnabledCategory value
      * @return bool|null
      */
-    public function getExpressEnabledCategory()
+    public function getExpressEnabledCategory(): ?bool
     {
         return $this->ExpressEnabledCategory;
     }
@@ -326,20 +333,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $expressEnabledCategory
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setExpressEnabledCategory($expressEnabledCategory = null)
+    public function setExpressEnabledCategory(?bool $expressEnabledCategory = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressEnabledCategory) && !is_bool($expressEnabledCategory)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressEnabledCategory)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressEnabledCategory, true), gettype($expressEnabledCategory)), __LINE__);
         }
         $this->ExpressEnabledCategory = $expressEnabledCategory;
+        
         return $this;
     }
     /**
      * Get EligiblePayPalAccount value
      * @return bool|null
      */
-    public function getEligiblePayPalAccount()
+    public function getEligiblePayPalAccount(): ?bool
     {
         return $this->EligiblePayPalAccount;
     }
@@ -348,20 +356,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $eligiblePayPalAccount
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setEligiblePayPalAccount($eligiblePayPalAccount = null)
+    public function setEligiblePayPalAccount(?bool $eligiblePayPalAccount = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligiblePayPalAccount) && !is_bool($eligiblePayPalAccount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligiblePayPalAccount)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligiblePayPalAccount, true), gettype($eligiblePayPalAccount)), __LINE__);
         }
         $this->EligiblePayPalAccount = $eligiblePayPalAccount;
+        
         return $this;
     }
     /**
      * Get DomesticShippingCost value
      * @return bool|null
      */
-    public function getDomesticShippingCost()
+    public function getDomesticShippingCost(): ?bool
     {
         return $this->DomesticShippingCost;
     }
@@ -370,20 +379,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $domesticShippingCost
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setDomesticShippingCost($domesticShippingCost = null)
+    public function setDomesticShippingCost(?bool $domesticShippingCost = null): self
     {
         // validation for constraint: boolean
         if (!is_null($domesticShippingCost) && !is_bool($domesticShippingCost)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($domesticShippingCost)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($domesticShippingCost, true), gettype($domesticShippingCost)), __LINE__);
         }
         $this->DomesticShippingCost = $domesticShippingCost;
+        
         return $this;
     }
     /**
      * Get EligibleReturnPolicy value
      * @return bool|null
      */
-    public function getEligibleReturnPolicy()
+    public function getEligibleReturnPolicy(): ?bool
     {
         return $this->EligibleReturnPolicy;
     }
@@ -392,20 +402,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $eligibleReturnPolicy
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setEligibleReturnPolicy($eligibleReturnPolicy = null)
+    public function setEligibleReturnPolicy(?bool $eligibleReturnPolicy = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligibleReturnPolicy) && !is_bool($eligibleReturnPolicy)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligibleReturnPolicy)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligibleReturnPolicy, true), gettype($eligibleReturnPolicy)), __LINE__);
         }
         $this->EligibleReturnPolicy = $eligibleReturnPolicy;
+        
         return $this;
     }
     /**
      * Get Picture value
      * @return bool|null
      */
-    public function getPicture()
+    public function getPicture(): ?bool
     {
         return $this->Picture;
     }
@@ -414,20 +425,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $picture
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setPicture($picture = null)
+    public function setPicture(?bool $picture = null): self
     {
         // validation for constraint: boolean
         if (!is_null($picture) && !is_bool($picture)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($picture)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($picture, true), gettype($picture)), __LINE__);
         }
         $this->Picture = $picture;
+        
         return $this;
     }
     /**
      * Get EligibleItemCondition value
      * @return bool|null
      */
-    public function getEligibleItemCondition()
+    public function getEligibleItemCondition(): ?bool
     {
         return $this->EligibleItemCondition;
     }
@@ -436,20 +448,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $eligibleItemCondition
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setEligibleItemCondition($eligibleItemCondition = null)
+    public function setEligibleItemCondition(?bool $eligibleItemCondition = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligibleItemCondition) && !is_bool($eligibleItemCondition)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligibleItemCondition)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligibleItemCondition, true), gettype($eligibleItemCondition)), __LINE__);
         }
         $this->EligibleItemCondition = $eligibleItemCondition;
+        
         return $this;
     }
     /**
      * Get PriceAboveMinimum value
      * @return bool|null
      */
-    public function getPriceAboveMinimum()
+    public function getPriceAboveMinimum(): ?bool
     {
         return $this->PriceAboveMinimum;
     }
@@ -458,20 +471,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $priceAboveMinimum
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setPriceAboveMinimum($priceAboveMinimum = null)
+    public function setPriceAboveMinimum(?bool $priceAboveMinimum = null): self
     {
         // validation for constraint: boolean
         if (!is_null($priceAboveMinimum) && !is_bool($priceAboveMinimum)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($priceAboveMinimum)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($priceAboveMinimum, true), gettype($priceAboveMinimum)), __LINE__);
         }
         $this->PriceAboveMinimum = $priceAboveMinimum;
+        
         return $this;
     }
     /**
      * Get PriceBelowMaximum value
      * @return bool|null
      */
-    public function getPriceBelowMaximum()
+    public function getPriceBelowMaximum(): ?bool
     {
         return $this->PriceBelowMaximum;
     }
@@ -480,20 +494,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $priceBelowMaximum
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setPriceBelowMaximum($priceBelowMaximum = null)
+    public function setPriceBelowMaximum(?bool $priceBelowMaximum = null): self
     {
         // validation for constraint: boolean
         if (!is_null($priceBelowMaximum) && !is_bool($priceBelowMaximum)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($priceBelowMaximum)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($priceBelowMaximum, true), gettype($priceBelowMaximum)), __LINE__);
         }
         $this->PriceBelowMaximum = $priceBelowMaximum;
+        
         return $this;
     }
     /**
      * Get EligibleCheckout value
      * @return bool|null
      */
-    public function getEligibleCheckout()
+    public function getEligibleCheckout(): ?bool
     {
         return $this->EligibleCheckout;
     }
@@ -502,20 +517,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $eligibleCheckout
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setEligibleCheckout($eligibleCheckout = null)
+    public function setEligibleCheckout(?bool $eligibleCheckout = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligibleCheckout) && !is_bool($eligibleCheckout)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligibleCheckout)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligibleCheckout, true), gettype($eligibleCheckout)), __LINE__);
         }
         $this->EligibleCheckout = $eligibleCheckout;
+        
         return $this;
     }
     /**
      * Get NoPreapprovedBidderList value
      * @return bool|null
      */
-    public function getNoPreapprovedBidderList()
+    public function getNoPreapprovedBidderList(): ?bool
     {
         return $this->NoPreapprovedBidderList;
     }
@@ -524,20 +540,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $noPreapprovedBidderList
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setNoPreapprovedBidderList($noPreapprovedBidderList = null)
+    public function setNoPreapprovedBidderList(?bool $noPreapprovedBidderList = null): self
     {
         // validation for constraint: boolean
         if (!is_null($noPreapprovedBidderList) && !is_bool($noPreapprovedBidderList)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($noPreapprovedBidderList)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($noPreapprovedBidderList, true), gettype($noPreapprovedBidderList)), __LINE__);
         }
         $this->NoPreapprovedBidderList = $noPreapprovedBidderList;
+        
         return $this;
     }
     /**
      * Get NoCharity value
      * @return bool|null
      */
-    public function getNoCharity()
+    public function getNoCharity(): ?bool
     {
         return $this->NoCharity;
     }
@@ -546,20 +563,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $noCharity
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setNoCharity($noCharity = null)
+    public function setNoCharity(?bool $noCharity = null): self
     {
         // validation for constraint: boolean
         if (!is_null($noCharity) && !is_bool($noCharity)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($noCharity)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($noCharity, true), gettype($noCharity)), __LINE__);
         }
         $this->NoCharity = $noCharity;
+        
         return $this;
     }
     /**
      * Get CombinedShippingDiscount value
      * @return bool|null
      */
-    public function getCombinedShippingDiscount()
+    public function getCombinedShippingDiscount(): ?bool
     {
         return $this->CombinedShippingDiscount;
     }
@@ -568,20 +586,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $combinedShippingDiscount
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setCombinedShippingDiscount($combinedShippingDiscount = null)
+    public function setCombinedShippingDiscount(?bool $combinedShippingDiscount = null): self
     {
         // validation for constraint: boolean
         if (!is_null($combinedShippingDiscount) && !is_bool($combinedShippingDiscount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($combinedShippingDiscount)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($combinedShippingDiscount, true), gettype($combinedShippingDiscount)), __LINE__);
         }
         $this->CombinedShippingDiscount = $combinedShippingDiscount;
+        
         return $this;
     }
     /**
      * Get ShipFromEligibleCountry value
      * @return bool|null
      */
-    public function getShipFromEligibleCountry()
+    public function getShipFromEligibleCountry(): ?bool
     {
         return $this->ShipFromEligibleCountry;
     }
@@ -590,20 +609,21 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $shipFromEligibleCountry
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setShipFromEligibleCountry($shipFromEligibleCountry = null)
+    public function setShipFromEligibleCountry(?bool $shipFromEligibleCountry = null): self
     {
         // validation for constraint: boolean
         if (!is_null($shipFromEligibleCountry) && !is_bool($shipFromEligibleCountry)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($shipFromEligibleCountry)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($shipFromEligibleCountry, true), gettype($shipFromEligibleCountry)), __LINE__);
         }
         $this->ShipFromEligibleCountry = $shipFromEligibleCountry;
+        
         return $this;
     }
     /**
      * Get PayPalAccountAcceptsUnconfirmedAddress value
      * @return bool|null
      */
-    public function getPayPalAccountAcceptsUnconfirmedAddress()
+    public function getPayPalAccountAcceptsUnconfirmedAddress(): ?bool
     {
         return $this->PayPalAccountAcceptsUnconfirmedAddress;
     }
@@ -612,65 +632,47 @@ class ExpressItemRequirementsType extends AbstractStructBase
      * @param bool $payPalAccountAcceptsUnconfirmedAddress
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setPayPalAccountAcceptsUnconfirmedAddress($payPalAccountAcceptsUnconfirmedAddress = null)
+    public function setPayPalAccountAcceptsUnconfirmedAddress(?bool $payPalAccountAcceptsUnconfirmedAddress = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalAccountAcceptsUnconfirmedAddress) && !is_bool($payPalAccountAcceptsUnconfirmedAddress)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalAccountAcceptsUnconfirmedAddress)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalAccountAcceptsUnconfirmedAddress, true), gettype($payPalAccountAcceptsUnconfirmedAddress)), __LINE__);
         }
         $this->PayPalAccountAcceptsUnconfirmedAddress = $payPalAccountAcceptsUnconfirmedAddress;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

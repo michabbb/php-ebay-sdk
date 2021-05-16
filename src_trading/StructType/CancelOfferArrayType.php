@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CancelOfferArrayType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class CancelOfferArrayType extends AbstractStructBase
 {
     /**
      * The CancelOffer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CancelOfferType[]
      */
-    public $CancelOffer;
+    protected array $CancelOffer = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CancelOfferArrayType
      * @uses CancelOfferArrayType::setCancelOffer()
      * @uses CancelOfferArrayType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\CancelOfferType[] $cancelOffer
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $cancelOffer = array(), \DOMDocument $any = null)
+    public function __construct(array $cancelOffer = [], $any = null)
     {
         $this
             ->setCancelOffer($cancelOffer)
@@ -41,94 +44,98 @@ class CancelOfferArrayType extends AbstractStructBase
     }
     /**
      * Get CancelOffer value
-     * @return \macropage\ebaysdk\trading\StructType\CancelOfferType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\CancelOfferType[]
      */
-    public function getCancelOffer()
+    public function getCancelOffer(): array
     {
         return $this->CancelOffer;
     }
     /**
+     * This method is responsible for validating the values passed to the setCancelOffer method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCancelOffer method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCancelOfferForArrayConstraintsFromSetCancelOffer(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $cancelOfferArrayTypeCancelOfferItem) {
+            // validation for constraint: itemType
+            if (!$cancelOfferArrayTypeCancelOfferItem instanceof \macropage\ebaysdk\trading\StructType\CancelOfferType) {
+                $invalidValues[] = is_object($cancelOfferArrayTypeCancelOfferItem) ? get_class($cancelOfferArrayTypeCancelOfferItem) : sprintf('%s(%s)', gettype($cancelOfferArrayTypeCancelOfferItem), var_export($cancelOfferArrayTypeCancelOfferItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The CancelOffer property can only contain items of type \macropage\ebaysdk\trading\StructType\CancelOfferType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set CancelOffer value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CancelOfferType[] $cancelOffer
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferArrayType
      */
-    public function setCancelOffer(array $cancelOffer = array())
+    public function setCancelOffer(array $cancelOffer = []): self
     {
-        foreach ($cancelOffer as $cancelOfferArrayTypeCancelOfferItem) {
-            // validation for constraint: itemType
-            if (!$cancelOfferArrayTypeCancelOfferItem instanceof \macropage\ebaysdk\trading\StructType\CancelOfferType) {
-                throw new \InvalidArgumentException(sprintf('The CancelOffer property can only contain items of \macropage\ebaysdk\trading\StructType\CancelOfferType, "%s" given', is_object($cancelOfferArrayTypeCancelOfferItem) ? get_class($cancelOfferArrayTypeCancelOfferItem) : gettype($cancelOfferArrayTypeCancelOfferItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($cancelOfferArrayErrorMessage = self::validateCancelOfferForArrayConstraintsFromSetCancelOffer($cancelOffer))) {
+            throw new InvalidArgumentException($cancelOfferArrayErrorMessage, __LINE__);
         }
         $this->CancelOffer = $cancelOffer;
+        
         return $this;
     }
     /**
      * Add item to CancelOffer value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CancelOfferType $item
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferArrayType
      */
-    public function addToCancelOffer(\macropage\ebaysdk\trading\StructType\CancelOfferType $item)
+    public function addToCancelOffer(\macropage\ebaysdk\trading\StructType\CancelOfferType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\CancelOfferType) {
-            throw new \InvalidArgumentException(sprintf('The CancelOffer property can only contain items of \macropage\ebaysdk\trading\StructType\CancelOfferType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The CancelOffer property can only contain items of type \macropage\ebaysdk\trading\StructType\CancelOfferType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->CancelOffer[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CancelOfferArrayType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferArrayType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CancelOfferArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

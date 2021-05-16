@@ -1,20 +1,13 @@
 {
     "name": "macropage/php-ebay-sdk",
-    "description": "TESTING ONLY !!! - The Object files have been created with this wonderful project: https://github.com/WsdlToPhp/PackageGenerator",
+    "description": "This is a simple SDK for the eBay APIs: trading, shopping, finding",
     "require": {
         "roave/security-advisories": "dev-master",
-        "php": ">=5.6.9",
+        "php": ">=8.0",
         "ext-soap": "*",
         "wsdltophp/packagebase": "~2.0",
-        "psr/log": "1.*"
-    },
-    "config": {
-        "discard-changes": true,
-        "secure-http": false,
-        "platform": {
-            "php": "5.6.9",
-            "ext-soap": "5.6.9"
-        }
+        "psr/log": "1.*",
+        "ext-dom": "*"
     },
     "autoload": {
         "classmap": [
@@ -27,5 +20,9 @@
             "src_shopping/",
             "soap_client_finding.php"
         ]
+    },
+    "require-dev": {
+        "monolog/monolog": "^2.2",
+        "kint-php/kint": "^3.3"
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddToWatchListResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type defines the response of the <b>AddToWatchList</b> call. Along with data indicating the success or failure of adding one or more items to a user's Watch List, this response also includes the number of items currently in the
  * user's Watch List and the maximum number of items allowed in the Watch List.
  * @subpackage Structs
@@ -15,21 +18,21 @@ class AddToWatchListResponseType extends AbstractResponseType
 {
     /**
      * The WatchListCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the total number of items in the user's Watch List (after those specified in the call request have been successfully added).
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WatchListCount;
+    protected ?int $WatchListCount = null;
     /**
      * The WatchListMaximum
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the maximum number of items allowed in a user's Watch List. This value can vary by site and is subject to change. Currently on the US site, up to 200 items can be on the user's Watch List at any given
      * time.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WatchListMaximum;
+    protected ?int $WatchListMaximum = null;
     /**
      * Constructor method for AddToWatchListResponseType
      * @uses AddToWatchListResponseType::setWatchListCount()
@@ -37,7 +40,7 @@ class AddToWatchListResponseType extends AbstractResponseType
      * @param int $watchListCount
      * @param int $watchListMaximum
      */
-    public function __construct($watchListCount = null, $watchListMaximum = null)
+    public function __construct(?int $watchListCount = null, ?int $watchListMaximum = null)
     {
         $this
             ->setWatchListCount($watchListCount)
@@ -47,7 +50,7 @@ class AddToWatchListResponseType extends AbstractResponseType
      * Get WatchListCount value
      * @return int|null
      */
-    public function getWatchListCount()
+    public function getWatchListCount(): ?int
     {
         return $this->WatchListCount;
     }
@@ -56,20 +59,21 @@ class AddToWatchListResponseType extends AbstractResponseType
      * @param int $watchListCount
      * @return \macropage\ebaysdk\trading\StructType\AddToWatchListResponseType
      */
-    public function setWatchListCount($watchListCount = null)
+    public function setWatchListCount(?int $watchListCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($watchListCount) && !is_numeric($watchListCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($watchListCount)), __LINE__);
+        if (!is_null($watchListCount) && !(is_int($watchListCount) || ctype_digit($watchListCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($watchListCount, true), gettype($watchListCount)), __LINE__);
         }
         $this->WatchListCount = $watchListCount;
+        
         return $this;
     }
     /**
      * Get WatchListMaximum value
      * @return int|null
      */
-    public function getWatchListMaximum()
+    public function getWatchListMaximum(): ?int
     {
         return $this->WatchListMaximum;
     }
@@ -78,33 +82,14 @@ class AddToWatchListResponseType extends AbstractResponseType
      * @param int $watchListMaximum
      * @return \macropage\ebaysdk\trading\StructType\AddToWatchListResponseType
      */
-    public function setWatchListMaximum($watchListMaximum = null)
+    public function setWatchListMaximum(?int $watchListMaximum = null): self
     {
         // validation for constraint: int
-        if (!is_null($watchListMaximum) && !is_numeric($watchListMaximum)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($watchListMaximum)), __LINE__);
+        if (!is_null($watchListMaximum) && !(is_int($watchListMaximum) || ctype_digit($watchListMaximum))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($watchListMaximum, true), gettype($watchListMaximum)), __LINE__);
         }
         $this->WatchListMaximum = $watchListMaximum;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AddToWatchListResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

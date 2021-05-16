@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for WarrantyOfferedDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated, as product warranties are no longer applicable or supported in eBay APIs.
  * @subpackage Structs
  */
@@ -14,23 +17,23 @@ class WarrantyOfferedDetailsType extends AbstractStructBase
 {
     /**
      * The WarrantyOfferedOption
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $WarrantyOfferedOption;
+    protected ?string $WarrantyOfferedOption = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for WarrantyOfferedDetailsType
      * @uses WarrantyOfferedDetailsType::setWarrantyOfferedOption()
@@ -38,9 +41,9 @@ class WarrantyOfferedDetailsType extends AbstractStructBase
      * @uses WarrantyOfferedDetailsType::setAny()
      * @param string $warrantyOfferedOption
      * @param string $description
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($warrantyOfferedOption = null, $description = null, \DOMDocument $any = null)
+    public function __construct(?string $warrantyOfferedOption = null, ?string $description = null, $any = null)
     {
         $this
             ->setWarrantyOfferedOption($warrantyOfferedOption)
@@ -51,7 +54,7 @@ class WarrantyOfferedDetailsType extends AbstractStructBase
      * Get WarrantyOfferedOption value
      * @return string|null
      */
-    public function getWarrantyOfferedOption()
+    public function getWarrantyOfferedOption(): ?string
     {
         return $this->WarrantyOfferedOption;
     }
@@ -60,20 +63,21 @@ class WarrantyOfferedDetailsType extends AbstractStructBase
      * @param string $warrantyOfferedOption
      * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType
      */
-    public function setWarrantyOfferedOption($warrantyOfferedOption = null)
+    public function setWarrantyOfferedOption(?string $warrantyOfferedOption = null): self
     {
         // validation for constraint: string
         if (!is_null($warrantyOfferedOption) && !is_string($warrantyOfferedOption)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($warrantyOfferedOption)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyOfferedOption, true), gettype($warrantyOfferedOption)), __LINE__);
         }
         $this->WarrantyOfferedOption = $warrantyOfferedOption;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -82,65 +86,47 @@ class WarrantyOfferedDetailsType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

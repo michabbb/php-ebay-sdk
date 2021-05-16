@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ItemTransactionIDType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>ItemTransactionID</b> container in the <b>GetOrderTransactions</b> call. This container is used to specify a specific order line item to retrieve.
  * @subpackage Structs
  */
@@ -14,47 +17,49 @@ class ItemTransactionIDType extends AbstractStructBase
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay listing. A multiple-quantity listing can have multiple order line items, but only one <b>ItemID</b>. Unless an <b>OrderLineItemID</b> or <b>SKU</b> value is specified in the same node, this field is
      * required for each <b>ItemTransactionID</b> node included in the request. <br> | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay order line item. The <b>TransactionID</b> should match the <b>ItemID</b> specified in each <b>ItemTransactionID</b> node included in the request. Optionally, an <b>OrderLineItemID</b> or <b>SKU</b> value
-     * can substitute for the <b>ItemID</b>/<b>TransactionID</b> pair. <br>
+     * can substitute for the <b>ItemID</b>/<b>TransactionID</b> pair. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The SKU
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A SKU (stock keeping unit) is a unique identifier defined and used by the seller to identify a product or variation of an item. Unless an <b>OrderLineItemID</b> value or <b>ItemID</b>/<b>TransactionID</b> pair is specified in the
      * same node, this field is required for each <b>ItemTransactionID</b> node included in the request. To retrieve order line items associated with a SKU, the <b>InventoryTrackingMethod</b> field must be set to SKU. The <b>InventoryTrackingMethod</b>
      * field is set through <b>AddFixedPriceItem</b> or <b>RelistFixedPriceItem</b>. <br> | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information and rules, see the fields
      * that reference this type.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SKU;
+    protected ?string $SKU = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two IDs. If an <b>OrderLineItemID</b> is included
-     * in an <b>ItemTransactionID</b> node in the request, the <b>ItemID</b>, <b>TransactionID</b>, and <b>SKU</b> fields are not required and are ignored if they are included in the request. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. If an <b>OrderLineItemID</b> is included in an <b>ItemTransactionID</b> node in the request, the <b>ItemID</b>, <b>TransactionID</b>, and <b>SKU</b> fields
+     * are not required and are ignored if they are included in the request. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ItemTransactionIDType
      * @uses ItemTransactionIDType::setItemID()
@@ -66,9 +71,9 @@ class ItemTransactionIDType extends AbstractStructBase
      * @param string $transactionID
      * @param string $sKU
      * @param string $orderLineItemID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemID = null, $transactionID = null, $sKU = null, $orderLineItemID = null, \DOMDocument $any = null)
+    public function __construct(?string $itemID = null, ?string $transactionID = null, ?string $sKU = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -81,7 +86,7 @@ class ItemTransactionIDType extends AbstractStructBase
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -90,20 +95,21 @@ class ItemTransactionIDType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -112,20 +118,21 @@ class ItemTransactionIDType extends AbstractStructBase
      * @param string $transactionID
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get SKU value
      * @return string|null
      */
-    public function getSKU()
+    public function getSKU(): ?string
     {
         return $this->SKU;
     }
@@ -134,20 +141,21 @@ class ItemTransactionIDType extends AbstractStructBase
      * @param string $sKU
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
      */
-    public function setSKU($sKU = null)
+    public function setSKU(?string $sKU = null): self
     {
         // validation for constraint: string
         if (!is_null($sKU) && !is_string($sKU)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sKU)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sKU, true), gettype($sKU)), __LINE__);
         }
         $this->SKU = $sKU;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -156,65 +164,47 @@ class ItemTransactionIDType extends AbstractStructBase
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ItemTransactionIDType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

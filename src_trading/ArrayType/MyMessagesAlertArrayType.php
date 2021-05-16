@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for MyMessagesAlertArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Arrays
  */
@@ -14,61 +17,68 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
 {
     /**
      * The Alert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[]
      */
-    public $Alert;
+    protected array $Alert = [];
     /**
      * Constructor method for MyMessagesAlertArrayType
      * @uses MyMessagesAlertArrayType::setAlert()
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[] $alert
      */
-    public function __construct(array $alert = array())
+    public function __construct(array $alert = [])
     {
         $this
             ->setAlert($alert);
     }
     /**
      * Get Alert value
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[]
      */
-    public function getAlert()
+    public function getAlert(): array
     {
         return $this->Alert;
     }
     /**
+     * This method is responsible for validating the values passed to the setAlert method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setAlert method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateAlertForArrayConstraintsFromSetAlert(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myMessagesAlertArrayTypeAlertItem) {
+            // validation for constraint: itemType
+            if (!$myMessagesAlertArrayTypeAlertItem instanceof \macropage\ebaysdk\trading\StructType\MyMessagesAlertType) {
+                $invalidValues[] = is_object($myMessagesAlertArrayTypeAlertItem) ? get_class($myMessagesAlertArrayTypeAlertItem) : sprintf('%s(%s)', gettype($myMessagesAlertArrayTypeAlertItem), var_export($myMessagesAlertArrayTypeAlertItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Alert property can only contain items of type \macropage\ebaysdk\trading\StructType\MyMessagesAlertType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Alert value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[] $alert
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
      */
-    public function setAlert(array $alert = array())
+    public function setAlert(array $alert = []): self
     {
-        foreach ($alert as $myMessagesAlertArrayTypeAlertItem) {
-            // validation for constraint: itemType
-            if (!$myMessagesAlertArrayTypeAlertItem instanceof \macropage\ebaysdk\trading\StructType\MyMessagesAlertType) {
-                throw new \InvalidArgumentException(sprintf('The Alert property can only contain items of \macropage\ebaysdk\trading\StructType\MyMessagesAlertType, "%s" given', is_object($myMessagesAlertArrayTypeAlertItem) ? get_class($myMessagesAlertArrayTypeAlertItem) : gettype($myMessagesAlertArrayTypeAlertItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($alertArrayErrorMessage = self::validateAlertForArrayConstraintsFromSetAlert($alert))) {
+            throw new InvalidArgumentException($alertArrayErrorMessage, __LINE__);
         }
         $this->Alert = $alert;
-        return $this;
-    }
-    /**
-     * Add item to Alert value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
-     */
-    public function addToAlert(\macropage\ebaysdk\trading\StructType\MyMessagesAlertType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\MyMessagesAlertType) {
-            throw new \InvalidArgumentException(sprintf('The Alert property can only contain items of \macropage\ebaysdk\trading\StructType\MyMessagesAlertType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->Alert[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +86,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\MyMessagesAlertType
     {
         return parent::current();
     }
@@ -86,7 +96,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\MyMessagesAlertType
     {
         return parent::item($index);
     }
@@ -95,7 +105,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\MyMessagesAlertType
     {
         return parent::first();
     }
@@ -104,7 +114,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\MyMessagesAlertType
     {
         return parent::last();
     }
@@ -114,37 +124,32 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\MyMessagesAlertType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\MyMessagesAlertType) {
+            throw new InvalidArgumentException(sprintf('The Alert property can only contain items of type \macropage\ebaysdk\trading\StructType\MyMessagesAlertType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string Alert
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'Alert';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

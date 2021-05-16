@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerSoldTransactionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains information about a single line item (transaction) in an order created through Selling Manager.
  * @subpackage Structs
  */
@@ -14,186 +17,186 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
 {
     /**
      * The InvoiceNumber
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Seller's customized invoice number.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InvoiceNumber;
+    protected ?string $InvoiceNumber = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier for an eBay order line item (transaction). An order line item is created once there is a commitment from a buyer to purchase an item. Since an auction listing can only have one order line item during the duration of
-     * the listing, the <b>TransactionID</b> for auction listings is always 0. Along with its corresponding <b>ItemID</b>, a <b>TransactionID</b> is used and referenced during an order checkout flow and after checkout has been completed.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier for an eBay order line item. An order line item is created once there is a commitment from a buyer to purchase an item. Since an auction listing can only have one order line item during the duration of the listing,
+     * the <b>TransactionID</b> for auction listings is always 0. Along with its corresponding <b>ItemID</b>, a <b>TransactionID</b> is used and referenced during an order checkout flow and after checkout has been completed.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TransactionID;
+    protected ?int $TransactionID = null;
     /**
      * The SaleRecordID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for a Selling Manager sale record. This field is created at the same time as the order line item (transaction). A sale record is displayed in the Sold view in Selling Manager and contains information on the buyer
      * and shipping. In the <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>, <b>GetOrders</b>, and <b>GetOrderTransactions</b> calls, the <b>SaleRecordID</b> value is reflected in the <b>ShippingDetails.SellingManagerSalesRecordNumber</b> field.
      * <br/><br/> For orders that occurred within the last 30 days, passing only the SaleRecordID into the GetSellingManagerSoldListings request will return the sale record. However, for sales that occurred more than 30 days ago, the SaleDateRange container
      * must also be used, passing in a date range that includes the date on which the specific sale occurred.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SaleRecordID;
+    protected ?int $SaleRecordID = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier for an eBay item listing. | Type that represents the unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier for an eBay listing. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The QuantitySold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Total number of identical items sold in the order line item.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantitySold;
+    protected ?int $QuantitySold = null;
     /**
      * The ItemPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Price per item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ItemPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ItemPrice = null;
     /**
      * The SubtotalAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value is calculated by multplying the <b>ItemPrice</b> value by the <b>QuantitySold</b> value.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $SubtotalAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $SubtotalAmount = null;
     /**
      * The ItemTitle
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The title of the item listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemTitle;
+    protected ?string $ItemTitle = null;
     /**
      * The ListingType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The item listing type.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingType;
+    protected ?string $ListingType = null;
     /**
      * The Relisted
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Boolean value indicating whether the item is a relisted item.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Relisted;
+    protected ?bool $Relisted = null;
     /**
      * The WatchCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Number of users watching the item.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WatchCount;
+    protected ?int $WatchCount = null;
     /**
      * The StartPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Start price of the item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $StartPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $StartPrice = null;
     /**
      * The ReservePrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserve Price of the item (if a Reserve Price was set for the item).
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ReservePrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ReservePrice = null;
     /**
      * The SecondChanceOfferSent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Boolean value indicating whether or not a Second Chance offer was sent by the seller to an eligible bidder.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SecondChanceOfferSent;
+    protected ?bool $SecondChanceOfferSent = null;
     /**
      * The CustomLabel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Custom label associated with this order line item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CustomLabel;
+    protected ?string $CustomLabel = null;
     /**
      * The SoldOn
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The platform on which the item was sold.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SoldOn;
+    protected ?string $SoldOn = null;
     /**
      * The ListedOn
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The platform on which the item was listed.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $ListedOn;
+    protected array $ListedOn = [];
     /**
      * The Shipment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of tracking information for the shipment.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShipmentType
+     * @var \macropage\ebaysdk\trading\StructType\ShipmentType|null
      */
-    public $Shipment;
+    protected ?\macropage\ebaysdk\trading\StructType\ShipmentType $Shipment = null;
     /**
      * The CharityListing
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as 'true' if the item is listed as a charity item.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CharityListing;
+    protected ?bool $CharityListing = null;
     /**
      * The Variation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: In a fixed-priced listing, a seller can offer variations of the same item. For example, the seller could create a fixed-priced listing for a t-shirt design and offer the shirt in different colors and sizes. In this case, each color
      * and size combination is a separate variation. Each variation can have a different quantity and price. Due to the possible price differentiation, buyers can buy multiple items from this listing at the same time, but all of the items must be of the
      * same variation. One order line item is created whether one or multiple items of the same variation are purchased. <br><br> The <b>Variation</b> node contains information about which variation was purchased. Therefore, applications that process order
      * line items should always check to see if this node is present.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VariationType
+     * @var \macropage\ebaysdk\trading\StructType\VariationType|null
      */
-    public $Variation;
+    protected ?\macropage\ebaysdk\trading\StructType\VariationType $Variation = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: A unique identifier for an eBay order line item. This field is created as soon as there is a commitment to buy from the seller, and its value is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in
-     * between these two IDs.
+     * Meta information extracted from the WSDL
+     * - documentation: A unique identifier for an eBay order line item. .
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerSoldTransactionType
      * @uses SellingManagerSoldTransactionType::setInvoiceNumber()
@@ -239,9 +242,9 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param bool $charityListing
      * @param \macropage\ebaysdk\trading\StructType\VariationType $variation
      * @param string $orderLineItemID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($invoiceNumber = null, $transactionID = null, $saleRecordID = null, $itemID = null, $quantitySold = null, \macropage\ebaysdk\trading\StructType\AmountType $itemPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $subtotalAmount = null, $itemTitle = null, $listingType = null, $relisted = null, $watchCount = null, \macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null, $secondChanceOfferSent = null, $customLabel = null, $soldOn = null, array $listedOn = array(), \macropage\ebaysdk\trading\StructType\ShipmentType $shipment = null, $charityListing = null, \macropage\ebaysdk\trading\StructType\VariationType $variation = null, $orderLineItemID = null, \DOMDocument $any = null)
+    public function __construct(?string $invoiceNumber = null, ?int $transactionID = null, ?int $saleRecordID = null, ?string $itemID = null, ?int $quantitySold = null, ?\macropage\ebaysdk\trading\StructType\AmountType $itemPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $subtotalAmount = null, ?string $itemTitle = null, ?string $listingType = null, ?bool $relisted = null, ?int $watchCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null, ?bool $secondChanceOfferSent = null, ?string $customLabel = null, ?string $soldOn = null, array $listedOn = [], ?\macropage\ebaysdk\trading\StructType\ShipmentType $shipment = null, ?bool $charityListing = null, ?\macropage\ebaysdk\trading\StructType\VariationType $variation = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setInvoiceNumber($invoiceNumber)
@@ -271,7 +274,7 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * Get InvoiceNumber value
      * @return string|null
      */
-    public function getInvoiceNumber()
+    public function getInvoiceNumber(): ?string
     {
         return $this->InvoiceNumber;
     }
@@ -280,20 +283,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param string $invoiceNumber
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setInvoiceNumber($invoiceNumber = null)
+    public function setInvoiceNumber(?string $invoiceNumber = null): self
     {
         // validation for constraint: string
         if (!is_null($invoiceNumber) && !is_string($invoiceNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($invoiceNumber)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($invoiceNumber, true), gettype($invoiceNumber)), __LINE__);
         }
         $this->InvoiceNumber = $invoiceNumber;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return int|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?int
     {
         return $this->TransactionID;
     }
@@ -302,20 +306,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param int $transactionID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?int $transactionID = null): self
     {
         // validation for constraint: int
-        if (!is_null($transactionID) && !is_numeric($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($transactionID)), __LINE__);
+        if (!is_null($transactionID) && !(is_int($transactionID) || ctype_digit($transactionID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get SaleRecordID value
      * @return int|null
      */
-    public function getSaleRecordID()
+    public function getSaleRecordID(): ?int
     {
         return $this->SaleRecordID;
     }
@@ -324,20 +329,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param int $saleRecordID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setSaleRecordID($saleRecordID = null)
+    public function setSaleRecordID(?int $saleRecordID = null): self
     {
         // validation for constraint: int
-        if (!is_null($saleRecordID) && !is_numeric($saleRecordID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($saleRecordID)), __LINE__);
+        if (!is_null($saleRecordID) && !(is_int($saleRecordID) || ctype_digit($saleRecordID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($saleRecordID, true), gettype($saleRecordID)), __LINE__);
         }
         $this->SaleRecordID = $saleRecordID;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -346,20 +352,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get QuantitySold value
      * @return int|null
      */
-    public function getQuantitySold()
+    public function getQuantitySold(): ?int
     {
         return $this->QuantitySold;
     }
@@ -368,20 +375,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param int $quantitySold
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setQuantitySold($quantitySold = null)
+    public function setQuantitySold(?int $quantitySold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantitySold) && !is_numeric($quantitySold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantitySold)), __LINE__);
+        if (!is_null($quantitySold) && !(is_int($quantitySold) || ctype_digit($quantitySold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantitySold, true), gettype($quantitySold)), __LINE__);
         }
         $this->QuantitySold = $quantitySold;
+        
         return $this;
     }
     /**
      * Get ItemPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getItemPrice()
+    public function getItemPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ItemPrice;
     }
@@ -390,16 +398,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $itemPrice
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setItemPrice(\macropage\ebaysdk\trading\StructType\AmountType $itemPrice = null)
+    public function setItemPrice(?\macropage\ebaysdk\trading\StructType\AmountType $itemPrice = null): self
     {
         $this->ItemPrice = $itemPrice;
+        
         return $this;
     }
     /**
      * Get SubtotalAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getSubtotalAmount()
+    public function getSubtotalAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->SubtotalAmount;
     }
@@ -408,16 +417,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $subtotalAmount
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setSubtotalAmount(\macropage\ebaysdk\trading\StructType\AmountType $subtotalAmount = null)
+    public function setSubtotalAmount(?\macropage\ebaysdk\trading\StructType\AmountType $subtotalAmount = null): self
     {
         $this->SubtotalAmount = $subtotalAmount;
+        
         return $this;
     }
     /**
      * Get ItemTitle value
      * @return string|null
      */
-    public function getItemTitle()
+    public function getItemTitle(): ?string
     {
         return $this->ItemTitle;
     }
@@ -426,20 +436,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param string $itemTitle
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setItemTitle($itemTitle = null)
+    public function setItemTitle(?string $itemTitle = null): self
     {
         // validation for constraint: string
         if (!is_null($itemTitle) && !is_string($itemTitle)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemTitle)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemTitle, true), gettype($itemTitle)), __LINE__);
         }
         $this->ItemTitle = $itemTitle;
+        
         return $this;
     }
     /**
      * Get ListingType value
      * @return string|null
      */
-    public function getListingType()
+    public function getListingType(): ?string
     {
         return $this->ListingType;
     }
@@ -447,24 +458,25 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * Set ListingType value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingType
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setListingType($listingType = null)
+    public function setListingType(?string $listingType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid($listingType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingType, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType', is_array($listingType) ? implode(', ', $listingType) : var_export($listingType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
         }
         $this->ListingType = $listingType;
+        
         return $this;
     }
     /**
      * Get Relisted value
      * @return bool|null
      */
-    public function getRelisted()
+    public function getRelisted(): ?bool
     {
         return $this->Relisted;
     }
@@ -473,20 +485,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param bool $relisted
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setRelisted($relisted = null)
+    public function setRelisted(?bool $relisted = null): self
     {
         // validation for constraint: boolean
         if (!is_null($relisted) && !is_bool($relisted)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($relisted)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($relisted, true), gettype($relisted)), __LINE__);
         }
         $this->Relisted = $relisted;
+        
         return $this;
     }
     /**
      * Get WatchCount value
      * @return int|null
      */
-    public function getWatchCount()
+    public function getWatchCount(): ?int
     {
         return $this->WatchCount;
     }
@@ -495,20 +508,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param int $watchCount
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setWatchCount($watchCount = null)
+    public function setWatchCount(?int $watchCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($watchCount) && !is_numeric($watchCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($watchCount)), __LINE__);
+        if (!is_null($watchCount) && !(is_int($watchCount) || ctype_digit($watchCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($watchCount, true), gettype($watchCount)), __LINE__);
         }
         $this->WatchCount = $watchCount;
+        
         return $this;
     }
     /**
      * Get StartPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getStartPrice()
+    public function getStartPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->StartPrice;
     }
@@ -517,16 +531,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $startPrice
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setStartPrice(\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null)
+    public function setStartPrice(?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null): self
     {
         $this->StartPrice = $startPrice;
+        
         return $this;
     }
     /**
      * Get ReservePrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getReservePrice()
+    public function getReservePrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ReservePrice;
     }
@@ -535,16 +550,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $reservePrice
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setReservePrice(\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null)
+    public function setReservePrice(?\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null): self
     {
         $this->ReservePrice = $reservePrice;
+        
         return $this;
     }
     /**
      * Get SecondChanceOfferSent value
      * @return bool|null
      */
-    public function getSecondChanceOfferSent()
+    public function getSecondChanceOfferSent(): ?bool
     {
         return $this->SecondChanceOfferSent;
     }
@@ -553,20 +569,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param bool $secondChanceOfferSent
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setSecondChanceOfferSent($secondChanceOfferSent = null)
+    public function setSecondChanceOfferSent(?bool $secondChanceOfferSent = null): self
     {
         // validation for constraint: boolean
         if (!is_null($secondChanceOfferSent) && !is_bool($secondChanceOfferSent)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($secondChanceOfferSent)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($secondChanceOfferSent, true), gettype($secondChanceOfferSent)), __LINE__);
         }
         $this->SecondChanceOfferSent = $secondChanceOfferSent;
+        
         return $this;
     }
     /**
      * Get CustomLabel value
      * @return string|null
      */
-    public function getCustomLabel()
+    public function getCustomLabel(): ?string
     {
         return $this->CustomLabel;
     }
@@ -575,20 +592,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param string $customLabel
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setCustomLabel($customLabel = null)
+    public function setCustomLabel(?string $customLabel = null): self
     {
         // validation for constraint: string
         if (!is_null($customLabel) && !is_string($customLabel)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($customLabel)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($customLabel, true), gettype($customLabel)), __LINE__);
         }
         $this->CustomLabel = $customLabel;
+        
         return $this;
     }
     /**
      * Get SoldOn value
      * @return string|null
      */
-    public function getSoldOn()
+    public function getSoldOn(): ?string
     {
         return $this->SoldOn;
     }
@@ -596,71 +614,92 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * Set SoldOn value
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $soldOn
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setSoldOn($soldOn = null)
+    public function setSoldOn(?string $soldOn = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid($soldOn)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $soldOn, implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType', is_array($soldOn) ? implode(', ', $soldOn) : var_export($soldOn, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
         }
         $this->SoldOn = $soldOn;
+        
         return $this;
     }
     /**
      * Get ListedOn value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getListedOn()
+    public function getListedOn(): array
     {
         return $this->ListedOn;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setListedOn method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setListedOn method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateListedOnForArrayConstraintsFromSetListedOn(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $sellingManagerSoldTransactionTypeListedOnItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid($sellingManagerSoldTransactionTypeListedOnItem)) {
+                $invalidValues[] = is_object($sellingManagerSoldTransactionTypeListedOnItem) ? get_class($sellingManagerSoldTransactionTypeListedOnItem) : sprintf('%s(%s)', gettype($sellingManagerSoldTransactionTypeListedOnItem), var_export($sellingManagerSoldTransactionTypeListedOnItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set ListedOn value
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $listedOn
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setListedOn(array $listedOn = array())
+    public function setListedOn(array $listedOn = []): self
     {
-        $invalidValues = array();
-        foreach ($listedOn as $sellingManagerSoldTransactionTypeListedOnItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid($sellingManagerSoldTransactionTypeListedOnItem)) {
-                $invalidValues[] = var_export($sellingManagerSoldTransactionTypeListedOnItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($listedOnArrayErrorMessage = self::validateListedOnForArrayConstraintsFromSetListedOn($listedOn))) {
+            throw new InvalidArgumentException($listedOnArrayErrorMessage, __LINE__);
         }
         $this->ListedOn = $listedOn;
+        
         return $this;
     }
     /**
      * Add item to ListedOn value
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function addToListedOn($item)
+    public function addToListedOn(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
         }
         $this->ListedOn[] = $item;
+        
         return $this;
     }
     /**
      * Get Shipment value
      * @return \macropage\ebaysdk\trading\StructType\ShipmentType|null
      */
-    public function getShipment()
+    public function getShipment(): ?\macropage\ebaysdk\trading\StructType\ShipmentType
     {
         return $this->Shipment;
     }
@@ -669,16 +708,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShipmentType $shipment
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setShipment(\macropage\ebaysdk\trading\StructType\ShipmentType $shipment = null)
+    public function setShipment(?\macropage\ebaysdk\trading\StructType\ShipmentType $shipment = null): self
     {
         $this->Shipment = $shipment;
+        
         return $this;
     }
     /**
      * Get CharityListing value
      * @return bool|null
      */
-    public function getCharityListing()
+    public function getCharityListing(): ?bool
     {
         return $this->CharityListing;
     }
@@ -687,20 +727,21 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param bool $charityListing
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setCharityListing($charityListing = null)
+    public function setCharityListing(?bool $charityListing = null): self
     {
         // validation for constraint: boolean
         if (!is_null($charityListing) && !is_bool($charityListing)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($charityListing)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($charityListing, true), gettype($charityListing)), __LINE__);
         }
         $this->CharityListing = $charityListing;
+        
         return $this;
     }
     /**
      * Get Variation value
      * @return \macropage\ebaysdk\trading\StructType\VariationType|null
      */
-    public function getVariation()
+    public function getVariation(): ?\macropage\ebaysdk\trading\StructType\VariationType
     {
         return $this->Variation;
     }
@@ -709,16 +750,17 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationType $variation
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setVariation(\macropage\ebaysdk\trading\StructType\VariationType $variation = null)
+    public function setVariation(?\macropage\ebaysdk\trading\StructType\VariationType $variation = null): self
     {
         $this->Variation = $variation;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -727,65 +769,47 @@ class SellingManagerSoldTransactionType extends AbstractStructBase
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldTransactionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

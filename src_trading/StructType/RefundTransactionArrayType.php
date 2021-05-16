@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for RefundTransactionArrayType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class RefundTransactionArrayType extends AbstractStructBase
 {
     /**
      * The RefundTransaction
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundTransactionType[]
      */
-    public $RefundTransaction;
+    protected array $RefundTransaction = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for RefundTransactionArrayType
      * @uses RefundTransactionArrayType::setRefundTransaction()
      * @uses RefundTransactionArrayType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionType[] $refundTransaction
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refundTransaction = array(), \DOMDocument $any = null)
+    public function __construct(array $refundTransaction = [], $any = null)
     {
         $this
             ->setRefundTransaction($refundTransaction)
@@ -41,94 +44,98 @@ class RefundTransactionArrayType extends AbstractStructBase
     }
     /**
      * Get RefundTransaction value
-     * @return \macropage\ebaysdk\trading\StructType\RefundTransactionType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\RefundTransactionType[]
      */
-    public function getRefundTransaction()
+    public function getRefundTransaction(): array
     {
         return $this->RefundTransaction;
     }
     /**
+     * This method is responsible for validating the values passed to the setRefundTransaction method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setRefundTransaction method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateRefundTransactionForArrayConstraintsFromSetRefundTransaction(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $refundTransactionArrayTypeRefundTransactionItem) {
+            // validation for constraint: itemType
+            if (!$refundTransactionArrayTypeRefundTransactionItem instanceof \macropage\ebaysdk\trading\StructType\RefundTransactionType) {
+                $invalidValues[] = is_object($refundTransactionArrayTypeRefundTransactionItem) ? get_class($refundTransactionArrayTypeRefundTransactionItem) : sprintf('%s(%s)', gettype($refundTransactionArrayTypeRefundTransactionItem), var_export($refundTransactionArrayTypeRefundTransactionItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The RefundTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\RefundTransactionType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set RefundTransaction value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionType[] $refundTransaction
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
      */
-    public function setRefundTransaction(array $refundTransaction = array())
+    public function setRefundTransaction(array $refundTransaction = []): self
     {
-        foreach ($refundTransaction as $refundTransactionArrayTypeRefundTransactionItem) {
-            // validation for constraint: itemType
-            if (!$refundTransactionArrayTypeRefundTransactionItem instanceof \macropage\ebaysdk\trading\StructType\RefundTransactionType) {
-                throw new \InvalidArgumentException(sprintf('The RefundTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\RefundTransactionType, "%s" given', is_object($refundTransactionArrayTypeRefundTransactionItem) ? get_class($refundTransactionArrayTypeRefundTransactionItem) : gettype($refundTransactionArrayTypeRefundTransactionItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($refundTransactionArrayErrorMessage = self::validateRefundTransactionForArrayConstraintsFromSetRefundTransaction($refundTransaction))) {
+            throw new InvalidArgumentException($refundTransactionArrayErrorMessage, __LINE__);
         }
         $this->RefundTransaction = $refundTransaction;
+        
         return $this;
     }
     /**
      * Add item to RefundTransaction value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionType $item
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
      */
-    public function addToRefundTransaction(\macropage\ebaysdk\trading\StructType\RefundTransactionType $item)
+    public function addToRefundTransaction(\macropage\ebaysdk\trading\StructType\RefundTransactionType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\RefundTransactionType) {
-            throw new \InvalidArgumentException(sprintf('The RefundTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\RefundTransactionType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The RefundTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\RefundTransactionType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->RefundTransaction[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

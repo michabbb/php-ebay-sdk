@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DuplicateInvocationDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>DuplicateInvocationDetails</b> container that is returned in some calls if a duplicate <b>InvocationID</b> or <b>InvocationTrackingID</b> is used in the call request.
  * @subpackage Structs
  */
@@ -14,34 +17,35 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
 {
     /**
      * The DuplicateInvocationID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value represents the duplicate <b>InvocationID</b> or <b>InvocationTrackingID</b> that was used in the call request. | Specifies a universally unique identifier for an item. This is used to ensure that you only list a particular
      * item once, particularly if you are listing many items at once. The identifier can contain only digits from 0-9 and letters from A-F. The identifier must be 32 characters long. For example, 9CEBD9A6825644EC8D06C436D6CF494B.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DuplicateInvocationID;
+    protected ?string $DuplicateInvocationID = null;
     /**
      * The Status
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the status of the previous call that used the <b>InvocationID</b> or <b>InvocationTrackingID</b> specified in the <b>DuplicateInvocationID</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Status;
+    protected ?string $Status = null;
     /**
      * The InvocationTrackingID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This unique identifier identifies the business item the previous API invocation created. For example, the Item ID of the item created by an <b>AddItem</b> call.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InvocationTrackingID;
+    protected ?string $InvocationTrackingID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DuplicateInvocationDetailsType
      * @uses DuplicateInvocationDetailsType::setDuplicateInvocationID()
@@ -51,9 +55,9 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
      * @param string $duplicateInvocationID
      * @param string $status
      * @param string $invocationTrackingID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($duplicateInvocationID = null, $status = null, $invocationTrackingID = null, \DOMDocument $any = null)
+    public function __construct(?string $duplicateInvocationID = null, ?string $status = null, ?string $invocationTrackingID = null, $any = null)
     {
         $this
             ->setDuplicateInvocationID($duplicateInvocationID)
@@ -65,7 +69,7 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
      * Get DuplicateInvocationID value
      * @return string|null
      */
-    public function getDuplicateInvocationID()
+    public function getDuplicateInvocationID(): ?string
     {
         return $this->DuplicateInvocationID;
     }
@@ -74,20 +78,21 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
      * @param string $duplicateInvocationID
      * @return \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType
      */
-    public function setDuplicateInvocationID($duplicateInvocationID = null)
+    public function setDuplicateInvocationID(?string $duplicateInvocationID = null): self
     {
         // validation for constraint: string
         if (!is_null($duplicateInvocationID) && !is_string($duplicateInvocationID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($duplicateInvocationID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($duplicateInvocationID, true), gettype($duplicateInvocationID)), __LINE__);
         }
         $this->DuplicateInvocationID = $duplicateInvocationID;
+        
         return $this;
     }
     /**
      * Get Status value
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->Status;
     }
@@ -95,24 +100,25 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
      * Set Status value
      * @uses \macropage\ebaysdk\trading\EnumType\InvocationStatusType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\InvocationStatusType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $status
      * @return \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType
      */
-    public function setStatus($status = null)
+    public function setStatus(?string $status = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\InvocationStatusType::valueIsValid($status)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $status, implode(', ', \macropage\ebaysdk\trading\EnumType\InvocationStatusType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\InvocationStatusType', is_array($status) ? implode(', ', $status) : var_export($status, true), implode(', ', \macropage\ebaysdk\trading\EnumType\InvocationStatusType::getValidValues())), __LINE__);
         }
         $this->Status = $status;
+        
         return $this;
     }
     /**
      * Get InvocationTrackingID value
      * @return string|null
      */
-    public function getInvocationTrackingID()
+    public function getInvocationTrackingID(): ?string
     {
         return $this->InvocationTrackingID;
     }
@@ -121,65 +127,47 @@ class DuplicateInvocationDetailsType extends AbstractStructBase
      * @param string $invocationTrackingID
      * @return \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType
      */
-    public function setInvocationTrackingID($invocationTrackingID = null)
+    public function setInvocationTrackingID(?string $invocationTrackingID = null): self
     {
         // validation for constraint: string
         if (!is_null($invocationTrackingID) && !is_string($invocationTrackingID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($invocationTrackingID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($invocationTrackingID, true), gettype($invocationTrackingID)), __LINE__);
         }
         $this->InvocationTrackingID = $invocationTrackingID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

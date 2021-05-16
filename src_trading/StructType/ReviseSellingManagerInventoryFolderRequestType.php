@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviseSellingManagerInventoryFolderRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This call is uses to rename and/or move a Selling Manager Inventory folder. This call is subject to change without notice; the deprecation process is inapplicable to this call. The user must have a Selling Manager Pro subscription to
  * use this call.
  * @subpackage Structs
@@ -15,18 +18,18 @@ class ReviseSellingManagerInventoryFolderRequestType extends AbstractRequestType
 {
     /**
      * The Folder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used to identify the Selling Manager Inventory folder that will be renamed and/or moved.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType|null
      */
-    public $Folder;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $Folder = null;
     /**
      * Constructor method for ReviseSellingManagerInventoryFolderRequestType
      * @uses ReviseSellingManagerInventoryFolderRequestType::setFolder()
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder = null)
     {
         $this
             ->setFolder($folder);
@@ -35,7 +38,7 @@ class ReviseSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * Get Folder value
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType|null
      */
-    public function getFolder()
+    public function getFolder(): ?\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
     {
         return $this->Folder;
     }
@@ -44,29 +47,10 @@ class ReviseSellingManagerInventoryFolderRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder
      * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerInventoryFolderRequestType
      */
-    public function setFolder(\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder = null)
+    public function setFolder(?\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $folder = null): self
     {
         $this->Folder = $folder;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviseSellingManagerInventoryFolderRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

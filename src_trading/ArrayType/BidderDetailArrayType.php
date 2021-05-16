@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for BidderDetailArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Arrays
  */
@@ -14,61 +17,68 @@ class BidderDetailArrayType extends AbstractStructArrayBase
 {
     /**
      * The BidderDetail
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BidderDetailType[]
      */
-    public $BidderDetail;
+    protected array $BidderDetail = [];
     /**
      * Constructor method for BidderDetailArrayType
      * @uses BidderDetailArrayType::setBidderDetail()
      * @param \macropage\ebaysdk\trading\StructType\BidderDetailType[] $bidderDetail
      */
-    public function __construct(array $bidderDetail = array())
+    public function __construct(array $bidderDetail = [])
     {
         $this
             ->setBidderDetail($bidderDetail);
     }
     /**
      * Get BidderDetail value
-     * @return \macropage\ebaysdk\trading\StructType\BidderDetailType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\BidderDetailType[]
      */
-    public function getBidderDetail()
+    public function getBidderDetail(): array
     {
         return $this->BidderDetail;
     }
     /**
+     * This method is responsible for validating the values passed to the setBidderDetail method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setBidderDetail method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateBidderDetailForArrayConstraintsFromSetBidderDetail(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $bidderDetailArrayTypeBidderDetailItem) {
+            // validation for constraint: itemType
+            if (!$bidderDetailArrayTypeBidderDetailItem instanceof \macropage\ebaysdk\trading\StructType\BidderDetailType) {
+                $invalidValues[] = is_object($bidderDetailArrayTypeBidderDetailItem) ? get_class($bidderDetailArrayTypeBidderDetailItem) : sprintf('%s(%s)', gettype($bidderDetailArrayTypeBidderDetailItem), var_export($bidderDetailArrayTypeBidderDetailItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The BidderDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\BidderDetailType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set BidderDetail value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\BidderDetailType[] $bidderDetail
      * @return \macropage\ebaysdk\trading\ArrayType\BidderDetailArrayType
      */
-    public function setBidderDetail(array $bidderDetail = array())
+    public function setBidderDetail(array $bidderDetail = []): self
     {
-        foreach ($bidderDetail as $bidderDetailArrayTypeBidderDetailItem) {
-            // validation for constraint: itemType
-            if (!$bidderDetailArrayTypeBidderDetailItem instanceof \macropage\ebaysdk\trading\StructType\BidderDetailType) {
-                throw new \InvalidArgumentException(sprintf('The BidderDetail property can only contain items of \macropage\ebaysdk\trading\StructType\BidderDetailType, "%s" given', is_object($bidderDetailArrayTypeBidderDetailItem) ? get_class($bidderDetailArrayTypeBidderDetailItem) : gettype($bidderDetailArrayTypeBidderDetailItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($bidderDetailArrayErrorMessage = self::validateBidderDetailForArrayConstraintsFromSetBidderDetail($bidderDetail))) {
+            throw new InvalidArgumentException($bidderDetailArrayErrorMessage, __LINE__);
         }
         $this->BidderDetail = $bidderDetail;
-        return $this;
-    }
-    /**
-     * Add item to BidderDetail value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\BidderDetailType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\BidderDetailArrayType
-     */
-    public function addToBidderDetail(\macropage\ebaysdk\trading\StructType\BidderDetailType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\BidderDetailType) {
-            throw new \InvalidArgumentException(sprintf('The BidderDetail property can only contain items of \macropage\ebaysdk\trading\StructType\BidderDetailType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->BidderDetail[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +86,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\BidderDetailType
     {
         return parent::current();
     }
@@ -86,7 +96,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\BidderDetailType
     {
         return parent::item($index);
     }
@@ -95,7 +105,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\BidderDetailType
     {
         return parent::first();
     }
@@ -104,7 +114,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\BidderDetailType
     {
         return parent::last();
     }
@@ -114,37 +124,32 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\BidderDetailType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\BidderDetailType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\BidderDetailArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\BidderDetailType) {
+            throw new InvalidArgumentException(sprintf('The BidderDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\BidderDetailType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string BidderDetail
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'BidderDetail';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\BidderDetailArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

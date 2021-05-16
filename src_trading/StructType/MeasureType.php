@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MeasureType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Basic type for specifying measures and the system of measurement. A decimal value (e.g., 10.25) is meaningful as a measure when accompanied by a definition of the unit of measure (e.g., Pounds), in which case the value specifies the
  * quantity of that unit. A MeasureType expresses both the value (a decimal) and, optionally, the unit and the system of measurement. Details such as shipping weights are specified as measure types.
  * @subpackage Structs
@@ -15,27 +18,27 @@ class MeasureType extends AbstractStructBase
 {
     /**
      * The _
-     * @var float
+     * @var float|null
      */
-    public $_;
+    protected ?float $_ = null;
     /**
      * The unit
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unit of measure. This attribute is shared by various fields, representing units such as lbs, oz, kg, g, in, cm. <br><br> For weight, English major/minor units are pounds and ounces, and metric major/minor units are kilograms and
      * grams. For length, the English unit is inches, and metric unit is centimeters. <br><br> To get the full list of package dimension and weight measurement units (and all alternative spellings and abbreviations) supported by your site, call
      * <b>GeteBayDetails</b>.
      * - use: optional
-     * @var string
+     * @var string|null
      */
-    public $unit;
+    protected ?string $unit = null;
     /**
      * The measurementSystem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The system of measurement (e.g., English).
      * - use: optional
-     * @var string
+     * @var string|null
      */
-    public $measurementSystem;
+    protected ?string $measurementSystem = null;
     /**
      * Constructor method for MeasureType
      * @uses MeasureType::set_()
@@ -45,7 +48,7 @@ class MeasureType extends AbstractStructBase
      * @param string $unit
      * @param string $measurementSystem
      */
-    public function __construct($_ = null, $unit = null, $measurementSystem = null)
+    public function __construct(?float $_ = null, ?string $unit = null, ?string $measurementSystem = null)
     {
         $this
             ->set_($_)
@@ -56,7 +59,7 @@ class MeasureType extends AbstractStructBase
      * Get _ value
      * @return float|null
      */
-    public function get_()
+    public function get_(): ?float
     {
         return $this->_;
     }
@@ -65,16 +68,21 @@ class MeasureType extends AbstractStructBase
      * @param float $_
      * @return \macropage\ebaysdk\trading\StructType\MeasureType
      */
-    public function set_($_ = null)
+    public function set_(?float $_ = null): self
     {
+        // validation for constraint: float
+        if (!is_null($_) && !(is_float($_) || is_numeric($_))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($_, true), gettype($_)), __LINE__);
+        }
         $this->_ = $_;
+        
         return $this;
     }
     /**
      * Get unit value
      * @return string|null
      */
-    public function getUnit()
+    public function getUnit(): ?string
     {
         return $this->unit;
     }
@@ -83,20 +91,21 @@ class MeasureType extends AbstractStructBase
      * @param string $unit
      * @return \macropage\ebaysdk\trading\StructType\MeasureType
      */
-    public function setUnit($unit = null)
+    public function setUnit(?string $unit = null): self
     {
         // validation for constraint: string
         if (!is_null($unit) && !is_string($unit)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($unit)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($unit, true), gettype($unit)), __LINE__);
         }
         $this->unit = $unit;
+        
         return $this;
     }
     /**
      * Get measurementSystem value
      * @return string|null
      */
-    public function getMeasurementSystem()
+    public function getMeasurementSystem(): ?string
     {
         return $this->measurementSystem;
     }
@@ -104,37 +113,18 @@ class MeasureType extends AbstractStructBase
      * Set measurementSystem value
      * @uses \macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $measurementSystem
      * @return \macropage\ebaysdk\trading\StructType\MeasureType
      */
-    public function setMeasurementSystem($measurementSystem = null)
+    public function setMeasurementSystem(?string $measurementSystem = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType::valueIsValid($measurementSystem)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $measurementSystem, implode(', ', \macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType', is_array($measurementSystem) ? implode(', ', $measurementSystem) : var_export($measurementSystem, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MeasurementSystemCodeType::getValidValues())), __LINE__);
         }
         $this->measurementSystem = $measurementSystem;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MeasureType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

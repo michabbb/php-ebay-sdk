@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for FeedbackCommentArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains one or more stored comments for use as feedback to buyers.
  * @subpackage Arrays
  */
@@ -14,61 +17,68 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
 {
     /**
      * The StoredCommentText
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This comment is for use as feedback for buyers. No more than ten (10) comments can be stored.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $StoredCommentText;
+    protected array $StoredCommentText = [];
     /**
      * Constructor method for FeedbackCommentArrayType
      * @uses FeedbackCommentArrayType::setStoredCommentText()
      * @param string[] $storedCommentText
      */
-    public function __construct(array $storedCommentText = array())
+    public function __construct(array $storedCommentText = [])
     {
         $this
             ->setStoredCommentText($storedCommentText);
     }
     /**
      * Get StoredCommentText value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getStoredCommentText()
+    public function getStoredCommentText(): array
     {
         return $this->StoredCommentText;
     }
     /**
+     * This method is responsible for validating the values passed to the setStoredCommentText method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setStoredCommentText method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateStoredCommentTextForArrayConstraintsFromSetStoredCommentText(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $feedbackCommentArrayTypeStoredCommentTextItem) {
+            // validation for constraint: itemType
+            if (!is_string($feedbackCommentArrayTypeStoredCommentTextItem)) {
+                $invalidValues[] = is_object($feedbackCommentArrayTypeStoredCommentTextItem) ? get_class($feedbackCommentArrayTypeStoredCommentTextItem) : sprintf('%s(%s)', gettype($feedbackCommentArrayTypeStoredCommentTextItem), var_export($feedbackCommentArrayTypeStoredCommentTextItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The StoredCommentText property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set StoredCommentText value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $storedCommentText
      * @return \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType
      */
-    public function setStoredCommentText(array $storedCommentText = array())
+    public function setStoredCommentText(array $storedCommentText = []): self
     {
-        foreach ($storedCommentText as $feedbackCommentArrayTypeStoredCommentTextItem) {
-            // validation for constraint: itemType
-            if (!is_string($feedbackCommentArrayTypeStoredCommentTextItem)) {
-                throw new \InvalidArgumentException(sprintf('The StoredCommentText property can only contain items of string, "%s" given', is_object($feedbackCommentArrayTypeStoredCommentTextItem) ? get_class($feedbackCommentArrayTypeStoredCommentTextItem) : gettype($feedbackCommentArrayTypeStoredCommentTextItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($storedCommentTextArrayErrorMessage = self::validateStoredCommentTextForArrayConstraintsFromSetStoredCommentText($storedCommentText))) {
+            throw new InvalidArgumentException($storedCommentTextArrayErrorMessage, __LINE__);
         }
         $this->StoredCommentText = $storedCommentText;
-        return $this;
-    }
-    /**
-     * Add item to StoredCommentText value
-     * @throws \InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType
-     */
-    public function addToStoredCommentText($item)
-    {
-        // validation for constraint: itemType
-        if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The StoredCommentText property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->StoredCommentText[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +86,7 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return string|null
      */
-    public function current()
+    public function current(): ?string
     {
         return parent::current();
     }
@@ -86,7 +96,7 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return string|null
      */
-    public function item($index)
+    public function item($index): ?string
     {
         return parent::item($index);
     }
@@ -95,7 +105,7 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return string|null
      */
-    public function first()
+    public function first(): ?string
     {
         return parent::first();
     }
@@ -104,7 +114,7 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return string|null
      */
-    public function last()
+    public function last(): ?string
     {
         return parent::last();
     }
@@ -114,7 +124,7 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return string|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?string
     {
         return parent::offsetGet($offset);
     }
@@ -123,28 +133,8 @@ class FeedbackCommentArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string StoredCommentText
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'StoredCommentText';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\FeedbackCommentArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

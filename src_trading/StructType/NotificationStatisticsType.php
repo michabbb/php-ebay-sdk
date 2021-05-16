@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for NotificationStatisticsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Summary information about notifications delivered, failed, errors, queued for a given application ID and time period.
  * @subpackage Structs
  */
@@ -14,49 +17,49 @@ class NotificationStatisticsType extends AbstractStructBase
 {
     /**
      * The DeliveredCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the number of notifications delivered successfully during the given time period.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DeliveredCount;
+    protected ?int $DeliveredCount = null;
     /**
      * The QueuedNewCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the number of new notifications that were queued during the given time period.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QueuedNewCount;
+    protected ?int $QueuedNewCount = null;
     /**
      * The QueuedPendingCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the number of pending notifications in the queue during the given time period.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QueuedPendingCount;
+    protected ?int $QueuedPendingCount = null;
     /**
      * The ExpiredCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the number of notifications that permanently failed during the given time period.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ExpiredCount;
+    protected ?int $ExpiredCount = null;
     /**
      * The ErrorCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the number of notifications for which there were delivery errors during the given time period.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ErrorCount;
+    protected ?int $ErrorCount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for NotificationStatisticsType
      * @uses NotificationStatisticsType::setDeliveredCount()
@@ -70,9 +73,9 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $queuedPendingCount
      * @param int $expiredCount
      * @param int $errorCount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($deliveredCount = null, $queuedNewCount = null, $queuedPendingCount = null, $expiredCount = null, $errorCount = null, \DOMDocument $any = null)
+    public function __construct(?int $deliveredCount = null, ?int $queuedNewCount = null, ?int $queuedPendingCount = null, ?int $expiredCount = null, ?int $errorCount = null, $any = null)
     {
         $this
             ->setDeliveredCount($deliveredCount)
@@ -86,7 +89,7 @@ class NotificationStatisticsType extends AbstractStructBase
      * Get DeliveredCount value
      * @return int|null
      */
-    public function getDeliveredCount()
+    public function getDeliveredCount(): ?int
     {
         return $this->DeliveredCount;
     }
@@ -95,20 +98,21 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $deliveredCount
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setDeliveredCount($deliveredCount = null)
+    public function setDeliveredCount(?int $deliveredCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($deliveredCount) && !is_numeric($deliveredCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($deliveredCount)), __LINE__);
+        if (!is_null($deliveredCount) && !(is_int($deliveredCount) || ctype_digit($deliveredCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($deliveredCount, true), gettype($deliveredCount)), __LINE__);
         }
         $this->DeliveredCount = $deliveredCount;
+        
         return $this;
     }
     /**
      * Get QueuedNewCount value
      * @return int|null
      */
-    public function getQueuedNewCount()
+    public function getQueuedNewCount(): ?int
     {
         return $this->QueuedNewCount;
     }
@@ -117,20 +121,21 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $queuedNewCount
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setQueuedNewCount($queuedNewCount = null)
+    public function setQueuedNewCount(?int $queuedNewCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($queuedNewCount) && !is_numeric($queuedNewCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($queuedNewCount)), __LINE__);
+        if (!is_null($queuedNewCount) && !(is_int($queuedNewCount) || ctype_digit($queuedNewCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($queuedNewCount, true), gettype($queuedNewCount)), __LINE__);
         }
         $this->QueuedNewCount = $queuedNewCount;
+        
         return $this;
     }
     /**
      * Get QueuedPendingCount value
      * @return int|null
      */
-    public function getQueuedPendingCount()
+    public function getQueuedPendingCount(): ?int
     {
         return $this->QueuedPendingCount;
     }
@@ -139,20 +144,21 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $queuedPendingCount
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setQueuedPendingCount($queuedPendingCount = null)
+    public function setQueuedPendingCount(?int $queuedPendingCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($queuedPendingCount) && !is_numeric($queuedPendingCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($queuedPendingCount)), __LINE__);
+        if (!is_null($queuedPendingCount) && !(is_int($queuedPendingCount) || ctype_digit($queuedPendingCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($queuedPendingCount, true), gettype($queuedPendingCount)), __LINE__);
         }
         $this->QueuedPendingCount = $queuedPendingCount;
+        
         return $this;
     }
     /**
      * Get ExpiredCount value
      * @return int|null
      */
-    public function getExpiredCount()
+    public function getExpiredCount(): ?int
     {
         return $this->ExpiredCount;
     }
@@ -161,20 +167,21 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $expiredCount
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setExpiredCount($expiredCount = null)
+    public function setExpiredCount(?int $expiredCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($expiredCount) && !is_numeric($expiredCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($expiredCount)), __LINE__);
+        if (!is_null($expiredCount) && !(is_int($expiredCount) || ctype_digit($expiredCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($expiredCount, true), gettype($expiredCount)), __LINE__);
         }
         $this->ExpiredCount = $expiredCount;
+        
         return $this;
     }
     /**
      * Get ErrorCount value
      * @return int|null
      */
-    public function getErrorCount()
+    public function getErrorCount(): ?int
     {
         return $this->ErrorCount;
     }
@@ -183,65 +190,47 @@ class NotificationStatisticsType extends AbstractStructBase
      * @param int $errorCount
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setErrorCount($errorCount = null)
+    public function setErrorCount(?int $errorCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($errorCount) && !is_numeric($errorCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($errorCount)), __LINE__);
+        if (!is_null($errorCount) && !(is_int($errorCount) || ctype_digit($errorCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($errorCount, true), gettype($errorCount)), __LINE__);
         }
         $this->ErrorCount = $errorCount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\NotificationStatisticsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\NotificationStatisticsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

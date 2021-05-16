@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CategoryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by each eBay category that is returned in the response of the <b>GetCategoryInfo</b> call. This type is used by the <b>Category</b> container, and consists of high-level details of a category, including its category
  * ID value and information on its parent category, child categories, and its level in the eBay site's category hierarchy.
  * @subpackage Structs
@@ -15,89 +18,89 @@ class CategoryType extends AbstractStructBase
 {
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The numeric identifier of a category on an eBay marketplace. For the root category of an eBay marketplace, the value will be <code>-1</code>. <br> <br> This field is always returned with each <b>Category</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The CategoryLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The level where the category fits in the eBay marketplace's category hierarchy. For example, if this field has a value of <code>2</code>, then the category is two levels below the root category. For the root category of an eBay
      * marketplace, the value will be <code>0</code>. <br> <br> This field is always returned with each <b>Category</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CategoryLevel;
+    protected ?int $CategoryLevel = null;
     /**
      * The CategoryName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The display name of the category as it would appear on the eBay marketplace. For the root category of an eBay marketplace, the value will be <code>Root</code>. <br> <br> This field is always returned with each <b>Category</b>
      * container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryName;
+    protected ?string $CategoryName = null;
     /**
      * The CategoryParentID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the category's parent category. Note that <code>-1</code> is returned for Level 1 categories, and <code>0</code> is returned for the root category of an eBay marketplace. <br> <br> This field is always
      * returned with each <b>Category</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryParentID;
+    protected ?string $CategoryParentID = null;
     /**
      * The CategoryParentName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. Instead, the name of the category's parent category can be derived from the <b>CategoryNamePath</b> field
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryParentName;
+    protected ?string $CategoryParentName = null;
     /**
      * The ItemCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemCount;
+    protected ?int $ItemCount = null;
     /**
      * The CategoryNamePath
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The fully-qualified category name path for the eBay category, including the display name for the category and the display name for all ancestor categories, all the way to the top-level (category Level 1) eBay category. Each eBay
      * category name is separated with a colon (:). An example is shown below: <br> <br> <code> &lt;CategoryNamePath&gt;Clothing, Shoes & Accessories:Men's Clothing:Shirts:T-Shirts&lt;/CategoryNamePath&gt; </code> <br> <br> This field is always returned for
      * any eBay category, but is not returned for the root (Level 0) of an eBay marketplace.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryNamePath;
+    protected ?string $CategoryNamePath = null;
     /**
      * The CategoryIDPath
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay category ID path for the eBay category, including the category ID for the corresponding category and the category IDs for all ancestor categories, all the way to the top-level (category Level 1) eBay category. Each eBay
      * category ID is separated with a colon (:). An example is shown below: <br> <br> <code> &lt;CategoryIDPath&gt;11450:1059:185100:15687&lt;/CategoryIDPath&gt; </code> <br> <br> This field is always returned for any eBay category, but is not returned for
      * the root (Level 0) of an eBay marketplace.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryIDPath;
+    protected ?string $CategoryIDPath = null;
     /**
      * The LeafCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field indicates if the corresponding category is a leaf category. eBay listings can only be created in leaf categories. If the value is <code>true</code>, the eBay category is a leaf category. <br> <br> This field is
      * always returned with each <b>Category</b> container.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LeafCategory;
+    protected ?bool $LeafCategory = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CategoryType
      * @uses CategoryType::setCategoryID()
@@ -119,9 +122,9 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryNamePath
      * @param string $categoryIDPath
      * @param bool $leafCategory
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($categoryID = null, $categoryLevel = null, $categoryName = null, $categoryParentID = null, $categoryParentName = null, $itemCount = null, $categoryNamePath = null, $categoryIDPath = null, $leafCategory = null, \DOMDocument $any = null)
+    public function __construct(?string $categoryID = null, ?int $categoryLevel = null, ?string $categoryName = null, ?string $categoryParentID = null, ?string $categoryParentName = null, ?int $itemCount = null, ?string $categoryNamePath = null, ?string $categoryIDPath = null, ?bool $leafCategory = null, $any = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -139,7 +142,7 @@ class CategoryType extends AbstractStructBase
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -148,20 +151,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryID
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get CategoryLevel value
      * @return int|null
      */
-    public function getCategoryLevel()
+    public function getCategoryLevel(): ?int
     {
         return $this->CategoryLevel;
     }
@@ -170,20 +174,21 @@ class CategoryType extends AbstractStructBase
      * @param int $categoryLevel
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryLevel($categoryLevel = null)
+    public function setCategoryLevel(?int $categoryLevel = null): self
     {
         // validation for constraint: int
-        if (!is_null($categoryLevel) && !is_numeric($categoryLevel)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($categoryLevel)), __LINE__);
+        if (!is_null($categoryLevel) && !(is_int($categoryLevel) || ctype_digit($categoryLevel))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($categoryLevel, true), gettype($categoryLevel)), __LINE__);
         }
         $this->CategoryLevel = $categoryLevel;
+        
         return $this;
     }
     /**
      * Get CategoryName value
      * @return string|null
      */
-    public function getCategoryName()
+    public function getCategoryName(): ?string
     {
         return $this->CategoryName;
     }
@@ -192,20 +197,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryName
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryName($categoryName = null)
+    public function setCategoryName(?string $categoryName = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryName) && !is_string($categoryName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryName, true), gettype($categoryName)), __LINE__);
         }
         $this->CategoryName = $categoryName;
+        
         return $this;
     }
     /**
      * Get CategoryParentID value
      * @return string|null
      */
-    public function getCategoryParentID()
+    public function getCategoryParentID(): ?string
     {
         return $this->CategoryParentID;
     }
@@ -214,20 +220,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryParentID
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryParentID($categoryParentID = null)
+    public function setCategoryParentID(?string $categoryParentID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryParentID) && !is_string($categoryParentID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryParentID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryParentID, true), gettype($categoryParentID)), __LINE__);
         }
         $this->CategoryParentID = $categoryParentID;
+        
         return $this;
     }
     /**
      * Get CategoryParentName value
      * @return string|null
      */
-    public function getCategoryParentName()
+    public function getCategoryParentName(): ?string
     {
         return $this->CategoryParentName;
     }
@@ -236,20 +243,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryParentName
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryParentName($categoryParentName = null)
+    public function setCategoryParentName(?string $categoryParentName = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryParentName) && !is_string($categoryParentName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryParentName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryParentName, true), gettype($categoryParentName)), __LINE__);
         }
         $this->CategoryParentName = $categoryParentName;
+        
         return $this;
     }
     /**
      * Get ItemCount value
      * @return int|null
      */
-    public function getItemCount()
+    public function getItemCount(): ?int
     {
         return $this->ItemCount;
     }
@@ -258,20 +266,21 @@ class CategoryType extends AbstractStructBase
      * @param int $itemCount
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setItemCount($itemCount = null)
+    public function setItemCount(?int $itemCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemCount) && !is_numeric($itemCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemCount)), __LINE__);
+        if (!is_null($itemCount) && !(is_int($itemCount) || ctype_digit($itemCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemCount, true), gettype($itemCount)), __LINE__);
         }
         $this->ItemCount = $itemCount;
+        
         return $this;
     }
     /**
      * Get CategoryNamePath value
      * @return string|null
      */
-    public function getCategoryNamePath()
+    public function getCategoryNamePath(): ?string
     {
         return $this->CategoryNamePath;
     }
@@ -280,20 +289,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryNamePath
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryNamePath($categoryNamePath = null)
+    public function setCategoryNamePath(?string $categoryNamePath = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryNamePath) && !is_string($categoryNamePath)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryNamePath)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryNamePath, true), gettype($categoryNamePath)), __LINE__);
         }
         $this->CategoryNamePath = $categoryNamePath;
+        
         return $this;
     }
     /**
      * Get CategoryIDPath value
      * @return string|null
      */
-    public function getCategoryIDPath()
+    public function getCategoryIDPath(): ?string
     {
         return $this->CategoryIDPath;
     }
@@ -302,20 +312,21 @@ class CategoryType extends AbstractStructBase
      * @param string $categoryIDPath
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setCategoryIDPath($categoryIDPath = null)
+    public function setCategoryIDPath(?string $categoryIDPath = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryIDPath) && !is_string($categoryIDPath)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryIDPath)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryIDPath, true), gettype($categoryIDPath)), __LINE__);
         }
         $this->CategoryIDPath = $categoryIDPath;
+        
         return $this;
     }
     /**
      * Get LeafCategory value
      * @return bool|null
      */
-    public function getLeafCategory()
+    public function getLeafCategory(): ?bool
     {
         return $this->LeafCategory;
     }
@@ -324,65 +335,47 @@ class CategoryType extends AbstractStructBase
      * @param bool $leafCategory
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setLeafCategory($leafCategory = null)
+    public function setLeafCategory(?bool $leafCategory = null): self
     {
         // validation for constraint: boolean
         if (!is_null($leafCategory) && !is_bool($leafCategory)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($leafCategory)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($leafCategory, true), gettype($leafCategory)), __LINE__);
         }
         $this->LeafCategory = $leafCategory;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\CategoryType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\CategoryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

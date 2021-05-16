@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BiddingSummaryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>BiddingSummary</b> container, which is returned in the <b>GetAllBidders</b> response if the <b>IncludeBiddingSummary</b> boolean field is included and set to <code>true</code> in the call request. The
  * <b>BiddingSummary</b> container consists of bidding history information for a specific bidder (specified in the <b>User.UserID</b> field).
  * @subpackage Structs
@@ -15,72 +18,72 @@ class BiddingSummaryType extends AbstractStructBase
 {
     /**
      * The SummaryDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the length of time (in number of days) that is being used to calculate all counts in the <b>BiddingSummary</b> container. This value is generally <code>30</code> (days), which means that all counts in the
      * container have been calculated from the present time and going back 30 days in the past. <br/><br/> This field is always returned with the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SummaryDays;
+    protected ?int $SummaryDays = null;
     /**
      * The TotalBids
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the total number of bids (from any and all eBay sellers) that the user has placed during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field). <br/><br/> This field is always
      * returned with the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalBids;
+    protected ?int $TotalBids = null;
     /**
      * The BidActivityWithSeller
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value is actually a percentage value that indicates what percentage of the user's total number of bids during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field) has been placed on auction
      * items that the seller has listed. The percentage value is rounded up to the highest whole percentage number. <br/><br/> This field is always returned with the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BidActivityWithSeller;
+    protected ?int $BidActivityWithSeller = null;
     /**
      * The BidsToUniqueSellers
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the total number of bids to unique sellers that the user has placed during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field). <br/><br/> This field is always returned with
      * the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BidsToUniqueSellers;
+    protected ?int $BidsToUniqueSellers = null;
     /**
      * The BidsToUniqueCategories
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the total number of bids made with unique listing categories that the user has placed during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field). <br/><br/> This field is
      * always returned with the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BidsToUniqueCategories;
+    protected ?int $BidsToUniqueCategories = null;
     /**
      * The BidRetractions
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the total number of bids that the user has retracted (from any and all sellers) during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field). <br/><br/> This field is always
      * returned with the <b>BiddingSummary</b> container.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BidRetractions;
+    protected ?int $BidRetractions = null;
     /**
      * The ItemBidDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container provides information on each auction item that the user has placed a bid on during the last 30 days (or the number of days specified in the <b>SummaryDays</b> field).
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[]
      */
-    public $ItemBidDetails;
+    protected array $ItemBidDetails = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BiddingSummaryType
      * @uses BiddingSummaryType::setSummaryDays()
@@ -98,9 +101,9 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $bidsToUniqueCategories
      * @param int $bidRetractions
      * @param \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[] $itemBidDetails
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($summaryDays = null, $totalBids = null, $bidActivityWithSeller = null, $bidsToUniqueSellers = null, $bidsToUniqueCategories = null, $bidRetractions = null, array $itemBidDetails = array(), \DOMDocument $any = null)
+    public function __construct(?int $summaryDays = null, ?int $totalBids = null, ?int $bidActivityWithSeller = null, ?int $bidsToUniqueSellers = null, ?int $bidsToUniqueCategories = null, ?int $bidRetractions = null, array $itemBidDetails = [], $any = null)
     {
         $this
             ->setSummaryDays($summaryDays)
@@ -116,7 +119,7 @@ class BiddingSummaryType extends AbstractStructBase
      * Get SummaryDays value
      * @return int|null
      */
-    public function getSummaryDays()
+    public function getSummaryDays(): ?int
     {
         return $this->SummaryDays;
     }
@@ -125,20 +128,21 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $summaryDays
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setSummaryDays($summaryDays = null)
+    public function setSummaryDays(?int $summaryDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($summaryDays) && !is_numeric($summaryDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($summaryDays)), __LINE__);
+        if (!is_null($summaryDays) && !(is_int($summaryDays) || ctype_digit($summaryDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($summaryDays, true), gettype($summaryDays)), __LINE__);
         }
         $this->SummaryDays = $summaryDays;
+        
         return $this;
     }
     /**
      * Get TotalBids value
      * @return int|null
      */
-    public function getTotalBids()
+    public function getTotalBids(): ?int
     {
         return $this->TotalBids;
     }
@@ -147,20 +151,21 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $totalBids
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setTotalBids($totalBids = null)
+    public function setTotalBids(?int $totalBids = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalBids) && !is_numeric($totalBids)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalBids)), __LINE__);
+        if (!is_null($totalBids) && !(is_int($totalBids) || ctype_digit($totalBids))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalBids, true), gettype($totalBids)), __LINE__);
         }
         $this->TotalBids = $totalBids;
+        
         return $this;
     }
     /**
      * Get BidActivityWithSeller value
      * @return int|null
      */
-    public function getBidActivityWithSeller()
+    public function getBidActivityWithSeller(): ?int
     {
         return $this->BidActivityWithSeller;
     }
@@ -169,20 +174,21 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $bidActivityWithSeller
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setBidActivityWithSeller($bidActivityWithSeller = null)
+    public function setBidActivityWithSeller(?int $bidActivityWithSeller = null): self
     {
         // validation for constraint: int
-        if (!is_null($bidActivityWithSeller) && !is_numeric($bidActivityWithSeller)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($bidActivityWithSeller)), __LINE__);
+        if (!is_null($bidActivityWithSeller) && !(is_int($bidActivityWithSeller) || ctype_digit($bidActivityWithSeller))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($bidActivityWithSeller, true), gettype($bidActivityWithSeller)), __LINE__);
         }
         $this->BidActivityWithSeller = $bidActivityWithSeller;
+        
         return $this;
     }
     /**
      * Get BidsToUniqueSellers value
      * @return int|null
      */
-    public function getBidsToUniqueSellers()
+    public function getBidsToUniqueSellers(): ?int
     {
         return $this->BidsToUniqueSellers;
     }
@@ -191,20 +197,21 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $bidsToUniqueSellers
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setBidsToUniqueSellers($bidsToUniqueSellers = null)
+    public function setBidsToUniqueSellers(?int $bidsToUniqueSellers = null): self
     {
         // validation for constraint: int
-        if (!is_null($bidsToUniqueSellers) && !is_numeric($bidsToUniqueSellers)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($bidsToUniqueSellers)), __LINE__);
+        if (!is_null($bidsToUniqueSellers) && !(is_int($bidsToUniqueSellers) || ctype_digit($bidsToUniqueSellers))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($bidsToUniqueSellers, true), gettype($bidsToUniqueSellers)), __LINE__);
         }
         $this->BidsToUniqueSellers = $bidsToUniqueSellers;
+        
         return $this;
     }
     /**
      * Get BidsToUniqueCategories value
      * @return int|null
      */
-    public function getBidsToUniqueCategories()
+    public function getBidsToUniqueCategories(): ?int
     {
         return $this->BidsToUniqueCategories;
     }
@@ -213,20 +220,21 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $bidsToUniqueCategories
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setBidsToUniqueCategories($bidsToUniqueCategories = null)
+    public function setBidsToUniqueCategories(?int $bidsToUniqueCategories = null): self
     {
         // validation for constraint: int
-        if (!is_null($bidsToUniqueCategories) && !is_numeric($bidsToUniqueCategories)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($bidsToUniqueCategories)), __LINE__);
+        if (!is_null($bidsToUniqueCategories) && !(is_int($bidsToUniqueCategories) || ctype_digit($bidsToUniqueCategories))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($bidsToUniqueCategories, true), gettype($bidsToUniqueCategories)), __LINE__);
         }
         $this->BidsToUniqueCategories = $bidsToUniqueCategories;
+        
         return $this;
     }
     /**
      * Get BidRetractions value
      * @return int|null
      */
-    public function getBidRetractions()
+    public function getBidRetractions(): ?int
     {
         return $this->BidRetractions;
     }
@@ -235,105 +243,110 @@ class BiddingSummaryType extends AbstractStructBase
      * @param int $bidRetractions
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setBidRetractions($bidRetractions = null)
+    public function setBidRetractions(?int $bidRetractions = null): self
     {
         // validation for constraint: int
-        if (!is_null($bidRetractions) && !is_numeric($bidRetractions)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($bidRetractions)), __LINE__);
+        if (!is_null($bidRetractions) && !(is_int($bidRetractions) || ctype_digit($bidRetractions))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($bidRetractions, true), gettype($bidRetractions)), __LINE__);
         }
         $this->BidRetractions = $bidRetractions;
+        
         return $this;
     }
     /**
      * Get ItemBidDetails value
-     * @return \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[]
      */
-    public function getItemBidDetails()
+    public function getItemBidDetails(): array
     {
         return $this->ItemBidDetails;
     }
     /**
+     * This method is responsible for validating the values passed to the setItemBidDetails method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setItemBidDetails method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateItemBidDetailsForArrayConstraintsFromSetItemBidDetails(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $biddingSummaryTypeItemBidDetailsItem) {
+            // validation for constraint: itemType
+            if (!$biddingSummaryTypeItemBidDetailsItem instanceof \macropage\ebaysdk\trading\StructType\ItemBidDetailsType) {
+                $invalidValues[] = is_object($biddingSummaryTypeItemBidDetailsItem) ? get_class($biddingSummaryTypeItemBidDetailsItem) : sprintf('%s(%s)', gettype($biddingSummaryTypeItemBidDetailsItem), var_export($biddingSummaryTypeItemBidDetailsItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ItemBidDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\ItemBidDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ItemBidDetails value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[] $itemBidDetails
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setItemBidDetails(array $itemBidDetails = array())
+    public function setItemBidDetails(array $itemBidDetails = []): self
     {
-        foreach ($itemBidDetails as $biddingSummaryTypeItemBidDetailsItem) {
-            // validation for constraint: itemType
-            if (!$biddingSummaryTypeItemBidDetailsItem instanceof \macropage\ebaysdk\trading\StructType\ItemBidDetailsType) {
-                throw new \InvalidArgumentException(sprintf('The ItemBidDetails property can only contain items of \macropage\ebaysdk\trading\StructType\ItemBidDetailsType, "%s" given', is_object($biddingSummaryTypeItemBidDetailsItem) ? get_class($biddingSummaryTypeItemBidDetailsItem) : gettype($biddingSummaryTypeItemBidDetailsItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($itemBidDetailsArrayErrorMessage = self::validateItemBidDetailsForArrayConstraintsFromSetItemBidDetails($itemBidDetails))) {
+            throw new InvalidArgumentException($itemBidDetailsArrayErrorMessage, __LINE__);
         }
         $this->ItemBidDetails = $itemBidDetails;
+        
         return $this;
     }
     /**
      * Add item to ItemBidDetails value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ItemBidDetailsType $item
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function addToItemBidDetails(\macropage\ebaysdk\trading\StructType\ItemBidDetailsType $item)
+    public function addToItemBidDetails(\macropage\ebaysdk\trading\StructType\ItemBidDetailsType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ItemBidDetailsType) {
-            throw new \InvalidArgumentException(sprintf('The ItemBidDetails property can only contain items of \macropage\ebaysdk\trading\StructType\ItemBidDetailsType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ItemBidDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\ItemBidDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ItemBidDetails[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BiddingSummaryType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

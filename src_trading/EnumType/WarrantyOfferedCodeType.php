@@ -1,54 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for WarrantyOfferedCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated, as product warranties are no longer applicable or supported in eBay APIs.
  * @subpackage Enumerations
  */
-class WarrantyOfferedCodeType
+class WarrantyOfferedCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'WarrantyOffered'
+     * Meta information extracted from the WSDL
+     * - documentation: If this value is returned in the <b>ReturnPolicyDetails.WarrantyOffered</b> container of the <b>GeteBayDetails</b> response, the seller may offer a warranty to the buyer. This value that should be passed into the
+     * <b>ReturnPolicy.WarrantyOfferedOption</b> field of an add/revise/relist API call if the seller wishes to offer a warranty to the buyer.
      * @return string 'WarrantyOffered'
      */
     const VALUE_WARRANTY_OFFERED = 'WarrantyOffered';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: This value is reserved for internal or future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_WARRANTY_OFFERED
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_WARRANTY_OFFERED,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

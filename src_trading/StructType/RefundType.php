@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for RefundType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: <span class="tablenote"><b>Note: </b> This type is only used for Half.com order refunds, and since the Half.com site has been shut down, this type will also be deprecated. </span> Contains information about a single Half.com refund.
  * @subpackage Structs
  */
@@ -14,123 +17,123 @@ class RefundType extends AbstractStructBase
 {
     /**
      * The RefundFromSeller
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span> Total amount refunded by the seller for this order line item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $RefundFromSeller;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $RefundFromSeller = null;
     /**
      * The TotalRefundToBuyer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span> Total amount refunded to the buyer for this order line item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalRefundToBuyer;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalRefundToBuyer = null;
     /**
      * The RefundTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span> The date and time at which the refund was issued.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundTime;
+    protected ?string $RefundTime = null;
     /**
      * The RefundID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span> The unique identifier of the refund. <br/><br/> <b>For GetOrders,
      * GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version
      * 1019, the real refund identifier is only returned to the buyer or seller, and a string value of <code>Unavailable</code> will be returned to all third parties.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundID;
+    protected ?string $RefundID = null;
     /**
      * The RefundTransactionArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
+     * @var \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType|null
      */
-    public $RefundTransactionArray;
+    protected ?\macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $RefundTransactionArray = null;
     /**
      * The RefundAmount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span> The total amount of the refund requested.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $RefundAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $RefundAmount = null;
     /**
      * The RefundStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundStatus;
+    protected ?string $RefundStatus = null;
     /**
      * The RefundFailureReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\RefundFailureReasonType
+     * @var \macropage\ebaysdk\trading\StructType\RefundFailureReasonType|null
      */
-    public $RefundFailureReason;
+    protected ?\macropage\ebaysdk\trading\StructType\RefundFailureReasonType $RefundFailureReason = null;
     /**
      * The RefundFundingSourceArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType
+     * @var \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType|null
      */
-    public $RefundFundingSourceArray;
+    protected ?\macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $RefundFundingSourceArray = null;
     /**
      * The ExternalReferenceID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalReferenceID;
+    protected ?string $ExternalReferenceID = null;
     /**
      * The RefundRequestedTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundRequestedTime;
+    protected ?string $RefundRequestedTime = null;
     /**
      * The RefundCompletionTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundCompletionTime;
+    protected ?string $RefundCompletionTime = null;
     /**
      * The EstimatedRefundCompletionTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EstimatedRefundCompletionTime;
+    protected ?string $EstimatedRefundCompletionTime = null;
     /**
      * The SellerNoteToBuyer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> <b>RefundType</b> and all of its fields are no longer applicable since the Half.com site has been shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerNoteToBuyer;
+    protected ?string $SellerNoteToBuyer = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for RefundType
      * @uses RefundType::setRefundFromSeller()
@@ -162,9 +165,9 @@ class RefundType extends AbstractStructBase
      * @param string $refundCompletionTime
      * @param string $estimatedRefundCompletionTime
      * @param string $sellerNoteToBuyer
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $refundFromSeller = null, \macropage\ebaysdk\trading\StructType\AmountType $totalRefundToBuyer = null, $refundTime = null, $refundID = null, \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $refundTransactionArray = null, \macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, $refundStatus = null, \macropage\ebaysdk\trading\StructType\RefundFailureReasonType $refundFailureReason = null, \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $refundFundingSourceArray = null, $externalReferenceID = null, $refundRequestedTime = null, $refundCompletionTime = null, $estimatedRefundCompletionTime = null, $sellerNoteToBuyer = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $refundFromSeller = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalRefundToBuyer = null, ?string $refundTime = null, ?string $refundID = null, ?\macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $refundTransactionArray = null, ?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, ?string $refundStatus = null, ?\macropage\ebaysdk\trading\StructType\RefundFailureReasonType $refundFailureReason = null, ?\macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $refundFundingSourceArray = null, ?string $externalReferenceID = null, ?string $refundRequestedTime = null, ?string $refundCompletionTime = null, ?string $estimatedRefundCompletionTime = null, ?string $sellerNoteToBuyer = null, $any = null)
     {
         $this
             ->setRefundFromSeller($refundFromSeller)
@@ -187,7 +190,7 @@ class RefundType extends AbstractStructBase
      * Get RefundFromSeller value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getRefundFromSeller()
+    public function getRefundFromSeller(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->RefundFromSeller;
     }
@@ -196,16 +199,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $refundFromSeller
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundFromSeller(\macropage\ebaysdk\trading\StructType\AmountType $refundFromSeller = null)
+    public function setRefundFromSeller(?\macropage\ebaysdk\trading\StructType\AmountType $refundFromSeller = null): self
     {
         $this->RefundFromSeller = $refundFromSeller;
+        
         return $this;
     }
     /**
      * Get TotalRefundToBuyer value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalRefundToBuyer()
+    public function getTotalRefundToBuyer(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalRefundToBuyer;
     }
@@ -214,16 +218,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalRefundToBuyer
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setTotalRefundToBuyer(\macropage\ebaysdk\trading\StructType\AmountType $totalRefundToBuyer = null)
+    public function setTotalRefundToBuyer(?\macropage\ebaysdk\trading\StructType\AmountType $totalRefundToBuyer = null): self
     {
         $this->TotalRefundToBuyer = $totalRefundToBuyer;
+        
         return $this;
     }
     /**
      * Get RefundTime value
      * @return string|null
      */
-    public function getRefundTime()
+    public function getRefundTime(): ?string
     {
         return $this->RefundTime;
     }
@@ -232,20 +237,21 @@ class RefundType extends AbstractStructBase
      * @param string $refundTime
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundTime($refundTime = null)
+    public function setRefundTime(?string $refundTime = null): self
     {
         // validation for constraint: string
         if (!is_null($refundTime) && !is_string($refundTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($refundTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($refundTime, true), gettype($refundTime)), __LINE__);
         }
         $this->RefundTime = $refundTime;
+        
         return $this;
     }
     /**
      * Get RefundID value
      * @return string|null
      */
-    public function getRefundID()
+    public function getRefundID(): ?string
     {
         return $this->RefundID;
     }
@@ -254,20 +260,21 @@ class RefundType extends AbstractStructBase
      * @param string $refundID
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundID($refundID = null)
+    public function setRefundID(?string $refundID = null): self
     {
         // validation for constraint: string
         if (!is_null($refundID) && !is_string($refundID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($refundID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($refundID, true), gettype($refundID)), __LINE__);
         }
         $this->RefundID = $refundID;
+        
         return $this;
     }
     /**
      * Get RefundTransactionArray value
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType|null
      */
-    public function getRefundTransactionArray()
+    public function getRefundTransactionArray(): ?\macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
     {
         return $this->RefundTransactionArray;
     }
@@ -276,16 +283,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $refundTransactionArray
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundTransactionArray(\macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $refundTransactionArray = null)
+    public function setRefundTransactionArray(?\macropage\ebaysdk\trading\StructType\RefundTransactionArrayType $refundTransactionArray = null): self
     {
         $this->RefundTransactionArray = $refundTransactionArray;
+        
         return $this;
     }
     /**
      * Get RefundAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getRefundAmount()
+    public function getRefundAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->RefundAmount;
     }
@@ -294,16 +302,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $refundAmount
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundAmount(\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null)
+    public function setRefundAmount(?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null): self
     {
         $this->RefundAmount = $refundAmount;
+        
         return $this;
     }
     /**
      * Get RefundStatus value
      * @return string|null
      */
-    public function getRefundStatus()
+    public function getRefundStatus(): ?string
     {
         return $this->RefundStatus;
     }
@@ -311,24 +320,25 @@ class RefundType extends AbstractStructBase
      * Set RefundStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\RefundStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\RefundStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $refundStatus
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundStatus($refundStatus = null)
+    public function setRefundStatus(?string $refundStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\RefundStatusCodeType::valueIsValid($refundStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $refundStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\RefundStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\RefundStatusCodeType', is_array($refundStatus) ? implode(', ', $refundStatus) : var_export($refundStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\RefundStatusCodeType::getValidValues())), __LINE__);
         }
         $this->RefundStatus = $refundStatus;
+        
         return $this;
     }
     /**
      * Get RefundFailureReason value
      * @return \macropage\ebaysdk\trading\StructType\RefundFailureReasonType|null
      */
-    public function getRefundFailureReason()
+    public function getRefundFailureReason(): ?\macropage\ebaysdk\trading\StructType\RefundFailureReasonType
     {
         return $this->RefundFailureReason;
     }
@@ -337,16 +347,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundFailureReasonType $refundFailureReason
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundFailureReason(\macropage\ebaysdk\trading\StructType\RefundFailureReasonType $refundFailureReason = null)
+    public function setRefundFailureReason(?\macropage\ebaysdk\trading\StructType\RefundFailureReasonType $refundFailureReason = null): self
     {
         $this->RefundFailureReason = $refundFailureReason;
+        
         return $this;
     }
     /**
      * Get RefundFundingSourceArray value
      * @return \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType|null
      */
-    public function getRefundFundingSourceArray()
+    public function getRefundFundingSourceArray(): ?\macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType
     {
         return $this->RefundFundingSourceArray;
     }
@@ -355,16 +366,17 @@ class RefundType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $refundFundingSourceArray
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundFundingSourceArray(\macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $refundFundingSourceArray = null)
+    public function setRefundFundingSourceArray(?\macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType $refundFundingSourceArray = null): self
     {
         $this->RefundFundingSourceArray = $refundFundingSourceArray;
+        
         return $this;
     }
     /**
      * Get ExternalReferenceID value
      * @return string|null
      */
-    public function getExternalReferenceID()
+    public function getExternalReferenceID(): ?string
     {
         return $this->ExternalReferenceID;
     }
@@ -373,20 +385,21 @@ class RefundType extends AbstractStructBase
      * @param string $externalReferenceID
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setExternalReferenceID($externalReferenceID = null)
+    public function setExternalReferenceID(?string $externalReferenceID = null): self
     {
         // validation for constraint: string
         if (!is_null($externalReferenceID) && !is_string($externalReferenceID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalReferenceID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalReferenceID, true), gettype($externalReferenceID)), __LINE__);
         }
         $this->ExternalReferenceID = $externalReferenceID;
+        
         return $this;
     }
     /**
      * Get RefundRequestedTime value
      * @return string|null
      */
-    public function getRefundRequestedTime()
+    public function getRefundRequestedTime(): ?string
     {
         return $this->RefundRequestedTime;
     }
@@ -395,20 +408,21 @@ class RefundType extends AbstractStructBase
      * @param string $refundRequestedTime
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundRequestedTime($refundRequestedTime = null)
+    public function setRefundRequestedTime(?string $refundRequestedTime = null): self
     {
         // validation for constraint: string
         if (!is_null($refundRequestedTime) && !is_string($refundRequestedTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($refundRequestedTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($refundRequestedTime, true), gettype($refundRequestedTime)), __LINE__);
         }
         $this->RefundRequestedTime = $refundRequestedTime;
+        
         return $this;
     }
     /**
      * Get RefundCompletionTime value
      * @return string|null
      */
-    public function getRefundCompletionTime()
+    public function getRefundCompletionTime(): ?string
     {
         return $this->RefundCompletionTime;
     }
@@ -417,20 +431,21 @@ class RefundType extends AbstractStructBase
      * @param string $refundCompletionTime
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setRefundCompletionTime($refundCompletionTime = null)
+    public function setRefundCompletionTime(?string $refundCompletionTime = null): self
     {
         // validation for constraint: string
         if (!is_null($refundCompletionTime) && !is_string($refundCompletionTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($refundCompletionTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($refundCompletionTime, true), gettype($refundCompletionTime)), __LINE__);
         }
         $this->RefundCompletionTime = $refundCompletionTime;
+        
         return $this;
     }
     /**
      * Get EstimatedRefundCompletionTime value
      * @return string|null
      */
-    public function getEstimatedRefundCompletionTime()
+    public function getEstimatedRefundCompletionTime(): ?string
     {
         return $this->EstimatedRefundCompletionTime;
     }
@@ -439,20 +454,21 @@ class RefundType extends AbstractStructBase
      * @param string $estimatedRefundCompletionTime
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setEstimatedRefundCompletionTime($estimatedRefundCompletionTime = null)
+    public function setEstimatedRefundCompletionTime(?string $estimatedRefundCompletionTime = null): self
     {
         // validation for constraint: string
         if (!is_null($estimatedRefundCompletionTime) && !is_string($estimatedRefundCompletionTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($estimatedRefundCompletionTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($estimatedRefundCompletionTime, true), gettype($estimatedRefundCompletionTime)), __LINE__);
         }
         $this->EstimatedRefundCompletionTime = $estimatedRefundCompletionTime;
+        
         return $this;
     }
     /**
      * Get SellerNoteToBuyer value
      * @return string|null
      */
-    public function getSellerNoteToBuyer()
+    public function getSellerNoteToBuyer(): ?string
     {
         return $this->SellerNoteToBuyer;
     }
@@ -461,65 +477,47 @@ class RefundType extends AbstractStructBase
      * @param string $sellerNoteToBuyer
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setSellerNoteToBuyer($sellerNoteToBuyer = null)
+    public function setSellerNoteToBuyer(?string $sellerNoteToBuyer = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerNoteToBuyer) && !is_string($sellerNoteToBuyer)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerNoteToBuyer)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerNoteToBuyer, true), gettype($sellerNoteToBuyer)), __LINE__);
         }
         $this->SellerNoteToBuyer = $sellerNoteToBuyer;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\RefundType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\RefundType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\RefundType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CharityAffiliationsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class CharityAffiliationsType extends AbstractStructBase
 {
     /**
      * The CharityID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharityIDType[]
      */
-    public $CharityID;
+    protected array $CharityID = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CharityAffiliationsType
      * @uses CharityAffiliationsType::setCharityID()
      * @uses CharityAffiliationsType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\CharityIDType[] $charityID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $charityID = array(), \DOMDocument $any = null)
+    public function __construct(array $charityID = [], $any = null)
     {
         $this
             ->setCharityID($charityID)
@@ -41,94 +44,98 @@ class CharityAffiliationsType extends AbstractStructBase
     }
     /**
      * Get CharityID value
-     * @return \macropage\ebaysdk\trading\StructType\CharityIDType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\CharityIDType[]
      */
-    public function getCharityID()
+    public function getCharityID(): array
     {
         return $this->CharityID;
     }
     /**
+     * This method is responsible for validating the values passed to the setCharityID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCharityID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCharityIDForArrayConstraintsFromSetCharityID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $charityAffiliationsTypeCharityIDItem) {
+            // validation for constraint: itemType
+            if (!$charityAffiliationsTypeCharityIDItem instanceof \macropage\ebaysdk\trading\StructType\CharityIDType) {
+                $invalidValues[] = is_object($charityAffiliationsTypeCharityIDItem) ? get_class($charityAffiliationsTypeCharityIDItem) : sprintf('%s(%s)', gettype($charityAffiliationsTypeCharityIDItem), var_export($charityAffiliationsTypeCharityIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The CharityID property can only contain items of type \macropage\ebaysdk\trading\StructType\CharityIDType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set CharityID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CharityIDType[] $charityID
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType
      */
-    public function setCharityID(array $charityID = array())
+    public function setCharityID(array $charityID = []): self
     {
-        foreach ($charityID as $charityAffiliationsTypeCharityIDItem) {
-            // validation for constraint: itemType
-            if (!$charityAffiliationsTypeCharityIDItem instanceof \macropage\ebaysdk\trading\StructType\CharityIDType) {
-                throw new \InvalidArgumentException(sprintf('The CharityID property can only contain items of \macropage\ebaysdk\trading\StructType\CharityIDType, "%s" given', is_object($charityAffiliationsTypeCharityIDItem) ? get_class($charityAffiliationsTypeCharityIDItem) : gettype($charityAffiliationsTypeCharityIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($charityIDArrayErrorMessage = self::validateCharityIDForArrayConstraintsFromSetCharityID($charityID))) {
+            throw new InvalidArgumentException($charityIDArrayErrorMessage, __LINE__);
         }
         $this->CharityID = $charityID;
+        
         return $this;
     }
     /**
      * Add item to CharityID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CharityIDType $item
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType
      */
-    public function addToCharityID(\macropage\ebaysdk\trading\StructType\CharityIDType $item)
+    public function addToCharityID(\macropage\ebaysdk\trading\StructType\CharityIDType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\CharityIDType) {
-            throw new \InvalidArgumentException(sprintf('The CharityID property can only contain items of \macropage\ebaysdk\trading\StructType\CharityIDType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The CharityID property can only contain items of type \macropage\ebaysdk\trading\StructType\CharityIDType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->CharityID[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CharityAffiliationsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for ModifyNameArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>ModifyNameList</b> container in a <b>ReviseFixedPriceItem</b> or <b>RelistFixedPriceItem</b> call to rename one or more Variation Specific names for a multiple-variation listing.
  * @subpackage Arrays
  */
@@ -14,7 +17,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
 {
     /**
      * The ModifyName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A <b>ModifyName</b> container is needed for each Variation Specific name that the seller wishes to change in a multiple-variation listing. <br><br> You cannot change the name of an Item Specific that is required for the listing
      * category. Use the <b>GetCategoryFeatures</b> or <b>GetCategorySpecifics</b> calls to determine which Item Specifics names are required for a category. <br><br> To get a current list of Variation Specifics defined for a multiple-variation listing, the
      * seller can use <b>GetItem</b>, and then view all Variation Specific names in the <b>VariationSpecificsSet</b> container in the response.
@@ -22,55 +25,62 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ModifyNameType[]
      */
-    public $ModifyName;
+    protected array $ModifyName = [];
     /**
      * Constructor method for ModifyNameArrayType
      * @uses ModifyNameArrayType::setModifyName()
      * @param \macropage\ebaysdk\trading\StructType\ModifyNameType[] $modifyName
      */
-    public function __construct(array $modifyName = array())
+    public function __construct(array $modifyName = [])
     {
         $this
             ->setModifyName($modifyName);
     }
     /**
      * Get ModifyName value
-     * @return \macropage\ebaysdk\trading\StructType\ModifyNameType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ModifyNameType[]
      */
-    public function getModifyName()
+    public function getModifyName(): array
     {
         return $this->ModifyName;
     }
     /**
+     * This method is responsible for validating the values passed to the setModifyName method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setModifyName method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateModifyNameForArrayConstraintsFromSetModifyName(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $modifyNameArrayTypeModifyNameItem) {
+            // validation for constraint: itemType
+            if (!$modifyNameArrayTypeModifyNameItem instanceof \macropage\ebaysdk\trading\StructType\ModifyNameType) {
+                $invalidValues[] = is_object($modifyNameArrayTypeModifyNameItem) ? get_class($modifyNameArrayTypeModifyNameItem) : sprintf('%s(%s)', gettype($modifyNameArrayTypeModifyNameItem), var_export($modifyNameArrayTypeModifyNameItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ModifyName property can only contain items of type \macropage\ebaysdk\trading\StructType\ModifyNameType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ModifyName value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ModifyNameType[] $modifyName
      * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
      */
-    public function setModifyName(array $modifyName = array())
+    public function setModifyName(array $modifyName = []): self
     {
-        foreach ($modifyName as $modifyNameArrayTypeModifyNameItem) {
-            // validation for constraint: itemType
-            if (!$modifyNameArrayTypeModifyNameItem instanceof \macropage\ebaysdk\trading\StructType\ModifyNameType) {
-                throw new \InvalidArgumentException(sprintf('The ModifyName property can only contain items of \macropage\ebaysdk\trading\StructType\ModifyNameType, "%s" given', is_object($modifyNameArrayTypeModifyNameItem) ? get_class($modifyNameArrayTypeModifyNameItem) : gettype($modifyNameArrayTypeModifyNameItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($modifyNameArrayErrorMessage = self::validateModifyNameForArrayConstraintsFromSetModifyName($modifyName))) {
+            throw new InvalidArgumentException($modifyNameArrayErrorMessage, __LINE__);
         }
         $this->ModifyName = $modifyName;
-        return $this;
-    }
-    /**
-     * Add item to ModifyName value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\ModifyNameType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
-     */
-    public function addToModifyName(\macropage\ebaysdk\trading\StructType\ModifyNameType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\ModifyNameType) {
-            throw new \InvalidArgumentException(sprintf('The ModifyName property can only contain items of \macropage\ebaysdk\trading\StructType\ModifyNameType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->ModifyName[] = $item;
+        
         return $this;
     }
     /**
@@ -78,7 +88,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\ModifyNameType
     {
         return parent::current();
     }
@@ -88,7 +98,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\ModifyNameType
     {
         return parent::item($index);
     }
@@ -97,7 +107,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\ModifyNameType
     {
         return parent::first();
     }
@@ -106,7 +116,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\ModifyNameType
     {
         return parent::last();
     }
@@ -116,37 +126,32 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\ModifyNameType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\ModifyNameType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\ModifyNameType) {
+            throw new InvalidArgumentException(sprintf('The ModifyName property can only contain items of type \macropage\ebaysdk\trading\StructType\ModifyNameType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string ModifyName
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'ModifyName';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

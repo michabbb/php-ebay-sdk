@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ItemListCustomizationType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Defines how a list of items should be returned.
  * @subpackage Structs
  */
@@ -14,67 +17,67 @@ class ItemListCustomizationType extends AbstractStructBase
 {
     /**
      * The Include
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether or not to include the container in the response. Set the value to true to return the default set of fields for the container. Not needed if you set a value for at least one other field in the container. <br><br> If
      * you set DetailLevel to ReturnAll, set Include to false to exclude the container from the response.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Include;
+    protected ?bool $Include = null;
     /**
      * The ListingType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the listing type of items in the returned list.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingType;
+    protected ?string $ListingType = null;
     /**
      * The Sort
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the sort order of the result. Default is Ascending.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Sort;
+    protected ?string $Sort = null;
     /**
      * The DurationInDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the time period during which an item was won or lost. Similar to the period drop-down menu in the My eBay user interface. For example, to return the items won or lost in the last week, specify a DurationInDays of 7.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DurationInDays;
+    protected ?int $DurationInDays = null;
     /**
      * The IncludeNotes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether or not to include Item.PrivateNotes and Item.eBayNotes in the response.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeNotes;
+    protected ?bool $IncludeNotes = null;
     /**
      * The Pagination
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies how to create virtual pages in the returned list. <br> Default for EntriesPerPage with GetMyeBayBuying is 200.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public $Pagination;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationType $Pagination = null;
     /**
      * The OrderStatusFilter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Filter to reduce the SoldList response based on whether the seller (or eBay) marked the applicable order as Paid and/or Shipped in My eBay.<br> <br> (Sellers can use CompleteSale or the eBay Web site UI to mark an order as Paid or
      * Shipped in My eBay. Sellers can also specify PaymentStatus in ReviseCheckoutStatus to mark an order as Paid or awaiting payment in My eBay.)
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderStatusFilter;
+    protected ?string $OrderStatusFilter = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ItemListCustomizationType
      * @uses ItemListCustomizationType::setInclude()
@@ -92,9 +95,9 @@ class ItemListCustomizationType extends AbstractStructBase
      * @param bool $includeNotes
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @param string $orderStatusFilter
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($include = null, $listingType = null, $sort = null, $durationInDays = null, $includeNotes = null, \macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, $orderStatusFilter = null, \DOMDocument $any = null)
+    public function __construct(?bool $include = null, ?string $listingType = null, ?string $sort = null, ?int $durationInDays = null, ?bool $includeNotes = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $orderStatusFilter = null, $any = null)
     {
         $this
             ->setInclude($include)
@@ -110,7 +113,7 @@ class ItemListCustomizationType extends AbstractStructBase
      * Get Include value
      * @return bool|null
      */
-    public function getInclude()
+    public function getInclude(): ?bool
     {
         return $this->Include;
     }
@@ -119,20 +122,21 @@ class ItemListCustomizationType extends AbstractStructBase
      * @param bool $include
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setInclude($include = null)
+    public function setInclude(?bool $include = null): self
     {
         // validation for constraint: boolean
         if (!is_null($include) && !is_bool($include)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($include)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($include, true), gettype($include)), __LINE__);
         }
         $this->Include = $include;
+        
         return $this;
     }
     /**
      * Get ListingType value
      * @return string|null
      */
-    public function getListingType()
+    public function getListingType(): ?string
     {
         return $this->ListingType;
     }
@@ -140,24 +144,25 @@ class ItemListCustomizationType extends AbstractStructBase
      * Set ListingType value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingType
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setListingType($listingType = null)
+    public function setListingType(?string $listingType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid($listingType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingType, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType', is_array($listingType) ? implode(', ', $listingType) : var_export($listingType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
         }
         $this->ListingType = $listingType;
+        
         return $this;
     }
     /**
      * Get Sort value
      * @return string|null
      */
-    public function getSort()
+    public function getSort(): ?string
     {
         return $this->Sort;
     }
@@ -165,24 +170,25 @@ class ItemListCustomizationType extends AbstractStructBase
      * Set Sort value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $sort
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setSort($sort = null)
+    public function setSort(?string $sort = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType::valueIsValid($sort)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $sort, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType', is_array($sort) ? implode(', ', $sort) : var_export($sort, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSortTypeCodeType::getValidValues())), __LINE__);
         }
         $this->Sort = $sort;
+        
         return $this;
     }
     /**
      * Get DurationInDays value
      * @return int|null
      */
-    public function getDurationInDays()
+    public function getDurationInDays(): ?int
     {
         return $this->DurationInDays;
     }
@@ -191,20 +197,21 @@ class ItemListCustomizationType extends AbstractStructBase
      * @param int $durationInDays
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setDurationInDays($durationInDays = null)
+    public function setDurationInDays(?int $durationInDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($durationInDays) && !is_numeric($durationInDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($durationInDays)), __LINE__);
+        if (!is_null($durationInDays) && !(is_int($durationInDays) || ctype_digit($durationInDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($durationInDays, true), gettype($durationInDays)), __LINE__);
         }
         $this->DurationInDays = $durationInDays;
+        
         return $this;
     }
     /**
      * Get IncludeNotes value
      * @return bool|null
      */
-    public function getIncludeNotes()
+    public function getIncludeNotes(): ?bool
     {
         return $this->IncludeNotes;
     }
@@ -213,20 +220,21 @@ class ItemListCustomizationType extends AbstractStructBase
      * @param bool $includeNotes
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setIncludeNotes($includeNotes = null)
+    public function setIncludeNotes(?bool $includeNotes = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeNotes) && !is_bool($includeNotes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeNotes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeNotes, true), gettype($includeNotes)), __LINE__);
         }
         $this->IncludeNotes = $includeNotes;
+        
         return $this;
     }
     /**
      * Get Pagination value
      * @return \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public function getPagination()
+    public function getPagination(): ?\macropage\ebaysdk\trading\StructType\PaginationType
     {
         return $this->Pagination;
     }
@@ -235,16 +243,17 @@ class ItemListCustomizationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setPagination(\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function setPagination(?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null): self
     {
         $this->Pagination = $pagination;
+        
         return $this;
     }
     /**
      * Get OrderStatusFilter value
      * @return string|null
      */
-    public function getOrderStatusFilter()
+    public function getOrderStatusFilter(): ?string
     {
         return $this->OrderStatusFilter;
     }
@@ -252,69 +261,51 @@ class ItemListCustomizationType extends AbstractStructBase
      * Set OrderStatusFilter value
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $orderStatusFilter
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setOrderStatusFilter($orderStatusFilter = null)
+    public function setOrderStatusFilter(?string $orderStatusFilter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType::valueIsValid($orderStatusFilter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $orderStatusFilter, implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType', is_array($orderStatusFilter) ? implode(', ', $orderStatusFilter) : var_export($orderStatusFilter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusFilterCodeType::getValidValues())), __LINE__);
         }
         $this->OrderStatusFilter = $orderStatusFilter;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ItemListCustomizationType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ItemListCustomizationType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

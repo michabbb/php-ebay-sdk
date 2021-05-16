@@ -1,65 +1,74 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetBidderListRequestType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Retrieves all items the user is currently bidding on, and the ones they have won or purchased. | Retrieves all items the user is currently bidding on, and the ones they have won or purchased.
+ * Meta information extracted from the WSDL
+ * - documentation: Retrieves all items that the user is currently bidding on, and the ones they have won or purchased.
  * @subpackage Structs
  */
 class GetBidderListRequestType extends AbstractRequestType
 {
     /**
      * The ActiveItemsOnly
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not to limit the result set to active items. If <code>true</code>, only active items are returned and the <b>EndTimeFrom</b> and <b>EndTimeTo</b> filters are ignored. If <code>false</code> (or not sent), both
      * active and ended items are returned.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ActiveItemsOnly;
+    protected ?bool $ActiveItemsOnly = null;
     /**
      * The EndTimeFrom
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used in conjunction with <b>EndTimeTo</b>. Limits returned items to only those for which the item's end date is on or after the date/time specified. Specify an end date within 30 days prior to today. Items that ended more than 30
      * days ago are omitted from the results. If specified, <b>EndTimeTo</b> must also be specified. Express date/time in the format <code>YYYY-MM-DD HH:MM:SS</code>, and in GMT. This field is ignored if <b>ActiveItemsOnly</b> is set to <code>true</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTimeFrom;
+    protected ?string $EndTimeFrom = null;
     /**
      * The EndTimeTo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used in conjunction with <b>EndTimeFrom</b>. Limits returned items to only those for which the item's end date is on or before the date/time specified. If specified, <b>EndTimeFrom</b> must also be specified. Express date/time in the
      * format <code>YYYY-MM-DD HH:MM:SS</code>, and in GMT. This field is ignored if <b>ActiveItemsOnly</b> is set to <code>true</code>. Note that for GTC items, whose end times automatically increment by 30 days every 30 days, an <b>EndTimeTo</b> value
-     * within the first 30 days of a listing will refer to the listing's initial end time.
+     * within the first 30 days of a listing will refer to the listing's initial end time. <br><br> <span class="tablenote"><b>Note: </b> Starting July 1, 2019, the Good 'Til Cancelled renewal schedule will be modified from every 30 days to once per
+     * calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the following month only has 30 days, the renewal will happen on the 30th in
+     * the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
+     * change. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTimeTo;
+    protected ?string $EndTimeTo = null;
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
-     * - documentation: The user for whom information should be returned. If provided, overrides any user ID specified through the <b>RequesterCredentials</b> header. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used
-     * by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller
-     * makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as
-     * anonymized userIDs.
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of an eBay user. <br><br> This field is generally not required unless there are multiple User IDs tied to the requester credentials that are specified through the <b>RequesterCredentials</b> header. If there are
+     * multiple User IDs tied to the requester credentials, this field allows you to specify the User ID for which you wish to retrieves bids and purchases. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several
+     * other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this
+     * API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized
+     * userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The GranularityLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: You can control some of the fields returned in the response by specifying one of two values in the <b>GranularityLevel</b> field: <code>Fine</code> or <code>Medium</code>. <code>Fine</code> returns more fields than the default, while
      * setting this field to <code>Medium</code> returns an abbreviated set of results.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $GranularityLevel;
+    protected ?string $GranularityLevel = null;
     /**
      * Constructor method for GetBidderListRequestType
      * @uses GetBidderListRequestType::setActiveItemsOnly()
@@ -73,7 +82,7 @@ class GetBidderListRequestType extends AbstractRequestType
      * @param string $userID
      * @param string $granularityLevel
      */
-    public function __construct($activeItemsOnly = null, $endTimeFrom = null, $endTimeTo = null, $userID = null, $granularityLevel = null)
+    public function __construct(?bool $activeItemsOnly = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?string $userID = null, ?string $granularityLevel = null)
     {
         $this
             ->setActiveItemsOnly($activeItemsOnly)
@@ -86,7 +95,7 @@ class GetBidderListRequestType extends AbstractRequestType
      * Get ActiveItemsOnly value
      * @return bool|null
      */
-    public function getActiveItemsOnly()
+    public function getActiveItemsOnly(): ?bool
     {
         return $this->ActiveItemsOnly;
     }
@@ -95,20 +104,21 @@ class GetBidderListRequestType extends AbstractRequestType
      * @param bool $activeItemsOnly
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
      */
-    public function setActiveItemsOnly($activeItemsOnly = null)
+    public function setActiveItemsOnly(?bool $activeItemsOnly = null): self
     {
         // validation for constraint: boolean
         if (!is_null($activeItemsOnly) && !is_bool($activeItemsOnly)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($activeItemsOnly)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($activeItemsOnly, true), gettype($activeItemsOnly)), __LINE__);
         }
         $this->ActiveItemsOnly = $activeItemsOnly;
+        
         return $this;
     }
     /**
      * Get EndTimeFrom value
      * @return string|null
      */
-    public function getEndTimeFrom()
+    public function getEndTimeFrom(): ?string
     {
         return $this->EndTimeFrom;
     }
@@ -117,20 +127,21 @@ class GetBidderListRequestType extends AbstractRequestType
      * @param string $endTimeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
      */
-    public function setEndTimeFrom($endTimeFrom = null)
+    public function setEndTimeFrom(?string $endTimeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($endTimeFrom) && !is_string($endTimeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTimeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTimeFrom, true), gettype($endTimeFrom)), __LINE__);
         }
         $this->EndTimeFrom = $endTimeFrom;
+        
         return $this;
     }
     /**
      * Get EndTimeTo value
      * @return string|null
      */
-    public function getEndTimeTo()
+    public function getEndTimeTo(): ?string
     {
         return $this->EndTimeTo;
     }
@@ -139,20 +150,21 @@ class GetBidderListRequestType extends AbstractRequestType
      * @param string $endTimeTo
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
      */
-    public function setEndTimeTo($endTimeTo = null)
+    public function setEndTimeTo(?string $endTimeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($endTimeTo) && !is_string($endTimeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTimeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTimeTo, true), gettype($endTimeTo)), __LINE__);
         }
         $this->EndTimeTo = $endTimeTo;
+        
         return $this;
     }
     /**
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -161,20 +173,21 @@ class GetBidderListRequestType extends AbstractRequestType
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get GranularityLevel value
      * @return string|null
      */
-    public function getGranularityLevel()
+    public function getGranularityLevel(): ?string
     {
         return $this->GranularityLevel;
     }
@@ -182,37 +195,18 @@ class GetBidderListRequestType extends AbstractRequestType
      * Set GranularityLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $granularityLevel
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
      */
-    public function setGranularityLevel($granularityLevel = null)
+    public function setGranularityLevel(?string $granularityLevel = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::valueIsValid($granularityLevel)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $granularityLevel, implode(', ', \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType', is_array($granularityLevel) ? implode(', ', $granularityLevel) : var_export($granularityLevel, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues())), __LINE__);
         }
         $this->GranularityLevel = $granularityLevel;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetBidderListRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

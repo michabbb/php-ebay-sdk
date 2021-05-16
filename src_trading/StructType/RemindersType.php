@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for RemindersType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type contains the counts of various eBay Buying and Seller Reminders that are returned in the <b>GetMyeBayReminders</b> call.
  * @subpackage Structs
  */
@@ -14,161 +17,161 @@ class RemindersType extends AbstractStructBase
 {
     /**
      * The PaymentToSendCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders requesting that the buyer send payment.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PaymentToSendCount;
+    protected ?int $PaymentToSendCount = null;
     /**
      * The FeedbackToReceiveCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders that feedback has not yet been received by the buyer or seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FeedbackToReceiveCount;
+    protected ?int $FeedbackToReceiveCount = null;
     /**
      * The FeedbackToSendCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders that feedback has not yet been sent by the buyer or seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FeedbackToSendCount;
+    protected ?int $FeedbackToSendCount = null;
     /**
      * The OutbidCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders advising the buyer that the buyer has been outbid.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $OutbidCount;
+    protected ?int $OutbidCount = null;
     /**
      * The PaymentToReceiveCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders that the seller has not yet received a payment.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PaymentToReceiveCount;
+    protected ?int $PaymentToReceiveCount = null;
     /**
      * The SecondChanceOfferCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders requesting that the seller review second chance offers.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SecondChanceOfferCount;
+    protected ?int $SecondChanceOfferCount = null;
     /**
      * The ShippingNeededCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders advising the seller that shipping is needed.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ShippingNeededCount;
+    protected ?int $ShippingNeededCount = null;
     /**
      * The RelistingNeededCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders advising the seller that relisting is needed.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RelistingNeededCount;
+    protected ?int $RelistingNeededCount = null;
     /**
      * The TotalNewLeadsCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of new leads the seller has recieved.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalNewLeadsCount;
+    protected ?int $TotalNewLeadsCount = null;
     /**
      * The DocsForCCProcessingToSendCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders advising the buyer to send documents for credit card processing.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DocsForCCProcessingToSendCount;
+    protected ?int $DocsForCCProcessingToSendCount = null;
     /**
      * The RTEToProcessCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders requesting the buyer to process request time extension submitted by the seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RTEToProcessCount;
+    protected ?int $RTEToProcessCount = null;
     /**
      * The ItemReceiptToConfirmCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders requesting the Buyer to confirm item receipt to seller.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemReceiptToConfirmCount;
+    protected ?int $ItemReceiptToConfirmCount = null;
     /**
      * The RefundOnHoldCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the buyer on refund on hold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RefundOnHoldCount;
+    protected ?int $RefundOnHoldCount = null;
     /**
      * The RefundCancelledCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the buyer on refund cancelled.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RefundCancelledCount;
+    protected ?int $RefundCancelledCount = null;
     /**
      * The ShippingDetailsToBeProvidedCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders requesting the seller to provide shipping details
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ShippingDetailsToBeProvidedCount;
+    protected ?int $ShippingDetailsToBeProvidedCount = null;
     /**
      * The ItemReceiptConfirmationToReceiveCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the seller on item receipt confirmation pending from buyer
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemReceiptConfirmationToReceiveCount;
+    protected ?int $ItemReceiptConfirmationToReceiveCount = null;
     /**
      * The RefundInitiatedCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the seller on refunds initiated
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RefundInitiatedCount;
+    protected ?int $RefundInitiatedCount = null;
     /**
      * The PendingRTERequestCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the seller on pending shipping time extension requests with the buyer
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PendingRTERequestCount;
+    protected ?int $PendingRTERequestCount = null;
     /**
      * The DeclinedRTERequestCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of reminders to the seller on declined shipping time extension requests by the buyer
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DeclinedRTERequestCount;
+    protected ?int $DeclinedRTERequestCount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for RemindersType
      * @uses RemindersType::setPaymentToSendCount()
@@ -210,9 +213,9 @@ class RemindersType extends AbstractStructBase
      * @param int $refundInitiatedCount
      * @param int $pendingRTERequestCount
      * @param int $declinedRTERequestCount
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($paymentToSendCount = null, $feedbackToReceiveCount = null, $feedbackToSendCount = null, $outbidCount = null, $paymentToReceiveCount = null, $secondChanceOfferCount = null, $shippingNeededCount = null, $relistingNeededCount = null, $totalNewLeadsCount = null, $docsForCCProcessingToSendCount = null, $rTEToProcessCount = null, $itemReceiptToConfirmCount = null, $refundOnHoldCount = null, $refundCancelledCount = null, $shippingDetailsToBeProvidedCount = null, $itemReceiptConfirmationToReceiveCount = null, $refundInitiatedCount = null, $pendingRTERequestCount = null, $declinedRTERequestCount = null, \DOMDocument $any = null)
+    public function __construct(?int $paymentToSendCount = null, ?int $feedbackToReceiveCount = null, ?int $feedbackToSendCount = null, ?int $outbidCount = null, ?int $paymentToReceiveCount = null, ?int $secondChanceOfferCount = null, ?int $shippingNeededCount = null, ?int $relistingNeededCount = null, ?int $totalNewLeadsCount = null, ?int $docsForCCProcessingToSendCount = null, ?int $rTEToProcessCount = null, ?int $itemReceiptToConfirmCount = null, ?int $refundOnHoldCount = null, ?int $refundCancelledCount = null, ?int $shippingDetailsToBeProvidedCount = null, ?int $itemReceiptConfirmationToReceiveCount = null, ?int $refundInitiatedCount = null, ?int $pendingRTERequestCount = null, ?int $declinedRTERequestCount = null, $any = null)
     {
         $this
             ->setPaymentToSendCount($paymentToSendCount)
@@ -240,7 +243,7 @@ class RemindersType extends AbstractStructBase
      * Get PaymentToSendCount value
      * @return int|null
      */
-    public function getPaymentToSendCount()
+    public function getPaymentToSendCount(): ?int
     {
         return $this->PaymentToSendCount;
     }
@@ -249,20 +252,21 @@ class RemindersType extends AbstractStructBase
      * @param int $paymentToSendCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setPaymentToSendCount($paymentToSendCount = null)
+    public function setPaymentToSendCount(?int $paymentToSendCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($paymentToSendCount) && !is_numeric($paymentToSendCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($paymentToSendCount)), __LINE__);
+        if (!is_null($paymentToSendCount) && !(is_int($paymentToSendCount) || ctype_digit($paymentToSendCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($paymentToSendCount, true), gettype($paymentToSendCount)), __LINE__);
         }
         $this->PaymentToSendCount = $paymentToSendCount;
+        
         return $this;
     }
     /**
      * Get FeedbackToReceiveCount value
      * @return int|null
      */
-    public function getFeedbackToReceiveCount()
+    public function getFeedbackToReceiveCount(): ?int
     {
         return $this->FeedbackToReceiveCount;
     }
@@ -271,20 +275,21 @@ class RemindersType extends AbstractStructBase
      * @param int $feedbackToReceiveCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setFeedbackToReceiveCount($feedbackToReceiveCount = null)
+    public function setFeedbackToReceiveCount(?int $feedbackToReceiveCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($feedbackToReceiveCount) && !is_numeric($feedbackToReceiveCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($feedbackToReceiveCount)), __LINE__);
+        if (!is_null($feedbackToReceiveCount) && !(is_int($feedbackToReceiveCount) || ctype_digit($feedbackToReceiveCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($feedbackToReceiveCount, true), gettype($feedbackToReceiveCount)), __LINE__);
         }
         $this->FeedbackToReceiveCount = $feedbackToReceiveCount;
+        
         return $this;
     }
     /**
      * Get FeedbackToSendCount value
      * @return int|null
      */
-    public function getFeedbackToSendCount()
+    public function getFeedbackToSendCount(): ?int
     {
         return $this->FeedbackToSendCount;
     }
@@ -293,20 +298,21 @@ class RemindersType extends AbstractStructBase
      * @param int $feedbackToSendCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setFeedbackToSendCount($feedbackToSendCount = null)
+    public function setFeedbackToSendCount(?int $feedbackToSendCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($feedbackToSendCount) && !is_numeric($feedbackToSendCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($feedbackToSendCount)), __LINE__);
+        if (!is_null($feedbackToSendCount) && !(is_int($feedbackToSendCount) || ctype_digit($feedbackToSendCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($feedbackToSendCount, true), gettype($feedbackToSendCount)), __LINE__);
         }
         $this->FeedbackToSendCount = $feedbackToSendCount;
+        
         return $this;
     }
     /**
      * Get OutbidCount value
      * @return int|null
      */
-    public function getOutbidCount()
+    public function getOutbidCount(): ?int
     {
         return $this->OutbidCount;
     }
@@ -315,20 +321,21 @@ class RemindersType extends AbstractStructBase
      * @param int $outbidCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setOutbidCount($outbidCount = null)
+    public function setOutbidCount(?int $outbidCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($outbidCount) && !is_numeric($outbidCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($outbidCount)), __LINE__);
+        if (!is_null($outbidCount) && !(is_int($outbidCount) || ctype_digit($outbidCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($outbidCount, true), gettype($outbidCount)), __LINE__);
         }
         $this->OutbidCount = $outbidCount;
+        
         return $this;
     }
     /**
      * Get PaymentToReceiveCount value
      * @return int|null
      */
-    public function getPaymentToReceiveCount()
+    public function getPaymentToReceiveCount(): ?int
     {
         return $this->PaymentToReceiveCount;
     }
@@ -337,20 +344,21 @@ class RemindersType extends AbstractStructBase
      * @param int $paymentToReceiveCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setPaymentToReceiveCount($paymentToReceiveCount = null)
+    public function setPaymentToReceiveCount(?int $paymentToReceiveCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($paymentToReceiveCount) && !is_numeric($paymentToReceiveCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($paymentToReceiveCount)), __LINE__);
+        if (!is_null($paymentToReceiveCount) && !(is_int($paymentToReceiveCount) || ctype_digit($paymentToReceiveCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($paymentToReceiveCount, true), gettype($paymentToReceiveCount)), __LINE__);
         }
         $this->PaymentToReceiveCount = $paymentToReceiveCount;
+        
         return $this;
     }
     /**
      * Get SecondChanceOfferCount value
      * @return int|null
      */
-    public function getSecondChanceOfferCount()
+    public function getSecondChanceOfferCount(): ?int
     {
         return $this->SecondChanceOfferCount;
     }
@@ -359,20 +367,21 @@ class RemindersType extends AbstractStructBase
      * @param int $secondChanceOfferCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setSecondChanceOfferCount($secondChanceOfferCount = null)
+    public function setSecondChanceOfferCount(?int $secondChanceOfferCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($secondChanceOfferCount) && !is_numeric($secondChanceOfferCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($secondChanceOfferCount)), __LINE__);
+        if (!is_null($secondChanceOfferCount) && !(is_int($secondChanceOfferCount) || ctype_digit($secondChanceOfferCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($secondChanceOfferCount, true), gettype($secondChanceOfferCount)), __LINE__);
         }
         $this->SecondChanceOfferCount = $secondChanceOfferCount;
+        
         return $this;
     }
     /**
      * Get ShippingNeededCount value
      * @return int|null
      */
-    public function getShippingNeededCount()
+    public function getShippingNeededCount(): ?int
     {
         return $this->ShippingNeededCount;
     }
@@ -381,20 +390,21 @@ class RemindersType extends AbstractStructBase
      * @param int $shippingNeededCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setShippingNeededCount($shippingNeededCount = null)
+    public function setShippingNeededCount(?int $shippingNeededCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($shippingNeededCount) && !is_numeric($shippingNeededCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($shippingNeededCount)), __LINE__);
+        if (!is_null($shippingNeededCount) && !(is_int($shippingNeededCount) || ctype_digit($shippingNeededCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingNeededCount, true), gettype($shippingNeededCount)), __LINE__);
         }
         $this->ShippingNeededCount = $shippingNeededCount;
+        
         return $this;
     }
     /**
      * Get RelistingNeededCount value
      * @return int|null
      */
-    public function getRelistingNeededCount()
+    public function getRelistingNeededCount(): ?int
     {
         return $this->RelistingNeededCount;
     }
@@ -403,20 +413,21 @@ class RemindersType extends AbstractStructBase
      * @param int $relistingNeededCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setRelistingNeededCount($relistingNeededCount = null)
+    public function setRelistingNeededCount(?int $relistingNeededCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($relistingNeededCount) && !is_numeric($relistingNeededCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($relistingNeededCount)), __LINE__);
+        if (!is_null($relistingNeededCount) && !(is_int($relistingNeededCount) || ctype_digit($relistingNeededCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($relistingNeededCount, true), gettype($relistingNeededCount)), __LINE__);
         }
         $this->RelistingNeededCount = $relistingNeededCount;
+        
         return $this;
     }
     /**
      * Get TotalNewLeadsCount value
      * @return int|null
      */
-    public function getTotalNewLeadsCount()
+    public function getTotalNewLeadsCount(): ?int
     {
         return $this->TotalNewLeadsCount;
     }
@@ -425,20 +436,21 @@ class RemindersType extends AbstractStructBase
      * @param int $totalNewLeadsCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setTotalNewLeadsCount($totalNewLeadsCount = null)
+    public function setTotalNewLeadsCount(?int $totalNewLeadsCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalNewLeadsCount) && !is_numeric($totalNewLeadsCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalNewLeadsCount)), __LINE__);
+        if (!is_null($totalNewLeadsCount) && !(is_int($totalNewLeadsCount) || ctype_digit($totalNewLeadsCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalNewLeadsCount, true), gettype($totalNewLeadsCount)), __LINE__);
         }
         $this->TotalNewLeadsCount = $totalNewLeadsCount;
+        
         return $this;
     }
     /**
      * Get DocsForCCProcessingToSendCount value
      * @return int|null
      */
-    public function getDocsForCCProcessingToSendCount()
+    public function getDocsForCCProcessingToSendCount(): ?int
     {
         return $this->DocsForCCProcessingToSendCount;
     }
@@ -447,20 +459,21 @@ class RemindersType extends AbstractStructBase
      * @param int $docsForCCProcessingToSendCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setDocsForCCProcessingToSendCount($docsForCCProcessingToSendCount = null)
+    public function setDocsForCCProcessingToSendCount(?int $docsForCCProcessingToSendCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($docsForCCProcessingToSendCount) && !is_numeric($docsForCCProcessingToSendCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($docsForCCProcessingToSendCount)), __LINE__);
+        if (!is_null($docsForCCProcessingToSendCount) && !(is_int($docsForCCProcessingToSendCount) || ctype_digit($docsForCCProcessingToSendCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($docsForCCProcessingToSendCount, true), gettype($docsForCCProcessingToSendCount)), __LINE__);
         }
         $this->DocsForCCProcessingToSendCount = $docsForCCProcessingToSendCount;
+        
         return $this;
     }
     /**
      * Get RTEToProcessCount value
      * @return int|null
      */
-    public function getRTEToProcessCount()
+    public function getRTEToProcessCount(): ?int
     {
         return $this->RTEToProcessCount;
     }
@@ -469,20 +482,21 @@ class RemindersType extends AbstractStructBase
      * @param int $rTEToProcessCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setRTEToProcessCount($rTEToProcessCount = null)
+    public function setRTEToProcessCount(?int $rTEToProcessCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($rTEToProcessCount) && !is_numeric($rTEToProcessCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($rTEToProcessCount)), __LINE__);
+        if (!is_null($rTEToProcessCount) && !(is_int($rTEToProcessCount) || ctype_digit($rTEToProcessCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($rTEToProcessCount, true), gettype($rTEToProcessCount)), __LINE__);
         }
         $this->RTEToProcessCount = $rTEToProcessCount;
+        
         return $this;
     }
     /**
      * Get ItemReceiptToConfirmCount value
      * @return int|null
      */
-    public function getItemReceiptToConfirmCount()
+    public function getItemReceiptToConfirmCount(): ?int
     {
         return $this->ItemReceiptToConfirmCount;
     }
@@ -491,20 +505,21 @@ class RemindersType extends AbstractStructBase
      * @param int $itemReceiptToConfirmCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setItemReceiptToConfirmCount($itemReceiptToConfirmCount = null)
+    public function setItemReceiptToConfirmCount(?int $itemReceiptToConfirmCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemReceiptToConfirmCount) && !is_numeric($itemReceiptToConfirmCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemReceiptToConfirmCount)), __LINE__);
+        if (!is_null($itemReceiptToConfirmCount) && !(is_int($itemReceiptToConfirmCount) || ctype_digit($itemReceiptToConfirmCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemReceiptToConfirmCount, true), gettype($itemReceiptToConfirmCount)), __LINE__);
         }
         $this->ItemReceiptToConfirmCount = $itemReceiptToConfirmCount;
+        
         return $this;
     }
     /**
      * Get RefundOnHoldCount value
      * @return int|null
      */
-    public function getRefundOnHoldCount()
+    public function getRefundOnHoldCount(): ?int
     {
         return $this->RefundOnHoldCount;
     }
@@ -513,20 +528,21 @@ class RemindersType extends AbstractStructBase
      * @param int $refundOnHoldCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setRefundOnHoldCount($refundOnHoldCount = null)
+    public function setRefundOnHoldCount(?int $refundOnHoldCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($refundOnHoldCount) && !is_numeric($refundOnHoldCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($refundOnHoldCount)), __LINE__);
+        if (!is_null($refundOnHoldCount) && !(is_int($refundOnHoldCount) || ctype_digit($refundOnHoldCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($refundOnHoldCount, true), gettype($refundOnHoldCount)), __LINE__);
         }
         $this->RefundOnHoldCount = $refundOnHoldCount;
+        
         return $this;
     }
     /**
      * Get RefundCancelledCount value
      * @return int|null
      */
-    public function getRefundCancelledCount()
+    public function getRefundCancelledCount(): ?int
     {
         return $this->RefundCancelledCount;
     }
@@ -535,20 +551,21 @@ class RemindersType extends AbstractStructBase
      * @param int $refundCancelledCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setRefundCancelledCount($refundCancelledCount = null)
+    public function setRefundCancelledCount(?int $refundCancelledCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($refundCancelledCount) && !is_numeric($refundCancelledCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($refundCancelledCount)), __LINE__);
+        if (!is_null($refundCancelledCount) && !(is_int($refundCancelledCount) || ctype_digit($refundCancelledCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($refundCancelledCount, true), gettype($refundCancelledCount)), __LINE__);
         }
         $this->RefundCancelledCount = $refundCancelledCount;
+        
         return $this;
     }
     /**
      * Get ShippingDetailsToBeProvidedCount value
      * @return int|null
      */
-    public function getShippingDetailsToBeProvidedCount()
+    public function getShippingDetailsToBeProvidedCount(): ?int
     {
         return $this->ShippingDetailsToBeProvidedCount;
     }
@@ -557,20 +574,21 @@ class RemindersType extends AbstractStructBase
      * @param int $shippingDetailsToBeProvidedCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setShippingDetailsToBeProvidedCount($shippingDetailsToBeProvidedCount = null)
+    public function setShippingDetailsToBeProvidedCount(?int $shippingDetailsToBeProvidedCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($shippingDetailsToBeProvidedCount) && !is_numeric($shippingDetailsToBeProvidedCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($shippingDetailsToBeProvidedCount)), __LINE__);
+        if (!is_null($shippingDetailsToBeProvidedCount) && !(is_int($shippingDetailsToBeProvidedCount) || ctype_digit($shippingDetailsToBeProvidedCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingDetailsToBeProvidedCount, true), gettype($shippingDetailsToBeProvidedCount)), __LINE__);
         }
         $this->ShippingDetailsToBeProvidedCount = $shippingDetailsToBeProvidedCount;
+        
         return $this;
     }
     /**
      * Get ItemReceiptConfirmationToReceiveCount value
      * @return int|null
      */
-    public function getItemReceiptConfirmationToReceiveCount()
+    public function getItemReceiptConfirmationToReceiveCount(): ?int
     {
         return $this->ItemReceiptConfirmationToReceiveCount;
     }
@@ -579,20 +597,21 @@ class RemindersType extends AbstractStructBase
      * @param int $itemReceiptConfirmationToReceiveCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setItemReceiptConfirmationToReceiveCount($itemReceiptConfirmationToReceiveCount = null)
+    public function setItemReceiptConfirmationToReceiveCount(?int $itemReceiptConfirmationToReceiveCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemReceiptConfirmationToReceiveCount) && !is_numeric($itemReceiptConfirmationToReceiveCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemReceiptConfirmationToReceiveCount)), __LINE__);
+        if (!is_null($itemReceiptConfirmationToReceiveCount) && !(is_int($itemReceiptConfirmationToReceiveCount) || ctype_digit($itemReceiptConfirmationToReceiveCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemReceiptConfirmationToReceiveCount, true), gettype($itemReceiptConfirmationToReceiveCount)), __LINE__);
         }
         $this->ItemReceiptConfirmationToReceiveCount = $itemReceiptConfirmationToReceiveCount;
+        
         return $this;
     }
     /**
      * Get RefundInitiatedCount value
      * @return int|null
      */
-    public function getRefundInitiatedCount()
+    public function getRefundInitiatedCount(): ?int
     {
         return $this->RefundInitiatedCount;
     }
@@ -601,20 +620,21 @@ class RemindersType extends AbstractStructBase
      * @param int $refundInitiatedCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setRefundInitiatedCount($refundInitiatedCount = null)
+    public function setRefundInitiatedCount(?int $refundInitiatedCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($refundInitiatedCount) && !is_numeric($refundInitiatedCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($refundInitiatedCount)), __LINE__);
+        if (!is_null($refundInitiatedCount) && !(is_int($refundInitiatedCount) || ctype_digit($refundInitiatedCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($refundInitiatedCount, true), gettype($refundInitiatedCount)), __LINE__);
         }
         $this->RefundInitiatedCount = $refundInitiatedCount;
+        
         return $this;
     }
     /**
      * Get PendingRTERequestCount value
      * @return int|null
      */
-    public function getPendingRTERequestCount()
+    public function getPendingRTERequestCount(): ?int
     {
         return $this->PendingRTERequestCount;
     }
@@ -623,20 +643,21 @@ class RemindersType extends AbstractStructBase
      * @param int $pendingRTERequestCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setPendingRTERequestCount($pendingRTERequestCount = null)
+    public function setPendingRTERequestCount(?int $pendingRTERequestCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($pendingRTERequestCount) && !is_numeric($pendingRTERequestCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pendingRTERequestCount)), __LINE__);
+        if (!is_null($pendingRTERequestCount) && !(is_int($pendingRTERequestCount) || ctype_digit($pendingRTERequestCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pendingRTERequestCount, true), gettype($pendingRTERequestCount)), __LINE__);
         }
         $this->PendingRTERequestCount = $pendingRTERequestCount;
+        
         return $this;
     }
     /**
      * Get DeclinedRTERequestCount value
      * @return int|null
      */
-    public function getDeclinedRTERequestCount()
+    public function getDeclinedRTERequestCount(): ?int
     {
         return $this->DeclinedRTERequestCount;
     }
@@ -645,65 +666,47 @@ class RemindersType extends AbstractStructBase
      * @param int $declinedRTERequestCount
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setDeclinedRTERequestCount($declinedRTERequestCount = null)
+    public function setDeclinedRTERequestCount(?int $declinedRTERequestCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($declinedRTERequestCount) && !is_numeric($declinedRTERequestCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($declinedRTERequestCount)), __LINE__);
+        if (!is_null($declinedRTERequestCount) && !(is_int($declinedRTERequestCount) || ctype_digit($declinedRTERequestCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($declinedRTERequestCount, true), gettype($declinedRTERequestCount)), __LINE__);
         }
         $this->DeclinedRTERequestCount = $declinedRTERequestCount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\RemindersType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\RemindersType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\RemindersType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

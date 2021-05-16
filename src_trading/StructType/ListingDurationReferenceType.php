@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ListingDurationReferenceType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Identifies the type of listing as an attribute on the <b>ListingDuration</b> node.
  * @subpackage Structs
  */
@@ -14,16 +17,16 @@ class ListingDurationReferenceType extends AbstractStructBase
 {
     /**
      * The _
-     * @var int
+     * @var int|null
      */
-    public $_;
+    protected ?int $_ = null;
     /**
      * The type
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The type of listing a set of durations describes.
-     * @var string
+     * @var string|null
      */
-    public $type;
+    protected ?string $type = null;
     /**
      * Constructor method for ListingDurationReferenceType
      * @uses ListingDurationReferenceType::set_()
@@ -31,7 +34,7 @@ class ListingDurationReferenceType extends AbstractStructBase
      * @param int $_
      * @param string $type
      */
-    public function __construct($_ = null, $type = null)
+    public function __construct(?int $_ = null, ?string $type = null)
     {
         $this
             ->set_($_)
@@ -41,7 +44,7 @@ class ListingDurationReferenceType extends AbstractStructBase
      * Get _ value
      * @return int|null
      */
-    public function get_()
+    public function get_(): ?int
     {
         return $this->_;
     }
@@ -50,20 +53,21 @@ class ListingDurationReferenceType extends AbstractStructBase
      * @param int $_
      * @return \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType
      */
-    public function set_($_ = null)
+    public function set_(?int $_ = null): self
     {
         // validation for constraint: int
-        if (!is_null($_) && !is_numeric($_)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($_)), __LINE__);
+        if (!is_null($_) && !(is_int($_) || ctype_digit($_))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($_, true), gettype($_)), __LINE__);
         }
         $this->_ = $_;
+        
         return $this;
     }
     /**
      * Get type value
      * @return string|null
      */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
@@ -71,37 +75,18 @@ class ListingDurationReferenceType extends AbstractStructBase
      * Set type value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $type
      * @return \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType
      */
-    public function setType($type = null)
+    public function setType(?string $type = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid($type)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $type, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType', is_array($type) ? implode(', ', $type) : var_export($type, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
         }
         $this->type = $type;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

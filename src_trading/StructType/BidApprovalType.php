@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BidApprovalType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,40 +17,41 @@ class BidApprovalType extends AbstractStructBase
 {
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
-     * - minOccurs: 0
+     * Meta information extracted from the WSDL
      * - documentation: This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on.
      * <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's
      * actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
-     * @var string
+     * - base: xs:string
+     * - minOccurs: 0
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The ApprovedBiddingLimit
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ApprovedBiddingLimit;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ApprovedBiddingLimit = null;
     /**
      * The DeclinedComment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DeclinedComment;
+    protected ?string $DeclinedComment = null;
     /**
      * The Status
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Status;
+    protected ?string $Status = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BidApprovalType
      * @uses BidApprovalType::setUserID()
@@ -59,9 +63,9 @@ class BidApprovalType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit
      * @param string $declinedComment
      * @param string $status
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($userID = null, \macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit = null, $declinedComment = null, $status = null, \DOMDocument $any = null)
+    public function __construct(?string $userID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit = null, ?string $declinedComment = null, ?string $status = null, $any = null)
     {
         $this
             ->setUserID($userID)
@@ -74,7 +78,7 @@ class BidApprovalType extends AbstractStructBase
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -83,20 +87,21 @@ class BidApprovalType extends AbstractStructBase
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get ApprovedBiddingLimit value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getApprovedBiddingLimit()
+    public function getApprovedBiddingLimit(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ApprovedBiddingLimit;
     }
@@ -105,16 +110,17 @@ class BidApprovalType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit
      * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
      */
-    public function setApprovedBiddingLimit(\macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit = null)
+    public function setApprovedBiddingLimit(?\macropage\ebaysdk\trading\StructType\AmountType $approvedBiddingLimit = null): self
     {
         $this->ApprovedBiddingLimit = $approvedBiddingLimit;
+        
         return $this;
     }
     /**
      * Get DeclinedComment value
      * @return string|null
      */
-    public function getDeclinedComment()
+    public function getDeclinedComment(): ?string
     {
         return $this->DeclinedComment;
     }
@@ -123,20 +129,21 @@ class BidApprovalType extends AbstractStructBase
      * @param string $declinedComment
      * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
      */
-    public function setDeclinedComment($declinedComment = null)
+    public function setDeclinedComment(?string $declinedComment = null): self
     {
         // validation for constraint: string
         if (!is_null($declinedComment) && !is_string($declinedComment)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($declinedComment)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($declinedComment, true), gettype($declinedComment)), __LINE__);
         }
         $this->DeclinedComment = $declinedComment;
+        
         return $this;
     }
     /**
      * Get Status value
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->Status;
     }
@@ -144,69 +151,51 @@ class BidApprovalType extends AbstractStructBase
      * Set Status value
      * @uses \macropage\ebaysdk\trading\EnumType\BidderStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BidderStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $status
      * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
      */
-    public function setStatus($status = null)
+    public function setStatus(?string $status = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BidderStatusCodeType::valueIsValid($status)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $status, implode(', ', \macropage\ebaysdk\trading\EnumType\BidderStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BidderStatusCodeType', is_array($status) ? implode(', ', $status) : var_export($status, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BidderStatusCodeType::getValidValues())), __LINE__);
         }
         $this->Status = $status;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BidApprovalType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BidApprovalType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

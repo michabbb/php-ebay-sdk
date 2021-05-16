@@ -1,139 +1,142 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellerPaymentType StructType
- * Meta informations extracted from the WSDL
- * - documentation: <span class="tablenote"><b>Note: </b> This type is only applicable to the <b>GetSellerPayments</b> call, and since the Half.com site was shut down, this type is also being deprecated. </span> A payment between Half.com and a seller.
- * The financial value of a payment is typically based on an amount that a buyer paid to Half.com for one order line item, plus the buyer's shipping cost, minus Half.com's commission.
+ * Meta information extracted from the WSDL
+ * - documentation: <span class="tablenote"><b>Note: </b> This type is deprecated since it was only applicable to the Half.com, and the Half.com site was shut down. </span>
  * @subpackage Structs
  */
 class SellerPaymentType extends AbstractStructBase
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Unique identifier for the Half.com item listing. | Type that represents the
-     * unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Unique identifier for a Half.com order line item (transaction). An order
-     * line item is created once there is a commitment from a buyer to purchase an item. Along with its corresponding <b>ItemID</b>, a <b>TransactionID</b> is used and referenced during an order checkout flow and after checkout has been completed.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The OrderID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> A unique identifier that identifies a single line item or multiple line item
-     * (Combined Invoice) Half.com order. <br><br> For a single line item order, the <b>OrderID</b> value is identical to the <b>OrderLineItemID</b> value that is generated upon creation of the order line item. For a Combined Invoice order, the
-     * <b>OrderID</b> value is created by eBay when the buyer or seller (sharing multiple, common order line items) combines multiple order line items into a Combined Invoice order through the Half.com site. | A unique identifier for an order.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> | Type that represents the unique identifier for an eBay order. <br><br>
+     * <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values. The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and
+     * multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and sellers
+     * who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from
+     * the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this Trading API
+     * change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older than Version
+     * 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the
+     * <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After
+     * the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span> <br> <span
+     * class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order will change as it goes from unpaid to paid status. Sellers can check to see if an order has been paid by looking for a
+     * value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or
+     * <b>GetSellerTransactions</b> call. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific order(s), either of these order IDs (paid or unpaid status) can be used to retrieve an order. </span>
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderID;
+    protected ?string $OrderID = null;
     /**
      * The SellerInventoryID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> An ID that the seller specified when they listed the Half.com item, if any.
-     * It can be used for the seller's SKU. Note that <b>SellerInventoryID</b> is not returned if no ID was specified. (Note: The SKU field used for eBay.com listings is not applicable to Half.com listings.)
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerInventoryID;
+    protected ?string $SellerInventoryID = null;
     /**
      * The PrivateNotes
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> A text note that the seller specified for the Half.com item, if any. Only
-     * visible to the seller. Not returned if the seller specified no notes.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PrivateNotes;
+    protected ?string $PrivateNotes = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> The title of the item listing as it appears on Half.com.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The PaymentType
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Indicates whether the payment is for a Half.com sale or a refund.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentType;
+    protected ?string $PaymentType = null;
     /**
      * The TransactionPrice
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Price of the order line item (transaction) before shipping and other costs.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TransactionPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TransactionPrice = null;
     /**
      * The ShippingReimbursement
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> The adjusted shipping cost that Half.com pays the seller. For a multiple
-     * line item (Combined Invoice) order, the total shipping cost may be less than the cost to ship the items individually, which makes the adjustment necessary. The shipping cost may also be adjusted due to Half.com handling charges. <br><br> <b>Note</b>:
-     * Due to the way shipping costs are calculated, this value may be different for identical items in different orders.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingReimbursement;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingReimbursement = null;
     /**
      * The Commission
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Amount of commission charged by Half.com.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Commission;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Commission = null;
     /**
      * The AmountPaid
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> Total amount paid by buyer for the Half.com order.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AmountPaid;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AmountPaid = null;
     /**
      * The PaidTime
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> The time and date when Half.com created the payment. Half.com creates a
-     * payment when the buyer pays for an order. This time is specified in GMT (not Pacific time). See <a href="http://developer.ebay.com/DevZone/guides/ebayfeatures/Basics/DataTypes.html#ConvertingBetweenUTCGMTandLocalTime"> eBay Features Guide</a> for
-     * information about converting between GMT and other time zones.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaidTime;
+    protected ?string $PaidTime = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span> A unique identifier for a Half.com order line item. This field is created as
-     * soon as there is a commitment to buy from the seller, and its value is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two IDs. For a single line item order, the <b>OrderLineItemID</b> value is
-     * identical to the <b>OrderID</b> value.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> <b>SellerPaymentType</b> and all of its fields are no longer applicable since the Half.com site was shut down. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellerPaymentType
      * @uses SellerPaymentType::setItemID()
@@ -163,9 +166,9 @@ class SellerPaymentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amountPaid
      * @param string $paidTime
      * @param string $orderLineItemID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemID = null, $transactionID = null, $orderID = null, $sellerInventoryID = null, $privateNotes = null, $title = null, $paymentType = null, \macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingReimbursement = null, \macropage\ebaysdk\trading\StructType\AmountType $commission = null, \macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, $paidTime = null, $orderLineItemID = null, \DOMDocument $any = null)
+    public function __construct(?string $itemID = null, ?string $transactionID = null, ?string $orderID = null, ?string $sellerInventoryID = null, ?string $privateNotes = null, ?string $title = null, ?string $paymentType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingReimbursement = null, ?\macropage\ebaysdk\trading\StructType\AmountType $commission = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, ?string $paidTime = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -187,7 +190,7 @@ class SellerPaymentType extends AbstractStructBase
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -196,20 +199,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -218,20 +222,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $transactionID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get OrderID value
      * @return string|null
      */
-    public function getOrderID()
+    public function getOrderID(): ?string
     {
         return $this->OrderID;
     }
@@ -240,20 +245,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $orderID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setOrderID($orderID = null)
+    public function setOrderID(?string $orderID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderID) && !is_string($orderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderID, true), gettype($orderID)), __LINE__);
         }
         $this->OrderID = $orderID;
+        
         return $this;
     }
     /**
      * Get SellerInventoryID value
      * @return string|null
      */
-    public function getSellerInventoryID()
+    public function getSellerInventoryID(): ?string
     {
         return $this->SellerInventoryID;
     }
@@ -262,20 +268,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $sellerInventoryID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setSellerInventoryID($sellerInventoryID = null)
+    public function setSellerInventoryID(?string $sellerInventoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerInventoryID) && !is_string($sellerInventoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerInventoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerInventoryID, true), gettype($sellerInventoryID)), __LINE__);
         }
         $this->SellerInventoryID = $sellerInventoryID;
+        
         return $this;
     }
     /**
      * Get PrivateNotes value
      * @return string|null
      */
-    public function getPrivateNotes()
+    public function getPrivateNotes(): ?string
     {
         return $this->PrivateNotes;
     }
@@ -284,20 +291,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $privateNotes
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setPrivateNotes($privateNotes = null)
+    public function setPrivateNotes(?string $privateNotes = null): self
     {
         // validation for constraint: string
         if (!is_null($privateNotes) && !is_string($privateNotes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($privateNotes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($privateNotes, true), gettype($privateNotes)), __LINE__);
         }
         $this->PrivateNotes = $privateNotes;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -306,20 +314,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get PaymentType value
      * @return string|null
      */
-    public function getPaymentType()
+    public function getPaymentType(): ?string
     {
         return $this->PaymentType;
     }
@@ -327,24 +336,25 @@ class SellerPaymentType extends AbstractStructBase
      * Set PaymentType value
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paymentType
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setPaymentType($paymentType = null)
+    public function setPaymentType(?string $paymentType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType::valueIsValid($paymentType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paymentType, implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType', is_array($paymentType) ? implode(', ', $paymentType) : var_export($paymentType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentTypeCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentType = $paymentType;
+        
         return $this;
     }
     /**
      * Get TransactionPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTransactionPrice()
+    public function getTransactionPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TransactionPrice;
     }
@@ -353,16 +363,17 @@ class SellerPaymentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $transactionPrice
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setTransactionPrice(\macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null)
+    public function setTransactionPrice(?\macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null): self
     {
         $this->TransactionPrice = $transactionPrice;
+        
         return $this;
     }
     /**
      * Get ShippingReimbursement value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingReimbursement()
+    public function getShippingReimbursement(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingReimbursement;
     }
@@ -371,16 +382,17 @@ class SellerPaymentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingReimbursement
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setShippingReimbursement(\macropage\ebaysdk\trading\StructType\AmountType $shippingReimbursement = null)
+    public function setShippingReimbursement(?\macropage\ebaysdk\trading\StructType\AmountType $shippingReimbursement = null): self
     {
         $this->ShippingReimbursement = $shippingReimbursement;
+        
         return $this;
     }
     /**
      * Get Commission value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getCommission()
+    public function getCommission(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Commission;
     }
@@ -389,16 +401,17 @@ class SellerPaymentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $commission
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setCommission(\macropage\ebaysdk\trading\StructType\AmountType $commission = null)
+    public function setCommission(?\macropage\ebaysdk\trading\StructType\AmountType $commission = null): self
     {
         $this->Commission = $commission;
+        
         return $this;
     }
     /**
      * Get AmountPaid value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAmountPaid()
+    public function getAmountPaid(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AmountPaid;
     }
@@ -407,16 +420,17 @@ class SellerPaymentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amountPaid
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setAmountPaid(\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null)
+    public function setAmountPaid(?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null): self
     {
         $this->AmountPaid = $amountPaid;
+        
         return $this;
     }
     /**
      * Get PaidTime value
      * @return string|null
      */
-    public function getPaidTime()
+    public function getPaidTime(): ?string
     {
         return $this->PaidTime;
     }
@@ -425,20 +439,21 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $paidTime
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setPaidTime($paidTime = null)
+    public function setPaidTime(?string $paidTime = null): self
     {
         // validation for constraint: string
         if (!is_null($paidTime) && !is_string($paidTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($paidTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($paidTime, true), gettype($paidTime)), __LINE__);
         }
         $this->PaidTime = $paidTime;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -447,65 +462,47 @@ class SellerPaymentType extends AbstractStructBase
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellerPaymentType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellerPaymentType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

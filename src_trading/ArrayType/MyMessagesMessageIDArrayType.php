@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for MyMessagesMessageIDArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains a list of up to 10 MessageID values.
  * @subpackage Arrays
  */
@@ -14,62 +17,70 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
 {
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An ID that uniquely identifies a message for a given user. | Type defining the <b>MessageID</b> field used in <b>GetMyMessages</b>, <b>ReviseMyMessages</b>, and <b>DeleteMyMessages</b> to identify a specific eBay message to retrieve,
      * revise, or delete, respectively. Up to 10 <b>MessageID</b> values can be specified in one API call.
+     * - base: xs:string
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $MessageID;
+    protected array $MessageID = [];
     /**
      * Constructor method for MyMessagesMessageIDArrayType
      * @uses MyMessagesMessageIDArrayType::setMessageID()
      * @param string[] $messageID
      */
-    public function __construct(array $messageID = array())
+    public function __construct(array $messageID = [])
     {
         $this
             ->setMessageID($messageID);
     }
     /**
      * Get MessageID value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getMessageID()
+    public function getMessageID(): array
     {
         return $this->MessageID;
     }
     /**
+     * This method is responsible for validating the values passed to the setMessageID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMessageID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMessageIDForArrayConstraintsFromSetMessageID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myMessagesMessageIDArrayTypeMessageIDItem) {
+            // validation for constraint: itemType
+            if (!is_string($myMessagesMessageIDArrayTypeMessageIDItem)) {
+                $invalidValues[] = is_object($myMessagesMessageIDArrayTypeMessageIDItem) ? get_class($myMessagesMessageIDArrayTypeMessageIDItem) : sprintf('%s(%s)', gettype($myMessagesMessageIDArrayTypeMessageIDItem), var_export($myMessagesMessageIDArrayTypeMessageIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The MessageID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set MessageID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $messageID
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType
      */
-    public function setMessageID(array $messageID = array())
+    public function setMessageID(array $messageID = []): self
     {
-        foreach ($messageID as $myMessagesMessageIDArrayTypeMessageIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($myMessagesMessageIDArrayTypeMessageIDItem)) {
-                throw new \InvalidArgumentException(sprintf('The MessageID property can only contain items of string, "%s" given', is_object($myMessagesMessageIDArrayTypeMessageIDItem) ? get_class($myMessagesMessageIDArrayTypeMessageIDItem) : gettype($myMessagesMessageIDArrayTypeMessageIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($messageIDArrayErrorMessage = self::validateMessageIDForArrayConstraintsFromSetMessageID($messageID))) {
+            throw new InvalidArgumentException($messageIDArrayErrorMessage, __LINE__);
         }
         $this->MessageID = $messageID;
-        return $this;
-    }
-    /**
-     * Add item to MessageID value
-     * @throws \InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType
-     */
-    public function addToMessageID($item)
-    {
-        // validation for constraint: itemType
-        if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The MessageID property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->MessageID[] = $item;
+        
         return $this;
     }
     /**
@@ -77,7 +88,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return string|null
      */
-    public function current()
+    public function current(): ?string
     {
         return parent::current();
     }
@@ -87,7 +98,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return string|null
      */
-    public function item($index)
+    public function item($index): ?string
     {
         return parent::item($index);
     }
@@ -96,7 +107,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return string|null
      */
-    public function first()
+    public function first(): ?string
     {
         return parent::first();
     }
@@ -105,7 +116,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return string|null
      */
-    public function last()
+    public function last(): ?string
     {
         return parent::last();
     }
@@ -115,37 +126,32 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return string|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?string
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param string $item
+     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!is_string($item)) {
+            throw new InvalidArgumentException(sprintf('The MessageID property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string MessageID
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'MessageID';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

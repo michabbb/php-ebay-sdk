@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerAutoSecondChanceOfferType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Defines the options available for an automated Second Chance Offer rule.
  * @subpackage Structs
  */
@@ -14,49 +17,49 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
 {
     /**
      * The SecondChanceOfferCondition
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The condition under which a Second Chance Offer should be sent.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SecondChanceOfferCondition;
+    protected ?string $SecondChanceOfferCondition = null;
     /**
      * The Amount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used when SecondChanceOfferCondition is equal to BidsGreaterThanAmount or BidsGreaterThanCostPlusAmount. Specifies the amount associated with the SecondChanceOfferCondition.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Amount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Amount = null;
     /**
      * The ProfitPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Used when SecondChanceOfferCondition is equal to BidsGreaterThanCostPlusPercentage to specify the amount of profit associated with the SecondChanceOfferCondition.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $ProfitPercent;
+    protected ?float $ProfitPercent = null;
     /**
      * The Duration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the length of time the Second Chance Offer listing will be active. The recipient bidder has that much time to purchase the item or the offer expires.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Duration;
+    protected ?string $Duration = null;
     /**
      * The ListingHoldInventoryLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Do not list if inventory levels on the associated product are at or below the specified amount.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ListingHoldInventoryLevel;
+    protected ?int $ListingHoldInventoryLevel = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerAutoSecondChanceOfferType
      * @uses SellingManagerAutoSecondChanceOfferType::setSecondChanceOfferCondition()
@@ -70,9 +73,9 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * @param float $profitPercent
      * @param string $duration
      * @param int $listingHoldInventoryLevel
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($secondChanceOfferCondition = null, \macropage\ebaysdk\trading\StructType\AmountType $amount = null, $profitPercent = null, $duration = null, $listingHoldInventoryLevel = null, \DOMDocument $any = null)
+    public function __construct(?string $secondChanceOfferCondition = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amount = null, ?float $profitPercent = null, ?string $duration = null, ?int $listingHoldInventoryLevel = null, $any = null)
     {
         $this
             ->setSecondChanceOfferCondition($secondChanceOfferCondition)
@@ -86,7 +89,7 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * Get SecondChanceOfferCondition value
      * @return string|null
      */
-    public function getSecondChanceOfferCondition()
+    public function getSecondChanceOfferCondition(): ?string
     {
         return $this->SecondChanceOfferCondition;
     }
@@ -94,24 +97,25 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * Set SecondChanceOfferCondition value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $secondChanceOfferCondition
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setSecondChanceOfferCondition($secondChanceOfferCondition = null)
+    public function setSecondChanceOfferCondition(?string $secondChanceOfferCondition = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType::valueIsValid($secondChanceOfferCondition)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $secondChanceOfferCondition, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType', is_array($secondChanceOfferCondition) ? implode(', ', $secondChanceOfferCondition) : var_export($secondChanceOfferCondition, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAutoSecondChanceOfferTypeCodeType::getValidValues())), __LINE__);
         }
         $this->SecondChanceOfferCondition = $secondChanceOfferCondition;
+        
         return $this;
     }
     /**
      * Get Amount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAmount()
+    public function getAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Amount;
     }
@@ -120,16 +124,17 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amount
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setAmount(\macropage\ebaysdk\trading\StructType\AmountType $amount = null)
+    public function setAmount(?\macropage\ebaysdk\trading\StructType\AmountType $amount = null): self
     {
         $this->Amount = $amount;
+        
         return $this;
     }
     /**
      * Get ProfitPercent value
      * @return float|null
      */
-    public function getProfitPercent()
+    public function getProfitPercent(): ?float
     {
         return $this->ProfitPercent;
     }
@@ -138,16 +143,21 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * @param float $profitPercent
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setProfitPercent($profitPercent = null)
+    public function setProfitPercent(?float $profitPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($profitPercent) && !(is_float($profitPercent) || is_numeric($profitPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($profitPercent, true), gettype($profitPercent)), __LINE__);
+        }
         $this->ProfitPercent = $profitPercent;
+        
         return $this;
     }
     /**
      * Get Duration value
      * @return string|null
      */
-    public function getDuration()
+    public function getDuration(): ?string
     {
         return $this->Duration;
     }
@@ -155,24 +165,25 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * Set Duration value
      * @uses \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $duration
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setDuration($duration = null)
+    public function setDuration(?string $duration = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::valueIsValid($duration)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $duration, implode(', ', \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType', is_array($duration) ? implode(', ', $duration) : var_export($duration, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SecondChanceOfferDurationCodeType::getValidValues())), __LINE__);
         }
         $this->Duration = $duration;
+        
         return $this;
     }
     /**
      * Get ListingHoldInventoryLevel value
      * @return int|null
      */
-    public function getListingHoldInventoryLevel()
+    public function getListingHoldInventoryLevel(): ?int
     {
         return $this->ListingHoldInventoryLevel;
     }
@@ -181,65 +192,47 @@ class SellingManagerAutoSecondChanceOfferType extends AbstractStructBase
      * @param int $listingHoldInventoryLevel
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setListingHoldInventoryLevel($listingHoldInventoryLevel = null)
+    public function setListingHoldInventoryLevel(?int $listingHoldInventoryLevel = null): self
     {
         // validation for constraint: int
-        if (!is_null($listingHoldInventoryLevel) && !is_numeric($listingHoldInventoryLevel)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($listingHoldInventoryLevel)), __LINE__);
+        if (!is_null($listingHoldInventoryLevel) && !(is_int($listingHoldInventoryLevel) || ctype_digit($listingHoldInventoryLevel))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($listingHoldInventoryLevel, true), gettype($listingHoldInventoryLevel)), __LINE__);
         }
         $this->ListingHoldInventoryLevel = $listingHoldInventoryLevel;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoSecondChanceOfferType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

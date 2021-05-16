@@ -1,125 +1,160 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for PaidStatusCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Specifies the payment status of an order, as seen by the buyer and seller.
  * @subpackage Enumerations
  */
-class PaidStatusCodeType
+class PaidStatusCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'NotPaid'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has completed checkout, but eBay has not recognized that the buyer has paid for the order. It is possible that the buyer has paid with an 'offline' payment method, but the order has not been marked as paid.
      * @return string 'NotPaid'
      */
     const VALUE_NOT_PAID = 'NotPaid';
     /**
      * Constant for value 'BuyerHasNotCompletedCheckout'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has not completed the checkout process and so has not made payment.
      * @return string 'BuyerHasNotCompletedCheckout'
      */
     const VALUE_BUYER_HAS_NOT_COMPLETED_CHECKOUT = 'BuyerHasNotCompletedCheckout';
     /**
      * Constant for value 'PaymentPendingWithPayPal'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has made a PayPal payment, but the seller has not yet received it.
      * @return string 'PaymentPendingWithPayPal'
      */
     const VALUE_PAYMENT_PENDING_WITH_PAY_PAL = 'PaymentPendingWithPayPal';
     /**
      * Constant for value 'PaidWithPayPal'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has made a PayPal payment, and the payment is complete. But please also see the documentation for PaymentHoldStatus and its applicable values. PaymentHoldStatus contains the current status of a hold on a PayPal payment.
      * @return string 'PaidWithPayPal'
      */
     const VALUE_PAID_WITH_PAY_PAL = 'PaidWithPayPal';
     /**
      * Constant for value 'MarkedAsPaid'
+     * Meta information extracted from the WSDL
+     * - documentation: The order is marked as paid by either the buyer or seller.
      * @return string 'MarkedAsPaid'
      */
     const VALUE_MARKED_AS_PAID = 'MarkedAsPaid';
     /**
      * Constant for value 'PaymentPendingWithEscrow'
+     * Meta information extracted from the WSDL
+     * - documentation: No longer an applicable value.
      * @return string 'PaymentPendingWithEscrow'
      */
     const VALUE_PAYMENT_PENDING_WITH_ESCROW = 'PaymentPendingWithEscrow';
     /**
      * Constant for value 'PaidWithEscrow'
+     * Meta information extracted from the WSDL
+     * - documentation: No longer an applicable value.
      * @return string 'PaidWithEscrow'
      */
     const VALUE_PAID_WITH_ESCROW = 'PaidWithEscrow';
     /**
      * Constant for value 'EscrowPaymentCancelled'
+     * Meta information extracted from the WSDL
+     * - documentation: No longer an applicable value.
      * @return string 'EscrowPaymentCancelled'
      */
     const VALUE_ESCROW_PAYMENT_CANCELLED = 'EscrowPaymentCancelled';
     /**
      * Constant for value 'PaymentPendingWithPaisaPay'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is a deprecated payment method, so this value is no longer applicable.
      * @return string 'PaymentPendingWithPaisaPay'
      */
     const VALUE_PAYMENT_PENDING_WITH_PAISA_PAY = 'PaymentPendingWithPaisaPay';
     /**
      * Constant for value 'PaidWithPaisaPay'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is a deprecated payment method, so this value is no longer applicable.
      * @return string 'PaidWithPaisaPay'
      */
     const VALUE_PAID_WITH_PAISA_PAY = 'PaidWithPaisaPay';
     /**
      * Constant for value 'PaymentPending'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has made a payment other than PayPal, but the payment is still being processed.
      * @return string 'PaymentPending'
      */
     const VALUE_PAYMENT_PENDING = 'PaymentPending';
     /**
      * Constant for value 'PaymentPendingWithPaisaPayEscrow'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is a deprecated payment method, so this value is no longer applicable.
      * @return string 'PaymentPendingWithPaisaPayEscrow'
      */
     const VALUE_PAYMENT_PENDING_WITH_PAISA_PAY_ESCROW = 'PaymentPendingWithPaisaPayEscrow';
     /**
      * Constant for value 'PaidWithPaisaPayEscrow'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is a deprecated payment method, so this value is no longer applicable.
      * @return string 'PaidWithPaisaPayEscrow'
      */
     const VALUE_PAID_WITH_PAISA_PAY_ESCROW = 'PaidWithPaisaPayEscrow';
     /**
      * Constant for value 'PaisaPayNotPaid'
+     * Meta information extracted from the WSDL
+     * - documentation: PaisaPay is a deprecated payment method, so this value is no longer applicable.
      * @return string 'PaisaPayNotPaid'
      */
     const VALUE_PAISA_PAY_NOT_PAID = 'PaisaPayNotPaid';
     /**
      * Constant for value 'Refunded'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer's payment was refunded.
      * @return string 'Refunded'
      */
     const VALUE_REFUNDED = 'Refunded';
     /**
      * Constant for value 'WaitingForCODPayment'
+     * Meta information extracted from the WSDL
+     * - documentation: The selected payment method is COD and the buyer will make the payment upon delivery.
      * @return string 'WaitingForCODPayment'
      */
     const VALUE_WAITING_FOR_CODPAYMENT = 'WaitingForCODPayment';
     /**
      * Constant for value 'PaidCOD'
+     * Meta information extracted from the WSDL
+     * - documentation: The buyer has paid for the order with the COD payment method.
      * @return string 'PaidCOD'
      */
     const VALUE_PAID_COD = 'PaidCOD';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: Reserved for future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
     /**
      * Constant for value 'Paid'
+     * Meta information extracted from the WSDL
+     * - documentation: The order has been paid for.
      * @return string 'Paid'
      */
     const VALUE_PAID = 'Paid';
     /**
      * Constant for value 'PayUponInvoice'
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates that the buyer was offered the 'Pay Upon Invoice' option. The 'Pay Upon Invoice' option is only available to eligible German buyers as part of Progressive Checkout on the German site. If a German buyer is offered
+     * the 'Pay Upon Invoice' option, that buyer is not required to pay for the order until after receiving an order invoice from the seller.
      * @return string 'PayUponInvoice'
      */
     const VALUE_PAY_UPON_INVOICE = 'PayUponInvoice';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_NOT_PAID
@@ -144,9 +179,9 @@ class PaidStatusCodeType
      * @uses self::VALUE_PAY_UPON_INVOICE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_NOT_PAID,
             self::VALUE_BUYER_HAS_NOT_COMPLETED_CHECKOUT,
             self::VALUE_PAYMENT_PENDING_WITH_PAY_PAL,
@@ -167,14 +202,6 @@ class PaidStatusCodeType
             self::VALUE_CUSTOM_CODE,
             self::VALUE_PAID,
             self::VALUE_PAY_UPON_INVOICE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

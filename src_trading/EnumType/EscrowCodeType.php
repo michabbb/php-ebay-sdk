@@ -1,45 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for EscrowCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This enumerated type is deprecated.
  * @subpackage Enumerations
  */
-class EscrowCodeType
+class EscrowCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'ByBuyer'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'ByBuyer'
      */
     const VALUE_BY_BUYER = 'ByBuyer';
     /**
      * Constant for value 'BySeller'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'BySeller'
      */
     const VALUE_BY_SELLER = 'BySeller';
     /**
      * Constant for value 'None'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'None'
      */
     const VALUE_NONE = 'None';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_BY_BUYER
@@ -48,21 +50,13 @@ class EscrowCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_BY_BUYER,
             self::VALUE_BY_SELLER,
             self::VALUE_NONE,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

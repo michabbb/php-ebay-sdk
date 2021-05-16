@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VeROReportItemType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>ReportItem</b> container. A <b>ReportItem</b> container is required for each eBay item that the product owner is reporting as violating the product owner's copyright, trademark, or intellectual property
  * rights.
  * @subpackage Structs
@@ -15,79 +18,80 @@ class VeROReportItemType extends AbstractStructBase
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier for the listing being reported for the alleged infringement, which is specified in the <b>VeROReasonCodeID</b> field. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The VeROReasonCodeID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier for the type of claimed infringement. The <b>GetVeROReasonCodeDetails</b> call can be used to retrieve a list of reason codes for a given eBay site.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $VeROReasonCodeID;
+    protected ?int $VeROReasonCodeID = null;
     /**
      * The MessageToSeller
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used by the VeRO Program member to provide more details to the seller about why the item is being reported as violating copyright, trademark, or intellectual property rights.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageToSeller;
+    protected ?string $MessageToSeller = null;
     /**
      * The CopyEmailToRightsOwner
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically
      * sent to the seller of the reported item.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CopyEmailToRightsOwner;
+    protected ?bool $CopyEmailToRightsOwner = null;
     /**
      * The Region
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If the infringement type stated in the <b>VeROReasonCodeID</b> has anything to do about which geographical region the item is shipped to, each region that would trigger this infringement type should be specified in its own
      * <b>Region</b> field. Supported values for <b>Region</b> are found in <b>ShippingRegionCodeType</b>.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $Region;
+    protected array $Region = [];
     /**
      * The Country
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If the infringement type stated in the <b>VeROReasonCodeID</b> has anything to do about which country the item is shipped to, each country that would trigger this infringement type should be specified in its own <b>Country</b> field.
      * Supported values for <b>Country</b> are found in <b>CountryCodeType</b>. <br><br> This field is required when the <b>VeROReasonCodeID</b> is 9037 (Item(s) is unlawful importation of product bearing trademark).
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $Country;
+    protected array $Country = [];
     /**
      * The Patent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string field is used to specify the number of a product patent that is being violated. <br><br> This field is required when the <b>VeROReasonCodeID</b> is 9048 (Item(s) infringes a valid patent).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Patent;
+    protected ?string $Patent = null;
     /**
      * The DetailedMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Explanatory text from the VeRO Program member. This field is conditionally required when the <b>VeROReasonCodeID</b> is <code>Others</code>. Note that there is a 1000-character restriction on this text field when the items are being
      * reported with the <code>Others</code> reason code.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailedMessage;
+    protected ?string $DetailedMessage = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for VeROReportItemType
      * @uses VeROReportItemType::setItemID()
@@ -107,9 +111,9 @@ class VeROReportItemType extends AbstractStructBase
      * @param string[] $country
      * @param string $patent
      * @param string $detailedMessage
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemID = null, $veROReasonCodeID = null, $messageToSeller = null, $copyEmailToRightsOwner = null, array $region = array(), array $country = array(), $patent = null, $detailedMessage = null, \DOMDocument $any = null)
+    public function __construct(?string $itemID = null, ?int $veROReasonCodeID = null, ?string $messageToSeller = null, ?bool $copyEmailToRightsOwner = null, array $region = [], array $country = [], ?string $patent = null, ?string $detailedMessage = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -126,7 +130,7 @@ class VeROReportItemType extends AbstractStructBase
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -135,20 +139,21 @@ class VeROReportItemType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get VeROReasonCodeID value
      * @return int|null
      */
-    public function getVeROReasonCodeID()
+    public function getVeROReasonCodeID(): ?int
     {
         return $this->VeROReasonCodeID;
     }
@@ -157,20 +162,21 @@ class VeROReportItemType extends AbstractStructBase
      * @param int $veROReasonCodeID
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setVeROReasonCodeID($veROReasonCodeID = null)
+    public function setVeROReasonCodeID(?int $veROReasonCodeID = null): self
     {
         // validation for constraint: int
-        if (!is_null($veROReasonCodeID) && !is_numeric($veROReasonCodeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($veROReasonCodeID)), __LINE__);
+        if (!is_null($veROReasonCodeID) && !(is_int($veROReasonCodeID) || ctype_digit($veROReasonCodeID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($veROReasonCodeID, true), gettype($veROReasonCodeID)), __LINE__);
         }
         $this->VeROReasonCodeID = $veROReasonCodeID;
+        
         return $this;
     }
     /**
      * Get MessageToSeller value
      * @return string|null
      */
-    public function getMessageToSeller()
+    public function getMessageToSeller(): ?string
     {
         return $this->MessageToSeller;
     }
@@ -179,20 +185,21 @@ class VeROReportItemType extends AbstractStructBase
      * @param string $messageToSeller
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setMessageToSeller($messageToSeller = null)
+    public function setMessageToSeller(?string $messageToSeller = null): self
     {
         // validation for constraint: string
         if (!is_null($messageToSeller) && !is_string($messageToSeller)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageToSeller)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageToSeller, true), gettype($messageToSeller)), __LINE__);
         }
         $this->MessageToSeller = $messageToSeller;
+        
         return $this;
     }
     /**
      * Get CopyEmailToRightsOwner value
      * @return bool|null
      */
-    public function getCopyEmailToRightsOwner()
+    public function getCopyEmailToRightsOwner(): ?bool
     {
         return $this->CopyEmailToRightsOwner;
     }
@@ -201,114 +208,155 @@ class VeROReportItemType extends AbstractStructBase
      * @param bool $copyEmailToRightsOwner
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setCopyEmailToRightsOwner($copyEmailToRightsOwner = null)
+    public function setCopyEmailToRightsOwner(?bool $copyEmailToRightsOwner = null): self
     {
         // validation for constraint: boolean
         if (!is_null($copyEmailToRightsOwner) && !is_bool($copyEmailToRightsOwner)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($copyEmailToRightsOwner)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($copyEmailToRightsOwner, true), gettype($copyEmailToRightsOwner)), __LINE__);
         }
         $this->CopyEmailToRightsOwner = $copyEmailToRightsOwner;
+        
         return $this;
     }
     /**
      * Get Region value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getRegion()
+    public function getRegion(): array
     {
         return $this->Region;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setRegion method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setRegion method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateRegionForArrayConstraintsFromSetRegion(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $veROReportItemTypeRegionItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::valueIsValid($veROReportItemTypeRegionItem)) {
+                $invalidValues[] = is_object($veROReportItemTypeRegionItem) ? get_class($veROReportItemTypeRegionItem) : sprintf('%s(%s)', gettype($veROReportItemTypeRegionItem), var_export($veROReportItemTypeRegionItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set Region value
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $region
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setRegion(array $region = array())
+    public function setRegion(array $region = []): self
     {
-        $invalidValues = array();
-        foreach ($region as $veROReportItemTypeRegionItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::valueIsValid($veROReportItemTypeRegionItem)) {
-                $invalidValues[] = var_export($veROReportItemTypeRegionItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($regionArrayErrorMessage = self::validateRegionForArrayConstraintsFromSetRegion($region))) {
+            throw new InvalidArgumentException($regionArrayErrorMessage, __LINE__);
         }
         $this->Region = $region;
+        
         return $this;
     }
     /**
      * Add item to Region value
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function addToRegion($item)
+    public function addToRegion(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingRegionCodeType::getValidValues())), __LINE__);
         }
         $this->Region[] = $item;
+        
         return $this;
     }
     /**
      * Get Country value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getCountry()
+    public function getCountry(): array
     {
         return $this->Country;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setCountry method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCountry method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCountryForArrayConstraintsFromSetCountry(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $veROReportItemTypeCountryItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($veROReportItemTypeCountryItem)) {
+                $invalidValues[] = is_object($veROReportItemTypeCountryItem) ? get_class($veROReportItemTypeCountryItem) : sprintf('%s(%s)', gettype($veROReportItemTypeCountryItem), var_export($veROReportItemTypeCountryItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CountryCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set Country value
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $country
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setCountry(array $country = array())
+    public function setCountry(array $country = []): self
     {
-        $invalidValues = array();
-        foreach ($country as $veROReportItemTypeCountryItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($veROReportItemTypeCountryItem)) {
-                $invalidValues[] = var_export($veROReportItemTypeCountryItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($countryArrayErrorMessage = self::validateCountryForArrayConstraintsFromSetCountry($country))) {
+            throw new InvalidArgumentException($countryArrayErrorMessage, __LINE__);
         }
         $this->Country = $country;
+        
         return $this;
     }
     /**
      * Add item to Country value
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function addToCountry($item)
+    public function addToCountry(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CountryCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
         }
         $this->Country[] = $item;
+        
         return $this;
     }
     /**
      * Get Patent value
      * @return string|null
      */
-    public function getPatent()
+    public function getPatent(): ?string
     {
         return $this->Patent;
     }
@@ -317,20 +365,21 @@ class VeROReportItemType extends AbstractStructBase
      * @param string $patent
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setPatent($patent = null)
+    public function setPatent(?string $patent = null): self
     {
         // validation for constraint: string
         if (!is_null($patent) && !is_string($patent)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($patent)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($patent, true), gettype($patent)), __LINE__);
         }
         $this->Patent = $patent;
+        
         return $this;
     }
     /**
      * Get DetailedMessage value
      * @return string|null
      */
-    public function getDetailedMessage()
+    public function getDetailedMessage(): ?string
     {
         return $this->DetailedMessage;
     }
@@ -339,65 +388,47 @@ class VeROReportItemType extends AbstractStructBase
      * @param string $detailedMessage
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setDetailedMessage($detailedMessage = null)
+    public function setDetailedMessage(?string $detailedMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($detailedMessage) && !is_string($detailedMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailedMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailedMessage, true), gettype($detailedMessage)), __LINE__);
         }
         $this->DetailedMessage = $detailedMessage;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\VeROReportItemType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

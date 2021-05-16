@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerFolderDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains information about a Selling Manager folder.
  * @subpackage Structs
  */
@@ -14,66 +17,66 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
 {
     /**
      * The FolderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique ID of the folder. Originally returned in the AddSellingManagerInventoryFolder response.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FolderID;
+    protected ?int $FolderID = null;
     /**
      * The ParentFolderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique ID of the parent folder. If it exists, it is returned.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ParentFolderID;
+    protected ?int $ParentFolderID = null;
     /**
      * The FolderLevel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Level of this folder in the folder tree hierarchy. Root folder is at level 1.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FolderLevel;
+    protected ?int $FolderLevel = null;
     /**
      * The FolderName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Name assigned to the folder by the user in the AddSellingManagerInventoryFolder or the ReviseSellingManagerInventoryFolder call.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FolderName;
+    protected ?string $FolderName = null;
     /**
      * The FolderComment
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Comments associated with the folder. Returned if it exists.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FolderComment;
+    protected ?string $FolderComment = null;
     /**
      * The ChildFolder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container for sub-folder information. Returned if requested.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType[]
      */
-    public $ChildFolder;
+    protected array $ChildFolder = [];
     /**
      * The CreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date when this folder was created.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreationTime;
+    protected ?string $CreationTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerFolderDetailsType
      * @uses SellingManagerFolderDetailsType::setFolderID()
@@ -91,9 +94,9 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param string $folderComment
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType[] $childFolder
      * @param string $creationTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($folderID = null, $parentFolderID = null, $folderLevel = null, $folderName = null, $folderComment = null, array $childFolder = array(), $creationTime = null, \DOMDocument $any = null)
+    public function __construct(?int $folderID = null, ?int $parentFolderID = null, ?int $folderLevel = null, ?string $folderName = null, ?string $folderComment = null, array $childFolder = [], ?string $creationTime = null, $any = null)
     {
         $this
             ->setFolderID($folderID)
@@ -109,7 +112,7 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * Get FolderID value
      * @return int|null
      */
-    public function getFolderID()
+    public function getFolderID(): ?int
     {
         return $this->FolderID;
     }
@@ -118,20 +121,21 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param int $folderID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setFolderID($folderID = null)
+    public function setFolderID(?int $folderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($folderID) && !is_numeric($folderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($folderID)), __LINE__);
+        if (!is_null($folderID) && !(is_int($folderID) || ctype_digit($folderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($folderID, true), gettype($folderID)), __LINE__);
         }
         $this->FolderID = $folderID;
+        
         return $this;
     }
     /**
      * Get ParentFolderID value
      * @return int|null
      */
-    public function getParentFolderID()
+    public function getParentFolderID(): ?int
     {
         return $this->ParentFolderID;
     }
@@ -140,20 +144,21 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param int $parentFolderID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setParentFolderID($parentFolderID = null)
+    public function setParentFolderID(?int $parentFolderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($parentFolderID) && !is_numeric($parentFolderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($parentFolderID)), __LINE__);
+        if (!is_null($parentFolderID) && !(is_int($parentFolderID) || ctype_digit($parentFolderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($parentFolderID, true), gettype($parentFolderID)), __LINE__);
         }
         $this->ParentFolderID = $parentFolderID;
+        
         return $this;
     }
     /**
      * Get FolderLevel value
      * @return int|null
      */
-    public function getFolderLevel()
+    public function getFolderLevel(): ?int
     {
         return $this->FolderLevel;
     }
@@ -162,20 +167,21 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param int $folderLevel
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setFolderLevel($folderLevel = null)
+    public function setFolderLevel(?int $folderLevel = null): self
     {
         // validation for constraint: int
-        if (!is_null($folderLevel) && !is_numeric($folderLevel)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($folderLevel)), __LINE__);
+        if (!is_null($folderLevel) && !(is_int($folderLevel) || ctype_digit($folderLevel))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($folderLevel, true), gettype($folderLevel)), __LINE__);
         }
         $this->FolderLevel = $folderLevel;
+        
         return $this;
     }
     /**
      * Get FolderName value
      * @return string|null
      */
-    public function getFolderName()
+    public function getFolderName(): ?string
     {
         return $this->FolderName;
     }
@@ -184,20 +190,21 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param string $folderName
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setFolderName($folderName = null)
+    public function setFolderName(?string $folderName = null): self
     {
         // validation for constraint: string
         if (!is_null($folderName) && !is_string($folderName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($folderName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($folderName, true), gettype($folderName)), __LINE__);
         }
         $this->FolderName = $folderName;
+        
         return $this;
     }
     /**
      * Get FolderComment value
      * @return string|null
      */
-    public function getFolderComment()
+    public function getFolderComment(): ?string
     {
         return $this->FolderComment;
     }
@@ -206,60 +213,84 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param string $folderComment
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setFolderComment($folderComment = null)
+    public function setFolderComment(?string $folderComment = null): self
     {
         // validation for constraint: string
         if (!is_null($folderComment) && !is_string($folderComment)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($folderComment)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($folderComment, true), gettype($folderComment)), __LINE__);
         }
         $this->FolderComment = $folderComment;
+        
         return $this;
     }
     /**
      * Get ChildFolder value
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType[]
      */
-    public function getChildFolder()
+    public function getChildFolder(): array
     {
         return $this->ChildFolder;
     }
     /**
+     * This method is responsible for validating the values passed to the setChildFolder method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setChildFolder method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateChildFolderForArrayConstraintsFromSetChildFolder(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $sellingManagerFolderDetailsTypeChildFolderItem) {
+            // validation for constraint: itemType
+            if (!$sellingManagerFolderDetailsTypeChildFolderItem instanceof \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType) {
+                $invalidValues[] = is_object($sellingManagerFolderDetailsTypeChildFolderItem) ? get_class($sellingManagerFolderDetailsTypeChildFolderItem) : sprintf('%s(%s)', gettype($sellingManagerFolderDetailsTypeChildFolderItem), var_export($sellingManagerFolderDetailsTypeChildFolderItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ChildFolder property can only contain items of type \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ChildFolder value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType[] $childFolder
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setChildFolder(array $childFolder = array())
+    public function setChildFolder(array $childFolder = []): self
     {
-        foreach ($childFolder as $sellingManagerFolderDetailsTypeChildFolderItem) {
-            // validation for constraint: itemType
-            if (!$sellingManagerFolderDetailsTypeChildFolderItem instanceof \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType) {
-                throw new \InvalidArgumentException(sprintf('The ChildFolder property can only contain items of \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType, "%s" given', is_object($sellingManagerFolderDetailsTypeChildFolderItem) ? get_class($sellingManagerFolderDetailsTypeChildFolderItem) : gettype($sellingManagerFolderDetailsTypeChildFolderItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($childFolderArrayErrorMessage = self::validateChildFolderForArrayConstraintsFromSetChildFolder($childFolder))) {
+            throw new InvalidArgumentException($childFolderArrayErrorMessage, __LINE__);
         }
         $this->ChildFolder = $childFolder;
+        
         return $this;
     }
     /**
      * Add item to ChildFolder value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $item
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function addToChildFolder(\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $item)
+    public function addToChildFolder(\macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType) {
-            throw new \InvalidArgumentException(sprintf('The ChildFolder property can only contain items of \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ChildFolder property can only contain items of type \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ChildFolder[] = $item;
+        
         return $this;
     }
     /**
      * Get CreationTime value
      * @return string|null
      */
-    public function getCreationTime()
+    public function getCreationTime(): ?string
     {
         return $this->CreationTime;
     }
@@ -268,65 +299,47 @@ class SellingManagerFolderDetailsType extends AbstractStructBase
      * @param string $creationTime
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setCreationTime($creationTime = null)
+    public function setCreationTime(?string $creationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($creationTime) && !is_string($creationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($creationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationTime, true), gettype($creationTime)), __LINE__);
         }
         $this->CreationTime = $creationTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerFolderDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,58 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CombinedPaymentPreferencesType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Type used to define all combined payment preferences, including preferences and rules for Calculated and Flat Rate shipping, a flag to allow or disallow <a
- * href="http://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> orders, and the time period in which to allow buyers to combine multiple purchases from the seller into a Combined
- * Invoice order.
+ * Meta information extracted from the WSDL
+ * - documentation: Type used to indicate if the seller supports <a href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> orders, and if so, defines whether the
+ * seller specifies any shipping discount before or after purchase. <br/><br/> <span class="tablenote"><b>Note:</b> In the past, this type was also used to indicate more settings related to Combined Invoice discounts, including the number of days that
+ * buyers have to combine line items into a Combined Invoice, and detailed information on Calculated and Flat-Rate shipping discount profiles. However, these settings are now set through the <b>SetShippingDiscountProfiles</b> call (or through Shipping
+ * Preferences in My eBay), and retrieved with the <b>GetShippingDiscountProfiles</b> call. </span>
  * @subpackage Structs
  */
 class CombinedPaymentPreferencesType extends AbstractStructBase
 {
     /**
      * The CalculatedShippingPreferences
-     * Meta informations extracted from the WSDL
-     * - documentation: DO NOT USE THIS CONTAINER. As an alternative, use SetShippingDiscountProfiles to set all Calculated Shipping rules and preferences, and use GetShippingDiscountProfiles to retrieve the same information.
+     * Meta information extracted from the WSDL
+     * - documentation: DO NOT USE THIS CONTAINER. As an alternative, use <b>SetShippingDiscountProfiles</b> to set all Calculated Shipping rules and preferences, and use <b>GetShippingDiscountProfiles</b> to retrieve the same information.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType
+     * @var \macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType|null
      */
-    public $CalculatedShippingPreferences;
+    protected ?\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $CalculatedShippingPreferences = null;
     /**
      * The CombinedPaymentOption
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether or not a seller wants to allow buyers to combine single order line items into a Combined Invoice order. A Combined Invoice order can be created by the buyer or seller if multiple unpaid order line items exist
      * between the same buyer and seller. Often, a Combined Invoice order can reduce shipping and handling expenses for the buyer and seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CombinedPaymentOption;
+    protected ?string $CombinedPaymentOption = null;
     /**
      * The CombinedPaymentPeriod
-     * Meta informations extracted from the WSDL
-     * - documentation: DO NOT USE THIS FIELD. As an alternative, use the CombinedDuration field in SetShippingDiscountProfiles to specify the time period in which to allow buyers to combine order line items into a Combined Invoice order. Use
-     * GetShippingDiscountProfiles to retrieve the CombinedDuration value.
+     * Meta information extracted from the WSDL
+     * - documentation: DO NOT USE THIS FIELD. As an alternative, use the <b>CombinedDuration</b> field in <b>SetShippingDiscountProfiles</b> to specify the time period in which to allow buyers to combine order line items into a Combined Invoice order, and
+     * use <b>GetShippingDiscountProfiles</b> to retrieve the <b>CombinedDuration</b> value.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CombinedPaymentPeriod;
+    protected ?string $CombinedPaymentPeriod = null;
     /**
      * The FlatShippingPreferences
-     * Meta informations extracted from the WSDL
-     * - documentation: DO NOT USE THIS CONTAINER. As an alternative, use SetShippingDiscountProfiles to set all Flat Rate Shipping rules and preferences, and use GetShippingDiscountProfiles to retrieve the same information.
+     * Meta information extracted from the WSDL
+     * - documentation: DO NOT USE THIS CONTAINER. As an alternative, use <b>SetShippingDiscountProfiles</b> to set all Flat Rate Shipping rules and preferences, and use <b>GetShippingDiscountProfiles</b> to retrieve the same information.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
+     * @var \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType|null
      */
-    public $FlatShippingPreferences;
+    protected ?\macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $FlatShippingPreferences = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CombinedPaymentPreferencesType
      * @uses CombinedPaymentPreferencesType::setCalculatedShippingPreferences()
@@ -64,9 +68,9 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * @param string $combinedPaymentOption
      * @param string $combinedPaymentPeriod
      * @param \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $calculatedShippingPreferences = null, $combinedPaymentOption = null, $combinedPaymentPeriod = null, \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $calculatedShippingPreferences = null, ?string $combinedPaymentOption = null, ?string $combinedPaymentPeriod = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences = null, $any = null)
     {
         $this
             ->setCalculatedShippingPreferences($calculatedShippingPreferences)
@@ -79,7 +83,7 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * Get CalculatedShippingPreferences value
      * @return \macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType|null
      */
-    public function getCalculatedShippingPreferences()
+    public function getCalculatedShippingPreferences(): ?\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType
     {
         return $this->CalculatedShippingPreferences;
     }
@@ -88,16 +92,17 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $calculatedShippingPreferences
      * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
      */
-    public function setCalculatedShippingPreferences(\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $calculatedShippingPreferences = null)
+    public function setCalculatedShippingPreferences(?\macropage\ebaysdk\trading\StructType\CalculatedShippingPreferencesType $calculatedShippingPreferences = null): self
     {
         $this->CalculatedShippingPreferences = $calculatedShippingPreferences;
+        
         return $this;
     }
     /**
      * Get CombinedPaymentOption value
      * @return string|null
      */
-    public function getCombinedPaymentOption()
+    public function getCombinedPaymentOption(): ?string
     {
         return $this->CombinedPaymentOption;
     }
@@ -105,24 +110,25 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * Set CombinedPaymentOption value
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $combinedPaymentOption
      * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
      */
-    public function setCombinedPaymentOption($combinedPaymentOption = null)
+    public function setCombinedPaymentOption(?string $combinedPaymentOption = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType::valueIsValid($combinedPaymentOption)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $combinedPaymentOption, implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType', is_array($combinedPaymentOption) ? implode(', ', $combinedPaymentOption) : var_export($combinedPaymentOption, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentOptionCodeType::getValidValues())), __LINE__);
         }
         $this->CombinedPaymentOption = $combinedPaymentOption;
+        
         return $this;
     }
     /**
      * Get CombinedPaymentPeriod value
      * @return string|null
      */
-    public function getCombinedPaymentPeriod()
+    public function getCombinedPaymentPeriod(): ?string
     {
         return $this->CombinedPaymentPeriod;
     }
@@ -130,24 +136,25 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * Set CombinedPaymentPeriod value
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $combinedPaymentPeriod
      * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
      */
-    public function setCombinedPaymentPeriod($combinedPaymentPeriod = null)
+    public function setCombinedPaymentPeriod(?string $combinedPaymentPeriod = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::valueIsValid($combinedPaymentPeriod)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $combinedPaymentPeriod, implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType', is_array($combinedPaymentPeriod) ? implode(', ', $combinedPaymentPeriod) : var_export($combinedPaymentPeriod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CombinedPaymentPeriodCodeType::getValidValues())), __LINE__);
         }
         $this->CombinedPaymentPeriod = $combinedPaymentPeriod;
+        
         return $this;
     }
     /**
      * Get FlatShippingPreferences value
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType|null
      */
-    public function getFlatShippingPreferences()
+    public function getFlatShippingPreferences(): ?\macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
     {
         return $this->FlatShippingPreferences;
     }
@@ -156,61 +163,43 @@ class CombinedPaymentPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences
      * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
      */
-    public function setFlatShippingPreferences(\macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences = null)
+    public function setFlatShippingPreferences(?\macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType $flatShippingPreferences = null): self
     {
         $this->FlatShippingPreferences = $flatShippingPreferences;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

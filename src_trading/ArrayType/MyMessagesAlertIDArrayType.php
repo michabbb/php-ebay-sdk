@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for MyMessagesAlertIDArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Arrays
  */
@@ -14,61 +17,69 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
 {
     /**
      * The AlertID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | This type is deprecated.
+     * - base: xs:string
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $AlertID;
+    protected array $AlertID = [];
     /**
      * Constructor method for MyMessagesAlertIDArrayType
      * @uses MyMessagesAlertIDArrayType::setAlertID()
      * @param string[] $alertID
      */
-    public function __construct(array $alertID = array())
+    public function __construct(array $alertID = [])
     {
         $this
             ->setAlertID($alertID);
     }
     /**
      * Get AlertID value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getAlertID()
+    public function getAlertID(): array
     {
         return $this->AlertID;
     }
     /**
+     * This method is responsible for validating the values passed to the setAlertID method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setAlertID method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateAlertIDForArrayConstraintsFromSetAlertID(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myMessagesAlertIDArrayTypeAlertIDItem) {
+            // validation for constraint: itemType
+            if (!is_string($myMessagesAlertIDArrayTypeAlertIDItem)) {
+                $invalidValues[] = is_object($myMessagesAlertIDArrayTypeAlertIDItem) ? get_class($myMessagesAlertIDArrayTypeAlertIDItem) : sprintf('%s(%s)', gettype($myMessagesAlertIDArrayTypeAlertIDItem), var_export($myMessagesAlertIDArrayTypeAlertIDItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The AlertID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set AlertID value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $alertID
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
      */
-    public function setAlertID(array $alertID = array())
+    public function setAlertID(array $alertID = []): self
     {
-        foreach ($alertID as $myMessagesAlertIDArrayTypeAlertIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($myMessagesAlertIDArrayTypeAlertIDItem)) {
-                throw new \InvalidArgumentException(sprintf('The AlertID property can only contain items of string, "%s" given', is_object($myMessagesAlertIDArrayTypeAlertIDItem) ? get_class($myMessagesAlertIDArrayTypeAlertIDItem) : gettype($myMessagesAlertIDArrayTypeAlertIDItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($alertIDArrayErrorMessage = self::validateAlertIDForArrayConstraintsFromSetAlertID($alertID))) {
+            throw new InvalidArgumentException($alertIDArrayErrorMessage, __LINE__);
         }
         $this->AlertID = $alertID;
-        return $this;
-    }
-    /**
-     * Add item to AlertID value
-     * @throws \InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
-     */
-    public function addToAlertID($item)
-    {
-        // validation for constraint: itemType
-        if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The AlertID property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->AlertID[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +87,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return string|null
      */
-    public function current()
+    public function current(): ?string
     {
         return parent::current();
     }
@@ -86,7 +97,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return string|null
      */
-    public function item($index)
+    public function item($index): ?string
     {
         return parent::item($index);
     }
@@ -95,7 +106,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return string|null
      */
-    public function first()
+    public function first(): ?string
     {
         return parent::first();
     }
@@ -104,7 +115,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return string|null
      */
-    public function last()
+    public function last(): ?string
     {
         return parent::last();
     }
@@ -114,37 +125,32 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return string|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?string
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param string $item
+     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!is_string($item)) {
+            throw new InvalidArgumentException(sprintf('The AlertID property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string AlertID
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'AlertID';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

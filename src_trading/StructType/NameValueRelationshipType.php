@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for NameValueRelationshipType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Information about a parent name-value pair that indicates the relationships between Item Specifics.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class NameValueRelationshipType extends AbstractStructBase
 {
     /**
      * The ParentName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of another Item Specific that the current value depends on. For example, in a clothing category, "Size Type" could be recommended as a parent of Size.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ParentName;
+    protected ?string $ParentName = null;
     /**
      * The ParentValue
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The value of another Item Specific that the current value depends on. For example, in a clothing category, if "Size Type" is the <b>ParentName</b>, then "Petite" could be recommended as a parent value for <b>Size</b> =
      * <code>Medium</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ParentValue;
+    protected ?string $ParentValue = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for NameValueRelationshipType
      * @uses NameValueRelationshipType::setParentName()
@@ -41,9 +44,9 @@ class NameValueRelationshipType extends AbstractStructBase
      * @uses NameValueRelationshipType::setAny()
      * @param string $parentName
      * @param string $parentValue
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($parentName = null, $parentValue = null, \DOMDocument $any = null)
+    public function __construct(?string $parentName = null, ?string $parentValue = null, $any = null)
     {
         $this
             ->setParentName($parentName)
@@ -54,7 +57,7 @@ class NameValueRelationshipType extends AbstractStructBase
      * Get ParentName value
      * @return string|null
      */
-    public function getParentName()
+    public function getParentName(): ?string
     {
         return $this->ParentName;
     }
@@ -63,20 +66,21 @@ class NameValueRelationshipType extends AbstractStructBase
      * @param string $parentName
      * @return \macropage\ebaysdk\trading\StructType\NameValueRelationshipType
      */
-    public function setParentName($parentName = null)
+    public function setParentName(?string $parentName = null): self
     {
         // validation for constraint: string
         if (!is_null($parentName) && !is_string($parentName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($parentName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($parentName, true), gettype($parentName)), __LINE__);
         }
         $this->ParentName = $parentName;
+        
         return $this;
     }
     /**
      * Get ParentValue value
      * @return string|null
      */
-    public function getParentValue()
+    public function getParentValue(): ?string
     {
         return $this->ParentValue;
     }
@@ -85,65 +89,47 @@ class NameValueRelationshipType extends AbstractStructBase
      * @param string $parentValue
      * @return \macropage\ebaysdk\trading\StructType\NameValueRelationshipType
      */
-    public function setParentValue($parentValue = null)
+    public function setParentValue(?string $parentValue = null): self
     {
         // validation for constraint: string
         if (!is_null($parentValue) && !is_string($parentValue)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($parentValue)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($parentValue, true), gettype($parentValue)), __LINE__);
         }
         $this->ParentValue = $parentValue;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\NameValueRelationshipType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\NameValueRelationshipType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\NameValueRelationshipType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

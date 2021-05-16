@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerAutoListType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Provides information about an automated listing rule. Automated listing rules cannot be combined with automated relisting rules. A template can have one set of information per automated listing rule specified.
  * @subpackage Structs
  */
@@ -14,34 +17,34 @@ class SellingManagerAutoListType extends AbstractStructBase
 {
     /**
      * The SourceSaleTemplateID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The source template ID for the rule that was retrieved. In the case of automated listing rules retrieved for an item, even if the item does not have an associated automation rule, an automated listing rule is inherited from the
      * source template.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SourceSaleTemplateID;
+    protected ?int $SourceSaleTemplateID = null;
     /**
      * The KeepMinActive
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies an automated listing rule that keeps a minimum number of listings on the site.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType
+     * @var \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType|null
      */
-    public $KeepMinActive;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $KeepMinActive = null;
     /**
      * The ListAccordingToSchedule
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies an automated listing rule that lists items according to a specified schedule.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType
+     * @var \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType|null
      */
-    public $ListAccordingToSchedule;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $ListAccordingToSchedule = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerAutoListType
      * @uses SellingManagerAutoListType::setSourceSaleTemplateID()
@@ -51,9 +54,9 @@ class SellingManagerAutoListType extends AbstractStructBase
      * @param int $sourceSaleTemplateID
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sourceSaleTemplateID = null, \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive = null, \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule = null, \DOMDocument $any = null)
+    public function __construct(?int $sourceSaleTemplateID = null, ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive = null, ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule = null, $any = null)
     {
         $this
             ->setSourceSaleTemplateID($sourceSaleTemplateID)
@@ -65,7 +68,7 @@ class SellingManagerAutoListType extends AbstractStructBase
      * Get SourceSaleTemplateID value
      * @return int|null
      */
-    public function getSourceSaleTemplateID()
+    public function getSourceSaleTemplateID(): ?int
     {
         return $this->SourceSaleTemplateID;
     }
@@ -74,20 +77,21 @@ class SellingManagerAutoListType extends AbstractStructBase
      * @param int $sourceSaleTemplateID
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType
      */
-    public function setSourceSaleTemplateID($sourceSaleTemplateID = null)
+    public function setSourceSaleTemplateID(?int $sourceSaleTemplateID = null): self
     {
         // validation for constraint: int
-        if (!is_null($sourceSaleTemplateID) && !is_numeric($sourceSaleTemplateID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($sourceSaleTemplateID)), __LINE__);
+        if (!is_null($sourceSaleTemplateID) && !(is_int($sourceSaleTemplateID) || ctype_digit($sourceSaleTemplateID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($sourceSaleTemplateID, true), gettype($sourceSaleTemplateID)), __LINE__);
         }
         $this->SourceSaleTemplateID = $sourceSaleTemplateID;
+        
         return $this;
     }
     /**
      * Get KeepMinActive value
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType|null
      */
-    public function getKeepMinActive()
+    public function getKeepMinActive(): ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType
     {
         return $this->KeepMinActive;
     }
@@ -96,16 +100,17 @@ class SellingManagerAutoListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType
      */
-    public function setKeepMinActive(\macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive = null)
+    public function setKeepMinActive(?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListMinActiveItemsType $keepMinActive = null): self
     {
         $this->KeepMinActive = $keepMinActive;
+        
         return $this;
     }
     /**
      * Get ListAccordingToSchedule value
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType|null
      */
-    public function getListAccordingToSchedule()
+    public function getListAccordingToSchedule(): ?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType
     {
         return $this->ListAccordingToSchedule;
     }
@@ -114,61 +119,43 @@ class SellingManagerAutoListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType
      */
-    public function setListAccordingToSchedule(\macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule = null)
+    public function setListAccordingToSchedule(?\macropage\ebaysdk\trading\StructType\SellingManagerAutoListAccordingToScheduleType $listAccordingToSchedule = null): self
     {
         $this->ListAccordingToSchedule = $listAccordingToSchedule;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerAutoListType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

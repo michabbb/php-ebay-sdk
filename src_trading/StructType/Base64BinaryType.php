@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for Base64BinaryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format by translating it into a radix-64 representation. The term "Base64" originates from a specific MIME content transfer encoding.
  * <br/><br/> <span class="tablenote"> <strong>Note:</strong> This type contains the name or reference ID of the binary attachment, not the attachment data. </span>
  * @subpackage Structs
@@ -15,16 +18,16 @@ class Base64BinaryType extends AbstractStructBase
 {
     /**
      * The _
-     * @var string
+     * @var string|null
      */
-    public $_;
+    protected ?string $_ = null;
     /**
      * The contentType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This optional attribute allows the binary attachment to be named.
-     * @var string
+     * @var string|null
      */
-    public $contentType;
+    protected ?string $contentType = null;
     /**
      * Constructor method for Base64BinaryType
      * @uses Base64BinaryType::set_()
@@ -32,7 +35,7 @@ class Base64BinaryType extends AbstractStructBase
      * @param string $_
      * @param string $contentType
      */
-    public function __construct($_ = null, $contentType = null)
+    public function __construct(?string $_ = null, ?string $contentType = null)
     {
         $this
             ->set_($_)
@@ -42,7 +45,7 @@ class Base64BinaryType extends AbstractStructBase
      * Get _ value
      * @return string|null
      */
-    public function get_()
+    public function get_(): ?string
     {
         return $this->_;
     }
@@ -51,20 +54,21 @@ class Base64BinaryType extends AbstractStructBase
      * @param string $_
      * @return \macropage\ebaysdk\trading\StructType\Base64BinaryType
      */
-    public function set_($_ = null)
+    public function set_(?string $_ = null): self
     {
         // validation for constraint: string
         if (!is_null($_) && !is_string($_)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($_)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($_, true), gettype($_)), __LINE__);
         }
         $this->_ = $_;
+        
         return $this;
     }
     /**
      * Get contentType value
      * @return string|null
      */
-    public function getContentType()
+    public function getContentType(): ?string
     {
         return $this->contentType;
     }
@@ -73,33 +77,14 @@ class Base64BinaryType extends AbstractStructBase
      * @param string $contentType
      * @return \macropage\ebaysdk\trading\StructType\Base64BinaryType
      */
-    public function setContentType($contentType = null)
+    public function setContentType(?string $contentType = null): self
     {
         // validation for constraint: string
         if (!is_null($contentType) && !is_string($contentType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($contentType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($contentType, true), gettype($contentType)), __LINE__);
         }
         $this->contentType = $contentType;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\Base64BinaryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

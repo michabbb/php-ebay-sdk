@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreFontType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Store font set.
  * @subpackage Structs
  */
@@ -14,81 +17,81 @@ class StoreFontType extends AbstractStructBase
 {
     /**
      * The NameFace
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font for the Store name.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $NameFace;
+    protected ?string $NameFace = null;
     /**
      * The NameSize
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font size for the Store name.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $NameSize;
+    protected ?string $NameSize = null;
     /**
      * The NameColor
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font color for the Store name. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $NameColor;
+    protected ?string $NameColor = null;
     /**
      * The TitleFace
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font for the Store section title.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TitleFace;
+    protected ?string $TitleFace = null;
     /**
      * The TitleSize
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font size for the Store section title.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TitleSize;
+    protected ?string $TitleSize = null;
     /**
      * The TitleColor
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font color for the Store section title. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TitleColor;
+    protected ?string $TitleColor = null;
     /**
      * The DescFace
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font for the Store description.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DescFace;
+    protected ?string $DescFace = null;
     /**
      * The DescSize
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font size for the Store description.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DescSize;
+    protected ?string $DescSize = null;
     /**
      * The DescColor
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Font color for the Store description. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DescColor;
+    protected ?string $DescColor = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreFontType
      * @uses StoreFontType::setNameFace()
@@ -110,9 +113,9 @@ class StoreFontType extends AbstractStructBase
      * @param string $descFace
      * @param string $descSize
      * @param string $descColor
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($nameFace = null, $nameSize = null, $nameColor = null, $titleFace = null, $titleSize = null, $titleColor = null, $descFace = null, $descSize = null, $descColor = null, \DOMDocument $any = null)
+    public function __construct(?string $nameFace = null, ?string $nameSize = null, ?string $nameColor = null, ?string $titleFace = null, ?string $titleSize = null, ?string $titleColor = null, ?string $descFace = null, ?string $descSize = null, ?string $descColor = null, $any = null)
     {
         $this
             ->setNameFace($nameFace)
@@ -130,7 +133,7 @@ class StoreFontType extends AbstractStructBase
      * Get NameFace value
      * @return string|null
      */
-    public function getNameFace()
+    public function getNameFace(): ?string
     {
         return $this->NameFace;
     }
@@ -138,24 +141,25 @@ class StoreFontType extends AbstractStructBase
      * Set NameFace value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $nameFace
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setNameFace($nameFace = null)
+    public function setNameFace(?string $nameFace = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid($nameFace)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $nameFace, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType', is_array($nameFace) ? implode(', ', $nameFace) : var_export($nameFace, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
         }
         $this->NameFace = $nameFace;
+        
         return $this;
     }
     /**
      * Get NameSize value
      * @return string|null
      */
-    public function getNameSize()
+    public function getNameSize(): ?string
     {
         return $this->NameSize;
     }
@@ -163,24 +167,25 @@ class StoreFontType extends AbstractStructBase
      * Set NameSize value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $nameSize
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setNameSize($nameSize = null)
+    public function setNameSize(?string $nameSize = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid($nameSize)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $nameSize, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType', is_array($nameSize) ? implode(', ', $nameSize) : var_export($nameSize, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
         }
         $this->NameSize = $nameSize;
+        
         return $this;
     }
     /**
      * Get NameColor value
      * @return string|null
      */
-    public function getNameColor()
+    public function getNameColor(): ?string
     {
         return $this->NameColor;
     }
@@ -189,20 +194,21 @@ class StoreFontType extends AbstractStructBase
      * @param string $nameColor
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setNameColor($nameColor = null)
+    public function setNameColor(?string $nameColor = null): self
     {
         // validation for constraint: string
         if (!is_null($nameColor) && !is_string($nameColor)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($nameColor)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($nameColor, true), gettype($nameColor)), __LINE__);
         }
         $this->NameColor = $nameColor;
+        
         return $this;
     }
     /**
      * Get TitleFace value
      * @return string|null
      */
-    public function getTitleFace()
+    public function getTitleFace(): ?string
     {
         return $this->TitleFace;
     }
@@ -210,24 +216,25 @@ class StoreFontType extends AbstractStructBase
      * Set TitleFace value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $titleFace
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setTitleFace($titleFace = null)
+    public function setTitleFace(?string $titleFace = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid($titleFace)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $titleFace, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType', is_array($titleFace) ? implode(', ', $titleFace) : var_export($titleFace, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
         }
         $this->TitleFace = $titleFace;
+        
         return $this;
     }
     /**
      * Get TitleSize value
      * @return string|null
      */
-    public function getTitleSize()
+    public function getTitleSize(): ?string
     {
         return $this->TitleSize;
     }
@@ -235,24 +242,25 @@ class StoreFontType extends AbstractStructBase
      * Set TitleSize value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $titleSize
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setTitleSize($titleSize = null)
+    public function setTitleSize(?string $titleSize = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid($titleSize)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $titleSize, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType', is_array($titleSize) ? implode(', ', $titleSize) : var_export($titleSize, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
         }
         $this->TitleSize = $titleSize;
+        
         return $this;
     }
     /**
      * Get TitleColor value
      * @return string|null
      */
-    public function getTitleColor()
+    public function getTitleColor(): ?string
     {
         return $this->TitleColor;
     }
@@ -261,20 +269,21 @@ class StoreFontType extends AbstractStructBase
      * @param string $titleColor
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setTitleColor($titleColor = null)
+    public function setTitleColor(?string $titleColor = null): self
     {
         // validation for constraint: string
         if (!is_null($titleColor) && !is_string($titleColor)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($titleColor)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($titleColor, true), gettype($titleColor)), __LINE__);
         }
         $this->TitleColor = $titleColor;
+        
         return $this;
     }
     /**
      * Get DescFace value
      * @return string|null
      */
-    public function getDescFace()
+    public function getDescFace(): ?string
     {
         return $this->DescFace;
     }
@@ -282,24 +291,25 @@ class StoreFontType extends AbstractStructBase
      * Set DescFace value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $descFace
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setDescFace($descFace = null)
+    public function setDescFace(?string $descFace = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::valueIsValid($descFace)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $descFace, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType', is_array($descFace) ? implode(', ', $descFace) : var_export($descFace, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontFaceCodeType::getValidValues())), __LINE__);
         }
         $this->DescFace = $descFace;
+        
         return $this;
     }
     /**
      * Get DescSize value
      * @return string|null
      */
-    public function getDescSize()
+    public function getDescSize(): ?string
     {
         return $this->DescSize;
     }
@@ -307,24 +317,25 @@ class StoreFontType extends AbstractStructBase
      * Set DescSize value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $descSize
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setDescSize($descSize = null)
+    public function setDescSize(?string $descSize = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::valueIsValid($descSize)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $descSize, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType', is_array($descSize) ? implode(', ', $descSize) : var_export($descSize, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreFontSizeCodeType::getValidValues())), __LINE__);
         }
         $this->DescSize = $descSize;
+        
         return $this;
     }
     /**
      * Get DescColor value
      * @return string|null
      */
-    public function getDescColor()
+    public function getDescColor(): ?string
     {
         return $this->DescColor;
     }
@@ -333,65 +344,47 @@ class StoreFontType extends AbstractStructBase
      * @param string $descColor
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setDescColor($descColor = null)
+    public function setDescColor(?string $descColor = null): self
     {
         // validation for constraint: string
         if (!is_null($descColor) && !is_string($descColor)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($descColor)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($descColor, true), gettype($descColor)), __LINE__);
         }
         $this->DescColor = $descColor;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreFontType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreFontType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreFontType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

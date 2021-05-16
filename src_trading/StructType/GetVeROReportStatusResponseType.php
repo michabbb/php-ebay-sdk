@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetVeROReportStatusResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base response of the <strong>GetVeROReportStatus</strong> call. This response contains status information for items reported by the VeRO Program member.
  * @subpackage Structs
  */
@@ -14,60 +17,60 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
 {
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains information regarding the pagination of data (if pagination is used), including total number of pages and total number of entries.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The HasMoreItems
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If true, there are more items yet to be retrieved. Additional calls with higher page numbers or more items per page must be made to retrieve these items. Not returned if no items match the request.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HasMoreItems;
+    protected ?bool $HasMoreItems = null;
     /**
      * The ItemsPerPage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the maximum number of Reported Item objects that can be returned in any given call. <br/>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemsPerPage;
+    protected ?int $ItemsPerPage = null;
     /**
      * The PageNumber
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the page of data returned by the current call. For instance, for the first set of items can be returned, this field has a value of one. <br/>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PageNumber;
+    protected ?int $PageNumber = null;
     /**
      * The VeROReportPacketID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The packet ID for status being returned.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $VeROReportPacketID;
+    protected ?int $VeROReportPacketID = null;
     /**
      * The VeROReportPacketStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Status of the packet.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $VeROReportPacketStatus;
+    protected ?string $VeROReportPacketStatus = null;
     /**
      * The ReportedItemDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container of one or more reported items that match the input criteria in the call request. Returns empty if no items are available that match the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType|null
      */
-    public $ReportedItemDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $ReportedItemDetails = null;
     /**
      * Constructor method for GetVeROReportStatusResponseType
      * @uses GetVeROReportStatusResponseType::setPaginationResult()
@@ -85,7 +88,7 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param string $veROReportPacketStatus
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $hasMoreItems = null, $itemsPerPage = null, $pageNumber = null, $veROReportPacketID = null, $veROReportPacketStatus = null, \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreItems = null, ?int $itemsPerPage = null, ?int $pageNumber = null, ?int $veROReportPacketID = null, ?string $veROReportPacketStatus = null, ?\macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -100,7 +103,7 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -109,16 +112,17 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get HasMoreItems value
      * @return bool|null
      */
-    public function getHasMoreItems()
+    public function getHasMoreItems(): ?bool
     {
         return $this->HasMoreItems;
     }
@@ -127,20 +131,21 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param bool $hasMoreItems
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setHasMoreItems($hasMoreItems = null)
+    public function setHasMoreItems(?bool $hasMoreItems = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hasMoreItems) && !is_bool($hasMoreItems)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hasMoreItems)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hasMoreItems, true), gettype($hasMoreItems)), __LINE__);
         }
         $this->HasMoreItems = $hasMoreItems;
+        
         return $this;
     }
     /**
      * Get ItemsPerPage value
      * @return int|null
      */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): ?int
     {
         return $this->ItemsPerPage;
     }
@@ -149,20 +154,21 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param int $itemsPerPage
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setItemsPerPage($itemsPerPage = null)
+    public function setItemsPerPage(?int $itemsPerPage = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemsPerPage) && !is_numeric($itemsPerPage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemsPerPage)), __LINE__);
+        if (!is_null($itemsPerPage) && !(is_int($itemsPerPage) || ctype_digit($itemsPerPage))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemsPerPage, true), gettype($itemsPerPage)), __LINE__);
         }
         $this->ItemsPerPage = $itemsPerPage;
+        
         return $this;
     }
     /**
      * Get PageNumber value
      * @return int|null
      */
-    public function getPageNumber()
+    public function getPageNumber(): ?int
     {
         return $this->PageNumber;
     }
@@ -171,20 +177,21 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param int $pageNumber
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setPageNumber($pageNumber = null)
+    public function setPageNumber(?int $pageNumber = null): self
     {
         // validation for constraint: int
-        if (!is_null($pageNumber) && !is_numeric($pageNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pageNumber)), __LINE__);
+        if (!is_null($pageNumber) && !(is_int($pageNumber) || ctype_digit($pageNumber))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pageNumber, true), gettype($pageNumber)), __LINE__);
         }
         $this->PageNumber = $pageNumber;
+        
         return $this;
     }
     /**
      * Get VeROReportPacketID value
      * @return int|null
      */
-    public function getVeROReportPacketID()
+    public function getVeROReportPacketID(): ?int
     {
         return $this->VeROReportPacketID;
     }
@@ -193,20 +200,21 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param int $veROReportPacketID
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setVeROReportPacketID($veROReportPacketID = null)
+    public function setVeROReportPacketID(?int $veROReportPacketID = null): self
     {
         // validation for constraint: int
-        if (!is_null($veROReportPacketID) && !is_numeric($veROReportPacketID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($veROReportPacketID)), __LINE__);
+        if (!is_null($veROReportPacketID) && !(is_int($veROReportPacketID) || ctype_digit($veROReportPacketID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($veROReportPacketID, true), gettype($veROReportPacketID)), __LINE__);
         }
         $this->VeROReportPacketID = $veROReportPacketID;
+        
         return $this;
     }
     /**
      * Get VeROReportPacketStatus value
      * @return string|null
      */
-    public function getVeROReportPacketStatus()
+    public function getVeROReportPacketStatus(): ?string
     {
         return $this->VeROReportPacketStatus;
     }
@@ -214,24 +222,25 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * Set VeROReportPacketStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $veROReportPacketStatus
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setVeROReportPacketStatus($veROReportPacketStatus = null)
+    public function setVeROReportPacketStatus(?string $veROReportPacketStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType::valueIsValid($veROReportPacketStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $veROReportPacketStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType', is_array($veROReportPacketStatus) ? implode(', ', $veROReportPacketStatus) : var_export($veROReportPacketStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\VeROReportPacketStatusCodeType::getValidValues())), __LINE__);
         }
         $this->VeROReportPacketStatus = $veROReportPacketStatus;
+        
         return $this;
     }
     /**
      * Get ReportedItemDetails value
      * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType|null
      */
-    public function getReportedItemDetails()
+    public function getReportedItemDetails(): ?\macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
     {
         return $this->ReportedItemDetails;
     }
@@ -240,29 +249,10 @@ class GetVeROReportStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
      */
-    public function setReportedItemDetails(\macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails = null)
+    public function setReportedItemDetails(?\macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType $reportedItemDetails = null): self
     {
         $this->ReportedItemDetails = $reportedItemDetails;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

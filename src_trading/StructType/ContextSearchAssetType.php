@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ContextSearchAssetType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>ContextSearchAsset</b> container that is returned in the <b>GetContextualKeywords</b> response for each keyword that is found.
  * @subpackage Structs
  */
@@ -14,28 +17,28 @@ class ContextSearchAssetType extends AbstractStructBase
 {
     /**
      * The Keyword
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of the keyword that was found in the search.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Keyword;
+    protected ?string $Keyword = null;
     /**
      * The Category
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay category in which the keyword is used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CategoryType
+     * @var \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public $Category;
+    protected ?\macropage\ebaysdk\trading\StructType\CategoryType $Category = null;
     /**
      * The Ranking
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The ranking of the corresponding keyword/category combination relative to other keywords that were returned in the response.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Ranking;
+    protected ?int $Ranking = null;
     /**
      * Constructor method for ContextSearchAssetType
      * @uses ContextSearchAssetType::setKeyword()
@@ -45,7 +48,7 @@ class ContextSearchAssetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $category
      * @param int $ranking
      */
-    public function __construct($keyword = null, \macropage\ebaysdk\trading\StructType\CategoryType $category = null, $ranking = null)
+    public function __construct(?string $keyword = null, ?\macropage\ebaysdk\trading\StructType\CategoryType $category = null, ?int $ranking = null)
     {
         $this
             ->setKeyword($keyword)
@@ -56,7 +59,7 @@ class ContextSearchAssetType extends AbstractStructBase
      * Get Keyword value
      * @return string|null
      */
-    public function getKeyword()
+    public function getKeyword(): ?string
     {
         return $this->Keyword;
     }
@@ -65,20 +68,21 @@ class ContextSearchAssetType extends AbstractStructBase
      * @param string $keyword
      * @return \macropage\ebaysdk\trading\StructType\ContextSearchAssetType
      */
-    public function setKeyword($keyword = null)
+    public function setKeyword(?string $keyword = null): self
     {
         // validation for constraint: string
         if (!is_null($keyword) && !is_string($keyword)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($keyword)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($keyword, true), gettype($keyword)), __LINE__);
         }
         $this->Keyword = $keyword;
+        
         return $this;
     }
     /**
      * Get Category value
      * @return \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public function getCategory()
+    public function getCategory(): ?\macropage\ebaysdk\trading\StructType\CategoryType
     {
         return $this->Category;
     }
@@ -87,16 +91,17 @@ class ContextSearchAssetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $category
      * @return \macropage\ebaysdk\trading\StructType\ContextSearchAssetType
      */
-    public function setCategory(\macropage\ebaysdk\trading\StructType\CategoryType $category = null)
+    public function setCategory(?\macropage\ebaysdk\trading\StructType\CategoryType $category = null): self
     {
         $this->Category = $category;
+        
         return $this;
     }
     /**
      * Get Ranking value
      * @return int|null
      */
-    public function getRanking()
+    public function getRanking(): ?int
     {
         return $this->Ranking;
     }
@@ -105,33 +110,14 @@ class ContextSearchAssetType extends AbstractStructBase
      * @param int $ranking
      * @return \macropage\ebaysdk\trading\StructType\ContextSearchAssetType
      */
-    public function setRanking($ranking = null)
+    public function setRanking(?int $ranking = null): self
     {
         // validation for constraint: int
-        if (!is_null($ranking) && !is_numeric($ranking)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($ranking)), __LINE__);
+        if (!is_null($ranking) && !(is_int($ranking) || ctype_digit($ranking))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($ranking, true), gettype($ranking)), __LINE__);
         }
         $this->Ranking = $ranking;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ContextSearchAssetType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

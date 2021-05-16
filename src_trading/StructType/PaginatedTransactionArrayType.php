@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PaginatedTransactionArrayType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains a paginated list of order line items.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class PaginatedTransactionArrayType extends AbstractStructBase
 {
     /**
      * The TransactionArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains a list of Transaction objects. Returned as an empty tag if no applicable order line items exist.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\TransactionArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\TransactionArrayType|null
      */
-    public $TransactionArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $TransactionArray = null;
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Provides information about the list of order line items, including number of pages and number of entries.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * Constructor method for PaginatedTransactionArrayType
      * @uses PaginatedTransactionArrayType::setTransactionArray()
@@ -35,7 +38,7 @@ class PaginatedTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
     {
         $this
             ->setTransactionArray($transactionArray)
@@ -45,7 +48,7 @@ class PaginatedTransactionArrayType extends AbstractStructBase
      * Get TransactionArray value
      * @return \macropage\ebaysdk\trading\ArrayType\TransactionArrayType|null
      */
-    public function getTransactionArray()
+    public function getTransactionArray(): ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType
     {
         return $this->TransactionArray;
     }
@@ -54,16 +57,17 @@ class PaginatedTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray
      * @return \macropage\ebaysdk\trading\StructType\PaginatedTransactionArrayType
      */
-    public function setTransactionArray(\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null)
+    public function setTransactionArray(?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null): self
     {
         $this->TransactionArray = $transactionArray;
+        
         return $this;
     }
     /**
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -72,29 +76,10 @@ class PaginatedTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\PaginatedTransactionArrayType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PaginatedTransactionArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

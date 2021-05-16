@@ -1,18 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace macropage\ebaysdk\trading;
 
 
 use macropage\ebaysdk\base\base;
 use macropage\ebaysdk\trading\ClassMap as ClassMapTradingService;
-use macropage\ebaysdk\trading\ServiceType as EbayTradingSerice;
+use macropage\ebaysdk\trading\ServiceType\Service as EbayTradingService;
 use macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType;
 use macropage\ebaysdk\trading\StructType\UserIdPasswordType;
+use SoapFault;
 use WsdlToPhp\PackageBase\AbstractSoapClientBase as AbstractSoapClientBaseAlias;
 
 /**
  * Class tradingservice
  * @package macropage\sdk_ebay_soap
+ *
+ * @see grep --color=never "public function" src_trading/ServiceType/* -R |grep --color=never Request |cut -d ":" -f 2|sed -E 's/\s+//'|sed 's/public function/* @method/' > tradingmethos
  *
  * @method AddDispute(\macropage\ebaysdk\trading\StructType\AddDisputeRequestType $addDisputeRequest)
  * @method AddDisputeResponse(\macropage\ebaysdk\trading\StructType\AddDisputeResponseRequestType $addDisputeResponseRequest)
@@ -124,7 +128,6 @@ use WsdlToPhp\PackageBase\AbstractSoapClientBase as AbstractSoapClientBaseAlias;
  * @method ReviseMyMessagesFolders(\macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersRequestType $reviseMyMessagesFoldersRequest)
  * @method ReviseSellingManagerInventoryFolder(\macropage\ebaysdk\trading\StructType\ReviseSellingManagerInventoryFolderRequestType $reviseSellingManagerInventoryFolderRequest)
  * @method ReviseSellingManagerProduct(\macropage\ebaysdk\trading\StructType\ReviseSellingManagerProductRequestType $reviseSellingManagerProductRequest)
- * @method ReviseSellingManagerSaleRecord(\macropage\ebaysdk\trading\StructType\ReviseSellingManagerSaleRecordRequestType $reviseSellingManagerSaleRecordRequest)
  * @method ReviseSellingManagerTemplate(\macropage\ebaysdk\trading\StructType\ReviseSellingManagerTemplateRequestType $reviseSellingManagerTemplateRequest)
  * @method RevokeToken(\macropage\ebaysdk\trading\StructType\RevokeTokenRequestType $revokeTokenRequest)
  * @method SaveItemToSellingManagerTemplate(\macropage\ebaysdk\trading\StructType\SaveItemToSellingManagerTemplateRequestType $saveItemToSellingManagerTemplateRequest)
@@ -157,18 +160,13 @@ use WsdlToPhp\PackageBase\AbstractSoapClientBase as AbstractSoapClientBaseAlias;
  */
 class trading extends base {
 
-	/**
-	 * @var array
-	 */
-	private $SoapServicoptions;
-
-	private $api_endpoints = [
+	private array $api_endpoints = [
 		'live'    => 'https://api.ebay.com/wsapi',
 		'sandbox' => 'https://api.sandbox.ebay.com/wsapi'
 	];
 
 	public function __construct(array $wsdlOptions = [],$api_endpoint='live') {
-		$this->SoapServicoptions = [
+		$SoapServicoptions = [
 			AbstractSoapClientBaseAlias::WSDL_URL                => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'trading.wsdl',
 			AbstractSoapClientBaseAlias::WSDL_CLASSMAP           => ClassMapTradingService::get(),
 			AbstractSoapClientBaseAlias::WSDL_TRACE              => true,
@@ -184,9 +182,9 @@ class trading extends base {
 																						  ])
 		];
 
-		$wsdlOptions = $this->overrideSoapWsdlOptions($this->SoapServicoptions,$wsdlOptions);
+		$wsdlOptions = $this->overrideSoapWsdlOptions($SoapServicoptions,$wsdlOptions);
 
-		$this->Service = new EbayTradingSerice\Service($wsdlOptions);
+		$this->Service = new EbayTradingService($wsdlOptions);
 		if (array_key_exists($api_endpoint,$this->api_endpoints)) {
 			$this->api_endpoint = $this->api_endpoints[$api_endpoint];
 		} else {
@@ -194,38 +192,28 @@ class trading extends base {
 		}
 	}
 
-	/**
-	 * @param $name
-	 * @param $arguments
-	 *
-	 * @return mixed
-	 * @throws \SoapFault
-	 */
-	public function __call($name, $arguments) {
+    /**
+     * @throws SoapFault
+     */
+    public function __call(string $name, $arguments) {
 		return $this->call($name,$arguments);
 	}
 
-	/**
-	 * @param $appid
-	 * @param $devid
-	 * @param $authtoken
-	 */
-	public function setCredentials($appid, $devid, $authtoken) {
+	public function setCredentials(string $appid, string $devid, string $authtoken): void
+    {
 		$this->appid                         = $appid;
 		$CustomSecurityHeader                = new CustomSecurityHeaderType();
-		$CustomSecurityHeader->eBayAuthToken = $authtoken;
+		$CustomSecurityHeader->setEBayAuthToken($authtoken);
 		$Credentials                         = new UserIdPasswordType(
 			$appid,
 			$devid
 		);
-		$CustomSecurityHeader->Credentials   = $Credentials;
+		$CustomSecurityHeader->setCredentials($Credentials);
 		$this->Service->setSoapHeaderRequesterCredentials($CustomSecurityHeader);
 	}
 
-	/**
-	 * @param mixed $api_endpoint
-	 */
-	public function setApiEndpoint($api_endpoint) {
+	public function setApiEndpoint(string $api_endpoint): void
+    {
 		$this->api_endpoint = $api_endpoint;
 	}
 

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VariationDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>VariationDetails</b> container that is returned in <b>GeteBayDetails</b> if <b>VariationDetails</b> is included in the request as a <b>DetailName</b> filter, or if <b>GeteBayDetails</b> is called with no
  * <b>DetailName</b> filters.
  * @subpackage Structs
@@ -15,50 +18,50 @@ class VariationDetailsType extends AbstractStructBase
 {
     /**
      * The MaxVariationsPerItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the maximum number of item variations that the site will allow within one multi-variation listing.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxVariationsPerItem;
+    protected ?int $MaxVariationsPerItem = null;
     /**
      * The MaxNamesPerVariationSpecificsSet
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the maximum number of variation specific sets that the site will allow per listing. Typical variation specific sets for clothing may be 'Color', 'Size', 'Long Sleeve', etc.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxNamesPerVariationSpecificsSet;
+    protected ?int $MaxNamesPerVariationSpecificsSet = null;
     /**
      * The MaxValuesPerVariationSpecificsSetName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the maximum number of values that the site will allow within one variation specific set. For example, if the variation specific set was 'Color', the seller could specify as many colors that are available up to
      * this maximum value.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxValuesPerVariationSpecificsSetName;
+    protected ?int $MaxValuesPerVariationSpecificsSetName = null;
     /**
      * The DetailVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the latest version number for this field. The version can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailVersion;
+    protected ?string $DetailVersion = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Gives the time in GMT that the feature flags for the details were last updated. This timestamp can be used to determine if and when to refresh cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for VariationDetailsType
      * @uses VariationDetailsType::setMaxVariationsPerItem()
@@ -72,9 +75,9 @@ class VariationDetailsType extends AbstractStructBase
      * @param int $maxValuesPerVariationSpecificsSetName
      * @param string $detailVersion
      * @param string $updateTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($maxVariationsPerItem = null, $maxNamesPerVariationSpecificsSet = null, $maxValuesPerVariationSpecificsSetName = null, $detailVersion = null, $updateTime = null, \DOMDocument $any = null)
+    public function __construct(?int $maxVariationsPerItem = null, ?int $maxNamesPerVariationSpecificsSet = null, ?int $maxValuesPerVariationSpecificsSetName = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setMaxVariationsPerItem($maxVariationsPerItem)
@@ -88,7 +91,7 @@ class VariationDetailsType extends AbstractStructBase
      * Get MaxVariationsPerItem value
      * @return int|null
      */
-    public function getMaxVariationsPerItem()
+    public function getMaxVariationsPerItem(): ?int
     {
         return $this->MaxVariationsPerItem;
     }
@@ -97,20 +100,21 @@ class VariationDetailsType extends AbstractStructBase
      * @param int $maxVariationsPerItem
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setMaxVariationsPerItem($maxVariationsPerItem = null)
+    public function setMaxVariationsPerItem(?int $maxVariationsPerItem = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxVariationsPerItem) && !is_numeric($maxVariationsPerItem)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxVariationsPerItem)), __LINE__);
+        if (!is_null($maxVariationsPerItem) && !(is_int($maxVariationsPerItem) || ctype_digit($maxVariationsPerItem))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxVariationsPerItem, true), gettype($maxVariationsPerItem)), __LINE__);
         }
         $this->MaxVariationsPerItem = $maxVariationsPerItem;
+        
         return $this;
     }
     /**
      * Get MaxNamesPerVariationSpecificsSet value
      * @return int|null
      */
-    public function getMaxNamesPerVariationSpecificsSet()
+    public function getMaxNamesPerVariationSpecificsSet(): ?int
     {
         return $this->MaxNamesPerVariationSpecificsSet;
     }
@@ -119,20 +123,21 @@ class VariationDetailsType extends AbstractStructBase
      * @param int $maxNamesPerVariationSpecificsSet
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setMaxNamesPerVariationSpecificsSet($maxNamesPerVariationSpecificsSet = null)
+    public function setMaxNamesPerVariationSpecificsSet(?int $maxNamesPerVariationSpecificsSet = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxNamesPerVariationSpecificsSet) && !is_numeric($maxNamesPerVariationSpecificsSet)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxNamesPerVariationSpecificsSet)), __LINE__);
+        if (!is_null($maxNamesPerVariationSpecificsSet) && !(is_int($maxNamesPerVariationSpecificsSet) || ctype_digit($maxNamesPerVariationSpecificsSet))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxNamesPerVariationSpecificsSet, true), gettype($maxNamesPerVariationSpecificsSet)), __LINE__);
         }
         $this->MaxNamesPerVariationSpecificsSet = $maxNamesPerVariationSpecificsSet;
+        
         return $this;
     }
     /**
      * Get MaxValuesPerVariationSpecificsSetName value
      * @return int|null
      */
-    public function getMaxValuesPerVariationSpecificsSetName()
+    public function getMaxValuesPerVariationSpecificsSetName(): ?int
     {
         return $this->MaxValuesPerVariationSpecificsSetName;
     }
@@ -141,20 +146,21 @@ class VariationDetailsType extends AbstractStructBase
      * @param int $maxValuesPerVariationSpecificsSetName
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setMaxValuesPerVariationSpecificsSetName($maxValuesPerVariationSpecificsSetName = null)
+    public function setMaxValuesPerVariationSpecificsSetName(?int $maxValuesPerVariationSpecificsSetName = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxValuesPerVariationSpecificsSetName) && !is_numeric($maxValuesPerVariationSpecificsSetName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxValuesPerVariationSpecificsSetName)), __LINE__);
+        if (!is_null($maxValuesPerVariationSpecificsSetName) && !(is_int($maxValuesPerVariationSpecificsSetName) || ctype_digit($maxValuesPerVariationSpecificsSetName))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxValuesPerVariationSpecificsSetName, true), gettype($maxValuesPerVariationSpecificsSetName)), __LINE__);
         }
         $this->MaxValuesPerVariationSpecificsSetName = $maxValuesPerVariationSpecificsSetName;
+        
         return $this;
     }
     /**
      * Get DetailVersion value
      * @return string|null
      */
-    public function getDetailVersion()
+    public function getDetailVersion(): ?string
     {
         return $this->DetailVersion;
     }
@@ -163,20 +169,21 @@ class VariationDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setDetailVersion($detailVersion = null)
+    public function setDetailVersion(?string $detailVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($detailVersion) && !is_string($detailVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailVersion, true), gettype($detailVersion)), __LINE__);
         }
         $this->DetailVersion = $detailVersion;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -185,65 +192,47 @@ class VariationDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\VariationDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VariationDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

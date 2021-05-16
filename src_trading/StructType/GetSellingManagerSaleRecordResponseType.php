@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetSellingManagerSaleRecordResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The base response to a <b>GetSellingManagerSaleRecord</b> call.
  * @subpackage Structs
  */
@@ -14,18 +17,18 @@ class GetSellingManagerSaleRecordResponseType extends AbstractResponseType
 {
     /**
      * The SellingManagerSoldOrder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the data in a Selling Manager Sale Record.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType
+     * @var \macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType|null
      */
-    public $SellingManagerSoldOrder;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $SellingManagerSoldOrder = null;
     /**
      * Constructor method for GetSellingManagerSaleRecordResponseType
      * @uses GetSellingManagerSaleRecordResponseType::setSellingManagerSoldOrder()
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder = null)
     {
         $this
             ->setSellingManagerSoldOrder($sellingManagerSoldOrder);
@@ -34,7 +37,7 @@ class GetSellingManagerSaleRecordResponseType extends AbstractResponseType
      * Get SellingManagerSoldOrder value
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType|null
      */
-    public function getSellingManagerSoldOrder()
+    public function getSellingManagerSoldOrder(): ?\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType
     {
         return $this->SellingManagerSoldOrder;
     }
@@ -43,29 +46,10 @@ class GetSellingManagerSaleRecordResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder
      * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerSaleRecordResponseType
      */
-    public function setSellingManagerSoldOrder(\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder = null)
+    public function setSellingManagerSoldOrder(?\macropage\ebaysdk\trading\StructType\SellingManagerSoldOrderType $sellingManagerSoldOrder = null): self
     {
         $this->SellingManagerSoldOrder = $sellingManagerSoldOrder;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerSaleRecordResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for RecommendationsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used to provide details about recommended Item Specifics and Product Identifier types.
  * @subpackage Structs
  */
@@ -14,54 +17,48 @@ class RecommendationsType extends AbstractStructBase
 {
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the leaf category for which the recommended Item Specifics and Product Identifier types apply to. This is always a category ID that you specified in the request.<br> <br> This field is always returned with
      * each <b>Recommendations</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The ProductIdentifiers
-     * Meta informations extracted from the WSDL
-     * - documentation: This container will consist of one or more Product Identifier types that are supported, or possibly required to be used when listing a product. These Product Identifier types will be common Global Trade Item Number (GTIN) types such
-     * as UPC, ISBN, and EAN. Each Product Identifier type that is applicable to the category will be returned in a separate <b>NameRecommendation</b> container. To see if one or more of the Product Identifier types are actually required at listing time,
-     * the seller will need to look at the <b>ValidationRules</b> container and the <b>MinRequired</b> value. If two Product Identifier types are returned, and the <b>MinRequired</b> value is the <code>2</code>, the seller will be required to use both
-     * Product Identifier types at listing time. If the <b>MinRequired</b> value was <code>0</code>, one or both of those Product Identifier types could be used, but they would not be required. <br> <br> <span class="tablenote"><b>Note:</b> This container
-     * is for future use, and is not currently returned in the <b>GetCategorySpecifics</b> call. Until the <b>ProductIdentifiers</b> container is wired on and returned, an alternative way to see if a Product Identifier type is required for a category is to
-     * identify the Product Identifier type through the <b>Recommendations.NameRecommendation.Name</b> field in the <b>GetCategorySpecifics</b> response, and then look at the corresponding <b>Recommendations.NameRecommendation.ValidationRules.MinValues</b>
-     * field. The <b>GetCategoryFeatures</b> call can also be used, and the seller will look for the values returned for that category under the <b>EANEnabled</b>, <b>ISBNEnabled</b>, <b>UPCEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> fields that
-     * indicate the Product Identifier types that are supported/required for the category.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><strong>Note:</strong> This container was originally introduced into the Trading schema with the intention of separating Global Trade Item Numbers (GTINs) and other descriptive item specifics, but this
+     * container was never wired on/returned in <b>GetCategorySpecifics</b>. Instead, users will still find one or more relevant GTIN types under a <b>Recommendations.NameRecommendation.Name</b> field. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[]
      */
-    public $ProductIdentifiers;
+    protected array $ProductIdentifiers = [];
     /**
      * The NameRecommendation
-     * Meta informations extracted from the WSDL
-     * - documentation: This container consists of Item Specific name/value pairs that eBay recommends as popular within the specified category. If no recommended Item Specific name/value pairs are found for the category, this container will not be
-     * returned.
+     * Meta information extracted from the WSDL
+     * - documentation: This container consists of Item Specific name/value pairs that are mandatory, recommended, or optional for the specified category. The value returned in the corresponding <b>UsageConstraint</b> field, just introduced in Version 1111,
+     * will indicate if the Item Specific is required, recommended, or optional when listing in that category. <br/><br/> If no relevant Item Specific name/value pairs are found for the category, this container will not be returned.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    public $NameRecommendation;
+    protected array $NameRecommendation = [];
     /**
      * The Updated
-     * Meta informations extracted from the WSDL
-     * - documentation: If this field is returned as <code>true</code>, the recommended Item Specifics and/or Product Identifiers for this category have changed since the time you specified in the <b>LastUpdateTime</b> field. In this case, we suggest you
-     * retrieve the latest data for the category. If this field is returned as <code>false</code>, the recommended Item Specifics and/or Product Identifiers for this category have not changed since the time you specified.<br> <br> This field is only
-     * returned when the <b>LastUpdateTime</b> field is passed in the request.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is only returned if the user includes a timestamp in the <b>LastUpdateTime</b> field in the call request payload. If this field is returned as <code>true</code>, the Item Specific metadata for the specified category has
+     * changed since the date/time specified in the <b>LastUpdateTime</b> field. In this case, we suggest you retrieve the latest metadata for the category. If this field is returned as <code>false</code>, the Item Specific metadata for this category has
+     * not changed since the date/time specified in the <b>LastUpdateTime</b> field.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Updated;
+    protected ?bool $Updated = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for RecommendationsType
      * @uses RecommendationsType::setCategoryID()
@@ -73,9 +70,9 @@ class RecommendationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[] $productIdentifiers
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType[] $nameRecommendation
      * @param bool $updated
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($categoryID = null, array $productIdentifiers = array(), array $nameRecommendation = array(), $updated = null, \DOMDocument $any = null)
+    public function __construct(?string $categoryID = null, array $productIdentifiers = [], array $nameRecommendation = [], ?bool $updated = null, $any = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -88,7 +85,7 @@ class RecommendationsType extends AbstractStructBase
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -97,100 +94,147 @@ class RecommendationsType extends AbstractStructBase
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get ProductIdentifiers value
-     * @return \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[]
      */
-    public function getProductIdentifiers()
+    public function getProductIdentifiers(): array
     {
         return $this->ProductIdentifiers;
     }
     /**
+     * This method is responsible for validating the values passed to the setProductIdentifiers method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setProductIdentifiers method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateProductIdentifiersForArrayConstraintsFromSetProductIdentifiers(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $recommendationsTypeProductIdentifiersItem) {
+            // validation for constraint: itemType
+            if (!$recommendationsTypeProductIdentifiersItem instanceof \macropage\ebaysdk\trading\StructType\ProductIdentifiersType) {
+                $invalidValues[] = is_object($recommendationsTypeProductIdentifiersItem) ? get_class($recommendationsTypeProductIdentifiersItem) : sprintf('%s(%s)', gettype($recommendationsTypeProductIdentifiersItem), var_export($recommendationsTypeProductIdentifiersItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ProductIdentifiers property can only contain items of type \macropage\ebaysdk\trading\StructType\ProductIdentifiersType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ProductIdentifiers value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[] $productIdentifiers
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setProductIdentifiers(array $productIdentifiers = array())
+    public function setProductIdentifiers(array $productIdentifiers = []): self
     {
-        foreach ($productIdentifiers as $recommendationsTypeProductIdentifiersItem) {
-            // validation for constraint: itemType
-            if (!$recommendationsTypeProductIdentifiersItem instanceof \macropage\ebaysdk\trading\StructType\ProductIdentifiersType) {
-                throw new \InvalidArgumentException(sprintf('The ProductIdentifiers property can only contain items of \macropage\ebaysdk\trading\StructType\ProductIdentifiersType, "%s" given', is_object($recommendationsTypeProductIdentifiersItem) ? get_class($recommendationsTypeProductIdentifiersItem) : gettype($recommendationsTypeProductIdentifiersItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($productIdentifiersArrayErrorMessage = self::validateProductIdentifiersForArrayConstraintsFromSetProductIdentifiers($productIdentifiers))) {
+            throw new InvalidArgumentException($productIdentifiersArrayErrorMessage, __LINE__);
         }
         $this->ProductIdentifiers = $productIdentifiers;
+        
         return $this;
     }
     /**
      * Add item to ProductIdentifiers value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ProductIdentifiersType $item
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function addToProductIdentifiers(\macropage\ebaysdk\trading\StructType\ProductIdentifiersType $item)
+    public function addToProductIdentifiers(\macropage\ebaysdk\trading\StructType\ProductIdentifiersType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ProductIdentifiersType) {
-            throw new \InvalidArgumentException(sprintf('The ProductIdentifiers property can only contain items of \macropage\ebaysdk\trading\StructType\ProductIdentifiersType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ProductIdentifiers property can only contain items of type \macropage\ebaysdk\trading\StructType\ProductIdentifiersType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ProductIdentifiers[] = $item;
+        
         return $this;
     }
     /**
      * Get NameRecommendation value
-     * @return \macropage\ebaysdk\trading\StructType\NameRecommendationType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    public function getNameRecommendation()
+    public function getNameRecommendation(): array
     {
         return $this->NameRecommendation;
     }
     /**
+     * This method is responsible for validating the values passed to the setNameRecommendation method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setNameRecommendation method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateNameRecommendationForArrayConstraintsFromSetNameRecommendation(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $recommendationsTypeNameRecommendationItem) {
+            // validation for constraint: itemType
+            if (!$recommendationsTypeNameRecommendationItem instanceof \macropage\ebaysdk\trading\StructType\NameRecommendationType) {
+                $invalidValues[] = is_object($recommendationsTypeNameRecommendationItem) ? get_class($recommendationsTypeNameRecommendationItem) : sprintf('%s(%s)', gettype($recommendationsTypeNameRecommendationItem), var_export($recommendationsTypeNameRecommendationItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The NameRecommendation property can only contain items of type \macropage\ebaysdk\trading\StructType\NameRecommendationType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set NameRecommendation value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType[] $nameRecommendation
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setNameRecommendation(array $nameRecommendation = array())
+    public function setNameRecommendation(array $nameRecommendation = []): self
     {
-        foreach ($nameRecommendation as $recommendationsTypeNameRecommendationItem) {
-            // validation for constraint: itemType
-            if (!$recommendationsTypeNameRecommendationItem instanceof \macropage\ebaysdk\trading\StructType\NameRecommendationType) {
-                throw new \InvalidArgumentException(sprintf('The NameRecommendation property can only contain items of \macropage\ebaysdk\trading\StructType\NameRecommendationType, "%s" given', is_object($recommendationsTypeNameRecommendationItem) ? get_class($recommendationsTypeNameRecommendationItem) : gettype($recommendationsTypeNameRecommendationItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($nameRecommendationArrayErrorMessage = self::validateNameRecommendationForArrayConstraintsFromSetNameRecommendation($nameRecommendation))) {
+            throw new InvalidArgumentException($nameRecommendationArrayErrorMessage, __LINE__);
         }
         $this->NameRecommendation = $nameRecommendation;
+        
         return $this;
     }
     /**
      * Add item to NameRecommendation value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType $item
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function addToNameRecommendation(\macropage\ebaysdk\trading\StructType\NameRecommendationType $item)
+    public function addToNameRecommendation(\macropage\ebaysdk\trading\StructType\NameRecommendationType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\NameRecommendationType) {
-            throw new \InvalidArgumentException(sprintf('The NameRecommendation property can only contain items of \macropage\ebaysdk\trading\StructType\NameRecommendationType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The NameRecommendation property can only contain items of type \macropage\ebaysdk\trading\StructType\NameRecommendationType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->NameRecommendation[] = $item;
+        
         return $this;
     }
     /**
      * Get Updated value
      * @return bool|null
      */
-    public function getUpdated()
+    public function getUpdated(): ?bool
     {
         return $this->Updated;
     }
@@ -199,65 +243,47 @@ class RecommendationsType extends AbstractStructBase
      * @param bool $updated
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setUpdated($updated = null)
+    public function setUpdated(?bool $updated = null): self
     {
         // validation for constraint: boolean
         if (!is_null($updated) && !is_bool($updated)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($updated)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($updated, true), gettype($updated)), __LINE__);
         }
         $this->Updated = $updated;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\RecommendationsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

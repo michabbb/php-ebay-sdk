@@ -1,53 +1,73 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PickUpInStoreDetailsType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Complex type defining the <b>PickupInStoreDetails</b> container, that is returned in <b>GetShippingCosts</b> if the In-Store Pickup option is enabled for the listing. <br/><br/> <span class="tablenote"> <strong>Note:</strong> At this
- * time, the In-Store Pickup feature is generally only available to large retail merchants, and can only be applied to multi-quantity, fixed-price listings. </span>
+ * Meta information extracted from the WSDL
+ * - documentation: Complex type defining the <b>PickupInStoreDetails</b> container, that is returned in <b>GetShippingCosts</b> if the listing is eligible for the In-Store Pickup or Click and Collect features, and additionally, if the In-Store
+ * Pickup/Click and Collect option is a possibility for the destination country/postal code specified in the request. <br/><br/> <span class="tablenote"> <strong>Note:</strong> At this time, the In-Store Pickup feature is generally only available to
+ * large retail merchants, and can only be applied to multi-quantity, fixed-price listings. </span>
  * @subpackage Structs
  */
 class PickUpInStoreDetailsType extends AbstractStructBase
 {
     /**
      * The EligibleForPickupInStore
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is only returned (as <code>true</code>) if the listing is enabled for In-Store Pickup. A seller must be eligible for the In-Store Pickup feature to list an item that is eligible for In-Store Pickup. At this time, the
-     * In-Store Pickup feature is generally only available to large retail merchants, and can only be applied to multiple-quantity, fixed-price listings. <br/><br/> When a seller is successful at listing an item with the In-Store Pickup feature enabled,
-     * prospective buyers within a reasonable distance (25 miles or so) from one of the seller's stores (that has stock available) will see the "Available for In-Store Pickup" option on the View Item page, along with information on the closest phsical store
-     * that has the item.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the listing is eligible for In-Store Pickup or Click and Collect features. A seller must be eligible for the In-Store Pickup or Click and Collect features to list an item that is
+     * eligible for these features. At this time, the In-Store Pickup feature is generally only available to large retail merchants in the US, Canada, UK, Germany, and Australia, and the Click and Collect feature is generally only available to large retail
+     * merchants in the UK, Australia, and Germany. Both of these features can only be applied to multiple-quantity, fixed-price listings. <br/><br/> When a seller is successful at listing an item with the In-Store Pickup/Click and Collect feature enabled,
+     * prospective buyers within a reasonable distance (25 miles or so) from one of the seller's stores (that has stock available) will see an "available for pickup" option on the View Item page, along with information on the closest phsical store that has
+     * the item.
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligibleForPickupInStore;
+    protected ?bool $EligibleForPickupInStore = null;
+    /**
+     * The AvailableForPickupInStore
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the listing is eligible for In-Store Pickup or Click and Collect feature (<b>EligibleForPickupInStore</b> returned as <code>true</code>), and the listing has inventory in a store near
+     * the destination country/postal code specified in the request. It is quite possible that the listing is eligible for In-Store Pickup/Click and Collect, but no stores near the specified destination has inventory, in which case, this field will return
+     * as <code>false</code>. <br/><br/> When a seller is successful at listing an item with the In-Store Pickup/Click and Collect feature enabled, prospective buyers within a reasonable distance (25 miles or so) from one of the seller's stores (that has
+     * stock available) will see an "available for pickup" option on the View Item page, along with information on the closest phsical store that has the item.
+     * - maxOccurs: 1
+     * - minOccurs: 0
+     * @var bool|null
+     */
+    protected ?bool $AvailableForPickupInStore = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PickUpInStoreDetailsType
      * @uses PickUpInStoreDetailsType::setEligibleForPickupInStore()
+     * @uses PickUpInStoreDetailsType::setAvailableForPickupInStore()
      * @uses PickUpInStoreDetailsType::setAny()
      * @param bool $eligibleForPickupInStore
-     * @param \DOMDocument $any
+     * @param bool $availableForPickupInStore
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($eligibleForPickupInStore = null, \DOMDocument $any = null)
+    public function __construct(?bool $eligibleForPickupInStore = null, ?bool $availableForPickupInStore = null, $any = null)
     {
         $this
             ->setEligibleForPickupInStore($eligibleForPickupInStore)
+            ->setAvailableForPickupInStore($availableForPickupInStore)
             ->setAny($any);
     }
     /**
      * Get EligibleForPickupInStore value
      * @return bool|null
      */
-    public function getEligibleForPickupInStore()
+    public function getEligibleForPickupInStore(): ?bool
     {
         return $this->EligibleForPickupInStore;
     }
@@ -56,65 +76,70 @@ class PickUpInStoreDetailsType extends AbstractStructBase
      * @param bool $eligibleForPickupInStore
      * @return \macropage\ebaysdk\shopping\StructType\PickUpInStoreDetailsType
      */
-    public function setEligibleForPickupInStore($eligibleForPickupInStore = null)
+    public function setEligibleForPickupInStore(?bool $eligibleForPickupInStore = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligibleForPickupInStore) && !is_bool($eligibleForPickupInStore)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligibleForPickupInStore)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligibleForPickupInStore, true), gettype($eligibleForPickupInStore)), __LINE__);
         }
         $this->EligibleForPickupInStore = $eligibleForPickupInStore;
+        
+        return $this;
+    }
+    /**
+     * Get AvailableForPickupInStore value
+     * @return bool|null
+     */
+    public function getAvailableForPickupInStore(): ?bool
+    {
+        return $this->AvailableForPickupInStore;
+    }
+    /**
+     * Set AvailableForPickupInStore value
+     * @param bool $availableForPickupInStore
+     * @return \macropage\ebaysdk\shopping\StructType\PickUpInStoreDetailsType
+     */
+    public function setAvailableForPickupInStore(?bool $availableForPickupInStore = null): self
+    {
+        // validation for constraint: boolean
+        if (!is_null($availableForPickupInStore) && !is_bool($availableForPickupInStore)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($availableForPickupInStore, true), gettype($availableForPickupInStore)), __LINE__);
+        }
+        $this->AvailableForPickupInStore = $availableForPickupInStore;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\PickUpInStoreDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\PickUpInStoreDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\PickUpInStoreDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

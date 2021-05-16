@@ -1,43 +1,46 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellerPaymentProfileType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Type defining the <b>SellerPaymentProfile</b> container, which is used in an Add/Revise/Relist/Verify Trading API call to reference a Business Policies payment profile.
+ * Meta information extracted from the WSDL
+ * - documentation: Type defining the <b>SellerPaymentProfile</b> container, which is used in an Add/Revise/Relist/Verify Trading API call to reference and use a payment business policy.
  * @subpackage Structs
  */
 class SellerPaymentProfileType extends AbstractStructBase
 {
     /**
      * The PaymentProfileID
-     * Meta informations extracted from the WSDL
-     * - documentation: The unique identifier of a Business Policies payment profile. A <b>PaymentProfileID</b> and/or a <b>PaymentProfileName</b> value is used in the Add/Revise/Relist/Verify call to reference and use the payment policy values of a
-     * Business Policies payment profile. If both fields are provided and their values don't match, the <b>PaymentProfileID</b> takes precedence. <br/><br/> Payment profile IDs can be retrieved with the <b>getPaymentPolicies</b> call of the <b>Account
-     * API</b> or with the <b>getSellerProfiles</b> call of the <b>Business Policies Management API</b>. Business Policy IDs can also be retrieved through the Business Policies section of My eBay. <br/><br/> In the 'Get' calls, the <b>PaymentProfileID</b>
-     * value will always be returned if Business Policies are set for the listing, and the person making the API call is the seller of the listing. The <b>PaymentProfileName</b> value will be returned if a name is assigned to the payment profile.
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of a payment business policy. A <b>PaymentProfileID</b> and/or a <b>PaymentProfileName</b> value is used in the Add/Revise/Relist/Verify call to reference and use the payment settings/values of a payment
+     * business policy. If both fields are provided and their values don't match, the <b>PaymentProfileID</b> takes precedence. <br/><br/> Payment profile IDs can be retrieved with the <b>getPaymentPolicies</b> call of the <b>Account API</b> or with the
+     * <b>getSellerProfiles</b> call of the <b>Business Policies Management API</b>. Business policy IDs can also be retrieved through the Business policies section of My eBay. <br/><br/> In the 'Get' calls, the <b>PaymentProfileID</b> value will always be
+     * returned if business policies are set for the listing, and the person making the API call is the seller of the listing. The <b>PaymentProfileName</b> value will be returned if a name is assigned to the payment business policy.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PaymentProfileID;
+    protected ?int $PaymentProfileID = null;
     /**
      * The PaymentProfileName
-     * Meta informations extracted from the WSDL
-     * - documentation: The name of a Business Policies payment profile. A <b>PaymentProfileID</b> and/or a <b>PaymentProfileName</b> value is used in the Add/Revise/Relist/Verify call to reference and use the payment policy values of a Business Policies
-     * payment profile. If both fields are provided and their values don't match, the <b>PaymentProfileID</b> takes precedence. <br/><br/> In the 'Get' calls, the <b>PaymentProfileID</b> value will always be returned if Business Policies are set for the
-     * listing, and the person making the API call is the seller of the listing. The <b>PaymentProfileName</b> value will be returned if a name is assigned to the payment profile.
+     * Meta information extracted from the WSDL
+     * - documentation: The name of a payment business policy. A <b>PaymentProfileID</b> and/or a <b>PaymentProfileName</b> value is used in the Add/Revise/Relist/Verify call to reference and use the payment settings/values of a payment business policy. If
+     * both fields are provided and their values don't match, the <b>PaymentProfileID</b> takes precedence. <br/><br/> In the 'Get' calls, the <b>PaymentProfileID</b> value will always be returned if business policies are set for the listing, and the person
+     * making the API call is the seller of the listing. The <b>PaymentProfileName</b> value will be returned if a name is assigned to the payment business policy.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentProfileName;
+    protected ?string $PaymentProfileName = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellerPaymentProfileType
      * @uses SellerPaymentProfileType::setPaymentProfileID()
@@ -45,9 +48,9 @@ class SellerPaymentProfileType extends AbstractStructBase
      * @uses SellerPaymentProfileType::setAny()
      * @param int $paymentProfileID
      * @param string $paymentProfileName
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($paymentProfileID = null, $paymentProfileName = null, \DOMDocument $any = null)
+    public function __construct(?int $paymentProfileID = null, ?string $paymentProfileName = null, $any = null)
     {
         $this
             ->setPaymentProfileID($paymentProfileID)
@@ -58,7 +61,7 @@ class SellerPaymentProfileType extends AbstractStructBase
      * Get PaymentProfileID value
      * @return int|null
      */
-    public function getPaymentProfileID()
+    public function getPaymentProfileID(): ?int
     {
         return $this->PaymentProfileID;
     }
@@ -67,20 +70,21 @@ class SellerPaymentProfileType extends AbstractStructBase
      * @param int $paymentProfileID
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType
      */
-    public function setPaymentProfileID($paymentProfileID = null)
+    public function setPaymentProfileID(?int $paymentProfileID = null): self
     {
         // validation for constraint: int
-        if (!is_null($paymentProfileID) && !is_numeric($paymentProfileID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($paymentProfileID)), __LINE__);
+        if (!is_null($paymentProfileID) && !(is_int($paymentProfileID) || ctype_digit($paymentProfileID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($paymentProfileID, true), gettype($paymentProfileID)), __LINE__);
         }
         $this->PaymentProfileID = $paymentProfileID;
+        
         return $this;
     }
     /**
      * Get PaymentProfileName value
      * @return string|null
      */
-    public function getPaymentProfileName()
+    public function getPaymentProfileName(): ?string
     {
         return $this->PaymentProfileName;
     }
@@ -89,65 +93,47 @@ class SellerPaymentProfileType extends AbstractStructBase
      * @param string $paymentProfileName
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType
      */
-    public function setPaymentProfileName($paymentProfileName = null)
+    public function setPaymentProfileName(?string $paymentProfileName = null): self
     {
         // validation for constraint: string
         if (!is_null($paymentProfileName) && !is_string($paymentProfileName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($paymentProfileName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($paymentProfileName, true), gettype($paymentProfileName)), __LINE__);
         }
         $this->PaymentProfileName = $paymentProfileName;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

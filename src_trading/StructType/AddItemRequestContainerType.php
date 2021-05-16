@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddItemRequestContainerType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>AddItemRequestContainer</b> containers that are used in an <b>AddItems</b> call. An <b>AddItemRequestContainer</b> container is required for each item being created through an <b>AddItems</b> call. Each item
  * being created through an <b>AddItems</b> call is identified through a unique <b>AddItemRequestContainer.MessageID</b> value that is defined by the seller.
  * @subpackage Structs
@@ -15,27 +18,27 @@ class AddItemRequestContainerType extends AbstractStructBase
 {
     /**
      * The Item
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container holding all values that define a new listing. One <b>Item</b> container is required for each <b>AddItemRequestContainer</b>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemType
+     * @var \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public $Item;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemType $Item = null;
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Most Trading API calls support a <b>MessageID</b> element in the request and a <b>CorrelationID</b> element in the response. With <b>AddItems</b>, a unique <b>MessageID</b> value is required for each <b>AddItemRequestContainer</b>
      * container that is used in the request. The <b>CorrelationID</b> value returned under each <b>AddItemResponseContainer</b> container is used to correlate each item request container with its corresponding response container. The same <b>MessageID</b>
      * value that you pass into a request will be returned in the <b>CorrelationID</b> field in the response.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageID;
+    protected ?string $MessageID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AddItemRequestContainerType
      * @uses AddItemRequestContainerType::setItem()
@@ -43,9 +46,9 @@ class AddItemRequestContainerType extends AbstractStructBase
      * @uses AddItemRequestContainerType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @param string $messageID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\ItemType $item = null, $messageID = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?string $messageID = null, $any = null)
     {
         $this
             ->setItem($item)
@@ -56,7 +59,7 @@ class AddItemRequestContainerType extends AbstractStructBase
      * Get Item value
      * @return \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public function getItem()
+    public function getItem(): ?\macropage\ebaysdk\trading\StructType\ItemType
     {
         return $this->Item;
     }
@@ -65,16 +68,17 @@ class AddItemRequestContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType
      */
-    public function setItem(\macropage\ebaysdk\trading\StructType\ItemType $item = null)
+    public function setItem(?\macropage\ebaysdk\trading\StructType\ItemType $item = null): self
     {
         $this->Item = $item;
+        
         return $this;
     }
     /**
      * Get MessageID value
      * @return string|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?string
     {
         return $this->MessageID;
     }
@@ -83,65 +87,47 @@ class AddItemRequestContainerType extends AbstractStructBase
      * @param string $messageID
      * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?string $messageID = null): self
     {
         // validation for constraint: string
         if (!is_null($messageID) && !is_string($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

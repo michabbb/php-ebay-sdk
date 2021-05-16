@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for UserIdPasswordType StructType
@@ -12,53 +15,53 @@ class UserIdPasswordType extends AbstractStructBase
 {
     /**
      * The AppId
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The application ID that is unique to each application you (or your company) has registered with the eBay Developers Program. If you are executing a call in the Sandbox, this is the "AppId" value that eBay issued to you when you
      * received your Sandbox keys. If you are executing a call in Production, this is the "AppId" value that eBay issued to you when you received your Production keys.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AppId;
+    protected ?string $AppId = null;
     /**
      * The DevId
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique developer ID that the eBay Developers Program issued to you (or your company). If you are executing a call in the Sandbox, this is the "DevId" value that eBay issued to you when you received your Sandbox keys. Typically,
      * you receive your Sandbox keys when you register as a new developer. If you are executing a call in Production, this is the "DevId" value that eBay issued to you when you received your Production keys. Typically, you receive your Production keys when
      * you certify an application.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DevId;
+    protected ?string $DevId = null;
     /**
      * The AuthCert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Authentication certificate that authenticates the application when making API calls. If you are executing a call in the Sandbox, this is the "CertId" value that eBay issued to you when you received your Sandbox keys. If you are
      * executing a call in Production, this is the "CertId" value that eBay issued to you when you received your Production keys. This is unrelated to auth tokens.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AuthCert;
+    protected ?string $AuthCert = null;
     /**
      * The Username
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: eBay user ID (i.e., eBay.com Web site login name) for the user the application is retrieving a token for. This is typically the application's end-user (not the developer).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Username;
+    protected ?string $Username = null;
     /**
      * The Password
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Password for the user specified in Username.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Password;
+    protected ?string $Password = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for UserIdPasswordType
      * @uses UserIdPasswordType::setAppId()
@@ -72,9 +75,9 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $authCert
      * @param string $username
      * @param string $password
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($appId = null, $devId = null, $authCert = null, $username = null, $password = null, \DOMDocument $any = null)
+    public function __construct(?string $appId = null, ?string $devId = null, ?string $authCert = null, ?string $username = null, ?string $password = null, $any = null)
     {
         $this
             ->setAppId($appId)
@@ -88,7 +91,7 @@ class UserIdPasswordType extends AbstractStructBase
      * Get AppId value
      * @return string|null
      */
-    public function getAppId()
+    public function getAppId(): ?string
     {
         return $this->AppId;
     }
@@ -97,20 +100,21 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $appId
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setAppId($appId = null)
+    public function setAppId(?string $appId = null): self
     {
         // validation for constraint: string
         if (!is_null($appId) && !is_string($appId)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($appId)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($appId, true), gettype($appId)), __LINE__);
         }
         $this->AppId = $appId;
+        
         return $this;
     }
     /**
      * Get DevId value
      * @return string|null
      */
-    public function getDevId()
+    public function getDevId(): ?string
     {
         return $this->DevId;
     }
@@ -119,20 +123,21 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $devId
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setDevId($devId = null)
+    public function setDevId(?string $devId = null): self
     {
         // validation for constraint: string
         if (!is_null($devId) && !is_string($devId)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($devId)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($devId, true), gettype($devId)), __LINE__);
         }
         $this->DevId = $devId;
+        
         return $this;
     }
     /**
      * Get AuthCert value
      * @return string|null
      */
-    public function getAuthCert()
+    public function getAuthCert(): ?string
     {
         return $this->AuthCert;
     }
@@ -141,20 +146,21 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $authCert
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setAuthCert($authCert = null)
+    public function setAuthCert(?string $authCert = null): self
     {
         // validation for constraint: string
         if (!is_null($authCert) && !is_string($authCert)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($authCert)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($authCert, true), gettype($authCert)), __LINE__);
         }
         $this->AuthCert = $authCert;
+        
         return $this;
     }
     /**
      * Get Username value
      * @return string|null
      */
-    public function getUsername()
+    public function getUsername(): ?string
     {
         return $this->Username;
     }
@@ -163,20 +169,21 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $username
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setUsername($username = null)
+    public function setUsername(?string $username = null): self
     {
         // validation for constraint: string
         if (!is_null($username) && !is_string($username)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($username)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($username, true), gettype($username)), __LINE__);
         }
         $this->Username = $username;
+        
         return $this;
     }
     /**
      * Get Password value
      * @return string|null
      */
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->Password;
     }
@@ -185,65 +192,47 @@ class UserIdPasswordType extends AbstractStructBase
      * @param string $password
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setPassword($password = null)
+    public function setPassword(?string $password = null): self
     {
         // validation for constraint: string
         if (!is_null($password) && !is_string($password)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($password)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($password, true), gettype($password)), __LINE__);
         }
         $this->Password = $password;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\UserIdPasswordType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\UserIdPasswordType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

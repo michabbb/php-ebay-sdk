@@ -1,94 +1,101 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddItemsRequestType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Defines from one to five items and lists them on a specified eBay site.
+ * Meta information extracted from the WSDL
+ * - documentation: Base request type for the <b>AddItems</b> call, which is used to create one to five fixed-price, auction, or classified ad listings. The <b>AddItems</b> call does not support multiple-variation listings, so multiple-variation
+ * listings cannot be created with this call.
  * @subpackage Structs
  */
 class AddItemsRequestType extends AbstractRequestType
 {
     /**
      * The AddItemRequestContainer
-     * Meta informations extracted from the WSDL
-     * - documentation: Defines a single item to be listed on eBay. This container is similar to an <b>AddItem</b> request. Up to five of these containers can be included in one <b>AddItems</b> request.
+     * Meta information extracted from the WSDL
+     * - documentation: An <b>AddItemRequestContainer</b> container is required for each listing that will be created with the <b>AddItems</b> request. Up to five of these containers can be included in one <b>AddItems</b> request.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[]
      */
-    public $AddItemRequestContainer;
+    protected array $AddItemRequestContainer = [];
     /**
      * Constructor method for AddItemsRequestType
      * @uses AddItemsRequestType::setAddItemRequestContainer()
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[] $addItemRequestContainer
      */
-    public function __construct(array $addItemRequestContainer = array())
+    public function __construct(array $addItemRequestContainer = [])
     {
         $this
             ->setAddItemRequestContainer($addItemRequestContainer);
     }
     /**
      * Get AddItemRequestContainer value
-     * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[]
      */
-    public function getAddItemRequestContainer()
+    public function getAddItemRequestContainer(): array
     {
         return $this->AddItemRequestContainer;
     }
     /**
+     * This method is responsible for validating the values passed to the setAddItemRequestContainer method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setAddItemRequestContainer method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateAddItemRequestContainerForArrayConstraintsFromSetAddItemRequestContainer(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $addItemsRequestTypeAddItemRequestContainerItem) {
+            // validation for constraint: itemType
+            if (!$addItemsRequestTypeAddItemRequestContainerItem instanceof \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType) {
+                $invalidValues[] = is_object($addItemsRequestTypeAddItemRequestContainerItem) ? get_class($addItemsRequestTypeAddItemRequestContainerItem) : sprintf('%s(%s)', gettype($addItemsRequestTypeAddItemRequestContainerItem), var_export($addItemsRequestTypeAddItemRequestContainerItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The AddItemRequestContainer property can only contain items of type \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set AddItemRequestContainer value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[] $addItemRequestContainer
      * @return \macropage\ebaysdk\trading\StructType\AddItemsRequestType
      */
-    public function setAddItemRequestContainer(array $addItemRequestContainer = array())
+    public function setAddItemRequestContainer(array $addItemRequestContainer = []): self
     {
-        foreach ($addItemRequestContainer as $addItemsRequestTypeAddItemRequestContainerItem) {
-            // validation for constraint: itemType
-            if (!$addItemsRequestTypeAddItemRequestContainerItem instanceof \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType) {
-                throw new \InvalidArgumentException(sprintf('The AddItemRequestContainer property can only contain items of \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType, "%s" given', is_object($addItemsRequestTypeAddItemRequestContainerItem) ? get_class($addItemsRequestTypeAddItemRequestContainerItem) : gettype($addItemsRequestTypeAddItemRequestContainerItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($addItemRequestContainerArrayErrorMessage = self::validateAddItemRequestContainerForArrayConstraintsFromSetAddItemRequestContainer($addItemRequestContainer))) {
+            throw new InvalidArgumentException($addItemRequestContainerArrayErrorMessage, __LINE__);
         }
         $this->AddItemRequestContainer = $addItemRequestContainer;
+        
         return $this;
     }
     /**
      * Add item to AddItemRequestContainer value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType $item
      * @return \macropage\ebaysdk\trading\StructType\AddItemsRequestType
      */
-    public function addToAddItemRequestContainer(\macropage\ebaysdk\trading\StructType\AddItemRequestContainerType $item)
+    public function addToAddItemRequestContainer(\macropage\ebaysdk\trading\StructType\AddItemRequestContainerType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType) {
-            throw new \InvalidArgumentException(sprintf('The AddItemRequestContainer property can only contain items of \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The AddItemRequestContainer property can only contain items of type \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->AddItemRequestContainer[] = $item;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AddItemsRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

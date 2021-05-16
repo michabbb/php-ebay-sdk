@@ -1,175 +1,166 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ShippingServiceOptionsType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Container consisting of shipping costs and other details related to a domestic shipping service. An exception to the domestic shipping service rule is seen in the <b>ShippingServiceSelected</b> container returned under the
- * <b>Order</b> and <b>Transaction</b> containers in order and order line item retrieval calls such as <b>GetOrders</b> or <b>GetItemTransactions</b>. In this scenario, the <b>SelectedShippingService</b> container consists of either domestic or
- * international shipping service data, based on the selected service according to the buyer's shipping address. <br/><br/> If one or more international shipping services are provided, the seller must specify at least one domestic shipping service as
- * well. <br/><br/> <span class="tablenote"> <strong>Note:</strong> For <b>GetItemTransactions</b> and <b>GetSellerTransactions</b>, this container does not return accurate shipping service and cost information for multiple line item orders. Use
- * <b>GetOrders</b> instead, and provide the order's combined <strong>OrderID</strong> to retrieve this information. </span>
+ * Meta information extracted from the WSDL
+ * - documentation: Container consisting of shipping costs and other details related to a domestic shipping service. A <b>ShippingServiceOptions</b> container is required for each domestic shipping service option that the seller will make available to
+ * buyers in an Add/Revise/Relist call. Up to four domestic shipping service options can be offered per listing.
  * @subpackage Structs
  */
 class ShippingServiceOptionsType extends AbstractStructBase
 {
     /**
      * The ShippingInsuranceCost
-     * Meta informations extracted from the WSDL
-     * - documentation: The insurance cost associated with shipping a single item with this shipping service. <br/><br/> <b>Exception</b>: For <b>GetItemShipping</b>, this is proportional to <b>QuantitySold</b>. If the item has not yet been sold, insurance
-     * information cannot be calculated and the value is 0.00. For calculated shipping only.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingInsuranceCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingInsuranceCost = null;
     /**
      * The ShippingService
-     * Meta informations extracted from the WSDL
-     * - documentation: A shipping service option being offered by the seller to ship an item to a buyer. For a list of valid <b>ShippingService</b> values, call <b>GeteBayDetails</b> with <b>DetailName</b> set to <code>ShippingServiceDetails</code>. The
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates a specific domestic shipping service option being offered by the seller to ship an item to a buyer who is located within the same country as the item. This field is required to identify each domestic
+     * shipping service option that is specified with a <b>ShippingServiceOptions</b> container. <br><br> For a list of valid <b>ShippingService</b> values, call <b>GeteBayDetails</b> with <b>DetailName</b> set to <code>ShippingServiceDetails</code>. The
      * <b>ShippingServiceDetails.ValidForSellingFlow</b> flag must also be present. Otherwise, that particular shipping service option is no longer valid and cannot be offered to buyers through a listing. <br><br> To view the full list of domestic shipping
      * service options in the response, look for the <b>ShippingServiceDetails.ShippingService</b> fields. Domestic shipping service options will not have a <b>InternationalService</b> = <code>true</code> field, as this indicates that the
-     * <b>ShippingService</b> value is an International shipping service option. <br><br> For flat and calculated shipping. <br><br> If there are two or more services and one is "pickup", "pickup" must not be specified as the first service.
+     * <b>ShippingService</b> value is an International shipping service option.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShippingService;
+    protected ?string $ShippingService = null;
     /**
      * The ShippingServiceCost
-     * Meta informations extracted from the WSDL
-     * - documentation: The base cost of shipping the item using the shipping service specified in the <b>ShippingService</b> field. In the case of a multiple-quantity, fixed-price listing, the <b>ShippingServiceAdditionalCost</b> field shows the cost to
-     * ship each additional item if the buyer purchases multiple quantity of the same line item. <br> <br> When returned by <b>GetItemShipping</b>, it includes the packaging and handling cost. For flat and calculated shipping. <br> <br> If a shipping
-     * service has been specified (even <b>LocalPickup</b>), <b>GetItem</b> returns the shipping service cost, even if the cost is zero. Otherwise, cost is not returned. <br> <br> If this is for calculated shipping for a listing that has not yet ended, note
-     * that the cost cannot be determined until the listing has ended and the buyer has specified a postal code. <br> <br> For <b>GetItemShipping</b>, promotional shipping savings is reflected in the cost, if applicable. <b></b> <ul> <li>If the promotional
-     * shipping option is lower than other shipping services being offered, the savings is reflected in the returned shipping cost. The shipping service named Promotional Shipping Service (or whatever is the localized name for it) is included among the
-     * shipping services.</li> <li>If the promotional shipping cost is lower than the cost of other shipping services being offered, it is presented first in the list. (The LOWEST shipping service cost is always presented first, regardless of whether there
-     * is promotional shipping.) </li> </ul>
+     * Meta information extracted from the WSDL
+     * - documentation: The base cost of shipping one unit of the item using the shipping service specified in the corresponding <b>ShippingService</b> field. <br> <br> In the case of a multiple-quantity, fixed-price listing, the
+     * <b>ShippingServiceAdditionalCost</b> field also becomes applicable, and shows the cost to ship each additional unit of the item if the buyer purchases multiple quantity of the same line item. <br> <br> <span class="tablenote"><strong>Note:</strong>
+     * If the corresponding shipping service option is set as a 'free shipping' option (<b>FreeShipping=true</b>), the seller still needs to include this <b>ShippingServiceCost</b> field and set its value to <code>0.0</code>, as eBay will not do this
+     * automatically. </span> When returned by <b>GetItemShipping</b>, it includes the packaging and handling cost. <br> <br> Note that if <b>ShippingService</b> is set to <code>LocalPickup</code>, <b>ShippingServiceCost</b> must be set to <code>0.0</code>.
+     * Also, if a shipping service has been specified (even <b>LocalPickup</b>), <b>GetItem</b> returns the shipping service cost, even if the cost is zero. <br> <br> If this is for calculated shipping for a listing that has not yet ended, note that the
+     * cost cannot be determined until the listing has ended and the buyer has specified a postal code.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingServiceCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingServiceCost = null;
     /**
      * The ShippingServiceAdditionalCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The cost of shipping each additional item if the same buyer purchases multiple quantity of the same line item. This field is required when creating a multiple-quantity, fixed-price listing. Generally, the seller will give the buyer a
      * shipping discount if that buyer purchases multiple quantity of the item, so this value should usually be less than the value set for <b>ShippingServiceCost</b>. <br/><br/> The value of this field can even be set to <code>0</code> if the seller wants
      * to encourage buyers to buy multiple quantity of the item, or it could be that the seller can fit multiple quantities of the line item in a single shipping package, so the seller is just passing this shipping savings onto the buyer. This field is not
      * applicable for single-quantity listings.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingServiceAdditionalCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingServiceAdditionalCost = null;
     /**
      * The ShippingServicePriority
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Controls the order (relative to other shipping services) in which the corresponding <b>ShippingService</b> will appear in the View Item and Checkout page. <br/><br/> Sellers can specify up to four domestic shipping services (with
      * four <b>ShippingServiceOptions</b> containers), so valid values are 1, 2, 3, and 4. A shipping service with a <b>ShippingServicePriority</b> value of 1 appears at the top. Conversely, a shipping service with a <b>ShippingServicePriority</b> value of
-     * 4 appears at the bottom of a list of four shipping service options. <br><br> This field is applicable to Flat and Calculated shipping.
+     * 4 appears at the bottom of a list of four shipping service options. <br><br> If this field is omitted from domestic shipping service options, the order of the shipping service options in View Item and Checkout pages will be determined by the order
+     * that these shipping service options are presented in the request payload of an Add/Revise/Relist call.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ShippingServicePriority;
+    protected ?int $ShippingServicePriority = null;
     /**
      * The ExpeditedService
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the service is an expedited shipping service.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the domestic shipping service is considered an expedited shipping service. An expedited service is typically a shipping service that can ship an order that will arrive at the buyer's
+     * location within one to two business days.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpeditedService;
+    protected ?bool $ExpeditedService = null;
     /**
      * The ShippingTimeMin
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The integer value returned here indicates the minimum number of business days that the shipping service (indicated in the corresponding <b>ShippingService</b> field) will take to be delivered to the buyer. <br><br> This minimum
      * shipping time does not include the seller's handling time, and the clock starts on the shipping time only after the seller has delivered the item to the shipping carrier for shipment to the buyer. 'Business days' can vary by shipping carrier and by
      * country, but 'business days' are generally Monday through Friday, excluding holidays. This field is returned if defined for that particular shipping service option.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ShippingTimeMin;
+    protected ?int $ShippingTimeMin = null;
     /**
      * The ShippingTimeMax
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The integer value returned here indicates the maximum number of business days that the shipping service (indicated in the corresponding <b>ShippingService</b> field) will take to be delivered to the buyer. <br><br> This maximum
      * shipping time does not include the seller's handling time, and the clock starts on the shipping time only after the seller has delivered the item to the shipping carrier for shipment to the buyer. 'Business days' can vary by shipping carrier and by
      * country, but 'business days' are generally Monday through Friday, excluding holidays. This field is returned if defined for that particular shipping service option.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ShippingTimeMax;
-    /**
-     * The ShippingSurcharge
-     * Meta informations extracted from the WSDL
-     * - documentation: An additional fee to charge US buyers who have the item shipped via UPS or FedEx to Alaska, Hawaii or Puerto Rico. Can only be assigned a value for the eBay US site and for items in the Parts and Accessories category of the eBay
-     * Motors site. Only returned if set. If some line items in an order have a surcharge, surcharge is added only for those line items. Flat rate shipping only.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
-     */
-    public $ShippingSurcharge;
+    protected ?int $ShippingTimeMax = null;
     /**
      * The FreeShipping
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies that the seller wants to offer free shipping. This applies only to the first specified domestic shipping service and is ignored if set for any other shipping service. <br/><br/> If the seller specifies <b>FreeShipping</b>
-     * but requires shipping insurance (<b>InsuranceOption</b> = <code>Require</code>), eBay sets the insurance cost to 0.00. However, if shipping insurance is optional and the buyer chooses shipping insurance, eBay preserves the cost of shipping insurance.
-     * It is up to the buyer whether to buy shipping insurance, regardless of whether the seller specified <b>FreeShipping</b>.
+     * Meta information extracted from the WSDL
+     * - documentation: This boolean field indicates whether or not the corresponding domestic shipping service option is free to the buyer. In an Add/Revise/Relist call, free shipping can only be offered for the first specified shipping service (so, the
+     * corresponding <b>ShippingServicePriority</b> value should be <code>1</code> or included first in the call request). If 'free shipping' is for any other shipping service, this field is ignored. <br/><br/> For 'Get' calls, including <b>GetItem</b>,
+     * this field is only returned if <code>1</code>. <br/><br/> <span class="tablenote"><strong>Note:</strong> If a seller is specifying a shipping service option as 'free shipping', in addition to this <b>FreeShipping</b> boolean field, the seller will
+     * also need to include the corresponding <b>ShippingServiceCost</b> field and set its value to <code>0.0</code>, as eBay will not do this automatically. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $FreeShipping;
+    protected ?bool $FreeShipping = null;
     /**
      * The LocalPickup
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The <b>LocalPickup</b> flag is used by the <b>GetMyEbayBuying</b> and <b>GetMyEbaySelling</b> calls to indicate whether the buyer has selected local pickup as the shipping option or the seller has specified local pickup as the first
      * shipping option. The <b>LocalPickup</b> flag can also be used with other fields to indicate if there is no fee for local pickup. <br/><br/> For example, if the <b>LocalPickup</b> flag is used with the <b>ShippingServiceOptions</b> and
      * <b>ShippingServiceCost</b> fields, the seller can indicate that local pickup is an available option and that no is fee charged. This is the equivalent of free shipping.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalPickup;
+    protected ?bool $LocalPickup = null;
     /**
      * The ImportCharge
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total cost of customs and taxes for the international leg of an order shipped using the Global Shipping Program. This amount is calculated and supplied for each item by the international shipping provider when a buyer views the
      * item properties.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ImportCharge;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ImportCharge = null;
     /**
      * The ShippingPackageInfo
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is returned in order management calls. <br/><br/> If the order is being delivered through eBay On Demand Delivery, it contains information on the status of the order, the unique identifier of the store where the order
-     * is originating from, and the expected and actual delivery times. <br/><br/> For other orders, this container only returns an estimated delivery window. <br/><br/> <span class="tablenote"><strong>Note:</strong> eBay Now has been officially retired in
-     * all US locations, so this field is no longer applicable for US listings. However, a feature similar to eBay Now, called 'eBay On Demand Delivery', is available in some parts of London, so this field is still applicable on the eBay UK site. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This container is no longer applicable, and it was only applicable to eBay Now and 'eBay On Demand Delivery' orders, and neither of these features are available any longer.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[]
      */
-    public $ShippingPackageInfo;
+    protected array $ShippingPackageInfo = [];
     /**
      * The ShippingServiceCutOffTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The last time of day that an order using the specified shipping service will be accepted by the seller for the current listing. The cut off time applies and is returned only when the <strong>ShippingService</strong> field contains
      * the name of a qualifying time-sensitive shipping service, such as <code>eBayNowImmediateDelivery</code>. <br/><br/> The cut off time is set by eBay and determined in part by the policies and locations of the seller and the shipping carrier.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShippingServiceCutOffTime;
+    protected ?string $ShippingServiceCutOffTime = null;
     /**
      * The LogisticPlanType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserved for internal or future use.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LogisticPlanType;
+    protected ?string $LogisticPlanType = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ShippingServiceOptionsType
      * @uses ShippingServiceOptionsType::setShippingInsuranceCost()
@@ -180,7 +171,6 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @uses ShippingServiceOptionsType::setExpeditedService()
      * @uses ShippingServiceOptionsType::setShippingTimeMin()
      * @uses ShippingServiceOptionsType::setShippingTimeMax()
-     * @uses ShippingServiceOptionsType::setShippingSurcharge()
      * @uses ShippingServiceOptionsType::setFreeShipping()
      * @uses ShippingServiceOptionsType::setLocalPickup()
      * @uses ShippingServiceOptionsType::setImportCharge()
@@ -196,16 +186,15 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param bool $expeditedService
      * @param int $shippingTimeMin
      * @param int $shippingTimeMax
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingSurcharge
      * @param bool $freeShipping
      * @param bool $localPickup
      * @param \macropage\ebaysdk\trading\StructType\AmountType $importCharge
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[] $shippingPackageInfo
      * @param string $shippingServiceCutOffTime
      * @param string $logisticPlanType
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, $shippingService = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, $shippingServicePriority = null, $expeditedService = null, $shippingTimeMin = null, $shippingTimeMax = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingSurcharge = null, $freeShipping = null, $localPickup = null, \macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, array $shippingPackageInfo = array(), $shippingServiceCutOffTime = null, $logisticPlanType = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?bool $freeShipping = null, ?bool $localPickup = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, array $shippingPackageInfo = [], ?string $shippingServiceCutOffTime = null, ?string $logisticPlanType = null, $any = null)
     {
         $this
             ->setShippingInsuranceCost($shippingInsuranceCost)
@@ -216,7 +205,6 @@ class ShippingServiceOptionsType extends AbstractStructBase
             ->setExpeditedService($expeditedService)
             ->setShippingTimeMin($shippingTimeMin)
             ->setShippingTimeMax($shippingTimeMax)
-            ->setShippingSurcharge($shippingSurcharge)
             ->setFreeShipping($freeShipping)
             ->setLocalPickup($localPickup)
             ->setImportCharge($importCharge)
@@ -229,7 +217,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * Get ShippingInsuranceCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingInsuranceCost()
+    public function getShippingInsuranceCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingInsuranceCost;
     }
@@ -238,16 +226,17 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingInsuranceCost(\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null)
+    public function setShippingInsuranceCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null): self
     {
         $this->ShippingInsuranceCost = $shippingInsuranceCost;
+        
         return $this;
     }
     /**
      * Get ShippingService value
      * @return string|null
      */
-    public function getShippingService()
+    public function getShippingService(): ?string
     {
         return $this->ShippingService;
     }
@@ -256,20 +245,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param string $shippingService
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingService($shippingService = null)
+    public function setShippingService(?string $shippingService = null): self
     {
         // validation for constraint: string
         if (!is_null($shippingService) && !is_string($shippingService)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($shippingService)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($shippingService, true), gettype($shippingService)), __LINE__);
         }
         $this->ShippingService = $shippingService;
+        
         return $this;
     }
     /**
      * Get ShippingServiceCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingServiceCost()
+    public function getShippingServiceCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingServiceCost;
     }
@@ -278,16 +268,17 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingServiceCost(\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null)
+    public function setShippingServiceCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null): self
     {
         $this->ShippingServiceCost = $shippingServiceCost;
+        
         return $this;
     }
     /**
      * Get ShippingServiceAdditionalCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingServiceAdditionalCost()
+    public function getShippingServiceAdditionalCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingServiceAdditionalCost;
     }
@@ -296,16 +287,17 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingServiceAdditionalCost(\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null)
+    public function setShippingServiceAdditionalCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null): self
     {
         $this->ShippingServiceAdditionalCost = $shippingServiceAdditionalCost;
+        
         return $this;
     }
     /**
      * Get ShippingServicePriority value
      * @return int|null
      */
-    public function getShippingServicePriority()
+    public function getShippingServicePriority(): ?int
     {
         return $this->ShippingServicePriority;
     }
@@ -314,20 +306,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param int $shippingServicePriority
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingServicePriority($shippingServicePriority = null)
+    public function setShippingServicePriority(?int $shippingServicePriority = null): self
     {
         // validation for constraint: int
-        if (!is_null($shippingServicePriority) && !is_numeric($shippingServicePriority)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($shippingServicePriority)), __LINE__);
+        if (!is_null($shippingServicePriority) && !(is_int($shippingServicePriority) || ctype_digit($shippingServicePriority))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingServicePriority, true), gettype($shippingServicePriority)), __LINE__);
         }
         $this->ShippingServicePriority = $shippingServicePriority;
+        
         return $this;
     }
     /**
      * Get ExpeditedService value
      * @return bool|null
      */
-    public function getExpeditedService()
+    public function getExpeditedService(): ?bool
     {
         return $this->ExpeditedService;
     }
@@ -336,20 +329,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param bool $expeditedService
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setExpeditedService($expeditedService = null)
+    public function setExpeditedService(?bool $expeditedService = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expeditedService) && !is_bool($expeditedService)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expeditedService)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expeditedService, true), gettype($expeditedService)), __LINE__);
         }
         $this->ExpeditedService = $expeditedService;
+        
         return $this;
     }
     /**
      * Get ShippingTimeMin value
      * @return int|null
      */
-    public function getShippingTimeMin()
+    public function getShippingTimeMin(): ?int
     {
         return $this->ShippingTimeMin;
     }
@@ -358,20 +352,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param int $shippingTimeMin
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingTimeMin($shippingTimeMin = null)
+    public function setShippingTimeMin(?int $shippingTimeMin = null): self
     {
         // validation for constraint: int
-        if (!is_null($shippingTimeMin) && !is_numeric($shippingTimeMin)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($shippingTimeMin)), __LINE__);
+        if (!is_null($shippingTimeMin) && !(is_int($shippingTimeMin) || ctype_digit($shippingTimeMin))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingTimeMin, true), gettype($shippingTimeMin)), __LINE__);
         }
         $this->ShippingTimeMin = $shippingTimeMin;
+        
         return $this;
     }
     /**
      * Get ShippingTimeMax value
      * @return int|null
      */
-    public function getShippingTimeMax()
+    public function getShippingTimeMax(): ?int
     {
         return $this->ShippingTimeMax;
     }
@@ -380,38 +375,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param int $shippingTimeMax
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingTimeMax($shippingTimeMax = null)
+    public function setShippingTimeMax(?int $shippingTimeMax = null): self
     {
         // validation for constraint: int
-        if (!is_null($shippingTimeMax) && !is_numeric($shippingTimeMax)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($shippingTimeMax)), __LINE__);
+        if (!is_null($shippingTimeMax) && !(is_int($shippingTimeMax) || ctype_digit($shippingTimeMax))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingTimeMax, true), gettype($shippingTimeMax)), __LINE__);
         }
         $this->ShippingTimeMax = $shippingTimeMax;
-        return $this;
-    }
-    /**
-     * Get ShippingSurcharge value
-     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    public function getShippingSurcharge()
-    {
-        return $this->ShippingSurcharge;
-    }
-    /**
-     * Set ShippingSurcharge value
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingSurcharge
-     * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
-     */
-    public function setShippingSurcharge(\macropage\ebaysdk\trading\StructType\AmountType $shippingSurcharge = null)
-    {
-        $this->ShippingSurcharge = $shippingSurcharge;
+        
         return $this;
     }
     /**
      * Get FreeShipping value
      * @return bool|null
      */
-    public function getFreeShipping()
+    public function getFreeShipping(): ?bool
     {
         return $this->FreeShipping;
     }
@@ -420,20 +398,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param bool $freeShipping
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setFreeShipping($freeShipping = null)
+    public function setFreeShipping(?bool $freeShipping = null): self
     {
         // validation for constraint: boolean
         if (!is_null($freeShipping) && !is_bool($freeShipping)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($freeShipping)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($freeShipping, true), gettype($freeShipping)), __LINE__);
         }
         $this->FreeShipping = $freeShipping;
+        
         return $this;
     }
     /**
      * Get LocalPickup value
      * @return bool|null
      */
-    public function getLocalPickup()
+    public function getLocalPickup(): ?bool
     {
         return $this->LocalPickup;
     }
@@ -442,20 +421,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param bool $localPickup
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setLocalPickup($localPickup = null)
+    public function setLocalPickup(?bool $localPickup = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localPickup) && !is_bool($localPickup)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localPickup)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localPickup, true), gettype($localPickup)), __LINE__);
         }
         $this->LocalPickup = $localPickup;
+        
         return $this;
     }
     /**
      * Get ImportCharge value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getImportCharge()
+    public function getImportCharge(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ImportCharge;
     }
@@ -464,56 +444,80 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $importCharge
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setImportCharge(\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null)
+    public function setImportCharge(?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null): self
     {
         $this->ImportCharge = $importCharge;
+        
         return $this;
     }
     /**
      * Get ShippingPackageInfo value
-     * @return \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[]
      */
-    public function getShippingPackageInfo()
+    public function getShippingPackageInfo(): array
     {
         return $this->ShippingPackageInfo;
     }
     /**
+     * This method is responsible for validating the values passed to the setShippingPackageInfo method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setShippingPackageInfo method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateShippingPackageInfoForArrayConstraintsFromSetShippingPackageInfo(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $shippingServiceOptionsTypeShippingPackageInfoItem) {
+            // validation for constraint: itemType
+            if (!$shippingServiceOptionsTypeShippingPackageInfoItem instanceof \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType) {
+                $invalidValues[] = is_object($shippingServiceOptionsTypeShippingPackageInfoItem) ? get_class($shippingServiceOptionsTypeShippingPackageInfoItem) : sprintf('%s(%s)', gettype($shippingServiceOptionsTypeShippingPackageInfoItem), var_export($shippingServiceOptionsTypeShippingPackageInfoItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ShippingPackageInfo property can only contain items of type \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ShippingPackageInfo value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[] $shippingPackageInfo
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingPackageInfo(array $shippingPackageInfo = array())
+    public function setShippingPackageInfo(array $shippingPackageInfo = []): self
     {
-        foreach ($shippingPackageInfo as $shippingServiceOptionsTypeShippingPackageInfoItem) {
-            // validation for constraint: itemType
-            if (!$shippingServiceOptionsTypeShippingPackageInfoItem instanceof \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType) {
-                throw new \InvalidArgumentException(sprintf('The ShippingPackageInfo property can only contain items of \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType, "%s" given', is_object($shippingServiceOptionsTypeShippingPackageInfoItem) ? get_class($shippingServiceOptionsTypeShippingPackageInfoItem) : gettype($shippingServiceOptionsTypeShippingPackageInfoItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($shippingPackageInfoArrayErrorMessage = self::validateShippingPackageInfoForArrayConstraintsFromSetShippingPackageInfo($shippingPackageInfo))) {
+            throw new InvalidArgumentException($shippingPackageInfoArrayErrorMessage, __LINE__);
         }
         $this->ShippingPackageInfo = $shippingPackageInfo;
+        
         return $this;
     }
     /**
      * Add item to ShippingPackageInfo value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType $item
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function addToShippingPackageInfo(\macropage\ebaysdk\trading\StructType\ShippingPackageInfoType $item)
+    public function addToShippingPackageInfo(\macropage\ebaysdk\trading\StructType\ShippingPackageInfoType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType) {
-            throw new \InvalidArgumentException(sprintf('The ShippingPackageInfo property can only contain items of \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ShippingPackageInfo property can only contain items of type \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ShippingPackageInfo[] = $item;
+        
         return $this;
     }
     /**
      * Get ShippingServiceCutOffTime value
      * @return string|null
      */
-    public function getShippingServiceCutOffTime()
+    public function getShippingServiceCutOffTime(): ?string
     {
         return $this->ShippingServiceCutOffTime;
     }
@@ -522,20 +526,21 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param string $shippingServiceCutOffTime
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingServiceCutOffTime($shippingServiceCutOffTime = null)
+    public function setShippingServiceCutOffTime(?string $shippingServiceCutOffTime = null): self
     {
         // validation for constraint: string
         if (!is_null($shippingServiceCutOffTime) && !is_string($shippingServiceCutOffTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($shippingServiceCutOffTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($shippingServiceCutOffTime, true), gettype($shippingServiceCutOffTime)), __LINE__);
         }
         $this->ShippingServiceCutOffTime = $shippingServiceCutOffTime;
+        
         return $this;
     }
     /**
      * Get LogisticPlanType value
      * @return string|null
      */
-    public function getLogisticPlanType()
+    public function getLogisticPlanType(): ?string
     {
         return $this->LogisticPlanType;
     }
@@ -544,65 +549,47 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param string $logisticPlanType
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setLogisticPlanType($logisticPlanType = null)
+    public function setLogisticPlanType(?string $logisticPlanType = null): self
     {
         // validation for constraint: string
         if (!is_null($logisticPlanType) && !is_string($logisticPlanType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($logisticPlanType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($logisticPlanType, true), gettype($logisticPlanType)), __LINE__);
         }
         $this->LogisticPlanType = $logisticPlanType;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

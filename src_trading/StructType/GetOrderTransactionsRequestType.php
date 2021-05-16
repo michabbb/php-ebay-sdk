@@ -1,55 +1,70 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetOrderTransactionsRequestType StructType
- * Meta informations extracted from the WSDL
- * - documentation: The base request type for the <b>GetOrderTransactions</b> call. This call retrieves detailed information about one or more orders. All recent orders can be retrieved, or the seller can search based on <b>OrderID</b> value(s),
- * <b>ItemID</b> value(s), <b>OrderLineItemID</b> value(s), or by <b>SKU</b> value(s).
+ * Meta information extracted from the WSDL
+ * - documentation: The base request type for the <b>GetOrderTransactions</b> call. This call retrieves detailed information about one or more orders or order line items created (or modified) in the last 90 days. <br><br> Unlike <b>GetOrders</b>, which
+ * can be used to retrieve specific orders, or orders created (or modified) within a specific time period, the <b>GetOrderTransactions</b> call only supports the retrieval of specific orders and/or order line items.
  * @subpackage Structs
  */
 class GetOrderTransactionsRequestType extends AbstractRequestType
 {
     /**
      * The ItemTransactionIDArray
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used if the seller wants to search for one or more specific order line items. An <b>ItemTransactionID</b> container is required for each order line item that is to be retrieved. An order line item can be identified
-     * with an <b>ItemID</b>/<b>TransactionID</b> pair, with a <b>OrderLineItemID</b> value, or with a <b>SKU</b> value (if a SKU exists for the order line item).
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used if the seller wants to retrieve for one or more order line items. An <b>ItemTransactionID</b> container is required for each order line item that is to be retrieved. An order line item can be identified with an
+     * <b>ItemID</b>/<b>TransactionID</b> pair, with an <b>OrderLineItemID</b> value, or with a <b>SKU</b> value (if a SKU is defined for the order line item).
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType|null
      */
-    public $ItemTransactionIDArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $ItemTransactionIDArray = null;
     /**
      * The OrderIDArray
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used if the seller wants to search for one or more specific orders. An <b>OrderID</b> field is required for each order that is to be retrieved. Up to 20 <b>OrderID</b> fields can be used.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used if the seller wants to search for one or more orders. An <b>OrderID</b> field is required for each order that is to be retrieved. Up to 20 <b>OrderID</b> fields can be used. <br><br> <span
+     * class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values. The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and multiple line
+     * item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and sellers who are already
+     * integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from the format
+     * (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this Trading API change with
+     * version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older than Version 1113, they
+     * can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the
+     * <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After
+     * the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span> <br> <span
+     * class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order will change as it goes from unpaid to paid status. Sellers can check to see if an order has been paid by looking for a
+     * value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or
+     * <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made payment. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific order(s), either of these order IDs (paid or unpaid status) can
+     * be used to retrieve an order. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType|null
      */
-    public $OrderIDArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $OrderIDArray = null;
     /**
      * The Platform
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This field's purpose is to allow the seller to retrieve only eBay listings or only Half.com listings instead of both order types. Since the Half.com site has been shut down, this field is no
-     * longer necessary to use since eBay orders will be the only orders that are retrieved. </span> The default behavior of <b>GetOrderTransactions</b> is to retrieve all orders originating from eBay.com and Half.com. If the user wants to retrieve only
-     * eBay.com order line items or Half.com order line items, this filter can be used to perform that function. Inserting <code>eBay</code> into this field will restrict retrieved order line items to those originating on eBay.com, and inserting
-     * <code>Half</code> into this field will restrict retrieved order line items to those originating on Half.com.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> This field should no longer be used since its sole purpose was to allow the seller to filter between eBay orders and Half.com orders, and the Half.com site no longer exists. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Platform;
+    protected ?string $Platform = null;
     /**
      * The IncludeFinalValueFees
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is included and set to <code>true</code> if the seller wishes to include the Final Value Fee (FVF) for each order in the response. A Final Value Fee is calculated based on total amount of the sale, including the final
-     * price of the item and shipping/handling charges. This fee is charged to a seller's account immediately upon creation of an order line item.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is included and set to <code>true</code> if the user wants to view the Final Value Fee (FVF) for all order line items in the response. The Final Value Fee is returned in the <b>Transaction.FinalValueFee</b> field. The
+     * Final Value Fee is assessed right after the creation of an order line item. <br> <br> <span class="tablenote"><b>Note:</b> The calculation of the Final Value Fee is changing for managed payments sellers, so the value returned in the
+     * <b>FinalValueFee</b> fields for each order line item in the response should only be considered as estimated values. The <b>getTransactions</b> method of the <b>Finances API</b> can be used to get accurate Final Value Fee values. <br><br> See the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees for managed payments sellers</a> help page for more information about how Final Value Fees are changing for managed payments sellers.
+     * </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeFinalValueFees;
+    protected ?bool $IncludeFinalValueFees = null;
     /**
      * Constructor method for GetOrderTransactionsRequestType
      * @uses GetOrderTransactionsRequestType::setItemTransactionIDArray()
@@ -61,7 +76,7 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * @param string $platform
      * @param bool $includeFinalValueFees
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $itemTransactionIDArray = null, \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null, $platform = null, $includeFinalValueFees = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $itemTransactionIDArray = null, ?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null, ?string $platform = null, ?bool $includeFinalValueFees = null)
     {
         $this
             ->setItemTransactionIDArray($itemTransactionIDArray)
@@ -73,7 +88,7 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * Get ItemTransactionIDArray value
      * @return \macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType|null
      */
-    public function getItemTransactionIDArray()
+    public function getItemTransactionIDArray(): ?\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType
     {
         return $this->ItemTransactionIDArray;
     }
@@ -82,16 +97,17 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $itemTransactionIDArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType
      */
-    public function setItemTransactionIDArray(\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $itemTransactionIDArray = null)
+    public function setItemTransactionIDArray(?\macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType $itemTransactionIDArray = null): self
     {
         $this->ItemTransactionIDArray = $itemTransactionIDArray;
+        
         return $this;
     }
     /**
      * Get OrderIDArray value
      * @return \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType|null
      */
-    public function getOrderIDArray()
+    public function getOrderIDArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType
     {
         return $this->OrderIDArray;
     }
@@ -100,16 +116,17 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType
      */
-    public function setOrderIDArray(\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null)
+    public function setOrderIDArray(?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null): self
     {
         $this->OrderIDArray = $orderIDArray;
+        
         return $this;
     }
     /**
      * Get Platform value
      * @return string|null
      */
-    public function getPlatform()
+    public function getPlatform(): ?string
     {
         return $this->Platform;
     }
@@ -117,24 +134,25 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * Set Platform value
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $platform
      * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType
      */
-    public function setPlatform($platform = null)
+    public function setPlatform(?string $platform = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::valueIsValid($platform)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $platform, implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType', is_array($platform) ? implode(', ', $platform) : var_export($platform, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TransactionPlatformCodeType::getValidValues())), __LINE__);
         }
         $this->Platform = $platform;
+        
         return $this;
     }
     /**
      * Get IncludeFinalValueFees value
      * @return bool|null
      */
-    public function getIncludeFinalValueFees()
+    public function getIncludeFinalValueFees(): ?bool
     {
         return $this->IncludeFinalValueFees;
     }
@@ -143,33 +161,14 @@ class GetOrderTransactionsRequestType extends AbstractRequestType
      * @param bool $includeFinalValueFees
      * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType
      */
-    public function setIncludeFinalValueFees($includeFinalValueFees = null)
+    public function setIncludeFinalValueFees(?bool $includeFinalValueFees = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeFinalValueFees) && !is_bool($includeFinalValueFees)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeFinalValueFees)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeFinalValueFees, true), gettype($includeFinalValueFees)), __LINE__);
         }
         $this->IncludeFinalValueFees = $includeFinalValueFees;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

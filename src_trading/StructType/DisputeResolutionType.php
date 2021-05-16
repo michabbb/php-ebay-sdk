@@ -1,47 +1,52 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DisputeResolutionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains all information about a dispute resolution. A dispute can have a resolution even if the seller does not receive payment. The resolution can have various results, including a Final Value Fee credit to the seller or a strike
- * to the buyer. <br/><br/> <span class="tablenote"><strong>Note:</strong> These are not eBay money back guarantee disputes. </span>
+ * to the buyer. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee program, are not returned with <b>GetUserDisputes</b>.
+ * The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used
+ * to retrieve Money Back Guarantee cases programmatically. </span>
  * @subpackage Structs
  */
 class DisputeResolutionType extends AbstractStructBase
 {
     /**
      * The DisputeResolutionRecordType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The action resulting from the resolution, affecting either the buyer or the seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeResolutionRecordType;
+    protected ?string $DisputeResolutionRecordType = null;
     /**
      * The DisputeResolutionReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The reason for the resolution. The DisputeResolutionReason results in the action described by the DisputeResolutionRecordType.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeResolutionReason;
+    protected ?string $DisputeResolutionReason = null;
     /**
      * The ResolutionTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date and time the dispute was resolved, in GMT.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ResolutionTime;
+    protected ?string $ResolutionTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DisputeResolutionType
      * @uses DisputeResolutionType::setDisputeResolutionRecordType()
@@ -51,9 +56,9 @@ class DisputeResolutionType extends AbstractStructBase
      * @param string $disputeResolutionRecordType
      * @param string $disputeResolutionReason
      * @param string $resolutionTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($disputeResolutionRecordType = null, $disputeResolutionReason = null, $resolutionTime = null, \DOMDocument $any = null)
+    public function __construct(?string $disputeResolutionRecordType = null, ?string $disputeResolutionReason = null, ?string $resolutionTime = null, $any = null)
     {
         $this
             ->setDisputeResolutionRecordType($disputeResolutionRecordType)
@@ -65,7 +70,7 @@ class DisputeResolutionType extends AbstractStructBase
      * Get DisputeResolutionRecordType value
      * @return string|null
      */
-    public function getDisputeResolutionRecordType()
+    public function getDisputeResolutionRecordType(): ?string
     {
         return $this->DisputeResolutionRecordType;
     }
@@ -73,24 +78,25 @@ class DisputeResolutionType extends AbstractStructBase
      * Set DisputeResolutionRecordType value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeResolutionRecordType
      * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType
      */
-    public function setDisputeResolutionRecordType($disputeResolutionRecordType = null)
+    public function setDisputeResolutionRecordType(?string $disputeResolutionRecordType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType::valueIsValid($disputeResolutionRecordType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeResolutionRecordType, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType', is_array($disputeResolutionRecordType) ? implode(', ', $disputeResolutionRecordType) : var_export($disputeResolutionRecordType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeResolutionRecordTypeCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeResolutionRecordType = $disputeResolutionRecordType;
+        
         return $this;
     }
     /**
      * Get DisputeResolutionReason value
      * @return string|null
      */
-    public function getDisputeResolutionReason()
+    public function getDisputeResolutionReason(): ?string
     {
         return $this->DisputeResolutionReason;
     }
@@ -98,24 +104,25 @@ class DisputeResolutionType extends AbstractStructBase
      * Set DisputeResolutionReason value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeResolutionReason
      * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType
      */
-    public function setDisputeResolutionReason($disputeResolutionReason = null)
+    public function setDisputeResolutionReason(?string $disputeResolutionReason = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType::valueIsValid($disputeResolutionReason)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeResolutionReason, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType', is_array($disputeResolutionReason) ? implode(', ', $disputeResolutionReason) : var_export($disputeResolutionReason, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeResolutionReasonCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeResolutionReason = $disputeResolutionReason;
+        
         return $this;
     }
     /**
      * Get ResolutionTime value
      * @return string|null
      */
-    public function getResolutionTime()
+    public function getResolutionTime(): ?string
     {
         return $this->ResolutionTime;
     }
@@ -124,65 +131,47 @@ class DisputeResolutionType extends AbstractStructBase
      * @param string $resolutionTime
      * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType
      */
-    public function setResolutionTime($resolutionTime = null)
+    public function setResolutionTime(?string $resolutionTime = null): self
     {
         // validation for constraint: string
         if (!is_null($resolutionTime) && !is_string($resolutionTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($resolutionTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($resolutionTime, true), gettype($resolutionTime)), __LINE__);
         }
         $this->ResolutionTime = $resolutionTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DisputeResolutionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

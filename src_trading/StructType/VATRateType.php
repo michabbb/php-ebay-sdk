@@ -1,65 +1,62 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for VATRateType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Type defining the <b>VATRateType</b> container, which is used by <b>ReviseSellingManagerSaleRecord</b> to modify the VAT percentage for an order line item. This container is also retrieved by <b>GetSellingManagerSaleRecord</b> if
- * Value-Added Tax has been applied to the order line item.
+ * Meta information extracted from the WSDL
+ * - documentation: Type defining the <b>VATRateType</b> container, which is used by <b>GetSellingManagerSaleRecord</b> if Value-Added Tax has been applied to the order line item.
  * @subpackage Structs
  */
 class VATRateType extends AbstractStructBase
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier for an eBay listing. A listing can have multiple order line items (transactions), but only one <b>ItemID</b>. An <b>ItemID</b> can be paired up with a corresponding <b>TransactionID</b> and used as an input filter
-     * for <b>ReviseSellingManagerSaleRecord</b>. However, if <b>OrderID</b> is passed in as an input filter for <b>ReviseSellingManagerSaleRecord</b>, the <b>ItemID</b>/<b>TransactionID</b> pair is ignored. | Type that represents the unique identifier for
-     * an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier for an eBay listing. A listing can have multiple order line items (transactions), but only one <b>ItemID</b>. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier for an eBay order line item. An order line item is created once there is a commitment from a buyer to purchase an item. Since an auction listing can only have one order line item during the duration of the listing,
-     * the <b>TransactionID</b> for auction listings is always 0. Along with its corresponding <b>ItemID</b>, a <b>TransactionID</b> is used and referenced during an order checkout flow and after checkout has been completed. The
-     * <b>ItemID</b>/<b>TransactionID</b> pair can be used as an input filter for <b>ReviseSellingManagerSaleRecord</b>. However, if <b>OrderID</b> is passed in as an input filter for <b>ReviseSellingManagerSaleRecord</b>, the
-     * <b>ItemID</b>/<b>TransactionID</b> pair is ignored.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier for an eBay sales transaction. This identifier is created once there is a commitment from a buyer to purchase an item. Along with its corresponding <b>ItemID</b>, a <b>TransactionID</b> is used and referenced during
+     * an order checkout flow and after checkout has been completed. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The VATPercent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The VAT (Value-Added Tax) rate for the order line item. When the <b>VATPercent</b> is specified, the item's VAT information appears on the item's listing page. In addition, the seller can choose to print an invoice that includes the
      * item's net price, VAT percent, VAT amount, and total price. Since VAT rates vary depending on the item and on the user's country of residence, a seller is responsible for entering the correct VAT rate; it is not calculated by eBay. To specify a
      * <b>VATPercent</b>, a seller must have a VAT-ID registered with eBay and must be listing the item on a VAT-enabled site. Max applicable length is 6 characters, including the decimal (e.g., 12.345). The scale is 3 decimal places. (If you pass in
      * 12.3456, eBay may round up the value to 12.346.) Note: The View Item page may display the precision to 2 decimal places with no trailing zeros. However, the full value you send in is stored.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $VATPercent;
+    protected ?float $VATPercent = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two IDs. If a VATRate is specified in the
-     * <b>ReviseSellingManagerSaleRecord</b> request, <b>OrderLineItemID</b> can be used instead of <b>ItemID</b> and <b>TransactionID</b>. For a single line item order, the <b>OrderLineItemID</b> value can be passed into the <b>OrderID</b> field to revise
-     * the corresponding order.
+     * Meta information extracted from the WSDL
+     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for VATRateType
      * @uses VATRateType::setItemID()
@@ -71,9 +68,9 @@ class VATRateType extends AbstractStructBase
      * @param string $transactionID
      * @param float $vATPercent
      * @param string $orderLineItemID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemID = null, $transactionID = null, $vATPercent = null, $orderLineItemID = null, \DOMDocument $any = null)
+    public function __construct(?string $itemID = null, ?string $transactionID = null, ?float $vATPercent = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -86,7 +83,7 @@ class VATRateType extends AbstractStructBase
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -95,20 +92,21 @@ class VATRateType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\VATRateType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -117,20 +115,21 @@ class VATRateType extends AbstractStructBase
      * @param string $transactionID
      * @return \macropage\ebaysdk\trading\StructType\VATRateType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get VATPercent value
      * @return float|null
      */
-    public function getVATPercent()
+    public function getVATPercent(): ?float
     {
         return $this->VATPercent;
     }
@@ -139,16 +138,21 @@ class VATRateType extends AbstractStructBase
      * @param float $vATPercent
      * @return \macropage\ebaysdk\trading\StructType\VATRateType
      */
-    public function setVATPercent($vATPercent = null)
+    public function setVATPercent(?float $vATPercent = null): self
     {
+        // validation for constraint: float
+        if (!is_null($vATPercent) && !(is_float($vATPercent) || is_numeric($vATPercent))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($vATPercent, true), gettype($vATPercent)), __LINE__);
+        }
         $this->VATPercent = $vATPercent;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -157,65 +161,47 @@ class VATRateType extends AbstractStructBase
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\VATRateType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\VATRateType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\VATRateType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\VATRateType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

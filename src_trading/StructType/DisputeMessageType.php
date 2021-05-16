@@ -1,55 +1,60 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DisputeMessageType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Contains a message posted to a dispute. The message can be posted by the buyer, the seller, or an eBay representative. <br/><br/> <span class="tablenote"><strong>Note:</strong> These are not eBay money back guarantee disputes.
- * </span>
+ * Meta information extracted from the WSDL
+ * - documentation: Contains a message posted to a dispute. The message can be posted by the buyer, the seller, or an eBay representative. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described'
+ * cases, initiated by buyers through the eBay Money Back Guarantee program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a
+ * href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to
+ * retrieve Money Back Guarantee cases programmatically. </span>
  * @subpackage Structs
  */
 class DisputeMessageType extends AbstractStructBase
 {
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An ID that uniquely identifies the message.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MessageID;
+    protected ?int $MessageID = null;
     /**
      * The MessageSource
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The party who posted the message: the buyer, the seller, or an eBay representative.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageSource;
+    protected ?string $MessageSource = null;
     /**
      * The MessageCreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date and time the message was created, in GMT.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageCreationTime;
+    protected ?string $MessageCreationTime = null;
     /**
      * The MessageText
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The text of the message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageText;
+    protected ?string $MessageText = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DisputeMessageType
      * @uses DisputeMessageType::setMessageID()
@@ -61,9 +66,9 @@ class DisputeMessageType extends AbstractStructBase
      * @param string $messageSource
      * @param string $messageCreationTime
      * @param string $messageText
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($messageID = null, $messageSource = null, $messageCreationTime = null, $messageText = null, \DOMDocument $any = null)
+    public function __construct(?int $messageID = null, ?string $messageSource = null, ?string $messageCreationTime = null, ?string $messageText = null, $any = null)
     {
         $this
             ->setMessageID($messageID)
@@ -76,7 +81,7 @@ class DisputeMessageType extends AbstractStructBase
      * Get MessageID value
      * @return int|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?int
     {
         return $this->MessageID;
     }
@@ -85,20 +90,21 @@ class DisputeMessageType extends AbstractStructBase
      * @param int $messageID
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?int $messageID = null): self
     {
         // validation for constraint: int
-        if (!is_null($messageID) && !is_numeric($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($messageID)), __LINE__);
+        if (!is_null($messageID) && !(is_int($messageID) || ctype_digit($messageID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get MessageSource value
      * @return string|null
      */
-    public function getMessageSource()
+    public function getMessageSource(): ?string
     {
         return $this->MessageSource;
     }
@@ -106,24 +112,25 @@ class DisputeMessageType extends AbstractStructBase
      * Set MessageSource value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $messageSource
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
      */
-    public function setMessageSource($messageSource = null)
+    public function setMessageSource(?string $messageSource = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType::valueIsValid($messageSource)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $messageSource, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType', is_array($messageSource) ? implode(', ', $messageSource) : var_export($messageSource, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeMessageSourceCodeType::getValidValues())), __LINE__);
         }
         $this->MessageSource = $messageSource;
+        
         return $this;
     }
     /**
      * Get MessageCreationTime value
      * @return string|null
      */
-    public function getMessageCreationTime()
+    public function getMessageCreationTime(): ?string
     {
         return $this->MessageCreationTime;
     }
@@ -132,20 +139,21 @@ class DisputeMessageType extends AbstractStructBase
      * @param string $messageCreationTime
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
      */
-    public function setMessageCreationTime($messageCreationTime = null)
+    public function setMessageCreationTime(?string $messageCreationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($messageCreationTime) && !is_string($messageCreationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageCreationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageCreationTime, true), gettype($messageCreationTime)), __LINE__);
         }
         $this->MessageCreationTime = $messageCreationTime;
+        
         return $this;
     }
     /**
      * Get MessageText value
      * @return string|null
      */
-    public function getMessageText()
+    public function getMessageText(): ?string
     {
         return $this->MessageText;
     }
@@ -154,65 +162,47 @@ class DisputeMessageType extends AbstractStructBase
      * @param string $messageText
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
      */
-    public function setMessageText($messageText = null)
+    public function setMessageText(?string $messageText = null): self
     {
         // validation for constraint: string
         if (!is_null($messageText) && !is_string($messageText)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageText)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageText, true), gettype($messageText)), __LINE__);
         }
         $this->MessageText = $messageText;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DisputeMessageType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ItemType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains the data defining one item. A seller populates an object of this type at listing time with the definition of a new item. A seller also uses an object of this type to relist or revise an item. Calls that retrieve item data
  * (such as the <b>GetSellerList</b> call) return an object of this type, filled with the item's data.
  * @subpackage Structs
@@ -15,243 +18,228 @@ class ItemType extends AbstractStructBase
 {
     /**
      * The ApplicationData
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Return custom, application-specific data associated with the item. The data you specify is stored by eBay with the item for your own reference, but it is not used by eBay in any way. Use <b>ApplicationData</b> to store special
-     * information for yourself, such as a part number. For a SKU in an eBay.com listing, use the <b>SKU</b> element instead. To remove this value when revising or relisting an item, use <b>DeletedField</b>.
+     * information for yourself, such as a part number. For a SKU in an eBay.com listing, use the <b>SKU</b> element instead. To remove this value when revising or relisting an item, use <b>DeletedField</b>. <br/>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ApplicationData;
+    protected ?string $ApplicationData = null;
     /**
      * The AttributeSetArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field has been deprecated, and should no longer be used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType|null
      */
-    public $AttributeSetArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $AttributeSetArray = null;
     /**
      * The AttributeArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field has been deprecated, and should no longer be used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\AttributeArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\AttributeArrayType|null
      */
-    public $AttributeArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\AttributeArrayType $AttributeArray = null;
     /**
      * The LookupAttributeArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated, and should no longer be used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType|null
      */
-    public $LookupAttributeArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $LookupAttributeArray = null;
     /**
      * The AutoPay
-     * Meta informations extracted from the WSDL
-     * - documentation: If <code>true</code>, the seller requests immediate payment for the item. If <code>false</code> or not specified, immediate payment is not requested. (In responses, does not indicate whether the item is actually still a candidate for
-     * purchase via immediate payment.)<br> <br> Only applicable to items listed on PayPal-enabled sites in categories that support immediate payment (see <b>AutoPayEnabled</b> in <b>GetCategories</b>), when seller has a Premier or Business PayPal account
-     * (see <b>PayPalAccountType</b> in <b>GetUser</b>). <br> <br> To create an Immediate Payment listing, <b>AutoPay</b> must be <code>true</code>, <b>PayPalEmailAddress</b> must be a valid PayPal email address for the seller, and the only included
-     * <b>PaymentMethods</b> value must be <code>PayPal</code>. <br/><br/> For a non-Immediate Payment listing, the <b>AutoPay</b> flag is not required since it defaults to <code>false</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: If <code>true</code>, the seller requests immediate payment for a fixed-price item or an auction item that is purchased with the 'Buy it Now' feature. If <code>false</code> or not specified, immediate payment is not requested. (In
+     * responses, does not indicate whether the item is actually still a candidate for purchase via immediate payment.) <br> <br> <b>For sellers not opted in to eBay managed payments</b>: immediate payment is only available if the eBay marketplace supports
+     * PayPal as a payment method, and the listing category supports immediate payment (the <b>AutoPayEnabled</b> should be returned as <code>true</code> in the <b>GetCategories</b> response). To enable the listing with the immediated payment requirement,
+     * <b>AutoPay</b> must be <code>true</code>, the <b>PayPalEmailAddress</b> field must be included and must have a valid PayPal email address for the seller, and the only specified <b>PaymentMethods</b> value must be <code>PayPal</code>. <br> <br> <b>For
+     * sellers opted in to eBay managed payments</b>: the only requirement is that the listing category supports immediate payments. With managed payments, eBay handles the payment methods available to the buyer, so the seller will not have to specify any
+     * payment methods, and will not have include the <b>PayPalEmailAddress</b> field. The seller only has to include the <b>AutoPay</b> field and set it to <code>true</code> to create an Immediate Payment listing. <br/><br/> If a seller does not wish to
+     * require immediate payment, the <b>AutoPay</b> flag is not required since it defaults to <code>false</code>. <br/>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AutoPay;
-    /**
-     * The PaymentDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used in an <b>Add/Revise/Relist/Verify</b> call if the seller is selling a motor vehicle, and is requiring an initial deposit on that vehicle. This container is only applicable for motor vehicle listings. <br><br>
-     * This container will only be returned in 'Get' calls for motor vehicle listings where an initial deposit is required for that vehicle.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaymentDetailsType
-     */
-    public $PaymentDetails;
+    protected ?bool $AutoPay = null;
     /**
      * The BiddingDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Detailed information about a bid. For <b>GetMyeBayBuying</b>, returned as a self-closed element if no bids meet the request criteria.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BiddingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\BiddingDetailsType|null
      */
-    public $BiddingDetails;
-    /**
-     * The MotorsGermanySearchable
-     * Meta informations extracted from the WSDL
-     * - documentation: Listing upgrade that features the item in eBay search results on the mobile.de partner site. Applicable to eBay Germany motor vehicle listings only. <br> <br> If <code>true</code> in listing requests and responses, the seller is
-     * purchasing or has purchased cross-promotional placement on the mobile.de site.
-     * - minOccurs: 0
-     * @var bool
-     */
-    public $MotorsGermanySearchable;
+    protected ?\macropage\ebaysdk\trading\StructType\BiddingDetailsType $BiddingDetails = null;
     /**
      * The BuyerProtection
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Flag to indicate an item's eligibility for the PayPal Buyer Protection program. This field is only returned if <code>true</code>. If this field is not returned, the item is not eligible for PayPal Buyer Protection. For more
      * information on items that are eligible for PayPal Buyer Protection, see the <a href="https://pages.ebay.com/help/buy/paypal-buyer-protection.html#paypal">PayPal Buyer Protection</a> help page.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BuyerProtection;
+    protected ?string $BuyerProtection = null;
     /**
      * The BuyItNowPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is only applicable for auction listings. By specifying a 'Buy It Now' price, a seller is allowing prospective buyers the opportunity to purchase the item in the auction listing at this price immediately. When a buyer uses
      * the 'Buy It Now' option to purchase the item, the auction listing will end immediately. <br/><br/> By including this field and specifying a 'Buy It Now' price, the seller is enabling the 'Buy It Now' feature on the auction listing. If the seller
      * includes this field for any other listing type other than an auction, this field and its price will just be ignored. <br/><br/> The price in this field must be at least 30 percent higher than the starting bid price (which is specified in an Add call
      * through the <b>Item.StartPrice</b> field). Once a bid is made on an auction listing, and the bid meets or exceeds the <b>Item.ReservePrice</b> value (if set), the 'Buy It Now' option becomes unavailable, and this field will no longer be applicable.
      * If there is no Reserve Price, the first bid will nullify the 'Buy It Now' option. <br><br> Keep in mind that <b>GetItem</b> (and other 'Get' calls that retrieve the Item details) may still return the <b>BuyItNowPrice</b> field for an auction item
      * even if the 'Buy It Now' option is no longer available. Instead, a user should look for the <b>ListingDetails.BuyItNowAvailable</b> boolean field in the <b>GetItem</b> response to determine if the 'Buy It Now' option is still available for the
-     * auction item. <br/><br/> <span class="tablenote"><b>Note: </b> For the US site, new eBay sellers are subject to <a href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-Policies.html#SellerLimits">Seller Limits</a>, which
-     * limit the quantity of items that may be listed and/or the total cumulative value of these listings. While subject to these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number of listings they
-     * can create and the remaining cumulative value of these listings. These values are shown in the <b>Summary.QuantityLimitRemaining</b> and <b>Summary.AmountLimitRemaining</b> fields in the <b>GetMyeBaySelling</b> response. If a call to add an item or
-     * revise an item would result in the exceeding of these limits, the add item or revise item call will fail. These fields will only be returned if the seller is subject to seller limits. </span>
+     * auction item. <br/><br/> <span class="tablenote"><b>Note: </b> For the US site, new eBay sellers are subject to <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-Policies.html#SellerLimits">Seller
+     * Limits</a>, which limit the quantity of items that may be listed and/or the total cumulative value of these listings. While subject to these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number
+     * of listings they can create and the remaining cumulative value of these listings. These values are shown in the <b>Summary.QuantityLimitRemaining</b> and <b>Summary.AmountLimitRemaining</b> fields in the <b>GetMyeBaySelling</b> response. If a call to
+     * add an item or revise an item would result in the exceeding of these limits, the add item or revise item call will fail. These fields will only be returned if the seller is subject to seller limits. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $BuyItNowPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $BuyItNowPrice = null;
     /**
      * The CategoryMappingAllowed
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> This field's value now defaults to <code>true</code> if this field is omitted. Previously, the default value was <code>false</code>, so a user had to include this field and set it to
+     * <code>true</code> in order for eBay to map an outdated Primary or Secondary Category ID to the updated Category ID. </span> This boolean field controls whether or not eBay automatically maps outdated Category ID(s) specified in a
+     * <b>PrimaryCategory</b> and/or <b>SecondaryCategory</b> container(s) to the updatd Category ID(s) no longer exists in the current category structure: If you pass a value of <code>true</code> in <b>CategoryMappingAllowed</b> or just omit the field,
+     * eBay will look up the current Category ID(s) that have replaced the specified Category ID(s). If you pass a value of <code>false</code>, eBay will not do any mapping, and the call may fail if specified Category ID(s) are no longer valid IDs for a
+     * eBay leaf category. The new Category ID(s) will be returned in the <b>CategoryID</b> and <b>Category2ID</b> fields (if secondary category is used) of the Add/Revise/Relist call response. <br/><br/>
      * - default: false
-     * - documentation: Controls how eBay handles cases in which an ID specified in <b>PrimaryCategory</b> and/or <b>SecondaryCategory</b> no longer exists in the current category structure: If you pass a value of <code>true</code> in
-     * <b>CategoryMappingAllowed</b>, eBay will look up the current ID that is mapped to the same category and use the new ID for the listing (if any). The new ID will be returned in the response as <b>CategoryID</b> (for the primary category) or
-     * <b>Category2ID</b> (for the secondary category). If <b>CategoryMappingAllowed</b> is not set or contains a value of <code>false</code> (the default), an error will be returned if a selected category ID no longer exists.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CategoryMappingAllowed;
+    protected ?bool $CategoryMappingAllowed = null;
     /**
      * The Charity
-     * Meta informations extracted from the WSDL
-     * - documentation: This container identifies the nonprofit organization that will benefit with a percentage of the proceeds from the sale of an item through an auction or fixed-price listing. Charity names and IDs can be found by going to <a
-     * href="https://charity.ebay.com/charity-auctions/my-causes" target="_blank">eBay for Charity</a> page and doing a search for a charity registered with the PayPal Giving Fund. The donation percentage can be set in 5 percent increments from 10 percent
-     * to 100 percent. If a benefitting charity is specified, the seller must also accept PayPal as a payment method for the item (see <b>Item.PaymentMethods</b>). <br><br> When it comes to revising an auction or fixed-price listing, you can add a
-     * benefitting charity (as long as there is at least 12 hours left before end of listing/close of auction), but you cannot remove or change a nonprofit company once one is already established in the original listing. <br><br> <b>For Revise calls</b>:
-     * The non-profit organization and donation percentage can now be modified in a Revise call as long as there are no active bids on an auction listing, or no pending Best Offers/Counter Offers on a listing. <br><br> This container will only be returned
-     * in Get calls for listings that will benefit a nonprofit organization if the item sells.
+     * Meta information extracted from the WSDL
+     * - documentation: This container identifies the nonprofit organization that will benefit with a percentage of the proceeds from each sale of an item through an auction or fixed-price listing. Charity names and IDs can be found by going to <a
+     * href="https://charity.ebay.com/charity-auctions/my-causes" target="_blank">eBay for Charity</a> page and doing a search, or by doing a search with the <b>GetCharities</b> call. The donation percentage can be set in 5 percent increments from 10
+     * percent to 100 percent. For all charitable listings, PayPal must be an accepted payment method(see <b>Item.PaymentMethods</b>). <br><br> When it comes to revising an auction or fixed-price listing, you can add a benefitting charity (as long as there
+     * is at least 12 hours left before end of listing/close of auction), but you cannot remove or change a nonprofit company once one is already established in the original listing. <br><br> <b>For Revise calls</b>: The non-profit organization and donation
+     * percentage can now be modified in a Revise call as long as there are no active bids on an auction listing, or no pending Best Offers/Counter Offers on a listing. <br><br> This container will only be returned in Get calls for charitable listings.
+     * Charitable listings are only supported in the US and UK marketplaces.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CharityType
+     * @var \macropage\ebaysdk\trading\StructType\CharityType|null
      */
-    public $Charity;
+    protected ?\macropage\ebaysdk\trading\StructType\CharityType $Charity = null;
     /**
      * The Country
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This two-digit enumeration value indicates the country of the seller's registration address. <b>CountryCodeType</b> defines the supported values. The <a
      * href="https://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GeteBayDetails.html">GeteBayDetails</a> call can also be used (include the <b>DetailName</b> field and set its value to <b>CountryDetails</b>) to see the full list of supported country
      * codes. <br><br> In an Add/Revise/Relist/Verify call, this field is required.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Country;
+    protected ?string $Country = null;
     /**
      * The CrossPromotion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated, and should not longer be used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CrossPromotionsType
+     * @var \macropage\ebaysdk\trading\StructType\CrossPromotionsType|null
      */
-    public $CrossPromotion;
+    protected ?\macropage\ebaysdk\trading\StructType\CrossPromotionsType $CrossPromotion = null;
     /**
      * The Currency
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: In an Add/Revise/Relist/Verify call, this required three-digit enumeration value defines the currency associated with the listing site. The item price and all costs passed in the call request will be using this currency. Similarly,
      * the listing fees and other cost-related data will be using this currency. Since the Trading API can only be used for a select number of eBay sites, only a subset of values are supporting when adding/revising/relisting an item. These supported values
      * are discussed in the top section of <b>CurrencyCodeType</b>. <br><br> In 'Get' calls, it is possible that any of the values in <b>CurrencyCodeType</b> may appear, as some cost-related fields will show the buyer's currency type.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Currency;
+    protected ?string $Currency = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The seller's description of the item. In listing requests, you can submit your description using CDATA if you want to use HTML or XML-reserved characters in the description. However, a seller can not use any active content in their
      * listing description. Active content includes animation or video via JavaScript, Flash, plug-ins, or form actions. All active content will be blocked/removed from a listing. Removing/blocking active content will lead to faster load times of listings,
-     * make listings more mobile-friendly, improve SEO performance, and lead to a more secure eBay Marketplace. For more tips on creating listings that are even more mobile-friendly, see this <a
-     * href="https://pages.ebay.com/sell/itemdescription/mobilefriendlyguidelines.html" target="_blank">Best practices</a> document. <br><br> For more information about eBay phasing out active content, see this <a
-     * href="https://pages.ebay.com/sellerinformation/news/fallupdate16/active-content.html" target="_blank">Seller Update</a> page. For more information about eBay's JavaScript/Active Content policy, see the <a
-     * href="https://pages.ebay.com/help/policies/listing-javascript.html" target="_blank">JavaScript policy</a> page. <br><br> In the listing description, sellers are only allowed to provide links to product videos, freight shipping services, or other
-     * legally required information, and when providing these links in the listing description, the secure 'https' protocol must be used instead of 'http'. In addition, any valid links to sites outside of eBay should use the <em>target="_blank"</em>
-     * attribute in the <b>a href</b> tag so a new browser window will be loaded when the link is clicked instead of buyers being redirected off of eBay. For more information on using links in the listing description, see eBay's <a
-     * href="http://pages.ebay.com/help/policies/listing-links.html" target="_blank">Links policy</a>. For more information about the stronger security standards that eBay is using, see the <a
-     * href="https://pages.ebay.com/seller-center/seller-updates/2018-fall/marketplace-update.html#use-secure-https" "target=_blank">Use secure HTTPS for enhanced browser security</a> topic in the 2018 Fall Seller Update. The <a
+     * make listings more mobile-friendly, improve SEO performance, and lead to a more secure eBay Marketplace. <br><br> <span class="tablenote"><b>Note: </b> To ensure that their listing description is optimized when viewed on mobile devices, sellers
+     * should strongly consider using eBay's <a href="https://pages.ebay.com/sell/itemdescription/customizeyoursummary.html" target="_blank">View Item description summary feature</a> when listing their item. Using HTML div and span tag attributes, this
+     * feature allows sellers to customize and fully control the listing description that is displayed for prospective buyers when viewing the item on a mobile device. The listing description on mobile devices is limited to 800 characters, and whenever the
+     * listing description exceeds this limit, eBay uses a special algorithm to derive the best possible description within the 800-character limit. However, due to some description content being removed, it is definitely not ideal for the seller, and could
+     * possibly lead to a bad buyer experience and a Significantly not as described (SNAD) case, since the buyer may not get complete details on the item. See the eBay help page for more details on using the HTML div and span tags, and for more tips on
+     * creating listings that are mobile-friendly, see this <a href="https://pages.ebay.com/sell/itemdescription/mobilefriendlyguidelines.html" target="_blank">Best practices</a> document. </span> <br> In the listing description, sellers are only allowed to
+     * provide links to product videos, freight shipping services, or other legally required information, and when providing these links in the listing description, the secure 'https' protocol must be used instead of 'http'. In addition, any valid links to
+     * sites outside of eBay should use the <em>target="_blank"</em> attribute in the <b>a href</b> tag so a new browser window will be loaded when the link is clicked instead of buyers being redirected off of eBay. For more information on using links in
+     * the listing description, see eBay's <a href="http://pages.ebay.com/help/policies/listing-links.html" target="_blank">Links policy</a>. For more information about the stronger security standards that eBay is using, see the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2018-fall/marketplace-update.html#use-secure-https" target="_blank">Use secure HTTPS for enhanced browser security</a> topic in the 2018 Fall Seller Update. The <a
      * href="https://developer.ebay.com/api-docs/sell/compliance/resources/listing_violation/methods/getListingViolations" target="_blank">getListingViolations</a> method of the Compliance API can be used to see if any of the seller's active listings are
      * not 'HTTPS' compliant. <br><br> If you embed pictures in the description (by using IMG tags) instead of using <b>PictureURL</b>, but you want a camera icon to appear in search and listing pages, specify the following null-image URL in the
-     * <b>PictureURL</b> field: https://pics.ebay.com/aw/pics/dot_clear.gif. See <a href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Pictures-InListing.html">Working with Pictures in an Item Listing</a> in the eBay Features Guide.
-     * <br><br> This field is conditionally required for all listings. The exception is when the seller specifies a product identifier, such as a GTIN or ePID, through the <b>ProductListingDetails</b> container and a product match is found in the eBay
-     * product catalog. If a matching product is found in the eBay product catalog, the item description will be created automatically (as long as the <b>ProductListingDetails.IncludeeBayProductDetails</b> value is <code>true</code>). <br>
+     * <b>PictureURL</b> field: https://pics.ebay.com/aw/pics/dot_clear.gif. See <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-InListing.html">Working with Pictures in an Item Listing</a> in the eBay
+     * Features Guide. <br><br> This field is conditionally required for all listings. The exception is when the seller specifies a product identifier, such as a GTIN or ePID, through the <b>ProductListingDetails</b> container and a product match is found
+     * in the eBay product catalog. If a matching product is found in the eBay product catalog, the item description will be created automatically (as long as the <b>ProductListingDetails.IncludeeBayProductDetails</b> value is <code>true</code>). <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The DescriptionReviseMode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is conditionally required if the listing is being revised through a Revise call, and the <b>Item.Description</b> field is one of the fields being changed. The enumeration value passed in this field specifies whether the
      * text provided in the <b>Item.Description</b> field will prepend, append, or replace the existing text in the current <b>Item.Description</b> field.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DescriptionReviseMode;
+    protected ?string $DescriptionReviseMode = null;
     /**
      * The Distance
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated, and should no longer be used.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DistanceType
+     * @var \macropage\ebaysdk\trading\StructType\DistanceType|null
      */
-    public $Distance;
+    protected ?\macropage\ebaysdk\trading\StructType\DistanceType $Distance = null;
     /**
      * The HitCounter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether an optional hit counter is displayed on the item's listing page and, if so, what type. See <b>HitCounterCodeType</b> for specific values. <br/> Restriction: <HitCounter>HiddenStyle</HitCounter> is not enabled on the
      * Germany, Austria, Switzerland, or Poland sites.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $HitCounter;
+    protected ?string $HitCounter = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the eBay listing. This identifier is generated by eBay and returned in the response of an Add call if an item is successfully listed. Once an item is successfully created, the <b>ItemID</b> cannot be
      * modified. <br> <br> <span class="tablenote"><b>Note:</b> Although we represent item IDs as strings in the schema, we recommend you store them as 64-bit signed integers. If you choose to store item IDs as strings, allocate at least 19 characters
      * (assuming decimal digits are used) to hold them. Your code should be prepared to handle IDs of up to 19 digits. </span> | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The ListingDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Various details about a listing, some of which are calculated or derived after the item is listed. These include the start and end time, converted (localized) prices, and certain flags that indicate whether the seller specified
      * fields whose values are not visible to the requesting user. For <b>GetMyeBayBuying</b>, returned as a self-closed element if no listings meet the request criteria. <br/><br/> In an Add/Revise/Relist call, this container is used to set the Best Offer
      * Auto-Accept and Best Offer Auto-Decline threshold values.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ListingDetailsType|null
      */
-    public $ListingDetails;
-    /**
-     * The ListingDesigner
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains the detail data for the Listing Designer theme and template (if either are used), which can optionally be used to enhance the appearance of the description area of an item's description.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingDesignerType
-     */
-    public $ListingDesigner;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingDetailsType $ListingDetails = null;
     /**
      * The ListingDuration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Describes the number of days the seller wants the listing to be active (available for bidding/buying). The duration specifies the seller's initial intent at listing time. <br/><br/> The end time for a listing is calculated by adding
      * the duration to the item's start time. If the listing ends early, the value of the listing duration does not change. When a listing's duration is changed, any related fees (e.g., 10-day fee) may be debited or credited (as applicable). <br><br> The
      * valid choice of values depends on the listing format (see <b>Item.ListingType</b>). For a list of valid values, call <b>GetCategoryFeatures</b> with <b>DetailLevel</b> set to <b>ReturnAll</b> and look for <b>ListingDurations</b> information. <br><br>
      * When you revise a listing, the duration cannot be reduced if it will result in ending the listing within 24 hours of the current date-time. You are only allowed to increase the duration of the listing if fewer than 2 hours have passed since you
-     * initially listed the item and the listing has no bids. You can decrease the value of this field only if the listing has no bids (or no items have sold) and the listing does not end within 12 hours.
+     * initially listed the item and the listing has no bids. You can decrease the value of this field only if the listing has no bids (or no items have sold) and the listing does not end within 12 hours. <br> <br> <span class="tablenote"><b>Note: </b> As
+     * of April 1, 2019, 'GTC' is the only supported listing duration for all eBay marketplaces with the following exceptions: <ul> <li>The following eBay Motors US categories are exempt from this change: <em>Cars & Trucks</em> (6001), <em>Motorcycles</em>
+     * (6024), <em>Other Vehicles & Trailers</em> (6038), <em>Boats</em> (26429), <em>Powersports</em> (66466).</li> <li>All child categories under <em>Cars, Motorcycles & Vehicles</em> (9800) categories on the eBay UK and eBay Italy sites are also exempt
+     * from this change. </li> </ul> If any other listing duration value besides <code>GTC</code> is specified in this field, it will be ignored, and <code>GTC</code> will be used instead. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingDuration;
+    protected ?string $ListingDuration = null;
     /**
      * The ListingEnhancement
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Describes listing upgrades that sellers can select for a fee, such as the <b>BoldTitle</b> upgrade. Also includes feature packs for saving on listing upgrades. See <a
      * href="https://pages.ebay.com/help/sell/ia/promoting_your_item.html">Listing Upgrades</a> in the eBay site help. <br><br> You cannot remove listing upgrades when you revise a listing. When you relist an item, use <b>DeletedField</b> to remove a
      * listing upgrades.
@@ -259,290 +247,327 @@ class ItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    public $ListingEnhancement;
+    protected array $ListingEnhancement = [];
     /**
      * The ListingType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The selling format of the eBay listing, such as auction (indicated with <code>Chinese</code> value), fixed-price (indicated with <code>FixedPriceItem</code> value), or classified ad (indicated with <code>AdType</code> value).
      * <br><br> If this field is not included in an <b>AddItem</b>, <b>AddItems</b>, <b>AddSellingManagerTemplate</b>, or <b>VerifyAddItem</b> call, the listing type defaults to auction <br><br> For <b>AddFixedPriceItem</b>, <b>RelistFixedPriceItem</b>, or
      * <b>VerifyAddFixedPriceItem</b> call, this field must be included and set to <code>FixedPriceItem</code>, since these calls only work with fixed-price listings. <br><br> This field is not applicable to Revise calls because the selling format of active
      * listings cannot be changed.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingType;
+    protected ?string $ListingType = null;
     /**
      * The Location
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the geographical location of the item (along with the value in the <b>Country</b> field). When you revise a listing, you can add or change this value only if the listing has no bids (or no items have sold) and it does not
      * end within 12 hours. <br><br> If you do not specify <b>Location</b>, you must specify <b>Item.PostalCode</b>. If you specify a postal code, but do not specify a location, then the location is given a default value derived from the postal code.
      * <br><br> For the Classified Ad format for motors vehicle listings, the value provided in the <b>Location</b> field is used as item location only if the <b>SellerContactDetails.Street</b> and the <b>SellerContactDetails.Street2</b> are empty. Else,
      * the <b>SellerContactDetails.Street</b> and the <b>SellerContactDetails.Street2</b> will be used for item location. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Location;
+    protected ?string $Location = null;
     /**
      * The LotSize
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A lot is a set of two or more similar items included in a single listing that must be purchased together in a single order line item. The <b>Item.LotSize</b> value is the number of items in the lot. This field is required if two or
      * more items are including in one listing. <br><br> Lots can be used for auction and fixed-price listings. Lot items can be listed only in lot-enabled categories. Call <b>GetCategories</b> to determine if a category supports lots. If the returned
      * <b>CategoryArray.Category.LSD</b> (<b>LotSize</b> Disabled) value is <code>true</code>, the category does not support lots. <br>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $LotSize;
+    protected ?int $LotSize = null;
     /**
      * The PartnerCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PartnerCode;
+    protected ?string $PartnerCode = null;
     /**
      * The PartnerName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PartnerName;
+    protected ?string $PartnerName = null;
+    /**
+     * The PaymentDetails
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used in an <b>Add/Revise/Relist/Verify</b> call if the seller is selling a motor vehicle, and is requiring an initial deposit on that vehicle. This container is only applicable for motor vehicle listings. <br> <br>
+     * <span class="tablenote"><b>Note: </b> If you set up a payment policy via the <a href="https://developer.ebay.com/api-docs/sell/account/resources/payment_policy/methods/createPaymentPolicy">Account API</a> or the <a
+     * href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices Managment API</a>, then you should not populate the fields in this <b>PaymentDetails</b> container. Instead, indicate your payment policy using
+     * the <b>SellerProfiles.SellerPaymentProfile</b> container. </span> <br> This container will only be returned in 'Get' calls for motor vehicle listings where an initial deposit is required for that vehicle.
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\PaymentDetailsType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\PaymentDetailsType $PaymentDetails = null;
     /**
      * The PaymentMethods
-     * Meta informations extracted from the WSDL
-     * - documentation: Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. For Add/Revise/Relist calls, at least one payment method must be specified. <br><br> Use <b>GetCategoryFeatures</b> to
-     * determine the payment methods that are allowed for a category on a site. For example, the response data of <b>GetCategoryFeatures</b> will show that on the US site, most categories only allow electronic payments. Also use <b>GetCategoryFeatures</b>
-     * to determine the default payment methods for a site. <br><br> Do not use <b>GeteBayDetails</b> to determine the payment methods for a site. <br><br> If you specify multiple <b>PaymentMethods</b> fields, the repeating fields must be contiguous. For
-     * example, you can specify <b>PayPalEmailAddress</b> after a list of repeating <b>PaymentMethods</b> fields, but not between them:<br> <br> <code> &lt;PaymentMethods&gt;VisaMC&lt;/PaymentMethods&gt;<br>
+     * Meta information extracted from the WSDL
+     * - documentation: Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. For Add/Revise/Relist calls, at least one payment method must be specified unless the seller is onboarded for eBay managed
+     * payments. <br> <br> <span class="tablenote"><b>Note: </b> If you set up a payment policy via the <a href="https://developer.ebay.com/api-docs/sell/account/resources/payment_policy/methods/createPaymentPolicy">Account API</a> or the <a
+     * href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices Managment API</a>, then you should not populate this field. Instead, indicate your payment policy using the
+     * <b>SellerProfiles.SellerPaymentProfile</b> container. </span> <br> <span class="tablenote"><b>Note:</b> eBay managed payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments
+     * has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For sellers in the eBay managed payments program, a payment method does not need to be specified at listing time.
+     * Any payment method that is specified at listing time (or defined in a payment business policy) will be ignored and dropped from the listing, and the seller will get a warning message in the response. Immediate payment is supported for sellers in the
+     * eBay managed payments program, so they can include the <b>AutoPay</b> field in the request and set its value to <code>true</code>. </span> <br> <span class="tablenote"><b>Note:</b> As of May 1, 2019, eBay no longer supports electronic payments
+     * through a seller's Integrated Merchant Credit Card account. If <code>IMCC</code> is passed in as a value, this value will be ignored and dropped (and listing will possibly get blocked if <code>IMCC</code> is the only specified payment method).
+     * </span><br> Use <b>GetCategoryFeatures</b> to determine the payment methods that are allowed for a category on a site. For example, the response data of <b>GetCategoryFeatures</b> will show that on the US site, most categories only allow electronic
+     * payments. Also use <b>GetCategoryFeatures</b> to determine the default payment methods for a site. <br><br> Do not use <b>GeteBayDetails</b> to determine the payment methods for a site. <br><br> If you specify multiple <b>PaymentMethods</b> fields,
+     * the repeating fields must be contiguous. For example, you can specify <b>PayPalEmailAddress</b> after a list of repeating <b>PaymentMethods</b> fields, but not between them:<br> <br> <code> &lt;PaymentMethods&gt;VisaMC&lt;/PaymentMethods&gt;<br>
      * &lt;PaymentMethods&gt;PayPal&lt;/PaymentMethods&gt;<br> &lt;PayPalEmailAddress&gt;mypaypalemail@ebay.com&lt;/PayPalEmailAddress&gt; </code> <br><br> In general, if you separate repeating instances of a field, the results will be unpredictable. This
-     * rule applies to all repeating fields (<code>maxOccurs="unbounded"</code> or greater than 1) in the schema. See <a href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Basics/Call-APISchema.html#OverviewoftheAPISchema">Overview of the API
-     * Schema</a> in the eBay Features Guide. <br> <br> <span class="tablenote"><b>Note:</b> Required or allowed payment methods vary by site and category. Refer to <a
-     * href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-PaymentMethod.html"> Determining the Payment Methods Allowed for a Category</a> in the eBay Features Guide to help you determine which payment methods you are required
-     * or allowed to specify. </span><br> Payment methods are not applicable to any classified ad listings, as any agreement and payment is handled off of the eBay platform. <br> <br> <b>For <b>ReviseItem</b> and <b>RelistItem</b> only:</b> A listing must
-     * have at least one valid payment method. When you revise or relist an item and you specify a payment method that is invalid for the target site, eBay ignores the invalid payment method, applies the other valid changes, and returns a warning to
-     * indicate that the invalid payment method was ignored. <br/><br/> If multiple payment methods were invalid, the warning indicates that they were all ignored. If you modify the listing so that it includes no valid payment methods, an error is returned.
-     * This situation could occur when the seller removes all valid payment methods or when all the payment methods specified for the item are no longer valid on the target site.
+     * rule applies to all repeating fields (<code>maxOccurs="unbounded"</code> or greater than 1) in the schema. See <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#basics/Call-APISchema.html#OverviewoftheAPISchema">Overview
+     * of the API Schema</a> in the eBay Features Guide. <br> <br> <span class="tablenote"><b>Note:</b> Required or allowed payment methods vary by site and category. Refer to <a
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-PaymentMethod.html"> Determining the Payment Methods Allowed for a Category</a> in the eBay Features Guide to help you determine which payment methods you
+     * are required or allowed to specify. </span><br> Payment methods are not applicable to any classified ad listings, as any agreement and payment is handled off of the eBay platform. <br> <br> <b>For <b>ReviseItem</b> and <b>RelistItem</b> only:</b> A
+     * listing must have at least one valid payment method. When you revise or relist an item and you specify a payment method that is invalid for the target site, eBay ignores the invalid payment method, applies the other valid changes, and returns a
+     * warning to indicate that the invalid payment method was ignored. <br/><br/> If multiple payment methods were invalid, the warning indicates that they were all ignored. If you modify the listing so that it includes no valid payment methods, an error
+     * is returned. This situation could occur when the seller removes all valid payment methods or when all the payment methods specified for the item are no longer valid on the target site.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $PaymentMethods;
+    protected array $PaymentMethods = [];
     /**
      * The PayPalEmailAddress
-     * Meta informations extracted from the WSDL
-     * - documentation: Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing. eBay uses this to identify the correct PayPal account when the buyer pays via PayPal during the
-     * checkout process. (As a seller can have more than one PayPal account, you cannot necessarily rely on PayPal account data returned from <b>GetUser</b> for details about the account associated with the PayPal email address that the seller
-     * specifies.)<br> <br> Required if seller has chosen PayPal as a payment method (<b>PaymentMethods</b>) for the listing.<br> <br> For digital listings, the seller needs to use an email address that is associated with a PayPal Premier or PayPal business
-     * account. <br> <br> <b>For ReviseItem and RelistItem only:</b> To remove this value when you revise or relist an item, use <b>DeletedField</b>. When you revise a listing, if the listing has bids (or items have been sold) or it ends within 12 hours,
-     * you can add <b>PayPalEmailAddress</b>, but you cannot remove it.<br> <br> Not applicable to eBay Motors listings.
+     * Meta information extracted from the WSDL
+     * - documentation: Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing. <br> <br> <span class="tablenote"><b>Note: </b> If you set up a payment policy via the <a
+     * href="https://developer.ebay.com/api-docs/sell/account/resources/payment_policy/methods/createPaymentPolicy">Account API</a> or the <a href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices
+     * Managment API</a>, then you should not populate this field. Instead, indicate your payment policy using the <b>SellerProfiles.SellerPaymentProfile</b> container. </span> <br> eBay uses this to identify the correct PayPal account when the buyer pays
+     * via PayPal during the checkout process. (As a seller can have more than one PayPal account, you cannot necessarily rely on PayPal account data returned from <b>GetUser</b> for details about the account associated with the PayPal email address that
+     * the seller specifies.)<br> <br> Required if seller has chosen PayPal as a payment method (<b>PaymentMethods</b>) for the listing.<br> <br> For digital listings, the seller needs to use an email address that is associated with a PayPal Premier or
+     * PayPal business account. <br> <br> <b>For ReviseItem and RelistItem only:</b> To remove this value when you revise or relist an item, use <b>DeletedField</b>. When you revise a listing, if the listing has bids (or items have been sold) or it ends
+     * within 12 hours, you can add <b>PayPalEmailAddress</b>, but you cannot remove it.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PayPalEmailAddress;
+    protected ?string $PayPalEmailAddress = null;
     /**
      * The PrimaryCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used in an Add/Revise/Relist call to set the primary listing category. This field is conditionally required in an Add call unless the seller successfully uses the <b>ProductListingDetails</b> container to find an
-     * eBay catalog product match. When the seller successfully uses an eBay catalog product to create a listing, the listing title, listing description, item specifics, listing category, and stock photo defined in the catalog product is used to create the
+     * eBay catalog product match. When the seller successfully uses an eBay catalog product to create a listing, the listing title, listing description, Item Specifics, listing category, and stock photo defined in the catalog product is used to create the
      * listing.<br> <br> If you do not know the appropriate eBay category for your product, you can use the <b>GetSuggestedCategories</b> call. Once you know your category, and want to know which listing features it supports, you can use the
-     * <b>GetCategoryFeatures</b> call. To discover if the category requires or recommends GTIN types and other item specifics, you can use the <b>GetCategorySpecifics</b> call. <br> <br> If you do use an eBay catalog product, it is advised that you do not
+     * <b>GetCategoryFeatures</b> call. To discover if the category requires or recommends GTIN types and other Item Specifics, you can use the <b>GetCategorySpecifics</b> call. <br> <br> If you do use an eBay catalog product, it is advised that you do not
      * include this field, as any primary category ID you specify in this field may get dropped if this category is different than the primary category defined in the eBay catalog product. <br> <br> <b>For ReviseItem only:</b> When revising a listing, you
      * can change the primary category only if an auction listing has no bids or a multiple-quantity, fixed-price listing has no sales, and the listing does not end within 12 hours. If you change the listing category, any Item Specifics that were previously
      * specified may be dropped from the listing if they aren't valid for the new category. <br> <br> When you list an event ticket on the US site, you must specify one of the leaf categories under the Tickets & Experiences meta category.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CategoryType
+     * @var \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public $PrimaryCategory;
+    protected ?\macropage\ebaysdk\trading\StructType\CategoryType $PrimaryCategory = null;
+    /**
+     * The PrivateListing
+     * Meta information extracted from the WSDL
+     * - documentation: A <code>true</code> value in this field indicates that the listing is private. In a private listing, a bidder or buyer's user ID will not be exposed to any other eBay user besides the seller of the listing. Sellers may want to use
+     * this option when they believe that a listing's potential bidders/buyers would not want their user IDs exposed to other users. <br>
+     * - minOccurs: 0
+     * @var bool|null
+     */
+    protected ?bool $PrivateListing = null;
     /**
      * The ProductListingDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used to provide one or more product identifiers for a product, and if desired by the seller, or required by eBay, the product can be matched to an eBay Catalog product. If a seller's product is matched to an eBay
-     * Catalog product, the product details associated with that catalog product will be prefilled for the listing. Product details defined for a catalog product include the product title, product description, product aspects, and stock image(s) of the
-     * product. <br> <br> In some eBay categories, one or more product identifier types (e.g. UPC or ISBN) may be required, but the category may not have any eBay Catalog products defined, or the category does not allow listings to be created using a
-     * catalog product. To see if an eBay category supports/requires an eBay Catalog product, use the <b>GetCategoryFeatures</b> call and look for the value returned for the <b>Category.ProductCreationEnabled</b> field. Additionally, the user should also be
-     * looking for the values returned in the <b>Category.EANEnabled</b>, <b>Category.ISBNEnabled</b>, and <b>Category.UPCEnabled</b> fields to see if these product identifier types are supported/required. Note that the <b>GetCategorySpecifics</b> call can
-     * also be used to retrieve supported/required product identifier types. <br> <br> <span class="tablenote"><b>Note:</b> In May 2018, eBay (US, UK, AU, and CA-EN sites) started requiring that eBay catalog products be used for some product brands in
-     * specific eBay categories. This requirement will be further expanded later in 2018. For more information on the categories/product brands affected by this project, see the <a
-     * href="https://developer.ebay.com/api-docs/sell/static/inventory/pbse_playbook_intro.html" target="_blank">Product-Based Shopping Experience Playbook</a>. If a product identifier type is required, the corresponding field must be used, even if the
-     * seller is not interested in finding an eBay catalog product match. A large percentage of eBay US categories require one or more product identifier types when listing an item. See the <a
-     * href="http://pages.ebay.com/sell/item_specifics/product_identifiers.html" target="_blank">Structured Data - Product Identifiers</a> help page for more information on which eBay US categories require which product identifier types. If known, an ePID
-     * (specified through the <b>ProductReferenceID</b> field) is always the best bet to find an eBay catalog product match, although an <b>EAN</b>, <b>ISBN</b>, <b>UPC</b>, or Brand/MPN pair can also be used in an attempt to find a catalog product match.
-     * If a Brand/MPN pair is required for the product, these values must be input through the <b>BrandMPN</b> container. </span> <br> When you use <b>ProductListingDetails</b>, in an Add/Revise/Relist call, you must specify at least one GTIN, a
-     * <b>ProductReferenceID</b> (also known as an ePID), a Brand/MPN pair, or <b>TicketListingDetails</b>. If you specify more than one GTIN value, eBay uses the first one that matches a product in eBay's catalog. <br> <br> <b>For ReviseItem and RelistItem
-     * only:</b> When you revise a listing, if it has bids or it ends within 12 hours, you cannot change the product identifier and you cannot remove existing product listing details data. However, you can change or add preferences such as
-     * <b>IncludeStockPhotoURL</b>, <b>UseStockPhotoURLAsGallery</b>, and <b>IncludePrefilledItemInformation</b>. To delete all catalog data when you revise or relist an item, specify Item.ProductListingDetails in <b>DeletedField</b> and don't pass
-     * <b>ProductListingDetails</b> in the request.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used to provide one or more product identifiers for a product, and if desired by the seller, eBay will use the identifier(s) of the product to try to match it to a defined product in the eBay catalog. If a seller's
+     * product is matched to an eBay catalog product, the product details associated with that catalog product will be prefilled for the listing. Product details defined for a catalog product include the product title, product description, product aspects,
+     * and stock image(s) of the product (if available). <br> <br> In some eBay categories, one or more product identifier types (e.g. UPC or ISBN) may be required, but the category may not have any eBay catalog products defined, or the category does not
+     * allow listings to be created using a catalog product. Note that the <b>GetCategorySpecifics</b> call or the <b>GetCategoryFeatures</b> call can be used to retrieve supported/required product identifier types. <br> <br> <span
+     * class="tablenote"><b>Note:</b> If a product identifier type is required, the corresponding field must be used, even if the seller is not interested in finding an eBay catalog product match. A large percentage of eBay US categories require one or more
+     * product identifier types when listing an item. See the <a href="http://pages.ebay.com/sell/item_specifics/product_identifiers.html" target="_blank">Structured Data - Product Identifiers</a> help page for more information on which eBay US categories
+     * require which product identifier types. If known, an ePID (specified through the <b>ProductReferenceID</b> field) is always the best bet to find an eBay catalog product match, although an <b>EAN</b>, <b>ISBN</b>, <b>UPC</b>, or Brand/MPN pair can
+     * also be used in an attempt to find a catalog product match. If a Brand/MPN pair is required for the product, these values must be input through the <b>BrandMPN</b> container. </span> <br> When you use <b>ProductListingDetails</b>, in an
+     * Add/Revise/Relist call, you must specify at least one GTIN, a <b>ProductReferenceID</b> (also known as an ePID), a Brand/MPN pair, or <b>TicketListingDetails</b>. If you specify more than one GTIN value, eBay uses the first one that matches a product
+     * in eBay's catalog. <br> <br> <b>For ReviseItem and RelistItem only:</b> When you revise a listing, if it has bids or it ends within 12 hours, you cannot change the product identifier and you cannot remove existing product listing details data.
+     * However, you can change or add preferences such as <b>IncludeStockPhotoURL</b>, <b>UseStockPhotoURLAsGallery</b>, and <b>IncludePrefilledItemInformation</b>. To delete all catalog data when you revise or relist an item, specify
+     * Item.ProductListingDetails in <b>DeletedField</b> and don't pass <b>ProductListingDetails</b> in the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ProductListingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ProductListingDetailsType|null
      */
-    public $ProductListingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $ProductListingDetails = null;
     /**
      * The Quantity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <b>For <b>AddItem</b> family of calls:</b> The <b>Quantity</b> value for auction listings must always be <code>1</code>. For a fixed-price listing, the <b>Quantity</b> value indicates the number of identical items the seller has
-     * available for sale in the listing. If variations are specified in <b>AddFixedPriceItem</b> or <b> VerifyAddFixedPriceItem</b>, the <b>Item.Quantity</b> is not required since the quantity of variations is specified in <b>Variation.Quantity</b>
-     * instead. See the <a href="https://pages.ebay.com/help/sell/listing-variations.html">Creating a listing with variations</a> eBay Help page for more information on variations. <br><br> <b>For ReviseItem and ReviseFixedPriceItem:</b> This value can only
-     * be changed for a fixed-price listing with no variations. The quantity of variations is controlled in the <b>Variation.Quantity</b> field and the <b>Item.Quantity</b> value for an auction listing should always be <code>1</code>. <br><br> <b>For
-     * RelistItem and RelistFixedPriceItem:</b> Like most fields, when you use <b>RelistItem</b> or <b>RelistFixedPriceItem</b>, <b>Quantity</b> retains its original value unless you specifically change it. This means that the item is relisted with the
-     * value that was already in <b>Quantity</b>, not with the remaining quantity available. For example, if the original <b>Quantity</b> value was <code>10</code>, and three items have been sold, eBay sets the relisted item's <b>Quantity</b> to
-     * <code>10</code> by default, and not <code>7</code>. So, we strongly recommend that you always set <b>Quantity</b> to the correct value (your actual quantity available) in your relist requests.<br> <br> When eBay auto-renews a GTC listing
-     * (<b>ListingDuration</b> = <b>GTC</b>) on your behalf, eBay relists with correct quantity available. <br> <br> <b>For GetSellerEvents:</b> <b>Quantity</b> is only returned for listings where item quantity is greater than 1. <br><br> <b>For GetItem and
-     * related calls:</b> This is the total of the number of items available for sale plus the quantity already sold. To determine the number of items available, subtract <b>SellingStatus.QuantitySold</b> from this value. <br><br> <b>For order line item
-     * calls with variations:</b> In <b>GetItemTransactions</b>, <b>Item.Quantity</b> is the same as <b>GetItem</b> (the total quantity across all variations). In <b>GetSellerTransactions</b>, <b>Transaction.Item.Quantity</b> is the total quantity of the
-     * applicable variation (quantity available plus quantity sold). <br> <br> <span class="tablenote"><b>Note: </b> For the US site, new eBay sellers are subject to <a
-     * href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-Policies.html#SellerLimits">Seller Limits</a>, which limit the quantity of items that may be listed and/or the total cumulative value of these listings. While subject to
-     * these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number of listings they can create and the remaining cumulative value of these listings. These values are shown in the
-     * <b>Summary.QuantityLimitRemaining</b> and <b>Summary.AmountLimitRemaining</b> fields in the <b>GetMyeBaySelling</b> response. If a call to add an item or revise an item would result in the exceeding of these limits, the add item or revise item call
-     * will fail. These fields will only be returned if the seller is subject to seller limits. </span>
+     * available for sale in the listing. If this field is not included when creating a new fixed-price listing, quantity defaults to '1'. If variations are specified in <b>AddFixedPriceItem</b> or <b> VerifyAddFixedPriceItem</b>, the <b>Item.Quantity</b>
+     * is not required since the quantity of variations is specified in <b>Variation.Quantity</b> instead. See the <a href="https://pages.ebay.com/help/sell/listing-variations.html">Creating a listing with variations</a> eBay Help page for more information
+     * on variations. <br><br> <b>For ReviseItem and ReviseFixedPriceItem:</b> This value can only be changed for a fixed-price listing with no variations. The quantity of variations is controlled in the <b>Variation.Quantity</b> field and the
+     * <b>Item.Quantity</b> value for an auction listing should always be <code>1</code>. <br><br> <b>For RelistItem and RelistFixedPriceItem:</b> Like most fields, when you use <b>RelistItem</b> or <b>RelistFixedPriceItem</b>, <b>Quantity</b> retains its
+     * original value unless you specifically change it. This means that the item is relisted with the value that was already in <b>Quantity</b>, not with the remaining quantity available. For example, if the original <b>Quantity</b> value was
+     * <code>10</code>, and three items have been sold, eBay sets the relisted item's <b>Quantity</b> to <code>10</code> by default, and not <code>7</code>. So, we strongly recommend that you always set <b>Quantity</b> to the correct value (your actual
+     * quantity available) in your relist requests.<br> <br> When eBay auto-renews a GTC listing (<b>ListingDuration</b> = <b>GTC</b>) on your behalf, eBay relists with correct quantity available. <br> <br> <b>For GetSellerEvents:</b> <b>Quantity</b> is
+     * only returned for listings where item quantity is greater than 1. <br><br> <b>For GetItem and related calls:</b> This is the total of the number of items available for sale plus the quantity already sold. To determine the number of items available,
+     * subtract <b>SellingStatus.QuantitySold</b> from this value. <br><br> <b>For order line item calls with variations:</b> In <b>GetItemTransactions</b>, <b>Item.Quantity</b> is the same as <b>GetItem</b> (the total quantity across all variations). In
+     * <b>GetSellerTransactions</b>, <b>Transaction.Item.Quantity</b> is the total quantity of the applicable variation (quantity available plus quantity sold). <br> <br> <span class="tablenote"><b>Note: </b> For the US site, new eBay sellers are subject to
+     * <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-Policies.html#SellerLimits">Seller Limits</a>, which limit the quantity of items that may be listed and/or the total cumulative value of these
+     * listings. While subject to these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number of listings they can create and the remaining cumulative value of these listings. These values are shown in
+     * the <b>Summary.QuantityLimitRemaining</b> and <b>Summary.AmountLimitRemaining</b> fields in the <b>GetMyeBaySelling</b> response. If a call to add an item or revise an item would result in the exceeding of these limits, the add item or revise item
+     * call will fail. These fields will only be returned if the seller is subject to seller limits. </span>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Quantity;
+    protected ?int $Quantity = null;
     /**
      * The PrivateNotes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A note that a user makes on an item from their My eBay account. <b>GetMyeBayBuying</b> and <b>GetMyeBaySelling</b> return this field, and only if you pass in the <b>IncludeNotes</b> field in the request, and set its value to
      * <b>true</b>. This field will only be returned if set for an item, and only returned to the user who created the note. <br><br> Not supported as input in <b>ReviseItem</b>. Use <b>SetUserNotes</b> instead. <br><br> <b>For GetMyeBayBuying</b> In
      * <b>WatchList</b>, notes for variations are only returned at the Item level, not the variation level. They are only set if you specified <b>ItemID</b> (if no purchases) or <b>ItemID</b> and <b>VariationSpecifics</b> (if there are purchases) in
      * <b>SetUserNotes</b> (or selected the equivalent in the My eBay UI on the site). <br><br> In <b>WonList</b>, notes for variations are only returned at the Item level, not the variation level. They are only set if you specified <b>ItemID</b> and
      * <b>TransactionID</b> in <b>SetUserNotes</b> (or selected the equivalent in the My eBay UI on the site).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PrivateNotes;
+    protected ?string $PrivateNotes = null;
     /**
      * The RegionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RegionID;
+    protected ?string $RegionID = null;
     /**
      * The RelistLink
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Applicable only to relisting an item. If true, creates a link in the item's old listing for the item that points to the new relist page, which accommodates users who might still look for the item under its old item ID.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $RelistLink;
+    protected ?bool $RelistLink = null;
     /**
      * The ReservePrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The lowest price at which the seller is willing to sell an auction item. (<b>StartPrice</b> must be lower than <b>ReservePrice</b> .) Not all categories support a Reserve Price. Use <b>GetCategories</b> to see if a category supports
      * a Reserve Price. In calls that retrieve item data, the <b>ReservePrice</b> field will only be returned to the auction item's seller, and only if a Reserve Price has been set up. A Reserve Price is not applicable to fixed-price or classified ad
      * listings.<br> <br> You can remove the Reserve price of a US eBay Motors listing if the category allows it, the current Reserve Price has not been met, and the Reserve Price is at least $2.00 more than the current high bid. In this case, if the item
      * has bids, the Reserve Price is set to $1.00 over the current high bid. The next bid meets the Reserve Price and wins. See <i>Fees Overview</i> below for information about fee credits that may be available when the Reserve Price is removed for a
      * Motors listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ReservePrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ReservePrice = null;
     /**
      * The ReviseStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is returned if a listing has been revised in any way since it first became active. One or more boolean fields will be returned under this container based on the type of revision(s) that occured, including a general
      * revision, a price change, or a feature added or removed.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ReviseStatusType
+     * @var \macropage\ebaysdk\trading\StructType\ReviseStatusType|null
      */
-    public $ReviseStatus;
+    protected ?\macropage\ebaysdk\trading\StructType\ReviseStatusType $ReviseStatus = null;
     /**
      * The ScheduleTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Allows the user to specify a time in the future that the listing becomes active on eBay. To schedule the listing start time, specify a time in the future in GMT format. In <b>GetItem</b> and related calls, the scheduled time is
      * returned in <b>StartTime</b>. For <b>ReviseItem</b>, you can modify this value if the currently scheduled start time is in the future (listing has yet to go live). <br><br> When you schedule a start time, the start time is randomized within 15-minute
      * intervals. Randomized start times applies to the following sites: <br> <code>AT, BEFR, BENL, CH, DE, ES, FR, IE, IT, NL, PL, UK</code> <br><br> Also see the following article in the Knowledge Base: <a href=
      * "https://ebaydts.com/eBayKBDetails?KBid=1473" >Why scheduled time is sometimes getting reset</a>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ScheduleTime;
+    protected ?string $ScheduleTime = null;
     /**
      * The SecondaryCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifer for a secondary category. This field is only applicable if the seller decides to list the item under two categories. <br> <br> You cannot list US eBay Motors vehicles in two categories. However, you can list
      * Parts & Accessories in two categories. The Final Value Fee is based on the primary category in which the item is listed. Furthermore, you can list the same item in an eBay Motors Parts & Accessories category and in an eligible eBay category, as long
      * as the primary category is associated with the site on which you are listing. That is, the two categories can be a mix of Motors Parts & Accessories and eBay site categories. (Real Estate, Mature Audience (adult), and Business & Industrial categories
      * are not eligible for listing in two categories in this manner.) For example, if you list on Motors, the primary category could be 6750 (eBay Motors > Parts & Accessories > Apparel & Merchandise > Motorcycle > Jackets & Leathers), and the secondary
-     * category could be 57988 (eBay > Clothing, Shoes > Accessories > Men's Clothing > Outerwear). If you list on the main eBay site, the primary category could be 57988 and the secondary category could be 6750. <br> <br> If eBay has designated a category
-     * as a value category (see ValueCategory in <b>GetCategoryFeatures</b>), items in that category cannot be listed in two categories. For example, if your <b>AddItem</b> request includes a primary or secondary category that is a value category, then eBay
-     * drops <b>SecondaryCategory</b> and lists the item with only the <b>PrimaryCategory</b> you selected. Also, if the listing request includes item specifics (in <b>ItemSpecifics</b>) that are associated with <b>SecondaryCategory</b>, eBay drops those
-     * values when we drop <b>SecondaryCategory</b>. (The same logic is used if you revise an existing listing to add a secondary category or to change one of the categories: If either the primary or secondary category is a value category, eBay drops the
-     * secondary category from your request.)<br> <br> To remove this value when relisting an item, use <b>DeletedField</b>. <br><br> <b>For ReviseItem only:</b> When revising a listing within 12 hours of the listing's scheduled end time, you can only add
-     * or change the secondary category when an auction listing has no active bids or a multiple-quantity, fixed-price listing has no items sold. If you change the secondary category, any corresponding Item Specifics that were previously specified may be
-     * dropped from the listing if they aren't valid for the category. <br> <br> <b>For ReviseItem only:</b> Previously, removing the listing from a secondary category was only possible within 12 hours of the listing's scheduled end time when an auction
-     * listing had no active bids or a multiple-quantity, fixed-price listing had no items sold, but this restriction no longer exists. Now, the secondary category can be dropped for any active listing at any time, regardless of whether an auction listing
-     * has bids or a fixed-price listing has sales. To drop a secondary category, the seller passes in a value of <code>0</code> in the <b>SecondaryCategory.CategoryID</b> field.
+     * category could be 57988 (eBay > Clothing, Shoes > Accessories > Men's Clothing > Outerwear). If you list on the main eBay site, the primary category could be 57988 and the secondary category could be 6750. <br> <br> If eBay has designated a listing
+     * category as a value category (see ValueCategory in <b>GetCategoryFeatures</b>), and that listing category will be the seller's primary category, the seller will not be able to list their item in a secondary category. If a seller's request payload
+     * includes a primary or a secondary category that is designated as a value category, then eBay drops the <b>SecondaryCategory</b> ID and only lists the item in the category specified with the <b>PrimaryCategory</b> ID. Also, if the listing request
+     * includes Item Specifics (in <b>ItemSpecifics</b>) that are associated with the <b>SecondaryCategory</b>, eBay drops those values as well when the <b>SecondaryCategory</b> is dropped. The same logic is used if you revise an existing listing to add a
+     * secondary category, or to change one of the categories: If either the primary or secondary category is a value category, eBay drops the secondary category from your request.) <br> <br> To remove this value when relisting an item, use
+     * <b>DeletedField</b>. <br><br> <b>For ReviseItem only:</b> When revising a listing within 12 hours of the listing's scheduled end time, you can only add or change the secondary category when an auction listing has no active bids or a
+     * multiple-quantity, fixed-price listing has no items sold. If you change the secondary category, any corresponding Item Specifics that were previously specified may be dropped from the listing if they aren't valid for the category. <br> <br> <b>For
+     * ReviseItem only:</b> Previously, removing the listing from a secondary category was only possible within 12 hours of the listing's scheduled end time when an auction listing had no active bids or a multiple-quantity, fixed-price listing had no items
+     * sold, but this restriction no longer exists. Now, the secondary category can be dropped for any active listing at any time, regardless of whether an auction listing has bids or a fixed-price listing has sales. To drop a secondary category, the seller
+     * passes in a value of <code>0</code> in the <b>SecondaryCategory.CategoryID</b> field.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CategoryType
+     * @var \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public $SecondaryCategory;
+    protected ?\macropage\ebaysdk\trading\StructType\CategoryType $SecondaryCategory = null;
     /**
      * The FreeAddedCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier for a secondary category that eBay has added as a free promotion. You cannot add this yourself. This container is only returned if the item was listed in a single category and eBay added a free secondary
      * category.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CategoryType
+     * @var \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public $FreeAddedCategory;
+    protected ?\macropage\ebaysdk\trading\StructType\CategoryType $FreeAddedCategory = null;
     /**
      * The Seller
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container for information about this listing's seller. <br><br> Returned by <b>GetItemsAwaitingFeedback</b> if Buyer is making the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UserType
+     * @var \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public $Seller;
+    protected ?\macropage\ebaysdk\trading\StructType\UserType $Seller = null;
     /**
      * The SellingStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Various details about the current status of the listing, such as the current number of bids, the current high bidder, quantity sold, current price, and listing status.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingStatusType
+     * @var \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
-    public $SellingStatus;
+    protected ?\macropage\ebaysdk\trading\StructType\SellingStatusType $SellingStatus = null;
     /**
      * The ShippingDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: The shipping-related details for an order, including flat and calculated shipping costs and shipping insurance costs.<br> <br> New users who list their first items in selected categories on the US site must specify at least one
-     * domestic shipping service. This applies to a category if <b>GetCategoryFeatures</b> returns <code>true</code> for <b>Category.ShippingTermsRequired</b>. <br> <br> For multi-quantity, fixed-price listings, a seller can revise all shipping details of
-     * the listing (except for sales tax and for shipping type of Freight) for all unsold items. This applies to both domestic and international shipping. Checkout is not affected for those who bought items prior to the seller's shipping changes&#8212;the
-     * shipping details that were in effect at the time of purchase are used for that buyer at the time of checkout.<br> <br> Shipping details are not applicable to any classified ad listings, as shipping/delivery/pickup is handled by the buyer and seller
-     * off of the eBay platform. <br> <br><b>GetMyeBayBuying, GetMyeBaySelling</b>: <b>ShippingDetails</b> is not returned.
+     * Meta information extracted from the WSDL
+     * - documentation: The shipping-related details for an order, including flat and calculated shipping costs. <br> <br> <span class="tablenote"><b>Note: </b> For sellers who are using a shipping (aka Fulfillment) business policy to create/revise/relist
+     * an item, none of the fields under the <b>ShippingDetails</b> container are necessary. A fulfillment business policy can be set up and/or modified in My eBay, or via the <a
+     * href="https://developer.ebay.com/api-docs/sell/account/resources/fulfillment_policy/methods/createFulfillmentPolicy">Account API</a> or the <a href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices
+     * Managment API</a>. A fulfillment business policy is associated to a listing through the <b>Item.SellerProfiles.SellerShippingProfile</b> container. <br> <br> If you <i>do not</i> use a fulfillment business policy, many of the fields under this
+     * <b>ShippingDetails</b> container become required in your request. </span> <br> New users who list their first items in selected categories on the US site must specify at least one domestic shipping service. This applies to a category if
+     * <b>GetCategoryFeatures</b> returns <code>true</code> for <b>Category.ShippingTermsRequired</b>. <br> <br> For multi-quantity, fixed-price listings, a seller can revise all shipping details of the listing (except for sales tax and for shipping type of
+     * Freight) for all unsold items. This applies to both domestic and international shipping. Checkout is not affected for those who bought items prior to the seller's shipping changes&#8212;the shipping details that were in effect at the time of purchase
+     * are used for that buyer at the time of checkout. <br> <br> Shipping details are not applicable to any classified ad listings, as shipping/delivery/pickup is handled by the buyer and seller off of the eBay platform. <br> <br> <span
+     * class="tablenote"><b>Note: </b> To create a listing that is 'Local Pickup only' (buyer picks up, with no shipping/delivery available), the user does the following two things: <ul> <li>Either omit the entire <strong>ShippingDetails</strong> container,
+     * or pass in an empty <strong>ShippingDetails</strong> container - &lt;ShippingDetails/&gt; </li> <li>Pass in one <strong>ShipToLocations</strong> field, with its value set to <code>None</code> - &lt;ShipToLocations&gt;None&lt;/ShipToLocations&gt;</li>
+     * </ul> </span> <br> For <b>GetMyeBayBuying, GetMyeBaySelling</b>: <b>ShippingDetails</b> is not returned.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingDetailsType|null
      */
-    public $ShippingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $ShippingDetails = null;
     /**
      * The ShipToLocations
-     * Meta informations extracted from the WSDL
-     * - documentation: An international location or region to which the seller is willing to ship, regardless of shipping service. The country of the listing site is added by eBay. Use <b>GeteBayDetails</b> with a <b>DetailName</b> of
-     * <b>ShippingLocationDetails</b> to determine which international locations are valid for the site. Omit <b>ShipToLocations</b> if you want to ship only within the country of the listing site. To state that you do not wish to ship at all, set
-     * <b>ShipToLocations</b> to <code>None</code>. <b>ReviseItem</b> can add a <b>ShipToLocations</b>. On output, <b>ShipToLocations</b> is the collection of all input item-level <b>ShipToLocations</b> plus international shipping service-level
-     * ShipToLocation values. <br><br> If you have specified a region to which you will ship (such as Asia), you can use <b>ExcludeShipToLocation</b> to exclude certain countries within that region to where you will not ship (such as Afghanistan).
+     * Meta information extracted from the WSDL
+     * - documentation: An international location or region to which the seller is willing to ship, regardless of shipping service. The country of the listing site is added by eBay. <br> <br> <span class="tablenote"><b>Note: </b> If you set up a fulfillment
+     * policy via the <a href="https://developer.ebay.com/api-docs/sell/account/resources/fulfillment_policy/methods/createFulfillmentPolicy">Account API</a> or the <a
+     * href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices Managment API</a>, then you should not populate the <b>ShipToLocations</b> field. Instead, indicate your fulfillment policy using the
+     * <b>SellerProfiles.SellerShippingProfile</b> container. </span> <br> Use <b>GeteBayDetails</b> with a <b>DetailName</b> of <b>ShippingLocationDetails</b> to determine which international locations are valid for the site. Omit <b>ShipToLocations</b> if
+     * you want to ship only within the country of the listing site. To state that you do not wish to ship at all, set <b>ShipToLocations</b> to <code>None</code>. <b>ReviseItem</b> can add a <b>ShipToLocations</b>. On output, <b>ShipToLocations</b> is the
+     * collection of all input item-level <b>ShipToLocations</b> plus international shipping service-level ShipToLocation values. <br><br> If you have specified a region to which you will ship (such as Asia), you can use <b>ExcludeShipToLocation</b> to
+     * exclude certain countries within that region to where you will not ship (such as Afghanistan). <br> <br> <span class="tablenote"><b>Note: </b> To create a listing that is 'Local Pickup only' (buyer picks up, with no shipping/delivery available), the
+     * user does the following two things: <ul> <li>Either omit the entire <strong>ShippingDetails</strong> container, or pass in an empty <strong>ShippingDetails</strong> container - &lt;ShippingDetails/&gt; </li> <li>Pass in one
+     * <strong>ShipToLocations</strong> field, with its value set to <code>None</code> - &lt;ShipToLocations&gt;None&lt;/ShipToLocations&gt;</li> </ul> </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $ShipToLocations;
+    protected array $ShipToLocations = [];
     /**
      * The Site
-     * Meta informations extracted from the WSDL
-     * - documentation: The name of the site on which the item is listed. The listing site affects the business logic and validation rules that are applied to the request, which in turn affect the values that are returned in the response, as well as values
-     * that appear on the eBay site. For example, the listing site can affect the validation of <b>Category</b> in listing requests, international business seller requirements, the values of converted (localized) prices in responses, the item-related time
-     * stamps that are displayed on the eBay site, the visibility of the item in some types of searches (e.g., <b>GetCategoryListings</b>), and other information. In some cases, the rules are determined by a combination of the site, the user's registration
-     * address, and other information. You cannot change the site when you revise a listing.<br> <br> When you specify <b>Item.Site</b> in <b>AddItem</b> or <b>AddFixedPriceItem</b>, it must be consistent with the numeric site ID that you specify in the
-     * request URL (for the SOAP API) or the <b>X-EBAY- API-SITEID</b> header (for the XML API).
+     * Meta information extracted from the WSDL
+     * - documentation: The name of the eBay listing site. The listing site affects the business logic and validation rules that are applied to the request, which in turn affect the values that are returned in the response, as well as values that appear on
+     * the eBay site. For example, the listing site can affect the validation of <b>Category</b> in listing requests, international business seller requirements, the values of converted (localized) prices in responses, the item-related time stamps that are
+     * displayed on the eBay site, the visibility of the item in some types of searches (e.g., <b>GetCategoryListings</b>), and other information. In some cases, the rules are determined by a combination of the site, the user's registration address, and
+     * other information. You cannot change the site when you revise a listing.<br> <br> When you specify <b>Item.Site</b> in <b>AddItem</b> or <b>AddFixedPriceItem</b>, it must be consistent with the numeric site ID that you specify in the request URL (for
+     * the SOAP API) or the <b>X-EBAY-API-SITEID</b> header (for the XML API).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Site;
+    protected ?string $Site = null;
     /**
      * The StartPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The original price of the item at listing or re-listing time. If this value changes when the item is revised, the new value becomes the original price. <br><br> <b>For auction listings:</b> Competitive bidding starts at this value.
      * Once at least one bid has been placed, <b>StartPrice</b> remains the same but <b>CurrentPrice</b> is incremented to the amount of each succeeding bid. If <b>ReservePrice</b> is also specified, the value of <b>StartPrice</b> must be lower than the
      * value of <b>ReservePrice</b>. <br><br> <b>For input on fixed-price listings (<b>FixedPriceItem</b>): </b> This is the constant price at which a buyer may purchase the item. <br><br> <b>GetMyeBaySelling</b> does not return <b>Item.StartPrice</b> for
@@ -550,202 +575,210 @@ class ItemType extends AbstractStructBase
      * each variation instead. <br><br> <b>For Revise calls:</b> If the <b>StartPrice</b> value for a fixed-price item is changed with a Revise call, the <b>MinimumBestOfferPrice</b> and <b>BestOfferAutoAcceptPrice</b> fields in the <b>ListingDetails</b>
      * container will be dropped (if set), basically turning off the Best Offer Auto Accept and/or Auto Decline features. If the seller wanted to reintroduce either of these Best Offer threshold values in the listing again, an additional Revise call would
      * have to be made, passing in the desired threshold values. <br><br> <span class="tablenote"><b>Note: </b> For the US site, new eBay sellers are subject to <a
-     * href="https://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-Policies.html#SellerLimits">Seller Limits</a>, which limit the quantity of items that may be listed and/or the total cumulative value of these listings. While subject to
-     * these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number of listings they can create and the remaining cumulative value of these listings. These values are shown in the
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-Policies.html#SellerLimits">Seller Limits</a>, which limit the quantity of items that may be listed and/or the total cumulative value of these listings.
+     * While subject to these selling limits, an eBay seller can use the <b>GetMyeBaySelling</b> call to retrieve both the remaining number of listings they can create and the remaining cumulative value of these listings. These values are shown in the
      * <b>Summary.QuantityLimitRemaining</b> and <b>Summary.AmountLimitRemaining</b> fields in the <b>GetMyeBaySelling</b> response. If a call to add an item or revise an item would result in the exceeding of these limits, the add item or revise item call
      * will fail. These fields will only be returned if the seller is subject to seller limits. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $StartPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $StartPrice = null;
     /**
      * The Storefront
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains information related to the item in the context of a seller's eBay Store. Applicable for auctions and fixed-price listings.
+     * Meta information extracted from the WSDL
+     * - documentation: This container provides details about the seller's eBay store. <br><br> In an Add/Revise/Relist call, the seller can include this container to set/change which customized eBay store category that the item will be placed in. <br><br>
+     * For 'Get' calls, this container is returned if the seller of the item has an eBay store.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\StorefrontType
+     * @var \macropage\ebaysdk\trading\StructType\StorefrontType|null
      */
-    public $Storefront;
+    protected ?\macropage\ebaysdk\trading\StructType\StorefrontType $Storefront = null;
     /**
      * The SubTitle
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Subtitle to use in addition to the title. Provides more keywords when buyers search in titles and descriptions. You cannot use HTML in the Subtitle. (HTML characters will be interpreted literally as plain text.) If you pass any
      * value, this feature is applied (with applicable fees).<br> <br> When you revise a item, you can add, change, or remove the subtitle. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SubTitle;
+    protected ?string $SubTitle = null;
     /**
      * The TimeLeft
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Time left before the listing ends. The duration is represented in the ISO 8601 duration format (PnYnMnDTnHnMnS). See Data Types in the Trading API Guide for information about this format. For ended listings, the time left is PT0S
      * (zero seconds).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TimeLeft;
+    protected ?string $TimeLeft = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used to specify the title of the listing. This field is conditionally required in an Add call unless the seller successfully uses the <b>ProductListingDetails</b> container to find an eBay catalog product match. When
-     * the seller successfully uses an eBay catalog product to create a listing, the listing title, listing description, item specifics, and stock photo defined in the catalog product are used to create the listing. <br> <br> You cannot use HTML or
+     * the seller successfully uses an eBay catalog product to create a listing, the listing title, listing description, Item Specifics, and stock photo defined in the catalog product are used to create the listing. <br> <br> You cannot use HTML or
      * JavaScript in the Title. (HTML characters will be interpreted literally as plain text.)<br> <br> The listing title can only be changed if the active listing has yet to have any bids or sales, and the listing does not end within 12 hours. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The UUID
-     * Meta informations extracted from the WSDL
-     * - documentation: Universally unique constraint tag. Use <b>UUID</b> to ensure that you only list a particular item once, particularly if you are listing many items at once. If you add an item and do not get a response, resend the request with the
-     * same <b>UUID</b>. If the item was successfully listed the first time, you will receive an error message for trying to use a <b>UUID</b> that you have already used. The error will also include the item ID for the duplicated item and a boolean value
-     * indicating whether the duplicate <b>UUID</b> was sent by the same application. <br><br> We recommend you use <b>Item.UUID</b> with calls that add item objects (for example, <b>AddItem</b> and <b>RelistItem</b>). For calls that modify an existing
-     * item, such as ReviseItem, use InvocationID instead. <br><br> The <b>UUID</b> can only contain digits from 0-9 and letters from A-F and must be 32 characters long. The <b>UUID</b> value must be unique across all item listings on all sites. <br> |
-     * Specifies a universally unique identifier for an item. This is used to ensure that you only list a particular item once, particularly if you are listing many items at once. The identifier can contain only digits from 0-9 and letters from A-F. The
-     * identifier must be 32 characters long. For example, 9CEBD9A6825644EC8D06C436D6CF494B.
+     * Meta information extracted from the WSDL
+     * - documentation: Use an <b>UUID</b> value to ensure that you only list (or relist) a particular item once. This field can be particularly useful if you are listing many items on a daily basis and/or many items at once with an <b>AddItems</b> call. If
+     * your call request does not generate a response, or if you get one or more (blocking) errors, be sure to use the same <b>UUID</b> value when you attempt to list or relist the same item with another call request. <br><br> If you pass in a <b>UUID</b>
+     * value that has already been used to successfully create or relist an item, you will receive an error message that includes the Item ID for that listing and a boolean value indicating whether the duplicate <b>UUID</b> was sent by the same application.
+     * <br><br> We recommend that you use the <b>Item.UUID</b> field for add and relist calls (for example, <b>AddItem</b> and <b>RelistItem</b>), but use the <b>Item.InvocationID</b> field instead when using a revise call. <br><br> The <b>UUID</b> can only
+     * contain digits from 0-9 and letters from A-F and must be 32 characters long. The <b>UUID</b> value must be unique across all of the seller's eBay across all eBay marketplaces. <br> | Specifies a universally unique identifier for an item. This is used
+     * to ensure that you only list a particular item once, particularly if you are listing many items at once. The identifier can contain only digits from 0-9 and letters from A-F. The identifier must be 32 characters long. For example,
+     * 9CEBD9A6825644EC8D06C436D6CF494B.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UUID;
+    protected ?string $UUID = null;
     /**
      * The VATDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: Container for eBay's VAT (value-added-tax) features. A business seller can choose to offer an item exclusively to bidders and buyers that also represent businesses. Only applicable when the item is listed in a B2B-enabled category
-     * (on a site that supports B2B business features).<br> <br> <span class="tablenote"><strong>Note:</strong> The India site (Global ID 203) does not accept VAT values in item listings. If you submit an item to the India site with a VAT value, eBay
-     * generates a warning message that indicates the listing was accepted, but the VAT value was removed. To include the VAT, relist the item with a Price value that includes the VAT. Sellers are solely responsible for compliance relating to tax
-     * legislation in India. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used in an Add/Revise/Relist call to set the VAT (Value-added Tax) percentage rate that will be charged to buyers when an item is purchased from the listing, and to enable Business Seller-related features. <br><br>
+     * This container is returned in 'Get' calls only if VAT is applicable to the listing, and unless the person making the 'Get' call owns the listing, only the <b>VATPercent</b> field is returned (if applicable). However, Business Seller-related
+     * information will be returned to all users in 'Get' calls under the <b>SellerInfo</b> and <b>BusinessSellerDetails</b> containers. <br> <br> <span class="tablenote"><b>Note:</b> VAT is not applicable to all countries, including the US. Allowed VAT
+     * percentage rates can vary by region/country, so sellers should be aware of the rates they are legally required/allowed to charge. Sellers must be registered as Business Sellers on the site they are selling on in order to use the Business
+     * Seller-related fields. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VATDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\VATDetailsType|null
      */
-    public $VATDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\VATDetailsType $VATDetails = null;
     /**
      * The SellerVacationNote
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned if the seller of the item is currently on vacation and that seller has turned on the Store vacation setting, and has included a message to display to shoppers who visit the eBay store. If the seller turns on
      * the Store vacation setting, the listing will be hidden from search result pages. <br/><br/> Store vacation settings, including this note, are set through the <b>Messages</b> tab in My eBay, or this message can also be set through the
      * <b>SetStorePreferences</b> call. <br/><br/> The Store vacation setting is only applicable for sellers with eBay stores.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerVacationNote;
+    protected ?string $SellerVacationNote = null;
     /**
      * The WatchCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of watches placed on this item from buyers' My eBay accounts. Specify <b>IncludeWatchCount</b> as <code>true</code> in the request. Returned by <b>GetMyeBaySelling</b> only if greater than 0.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WatchCount;
+    protected ?int $WatchCount = null;
     /**
      * The HitCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the number of page views for the listing. This number is calculated by eBay and is returned in 'Get' calls if the <b>HitCounter</b> value is set to <code>BasicStyle</code>, <code>RetroStyle</code>, or
-     * <code>HiddenStyle</code>. If the <b>HitCounter</b> value is set to <code>HiddenStyle</code> or <code>NoHitCounter</code>, <b>HitCount</b> is only returned if the one making the call is the item's seller.
+     * <code>HiddenStyle</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $HitCount;
+    protected ?int $HitCount = null;
     /**
      * The DisableBuyerRequirements
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If <code>true</code>, all buyer requirements (from <b>Item.BuyerRequirementDetails</b> or Buyer requirements preferences in My eBay) are ignored. <br> <br> If <code>false</code> (or omitted): <b>Item.BuyerRequirementDetails</b> or
      * Buyer requirements preferences are used, with <b>Item.BuyerRequirementDetails</b> having the higher precedence. <br>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DisableBuyerRequirements;
+    protected ?bool $DisableBuyerRequirements = null;
     /**
      * The BestOfferDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>For Add/Revise/Relist/Verify calls</b>: This container is used to enable the Best Offer feature on a listing. Note that the Best Offer feature can be set for auction listings, but a seller can only use Best Offer or Buy It Now,
-     * but not both. Once an auction listing receives a qualifying bid, the Best Offer feature will be turned off and any pending Best Offers or Counteroffers will no longer be valid. <br><br> For <b>GetItem</b> and other calls that retrieve item data, this
-     * container will include the status (<b>GetMyeBayBuying</b> only) and dollar amount of the latest Best Offer on a fixed-price listing, and the number of Best Offers received for the fixed-price listing.
+     * Meta information extracted from the WSDL
+     * - documentation: <b>For Add/Revise/Relist/Verify calls</b>: This container is used to enable the Best Offer feature on a listing. Note that the Best Offer feature can be set for auction listings on the US, Canada, UK, Germany, Australia, France,
+     * Italy, and Spain marketplaces, but a seller can only use Best Offer or Buy It Now, but not both. Once an auction listing receives a qualifying bid, the Best Offer feature will be turned off and any pending Best Offers or Counteroffers will no longer
+     * be valid. <br><br> For <b>GetItem</b> and other calls that retrieve item data, this container will include the status (<b>GetMyeBayBuying</b> only) and dollar amount of the latest Best Offer on a fixed-price listing, and the number of Best Offers
+     * received for the fixed-price listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BestOfferDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\BestOfferDetailsType|null
      */
-    public $BestOfferDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\BestOfferDetailsType $BestOfferDetails = null;
     /**
      * The LocationDefaulted
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If <code>true</code>, eBay provided a central location as a result of the user not specifying a location. This typically occurs when the seller specifies <b>PostalCode</b> without Location.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocationDefaulted;
+    protected ?bool $LocationDefaulted = null;
     /**
      * The UseTaxTable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller's tax table is to be used when applying and calculating sales tax for an order line item. A sales tax table can be created programmatically using the <b>SetTaxTable</b> call, or it can be created manually
      * in My eBay's Payment Preferences. If <b>UseTaxTable</b> is set to <code>true</code>, the values contained in the seller's sales tax table will supersede the values contained in the <b>Item.ShippingDetails.SalesTax</b> container (if included in the
-     * request).
+     * request). <br><br> <span class="tablenote"><b>Note: </b> As of September 1, 2020, buyers in over 40 US states will automatically be charged sales tax for eBay purchases. eBay will collect and remit this sales tax to the proper taxing authority on the
+     * buyer's behalf. The Sales Tax Table page for eBay US is being updated as each US state starts requiring collection of sales tax. This means that the seller no longer has control over, nor can specify a sales tax rate for these states. For a list of
+     * the US states that are currently subject to 'eBay Collect and Remit', or will become subject to 'eBay Collect and Remit', see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax
+     * collection</a> help topic. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $UseTaxTable;
+    protected ?bool $UseTaxTable = null;
     /**
      * The GetItFast
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $GetItFast;
+    protected ?bool $GetItFast = null;
     /**
      * The BuyerResponsibleForShipping
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Applicable for listings in vehicle categories on the US eBay Motors site and eBay Canada site. (No business effect if specified for other categories or sites, as the Web site will not display the information to buyers.) <b></b> <ul>
      * <li>If <code>true</code>, the buyer is responsible for vehicle pickup or shipping. </li> <li>If <code>false</code>, specify vehicle shipping arrangements in the item description. (The description can also include vehicle shipping arrangements when
      * this value is <code>true</code>.) </li> </ul> <b></b> If the item has bids or ends within 12 hours, you cannot modify this flag. Do not specify <b>ShippingDetails.ShippingServiceOptions</b> for vehicle listings. <br><br> If <code>true</code> and the
      * listing is on the US eBay Motors site, and you want the listing to be visible on the eBay Canada site, set <b>Item.ShipToLocations</b> to CA. <br><br> If <code>true</code> and the listing is on the eBay Canada site, and you want your listing to be
      * visible on the US eBay Motors site, set <b>Item.ShipToLocations</b> to US. <br>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BuyerResponsibleForShipping;
+    protected ?bool $BuyerResponsibleForShipping = null;
     /**
      * The LimitedWarrantyEligible
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LimitedWarrantyEligible;
+    protected ?bool $LimitedWarrantyEligible = null;
     /**
      * The eBayNotes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns a note from eBay displayed below items in the user's My eBay account.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayNotes;
+    protected ?string $eBayNotes = null;
     /**
      * The QuestionCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the number of questions buyers have posted about the item. Returned only if greater than 0.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuestionCount;
+    protected ?int $QuestionCount = null;
     /**
      * The Relisted
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the item in this listing was relisted. When an item is relisted, a brand new Item ID value is automatically created by eBay. This field is only returned for an original listing
-     * whose item has been relisted, so a <code>false</code> value should never get returned. <span class="tablenote"><b>Note: </b> A new listing will not return this field. </span>
+     * whose item has been relisted, so a <code>false</code> value should never get returned. <br><br> <span class="tablenote"><b>Note: </b> A new listing will not return this field. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Relisted;
+    protected ?bool $Relisted = null;
     /**
      * The QuantityAvailable
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This integer value indicates the quantity of an item that is still available for purchase in a multiple-quantity, fixed-price listing. This field is not applicable to auction listings.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantityAvailable;
+    protected ?int $QuantityAvailable = null;
     /**
      * The SKU
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A SKU (Stock Keeping Unit) value is a seller-defined identifier for a product. Each product within a seller's inventory should be unique. Most large-volume sellers use SKUs, but eBay only requires a SKU value if the
      * <b>InventoryTrackingMethod</b> field is included in an <b>AddFixedPriceItem</b> call and its value is set to <code>SKU</code>. Setting the <b>InventoryTrackingMethod</b> field to <code>SKU</code> allows the seller to use a SKU value instead of an
      * <b>ItemID</b> value as a unique identifier in calls such as <b>GetItem</b> and <b>ReviseInventoryStatus</b> <br><br> A seller can specify a SKU when listing an item with <b>AddItem</b> and related calls. eBay preserves the SKU on the item, enabling
@@ -755,242 +788,234 @@ class ItemType extends AbstractStructBase
      * ID. When a buyer contacts you via eBay's messaging functionality, eBay uses the item ID as the identifier. Buyer-focused APIs (like the Shopping API) also do not support SKU as an identifier. </span> <b>For revising and relisting only:</b> To remove
      * a SKU when you revise or relist an item, use <b>DeletedField</b>. (You cannot remove a SKU when <b>Item.InventoryTrackingMethod</b> is set to SKU.)<br> <br> For <b>GetItem</b>, <b>GetMyeBaySelling</b>, and other 'Get' call, the <b>SKU</b> value will
      * only be returned if defined for the listing. <br> | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information and rules, see the fields that reference this type.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SKU;
+    protected ?string $SKU = null;
     /**
      * The SearchDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SearchDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\SearchDetailsType|null
      */
-    public $SearchDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\SearchDetailsType $SearchDetails = null;
     /**
      * The PostalCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Postal code of the place where the item is located. This value is used for proximity searches. To remove this value when revising or relisting an item, use <b>DeletedField</b>. If you do not specify <b>PostalCode</b>, you must
-     * specify <b>Item.Location</b>. If you specify <b>PostalCode</b>, but do not specify <b>Item.Location</b>, then <b>Item.Location</b> is given a default value derived from the postal code.
+     * specify <b>Item.Location</b>. If you specify <b>PostalCode</b>, but do not specify <b>Item.Location</b>, then <b>Item.Location</b> is given a default value derived from the postal code. <br><br> <span class="tablenote"><b>Note:</b> As of late January
+     * 2020, the displayed postal code returned in <b>GetItem</b> is now masked to all users except for the seller of the item. Different countries will mask postal/zip codes in slightly different ways, but an example would be <code>951**</code>. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PostalCode;
-    /**
-     * The ShippingTermsInDescription
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether details about shipping costs and arrangements are specified in the item description.
-     * - minOccurs: 0
-     * @var bool
-     */
-    public $ShippingTermsInDescription;
-    /**
-     * The SellerInventoryID
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> A <b>SellerInventoryID</b> value is only applicable to Half.com listings, and since the Half.com site has been shut down, this field is no longer applicable. </span> Unique identifier for a
-     * Half.com item. Must be an alphanumeric value (with no symbols) that is unique across the seller's active (unsold) inventory on Half.com. For Half.com, you can specify either <b>ItemID</b> or <b>SellerInventoryID</b> in a <b>ReviseItem</b> request to
-     * uniquely identify the listing. Only returned from <b>GetOrders</b> if the seller specified a value when the item was listed. You cannot revise this field. <br><br> Not applicable to eBay.com listings.
-     * - minOccurs: 0
-     * @var string
-     */
-    public $SellerInventoryID;
+    protected ?string $PostalCode = null;
     /**
      * The PictureDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of the data associated with photos within the listing. With most eBay sites and categories, a seller can add up to 12 photos to their listings free of charge. These photos can be hosted by eBay Picture
      * Services (EPS), or the seller can host pictures on a non-eBay server. If pictures are externally-hosted, they must be hosted on a site that is using the 'https' protocol. <br/><br/> It is required that all listings have at least one picture. eBay
      * Motors listings can have up to 24 pictures.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PictureDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\PictureDetailsType|null
      */
-    public $PictureDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PictureDetailsType $PictureDetails = null;
+    /**
+     * The VideoDetails
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used if the seller wants to add a video to their listing. At this time, only one video can be added per listing, and the video must be uploaded to eBay via the <a href="/api-docs/commerce/media/overview.html"
+     * target="_blank">Media API</a>. See the <a href="/api-docs/commerce/media/overview.html" target="_blank">Media API</a> reference documentation for all of the necessary details to upload videos to eBay. <br/><br/> This container will only be returned
+     * in <b>GetItem</b> if the listing contains a video, and the seller of the item is the one making the <b>GetItem</b> call. <br/><br/> <span class="tablenote"><b>Note: </b> At present, videos can be attached to listings on the eBay US marketplace and
+     * can be viewed through the native apps (iOS and Android) only. Additional sites and platforms will be supported in the near future. </span>
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\VideoDetailsType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\VideoDetailsType $VideoDetails = null;
     /**
      * The DispatchTimeMax
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the maximum number of business days the seller commits to for preparing an item to be shipped after receiving a cleared payment. This time does not include the shipping time (the carrier's transit time). <br><br> <span
      * class="tablenote"><b>Note:</b> If the seller opts into the eBay Guaranteed Delivery feature and wants to make a listing eligible for eBay Guaranteed Delivery, the <b>DispatchTimeMax</b> value must be set to <code>0</code> or <code>1</code> (days) and
-     * cumulative value of <b>DispatchTimeMax</b> plus the transit time of the shipping service (returned in <b>ShippingServiceDetails.ShippingTimeMax</b> field of <b>GeteBayDetails</b>) must be 3 business days or less to be eligible for this feature. See
-     * the <a href="https://pages.ebay.com/seller-center/shipping/ebay-guaranteed-delivery.html" target="_blank">eBay Guaranteed Delivery</a> page in Seller Center for more information on this program. </span> <br> <b>For Add/Revise/Relist calls:</b>
-     * Required for listings in certain categories when certain shipping services (with delivery) are offered. See <b>HandlingTimeEnabled</b> in <b>GetCategoryFeatures</b>.<br> <br> The seller sets this to a positive integer value corresponding to the
-     * number of days. For a list of allowed values on each eBay site, use <b>DispatchTimeMaxDetails</b> in <b>GeteBayDetails</b>. (Typical values are <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>10</code>,
-     * <code>15</code>, or <code>20</code>, but this can vary by site and these may change over time.)<br> <br> Valid for flat and calculated shipping. Does not apply when there is no shipping, when it is local pickup only or it is freight shipping. For
-     * example, when <b>ShippingService</b> = <code>Pickup</code> or <b>ShipToLocations</b> = <code>None</code>, then <b>DispatchTimeMax</b> is not required (or it can be <code>0</code>).<br> <br> <b>For ReviseItem only:</b> If the listing has bids or sales
-     * and it ends within 12 hours, you can't change this value. If the listing is a GTC listing that has sales or ends within 12 hours (one or the other, but not both), you can add or change this value. If the listing has no bids or sales and more than 12
-     * hours remain before the listing ends, you can add or change the dispatch (handling) time.<br> <br> <b>For GetItem:</b> <b>GetItem</b> returns <b>DispatchTimeMax</b> only when shipping service options are specified for the item and the seller
-     * specified a dispatch time.
+     * the cumulative value of <b>DispatchTimeMax</b> plus the transit time of the shipping service (returned in <b>ShippingServiceDetails.ShippingTimeMax</b> field of <b>GeteBayDetails</b>) must be 4 business days or less to be eligible for this feature.
+     * See the <a href="https://pages.ebay.com/seller-center/shipping/ebay-guaranteed-delivery.html" target="_blank">eBay Guaranteed Delivery</a> page in Seller Center for more information on this program. The eBay Guaranteed Delivery feature is only
+     * available on the US and Australia marketplaces. </span> <br> <b>For Add/Revise/Relist calls:</b> Required for listings in certain categories when certain shipping services (with delivery) are offered. See <b>HandlingTimeEnabled</b> in
+     * <b>GetCategoryFeatures</b>.<br> <br> The seller sets this to a positive integer value corresponding to the number of 'handling' days. For a list of allowed values on each eBay site, use <b>DispatchTimeMaxDetails</b> in <b>GeteBayDetails</b>.
+     * Supported handling times for most sites in most categories range from 0 (same-day handling) to 3 business days, but this can vary by site. Some categories on some sites support longer handling times, and this generally comes into play with extremely
+     * large items where freight shipping may be required. <br> <br> This field is required whenever flat-rate or calculated shipping is used, but does not apply when there is no shipping involved, which is the case for digital gift card listings, or any
+     * orders where local pickup is available and this option is selected by the buyer.<br> <br> <b>For ReviseItem only:</b> If the listing has bids or sales and it ends within 12 hours, you can't change this value. If the listing is a GTC listing that has
+     * sales or ends within 12 hours (one or the other, but not both), you can add or change this value. If the listing has no bids or sales and more than 12 hours remain before the listing ends, you can add or change the dispatch (handling) time.<br> <br>
+     * <b>For GetItem:</b> <b>GetItem</b> returns <b>DispatchTimeMax</b> only when shipping service options are specified for the item and the seller specified a dispatch time.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DispatchTimeMax;
+    protected ?int $DispatchTimeMax = null;
     /**
      * The BestOfferEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. This information is returned in <b>BestOfferDetails</b>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BestOfferEnabled;
+    protected ?bool $BestOfferEnabled = null;
     /**
      * The LocalListing
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalListing;
+    protected ?bool $LocalListing = null;
     /**
      * The SellerContactDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: Contact information for sellers using the Classified Ad format for eBay Motors vehicles categories. To remove seller contact information when revising or relisting an item, use <b>DeletedField</b>. The seller contact details for the
-     * primary and secondary phone numbers cannot be deleted individually. <br><br> To provide City, State, and Zip code information in <b>SellerContactDetails</b> use the following field:<br> <b>Item.SellerContactDetails.Street2</b> <br><br> To delete the
-     * secondary phone number, for example, you must delete all of the secondary phone fields:<br> <code>Item.SellerContactDetails.Phone2AreaOrCityCode<br> Item.SellerContactDetails.Phone2CountryCode<br> Item.SellerContactDetails.Phone2CountryPrefix<br>
-     * Item.SellerContactDetails.Phone2LocalNumber </code>
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used by sellers of Classified Ad listings to provide contact information.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AddressType
+     * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public $SellerContactDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\AddressType $SellerContactDetails = null;
     /**
      * The TotalQuestionCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of questions asked about this item. Applies to eBay Motors Pro applications only.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $TotalQuestionCount;
+    protected ?int $TotalQuestionCount = null;
     /**
      * The ProxyItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Some listings on the eBay platform originate from eBay affiliates. Depending on the relationship the affiliate has with eBay, there are times when the affiliate retains ownership of the listing. When this occurs the representation of
      * the listing on eBay is considered a proxy item. Proxy items can only be edited using API requests from the applications that originally listed them.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ProxyItem;
+    protected ?bool $ProxyItem = null;
     /**
      * The ExtendedSellerContactDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Extended contact information for sellers using the Classified Ad format. Specifies the days and hours when the seller can be contacted. To remove seller contact information when revising or relisting an item, use <b>DeletedField</b>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType|null
      */
-    public $ExtendedSellerContactDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $ExtendedSellerContactDetails = null;
     /**
      * The LeadCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the number of leads (emails) buyers have posted about the item. You must be the seller of the item to retrieve the lead count.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $LeadCount;
+    protected ?int $LeadCount = null;
     /**
      * The NewLeadCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the number of new leads (unanswered emails) buyers have posted about the item.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NewLeadCount;
+    protected ?int $NewLeadCount = null;
     /**
      * The ItemSpecifics
-     * Meta informations extracted from the WSDL
-     * - documentation: A list of item specific <b>Name</b>/<b>Value</b> pairs that the seller provided for the item. (To retrieve mandatory and recommended item specifics for a category, use <b>GetCategorySpecifics</b>.) <br><br> In the <b>Add</b>,
-     * <b>Relist</b>, <b>Revise</b>, and <b>Verify</b> families of calls, use this list to define custom item specifics. <br><br> <b>For ReviseItem only:</b> When you revise a listing, if the listing has bids and ends within 12 hours, you cannot change or
-     * add item specifics. If the listing has bids but ends in more than 12 hours, you cannot change existing item specifics, but you can add item specifics that were not previously included. <br><br> If your item is in a catalog-enabled category, certain
-     * <b>Name</b>/<b>Value</b> pairs will be accepted as product identifying information. The <b>Name</b> can be <code>Brand</code>, <code>MPN</code>, or a Global Trade Item Number (GTIN). GTINs are a set of globally recognized identifiers, including
-     * <code>EAN</code>, <code>ISBN</code>, and <code>UPC</code>. However, the <b>Values</b> provided for these <b>Name</b>s must comply with eBay's constraints or they will not be recognized as product identifiers. The <b>Value</b> for Brand must be an
-     * actual brand name (except that if the item is not branded, <b>Value</b> can be <code>Unbranded</code>.) The <b>Value</b> for Brand or MPN cannot contain only special characters (e.g. <code>%$*#@</code>). All GTINs must comply with international
-     * formatting standards. For more details, see <a href="https://developer.ebay.com/devzone/guides/ebayfeatures/Development/ItemSpecifics-Listing.html" target="_blank">Listing with Custom Item Specifics</a>. <br><br> If the <b>ProductListingDetails</b>
-     * container in an Add/Revise/Relist call is successfully used to find and use an eBay catalog product to create/revise listing, the seller cannot use Item Specifics name-value pairs that contradict the Item Specifics that are defined in the eBay
-     * catalog product. <br><br> <span class="tablenote"><b>Note:</b> If the item is being listed in a Product-Based Shopping Experience (PBSE) category where an eBay Catalog product is being used, the seller should not pass in any item specifics that are
-     * already defined in the eBay Catalog product. Sellers can make a <b>GetCategorySpecifics</b> call to see if the listing category supports any 'instance aspects', which can be thought of as item specifics that are unique to the specific item that is
-     * being listed. Instance aspects are identified in the response by looking for a value of <code>Instance</code> in one or more <b>NameRecommendation.ValidationRules.aspectUsage</b> fields. Many PBSE categories now support the following instance
-     * aspects: <em>Custom Bundle</em>, <em>Bundle Description</em>, <em>Modified Item</em>, and <em>Modification Description</em>. These instance aspects allow the seller to provide more information about product bundles or modified products in a
-     * structured way. Depending on the category, there are other instance aspects as well. For more information about creating bundle listings or modified product listings in PBSE categories, see the <a
-     * href="https://developer.ebay.com/api-docs/sell/static/inventory/pbse-special-listings.html" target="_blank">Associating catalog products to special listings</a> topic in the PBSE Playbook. </span> <span class="tablenote"><b>Note:</b> To specify an
-     * item's condition, use the <b>ConditionID</b> field instead of a condition item specific. Use <b>GetCategoryFeatures</b> to see which categories support <b>ConditionID</b> and to get a list of valid condition IDs. (If you specify <b>ConditionID</b>
-     * and you also specify <b>Condition</b> as a custom item specific, eBay drops the condition item specific.) </span> <b>For GetItem</b>: This list is returned only when you specify <b>IncludeItemSpecifics</b> in the request (and the seller included
-     * custom item specifics in their listing). <br><br> To delete all item specifics when you revise or relist, specify <b>Item.ItemSpecifics</b> in <b>DeletedField</b>, and don't pass <b>ItemSpecifics</b> in the request.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is a list of Item Specific <b>Name</b>/<b>Value</b> pairs used by the seller to provide desciptive details of an item in a structured manner. <br><br> If creating, revising, or relisting an item with an <b>Add</b>,
+     * <b>Revise</b>, or <b>Relist</b> call, it is recommended that you use the <b>GetCategorySpecifics</b> call to retrieve mandatory and recommended Item Specifics for a listing category. <br><br> <b>For ReviseItem only:</b> When you revise a listing, if
+     * an auction listing has one or more bids and ends within 12 hours, you cannot change or add Item Ppecifics. If the auction listing has bids but ends in more than 12 hours, you cannot change existing Item Specifics, but you can add Item Specifics that
+     * were not previously included. <br><br> If your listing is in a eBay product catalog-enabled category, certain <b>Name</b>/<b>Value</b> pairs will be accepted as product identifying information. The <b>Name</b> can be <code>Brand</code>,
+     * <code>MPN</code>, or a Global Trade Item Number (GTIN). GTINs are a set of globally recognized identifiers, including <code>EAN</code>, <code>ISBN</code>, and <code>UPC</code>. However, the <b>Values</b> provided for these <b>Name</b>s must comply
+     * with eBay's constraints or they will not be recognized as product identifiers. The <b>Value</b> for Brand must be an actual brand name (except that if the item is not branded, <b>Value</b> can be <code>Unbranded</code>.) The <b>Value</b> for Brand or
+     * MPN cannot contain only special characters (e.g. <code>%$*#@</code>). All GTINs must comply with international formatting standards. For more details, see <a
+     * href="https://developer.ebay.com/devzone/guides/features-guide/default.html#development/ItemSpecifics-Listing.html" target="_blank">Listing with Item Specifics</a>. <br><br> If the <b>ProductListingDetails</b> container in an Add/Revise/Relist call
+     * is successfully used to find and use an eBay catalog product to create/revise listing, the seller should not remove or change the value of any Item Specific name or value that is defined as part of the eBay catalog product definition. <br><br> <span
+     * class="tablenote"><b>Note:</b> If a listing is associated with an eBay catalog product, the seller does not need to pass in any Item Specifics that are already defined in the eBay catalog product. Sellers can make a <b>GetCategorySpecifics</b> call
+     * to see if the listing category supports any 'instance aspects', which can be thought of as Item Specifics that are unique to the specific item that is being listed. Instance aspects are identified in the <b>GetCategorySpecifics</b> response by
+     * looking for a value of <code>Instance</code> in one or more <b>NameRecommendation.ValidationRules.aspectUsage</b> fields. Many categories support the following instance aspects: <em>Custom Bundle</em>, <em>Bundle Description</em>, <em>Modified
+     * Item</em>, <em>Modification Description</em>, and <em>California Prop 65 Warning</em>. These instance aspects allow the seller to provide more information about product bundles or modified products in a structured way. Depending on the category,
+     * there are other instance aspects as well. </span> <span class="tablenote"><b>Note:</b> To specify an item's condition, use the <b>ConditionID</b> field instead of a condition Item Specific. Use <b>GetCategoryFeatures</b> to see which categories
+     * support <b>ConditionID</b> and to get a list of valid condition IDs. (If you specify <b>ConditionID</b> and you also specify <b>Condition</b> as a Item Specific, eBay drops the condition Item Specific.) </span> <b>For GetItem</b>: This list is
+     * returned only when you specify <b>IncludeItemSpecifics</b> in the request (and the seller included Item Specifics in their listing). <br><br> To delete all Item Specifics when you revise or relist, specify <b>Item.ItemSpecifics</b> in
+     * <b>DeletedField</b>, and don't pass <b>ItemSpecifics</b> in the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public $ItemSpecifics;
+    protected ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $ItemSpecifics = null;
     /**
      * The GroupCategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $GroupCategoryID;
+    protected ?string $GroupCategoryID = null;
     /**
      * The ClassifiedAdPayPerLeadFee
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The email and phone lead fee for a pay-per-lead item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ClassifiedAdPayPerLeadFee;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ClassifiedAdPayPerLeadFee = null;
     /**
      * The BidGroupItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BidGroupItem;
+    protected ?bool $BidGroupItem = null;
     /**
      * The ApplyBuyerProtection
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Different Buyer protection schemes and the various status associated with each one of them.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType|null
      */
-    public $ApplyBuyerProtection;
+    protected ?\macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $ApplyBuyerProtection = null;
     /**
      * The ListingSubtype2
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates a specific type of lead generation format listing, such as classified ad or local market best offer listing. Only applicable when <b>ListingType</b> = <b>LeadGeneration</b>. <br/><br/> <span class="tablenote"><b>Note:</b>
      * <b>ListingSubtype2</b> replaces the deprecated <b>ListingSubtype</b> field. If both are specified in a request, <b>ListingSubtype2</b> takes precedence. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingSubtype2;
+    protected ?string $ListingSubtype2 = null;
     /**
      * The MechanicalCheckAccepted
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller allows the bidder to request mechanical inspection services from RAC. For the Car category listings on the UK site.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $MechanicalCheckAccepted;
+    protected ?bool $MechanicalCheckAccepted = null;
     /**
      * The UpdateSellerInfo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the following Business Seller fields have been updated for the item specified in the request: First Name, Last Name, Fax, Email Address, Additional Contact Information, Trade Registration Number, VAT Identification
      * Number.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $UpdateSellerInfo;
+    protected ?bool $UpdateSellerInfo = null;
     /**
      * The UpdateReturnPolicy
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the Return Policy Details have been updated for the item specified in the request.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $UpdateReturnPolicy;
+    protected ?bool $UpdateReturnPolicy = null;
     /**
      * The ItemPolicyViolation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the details of policy violations if the item was administratively canceled.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemPolicyViolationType
+     * @var \macropage\ebaysdk\trading\StructType\ItemPolicyViolationType|null
      */
-    public $ItemPolicyViolation;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $ItemPolicyViolation = null;
     /**
      * The CrossBorderTrade
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used by sellers who want their listing to be returned in the search results for other eBay sites. This feature is currently only supported by the US, UK, eBay Canada, and eBay Ireland sites. See <a href="
      * https://pages.ebay.com/help/sell/globalexposure.html">Getting exposure on international sites</a> for full requirements on using this feature. There is a small listing fee for each country specified as a Cross Border Trade country. <br><br> US
      * listings that offer shipping to Canada, North America, or worldwide are automatically returned on eBay.ca at no extra charge, so US listings that offer shipping to these locations do not need to specify Canada as a Cross Border Trade country.
@@ -998,83 +1023,92 @@ class ItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    public $CrossBorderTrade;
+    protected array $CrossBorderTrade = [];
     /**
      * The BusinessSellerDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the seller's information (in a business card format) if the seller's <b>SellerBusinessCodeType</b> is set to <code>Commercial</code>. This is only applicable for sites where Business Seller options are supported.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType|null
      */
-    public $BusinessSellerDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $BusinessSellerDetails = null;
     /**
      * The BuyerGuaranteePrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: For the Australia site, <b>BuyerGuaranteePrice</b> is the PayPal Buyer Protection coverage, offered for the item at the time of purchase. Details of coverage are in the following sections of the View Item page: the Buy Safely section
      * and the Payment Details section.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $BuyerGuaranteePrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $BuyerGuaranteePrice = null;
     /**
      * The BuyerRequirementDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: When this container is present in an <b>AddItem</b> or <b>AddFixedPriceItem</b> call, all buyer requirements for the resulting listing are set by this container. Furthermore, individual buyer requirements cannot be modified or added
      * when including this container in a <b>ReviseItem</b> call. The <b>ReviseItem</b> call needs to provide the entire set of buyer requirements to modify or add any of the requirements. <br/><br/> Unless otherwise specified, most buyer requirements are
-     * only returned if the caller is the seller. All global My eBay Buyer Requirements are overridden by the contents of this container. This means that buyer requirements set in My eBay cannot be combined with buyer requirements included in this
-     * container.
+     * only returned if the caller is the seller. Any and all My eBay account-level Buyer Requirements are overridden by the contents of this container. This means that buyer requirements set in My eBay cannot be combined with buyer requirements included in
+     * this container.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType|null
      */
-    public $BuyerRequirementDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $BuyerRequirementDetails = null;
     /**
      * The ReturnPolicy
-     * Meta informations extracted from the WSDL
-     * - documentation: Describes the seller's return policy. Most categories on most eBay sites require the seller to clearly specify whether or not returns are accepted (see <b>ReturnsAcceptedOption</b>). <br> <br> <b>For the <b>AddItem</b> family of
-     * calls:</b> Required for most categories on most sites. Use <b>ReturnPolicyEnabled</b> in <b>GetCategoryFeatures</b> to determine which categories require this field. Also use <b>ReturnPolicyDetails</b> in <b>GeteBayDetails</b> to determine which
-     * <b>ReturnPolicy</b> fields can be used on each site.<br> <br> eBay India (IN), Australia (AU), and US eBay Motors Parts and Accessories categories typically support but do not require a return policy. (However, we strongly recommend that you specify
-     * a clear return policy whenever possible.)<br> <br> <b>For ReviseItem only:</b> If the listing has bids or sales and it ends within 12 hours, you can't change the return policy details. If the listing is a GTC listing that has sales or ends within 12
-     * hours (one or the other, but not both), you can add a return policy to the GTC listing (but you can't change return policy details if already present). If the listing has no bids or sales and more than 12 hours remain before the listing ends, you can
-     * add or change the return policy. When you revise your return policy, you only need to specify the fields you want to add or change. You don't need to specify all the other <b>ReturnPolicy</b> fields again. The other fields will retain their existing
-     * settings.<br> <br> <b>For the GetItem family of calls:</b> Only returned if the site you sent the request to supports the seller's return policy. Typically, the return policy details are only returned when the request is sent to the listing site.
-     * <br><br> <span class="tablenote"><b>Note:</b> Currently, the <b>GeteBayDetails</b> call is used to retrieve return policy metadata. However, starting in September 2018, the <b>GetCategoryFeatures</b> call will start returning category-level metadata
-     * for both domestic and international return policies, and developers should make plans to use that call for this metadata.</span>
+     * Meta information extracted from the WSDL
+     * - documentation: Describes the seller's return policy. Most categories on most eBay sites require the seller to clearly specify whether or not returns are accepted (see <b>ReturnsAcceptedOption</b>). <br> <br> <span class="tablenote"><b>Note: </b> If
+     * you set up a return policy via the <a href="https://developer.ebay.com/api-docs/sell/account/resources/return_policy/methods/createReturnPolicy">Account API</a> or the <a
+     * href="https://developer.ebay.com/Devzone/business-policies/CallRef/addSellerProfile.html">Business Polices Managment API</a>, then you should not populate the fields in this <b>ReturnPolicy</b> container. Instead, indicate your return policy using
+     * the <b>SellerProfiles.SellerReturnProfile</b> container. <br> <br> However, if you <i>do not</i> configure a return policy, all the fields in this <b>ReturnPolicy</b> container that are marked <b>conditional</b> must be populated in your request.
+     * </span> <br> <b>For the <b>AddItem</b> family of calls:</b> Required for most categories on most sites. Use <b>ReturnPolicyEnabled</b> in <b>GetCategoryFeatures</b> to determine which categories require this field. Also use <b>ReturnPolicyDetails</b>
+     * in <b>GeteBayDetails</b> to determine which <b>ReturnPolicy</b> fields can be used on each site.<br> <br> Australia (AU) and US eBay Motors Parts and Accessories categories typically support but do not require a return policy. (However, we strongly
+     * recommend that you specify a clear return policy whenever possible.)<br> <br> <b>For ReviseItem only:</b> If the listing has bids or sales and it ends within 12 hours, you can't change the return policy details. If the listing is a GTC listing that
+     * has sales or ends within 12 hours (one or the other, but not both), you can add a return policy to the GTC listing (but you can't change return policy details if already present). If the listing has no bids or sales and more than 12 hours remain
+     * before the listing ends, you can add or change the return policy. When you revise your return policy, you only need to specify the fields you want to add or change. You don't need to specify all the other <b>ReturnPolicy</b> fields again. The other
+     * fields will retain their existing settings.<br> <br> <b>For the GetItem family of calls:</b> Only returned if the site you sent the request to supports the seller's return policy. Typically, the return policy details are only returned when the
+     * request is sent to the listing site. <br><br> <span class="tablenote"><b>Note:</b> The <b>GeteBayDetails</b> call can be used to retrieve site-wide return policy metadata, but it is recommended that sellers use the <b>GetCategoryFeatures</b> call
+     * instead, as this call was recently updated to retrieve category-level metadata for both domestic and international return policies.</span> <br> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate
+     * international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead for international returns. For more
+     * information on setting separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns
+     * policy</a> help topic. For the international equivalent of this field, see the <b>InternationalRefundMethodValues</b> field.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ReturnPolicyType
+     * @var \macropage\ebaysdk\trading\StructType\ReturnPolicyType|null
      */
-    public $ReturnPolicy;
+    protected ?\macropage\ebaysdk\trading\StructType\ReturnPolicyType $ReturnPolicy = null;
     /**
      * The PaymentAllowedSite
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Enables you to view the sites on which an item can be purchased, based on the payment methods offered for the item.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $PaymentAllowedSite;
+    protected array $PaymentAllowedSite = [];
     /**
      * The InventoryTrackingMethod
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether you prefer to track your eBay listings by eBay Item ID or by your own SKU. <br> <br> If a seller will be converting an existing eBay listing into the new Inventory model using the <b>bulkMigrateListings</b> call of
      * the <b>Inventory API</b>, the <b>InventoryTrackingMethod</b> value must be set to <code>ItemID</code> (default value), but the item must also have a SKU value (Item.<b>SKU</b> or Variation.<b>SKU</b>) associated with it. <b>For GetItem and related
-     * calls</b>: Only returned when the value is <code>SKU</code>; not returned when the value is <code>ItemID</code>.
+     * calls</b>: Only returned when the value is <code>SKU</code>; not returned when the value is <code>ItemID</code>. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InventoryTrackingMethod;
+    protected ?string $InventoryTrackingMethod = null;
     /**
      * The IntegratedMerchantCreditCardEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the item can be paid for through a payment gateway (Payflow) account. If <b>IntegratedMerchantCreditCardEnabled</b> is <code>true</code>, then integrated merchant credit card (IMCC) is enabled for credit cards
-     * because the seller has a payment gateway account. Therefore, if <b>IntegratedMerchantCreditCardEnabled</b> is <code>true</code>, and AmEx, Discover, or VisaMC is returned for an item, then on checkout, an online credit-card payment is processed
-     * through a payment gateway account. A payment gateway account is used by sellers to accept online credit cards (Visa, MasterCard, American Express, and Discover).
+     * because the seller has a payment gateway account. Therefore, if <b>IntegratedMerchantCreditCardEnabled</b> is <code>true</code>, an AmEx, Discover, or VisaMC is returned for an item, then on checkout, an online credit-card payment is processed
+     * through a payment gateway account. A payment gateway account is used by sellers to accept online credit cards (Visa, MasterCard, American Express, and Discover). <br><br> <span class="tablenote"><b>Note: </b> As of May 1, 2019, eBay no longer
+     * supports electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must specify PayPal as an accepted payment method, or opt in to eBay managed payments program (if the program
+     * is available to that seller). </span> <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only returned to the seller
+     * of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IntegratedMerchantCreditCardEnabled;
+    protected ?bool $IntegratedMerchantCreditCardEnabled = null;
     /**
      * The Variations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Variations are multiple similar (but not identical) items in a single fixed-price listing. For example, a T-shirt listing could contain multiple items of the same brand that vary by color and size (like "Blue, Large" and "Black,
      * Medium"). Each variation specifies a combination of one of these colors and sizes. Each variation can have a different quantity and price. You can buy multiple items from one variation at the same time. (That is, one order line item can contain
      * multiple items from a single variation.) <br> <br> If you list in two categories, both categories must support listing with variations. See <b>VariationsEnabled</b> in <b>GetCategoryFeatures</b> to determine applicable categories.<br> <br> <b>For
@@ -1088,52 +1122,55 @@ class ItemType extends AbstractStructBase
      * about which variation was actually purchased.) <br> <br> <b>For GetSellerEvents, GetMyeBayBuying, and GetMyeBaySelling:</b> Only returned when a listing has variations and <b>HideVariations</b> was set to <code>false</code> or not specified in the
      * request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VariationsType
+     * @var \macropage\ebaysdk\trading\StructType\VariationsType|null
      */
-    public $Variations;
+    protected ?\macropage\ebaysdk\trading\StructType\VariationsType $Variations = null;
     /**
      * The ItemCompatibilityList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A list of parts compatibility information specified as name and value pairs. Describes an assembly with which a part is compatible (i.e., compatibility by application). For example, to specify a part's compatibility with a vehicle,
      * the name (search name) would map to standard vehicle characteristics (e.g., Year, Make, Model, Trim, and Engine). The values would describe the specific vehicle, such as a 2006 Honda Accord. Use the <b>Product Metadata API</b> to retrieve valid
      * search names and corresponding values. <br><br> <b>For the <b>AddItem</b> family of calls:</b> Use this for specifying parts compatibility by application manually. This can only be used in categories that support parts compatibility by application.
      * Use <b class="con">GetCategoryFeatures</b> with the <b>CompatibilityEnabled</b> feature ID to determine which categories support parts compatibility by application. <br><br> <b>For ReviseFixedPriceItem and ReviseItem:</b> When you revise a listing,
      * if the listing has bids and/or ends within 12 hours, item compatibilities cannot be deleted. You may add item compatibilities at any time. <br><br> <b>For GetItem:</b> <b class="con">ItemCompatibilityList</b> is only returned if the seller included
-     * item compatibility in the listing and <b class="con">IncludeItemCompatibilityList</b> is set to <code>true</code> in the <b>GetItem</b> request. <br><br> Parts Compatibility is supported in limited Parts & Accessories categories for the eBay Motors
-     * (US) site (site ID 100) only. <br><br>
+     * item compatibility in the listing and <b class="con">IncludeItemCompatibilityList</b> is set to <code>true</code> in the <b>GetItem</b> request. <br><br>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemCompatibilityListType
+     * @var \macropage\ebaysdk\trading\StructType\ItemCompatibilityListType|null
      */
-    public $ItemCompatibilityList;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $ItemCompatibilityList = null;
     /**
      * The ItemCompatibilityCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the number of compatible applications specified for the given item. Applies to items listed with fitment by application only (either manually or with a catalog product that supports compatibility). <br><br> Not returned if
      * the item has no specified compatible applications. Not returned if <b>IncludeItemCompatibilityList</b> is specified in the request. <br><br> To retrieve the list of compatibility information, set <b> IncludeItemCompatibilityList</b> to
      * <code>true</code> in the request. <br><br> Parts Compatibility is supported in limited Parts & Accessories categories for the eBay Motors (US) site (site ID 100) only.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemCompatibilityCount;
+    protected ?int $ItemCompatibilityCount = null;
     /**
      * The ConditionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is a numeric identifier for an item's condition. All numeric Condition ID values map to an item condition string value. For example, numeric identifer <code>1000</code> maps to <code>New</code> condition. <br><br> Most eBay
-     * categories require an item condition, but a few eBay categories do not. To verify if the listing category requires an item condition, and if so, what are the supported item condition and <b>ConditionID</b> values, you can call
-     * <b>GetCategoryFeatures</b>. In this <b>GetCategoryFeatures</b> call, you'd pass in the listing <b>CategoryID</b> value and two <b>FeatureID</b> fields - one of these fields set to <code>ConditionEnabled</code>, and the other field set to
-     * <code>ConditionValues</code>. <br><br> In the <b>GetCategoryFeatures</b> response, look at the Category.<b>ConditionEnabled</b> to see if item condition is required for the category. Then look at the Category.<b>ConditionValues</b> container in the
-     * response for the full list of Condition IDs that you can pass in through the <b>ConditionID</b> field of an Add/Revise/Relist/Verify call. Note that the Condition.<b>DisplayName</b> value in the response is the actual condition value that will appear
-     * in the actual eBay listing. <br> <br> If you pass in a <b>ConditionID</b> value that is not valid for the category, or if you don't pass in a <b>ConditionID</b> value at all for a category that requires it, the listing request fails. <br><br> If you
-     * are listing in two categories (using a secondary category), it is the primary listing category that determines which <b>ConditionID</b> values are supported. <br><br> <b>For Revise/Relist calls:</b> In most cases, you can change the
-     * <b>ConditionID</b> value (if applicable/warranted), with the exception being an auction listing that has one or more bids, or any listing that is scheduled to end in 12 hours or less. <br> <br> <b>For GetItem:</b> The <b>ConditionID</b> value is
-     * always returned if set for the listing. <b>GetItem</b> also returns the item condition string value in the <b>ConditionDisplayName</b> field.
+     * listing categories require an item condition, but a few eBay categories do not (such as Digital Gift Cards or Antiques categories). To verify if the listing category requires an item condition, and if so, what are the supported item condition and
+     * <b>ConditionID</b> values, you can call <b>GetCategoryFeatures</b>. In this <b>GetCategoryFeatures</b> call, you'd pass in the listing <b>CategoryID</b> value and two <b>FeatureID</b> fields - one of these fields set to <code>ConditionEnabled</code>,
+     * and the other field set to <code>ConditionValues</code>. <br><br> In the <b>GetCategoryFeatures</b> response, look at the Category.<b>ConditionEnabled</b> to see if item condition is required for the category. Then look at the
+     * Category.<b>ConditionValues</b> container in the response for the full list of Condition IDs that you can pass in through the <b>ConditionID</b> field of an Add/Revise/Relist/Verify call. Note that the Condition.<b>DisplayName</b> value in the
+     * response is the actual condition value that will appear in the actual eBay listing. <br> <br> If you pass in a <b>ConditionID</b> value that is not valid for the category, or if you don't pass in a <b>ConditionID</b> value at all for a category that
+     * requires it, the listing request fails. <br><br> If you are listing in two categories (using a secondary category), it is the primary listing category that determines which <b>ConditionID</b> values are supported. <br><br> <b>For Revise/Relist
+     * calls:</b> In most cases, you can change the <b>ConditionID</b> value (if applicable/warranted), with the exception being an auction listing that has one or more bids, or any listing that is scheduled to end in 12 hours or less. <br> <br> <b>For
+     * GetItem:</b> The <b>ConditionID</b> value is always returned if set for the listing. <b>GetItem</b> also returns the item condition string value in the <b>ConditionDisplayName</b> field. <br> <br> <span class="tablenote"><strong>Note:</strong> In all
+     * eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Any seller who is
+     * not eligible for this feature will be blocked if they try to create a new listing or revise an existing listing with this item condition. Any active listings on any eBay marketplace that had 'Manufacturer Refurbished' as the item condition should
+     * have been automatically updated by eBay to the 'Seller Refurbished' item condition (Condition ID 2500). <br> <br> Any seller that is interested in eligibility requirements to list with 'Certified Refurbished' should see the <a
+     * href="https://pages.ebay.com/seller-center/listing-and-marketing/certified-refurbished-program.html" target="_blank">Certified refurbished program</a> page in Seller Center. </span>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ConditionID;
+    protected ?int $ConditionID = null;
     /**
      * The ConditionDescription
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string field is used by the seller to more clearly describe the condition of items that are not brand new. <br> <br> The <b>ConditionDescription</b> field is available for all categories, including categories where the condition
      * type is not applicable (e.g., Antiques). This field is applicable for all item conditions except 'New', 'Brand New', 'New with tags', and 'New in box'. If <b>ConditionDescription</b> is used with these conditions (Condition IDs 1000-1499), eBay will
      * simply ignore this field if included, and eBay will return a warning message to the user. <br> <br> This field should only be used to further clarify the condition of the used item. For example, "The right leg of the chair has a small scratch, and on
@@ -1143,296 +1180,292 @@ class ItemType extends AbstractStructBase
      * NL (146), ES (186), CH (193), IE (205) and PL (212) sites. </span> <br> The <b>ConditionDescription</b> field is returned by <b>GetItem</b> (and other related calls that return the Item object) if a condition description is specified in the listing.
      * <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ConditionDescription;
+    protected ?string $ConditionDescription = null;
     /**
      * The ConditionDisplayName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The human-readable label for the item condition. Display names are localized for the site on which they're listed (not necessarily the site on which they're viewed).<br> <br> Most categories use the same display name for the same
      * condition ID. Some categories may override the display name based on buyer expectations for items in the category. For example, condition ID 1000 could be called "New" in one category and "New with tags" in another.<br> <br> Behind the scenes, eBay's
      * search engine uses the ID (not the display name) to determine whether items are new, used, or refurbished.<br> <br> Only returned when the seller specified <b>ConditionID</b> in their listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ConditionDisplayName;
+    protected ?string $ConditionDisplayName = null;
     /**
      * The TaxCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Tax exception category code. This is to be used only by sellers who have opted into sales tax being calculated by a sales tax calculation vendor. If you are interested in becoming a tax calculation vendor partner with eBay, contact
      * developer-relations@ebay.com.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TaxCategory;
+    protected ?string $TaxCategory = null;
     /**
      * The QuantityAvailableHint
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the type of message that will be returned describing the quantity available for the item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $QuantityAvailableHint;
+    protected ?string $QuantityAvailableHint = null;
     /**
      * The QuantityThreshold
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The quantity threshold above which the seller prefers not to show the actual quantity available. Returned when the quantity available is greater than the value of quantity threshold. Currently, 10 is the only available value for this
      * threshold.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $QuantityThreshold;
+    protected ?int $QuantityThreshold = null;
     /**
      * The DiscountPriceInfo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container provides information for an item that has a Strikethrough Price (STP) or a Minimum Advertised Price (MAP) discount pricing treatment. STP and MAP apply only to fixed-price listings. STP is available on the US, eBay
      * Motors, UK, Germany, Canada (English and French), France, Italy, and Spain sites, while MAP is available only on the US site. <br><br> Discount pricing is available to qualified sellers (and their associated developers) who participate in the
      * Discount Pricing Program. Once qualified, sellers receive a 'special account flag' (SAF) that allows them to apply Discount Pricing to both single-variation and multi-variation items. STP is intended for eBay partners and their sellers only. <br><br>
      * As a seller listing Discount Price items, you are required to maintain records of your discount pricing in the event you are called upon to substantiate your item pricing. <br><br> <b>For AddFixedPriceItem, RelistFixedPriceItem, ReviseFixedPriceItem,
      * and VerifyAddFixedPriceItem</b>: If you are listing variations (MSKU items), use <b>Variation.DiscountPriceInfo</b> for each variation.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
+     * @var \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType|null
      */
-    public $DiscountPriceInfo;
+    protected ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $DiscountPriceInfo = null;
     /**
      * The SellerProvidedTitle
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A descriptive free-text title for a US or CA eBay Motors vehicle listing. This title appears below eBay's pre-filled listing title on the View Item page (not at the top of the View Item page). It's also appended to the listing title
      * in search results (like a subtitle) on the US eBay Motors site. Keywords in this title help buyers find or distinguish your listing. <br><br> Applicable to listings in US eBay Motors Cars and Trucks, Motorcycle, and some of the Powersport, Boats and
-     * RV campers categories; or to Cars and Trucks listings on CA eBay Motors. <br><br> This replaces the older US and Canada eBay Motors Subtitle attribute (attribute ID 10246). <br>
+     * RV campers categories; or to Cars and Trucks listings on CA eBay Motors. <br><br> This replaces the older US and Canada eBay Motors Subtitle attribute (attribute ID 4148). <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerProvidedTitle;
+    protected ?string $SellerProvidedTitle = null;
     /**
      * The VIN
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field displays the Vehicle Identification Number, which is a unique serial number for a motor vehicle. <br><br> This field is applicable to listings in US eBay Motors Cars and Trucks (6001), Motorcycles (6024), Commercial Trucks
      * (63732), RVs and Campers (50054), ATVs (6723), Snowmobiles (42595), and UTVs (173665); and to Cars and Trucks listings in CA, CAFR and AU eBay Motors. For vehicle categories that do not use VIN, call <b>GetCategorySpecifics</b> to determine
-     * applicable custom item specifics (such as 'Hull ID Number' for Boats). <br><br> For the US, CA, and CAFR eBay Motors sites, required for cars and trucks from model year 1981 and later. (The US developed national standards for VIN values in 1981.)
-     * <br><br> For the eBay Australia site, required for vehicles from model year 1989 or later. For the eBay Australia site, only appears on the View Item page if you also specify the date of first registration in the listing's item specifics. <br><br>
-     * Appears in the VIN field in the Item Specifics section of eBay's View Item page. <br>
+     * applicable Item Specifics (such as 'Hull ID Number' for Boats). <br><br> For the US, CA, and CAFR eBay Motors sites, required for cars and trucks from model year 1981 and later. (The US developed national standards for VIN values in 1981.) <br><br>
+     * For the eBay Australia site, required for vehicles from model year 1989 or later. For the eBay Australia site, only appears on the View Item page if you also specify the date of first registration in the listing's Item Specifics. <br><br> Appears in
+     * the VIN field in the Item Specifics section of eBay's View Item page. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $VIN;
+    protected ?string $VIN = null;
     /**
      * The VINLink
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $VINLink;
+    protected ?string $VINLink = null;
     /**
      * The VRM
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Vehicle Registration Mark, which is a unique identifier for a motor vehicle in the UK. <br><br> Applicable to listings in UK eBay Motors Cars and Trucks, Motorcycle, and some Powersport categories. <br><br> Appears as a VRM field in
      * the Item Specifics section of eBay's View Item page. On the View Item page, the VRM value is masked (i.e., only a portion of the value is shown to users). In the <b>GetItem</b> response, the VRM is only returned if the call is made by the seller
      * (i.e., the AuthToken is associated with the vehicle's seller).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $VRM;
+    protected ?string $VRM = null;
     /**
      * The VRMLink
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $VRMLink;
+    protected ?string $VRMLink = null;
     /**
      * The QuantityInfo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used to set the minimum number of event tickets that should remain available after a buyer makes a purchase. This functionality allows the seller to avoid the possibility of being left with just one event ticket
      * after a sale. <br><br> This container can be used when adding, revising, or relisting event tickets, and it will only be returned in <b>GetItem</b> if set for the listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\QuantityInfoType
+     * @var \macropage\ebaysdk\trading\StructType\QuantityInfoType|null
      */
-    public $QuantityInfo;
+    protected ?\macropage\ebaysdk\trading\StructType\QuantityInfoType $QuantityInfo = null;
     /**
      * The SellerProfiles
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used if the seller would like to use/reference Business Policies to create, revise, relist, or verify their listing. The seller's account must be opted in to Business Policies to use this container. If this
-     * container is used, exactly one Payment Business Policy, one Shipping Business Policy, and one Return Business Policy is applied to the listing. If the seller's account is not opted in to Business Policies, that seller may not use this container.
-     * Sellers must opt-in to Business Policies through My eBay or by using the <b>optInToProgram</b> call of the <b>eBay Account API</b>. <br><br> If Business Policies are applied to a listing, all payment, shipping, and return policy settings in these
-     * policies will override any other payment, shipping, or return policy legacy fields that are included in the call request. <br><br> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the
-     * API call is the seller of the listing.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used if the seller would like to use/reference business policies to create, revise, relist, or verify their listing. The seller's account must be opted in to business policies to use this container. If this
+     * container is used, exactly one Payment Business Policy, one Shipping Business Policy, and one Return Business Policy must be specified and applied to the listing. If the seller's account is not opted in to business policies, that seller may not use
+     * this container. Sellers must opt-in to business policies through My eBay or by using the <b>optInToProgram</b> call of the <b>eBay Account API</b>. <br><br> If business policies are applied to a listing, all payment, shipping, and return policy
+     * settings in these policies will override any other payment, shipping, or return policy legacy fields that are included in the call request. <br><br> This container is only returned in 'Get' calls if business policies are set for the listing, and the
+     * person making the API call is the seller of the listing.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellerProfilesType
+     * @var \macropage\ebaysdk\trading\StructType\SellerProfilesType|null
      */
-    public $SellerProfiles;
+    protected ?\macropage\ebaysdk\trading\StructType\SellerProfilesType $SellerProfiles = null;
     /**
      * The ShippingServiceCostOverrideList
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used when the seller wants to override the flat shipping costs for all domestic and/or all international shipping services defined in the Business Policies shipping profile referenced in the
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used when the seller wants to override the flat shipping costs for all domestic and/or all international shipping services defined in the shipping business policy referenced in the
      * <b>SellerProfiles.SellerShippingProfile.ShippingProfileID</b> field. Shipping costs include the cost to ship one item, the cost to ship each additional identical item, and any shipping surcharges applicable to domestic shipping services. <br><br> A
      * <b>ShippingServiceCostOverrideList.ShippingServiceCostOverride</b> container is required for each domestic and/or international shipping service that is defined in the <b>domesticShippingPolicyInfoService</b> and <b>intlShippingPolicyInfoService</b>
-     * containers of the Business Policies shipping profile. <br><br> Shipping service cost overrides are a listing-level concept, and the shipping costs specified through each <b>ShippingServiceCostOverrideList.ShippingServiceCostOverride</b> container
-     * will not change the shipping costs defined for the same shipping services in the Business Policies shipping profile. <br><br> <b>For Revise and Relist calls</b>: To delete all shipping service cost overrides when you revise or relist, specify
+     * containers of the shipping business policy. <br><br> Shipping service cost overrides are a listing-level concept, and the shipping costs specified through each <b>ShippingServiceCostOverrideList.ShippingServiceCostOverride</b> container will not
+     * change the shipping costs defined for the same shipping services in the shipping business policy. <br><br> <b>For Revise and Relist calls</b>: To delete all shipping service cost overrides when you revise or relist, specify
      * <b>Item.ShippingServiceCostOverrideList</b> in <b>DeletedField</b>, and don't pass <b>ShippingServiceCostOverrideList</b> in the request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType|null
      */
-    public $ShippingServiceCostOverrideList;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $ShippingServiceCostOverrideList = null;
     /**
      * The ShippingOverride
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is reserved for internal or future use.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingOverrideType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingOverrideType|null
      */
-    public $ShippingOverride;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingOverrideType $ShippingOverride = null;
     /**
      * The ShippingPackageDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of dimension and size details related to a shipping package in which an item will be sent. The information in this container is applicable if the seller is using calculated shipping or flat rate shipping using
      * shipping rate tables with weight surcharges. This container is only returned in the <b>Get</b> calls if specified for the item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShipPackageDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ShipPackageDetailsType|null
      */
-    public $ShippingPackageDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $ShippingPackageDetails = null;
     /**
      * The TopRatedListing
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the listing was created by a Top-Rated Seller and the listing has all of the requirements that qualifies it as a Top-Rated Plus listing. The Top-Rated Seller program is only
      * available on the US, UK, and Germany sites. See the <a href="https://pages.ebay.com/help/sell/top-rated.html#what">Top-Rated Seller requirements</a> help topic for more information on qualifying as a Top-Rated Seller and the <a
      * href="https://pages.ebay.com/help/sell/top-rated.html#plus">Top-Rated Plus listing requirements</a> help topic for more information on what a listing must offer to qualify as a Top-Rated Plus listing and get the Top-Rated Plus badge. Information on
      * the overall program can be found on the <a href="https://pages.ebay.com/sellerinformation/build-your-business-online/status-standards/top-rated-seller.html">Top-Rated Seller home page</a> in the Seller Center.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $TopRatedListing;
+    protected ?bool $TopRatedListing = null;
     /**
      * The QuantityRestrictionPerBuyer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used by the seller to restrict the quantity of items that may be purchased by one buyer during the duration of a fixed-price listing (single or multi-variation). This is an optional container that can be used with
      * an <b>Add</b>, <b>Revise</b>, or <b>Relist</b> call. <br><br> This container is not applicable to auction listings.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType
+     * @var \macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType|null
      */
-    public $QuantityRestrictionPerBuyer;
+    protected ?\macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $QuantityRestrictionPerBuyer = null;
     /**
      * The FloorPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value sets the minimum price threshold for a seller's product price in a fixed-price listing. Regardless of the product price on eBay Value Box or Amazon listings, the seller's product price will not be reduced lower than this
      * dollar value. <br><br> This value is only applicable to sellers enabled to use the <b>Dynamic Pricing</b> API, and if a dynamic pricing rule is assigned to the listing's product.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $FloorPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $FloorPrice = null;
     /**
      * The CeilingPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value sets the maximum price threshold for a seller's product price in a fixed-price listing. Regardless of the product price on Amazon or eBay Value Box, the seller's product price will not be raised higher than this dollar
      * value. <br><br> This value is only applicable to sellers enabled to use the <b>Dynamic Pricing</b> API, and if a dynamic pricing rule is assigned to the listing's product. If this field is not specified through the <b>Dynamic Pricing</b> API, an eBay
      * system-level threshold is used to avoid any undesirable results.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $CeilingPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $CeilingPrice = null;
     /**
      * The IsIntermediatedShippingEligible
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the item is eligible is to be shipped internationally via eBay's Global Shipping Program. With the Global Shipping Program, the buyer pays a single shipping fee for the order,
      * which includes the domestic shipping leg, the international shipping leg, and handling charges, and import charges. <br/><br/> eBay uses a shipping partner that allows the seller to ship the package to a domestic location and then the shipping
      * partner takes care of the rest, including the international shipping leg.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IsIntermediatedShippingEligible;
+    protected ?bool $IsIntermediatedShippingEligible = null;
     /**
      * The UnitInfo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container provides information about the weight, volume or other quantity measurement of a listed item. The European Union requires listings for certain types of products to include the price per unit so buyers can accurately
      * compare prices. eBay uses the <b>UnitType</b> and <b>UnitQuantity</b> values and the item's listed price to calculate and display the per-unit price on eBay EU sites. <br/><br/> This container will only be returned if price per unit information
      * exists for the listing, and the <b>IncludeItemSpecifics</b> field was included in the call request and set to <code>true</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UnitInfoType
+     * @var \macropage\ebaysdk\trading\StructType\UnitInfoType|null
      */
-    public $UnitInfo;
+    protected ?\macropage\ebaysdk\trading\StructType\UnitInfoType $UnitInfo = null;
     /**
      * The RelistParentID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The identifier of the original listing that contained the item before the item was relisted. This field is only returned for an item that was relisted.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $RelistParentID;
+    protected ?int $RelistParentID = null;
     /**
      * The ConditionDefinition
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string value provides more details about the item's condition.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ConditionDefinition;
+    protected ?string $ConditionDefinition = null;
     /**
      * The HideFromSearch
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the listing has been hidden from all searches occurring on eBay. If a listing is hidden from eBay searches, the reason can be found in the <b>ReasonHideFromSearch</b> field.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HideFromSearch;
+    protected ?bool $HideFromSearch = null;
     /**
      * The ReasonHideFromSearch
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned only when the listing is currently being hidden from any searches occurring on eBay. Listings may be hidden from search if an active listing is currently out of stock or if the listing has been determined by
      * eBay to be a duplicate listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReasonHideFromSearch;
+    protected ?string $ReasonHideFromSearch = null;
     /**
      * The IncludeRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> This field is deprecated, and <b>ListingRecommendations</b> containers will no longer be returned in any responses after June 1, 2021. eBay recommends that you integrate with the REST-based <a
+     * href="/api-docs/sell/recommendation/overview.html" target="_blank">Recommendation API</a> to retrieve recommendations for improving your listings and sales performance, or with the <a href="/api-docs/sell/compliance/overview.html"
+     * target="_blank">Compliance API</a> to discover non-compliant listings or listings that are at risk at becoming non-compliant in the future. </span> <br><br> This boolean field should be included and set to <code>true</code> if the seller wishes to
+     * see listing recommendations in the call response via the <b>ListingRecommendations</b> container. Listing recommendations provide one or more messages to the seller on recommendations on: <b></b> <ul> <li>improving a listing </li> <li>bringing a
+     * listing up to standard in regards to Top-Rated seller/listing requirements </li> <li>mandated or recommended Item Specifics </li> <li>picture quality requirements </li> <li>pricing and/or listing format recommendations </li> <li>recommended keywords
+     * and/or Item Specifics in a Title </li> <li>offering fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge </li> </ul>
      * - default: false
-     * - documentation: This boolean field should be included and set to <code>true</code> if the seller wishes to see listing recommendations in the call response via the <b>ListingRecommendations</b> container. Listing recommendations provide one or more
-     * messages to the seller on recommendations on: <b></b> <ul> <li>improving a listing </li> <li>bringing a listing up to standard in regards to Top-Rated seller/listing requirements </li> <li>mandated or recommended Item Specifics </li> <li>picture
-     * quality requirements </li> <li>pricing and/or listing format recommendations </li> <li>recommended keywords and/or Item Specifics in a Title </li> <li>offering fast handling (same-day handling or handling time of 1 day) and/or a free shipping option
-     * in order to qualify the listing for a Fast 'N Free badge </li> </ul>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeRecommendations;
+    protected ?bool $IncludeRecommendations = null;
     /**
      * The PickupInStoreDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: This container is used in <b>Add</b>/<b>Revise</b>/<b>Relist</b>/<b>Verify</b> listing calls by the seller to enable a listing with the 'In-Store Pickup' feature. The 'In-Store Pickup' feature is only available on the eBay US site.
-     * This feature is discussed in more detail in this container's child fields. <br/><br/> This container is also returned in the <strong>GetItem</strong> call.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used in <b>Add</b>/<b>Revise</b>/<b>Relist</b>/<b>Verify</b> listing calls by the seller to enable a listing with the 'In-Store Pickup' feature. The 'In-Store Pickup' feature is only available to a limited number of
+     * large retail merchants in the US, Canada, UK, Germany, and Australia marketplaces. <br/><br/> This container is returned in the 'Get' calls if the listing is enabled with the In-Store Pickup feature.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType|null
      */
-    public $PickupInStoreDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $PickupInStoreDetails = null;
     /**
-     * The eBayNowEligible
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><strong>Note:</strong> eBay Now has been officially retired, so this field is no longer applicable. </span>
+     * The SiteId
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of the eBay site on which the item is listed. If the Site ID is already passed in as an HTTP header, this field is not needed. If Site ID is specified in the HTTP header and through this request field, the value
+     * in this field will override the value in the HTTP headerWhen this is given we would ignore the site Id, which is given in header. See <strong>SiteCodeType</strong> for a full list of Site IDs for the eBay sites that are compatible with the Trading
+     * API.
      * - minOccurs: 0
-     * @var bool
+     * @var int|null
      */
-    public $eBayNowEligible;
-    /**
-     * The eBayNowAvailable
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><strong>Note:</strong> eBay Now has been officially retired, so this field is no longer applicable. </span>
-     * - minOccurs: 0
-     * @var bool
-     */
-    public $eBayNowAvailable;
+    protected ?int $SiteId = null;
     /**
      * The IgnoreQuantity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned as <code>true</code> if the actual quantity of a multiple-quantity, fixed-price listing (indicated in the <b>Item.Quantity</b> field) can not be accurately determined by eBay.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IgnoreQuantity;
+    protected ?bool $IgnoreQuantity = null;
     /**
      * The AvailableForPickupDropOff
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is only returned if <code>true</code>, and indicates that the 'Click and Collect' feature is available for this item. With Click and Collect, buyers are able to purchase from thousands of sellers on the eBay UK, Australia,
      * and Germany sites, and then pick up their order from the nearest 'eBay Collection Point'. Note that an item may be eligible for Click and Collect, but this logistics option will only surface if the prospective buyer is within the vicinity of an 'eBay
      * Collection Point'. <br/><br/> The Click and Collect feature is only available on the eBay UK, Australia, and Germany sites. For more information about Click and Collect, see the <a href="https://ebay.co.uk/clickandcollect/">Click and Collect</a> home
@@ -1443,70 +1476,74 @@ class ItemType extends AbstractStructBase
      * class="tablenote"><b>Note:</b> For Click and Collect eligible sellers, the Click and Collect feature can only be enabled at the account level, and then each of the seller's listings will be automatically evaluated for Click and Collect eligibility.
      * </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AvailableForPickupDropOff;
+    protected ?bool $AvailableForPickupDropOff = null;
     /**
      * The EligibleForPickupDropOff
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: For 'Click and Collect' eligible sellers, this field was once used to set 'Click and Collect' eligibility at the listing level. However, now the seller can only opt in to 'Click and Collect' at the account level, and then each of
      * their listings will be automatically evaluated for 'Click and Collect' eligibility. <br/><br/> <span class="tablenote"><b>Note:</b> Until this field is fully deprecated in the Trading WSDL (and in Add/Revise/Relist/Verify calls), it can still be
      * used, but it will have no functional affect. However, if set in an Add/Revise/Relist/Verify call, it will get returned in <b>GetItem</b>, but it won't be a true indicator if the item is available for the 'Click and Collect' logistics type. Instead,
      * the <b>Item.AvailableForPickupDropOff</b> field should be referenced to see if the item is available for 'Click and Collect'. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EligibleForPickupDropOff;
+    protected ?bool $EligibleForPickupDropOff = null;
     /**
      * The LiveAuction
-     * Meta informations extracted from the WSDL
-     * - documentation: This field must be included and set to <code>true</code> if the listing will be a part of a Live Auction. This boolean field is returned as <code>true</code> in <b>GetItem</b> if the listing is part of a Live Auction. See the <a
-     * href="https://www.ebay.com/rpp/live-auctions">eBay Live Auctions</a> home page for more information about Live Auctions on eBay.com.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note:</b> This field is no longer applicable as eBay Live Auctions are no longer being held as of September 1, 2018. If this field is used in an Add/Revise/Relist call, it will be ignored and dropped.
+     * </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LiveAuction;
+    protected ?bool $LiveAuction = null;
     /**
      * The DigitalGoodInfo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is used in <b>Add</b>/<b>Revise</b>/<b>Relist</b>/<b>Verify</b> listing calls to designate the listing as a digital gift card listing. It is also returned in <strong>GetItem</strong> to indicate that the listing
      * contains a digital gift card.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DigitalGoodInfoType
+     * @var \macropage\ebaysdk\trading\StructType\DigitalGoodInfoType|null
      */
-    public $DigitalGoodInfo;
+    protected ?\macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $DigitalGoodInfo = null;
     /**
      * The eBayPlus
-     * Meta informations extracted from the WSDL
-     * - documentation: If <code>true</code>, this item is being offered under the eBay Plus program. eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top-Rated
-     * eBay sellers must opt in to eBay Plus to be able to offer the program on qualifying listings. Sellers must commit to next-day delivery of those items. <br/><br/> <span class="tablenote"><b>Note:</b> Currently, eBay Plus is available only to buyers in
-     * Germany, Austria, and Australia marketplaces. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: eBay Plus is a premium account option for buyers, which provides benefits such as fast and free domestic shipping, and free returns on selected items. To offer this feature to buyers, sellers must opt in to eBay Plus, and their
+     * selling status must be 'Above Standard' or above. <br/><br/> <span class="tablenote"><b>Note:</b> Currently, eBay Plus is only available to buyers on the Germany and Australia marketplaces, and this field should only be used by sellers selling
+     * eligible items in Germany. <br/><br/> In Australia, the seller has no control/responsibility over setting the eBay Plus feature for a listing. Instead, eBay will evaluate/determine whether a listing is eligible for eBay Plus. Due to this fact, an
+     * Australian seller will also get the <code>21919431: This listing isn't eligible for eBay Plus.</code> warning message in an add/revise/relist call, even though eBay may ultimately set the eBay Plus feature on the listing if the item is eligible.
+     * </span> <br/> In an add/revise/relist call, a seller on the Germany site must include this field and set its value to <code>true</code>. If the seller is not eligible for/opted in to eBay Plus and/or the listing category or item does not qualify for
+     * eBay Plus, a warning message will be returned to the seller in the response indicating this. In addition to the seller, listing category, and item being eligible for eBay Plus, the seller must also set/commit to the following for the listing: <ul>
+     * <li>Listing format must be fixed-price.</li> <li>Same-day or one-day handling (<b>DispatchTimeMax</b> set to <code>0</code> or <code>1</code>). </li> <li>A free, next-day shipping option offered.</li> <li>A return policy that offers a 30-day (or
+     * longer) return period.</li> </ul> If this field is returned as <code>true</code> in a 'Get' call, it indicates that the item is eligible for eBay Plus treatment, but eBay Plus will only come into play if the buyer is subscribed to eBay Plus.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayPlus;
+    protected ?bool $eBayPlus = null;
     /**
      * The eBayPlusEligible
-     * Meta informations extracted from the WSDL
-     * - documentation: If <code>true</code>, this item is eligible to be listed under the eBay Plus program. eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items.
-     * Top-Rated eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Sellers must commit to next-day delivery of those items. <br/><br/> <span class="tablenote"><b>Note:</b> Currently, eBay Plus is available only to
-     * buyers in Germany, Austria, and Australia marketplaces. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: If this field is returned as <code>true</code>, this item is eligible to be listed under the eBay Plus program. eBay Plus is a premium account option for buyers, which provides benefits such as fast and free domestic shipping and
+     * free returns on selected items. eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Among other requirements, sellers must commit to next-day delivery of those items. <br/><br/> <span
+     * class="tablenote"><b>Note:</b> Currently, eBay Plus is available only to buyers in Germany and Australia marketplaces. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayPlusEligible;
+    protected ?bool $eBayPlusEligible = null;
     /**
      * The eMailDeliveryAvailable
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><strong>Note:</strong> This field was enabled with version 935. For those using versions older than 935, this field will not be returned. </span> <br> The boolean value that is returned in this field will
-     * indicate whether or not a digital gift card can be delivered by email to the buyer or recipient of the gift card. This field is only applicable to digital gift card listings.
+     * Meta information extracted from the WSDL
+     * - documentation: The boolean value that is returned in this field will indicate whether or not a digital gift card can be delivered by email to the buyer or recipient of the gift card. This field is only applicable to digital gift card listings.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eMailDeliveryAvailable;
+    protected ?bool $eMailDeliveryAvailable = null;
     /**
      * The IsSecureDescription
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This boolean field indicates whether or not the listing description is HTTPS secure/compliant. To be HTTPS secure/compliant, the <b>Item.Description</b> field may not contain any links to site pages that use the HTTP (and not HTTPS)
      * protocol. This field will be returned with each listing that is found unless one or more <b>OutputSelector</b> fields are used and <code>Item.IsSecureDescription</code> is not one of the values passed in to one of these fields. <br/><br/> If this
      * field is returned as <code>true</code>, the listing is HTTPs secure/compliant, and the whole listing description will appear on the View Item page for the listing. If this field is returned as <code>false</code>, the listing is not HTTPs
@@ -1514,14 +1551,14 @@ class ItemType extends AbstractStructBase
      * the fix is to call <b>ReviseItem</b> or <b>ReviseFixedPriceItem</b> and update the <b>Item.Description</b> field, removing all links to HTTP pages. <br/><br/> For more information about why eBay made this change, please see the <a
      * href="http://pages.ebay.com/seller-center/seller-updates/2017-fall/policy-updates.html" target="_blank">Policy Updates</a> page of the Fall 2017 Seller Updates page.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IsSecureDescription;
+    protected ?bool $IsSecureDescription = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ItemType
      * @uses ItemType::setApplicationData()
@@ -1529,9 +1566,7 @@ class ItemType extends AbstractStructBase
      * @uses ItemType::setAttributeArray()
      * @uses ItemType::setLookupAttributeArray()
      * @uses ItemType::setAutoPay()
-     * @uses ItemType::setPaymentDetails()
      * @uses ItemType::setBiddingDetails()
-     * @uses ItemType::setMotorsGermanySearchable()
      * @uses ItemType::setBuyerProtection()
      * @uses ItemType::setBuyItNowPrice()
      * @uses ItemType::setCategoryMappingAllowed()
@@ -1545,7 +1580,6 @@ class ItemType extends AbstractStructBase
      * @uses ItemType::setHitCounter()
      * @uses ItemType::setItemID()
      * @uses ItemType::setListingDetails()
-     * @uses ItemType::setListingDesigner()
      * @uses ItemType::setListingDuration()
      * @uses ItemType::setListingEnhancement()
      * @uses ItemType::setListingType()
@@ -1553,9 +1587,11 @@ class ItemType extends AbstractStructBase
      * @uses ItemType::setLotSize()
      * @uses ItemType::setPartnerCode()
      * @uses ItemType::setPartnerName()
+     * @uses ItemType::setPaymentDetails()
      * @uses ItemType::setPaymentMethods()
      * @uses ItemType::setPayPalEmailAddress()
      * @uses ItemType::setPrimaryCategory()
+     * @uses ItemType::setPrivateListing()
      * @uses ItemType::setProductListingDetails()
      * @uses ItemType::setQuantity()
      * @uses ItemType::setPrivateNotes()
@@ -1595,9 +1631,8 @@ class ItemType extends AbstractStructBase
      * @uses ItemType::setSKU()
      * @uses ItemType::setSearchDetails()
      * @uses ItemType::setPostalCode()
-     * @uses ItemType::setShippingTermsInDescription()
-     * @uses ItemType::setSellerInventoryID()
      * @uses ItemType::setPictureDetails()
+     * @uses ItemType::setVideoDetails()
      * @uses ItemType::setDispatchTimeMax()
      * @uses ItemType::setBestOfferEnabled()
      * @uses ItemType::setLocalListing()
@@ -1657,8 +1692,7 @@ class ItemType extends AbstractStructBase
      * @uses ItemType::setReasonHideFromSearch()
      * @uses ItemType::setIncludeRecommendations()
      * @uses ItemType::setPickupInStoreDetails()
-     * @uses ItemType::setEBayNowEligible()
-     * @uses ItemType::setEBayNowAvailable()
+     * @uses ItemType::setSiteId()
      * @uses ItemType::setIgnoreQuantity()
      * @uses ItemType::setAvailableForPickupDropOff()
      * @uses ItemType::setEligibleForPickupDropOff()
@@ -1674,9 +1708,7 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray
      * @param \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray
      * @param bool $autoPay
-     * @param \macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails
      * @param \macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails
-     * @param bool $motorsGermanySearchable
      * @param string $buyerProtection
      * @param \macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice
      * @param bool $categoryMappingAllowed
@@ -1690,7 +1722,6 @@ class ItemType extends AbstractStructBase
      * @param string $hitCounter
      * @param string $itemID
      * @param \macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails
-     * @param \macropage\ebaysdk\trading\StructType\ListingDesignerType $listingDesigner
      * @param string $listingDuration
      * @param string[] $listingEnhancement
      * @param string $listingType
@@ -1698,9 +1729,11 @@ class ItemType extends AbstractStructBase
      * @param int $lotSize
      * @param string $partnerCode
      * @param string $partnerName
+     * @param \macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails
      * @param string[] $paymentMethods
      * @param string $payPalEmailAddress
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory
+     * @param bool $privateListing
      * @param \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails
      * @param int $quantity
      * @param string $privateNotes
@@ -1740,9 +1773,8 @@ class ItemType extends AbstractStructBase
      * @param string $sKU
      * @param \macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails
      * @param string $postalCode
-     * @param bool $shippingTermsInDescription
-     * @param string $sellerInventoryID
      * @param \macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails
+     * @param \macropage\ebaysdk\trading\StructType\VideoDetailsType $videoDetails
      * @param int $dispatchTimeMax
      * @param bool $bestOfferEnabled
      * @param bool $localListing
@@ -1802,8 +1834,7 @@ class ItemType extends AbstractStructBase
      * @param string $reasonHideFromSearch
      * @param bool $includeRecommendations
      * @param \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails
-     * @param bool $eBayNowEligible
-     * @param bool $eBayNowAvailable
+     * @param int $siteId
      * @param bool $ignoreQuantity
      * @param bool $availableForPickupDropOff
      * @param bool $eligibleForPickupDropOff
@@ -1813,9 +1844,9 @@ class ItemType extends AbstractStructBase
      * @param bool $eBayPlusEligible
      * @param bool $eMailDeliveryAvailable
      * @param bool $isSecureDescription
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($applicationData = null, \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $attributeSetArray = null, \macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray = null, \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray = null, $autoPay = null, \macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails = null, \macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails = null, $motorsGermanySearchable = null, $buyerProtection = null, \macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null, $categoryMappingAllowed = false, \macropage\ebaysdk\trading\StructType\CharityType $charity = null, $country = null, \macropage\ebaysdk\trading\StructType\CrossPromotionsType $crossPromotion = null, $currency = null, $description = null, $descriptionReviseMode = null, \macropage\ebaysdk\trading\StructType\DistanceType $distance = null, $hitCounter = null, $itemID = null, \macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails = null, \macropage\ebaysdk\trading\StructType\ListingDesignerType $listingDesigner = null, $listingDuration = null, array $listingEnhancement = array(), $listingType = null, $location = null, $lotSize = null, $partnerCode = null, $partnerName = null, array $paymentMethods = array(), $payPalEmailAddress = null, \macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory = null, \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null, $quantity = null, $privateNotes = null, $regionID = null, $relistLink = null, \macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null, \macropage\ebaysdk\trading\StructType\ReviseStatusType $reviseStatus = null, $scheduleTime = null, \macropage\ebaysdk\trading\StructType\CategoryType $secondaryCategory = null, \macropage\ebaysdk\trading\StructType\CategoryType $freeAddedCategory = null, \macropage\ebaysdk\trading\StructType\UserType $seller = null, \macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, \macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, array $shipToLocations = array(), $site = null, \macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, \macropage\ebaysdk\trading\StructType\StorefrontType $storefront = null, $subTitle = null, $timeLeft = null, $title = null, $uUID = null, \macropage\ebaysdk\trading\StructType\VATDetailsType $vATDetails = null, $sellerVacationNote = null, $watchCount = null, $hitCount = null, $disableBuyerRequirements = null, \macropage\ebaysdk\trading\StructType\BestOfferDetailsType $bestOfferDetails = null, $locationDefaulted = null, $useTaxTable = null, $getItFast = null, $buyerResponsibleForShipping = null, $limitedWarrantyEligible = null, $eBayNotes = null, $questionCount = null, $relisted = null, $quantityAvailable = null, $sKU = null, \macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails = null, $postalCode = null, $shippingTermsInDescription = null, $sellerInventoryID = null, \macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails = null, $dispatchTimeMax = null, $bestOfferEnabled = null, $localListing = null, \macropage\ebaysdk\trading\StructType\AddressType $sellerContactDetails = null, $totalQuestionCount = null, $proxyItem = null, \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $extendedSellerContactDetails = null, $leadCount = null, $newLeadCount = null, \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $itemSpecifics = null, $groupCategoryID = null, \macropage\ebaysdk\trading\StructType\AmountType $classifiedAdPayPerLeadFee = null, $bidGroupItem = null, \macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $applyBuyerProtection = null, $listingSubtype2 = null, $mechanicalCheckAccepted = null, $updateSellerInfo = null, $updateReturnPolicy = null, \macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $itemPolicyViolation = null, array $crossBorderTrade = array(), \macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $businessSellerDetails = null, \macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null, \macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $buyerRequirementDetails = null, \macropage\ebaysdk\trading\StructType\ReturnPolicyType $returnPolicy = null, array $paymentAllowedSite = array(), $inventoryTrackingMethod = null, $integratedMerchantCreditCardEnabled = null, \macropage\ebaysdk\trading\StructType\VariationsType $variations = null, \macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $itemCompatibilityList = null, $itemCompatibilityCount = null, $conditionID = null, $conditionDescription = null, $conditionDisplayName = null, $taxCategory = null, $quantityAvailableHint = null, $quantityThreshold = null, \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, $sellerProvidedTitle = null, $vIN = null, $vINLink = null, $vRM = null, $vRMLink = null, \macropage\ebaysdk\trading\StructType\QuantityInfoType $quantityInfo = null, \macropage\ebaysdk\trading\StructType\SellerProfilesType $sellerProfiles = null, \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $shippingServiceCostOverrideList = null, \macropage\ebaysdk\trading\StructType\ShippingOverrideType $shippingOverride = null, \macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $shippingPackageDetails = null, $topRatedListing = null, \macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $quantityRestrictionPerBuyer = null, \macropage\ebaysdk\trading\StructType\AmountType $floorPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $ceilingPrice = null, $isIntermediatedShippingEligible = null, \macropage\ebaysdk\trading\StructType\UnitInfoType $unitInfo = null, $relistParentID = null, $conditionDefinition = null, $hideFromSearch = null, $reasonHideFromSearch = null, $includeRecommendations = false, \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails = null, $eBayNowEligible = null, $eBayNowAvailable = null, $ignoreQuantity = null, $availableForPickupDropOff = null, $eligibleForPickupDropOff = null, $liveAuction = null, \macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $digitalGoodInfo = null, $eBayPlus = null, $eBayPlusEligible = null, $eMailDeliveryAvailable = null, $isSecureDescription = null, \DOMDocument $any = null)
+    public function __construct(?string $applicationData = null, ?\macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $attributeSetArray = null, ?\macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray = null, ?\macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray = null, ?bool $autoPay = null, ?\macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails = null, ?string $buyerProtection = null, ?\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null, ?bool $categoryMappingAllowed = false, ?\macropage\ebaysdk\trading\StructType\CharityType $charity = null, ?string $country = null, ?\macropage\ebaysdk\trading\StructType\CrossPromotionsType $crossPromotion = null, ?string $currency = null, ?string $description = null, ?string $descriptionReviseMode = null, ?\macropage\ebaysdk\trading\StructType\DistanceType $distance = null, ?string $hitCounter = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails = null, ?string $listingDuration = null, array $listingEnhancement = [], ?string $listingType = null, ?string $location = null, ?int $lotSize = null, ?string $partnerCode = null, ?string $partnerName = null, ?\macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails = null, array $paymentMethods = [], ?string $payPalEmailAddress = null, ?\macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory = null, ?bool $privateListing = null, ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null, ?int $quantity = null, ?string $privateNotes = null, ?string $regionID = null, ?bool $relistLink = null, ?\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null, ?\macropage\ebaysdk\trading\StructType\ReviseStatusType $reviseStatus = null, ?string $scheduleTime = null, ?\macropage\ebaysdk\trading\StructType\CategoryType $secondaryCategory = null, ?\macropage\ebaysdk\trading\StructType\CategoryType $freeAddedCategory = null, ?\macropage\ebaysdk\trading\StructType\UserType $seller = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, array $shipToLocations = [], ?string $site = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?\macropage\ebaysdk\trading\StructType\StorefrontType $storefront = null, ?string $subTitle = null, ?string $timeLeft = null, ?string $title = null, ?string $uUID = null, ?\macropage\ebaysdk\trading\StructType\VATDetailsType $vATDetails = null, ?string $sellerVacationNote = null, ?int $watchCount = null, ?int $hitCount = null, ?bool $disableBuyerRequirements = null, ?\macropage\ebaysdk\trading\StructType\BestOfferDetailsType $bestOfferDetails = null, ?bool $locationDefaulted = null, ?bool $useTaxTable = null, ?bool $getItFast = null, ?bool $buyerResponsibleForShipping = null, ?bool $limitedWarrantyEligible = null, ?string $eBayNotes = null, ?int $questionCount = null, ?bool $relisted = null, ?int $quantityAvailable = null, ?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails = null, ?string $postalCode = null, ?\macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails = null, ?\macropage\ebaysdk\trading\StructType\VideoDetailsType $videoDetails = null, ?int $dispatchTimeMax = null, ?bool $bestOfferEnabled = null, ?bool $localListing = null, ?\macropage\ebaysdk\trading\StructType\AddressType $sellerContactDetails = null, ?int $totalQuestionCount = null, ?bool $proxyItem = null, ?\macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $extendedSellerContactDetails = null, ?int $leadCount = null, ?int $newLeadCount = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $itemSpecifics = null, ?string $groupCategoryID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $classifiedAdPayPerLeadFee = null, ?bool $bidGroupItem = null, ?\macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $applyBuyerProtection = null, ?string $listingSubtype2 = null, ?bool $mechanicalCheckAccepted = null, ?bool $updateSellerInfo = null, ?bool $updateReturnPolicy = null, ?\macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $itemPolicyViolation = null, array $crossBorderTrade = [], ?\macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $businessSellerDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null, ?\macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $buyerRequirementDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyType $returnPolicy = null, array $paymentAllowedSite = [], ?string $inventoryTrackingMethod = null, ?bool $integratedMerchantCreditCardEnabled = null, ?\macropage\ebaysdk\trading\StructType\VariationsType $variations = null, ?\macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $itemCompatibilityList = null, ?int $itemCompatibilityCount = null, ?int $conditionID = null, ?string $conditionDescription = null, ?string $conditionDisplayName = null, ?string $taxCategory = null, ?string $quantityAvailableHint = null, ?int $quantityThreshold = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?string $sellerProvidedTitle = null, ?string $vIN = null, ?string $vINLink = null, ?string $vRM = null, ?string $vRMLink = null, ?\macropage\ebaysdk\trading\StructType\QuantityInfoType $quantityInfo = null, ?\macropage\ebaysdk\trading\StructType\SellerProfilesType $sellerProfiles = null, ?\macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $shippingServiceCostOverrideList = null, ?\macropage\ebaysdk\trading\StructType\ShippingOverrideType $shippingOverride = null, ?\macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $shippingPackageDetails = null, ?bool $topRatedListing = null, ?\macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $quantityRestrictionPerBuyer = null, ?\macropage\ebaysdk\trading\StructType\AmountType $floorPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $ceilingPrice = null, ?bool $isIntermediatedShippingEligible = null, ?\macropage\ebaysdk\trading\StructType\UnitInfoType $unitInfo = null, ?int $relistParentID = null, ?string $conditionDefinition = null, ?bool $hideFromSearch = null, ?string $reasonHideFromSearch = null, ?bool $includeRecommendations = false, ?\macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails = null, ?int $siteId = null, ?bool $ignoreQuantity = null, ?bool $availableForPickupDropOff = null, ?bool $eligibleForPickupDropOff = null, ?bool $liveAuction = null, ?\macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $digitalGoodInfo = null, ?bool $eBayPlus = null, ?bool $eBayPlusEligible = null, ?bool $eMailDeliveryAvailable = null, ?bool $isSecureDescription = null, $any = null)
     {
         $this
             ->setApplicationData($applicationData)
@@ -1823,9 +1854,7 @@ class ItemType extends AbstractStructBase
             ->setAttributeArray($attributeArray)
             ->setLookupAttributeArray($lookupAttributeArray)
             ->setAutoPay($autoPay)
-            ->setPaymentDetails($paymentDetails)
             ->setBiddingDetails($biddingDetails)
-            ->setMotorsGermanySearchable($motorsGermanySearchable)
             ->setBuyerProtection($buyerProtection)
             ->setBuyItNowPrice($buyItNowPrice)
             ->setCategoryMappingAllowed($categoryMappingAllowed)
@@ -1839,7 +1868,6 @@ class ItemType extends AbstractStructBase
             ->setHitCounter($hitCounter)
             ->setItemID($itemID)
             ->setListingDetails($listingDetails)
-            ->setListingDesigner($listingDesigner)
             ->setListingDuration($listingDuration)
             ->setListingEnhancement($listingEnhancement)
             ->setListingType($listingType)
@@ -1847,9 +1875,11 @@ class ItemType extends AbstractStructBase
             ->setLotSize($lotSize)
             ->setPartnerCode($partnerCode)
             ->setPartnerName($partnerName)
+            ->setPaymentDetails($paymentDetails)
             ->setPaymentMethods($paymentMethods)
             ->setPayPalEmailAddress($payPalEmailAddress)
             ->setPrimaryCategory($primaryCategory)
+            ->setPrivateListing($privateListing)
             ->setProductListingDetails($productListingDetails)
             ->setQuantity($quantity)
             ->setPrivateNotes($privateNotes)
@@ -1889,9 +1919,8 @@ class ItemType extends AbstractStructBase
             ->setSKU($sKU)
             ->setSearchDetails($searchDetails)
             ->setPostalCode($postalCode)
-            ->setShippingTermsInDescription($shippingTermsInDescription)
-            ->setSellerInventoryID($sellerInventoryID)
             ->setPictureDetails($pictureDetails)
+            ->setVideoDetails($videoDetails)
             ->setDispatchTimeMax($dispatchTimeMax)
             ->setBestOfferEnabled($bestOfferEnabled)
             ->setLocalListing($localListing)
@@ -1951,8 +1980,7 @@ class ItemType extends AbstractStructBase
             ->setReasonHideFromSearch($reasonHideFromSearch)
             ->setIncludeRecommendations($includeRecommendations)
             ->setPickupInStoreDetails($pickupInStoreDetails)
-            ->setEBayNowEligible($eBayNowEligible)
-            ->setEBayNowAvailable($eBayNowAvailable)
+            ->setSiteId($siteId)
             ->setIgnoreQuantity($ignoreQuantity)
             ->setAvailableForPickupDropOff($availableForPickupDropOff)
             ->setEligibleForPickupDropOff($eligibleForPickupDropOff)
@@ -1968,7 +1996,7 @@ class ItemType extends AbstractStructBase
      * Get ApplicationData value
      * @return string|null
      */
-    public function getApplicationData()
+    public function getApplicationData(): ?string
     {
         return $this->ApplicationData;
     }
@@ -1977,20 +2005,21 @@ class ItemType extends AbstractStructBase
      * @param string $applicationData
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setApplicationData($applicationData = null)
+    public function setApplicationData(?string $applicationData = null): self
     {
         // validation for constraint: string
         if (!is_null($applicationData) && !is_string($applicationData)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($applicationData)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($applicationData, true), gettype($applicationData)), __LINE__);
         }
         $this->ApplicationData = $applicationData;
+        
         return $this;
     }
     /**
      * Get AttributeSetArray value
      * @return \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType|null
      */
-    public function getAttributeSetArray()
+    public function getAttributeSetArray(): ?\macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType
     {
         return $this->AttributeSetArray;
     }
@@ -1999,16 +2028,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $attributeSetArray
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setAttributeSetArray(\macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $attributeSetArray = null)
+    public function setAttributeSetArray(?\macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType $attributeSetArray = null): self
     {
         $this->AttributeSetArray = $attributeSetArray;
+        
         return $this;
     }
     /**
      * Get AttributeArray value
      * @return \macropage\ebaysdk\trading\ArrayType\AttributeArrayType|null
      */
-    public function getAttributeArray()
+    public function getAttributeArray(): ?\macropage\ebaysdk\trading\ArrayType\AttributeArrayType
     {
         return $this->AttributeArray;
     }
@@ -2017,16 +2047,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setAttributeArray(\macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray = null)
+    public function setAttributeArray(?\macropage\ebaysdk\trading\ArrayType\AttributeArrayType $attributeArray = null): self
     {
         $this->AttributeArray = $attributeArray;
+        
         return $this;
     }
     /**
      * Get LookupAttributeArray value
      * @return \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType|null
      */
-    public function getLookupAttributeArray()
+    public function getLookupAttributeArray(): ?\macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType
     {
         return $this->LookupAttributeArray;
     }
@@ -2035,16 +2066,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLookupAttributeArray(\macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray = null)
+    public function setLookupAttributeArray(?\macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType $lookupAttributeArray = null): self
     {
         $this->LookupAttributeArray = $lookupAttributeArray;
+        
         return $this;
     }
     /**
      * Get AutoPay value
      * @return bool|null
      */
-    public function getAutoPay()
+    public function getAutoPay(): ?bool
     {
         return $this->AutoPay;
     }
@@ -2053,38 +2085,21 @@ class ItemType extends AbstractStructBase
      * @param bool $autoPay
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setAutoPay($autoPay = null)
+    public function setAutoPay(?bool $autoPay = null): self
     {
         // validation for constraint: boolean
         if (!is_null($autoPay) && !is_bool($autoPay)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($autoPay)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($autoPay, true), gettype($autoPay)), __LINE__);
         }
         $this->AutoPay = $autoPay;
-        return $this;
-    }
-    /**
-     * Get PaymentDetails value
-     * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType|null
-     */
-    public function getPaymentDetails()
-    {
-        return $this->PaymentDetails;
-    }
-    /**
-     * Set PaymentDetails value
-     * @param \macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setPaymentDetails(\macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails = null)
-    {
-        $this->PaymentDetails = $paymentDetails;
+        
         return $this;
     }
     /**
      * Get BiddingDetails value
      * @return \macropage\ebaysdk\trading\StructType\BiddingDetailsType|null
      */
-    public function getBiddingDetails()
+    public function getBiddingDetails(): ?\macropage\ebaysdk\trading\StructType\BiddingDetailsType
     {
         return $this->BiddingDetails;
     }
@@ -2093,38 +2108,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBiddingDetails(\macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails = null)
+    public function setBiddingDetails(?\macropage\ebaysdk\trading\StructType\BiddingDetailsType $biddingDetails = null): self
     {
         $this->BiddingDetails = $biddingDetails;
-        return $this;
-    }
-    /**
-     * Get MotorsGermanySearchable value
-     * @return bool|null
-     */
-    public function getMotorsGermanySearchable()
-    {
-        return $this->MotorsGermanySearchable;
-    }
-    /**
-     * Set MotorsGermanySearchable value
-     * @param bool $motorsGermanySearchable
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setMotorsGermanySearchable($motorsGermanySearchable = null)
-    {
-        // validation for constraint: boolean
-        if (!is_null($motorsGermanySearchable) && !is_bool($motorsGermanySearchable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($motorsGermanySearchable)), __LINE__);
-        }
-        $this->MotorsGermanySearchable = $motorsGermanySearchable;
+        
         return $this;
     }
     /**
      * Get BuyerProtection value
      * @return string|null
      */
-    public function getBuyerProtection()
+    public function getBuyerProtection(): ?string
     {
         return $this->BuyerProtection;
     }
@@ -2132,24 +2126,25 @@ class ItemType extends AbstractStructBase
      * Set BuyerProtection value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $buyerProtection
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBuyerProtection($buyerProtection = null)
+    public function setBuyerProtection(?string $buyerProtection = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType::valueIsValid($buyerProtection)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $buyerProtection, implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType', is_array($buyerProtection) ? implode(', ', $buyerProtection) : var_export($buyerProtection, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerProtectionCodeType::getValidValues())), __LINE__);
         }
         $this->BuyerProtection = $buyerProtection;
+        
         return $this;
     }
     /**
      * Get BuyItNowPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getBuyItNowPrice()
+    public function getBuyItNowPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->BuyItNowPrice;
     }
@@ -2158,16 +2153,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBuyItNowPrice(\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null)
+    public function setBuyItNowPrice(?\macropage\ebaysdk\trading\StructType\AmountType $buyItNowPrice = null): self
     {
         $this->BuyItNowPrice = $buyItNowPrice;
+        
         return $this;
     }
     /**
      * Get CategoryMappingAllowed value
      * @return bool|null
      */
-    public function getCategoryMappingAllowed()
+    public function getCategoryMappingAllowed(): ?bool
     {
         return $this->CategoryMappingAllowed;
     }
@@ -2176,20 +2172,21 @@ class ItemType extends AbstractStructBase
      * @param bool $categoryMappingAllowed
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCategoryMappingAllowed($categoryMappingAllowed = false)
+    public function setCategoryMappingAllowed(?bool $categoryMappingAllowed = false): self
     {
         // validation for constraint: boolean
         if (!is_null($categoryMappingAllowed) && !is_bool($categoryMappingAllowed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($categoryMappingAllowed)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($categoryMappingAllowed, true), gettype($categoryMappingAllowed)), __LINE__);
         }
         $this->CategoryMappingAllowed = $categoryMappingAllowed;
+        
         return $this;
     }
     /**
      * Get Charity value
      * @return \macropage\ebaysdk\trading\StructType\CharityType|null
      */
-    public function getCharity()
+    public function getCharity(): ?\macropage\ebaysdk\trading\StructType\CharityType
     {
         return $this->Charity;
     }
@@ -2198,16 +2195,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharityType $charity
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCharity(\macropage\ebaysdk\trading\StructType\CharityType $charity = null)
+    public function setCharity(?\macropage\ebaysdk\trading\StructType\CharityType $charity = null): self
     {
         $this->Charity = $charity;
+        
         return $this;
     }
     /**
      * Get Country value
      * @return string|null
      */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->Country;
     }
@@ -2215,24 +2213,25 @@ class ItemType extends AbstractStructBase
      * Set Country value
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $country
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCountry($country = null)
+    public function setCountry(?string $country = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CountryCodeType::valueIsValid($country)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $country, implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CountryCodeType', is_array($country) ? implode(', ', $country) : var_export($country, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CountryCodeType::getValidValues())), __LINE__);
         }
         $this->Country = $country;
+        
         return $this;
     }
     /**
      * Get CrossPromotion value
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType|null
      */
-    public function getCrossPromotion()
+    public function getCrossPromotion(): ?\macropage\ebaysdk\trading\StructType\CrossPromotionsType
     {
         return $this->CrossPromotion;
     }
@@ -2241,16 +2240,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CrossPromotionsType $crossPromotion
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCrossPromotion(\macropage\ebaysdk\trading\StructType\CrossPromotionsType $crossPromotion = null)
+    public function setCrossPromotion(?\macropage\ebaysdk\trading\StructType\CrossPromotionsType $crossPromotion = null): self
     {
         $this->CrossPromotion = $crossPromotion;
+        
         return $this;
     }
     /**
      * Get Currency value
      * @return string|null
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->Currency;
     }
@@ -2258,24 +2258,25 @@ class ItemType extends AbstractStructBase
      * Set Currency value
      * @uses \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $currency
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCurrency($currency = null)
+    public function setCurrency(?string $currency = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CurrencyCodeType::valueIsValid($currency)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $currency, implode(', ', \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CurrencyCodeType', is_array($currency) ? implode(', ', $currency) : var_export($currency, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CurrencyCodeType::getValidValues())), __LINE__);
         }
         $this->Currency = $currency;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -2284,20 +2285,21 @@ class ItemType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get DescriptionReviseMode value
      * @return string|null
      */
-    public function getDescriptionReviseMode()
+    public function getDescriptionReviseMode(): ?string
     {
         return $this->DescriptionReviseMode;
     }
@@ -2305,24 +2307,25 @@ class ItemType extends AbstractStructBase
      * Set DescriptionReviseMode value
      * @uses \macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $descriptionReviseMode
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDescriptionReviseMode($descriptionReviseMode = null)
+    public function setDescriptionReviseMode(?string $descriptionReviseMode = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType::valueIsValid($descriptionReviseMode)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $descriptionReviseMode, implode(', ', \macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType', is_array($descriptionReviseMode) ? implode(', ', $descriptionReviseMode) : var_export($descriptionReviseMode, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DescriptionReviseModeCodeType::getValidValues())), __LINE__);
         }
         $this->DescriptionReviseMode = $descriptionReviseMode;
+        
         return $this;
     }
     /**
      * Get Distance value
      * @return \macropage\ebaysdk\trading\StructType\DistanceType|null
      */
-    public function getDistance()
+    public function getDistance(): ?\macropage\ebaysdk\trading\StructType\DistanceType
     {
         return $this->Distance;
     }
@@ -2331,16 +2334,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DistanceType $distance
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDistance(\macropage\ebaysdk\trading\StructType\DistanceType $distance = null)
+    public function setDistance(?\macropage\ebaysdk\trading\StructType\DistanceType $distance = null): self
     {
         $this->Distance = $distance;
+        
         return $this;
     }
     /**
      * Get HitCounter value
      * @return string|null
      */
-    public function getHitCounter()
+    public function getHitCounter(): ?string
     {
         return $this->HitCounter;
     }
@@ -2348,24 +2352,25 @@ class ItemType extends AbstractStructBase
      * Set HitCounter value
      * @uses \macropage\ebaysdk\trading\EnumType\HitCounterCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\HitCounterCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $hitCounter
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setHitCounter($hitCounter = null)
+    public function setHitCounter(?string $hitCounter = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\HitCounterCodeType::valueIsValid($hitCounter)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $hitCounter, implode(', ', \macropage\ebaysdk\trading\EnumType\HitCounterCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\HitCounterCodeType', is_array($hitCounter) ? implode(', ', $hitCounter) : var_export($hitCounter, true), implode(', ', \macropage\ebaysdk\trading\EnumType\HitCounterCodeType::getValidValues())), __LINE__);
         }
         $this->HitCounter = $hitCounter;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -2374,20 +2379,21 @@ class ItemType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get ListingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ListingDetailsType|null
      */
-    public function getListingDetails()
+    public function getListingDetails(): ?\macropage\ebaysdk\trading\StructType\ListingDetailsType
     {
         return $this->ListingDetails;
     }
@@ -2396,34 +2402,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setListingDetails(\macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails = null)
+    public function setListingDetails(?\macropage\ebaysdk\trading\StructType\ListingDetailsType $listingDetails = null): self
     {
         $this->ListingDetails = $listingDetails;
-        return $this;
-    }
-    /**
-     * Get ListingDesigner value
-     * @return \macropage\ebaysdk\trading\StructType\ListingDesignerType|null
-     */
-    public function getListingDesigner()
-    {
-        return $this->ListingDesigner;
-    }
-    /**
-     * Set ListingDesigner value
-     * @param \macropage\ebaysdk\trading\StructType\ListingDesignerType $listingDesigner
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setListingDesigner(\macropage\ebaysdk\trading\StructType\ListingDesignerType $listingDesigner = null)
-    {
-        $this->ListingDesigner = $listingDesigner;
+        
         return $this;
     }
     /**
      * Get ListingDuration value
      * @return string|null
      */
-    public function getListingDuration()
+    public function getListingDuration(): ?string
     {
         return $this->ListingDuration;
     }
@@ -2432,67 +2421,88 @@ class ItemType extends AbstractStructBase
      * @param string $listingDuration
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setListingDuration($listingDuration = null)
+    public function setListingDuration(?string $listingDuration = null): self
     {
         // validation for constraint: string
         if (!is_null($listingDuration) && !is_string($listingDuration)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($listingDuration)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($listingDuration, true), gettype($listingDuration)), __LINE__);
         }
         $this->ListingDuration = $listingDuration;
+        
         return $this;
     }
     /**
      * Get ListingEnhancement value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getListingEnhancement()
+    public function getListingEnhancement(): array
     {
         return $this->ListingEnhancement;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setListingEnhancement method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setListingEnhancement method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateListingEnhancementForArrayConstraintsFromSetListingEnhancement(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemTypeListingEnhancementItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::valueIsValid($itemTypeListingEnhancementItem)) {
+                $invalidValues[] = is_object($itemTypeListingEnhancementItem) ? get_class($itemTypeListingEnhancementItem) : sprintf('%s(%s)', gettype($itemTypeListingEnhancementItem), var_export($itemTypeListingEnhancementItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set ListingEnhancement value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $listingEnhancement
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setListingEnhancement(array $listingEnhancement = array())
+    public function setListingEnhancement(array $listingEnhancement = []): self
     {
-        $invalidValues = array();
-        foreach ($listingEnhancement as $itemTypeListingEnhancementItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::valueIsValid($itemTypeListingEnhancementItem)) {
-                $invalidValues[] = var_export($itemTypeListingEnhancementItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($listingEnhancementArrayErrorMessage = self::validateListingEnhancementForArrayConstraintsFromSetListingEnhancement($listingEnhancement))) {
+            throw new InvalidArgumentException($listingEnhancementArrayErrorMessage, __LINE__);
         }
         $this->ListingEnhancement = $listingEnhancement;
+        
         return $this;
     }
     /**
      * Add item to ListingEnhancement value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function addToListingEnhancement($item)
+    public function addToListingEnhancement(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingEnhancementsCodeType::getValidValues())), __LINE__);
         }
         $this->ListingEnhancement[] = $item;
+        
         return $this;
     }
     /**
      * Get ListingType value
      * @return string|null
      */
-    public function getListingType()
+    public function getListingType(): ?string
     {
         return $this->ListingType;
     }
@@ -2500,24 +2510,25 @@ class ItemType extends AbstractStructBase
      * Set ListingType value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingType
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setListingType($listingType = null)
+    public function setListingType(?string $listingType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid($listingType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingType, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType', is_array($listingType) ? implode(', ', $listingType) : var_export($listingType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
         }
         $this->ListingType = $listingType;
+        
         return $this;
     }
     /**
      * Get Location value
      * @return string|null
      */
-    public function getLocation()
+    public function getLocation(): ?string
     {
         return $this->Location;
     }
@@ -2526,20 +2537,21 @@ class ItemType extends AbstractStructBase
      * @param string $location
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLocation($location = null)
+    public function setLocation(?string $location = null): self
     {
         // validation for constraint: string
         if (!is_null($location) && !is_string($location)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($location)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($location, true), gettype($location)), __LINE__);
         }
         $this->Location = $location;
+        
         return $this;
     }
     /**
      * Get LotSize value
      * @return int|null
      */
-    public function getLotSize()
+    public function getLotSize(): ?int
     {
         return $this->LotSize;
     }
@@ -2548,20 +2560,21 @@ class ItemType extends AbstractStructBase
      * @param int $lotSize
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLotSize($lotSize = null)
+    public function setLotSize(?int $lotSize = null): self
     {
         // validation for constraint: int
-        if (!is_null($lotSize) && !is_numeric($lotSize)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($lotSize)), __LINE__);
+        if (!is_null($lotSize) && !(is_int($lotSize) || ctype_digit($lotSize))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($lotSize, true), gettype($lotSize)), __LINE__);
         }
         $this->LotSize = $lotSize;
+        
         return $this;
     }
     /**
      * Get PartnerCode value
      * @return string|null
      */
-    public function getPartnerCode()
+    public function getPartnerCode(): ?string
     {
         return $this->PartnerCode;
     }
@@ -2570,20 +2583,21 @@ class ItemType extends AbstractStructBase
      * @param string $partnerCode
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPartnerCode($partnerCode = null)
+    public function setPartnerCode(?string $partnerCode = null): self
     {
         // validation for constraint: string
         if (!is_null($partnerCode) && !is_string($partnerCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($partnerCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($partnerCode, true), gettype($partnerCode)), __LINE__);
         }
         $this->PartnerCode = $partnerCode;
+        
         return $this;
     }
     /**
      * Get PartnerName value
      * @return string|null
      */
-    public function getPartnerName()
+    public function getPartnerName(): ?string
     {
         return $this->PartnerName;
     }
@@ -2592,67 +2606,107 @@ class ItemType extends AbstractStructBase
      * @param string $partnerName
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPartnerName($partnerName = null)
+    public function setPartnerName(?string $partnerName = null): self
     {
         // validation for constraint: string
         if (!is_null($partnerName) && !is_string($partnerName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($partnerName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($partnerName, true), gettype($partnerName)), __LINE__);
         }
         $this->PartnerName = $partnerName;
+        
+        return $this;
+    }
+    /**
+     * Get PaymentDetails value
+     * @return \macropage\ebaysdk\trading\StructType\PaymentDetailsType|null
+     */
+    public function getPaymentDetails(): ?\macropage\ebaysdk\trading\StructType\PaymentDetailsType
+    {
+        return $this->PaymentDetails;
+    }
+    /**
+     * Set PaymentDetails value
+     * @param \macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails
+     * @return \macropage\ebaysdk\trading\StructType\ItemType
+     */
+    public function setPaymentDetails(?\macropage\ebaysdk\trading\StructType\PaymentDetailsType $paymentDetails = null): self
+    {
+        $this->PaymentDetails = $paymentDetails;
+        
         return $this;
     }
     /**
      * Get PaymentMethods value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
         return $this->PaymentMethods;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setPaymentMethods method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPaymentMethods method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemTypePaymentMethodsItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($itemTypePaymentMethodsItem)) {
+                $invalidValues[] = is_object($itemTypePaymentMethodsItem) ? get_class($itemTypePaymentMethodsItem) : sprintf('%s(%s)', gettype($itemTypePaymentMethodsItem), var_export($itemTypePaymentMethodsItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set PaymentMethods value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $paymentMethods
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPaymentMethods(array $paymentMethods = array())
+    public function setPaymentMethods(array $paymentMethods = []): self
     {
-        $invalidValues = array();
-        foreach ($paymentMethods as $itemTypePaymentMethodsItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($itemTypePaymentMethodsItem)) {
-                $invalidValues[] = var_export($itemTypePaymentMethodsItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($paymentMethodsArrayErrorMessage = self::validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods($paymentMethods))) {
+            throw new InvalidArgumentException($paymentMethodsArrayErrorMessage, __LINE__);
         }
         $this->PaymentMethods = $paymentMethods;
+        
         return $this;
     }
     /**
      * Add item to PaymentMethods value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function addToPaymentMethods($item)
+    public function addToPaymentMethods(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentMethods[] = $item;
+        
         return $this;
     }
     /**
      * Get PayPalEmailAddress value
      * @return string|null
      */
-    public function getPayPalEmailAddress()
+    public function getPayPalEmailAddress(): ?string
     {
         return $this->PayPalEmailAddress;
     }
@@ -2661,20 +2715,21 @@ class ItemType extends AbstractStructBase
      * @param string $payPalEmailAddress
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPayPalEmailAddress($payPalEmailAddress = null)
+    public function setPayPalEmailAddress(?string $payPalEmailAddress = null): self
     {
         // validation for constraint: string
         if (!is_null($payPalEmailAddress) && !is_string($payPalEmailAddress)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($payPalEmailAddress)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($payPalEmailAddress, true), gettype($payPalEmailAddress)), __LINE__);
         }
         $this->PayPalEmailAddress = $payPalEmailAddress;
+        
         return $this;
     }
     /**
      * Get PrimaryCategory value
      * @return \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public function getPrimaryCategory()
+    public function getPrimaryCategory(): ?\macropage\ebaysdk\trading\StructType\CategoryType
     {
         return $this->PrimaryCategory;
     }
@@ -2683,16 +2738,40 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPrimaryCategory(\macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory = null)
+    public function setPrimaryCategory(?\macropage\ebaysdk\trading\StructType\CategoryType $primaryCategory = null): self
     {
         $this->PrimaryCategory = $primaryCategory;
+        
+        return $this;
+    }
+    /**
+     * Get PrivateListing value
+     * @return bool|null
+     */
+    public function getPrivateListing(): ?bool
+    {
+        return $this->PrivateListing;
+    }
+    /**
+     * Set PrivateListing value
+     * @param bool $privateListing
+     * @return \macropage\ebaysdk\trading\StructType\ItemType
+     */
+    public function setPrivateListing(?bool $privateListing = null): self
+    {
+        // validation for constraint: boolean
+        if (!is_null($privateListing) && !is_bool($privateListing)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($privateListing, true), gettype($privateListing)), __LINE__);
+        }
+        $this->PrivateListing = $privateListing;
+        
         return $this;
     }
     /**
      * Get ProductListingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ProductListingDetailsType|null
      */
-    public function getProductListingDetails()
+    public function getProductListingDetails(): ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType
     {
         return $this->ProductListingDetails;
     }
@@ -2701,16 +2780,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setProductListingDetails(\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null)
+    public function setProductListingDetails(?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null): self
     {
         $this->ProductListingDetails = $productListingDetails;
+        
         return $this;
     }
     /**
      * Get Quantity value
      * @return int|null
      */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
         return $this->Quantity;
     }
@@ -2719,20 +2799,21 @@ class ItemType extends AbstractStructBase
      * @param int $quantity
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantity($quantity = null)
+    public function setQuantity(?int $quantity = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantity) && !is_numeric($quantity)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantity)), __LINE__);
+        if (!is_null($quantity) && !(is_int($quantity) || ctype_digit($quantity))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantity, true), gettype($quantity)), __LINE__);
         }
         $this->Quantity = $quantity;
+        
         return $this;
     }
     /**
      * Get PrivateNotes value
      * @return string|null
      */
-    public function getPrivateNotes()
+    public function getPrivateNotes(): ?string
     {
         return $this->PrivateNotes;
     }
@@ -2741,20 +2822,21 @@ class ItemType extends AbstractStructBase
      * @param string $privateNotes
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPrivateNotes($privateNotes = null)
+    public function setPrivateNotes(?string $privateNotes = null): self
     {
         // validation for constraint: string
         if (!is_null($privateNotes) && !is_string($privateNotes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($privateNotes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($privateNotes, true), gettype($privateNotes)), __LINE__);
         }
         $this->PrivateNotes = $privateNotes;
+        
         return $this;
     }
     /**
      * Get RegionID value
      * @return string|null
      */
-    public function getRegionID()
+    public function getRegionID(): ?string
     {
         return $this->RegionID;
     }
@@ -2763,20 +2845,21 @@ class ItemType extends AbstractStructBase
      * @param string $regionID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setRegionID($regionID = null)
+    public function setRegionID(?string $regionID = null): self
     {
         // validation for constraint: string
         if (!is_null($regionID) && !is_string($regionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($regionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($regionID, true), gettype($regionID)), __LINE__);
         }
         $this->RegionID = $regionID;
+        
         return $this;
     }
     /**
      * Get RelistLink value
      * @return bool|null
      */
-    public function getRelistLink()
+    public function getRelistLink(): ?bool
     {
         return $this->RelistLink;
     }
@@ -2785,20 +2868,21 @@ class ItemType extends AbstractStructBase
      * @param bool $relistLink
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setRelistLink($relistLink = null)
+    public function setRelistLink(?bool $relistLink = null): self
     {
         // validation for constraint: boolean
         if (!is_null($relistLink) && !is_bool($relistLink)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($relistLink)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($relistLink, true), gettype($relistLink)), __LINE__);
         }
         $this->RelistLink = $relistLink;
+        
         return $this;
     }
     /**
      * Get ReservePrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getReservePrice()
+    public function getReservePrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ReservePrice;
     }
@@ -2807,16 +2891,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $reservePrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setReservePrice(\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null)
+    public function setReservePrice(?\macropage\ebaysdk\trading\StructType\AmountType $reservePrice = null): self
     {
         $this->ReservePrice = $reservePrice;
+        
         return $this;
     }
     /**
      * Get ReviseStatus value
      * @return \macropage\ebaysdk\trading\StructType\ReviseStatusType|null
      */
-    public function getReviseStatus()
+    public function getReviseStatus(): ?\macropage\ebaysdk\trading\StructType\ReviseStatusType
     {
         return $this->ReviseStatus;
     }
@@ -2825,16 +2910,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReviseStatusType $reviseStatus
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setReviseStatus(\macropage\ebaysdk\trading\StructType\ReviseStatusType $reviseStatus = null)
+    public function setReviseStatus(?\macropage\ebaysdk\trading\StructType\ReviseStatusType $reviseStatus = null): self
     {
         $this->ReviseStatus = $reviseStatus;
+        
         return $this;
     }
     /**
      * Get ScheduleTime value
      * @return string|null
      */
-    public function getScheduleTime()
+    public function getScheduleTime(): ?string
     {
         return $this->ScheduleTime;
     }
@@ -2843,20 +2929,21 @@ class ItemType extends AbstractStructBase
      * @param string $scheduleTime
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setScheduleTime($scheduleTime = null)
+    public function setScheduleTime(?string $scheduleTime = null): self
     {
         // validation for constraint: string
         if (!is_null($scheduleTime) && !is_string($scheduleTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($scheduleTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($scheduleTime, true), gettype($scheduleTime)), __LINE__);
         }
         $this->ScheduleTime = $scheduleTime;
+        
         return $this;
     }
     /**
      * Get SecondaryCategory value
      * @return \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public function getSecondaryCategory()
+    public function getSecondaryCategory(): ?\macropage\ebaysdk\trading\StructType\CategoryType
     {
         return $this->SecondaryCategory;
     }
@@ -2865,16 +2952,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $secondaryCategory
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSecondaryCategory(\macropage\ebaysdk\trading\StructType\CategoryType $secondaryCategory = null)
+    public function setSecondaryCategory(?\macropage\ebaysdk\trading\StructType\CategoryType $secondaryCategory = null): self
     {
         $this->SecondaryCategory = $secondaryCategory;
+        
         return $this;
     }
     /**
      * Get FreeAddedCategory value
      * @return \macropage\ebaysdk\trading\StructType\CategoryType|null
      */
-    public function getFreeAddedCategory()
+    public function getFreeAddedCategory(): ?\macropage\ebaysdk\trading\StructType\CategoryType
     {
         return $this->FreeAddedCategory;
     }
@@ -2883,16 +2971,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CategoryType $freeAddedCategory
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setFreeAddedCategory(\macropage\ebaysdk\trading\StructType\CategoryType $freeAddedCategory = null)
+    public function setFreeAddedCategory(?\macropage\ebaysdk\trading\StructType\CategoryType $freeAddedCategory = null): self
     {
         $this->FreeAddedCategory = $freeAddedCategory;
+        
         return $this;
     }
     /**
      * Get Seller value
      * @return \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public function getSeller()
+    public function getSeller(): ?\macropage\ebaysdk\trading\StructType\UserType
     {
         return $this->Seller;
     }
@@ -2901,16 +2990,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UserType $seller
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSeller(\macropage\ebaysdk\trading\StructType\UserType $seller = null)
+    public function setSeller(?\macropage\ebaysdk\trading\StructType\UserType $seller = null): self
     {
         $this->Seller = $seller;
+        
         return $this;
     }
     /**
      * Get SellingStatus value
      * @return \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
-    public function getSellingStatus()
+    public function getSellingStatus(): ?\macropage\ebaysdk\trading\StructType\SellingStatusType
     {
         return $this->SellingStatus;
     }
@@ -2919,16 +3009,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSellingStatus(\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null)
+    public function setSellingStatus(?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null): self
     {
         $this->SellingStatus = $sellingStatus;
+        
         return $this;
     }
     /**
      * Get ShippingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType|null
      */
-    public function getShippingDetails()
+    public function getShippingDetails(): ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType
     {
         return $this->ShippingDetails;
     }
@@ -2937,56 +3028,80 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setShippingDetails(\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null)
+    public function setShippingDetails(?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null): self
     {
         $this->ShippingDetails = $shippingDetails;
+        
         return $this;
     }
     /**
      * Get ShipToLocations value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getShipToLocations()
+    public function getShipToLocations(): array
     {
         return $this->ShipToLocations;
     }
     /**
+     * This method is responsible for validating the values passed to the setShipToLocations method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setShipToLocations method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateShipToLocationsForArrayConstraintsFromSetShipToLocations(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemTypeShipToLocationsItem) {
+            // validation for constraint: itemType
+            if (!is_string($itemTypeShipToLocationsItem)) {
+                $invalidValues[] = is_object($itemTypeShipToLocationsItem) ? get_class($itemTypeShipToLocationsItem) : sprintf('%s(%s)', gettype($itemTypeShipToLocationsItem), var_export($itemTypeShipToLocationsItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ShipToLocations property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ShipToLocations value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $shipToLocations
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setShipToLocations(array $shipToLocations = array())
+    public function setShipToLocations(array $shipToLocations = []): self
     {
-        foreach ($shipToLocations as $itemTypeShipToLocationsItem) {
-            // validation for constraint: itemType
-            if (!is_string($itemTypeShipToLocationsItem)) {
-                throw new \InvalidArgumentException(sprintf('The ShipToLocations property can only contain items of string, "%s" given', is_object($itemTypeShipToLocationsItem) ? get_class($itemTypeShipToLocationsItem) : gettype($itemTypeShipToLocationsItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($shipToLocationsArrayErrorMessage = self::validateShipToLocationsForArrayConstraintsFromSetShipToLocations($shipToLocations))) {
+            throw new InvalidArgumentException($shipToLocationsArrayErrorMessage, __LINE__);
         }
         $this->ShipToLocations = $shipToLocations;
+        
         return $this;
     }
     /**
      * Add item to ShipToLocations value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function addToShipToLocations($item)
+    public function addToShipToLocations(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The ShipToLocations property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ShipToLocations property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ShipToLocations[] = $item;
+        
         return $this;
     }
     /**
      * Get Site value
      * @return string|null
      */
-    public function getSite()
+    public function getSite(): ?string
     {
         return $this->Site;
     }
@@ -2994,24 +3109,25 @@ class ItemType extends AbstractStructBase
      * Set Site value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $site
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSite($site = null)
+    public function setSite(?string $site = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($site)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $site, implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($site) ? implode(', ', $site) : var_export($site, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
         }
         $this->Site = $site;
+        
         return $this;
     }
     /**
      * Get StartPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getStartPrice()
+    public function getStartPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->StartPrice;
     }
@@ -3020,16 +3136,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $startPrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setStartPrice(\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null)
+    public function setStartPrice(?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null): self
     {
         $this->StartPrice = $startPrice;
+        
         return $this;
     }
     /**
      * Get Storefront value
      * @return \macropage\ebaysdk\trading\StructType\StorefrontType|null
      */
-    public function getStorefront()
+    public function getStorefront(): ?\macropage\ebaysdk\trading\StructType\StorefrontType
     {
         return $this->Storefront;
     }
@@ -3038,16 +3155,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StorefrontType $storefront
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setStorefront(\macropage\ebaysdk\trading\StructType\StorefrontType $storefront = null)
+    public function setStorefront(?\macropage\ebaysdk\trading\StructType\StorefrontType $storefront = null): self
     {
         $this->Storefront = $storefront;
+        
         return $this;
     }
     /**
      * Get SubTitle value
      * @return string|null
      */
-    public function getSubTitle()
+    public function getSubTitle(): ?string
     {
         return $this->SubTitle;
     }
@@ -3056,20 +3174,21 @@ class ItemType extends AbstractStructBase
      * @param string $subTitle
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSubTitle($subTitle = null)
+    public function setSubTitle(?string $subTitle = null): self
     {
         // validation for constraint: string
         if (!is_null($subTitle) && !is_string($subTitle)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($subTitle)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($subTitle, true), gettype($subTitle)), __LINE__);
         }
         $this->SubTitle = $subTitle;
+        
         return $this;
     }
     /**
      * Get TimeLeft value
      * @return string|null
      */
-    public function getTimeLeft()
+    public function getTimeLeft(): ?string
     {
         return $this->TimeLeft;
     }
@@ -3078,20 +3197,21 @@ class ItemType extends AbstractStructBase
      * @param string $timeLeft
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setTimeLeft($timeLeft = null)
+    public function setTimeLeft(?string $timeLeft = null): self
     {
         // validation for constraint: string
         if (!is_null($timeLeft) && !is_string($timeLeft)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($timeLeft)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($timeLeft, true), gettype($timeLeft)), __LINE__);
         }
         $this->TimeLeft = $timeLeft;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -3100,20 +3220,21 @@ class ItemType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get UUID value
      * @return string|null
      */
-    public function getUUID()
+    public function getUUID(): ?string
     {
         return $this->UUID;
     }
@@ -3122,20 +3243,21 @@ class ItemType extends AbstractStructBase
      * @param string $uUID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setUUID($uUID = null)
+    public function setUUID(?string $uUID = null): self
     {
         // validation for constraint: string
         if (!is_null($uUID) && !is_string($uUID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($uUID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($uUID, true), gettype($uUID)), __LINE__);
         }
         $this->UUID = $uUID;
+        
         return $this;
     }
     /**
      * Get VATDetails value
      * @return \macropage\ebaysdk\trading\StructType\VATDetailsType|null
      */
-    public function getVATDetails()
+    public function getVATDetails(): ?\macropage\ebaysdk\trading\StructType\VATDetailsType
     {
         return $this->VATDetails;
     }
@@ -3144,16 +3266,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VATDetailsType $vATDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVATDetails(\macropage\ebaysdk\trading\StructType\VATDetailsType $vATDetails = null)
+    public function setVATDetails(?\macropage\ebaysdk\trading\StructType\VATDetailsType $vATDetails = null): self
     {
         $this->VATDetails = $vATDetails;
+        
         return $this;
     }
     /**
      * Get SellerVacationNote value
      * @return string|null
      */
-    public function getSellerVacationNote()
+    public function getSellerVacationNote(): ?string
     {
         return $this->SellerVacationNote;
     }
@@ -3162,20 +3285,21 @@ class ItemType extends AbstractStructBase
      * @param string $sellerVacationNote
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSellerVacationNote($sellerVacationNote = null)
+    public function setSellerVacationNote(?string $sellerVacationNote = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerVacationNote) && !is_string($sellerVacationNote)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerVacationNote)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerVacationNote, true), gettype($sellerVacationNote)), __LINE__);
         }
         $this->SellerVacationNote = $sellerVacationNote;
+        
         return $this;
     }
     /**
      * Get WatchCount value
      * @return int|null
      */
-    public function getWatchCount()
+    public function getWatchCount(): ?int
     {
         return $this->WatchCount;
     }
@@ -3184,20 +3308,21 @@ class ItemType extends AbstractStructBase
      * @param int $watchCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setWatchCount($watchCount = null)
+    public function setWatchCount(?int $watchCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($watchCount) && !is_numeric($watchCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($watchCount)), __LINE__);
+        if (!is_null($watchCount) && !(is_int($watchCount) || ctype_digit($watchCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($watchCount, true), gettype($watchCount)), __LINE__);
         }
         $this->WatchCount = $watchCount;
+        
         return $this;
     }
     /**
      * Get HitCount value
      * @return int|null
      */
-    public function getHitCount()
+    public function getHitCount(): ?int
     {
         return $this->HitCount;
     }
@@ -3206,20 +3331,21 @@ class ItemType extends AbstractStructBase
      * @param int $hitCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setHitCount($hitCount = null)
+    public function setHitCount(?int $hitCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($hitCount) && !is_numeric($hitCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($hitCount)), __LINE__);
+        if (!is_null($hitCount) && !(is_int($hitCount) || ctype_digit($hitCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($hitCount, true), gettype($hitCount)), __LINE__);
         }
         $this->HitCount = $hitCount;
+        
         return $this;
     }
     /**
      * Get DisableBuyerRequirements value
      * @return bool|null
      */
-    public function getDisableBuyerRequirements()
+    public function getDisableBuyerRequirements(): ?bool
     {
         return $this->DisableBuyerRequirements;
     }
@@ -3228,20 +3354,21 @@ class ItemType extends AbstractStructBase
      * @param bool $disableBuyerRequirements
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDisableBuyerRequirements($disableBuyerRequirements = null)
+    public function setDisableBuyerRequirements(?bool $disableBuyerRequirements = null): self
     {
         // validation for constraint: boolean
         if (!is_null($disableBuyerRequirements) && !is_bool($disableBuyerRequirements)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($disableBuyerRequirements)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($disableBuyerRequirements, true), gettype($disableBuyerRequirements)), __LINE__);
         }
         $this->DisableBuyerRequirements = $disableBuyerRequirements;
+        
         return $this;
     }
     /**
      * Get BestOfferDetails value
      * @return \macropage\ebaysdk\trading\StructType\BestOfferDetailsType|null
      */
-    public function getBestOfferDetails()
+    public function getBestOfferDetails(): ?\macropage\ebaysdk\trading\StructType\BestOfferDetailsType
     {
         return $this->BestOfferDetails;
     }
@@ -3250,16 +3377,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BestOfferDetailsType $bestOfferDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBestOfferDetails(\macropage\ebaysdk\trading\StructType\BestOfferDetailsType $bestOfferDetails = null)
+    public function setBestOfferDetails(?\macropage\ebaysdk\trading\StructType\BestOfferDetailsType $bestOfferDetails = null): self
     {
         $this->BestOfferDetails = $bestOfferDetails;
+        
         return $this;
     }
     /**
      * Get LocationDefaulted value
      * @return bool|null
      */
-    public function getLocationDefaulted()
+    public function getLocationDefaulted(): ?bool
     {
         return $this->LocationDefaulted;
     }
@@ -3268,20 +3396,21 @@ class ItemType extends AbstractStructBase
      * @param bool $locationDefaulted
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLocationDefaulted($locationDefaulted = null)
+    public function setLocationDefaulted(?bool $locationDefaulted = null): self
     {
         // validation for constraint: boolean
         if (!is_null($locationDefaulted) && !is_bool($locationDefaulted)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($locationDefaulted)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($locationDefaulted, true), gettype($locationDefaulted)), __LINE__);
         }
         $this->LocationDefaulted = $locationDefaulted;
+        
         return $this;
     }
     /**
      * Get UseTaxTable value
      * @return bool|null
      */
-    public function getUseTaxTable()
+    public function getUseTaxTable(): ?bool
     {
         return $this->UseTaxTable;
     }
@@ -3290,20 +3419,21 @@ class ItemType extends AbstractStructBase
      * @param bool $useTaxTable
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setUseTaxTable($useTaxTable = null)
+    public function setUseTaxTable(?bool $useTaxTable = null): self
     {
         // validation for constraint: boolean
         if (!is_null($useTaxTable) && !is_bool($useTaxTable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($useTaxTable)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($useTaxTable, true), gettype($useTaxTable)), __LINE__);
         }
         $this->UseTaxTable = $useTaxTable;
+        
         return $this;
     }
     /**
      * Get GetItFast value
      * @return bool|null
      */
-    public function getGetItFast()
+    public function getGetItFast(): ?bool
     {
         return $this->GetItFast;
     }
@@ -3312,20 +3442,21 @@ class ItemType extends AbstractStructBase
      * @param bool $getItFast
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setGetItFast($getItFast = null)
+    public function setGetItFast(?bool $getItFast = null): self
     {
         // validation for constraint: boolean
         if (!is_null($getItFast) && !is_bool($getItFast)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($getItFast)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($getItFast, true), gettype($getItFast)), __LINE__);
         }
         $this->GetItFast = $getItFast;
+        
         return $this;
     }
     /**
      * Get BuyerResponsibleForShipping value
      * @return bool|null
      */
-    public function getBuyerResponsibleForShipping()
+    public function getBuyerResponsibleForShipping(): ?bool
     {
         return $this->BuyerResponsibleForShipping;
     }
@@ -3334,20 +3465,21 @@ class ItemType extends AbstractStructBase
      * @param bool $buyerResponsibleForShipping
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBuyerResponsibleForShipping($buyerResponsibleForShipping = null)
+    public function setBuyerResponsibleForShipping(?bool $buyerResponsibleForShipping = null): self
     {
         // validation for constraint: boolean
         if (!is_null($buyerResponsibleForShipping) && !is_bool($buyerResponsibleForShipping)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($buyerResponsibleForShipping)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($buyerResponsibleForShipping, true), gettype($buyerResponsibleForShipping)), __LINE__);
         }
         $this->BuyerResponsibleForShipping = $buyerResponsibleForShipping;
+        
         return $this;
     }
     /**
      * Get LimitedWarrantyEligible value
      * @return bool|null
      */
-    public function getLimitedWarrantyEligible()
+    public function getLimitedWarrantyEligible(): ?bool
     {
         return $this->LimitedWarrantyEligible;
     }
@@ -3356,20 +3488,21 @@ class ItemType extends AbstractStructBase
      * @param bool $limitedWarrantyEligible
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLimitedWarrantyEligible($limitedWarrantyEligible = null)
+    public function setLimitedWarrantyEligible(?bool $limitedWarrantyEligible = null): self
     {
         // validation for constraint: boolean
         if (!is_null($limitedWarrantyEligible) && !is_bool($limitedWarrantyEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($limitedWarrantyEligible)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($limitedWarrantyEligible, true), gettype($limitedWarrantyEligible)), __LINE__);
         }
         $this->LimitedWarrantyEligible = $limitedWarrantyEligible;
+        
         return $this;
     }
     /**
      * Get eBayNotes value
      * @return string|null
      */
-    public function getEBayNotes()
+    public function getEBayNotes(): ?string
     {
         return $this->eBayNotes;
     }
@@ -3378,20 +3511,21 @@ class ItemType extends AbstractStructBase
      * @param string $eBayNotes
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEBayNotes($eBayNotes = null)
+    public function setEBayNotes(?string $eBayNotes = null): self
     {
         // validation for constraint: string
         if (!is_null($eBayNotes) && !is_string($eBayNotes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eBayNotes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eBayNotes, true), gettype($eBayNotes)), __LINE__);
         }
         $this->eBayNotes = $eBayNotes;
+        
         return $this;
     }
     /**
      * Get QuestionCount value
      * @return int|null
      */
-    public function getQuestionCount()
+    public function getQuestionCount(): ?int
     {
         return $this->QuestionCount;
     }
@@ -3400,20 +3534,21 @@ class ItemType extends AbstractStructBase
      * @param int $questionCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuestionCount($questionCount = null)
+    public function setQuestionCount(?int $questionCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($questionCount) && !is_numeric($questionCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($questionCount)), __LINE__);
+        if (!is_null($questionCount) && !(is_int($questionCount) || ctype_digit($questionCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($questionCount, true), gettype($questionCount)), __LINE__);
         }
         $this->QuestionCount = $questionCount;
+        
         return $this;
     }
     /**
      * Get Relisted value
      * @return bool|null
      */
-    public function getRelisted()
+    public function getRelisted(): ?bool
     {
         return $this->Relisted;
     }
@@ -3422,20 +3557,21 @@ class ItemType extends AbstractStructBase
      * @param bool $relisted
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setRelisted($relisted = null)
+    public function setRelisted(?bool $relisted = null): self
     {
         // validation for constraint: boolean
         if (!is_null($relisted) && !is_bool($relisted)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($relisted)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($relisted, true), gettype($relisted)), __LINE__);
         }
         $this->Relisted = $relisted;
+        
         return $this;
     }
     /**
      * Get QuantityAvailable value
      * @return int|null
      */
-    public function getQuantityAvailable()
+    public function getQuantityAvailable(): ?int
     {
         return $this->QuantityAvailable;
     }
@@ -3444,20 +3580,21 @@ class ItemType extends AbstractStructBase
      * @param int $quantityAvailable
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantityAvailable($quantityAvailable = null)
+    public function setQuantityAvailable(?int $quantityAvailable = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantityAvailable) && !is_numeric($quantityAvailable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantityAvailable)), __LINE__);
+        if (!is_null($quantityAvailable) && !(is_int($quantityAvailable) || ctype_digit($quantityAvailable))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantityAvailable, true), gettype($quantityAvailable)), __LINE__);
         }
         $this->QuantityAvailable = $quantityAvailable;
+        
         return $this;
     }
     /**
      * Get SKU value
      * @return string|null
      */
-    public function getSKU()
+    public function getSKU(): ?string
     {
         return $this->SKU;
     }
@@ -3466,20 +3603,21 @@ class ItemType extends AbstractStructBase
      * @param string $sKU
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSKU($sKU = null)
+    public function setSKU(?string $sKU = null): self
     {
         // validation for constraint: string
         if (!is_null($sKU) && !is_string($sKU)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sKU)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sKU, true), gettype($sKU)), __LINE__);
         }
         $this->SKU = $sKU;
+        
         return $this;
     }
     /**
      * Get SearchDetails value
      * @return \macropage\ebaysdk\trading\StructType\SearchDetailsType|null
      */
-    public function getSearchDetails()
+    public function getSearchDetails(): ?\macropage\ebaysdk\trading\StructType\SearchDetailsType
     {
         return $this->SearchDetails;
     }
@@ -3488,16 +3626,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSearchDetails(\macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails = null)
+    public function setSearchDetails(?\macropage\ebaysdk\trading\StructType\SearchDetailsType $searchDetails = null): self
     {
         $this->SearchDetails = $searchDetails;
+        
         return $this;
     }
     /**
      * Get PostalCode value
      * @return string|null
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
         return $this->PostalCode;
     }
@@ -3506,64 +3645,21 @@ class ItemType extends AbstractStructBase
      * @param string $postalCode
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPostalCode($postalCode = null)
+    public function setPostalCode(?string $postalCode = null): self
     {
         // validation for constraint: string
         if (!is_null($postalCode) && !is_string($postalCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($postalCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($postalCode, true), gettype($postalCode)), __LINE__);
         }
         $this->PostalCode = $postalCode;
-        return $this;
-    }
-    /**
-     * Get ShippingTermsInDescription value
-     * @return bool|null
-     */
-    public function getShippingTermsInDescription()
-    {
-        return $this->ShippingTermsInDescription;
-    }
-    /**
-     * Set ShippingTermsInDescription value
-     * @param bool $shippingTermsInDescription
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setShippingTermsInDescription($shippingTermsInDescription = null)
-    {
-        // validation for constraint: boolean
-        if (!is_null($shippingTermsInDescription) && !is_bool($shippingTermsInDescription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($shippingTermsInDescription)), __LINE__);
-        }
-        $this->ShippingTermsInDescription = $shippingTermsInDescription;
-        return $this;
-    }
-    /**
-     * Get SellerInventoryID value
-     * @return string|null
-     */
-    public function getSellerInventoryID()
-    {
-        return $this->SellerInventoryID;
-    }
-    /**
-     * Set SellerInventoryID value
-     * @param string $sellerInventoryID
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setSellerInventoryID($sellerInventoryID = null)
-    {
-        // validation for constraint: string
-        if (!is_null($sellerInventoryID) && !is_string($sellerInventoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerInventoryID)), __LINE__);
-        }
-        $this->SellerInventoryID = $sellerInventoryID;
+        
         return $this;
     }
     /**
      * Get PictureDetails value
      * @return \macropage\ebaysdk\trading\StructType\PictureDetailsType|null
      */
-    public function getPictureDetails()
+    public function getPictureDetails(): ?\macropage\ebaysdk\trading\StructType\PictureDetailsType
     {
         return $this->PictureDetails;
     }
@@ -3572,16 +3668,36 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPictureDetails(\macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails = null)
+    public function setPictureDetails(?\macropage\ebaysdk\trading\StructType\PictureDetailsType $pictureDetails = null): self
     {
         $this->PictureDetails = $pictureDetails;
+        
+        return $this;
+    }
+    /**
+     * Get VideoDetails value
+     * @return \macropage\ebaysdk\trading\StructType\VideoDetailsType|null
+     */
+    public function getVideoDetails(): ?\macropage\ebaysdk\trading\StructType\VideoDetailsType
+    {
+        return $this->VideoDetails;
+    }
+    /**
+     * Set VideoDetails value
+     * @param \macropage\ebaysdk\trading\StructType\VideoDetailsType $videoDetails
+     * @return \macropage\ebaysdk\trading\StructType\ItemType
+     */
+    public function setVideoDetails(?\macropage\ebaysdk\trading\StructType\VideoDetailsType $videoDetails = null): self
+    {
+        $this->VideoDetails = $videoDetails;
+        
         return $this;
     }
     /**
      * Get DispatchTimeMax value
      * @return int|null
      */
-    public function getDispatchTimeMax()
+    public function getDispatchTimeMax(): ?int
     {
         return $this->DispatchTimeMax;
     }
@@ -3590,20 +3706,21 @@ class ItemType extends AbstractStructBase
      * @param int $dispatchTimeMax
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDispatchTimeMax($dispatchTimeMax = null)
+    public function setDispatchTimeMax(?int $dispatchTimeMax = null): self
     {
         // validation for constraint: int
-        if (!is_null($dispatchTimeMax) && !is_numeric($dispatchTimeMax)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($dispatchTimeMax)), __LINE__);
+        if (!is_null($dispatchTimeMax) && !(is_int($dispatchTimeMax) || ctype_digit($dispatchTimeMax))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($dispatchTimeMax, true), gettype($dispatchTimeMax)), __LINE__);
         }
         $this->DispatchTimeMax = $dispatchTimeMax;
+        
         return $this;
     }
     /**
      * Get BestOfferEnabled value
      * @return bool|null
      */
-    public function getBestOfferEnabled()
+    public function getBestOfferEnabled(): ?bool
     {
         return $this->BestOfferEnabled;
     }
@@ -3612,20 +3729,21 @@ class ItemType extends AbstractStructBase
      * @param bool $bestOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBestOfferEnabled($bestOfferEnabled = null)
+    public function setBestOfferEnabled(?bool $bestOfferEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bestOfferEnabled) && !is_bool($bestOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bestOfferEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bestOfferEnabled, true), gettype($bestOfferEnabled)), __LINE__);
         }
         $this->BestOfferEnabled = $bestOfferEnabled;
+        
         return $this;
     }
     /**
      * Get LocalListing value
      * @return bool|null
      */
-    public function getLocalListing()
+    public function getLocalListing(): ?bool
     {
         return $this->LocalListing;
     }
@@ -3634,20 +3752,21 @@ class ItemType extends AbstractStructBase
      * @param bool $localListing
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLocalListing($localListing = null)
+    public function setLocalListing(?bool $localListing = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localListing) && !is_bool($localListing)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localListing)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localListing, true), gettype($localListing)), __LINE__);
         }
         $this->LocalListing = $localListing;
+        
         return $this;
     }
     /**
      * Get SellerContactDetails value
      * @return \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public function getSellerContactDetails()
+    public function getSellerContactDetails(): ?\macropage\ebaysdk\trading\StructType\AddressType
     {
         return $this->SellerContactDetails;
     }
@@ -3656,16 +3775,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AddressType $sellerContactDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSellerContactDetails(\macropage\ebaysdk\trading\StructType\AddressType $sellerContactDetails = null)
+    public function setSellerContactDetails(?\macropage\ebaysdk\trading\StructType\AddressType $sellerContactDetails = null): self
     {
         $this->SellerContactDetails = $sellerContactDetails;
+        
         return $this;
     }
     /**
      * Get TotalQuestionCount value
      * @return int|null
      */
-    public function getTotalQuestionCount()
+    public function getTotalQuestionCount(): ?int
     {
         return $this->TotalQuestionCount;
     }
@@ -3674,20 +3794,21 @@ class ItemType extends AbstractStructBase
      * @param int $totalQuestionCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setTotalQuestionCount($totalQuestionCount = null)
+    public function setTotalQuestionCount(?int $totalQuestionCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($totalQuestionCount) && !is_numeric($totalQuestionCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($totalQuestionCount)), __LINE__);
+        if (!is_null($totalQuestionCount) && !(is_int($totalQuestionCount) || ctype_digit($totalQuestionCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalQuestionCount, true), gettype($totalQuestionCount)), __LINE__);
         }
         $this->TotalQuestionCount = $totalQuestionCount;
+        
         return $this;
     }
     /**
      * Get ProxyItem value
      * @return bool|null
      */
-    public function getProxyItem()
+    public function getProxyItem(): ?bool
     {
         return $this->ProxyItem;
     }
@@ -3696,20 +3817,21 @@ class ItemType extends AbstractStructBase
      * @param bool $proxyItem
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setProxyItem($proxyItem = null)
+    public function setProxyItem(?bool $proxyItem = null): self
     {
         // validation for constraint: boolean
         if (!is_null($proxyItem) && !is_bool($proxyItem)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($proxyItem)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($proxyItem, true), gettype($proxyItem)), __LINE__);
         }
         $this->ProxyItem = $proxyItem;
+        
         return $this;
     }
     /**
      * Get ExtendedSellerContactDetails value
      * @return \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType|null
      */
-    public function getExtendedSellerContactDetails()
+    public function getExtendedSellerContactDetails(): ?\macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType
     {
         return $this->ExtendedSellerContactDetails;
     }
@@ -3718,16 +3840,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $extendedSellerContactDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setExtendedSellerContactDetails(\macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $extendedSellerContactDetails = null)
+    public function setExtendedSellerContactDetails(?\macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType $extendedSellerContactDetails = null): self
     {
         $this->ExtendedSellerContactDetails = $extendedSellerContactDetails;
+        
         return $this;
     }
     /**
      * Get LeadCount value
      * @return int|null
      */
-    public function getLeadCount()
+    public function getLeadCount(): ?int
     {
         return $this->LeadCount;
     }
@@ -3736,20 +3859,21 @@ class ItemType extends AbstractStructBase
      * @param int $leadCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLeadCount($leadCount = null)
+    public function setLeadCount(?int $leadCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($leadCount) && !is_numeric($leadCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($leadCount)), __LINE__);
+        if (!is_null($leadCount) && !(is_int($leadCount) || ctype_digit($leadCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($leadCount, true), gettype($leadCount)), __LINE__);
         }
         $this->LeadCount = $leadCount;
+        
         return $this;
     }
     /**
      * Get NewLeadCount value
      * @return int|null
      */
-    public function getNewLeadCount()
+    public function getNewLeadCount(): ?int
     {
         return $this->NewLeadCount;
     }
@@ -3758,20 +3882,21 @@ class ItemType extends AbstractStructBase
      * @param int $newLeadCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setNewLeadCount($newLeadCount = null)
+    public function setNewLeadCount(?int $newLeadCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($newLeadCount) && !is_numeric($newLeadCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($newLeadCount)), __LINE__);
+        if (!is_null($newLeadCount) && !(is_int($newLeadCount) || ctype_digit($newLeadCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newLeadCount, true), gettype($newLeadCount)), __LINE__);
         }
         $this->NewLeadCount = $newLeadCount;
+        
         return $this;
     }
     /**
      * Get ItemSpecifics value
      * @return \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
-    public function getItemSpecifics()
+    public function getItemSpecifics(): ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
     {
         return $this->ItemSpecifics;
     }
@@ -3780,16 +3905,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $itemSpecifics
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setItemSpecifics(\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $itemSpecifics = null)
+    public function setItemSpecifics(?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $itemSpecifics = null): self
     {
         $this->ItemSpecifics = $itemSpecifics;
+        
         return $this;
     }
     /**
      * Get GroupCategoryID value
      * @return string|null
      */
-    public function getGroupCategoryID()
+    public function getGroupCategoryID(): ?string
     {
         return $this->GroupCategoryID;
     }
@@ -3798,20 +3924,21 @@ class ItemType extends AbstractStructBase
      * @param string $groupCategoryID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setGroupCategoryID($groupCategoryID = null)
+    public function setGroupCategoryID(?string $groupCategoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($groupCategoryID) && !is_string($groupCategoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($groupCategoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($groupCategoryID, true), gettype($groupCategoryID)), __LINE__);
         }
         $this->GroupCategoryID = $groupCategoryID;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdPayPerLeadFee value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getClassifiedAdPayPerLeadFee()
+    public function getClassifiedAdPayPerLeadFee(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ClassifiedAdPayPerLeadFee;
     }
@@ -3820,16 +3947,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $classifiedAdPayPerLeadFee
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setClassifiedAdPayPerLeadFee(\macropage\ebaysdk\trading\StructType\AmountType $classifiedAdPayPerLeadFee = null)
+    public function setClassifiedAdPayPerLeadFee(?\macropage\ebaysdk\trading\StructType\AmountType $classifiedAdPayPerLeadFee = null): self
     {
         $this->ClassifiedAdPayPerLeadFee = $classifiedAdPayPerLeadFee;
+        
         return $this;
     }
     /**
      * Get BidGroupItem value
      * @return bool|null
      */
-    public function getBidGroupItem()
+    public function getBidGroupItem(): ?bool
     {
         return $this->BidGroupItem;
     }
@@ -3838,20 +3966,21 @@ class ItemType extends AbstractStructBase
      * @param bool $bidGroupItem
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBidGroupItem($bidGroupItem = null)
+    public function setBidGroupItem(?bool $bidGroupItem = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bidGroupItem) && !is_bool($bidGroupItem)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bidGroupItem)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bidGroupItem, true), gettype($bidGroupItem)), __LINE__);
         }
         $this->BidGroupItem = $bidGroupItem;
+        
         return $this;
     }
     /**
      * Get ApplyBuyerProtection value
      * @return \macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType|null
      */
-    public function getApplyBuyerProtection()
+    public function getApplyBuyerProtection(): ?\macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType
     {
         return $this->ApplyBuyerProtection;
     }
@@ -3860,16 +3989,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $applyBuyerProtection
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setApplyBuyerProtection(\macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $applyBuyerProtection = null)
+    public function setApplyBuyerProtection(?\macropage\ebaysdk\trading\StructType\BuyerProtectionDetailsType $applyBuyerProtection = null): self
     {
         $this->ApplyBuyerProtection = $applyBuyerProtection;
+        
         return $this;
     }
     /**
      * Get ListingSubtype2 value
      * @return string|null
      */
-    public function getListingSubtype2()
+    public function getListingSubtype2(): ?string
     {
         return $this->ListingSubtype2;
     }
@@ -3877,24 +4007,25 @@ class ItemType extends AbstractStructBase
      * Set ListingSubtype2 value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingSubtype2
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setListingSubtype2($listingSubtype2 = null)
+    public function setListingSubtype2(?string $listingSubtype2 = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType::valueIsValid($listingSubtype2)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingSubtype2, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType', is_array($listingSubtype2) ? implode(', ', $listingSubtype2) : var_export($listingSubtype2, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingSubtypeCodeType::getValidValues())), __LINE__);
         }
         $this->ListingSubtype2 = $listingSubtype2;
+        
         return $this;
     }
     /**
      * Get MechanicalCheckAccepted value
      * @return bool|null
      */
-    public function getMechanicalCheckAccepted()
+    public function getMechanicalCheckAccepted(): ?bool
     {
         return $this->MechanicalCheckAccepted;
     }
@@ -3903,20 +4034,21 @@ class ItemType extends AbstractStructBase
      * @param bool $mechanicalCheckAccepted
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setMechanicalCheckAccepted($mechanicalCheckAccepted = null)
+    public function setMechanicalCheckAccepted(?bool $mechanicalCheckAccepted = null): self
     {
         // validation for constraint: boolean
         if (!is_null($mechanicalCheckAccepted) && !is_bool($mechanicalCheckAccepted)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($mechanicalCheckAccepted)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($mechanicalCheckAccepted, true), gettype($mechanicalCheckAccepted)), __LINE__);
         }
         $this->MechanicalCheckAccepted = $mechanicalCheckAccepted;
+        
         return $this;
     }
     /**
      * Get UpdateSellerInfo value
      * @return bool|null
      */
-    public function getUpdateSellerInfo()
+    public function getUpdateSellerInfo(): ?bool
     {
         return $this->UpdateSellerInfo;
     }
@@ -3925,20 +4057,21 @@ class ItemType extends AbstractStructBase
      * @param bool $updateSellerInfo
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setUpdateSellerInfo($updateSellerInfo = null)
+    public function setUpdateSellerInfo(?bool $updateSellerInfo = null): self
     {
         // validation for constraint: boolean
         if (!is_null($updateSellerInfo) && !is_bool($updateSellerInfo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($updateSellerInfo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($updateSellerInfo, true), gettype($updateSellerInfo)), __LINE__);
         }
         $this->UpdateSellerInfo = $updateSellerInfo;
+        
         return $this;
     }
     /**
      * Get UpdateReturnPolicy value
      * @return bool|null
      */
-    public function getUpdateReturnPolicy()
+    public function getUpdateReturnPolicy(): ?bool
     {
         return $this->UpdateReturnPolicy;
     }
@@ -3947,20 +4080,21 @@ class ItemType extends AbstractStructBase
      * @param bool $updateReturnPolicy
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setUpdateReturnPolicy($updateReturnPolicy = null)
+    public function setUpdateReturnPolicy(?bool $updateReturnPolicy = null): self
     {
         // validation for constraint: boolean
         if (!is_null($updateReturnPolicy) && !is_bool($updateReturnPolicy)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($updateReturnPolicy)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($updateReturnPolicy, true), gettype($updateReturnPolicy)), __LINE__);
         }
         $this->UpdateReturnPolicy = $updateReturnPolicy;
+        
         return $this;
     }
     /**
      * Get ItemPolicyViolation value
      * @return \macropage\ebaysdk\trading\StructType\ItemPolicyViolationType|null
      */
-    public function getItemPolicyViolation()
+    public function getItemPolicyViolation(): ?\macropage\ebaysdk\trading\StructType\ItemPolicyViolationType
     {
         return $this->ItemPolicyViolation;
     }
@@ -3969,56 +4103,80 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $itemPolicyViolation
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setItemPolicyViolation(\macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $itemPolicyViolation = null)
+    public function setItemPolicyViolation(?\macropage\ebaysdk\trading\StructType\ItemPolicyViolationType $itemPolicyViolation = null): self
     {
         $this->ItemPolicyViolation = $itemPolicyViolation;
+        
         return $this;
     }
     /**
      * Get CrossBorderTrade value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getCrossBorderTrade()
+    public function getCrossBorderTrade(): array
     {
         return $this->CrossBorderTrade;
     }
     /**
+     * This method is responsible for validating the values passed to the setCrossBorderTrade method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCrossBorderTrade method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCrossBorderTradeForArrayConstraintsFromSetCrossBorderTrade(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemTypeCrossBorderTradeItem) {
+            // validation for constraint: itemType
+            if (!is_string($itemTypeCrossBorderTradeItem)) {
+                $invalidValues[] = is_object($itemTypeCrossBorderTradeItem) ? get_class($itemTypeCrossBorderTradeItem) : sprintf('%s(%s)', gettype($itemTypeCrossBorderTradeItem), var_export($itemTypeCrossBorderTradeItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The CrossBorderTrade property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set CrossBorderTrade value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $crossBorderTrade
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCrossBorderTrade(array $crossBorderTrade = array())
+    public function setCrossBorderTrade(array $crossBorderTrade = []): self
     {
-        foreach ($crossBorderTrade as $itemTypeCrossBorderTradeItem) {
-            // validation for constraint: itemType
-            if (!is_string($itemTypeCrossBorderTradeItem)) {
-                throw new \InvalidArgumentException(sprintf('The CrossBorderTrade property can only contain items of string, "%s" given', is_object($itemTypeCrossBorderTradeItem) ? get_class($itemTypeCrossBorderTradeItem) : gettype($itemTypeCrossBorderTradeItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($crossBorderTradeArrayErrorMessage = self::validateCrossBorderTradeForArrayConstraintsFromSetCrossBorderTrade($crossBorderTrade))) {
+            throw new InvalidArgumentException($crossBorderTradeArrayErrorMessage, __LINE__);
         }
         $this->CrossBorderTrade = $crossBorderTrade;
+        
         return $this;
     }
     /**
      * Add item to CrossBorderTrade value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function addToCrossBorderTrade($item)
+    public function addToCrossBorderTrade(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The CrossBorderTrade property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The CrossBorderTrade property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->CrossBorderTrade[] = $item;
+        
         return $this;
     }
     /**
      * Get BusinessSellerDetails value
      * @return \macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType|null
      */
-    public function getBusinessSellerDetails()
+    public function getBusinessSellerDetails(): ?\macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType
     {
         return $this->BusinessSellerDetails;
     }
@@ -4027,16 +4185,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $businessSellerDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBusinessSellerDetails(\macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $businessSellerDetails = null)
+    public function setBusinessSellerDetails(?\macropage\ebaysdk\trading\StructType\BusinessSellerDetailsType $businessSellerDetails = null): self
     {
         $this->BusinessSellerDetails = $businessSellerDetails;
+        
         return $this;
     }
     /**
      * Get BuyerGuaranteePrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getBuyerGuaranteePrice()
+    public function getBuyerGuaranteePrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->BuyerGuaranteePrice;
     }
@@ -4045,16 +4204,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBuyerGuaranteePrice(\macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null)
+    public function setBuyerGuaranteePrice(?\macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null): self
     {
         $this->BuyerGuaranteePrice = $buyerGuaranteePrice;
+        
         return $this;
     }
     /**
      * Get BuyerRequirementDetails value
      * @return \macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType|null
      */
-    public function getBuyerRequirementDetails()
+    public function getBuyerRequirementDetails(): ?\macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType
     {
         return $this->BuyerRequirementDetails;
     }
@@ -4063,16 +4223,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $buyerRequirementDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setBuyerRequirementDetails(\macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $buyerRequirementDetails = null)
+    public function setBuyerRequirementDetails(?\macropage\ebaysdk\trading\StructType\BuyerRequirementDetailsType $buyerRequirementDetails = null): self
     {
         $this->BuyerRequirementDetails = $buyerRequirementDetails;
+        
         return $this;
     }
     /**
      * Get ReturnPolicy value
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType|null
      */
-    public function getReturnPolicy()
+    public function getReturnPolicy(): ?\macropage\ebaysdk\trading\StructType\ReturnPolicyType
     {
         return $this->ReturnPolicy;
     }
@@ -4081,63 +4242,84 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReturnPolicyType $returnPolicy
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setReturnPolicy(\macropage\ebaysdk\trading\StructType\ReturnPolicyType $returnPolicy = null)
+    public function setReturnPolicy(?\macropage\ebaysdk\trading\StructType\ReturnPolicyType $returnPolicy = null): self
     {
         $this->ReturnPolicy = $returnPolicy;
+        
         return $this;
     }
     /**
      * Get PaymentAllowedSite value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPaymentAllowedSite()
+    public function getPaymentAllowedSite(): array
     {
         return $this->PaymentAllowedSite;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setPaymentAllowedSite method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPaymentAllowedSite method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePaymentAllowedSiteForArrayConstraintsFromSetPaymentAllowedSite(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $itemTypePaymentAllowedSiteItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($itemTypePaymentAllowedSiteItem)) {
+                $invalidValues[] = is_object($itemTypePaymentAllowedSiteItem) ? get_class($itemTypePaymentAllowedSiteItem) : sprintf('%s(%s)', gettype($itemTypePaymentAllowedSiteItem), var_export($itemTypePaymentAllowedSiteItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set PaymentAllowedSite value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $paymentAllowedSite
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPaymentAllowedSite(array $paymentAllowedSite = array())
+    public function setPaymentAllowedSite(array $paymentAllowedSite = []): self
     {
-        $invalidValues = array();
-        foreach ($paymentAllowedSite as $itemTypePaymentAllowedSiteItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($itemTypePaymentAllowedSiteItem)) {
-                $invalidValues[] = var_export($itemTypePaymentAllowedSiteItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($paymentAllowedSiteArrayErrorMessage = self::validatePaymentAllowedSiteForArrayConstraintsFromSetPaymentAllowedSite($paymentAllowedSite))) {
+            throw new InvalidArgumentException($paymentAllowedSiteArrayErrorMessage, __LINE__);
         }
         $this->PaymentAllowedSite = $paymentAllowedSite;
+        
         return $this;
     }
     /**
      * Add item to PaymentAllowedSite value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function addToPaymentAllowedSite($item)
+    public function addToPaymentAllowedSite(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentAllowedSite[] = $item;
+        
         return $this;
     }
     /**
      * Get InventoryTrackingMethod value
      * @return string|null
      */
-    public function getInventoryTrackingMethod()
+    public function getInventoryTrackingMethod(): ?string
     {
         return $this->InventoryTrackingMethod;
     }
@@ -4145,24 +4327,25 @@ class ItemType extends AbstractStructBase
      * Set InventoryTrackingMethod value
      * @uses \macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $inventoryTrackingMethod
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setInventoryTrackingMethod($inventoryTrackingMethod = null)
+    public function setInventoryTrackingMethod(?string $inventoryTrackingMethod = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType::valueIsValid($inventoryTrackingMethod)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $inventoryTrackingMethod, implode(', ', \macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType', is_array($inventoryTrackingMethod) ? implode(', ', $inventoryTrackingMethod) : var_export($inventoryTrackingMethod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\InventoryTrackingMethodCodeType::getValidValues())), __LINE__);
         }
         $this->InventoryTrackingMethod = $inventoryTrackingMethod;
+        
         return $this;
     }
     /**
      * Get IntegratedMerchantCreditCardEnabled value
      * @return bool|null
      */
-    public function getIntegratedMerchantCreditCardEnabled()
+    public function getIntegratedMerchantCreditCardEnabled(): ?bool
     {
         return $this->IntegratedMerchantCreditCardEnabled;
     }
@@ -4171,20 +4354,21 @@ class ItemType extends AbstractStructBase
      * @param bool $integratedMerchantCreditCardEnabled
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setIntegratedMerchantCreditCardEnabled($integratedMerchantCreditCardEnabled = null)
+    public function setIntegratedMerchantCreditCardEnabled(?bool $integratedMerchantCreditCardEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($integratedMerchantCreditCardEnabled) && !is_bool($integratedMerchantCreditCardEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($integratedMerchantCreditCardEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($integratedMerchantCreditCardEnabled, true), gettype($integratedMerchantCreditCardEnabled)), __LINE__);
         }
         $this->IntegratedMerchantCreditCardEnabled = $integratedMerchantCreditCardEnabled;
+        
         return $this;
     }
     /**
      * Get Variations value
      * @return \macropage\ebaysdk\trading\StructType\VariationsType|null
      */
-    public function getVariations()
+    public function getVariations(): ?\macropage\ebaysdk\trading\StructType\VariationsType
     {
         return $this->Variations;
     }
@@ -4193,16 +4377,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationsType $variations
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVariations(\macropage\ebaysdk\trading\StructType\VariationsType $variations = null)
+    public function setVariations(?\macropage\ebaysdk\trading\StructType\VariationsType $variations = null): self
     {
         $this->Variations = $variations;
+        
         return $this;
     }
     /**
      * Get ItemCompatibilityList value
      * @return \macropage\ebaysdk\trading\StructType\ItemCompatibilityListType|null
      */
-    public function getItemCompatibilityList()
+    public function getItemCompatibilityList(): ?\macropage\ebaysdk\trading\StructType\ItemCompatibilityListType
     {
         return $this->ItemCompatibilityList;
     }
@@ -4211,16 +4396,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $itemCompatibilityList
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setItemCompatibilityList(\macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $itemCompatibilityList = null)
+    public function setItemCompatibilityList(?\macropage\ebaysdk\trading\StructType\ItemCompatibilityListType $itemCompatibilityList = null): self
     {
         $this->ItemCompatibilityList = $itemCompatibilityList;
+        
         return $this;
     }
     /**
      * Get ItemCompatibilityCount value
      * @return int|null
      */
-    public function getItemCompatibilityCount()
+    public function getItemCompatibilityCount(): ?int
     {
         return $this->ItemCompatibilityCount;
     }
@@ -4229,20 +4415,21 @@ class ItemType extends AbstractStructBase
      * @param int $itemCompatibilityCount
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setItemCompatibilityCount($itemCompatibilityCount = null)
+    public function setItemCompatibilityCount(?int $itemCompatibilityCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemCompatibilityCount) && !is_numeric($itemCompatibilityCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemCompatibilityCount)), __LINE__);
+        if (!is_null($itemCompatibilityCount) && !(is_int($itemCompatibilityCount) || ctype_digit($itemCompatibilityCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemCompatibilityCount, true), gettype($itemCompatibilityCount)), __LINE__);
         }
         $this->ItemCompatibilityCount = $itemCompatibilityCount;
+        
         return $this;
     }
     /**
      * Get ConditionID value
      * @return int|null
      */
-    public function getConditionID()
+    public function getConditionID(): ?int
     {
         return $this->ConditionID;
     }
@@ -4251,20 +4438,21 @@ class ItemType extends AbstractStructBase
      * @param int $conditionID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setConditionID($conditionID = null)
+    public function setConditionID(?int $conditionID = null): self
     {
         // validation for constraint: int
-        if (!is_null($conditionID) && !is_numeric($conditionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($conditionID)), __LINE__);
+        if (!is_null($conditionID) && !(is_int($conditionID) || ctype_digit($conditionID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($conditionID, true), gettype($conditionID)), __LINE__);
         }
         $this->ConditionID = $conditionID;
+        
         return $this;
     }
     /**
      * Get ConditionDescription value
      * @return string|null
      */
-    public function getConditionDescription()
+    public function getConditionDescription(): ?string
     {
         return $this->ConditionDescription;
     }
@@ -4273,20 +4461,21 @@ class ItemType extends AbstractStructBase
      * @param string $conditionDescription
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setConditionDescription($conditionDescription = null)
+    public function setConditionDescription(?string $conditionDescription = null): self
     {
         // validation for constraint: string
         if (!is_null($conditionDescription) && !is_string($conditionDescription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($conditionDescription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($conditionDescription, true), gettype($conditionDescription)), __LINE__);
         }
         $this->ConditionDescription = $conditionDescription;
+        
         return $this;
     }
     /**
      * Get ConditionDisplayName value
      * @return string|null
      */
-    public function getConditionDisplayName()
+    public function getConditionDisplayName(): ?string
     {
         return $this->ConditionDisplayName;
     }
@@ -4295,20 +4484,21 @@ class ItemType extends AbstractStructBase
      * @param string $conditionDisplayName
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setConditionDisplayName($conditionDisplayName = null)
+    public function setConditionDisplayName(?string $conditionDisplayName = null): self
     {
         // validation for constraint: string
         if (!is_null($conditionDisplayName) && !is_string($conditionDisplayName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($conditionDisplayName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($conditionDisplayName, true), gettype($conditionDisplayName)), __LINE__);
         }
         $this->ConditionDisplayName = $conditionDisplayName;
+        
         return $this;
     }
     /**
      * Get TaxCategory value
      * @return string|null
      */
-    public function getTaxCategory()
+    public function getTaxCategory(): ?string
     {
         return $this->TaxCategory;
     }
@@ -4317,20 +4507,21 @@ class ItemType extends AbstractStructBase
      * @param string $taxCategory
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setTaxCategory($taxCategory = null)
+    public function setTaxCategory(?string $taxCategory = null): self
     {
         // validation for constraint: string
         if (!is_null($taxCategory) && !is_string($taxCategory)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($taxCategory)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($taxCategory, true), gettype($taxCategory)), __LINE__);
         }
         $this->TaxCategory = $taxCategory;
+        
         return $this;
     }
     /**
      * Get QuantityAvailableHint value
      * @return string|null
      */
-    public function getQuantityAvailableHint()
+    public function getQuantityAvailableHint(): ?string
     {
         return $this->QuantityAvailableHint;
     }
@@ -4338,24 +4529,25 @@ class ItemType extends AbstractStructBase
      * Set QuantityAvailableHint value
      * @uses \macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $quantityAvailableHint
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantityAvailableHint($quantityAvailableHint = null)
+    public function setQuantityAvailableHint(?string $quantityAvailableHint = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType::valueIsValid($quantityAvailableHint)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $quantityAvailableHint, implode(', ', \macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType', is_array($quantityAvailableHint) ? implode(', ', $quantityAvailableHint) : var_export($quantityAvailableHint, true), implode(', ', \macropage\ebaysdk\trading\EnumType\QuantityAvailableHintCodeType::getValidValues())), __LINE__);
         }
         $this->QuantityAvailableHint = $quantityAvailableHint;
+        
         return $this;
     }
     /**
      * Get QuantityThreshold value
      * @return int|null
      */
-    public function getQuantityThreshold()
+    public function getQuantityThreshold(): ?int
     {
         return $this->QuantityThreshold;
     }
@@ -4364,20 +4556,21 @@ class ItemType extends AbstractStructBase
      * @param int $quantityThreshold
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantityThreshold($quantityThreshold = null)
+    public function setQuantityThreshold(?int $quantityThreshold = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantityThreshold) && !is_numeric($quantityThreshold)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantityThreshold)), __LINE__);
+        if (!is_null($quantityThreshold) && !(is_int($quantityThreshold) || ctype_digit($quantityThreshold))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantityThreshold, true), gettype($quantityThreshold)), __LINE__);
         }
         $this->QuantityThreshold = $quantityThreshold;
+        
         return $this;
     }
     /**
      * Get DiscountPriceInfo value
      * @return \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType|null
      */
-    public function getDiscountPriceInfo()
+    public function getDiscountPriceInfo(): ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType
     {
         return $this->DiscountPriceInfo;
     }
@@ -4386,16 +4579,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDiscountPriceInfo(\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null)
+    public function setDiscountPriceInfo(?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null): self
     {
         $this->DiscountPriceInfo = $discountPriceInfo;
+        
         return $this;
     }
     /**
      * Get SellerProvidedTitle value
      * @return string|null
      */
-    public function getSellerProvidedTitle()
+    public function getSellerProvidedTitle(): ?string
     {
         return $this->SellerProvidedTitle;
     }
@@ -4404,20 +4598,21 @@ class ItemType extends AbstractStructBase
      * @param string $sellerProvidedTitle
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSellerProvidedTitle($sellerProvidedTitle = null)
+    public function setSellerProvidedTitle(?string $sellerProvidedTitle = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerProvidedTitle) && !is_string($sellerProvidedTitle)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerProvidedTitle)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerProvidedTitle, true), gettype($sellerProvidedTitle)), __LINE__);
         }
         $this->SellerProvidedTitle = $sellerProvidedTitle;
+        
         return $this;
     }
     /**
      * Get VIN value
      * @return string|null
      */
-    public function getVIN()
+    public function getVIN(): ?string
     {
         return $this->VIN;
     }
@@ -4426,20 +4621,21 @@ class ItemType extends AbstractStructBase
      * @param string $vIN
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVIN($vIN = null)
+    public function setVIN(?string $vIN = null): self
     {
         // validation for constraint: string
         if (!is_null($vIN) && !is_string($vIN)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($vIN)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($vIN, true), gettype($vIN)), __LINE__);
         }
         $this->VIN = $vIN;
+        
         return $this;
     }
     /**
      * Get VINLink value
      * @return string|null
      */
-    public function getVINLink()
+    public function getVINLink(): ?string
     {
         return $this->VINLink;
     }
@@ -4448,20 +4644,21 @@ class ItemType extends AbstractStructBase
      * @param string $vINLink
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVINLink($vINLink = null)
+    public function setVINLink(?string $vINLink = null): self
     {
         // validation for constraint: string
         if (!is_null($vINLink) && !is_string($vINLink)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($vINLink)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($vINLink, true), gettype($vINLink)), __LINE__);
         }
         $this->VINLink = $vINLink;
+        
         return $this;
     }
     /**
      * Get VRM value
      * @return string|null
      */
-    public function getVRM()
+    public function getVRM(): ?string
     {
         return $this->VRM;
     }
@@ -4470,20 +4667,21 @@ class ItemType extends AbstractStructBase
      * @param string $vRM
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVRM($vRM = null)
+    public function setVRM(?string $vRM = null): self
     {
         // validation for constraint: string
         if (!is_null($vRM) && !is_string($vRM)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($vRM)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($vRM, true), gettype($vRM)), __LINE__);
         }
         $this->VRM = $vRM;
+        
         return $this;
     }
     /**
      * Get VRMLink value
      * @return string|null
      */
-    public function getVRMLink()
+    public function getVRMLink(): ?string
     {
         return $this->VRMLink;
     }
@@ -4492,20 +4690,21 @@ class ItemType extends AbstractStructBase
      * @param string $vRMLink
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setVRMLink($vRMLink = null)
+    public function setVRMLink(?string $vRMLink = null): self
     {
         // validation for constraint: string
         if (!is_null($vRMLink) && !is_string($vRMLink)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($vRMLink)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($vRMLink, true), gettype($vRMLink)), __LINE__);
         }
         $this->VRMLink = $vRMLink;
+        
         return $this;
     }
     /**
      * Get QuantityInfo value
      * @return \macropage\ebaysdk\trading\StructType\QuantityInfoType|null
      */
-    public function getQuantityInfo()
+    public function getQuantityInfo(): ?\macropage\ebaysdk\trading\StructType\QuantityInfoType
     {
         return $this->QuantityInfo;
     }
@@ -4514,16 +4713,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\QuantityInfoType $quantityInfo
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantityInfo(\macropage\ebaysdk\trading\StructType\QuantityInfoType $quantityInfo = null)
+    public function setQuantityInfo(?\macropage\ebaysdk\trading\StructType\QuantityInfoType $quantityInfo = null): self
     {
         $this->QuantityInfo = $quantityInfo;
+        
         return $this;
     }
     /**
      * Get SellerProfiles value
      * @return \macropage\ebaysdk\trading\StructType\SellerProfilesType|null
      */
-    public function getSellerProfiles()
+    public function getSellerProfiles(): ?\macropage\ebaysdk\trading\StructType\SellerProfilesType
     {
         return $this->SellerProfiles;
     }
@@ -4532,16 +4732,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerProfilesType $sellerProfiles
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setSellerProfiles(\macropage\ebaysdk\trading\StructType\SellerProfilesType $sellerProfiles = null)
+    public function setSellerProfiles(?\macropage\ebaysdk\trading\StructType\SellerProfilesType $sellerProfiles = null): self
     {
         $this->SellerProfiles = $sellerProfiles;
+        
         return $this;
     }
     /**
      * Get ShippingServiceCostOverrideList value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType|null
      */
-    public function getShippingServiceCostOverrideList()
+    public function getShippingServiceCostOverrideList(): ?\macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType
     {
         return $this->ShippingServiceCostOverrideList;
     }
@@ -4550,16 +4751,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $shippingServiceCostOverrideList
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setShippingServiceCostOverrideList(\macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $shippingServiceCostOverrideList = null)
+    public function setShippingServiceCostOverrideList(?\macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType $shippingServiceCostOverrideList = null): self
     {
         $this->ShippingServiceCostOverrideList = $shippingServiceCostOverrideList;
+        
         return $this;
     }
     /**
      * Get ShippingOverride value
      * @return \macropage\ebaysdk\trading\StructType\ShippingOverrideType|null
      */
-    public function getShippingOverride()
+    public function getShippingOverride(): ?\macropage\ebaysdk\trading\StructType\ShippingOverrideType
     {
         return $this->ShippingOverride;
     }
@@ -4568,16 +4770,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingOverrideType $shippingOverride
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setShippingOverride(\macropage\ebaysdk\trading\StructType\ShippingOverrideType $shippingOverride = null)
+    public function setShippingOverride(?\macropage\ebaysdk\trading\StructType\ShippingOverrideType $shippingOverride = null): self
     {
         $this->ShippingOverride = $shippingOverride;
+        
         return $this;
     }
     /**
      * Get ShippingPackageDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShipPackageDetailsType|null
      */
-    public function getShippingPackageDetails()
+    public function getShippingPackageDetails(): ?\macropage\ebaysdk\trading\StructType\ShipPackageDetailsType
     {
         return $this->ShippingPackageDetails;
     }
@@ -4586,16 +4789,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $shippingPackageDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setShippingPackageDetails(\macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $shippingPackageDetails = null)
+    public function setShippingPackageDetails(?\macropage\ebaysdk\trading\StructType\ShipPackageDetailsType $shippingPackageDetails = null): self
     {
         $this->ShippingPackageDetails = $shippingPackageDetails;
+        
         return $this;
     }
     /**
      * Get TopRatedListing value
      * @return bool|null
      */
-    public function getTopRatedListing()
+    public function getTopRatedListing(): ?bool
     {
         return $this->TopRatedListing;
     }
@@ -4604,20 +4808,21 @@ class ItemType extends AbstractStructBase
      * @param bool $topRatedListing
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setTopRatedListing($topRatedListing = null)
+    public function setTopRatedListing(?bool $topRatedListing = null): self
     {
         // validation for constraint: boolean
         if (!is_null($topRatedListing) && !is_bool($topRatedListing)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($topRatedListing)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($topRatedListing, true), gettype($topRatedListing)), __LINE__);
         }
         $this->TopRatedListing = $topRatedListing;
+        
         return $this;
     }
     /**
      * Get QuantityRestrictionPerBuyer value
      * @return \macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType|null
      */
-    public function getQuantityRestrictionPerBuyer()
+    public function getQuantityRestrictionPerBuyer(): ?\macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType
     {
         return $this->QuantityRestrictionPerBuyer;
     }
@@ -4626,16 +4831,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $quantityRestrictionPerBuyer
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setQuantityRestrictionPerBuyer(\macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $quantityRestrictionPerBuyer = null)
+    public function setQuantityRestrictionPerBuyer(?\macropage\ebaysdk\trading\StructType\QuantityRestrictionPerBuyerInfoType $quantityRestrictionPerBuyer = null): self
     {
         $this->QuantityRestrictionPerBuyer = $quantityRestrictionPerBuyer;
+        
         return $this;
     }
     /**
      * Get FloorPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getFloorPrice()
+    public function getFloorPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->FloorPrice;
     }
@@ -4644,16 +4850,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $floorPrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setFloorPrice(\macropage\ebaysdk\trading\StructType\AmountType $floorPrice = null)
+    public function setFloorPrice(?\macropage\ebaysdk\trading\StructType\AmountType $floorPrice = null): self
     {
         $this->FloorPrice = $floorPrice;
+        
         return $this;
     }
     /**
      * Get CeilingPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getCeilingPrice()
+    public function getCeilingPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->CeilingPrice;
     }
@@ -4662,16 +4869,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $ceilingPrice
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setCeilingPrice(\macropage\ebaysdk\trading\StructType\AmountType $ceilingPrice = null)
+    public function setCeilingPrice(?\macropage\ebaysdk\trading\StructType\AmountType $ceilingPrice = null): self
     {
         $this->CeilingPrice = $ceilingPrice;
+        
         return $this;
     }
     /**
      * Get IsIntermediatedShippingEligible value
      * @return bool|null
      */
-    public function getIsIntermediatedShippingEligible()
+    public function getIsIntermediatedShippingEligible(): ?bool
     {
         return $this->IsIntermediatedShippingEligible;
     }
@@ -4680,20 +4888,21 @@ class ItemType extends AbstractStructBase
      * @param bool $isIntermediatedShippingEligible
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setIsIntermediatedShippingEligible($isIntermediatedShippingEligible = null)
+    public function setIsIntermediatedShippingEligible(?bool $isIntermediatedShippingEligible = null): self
     {
         // validation for constraint: boolean
         if (!is_null($isIntermediatedShippingEligible) && !is_bool($isIntermediatedShippingEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($isIntermediatedShippingEligible)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($isIntermediatedShippingEligible, true), gettype($isIntermediatedShippingEligible)), __LINE__);
         }
         $this->IsIntermediatedShippingEligible = $isIntermediatedShippingEligible;
+        
         return $this;
     }
     /**
      * Get UnitInfo value
      * @return \macropage\ebaysdk\trading\StructType\UnitInfoType|null
      */
-    public function getUnitInfo()
+    public function getUnitInfo(): ?\macropage\ebaysdk\trading\StructType\UnitInfoType
     {
         return $this->UnitInfo;
     }
@@ -4702,16 +4911,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UnitInfoType $unitInfo
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setUnitInfo(\macropage\ebaysdk\trading\StructType\UnitInfoType $unitInfo = null)
+    public function setUnitInfo(?\macropage\ebaysdk\trading\StructType\UnitInfoType $unitInfo = null): self
     {
         $this->UnitInfo = $unitInfo;
+        
         return $this;
     }
     /**
      * Get RelistParentID value
      * @return int|null
      */
-    public function getRelistParentID()
+    public function getRelistParentID(): ?int
     {
         return $this->RelistParentID;
     }
@@ -4720,20 +4930,21 @@ class ItemType extends AbstractStructBase
      * @param int $relistParentID
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setRelistParentID($relistParentID = null)
+    public function setRelistParentID(?int $relistParentID = null): self
     {
         // validation for constraint: int
-        if (!is_null($relistParentID) && !is_numeric($relistParentID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($relistParentID)), __LINE__);
+        if (!is_null($relistParentID) && !(is_int($relistParentID) || ctype_digit($relistParentID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($relistParentID, true), gettype($relistParentID)), __LINE__);
         }
         $this->RelistParentID = $relistParentID;
+        
         return $this;
     }
     /**
      * Get ConditionDefinition value
      * @return string|null
      */
-    public function getConditionDefinition()
+    public function getConditionDefinition(): ?string
     {
         return $this->ConditionDefinition;
     }
@@ -4742,20 +4953,21 @@ class ItemType extends AbstractStructBase
      * @param string $conditionDefinition
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setConditionDefinition($conditionDefinition = null)
+    public function setConditionDefinition(?string $conditionDefinition = null): self
     {
         // validation for constraint: string
         if (!is_null($conditionDefinition) && !is_string($conditionDefinition)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($conditionDefinition)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($conditionDefinition, true), gettype($conditionDefinition)), __LINE__);
         }
         $this->ConditionDefinition = $conditionDefinition;
+        
         return $this;
     }
     /**
      * Get HideFromSearch value
      * @return bool|null
      */
-    public function getHideFromSearch()
+    public function getHideFromSearch(): ?bool
     {
         return $this->HideFromSearch;
     }
@@ -4764,20 +4976,21 @@ class ItemType extends AbstractStructBase
      * @param bool $hideFromSearch
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setHideFromSearch($hideFromSearch = null)
+    public function setHideFromSearch(?bool $hideFromSearch = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hideFromSearch) && !is_bool($hideFromSearch)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hideFromSearch)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hideFromSearch, true), gettype($hideFromSearch)), __LINE__);
         }
         $this->HideFromSearch = $hideFromSearch;
+        
         return $this;
     }
     /**
      * Get ReasonHideFromSearch value
      * @return string|null
      */
-    public function getReasonHideFromSearch()
+    public function getReasonHideFromSearch(): ?string
     {
         return $this->ReasonHideFromSearch;
     }
@@ -4785,24 +4998,25 @@ class ItemType extends AbstractStructBase
      * Set ReasonHideFromSearch value
      * @uses \macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $reasonHideFromSearch
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setReasonHideFromSearch($reasonHideFromSearch = null)
+    public function setReasonHideFromSearch(?string $reasonHideFromSearch = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType::valueIsValid($reasonHideFromSearch)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $reasonHideFromSearch, implode(', ', \macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType', is_array($reasonHideFromSearch) ? implode(', ', $reasonHideFromSearch) : var_export($reasonHideFromSearch, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ReasonHideFromSearchCodeType::getValidValues())), __LINE__);
         }
         $this->ReasonHideFromSearch = $reasonHideFromSearch;
+        
         return $this;
     }
     /**
      * Get IncludeRecommendations value
      * @return bool|null
      */
-    public function getIncludeRecommendations()
+    public function getIncludeRecommendations(): ?bool
     {
         return $this->IncludeRecommendations;
     }
@@ -4811,20 +5025,21 @@ class ItemType extends AbstractStructBase
      * @param bool $includeRecommendations
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setIncludeRecommendations($includeRecommendations = false)
+    public function setIncludeRecommendations(?bool $includeRecommendations = false): self
     {
         // validation for constraint: boolean
         if (!is_null($includeRecommendations) && !is_bool($includeRecommendations)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeRecommendations)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeRecommendations, true), gettype($includeRecommendations)), __LINE__);
         }
         $this->IncludeRecommendations = $includeRecommendations;
+        
         return $this;
     }
     /**
      * Get PickupInStoreDetails value
      * @return \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType|null
      */
-    public function getPickupInStoreDetails()
+    public function getPickupInStoreDetails(): ?\macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType
     {
         return $this->PickupInStoreDetails;
     }
@@ -4833,60 +5048,40 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setPickupInStoreDetails(\macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails = null)
+    public function setPickupInStoreDetails(?\macropage\ebaysdk\trading\StructType\PickupInStoreDetailsType $pickupInStoreDetails = null): self
     {
         $this->PickupInStoreDetails = $pickupInStoreDetails;
+        
         return $this;
     }
     /**
-     * Get eBayNowEligible value
-     * @return bool|null
+     * Get SiteId value
+     * @return int|null
      */
-    public function getEBayNowEligible()
+    public function getSiteId(): ?int
     {
-        return $this->eBayNowEligible;
+        return $this->SiteId;
     }
     /**
-     * Set eBayNowEligible value
-     * @param bool $eBayNowEligible
+     * Set SiteId value
+     * @param int $siteId
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEBayNowEligible($eBayNowEligible = null)
+    public function setSiteId(?int $siteId = null): self
     {
-        // validation for constraint: boolean
-        if (!is_null($eBayNowEligible) && !is_bool($eBayNowEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayNowEligible)), __LINE__);
+        // validation for constraint: int
+        if (!is_null($siteId) && !(is_int($siteId) || ctype_digit($siteId))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($siteId, true), gettype($siteId)), __LINE__);
         }
-        $this->eBayNowEligible = $eBayNowEligible;
-        return $this;
-    }
-    /**
-     * Get eBayNowAvailable value
-     * @return bool|null
-     */
-    public function getEBayNowAvailable()
-    {
-        return $this->eBayNowAvailable;
-    }
-    /**
-     * Set eBayNowAvailable value
-     * @param bool $eBayNowAvailable
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public function setEBayNowAvailable($eBayNowAvailable = null)
-    {
-        // validation for constraint: boolean
-        if (!is_null($eBayNowAvailable) && !is_bool($eBayNowAvailable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayNowAvailable)), __LINE__);
-        }
-        $this->eBayNowAvailable = $eBayNowAvailable;
+        $this->SiteId = $siteId;
+        
         return $this;
     }
     /**
      * Get IgnoreQuantity value
      * @return bool|null
      */
-    public function getIgnoreQuantity()
+    public function getIgnoreQuantity(): ?bool
     {
         return $this->IgnoreQuantity;
     }
@@ -4895,20 +5090,21 @@ class ItemType extends AbstractStructBase
      * @param bool $ignoreQuantity
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setIgnoreQuantity($ignoreQuantity = null)
+    public function setIgnoreQuantity(?bool $ignoreQuantity = null): self
     {
         // validation for constraint: boolean
         if (!is_null($ignoreQuantity) && !is_bool($ignoreQuantity)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($ignoreQuantity)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($ignoreQuantity, true), gettype($ignoreQuantity)), __LINE__);
         }
         $this->IgnoreQuantity = $ignoreQuantity;
+        
         return $this;
     }
     /**
      * Get AvailableForPickupDropOff value
      * @return bool|null
      */
-    public function getAvailableForPickupDropOff()
+    public function getAvailableForPickupDropOff(): ?bool
     {
         return $this->AvailableForPickupDropOff;
     }
@@ -4917,20 +5113,21 @@ class ItemType extends AbstractStructBase
      * @param bool $availableForPickupDropOff
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setAvailableForPickupDropOff($availableForPickupDropOff = null)
+    public function setAvailableForPickupDropOff(?bool $availableForPickupDropOff = null): self
     {
         // validation for constraint: boolean
         if (!is_null($availableForPickupDropOff) && !is_bool($availableForPickupDropOff)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($availableForPickupDropOff)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($availableForPickupDropOff, true), gettype($availableForPickupDropOff)), __LINE__);
         }
         $this->AvailableForPickupDropOff = $availableForPickupDropOff;
+        
         return $this;
     }
     /**
      * Get EligibleForPickupDropOff value
      * @return bool|null
      */
-    public function getEligibleForPickupDropOff()
+    public function getEligibleForPickupDropOff(): ?bool
     {
         return $this->EligibleForPickupDropOff;
     }
@@ -4939,20 +5136,21 @@ class ItemType extends AbstractStructBase
      * @param bool $eligibleForPickupDropOff
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEligibleForPickupDropOff($eligibleForPickupDropOff = null)
+    public function setEligibleForPickupDropOff(?bool $eligibleForPickupDropOff = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eligibleForPickupDropOff) && !is_bool($eligibleForPickupDropOff)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eligibleForPickupDropOff)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eligibleForPickupDropOff, true), gettype($eligibleForPickupDropOff)), __LINE__);
         }
         $this->EligibleForPickupDropOff = $eligibleForPickupDropOff;
+        
         return $this;
     }
     /**
      * Get LiveAuction value
      * @return bool|null
      */
-    public function getLiveAuction()
+    public function getLiveAuction(): ?bool
     {
         return $this->LiveAuction;
     }
@@ -4961,20 +5159,21 @@ class ItemType extends AbstractStructBase
      * @param bool $liveAuction
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setLiveAuction($liveAuction = null)
+    public function setLiveAuction(?bool $liveAuction = null): self
     {
         // validation for constraint: boolean
         if (!is_null($liveAuction) && !is_bool($liveAuction)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($liveAuction)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($liveAuction, true), gettype($liveAuction)), __LINE__);
         }
         $this->LiveAuction = $liveAuction;
+        
         return $this;
     }
     /**
      * Get DigitalGoodInfo value
      * @return \macropage\ebaysdk\trading\StructType\DigitalGoodInfoType|null
      */
-    public function getDigitalGoodInfo()
+    public function getDigitalGoodInfo(): ?\macropage\ebaysdk\trading\StructType\DigitalGoodInfoType
     {
         return $this->DigitalGoodInfo;
     }
@@ -4983,16 +5182,17 @@ class ItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $digitalGoodInfo
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setDigitalGoodInfo(\macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $digitalGoodInfo = null)
+    public function setDigitalGoodInfo(?\macropage\ebaysdk\trading\StructType\DigitalGoodInfoType $digitalGoodInfo = null): self
     {
         $this->DigitalGoodInfo = $digitalGoodInfo;
+        
         return $this;
     }
     /**
      * Get eBayPlus value
      * @return bool|null
      */
-    public function getEBayPlus()
+    public function getEBayPlus(): ?bool
     {
         return $this->eBayPlus;
     }
@@ -5001,20 +5201,21 @@ class ItemType extends AbstractStructBase
      * @param bool $eBayPlus
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEBayPlus($eBayPlus = null)
+    public function setEBayPlus(?bool $eBayPlus = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayPlus) && !is_bool($eBayPlus)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayPlus)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayPlus, true), gettype($eBayPlus)), __LINE__);
         }
         $this->eBayPlus = $eBayPlus;
+        
         return $this;
     }
     /**
      * Get eBayPlusEligible value
      * @return bool|null
      */
-    public function getEBayPlusEligible()
+    public function getEBayPlusEligible(): ?bool
     {
         return $this->eBayPlusEligible;
     }
@@ -5023,20 +5224,21 @@ class ItemType extends AbstractStructBase
      * @param bool $eBayPlusEligible
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEBayPlusEligible($eBayPlusEligible = null)
+    public function setEBayPlusEligible(?bool $eBayPlusEligible = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayPlusEligible) && !is_bool($eBayPlusEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayPlusEligible)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayPlusEligible, true), gettype($eBayPlusEligible)), __LINE__);
         }
         $this->eBayPlusEligible = $eBayPlusEligible;
+        
         return $this;
     }
     /**
      * Get eMailDeliveryAvailable value
      * @return bool|null
      */
-    public function getEMailDeliveryAvailable()
+    public function getEMailDeliveryAvailable(): ?bool
     {
         return $this->eMailDeliveryAvailable;
     }
@@ -5045,20 +5247,21 @@ class ItemType extends AbstractStructBase
      * @param bool $eMailDeliveryAvailable
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setEMailDeliveryAvailable($eMailDeliveryAvailable = null)
+    public function setEMailDeliveryAvailable(?bool $eMailDeliveryAvailable = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eMailDeliveryAvailable) && !is_bool($eMailDeliveryAvailable)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eMailDeliveryAvailable)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eMailDeliveryAvailable, true), gettype($eMailDeliveryAvailable)), __LINE__);
         }
         $this->eMailDeliveryAvailable = $eMailDeliveryAvailable;
+        
         return $this;
     }
     /**
      * Get IsSecureDescription value
      * @return bool|null
      */
-    public function getIsSecureDescription()
+    public function getIsSecureDescription(): ?bool
     {
         return $this->IsSecureDescription;
     }
@@ -5067,65 +5270,47 @@ class ItemType extends AbstractStructBase
      * @param bool $isSecureDescription
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setIsSecureDescription($isSecureDescription = null)
+    public function setIsSecureDescription(?bool $isSecureDescription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($isSecureDescription) && !is_bool($isSecureDescription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($isSecureDescription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($isSecureDescription, true), gettype($isSecureDescription)), __LINE__);
         }
         $this->IsSecureDescription = $isSecureDescription;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ItemType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ItemType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ItemType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

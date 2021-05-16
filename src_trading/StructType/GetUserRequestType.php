@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetUserRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves data pertaining to a single eBay user. Callers can use this call to return their own user data or the data of another eBay user. Unless the caller passes in an <strong>ItemID</strong> value that identifies a current or past
  * common order, not all data (like email addresses) will be returned in the response.
  * @subpackage Structs
@@ -15,38 +18,39 @@ class GetUserRequestType extends AbstractRequestType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specify the <strong>ItemID</strong> value for a successfully concluded listing in which the requestor and target user were participants (one as seller and the other as buyer). Necessary to return certain data (like an email address).
      * Not necessary if the requestor is retrieving their own data. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specify the user whose data you want returned by the call. If not specified, eBay returns data pertaining to the requesting user (as specified with the <strong>eBayAuthToken</strong> value).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The IncludeExpressRequirements
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeExpressRequirements;
+    protected ?bool $IncludeExpressRequirements = null;
     /**
      * The IncludeFeatureEligibility
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If the <b>IncludeFeatureEligibility</b> flag is included and set to 'true', the call response will include a <b>QualifiesForSelling</b> flag which indicates if the eBay user is eligible to sell on eBay, and a
      * <b>IncludeFeatureEligibility</b> container which indicates which selling features are available to the user.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeFeatureEligibility;
+    protected ?bool $IncludeFeatureEligibility = null;
     /**
      * Constructor method for GetUserRequestType
      * @uses GetUserRequestType::setItemID()
@@ -58,7 +62,7 @@ class GetUserRequestType extends AbstractRequestType
      * @param bool $includeExpressRequirements
      * @param bool $includeFeatureEligibility
      */
-    public function __construct($itemID = null, $userID = null, $includeExpressRequirements = null, $includeFeatureEligibility = null)
+    public function __construct(?string $itemID = null, ?string $userID = null, ?bool $includeExpressRequirements = null, ?bool $includeFeatureEligibility = null)
     {
         $this
             ->setItemID($itemID)
@@ -70,7 +74,7 @@ class GetUserRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -79,20 +83,21 @@ class GetUserRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -101,20 +106,21 @@ class GetUserRequestType extends AbstractRequestType
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get IncludeExpressRequirements value
      * @return bool|null
      */
-    public function getIncludeExpressRequirements()
+    public function getIncludeExpressRequirements(): ?bool
     {
         return $this->IncludeExpressRequirements;
     }
@@ -123,20 +129,21 @@ class GetUserRequestType extends AbstractRequestType
      * @param bool $includeExpressRequirements
      * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
      */
-    public function setIncludeExpressRequirements($includeExpressRequirements = null)
+    public function setIncludeExpressRequirements(?bool $includeExpressRequirements = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeExpressRequirements) && !is_bool($includeExpressRequirements)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeExpressRequirements)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeExpressRequirements, true), gettype($includeExpressRequirements)), __LINE__);
         }
         $this->IncludeExpressRequirements = $includeExpressRequirements;
+        
         return $this;
     }
     /**
      * Get IncludeFeatureEligibility value
      * @return bool|null
      */
-    public function getIncludeFeatureEligibility()
+    public function getIncludeFeatureEligibility(): ?bool
     {
         return $this->IncludeFeatureEligibility;
     }
@@ -145,33 +152,14 @@ class GetUserRequestType extends AbstractRequestType
      * @param bool $includeFeatureEligibility
      * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
      */
-    public function setIncludeFeatureEligibility($includeFeatureEligibility = null)
+    public function setIncludeFeatureEligibility(?bool $includeFeatureEligibility = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeFeatureEligibility) && !is_bool($includeFeatureEligibility)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeFeatureEligibility)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeFeatureEligibility, true), gettype($includeFeatureEligibility)), __LINE__);
         }
         $this->IncludeFeatureEligibility = $includeFeatureEligibility;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

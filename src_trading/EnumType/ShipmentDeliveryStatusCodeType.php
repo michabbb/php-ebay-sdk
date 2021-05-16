@@ -1,80 +1,96 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for ShipmentDeliveryStatusCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Status of the delivery.
  * @subpackage Enumerations
  */
-class ShipmentDeliveryStatusCodeType
+class ShipmentDeliveryStatusCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'Created'
+     * Meta information extracted from the WSDL
+     * - documentation: Created (default).
      * @return string 'Created'
      */
     const VALUE_CREATED = 'Created';
     /**
      * Constant for value 'DroppedOff'
+     * Meta information extracted from the WSDL
+     * - documentation: Dropped off.
      * @return string 'DroppedOff'
      */
     const VALUE_DROPPED_OFF = 'DroppedOff';
     /**
      * Constant for value 'InTransit'
+     * Meta information extracted from the WSDL
+     * - documentation: In transit.
      * @return string 'InTransit'
      */
     const VALUE_IN_TRANSIT = 'InTransit';
     /**
      * Constant for value 'Delivered'
+     * Meta information extracted from the WSDL
+     * - documentation: Delivered.
      * @return string 'Delivered'
      */
     const VALUE_DELIVERED = 'Delivered';
     /**
      * Constant for value 'Returned'
+     * Meta information extracted from the WSDL
+     * - documentation: Returned.
      * @return string 'Returned'
      */
     const VALUE_RETURNED = 'Returned';
     /**
      * Constant for value 'Canceled'
+     * Meta information extracted from the WSDL
+     * - documentation: Cancelled.
      * @return string 'Canceled'
      */
     const VALUE_CANCELED = 'Canceled';
     /**
      * Constant for value 'LabelPrinted'
+     * Meta information extracted from the WSDL
+     * - documentation: Label printed.
      * @return string 'LabelPrinted'
      */
     const VALUE_LABEL_PRINTED = 'LabelPrinted';
     /**
      * Constant for value 'Unconfirmed'
+     * Meta information extracted from the WSDL
+     * - documentation: Unconfirmed.
      * @return string 'Unconfirmed'
      */
     const VALUE_UNCONFIRMED = 'Unconfirmed';
     /**
      * Constant for value 'Unknown'
+     * Meta information extracted from the WSDL
+     * - documentation: Unknown.
      * @return string 'Unknown'
      */
     const VALUE_UNKNOWN = 'Unknown';
     /**
      * Constant for value 'Error'
+     * Meta information extracted from the WSDL
+     * - documentation: Error.
      * @return string 'Error'
      */
     const VALUE_ERROR = 'Error';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: Reserved for future use.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_CREATED
@@ -90,9 +106,9 @@ class ShipmentDeliveryStatusCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_CREATED,
             self::VALUE_DROPPED_OFF,
             self::VALUE_IN_TRANSIT,
@@ -104,14 +120,6 @@ class ShipmentDeliveryStatusCodeType
             self::VALUE_UNKNOWN,
             self::VALUE_ERROR,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

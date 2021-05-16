@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SiteHostedPictureDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>SiteHostedPictureDetails</b> container that is returned in an <b>UploadSiteHostedPictures</b> call.
  * @subpackage Structs
  */
@@ -14,77 +17,77 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
 {
     /**
      * The PictureName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The seller-defined name for the picture. This field is only returned if a <b>PictureName</b> value was specified in the request. A name for a picture can make it easier to track than an arbitrary, eBay-assigned URL.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PictureName;
+    protected ?string $PictureName = null;
     /**
      * The PictureSet
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the size of the generated picture. This value may differ from the one specified in the request (e.g. if a Supersize image cannot be generated).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PictureSet;
+    protected ?string $PictureSet = null;
     /**
      * The PictureFormat
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the image format of the generated image, such as JPG, GIF, or PNG.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PictureFormat;
+    protected ?string $PictureFormat = null;
     /**
      * The FullURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the full URL for the uploaded picture on the EPS server. This value should be stored by the seller, as this URL will be needed when create, revise, or relist an item and add this image to the listing. This URL will also be
      * needed for unpublished pictures whose expiration date must be extended through an <b>ExtendSiteHostedPictures</b> call.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FullURL;
+    protected ?string $FullURL = null;
     /**
      * The BaseURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the truncated version of the full URL.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BaseURL;
+    protected ?string $BaseURL = null;
     /**
      * The PictureSetMember
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The URL and size information for each generated image.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureSetMemberType[]
      */
-    public $PictureSetMember;
+    protected array $PictureSetMember = [];
     /**
      * The ExternalPictureURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The URL of the external Web site hosting the uploaded photo. This field is returned if an <b>ExternalPictureURL</b> is provided in the call request. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalPictureURL;
+    protected ?string $ExternalPictureURL = null;
     /**
      * The UseByDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This timestamp indicates when the picture must be uploaded with an eBay listing before it is purged from the EPS server. <br> <br> By default, unpublished pictures (not associated with an active eBay listing) are kept on the EPS
      * server for five days, but a seller can use the <b>ExtensionInDays</b> field in the request to make the expiration date further into the future (a maximum of 30 days). The seller can also use the <b>ExtendSiteHostedPictures</b> to extend the
      * expiration date of the picture.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UseByDate;
+    protected ?string $UseByDate = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SiteHostedPictureDetailsType
      * @uses SiteHostedPictureDetailsType::setPictureName()
@@ -104,9 +107,9 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureSetMemberType[] $pictureSetMember
      * @param string $externalPictureURL
      * @param string $useByDate
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($pictureName = null, $pictureSet = null, $pictureFormat = null, $fullURL = null, $baseURL = null, array $pictureSetMember = array(), $externalPictureURL = null, $useByDate = null, \DOMDocument $any = null)
+    public function __construct(?string $pictureName = null, ?string $pictureSet = null, ?string $pictureFormat = null, ?string $fullURL = null, ?string $baseURL = null, array $pictureSetMember = [], ?string $externalPictureURL = null, ?string $useByDate = null, $any = null)
     {
         $this
             ->setPictureName($pictureName)
@@ -123,7 +126,7 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * Get PictureName value
      * @return string|null
      */
-    public function getPictureName()
+    public function getPictureName(): ?string
     {
         return $this->PictureName;
     }
@@ -132,20 +135,21 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $pictureName
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setPictureName($pictureName = null)
+    public function setPictureName(?string $pictureName = null): self
     {
         // validation for constraint: string
         if (!is_null($pictureName) && !is_string($pictureName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($pictureName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($pictureName, true), gettype($pictureName)), __LINE__);
         }
         $this->PictureName = $pictureName;
+        
         return $this;
     }
     /**
      * Get PictureSet value
      * @return string|null
      */
-    public function getPictureSet()
+    public function getPictureSet(): ?string
     {
         return $this->PictureSet;
     }
@@ -153,24 +157,25 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * Set PictureSet value
      * @uses \macropage\ebaysdk\trading\EnumType\PictureSetCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PictureSetCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $pictureSet
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setPictureSet($pictureSet = null)
+    public function setPictureSet(?string $pictureSet = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PictureSetCodeType::valueIsValid($pictureSet)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $pictureSet, implode(', ', \macropage\ebaysdk\trading\EnumType\PictureSetCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PictureSetCodeType', is_array($pictureSet) ? implode(', ', $pictureSet) : var_export($pictureSet, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PictureSetCodeType::getValidValues())), __LINE__);
         }
         $this->PictureSet = $pictureSet;
+        
         return $this;
     }
     /**
      * Get PictureFormat value
      * @return string|null
      */
-    public function getPictureFormat()
+    public function getPictureFormat(): ?string
     {
         return $this->PictureFormat;
     }
@@ -178,24 +183,25 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * Set PictureFormat value
      * @uses \macropage\ebaysdk\trading\EnumType\PictureFormatCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PictureFormatCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $pictureFormat
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setPictureFormat($pictureFormat = null)
+    public function setPictureFormat(?string $pictureFormat = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PictureFormatCodeType::valueIsValid($pictureFormat)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $pictureFormat, implode(', ', \macropage\ebaysdk\trading\EnumType\PictureFormatCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PictureFormatCodeType', is_array($pictureFormat) ? implode(', ', $pictureFormat) : var_export($pictureFormat, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PictureFormatCodeType::getValidValues())), __LINE__);
         }
         $this->PictureFormat = $pictureFormat;
+        
         return $this;
     }
     /**
      * Get FullURL value
      * @return string|null
      */
-    public function getFullURL()
+    public function getFullURL(): ?string
     {
         return $this->FullURL;
     }
@@ -204,20 +210,21 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $fullURL
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setFullURL($fullURL = null)
+    public function setFullURL(?string $fullURL = null): self
     {
         // validation for constraint: string
         if (!is_null($fullURL) && !is_string($fullURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($fullURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($fullURL, true), gettype($fullURL)), __LINE__);
         }
         $this->FullURL = $fullURL;
+        
         return $this;
     }
     /**
      * Get BaseURL value
      * @return string|null
      */
-    public function getBaseURL()
+    public function getBaseURL(): ?string
     {
         return $this->BaseURL;
     }
@@ -226,60 +233,84 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $baseURL
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setBaseURL($baseURL = null)
+    public function setBaseURL(?string $baseURL = null): self
     {
         // validation for constraint: string
         if (!is_null($baseURL) && !is_string($baseURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($baseURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($baseURL, true), gettype($baseURL)), __LINE__);
         }
         $this->BaseURL = $baseURL;
+        
         return $this;
     }
     /**
      * Get PictureSetMember value
-     * @return \macropage\ebaysdk\trading\StructType\PictureSetMemberType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\PictureSetMemberType[]
      */
-    public function getPictureSetMember()
+    public function getPictureSetMember(): array
     {
         return $this->PictureSetMember;
     }
     /**
+     * This method is responsible for validating the values passed to the setPictureSetMember method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPictureSetMember method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePictureSetMemberForArrayConstraintsFromSetPictureSetMember(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $siteHostedPictureDetailsTypePictureSetMemberItem) {
+            // validation for constraint: itemType
+            if (!$siteHostedPictureDetailsTypePictureSetMemberItem instanceof \macropage\ebaysdk\trading\StructType\PictureSetMemberType) {
+                $invalidValues[] = is_object($siteHostedPictureDetailsTypePictureSetMemberItem) ? get_class($siteHostedPictureDetailsTypePictureSetMemberItem) : sprintf('%s(%s)', gettype($siteHostedPictureDetailsTypePictureSetMemberItem), var_export($siteHostedPictureDetailsTypePictureSetMemberItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The PictureSetMember property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureSetMemberType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set PictureSetMember value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureSetMemberType[] $pictureSetMember
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setPictureSetMember(array $pictureSetMember = array())
+    public function setPictureSetMember(array $pictureSetMember = []): self
     {
-        foreach ($pictureSetMember as $siteHostedPictureDetailsTypePictureSetMemberItem) {
-            // validation for constraint: itemType
-            if (!$siteHostedPictureDetailsTypePictureSetMemberItem instanceof \macropage\ebaysdk\trading\StructType\PictureSetMemberType) {
-                throw new \InvalidArgumentException(sprintf('The PictureSetMember property can only contain items of \macropage\ebaysdk\trading\StructType\PictureSetMemberType, "%s" given', is_object($siteHostedPictureDetailsTypePictureSetMemberItem) ? get_class($siteHostedPictureDetailsTypePictureSetMemberItem) : gettype($siteHostedPictureDetailsTypePictureSetMemberItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($pictureSetMemberArrayErrorMessage = self::validatePictureSetMemberForArrayConstraintsFromSetPictureSetMember($pictureSetMember))) {
+            throw new InvalidArgumentException($pictureSetMemberArrayErrorMessage, __LINE__);
         }
         $this->PictureSetMember = $pictureSetMember;
+        
         return $this;
     }
     /**
      * Add item to PictureSetMember value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PictureSetMemberType $item
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function addToPictureSetMember(\macropage\ebaysdk\trading\StructType\PictureSetMemberType $item)
+    public function addToPictureSetMember(\macropage\ebaysdk\trading\StructType\PictureSetMemberType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\PictureSetMemberType) {
-            throw new \InvalidArgumentException(sprintf('The PictureSetMember property can only contain items of \macropage\ebaysdk\trading\StructType\PictureSetMemberType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The PictureSetMember property can only contain items of type \macropage\ebaysdk\trading\StructType\PictureSetMemberType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->PictureSetMember[] = $item;
+        
         return $this;
     }
     /**
      * Get ExternalPictureURL value
      * @return string|null
      */
-    public function getExternalPictureURL()
+    public function getExternalPictureURL(): ?string
     {
         return $this->ExternalPictureURL;
     }
@@ -288,20 +319,21 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $externalPictureURL
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setExternalPictureURL($externalPictureURL = null)
+    public function setExternalPictureURL(?string $externalPictureURL = null): self
     {
         // validation for constraint: string
         if (!is_null($externalPictureURL) && !is_string($externalPictureURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalPictureURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalPictureURL, true), gettype($externalPictureURL)), __LINE__);
         }
         $this->ExternalPictureURL = $externalPictureURL;
+        
         return $this;
     }
     /**
      * Get UseByDate value
      * @return string|null
      */
-    public function getUseByDate()
+    public function getUseByDate(): ?string
     {
         return $this->UseByDate;
     }
@@ -310,65 +342,47 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $useByDate
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setUseByDate($useByDate = null)
+    public function setUseByDate(?string $useByDate = null): self
     {
         // validation for constraint: string
         if (!is_null($useByDate) && !is_string($useByDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($useByDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($useByDate, true), gettype($useByDate)), __LINE__);
         }
         $this->UseByDate = $useByDate;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

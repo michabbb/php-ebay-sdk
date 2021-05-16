@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetSellingManagerInventoryResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains a list of the products created by the seller. The list of products is returned as a set of tags, in which are returned zero, one, or multiple SellingManagerProductType objects. Each SellingManagerProductType object contains
  * the information about for one Selling Manager product and any Selling Manager templates the product contains.
  * @subpackage Structs
@@ -15,29 +18,29 @@ class GetSellingManagerInventoryResponseType extends AbstractResponseType
 {
     /**
      * The InventoryCountLastCalculatedDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the date the inventory counts were last calculated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InventoryCountLastCalculatedDate;
+    protected ?string $InventoryCountLastCalculatedDate = null;
     /**
      * The SellingManagerProduct
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container for information about the requested products and templates.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellingManagerProductType[]
      */
-    public $SellingManagerProduct;
+    protected array $SellingManagerProduct = [];
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the total number of pages (TotalNumberOfPages) and the total number of products entries (TotalNumberOfEntries) that can be returned on repeated calls with the same format and report criteria.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * Constructor method for GetSellingManagerInventoryResponseType
      * @uses GetSellingManagerInventoryResponseType::setInventoryCountLastCalculatedDate()
@@ -47,7 +50,7 @@ class GetSellingManagerInventoryResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerProductType[] $sellingManagerProduct
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      */
-    public function __construct($inventoryCountLastCalculatedDate = null, array $sellingManagerProduct = array(), \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function __construct(?string $inventoryCountLastCalculatedDate = null, array $sellingManagerProduct = [], ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
     {
         $this
             ->setInventoryCountLastCalculatedDate($inventoryCountLastCalculatedDate)
@@ -58,7 +61,7 @@ class GetSellingManagerInventoryResponseType extends AbstractResponseType
      * Get InventoryCountLastCalculatedDate value
      * @return string|null
      */
-    public function getInventoryCountLastCalculatedDate()
+    public function getInventoryCountLastCalculatedDate(): ?string
     {
         return $this->InventoryCountLastCalculatedDate;
     }
@@ -67,60 +70,84 @@ class GetSellingManagerInventoryResponseType extends AbstractResponseType
      * @param string $inventoryCountLastCalculatedDate
      * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerInventoryResponseType
      */
-    public function setInventoryCountLastCalculatedDate($inventoryCountLastCalculatedDate = null)
+    public function setInventoryCountLastCalculatedDate(?string $inventoryCountLastCalculatedDate = null): self
     {
         // validation for constraint: string
         if (!is_null($inventoryCountLastCalculatedDate) && !is_string($inventoryCountLastCalculatedDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($inventoryCountLastCalculatedDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($inventoryCountLastCalculatedDate, true), gettype($inventoryCountLastCalculatedDate)), __LINE__);
         }
         $this->InventoryCountLastCalculatedDate = $inventoryCountLastCalculatedDate;
+        
         return $this;
     }
     /**
      * Get SellingManagerProduct value
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductType[]
      */
-    public function getSellingManagerProduct()
+    public function getSellingManagerProduct(): array
     {
         return $this->SellingManagerProduct;
     }
     /**
+     * This method is responsible for validating the values passed to the setSellingManagerProduct method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setSellingManagerProduct method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateSellingManagerProductForArrayConstraintsFromSetSellingManagerProduct(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $getSellingManagerInventoryResponseTypeSellingManagerProductItem) {
+            // validation for constraint: itemType
+            if (!$getSellingManagerInventoryResponseTypeSellingManagerProductItem instanceof \macropage\ebaysdk\trading\StructType\SellingManagerProductType) {
+                $invalidValues[] = is_object($getSellingManagerInventoryResponseTypeSellingManagerProductItem) ? get_class($getSellingManagerInventoryResponseTypeSellingManagerProductItem) : sprintf('%s(%s)', gettype($getSellingManagerInventoryResponseTypeSellingManagerProductItem), var_export($getSellingManagerInventoryResponseTypeSellingManagerProductItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The SellingManagerProduct property can only contain items of type \macropage\ebaysdk\trading\StructType\SellingManagerProductType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set SellingManagerProduct value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerProductType[] $sellingManagerProduct
      * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerInventoryResponseType
      */
-    public function setSellingManagerProduct(array $sellingManagerProduct = array())
+    public function setSellingManagerProduct(array $sellingManagerProduct = []): self
     {
-        foreach ($sellingManagerProduct as $getSellingManagerInventoryResponseTypeSellingManagerProductItem) {
-            // validation for constraint: itemType
-            if (!$getSellingManagerInventoryResponseTypeSellingManagerProductItem instanceof \macropage\ebaysdk\trading\StructType\SellingManagerProductType) {
-                throw new \InvalidArgumentException(sprintf('The SellingManagerProduct property can only contain items of \macropage\ebaysdk\trading\StructType\SellingManagerProductType, "%s" given', is_object($getSellingManagerInventoryResponseTypeSellingManagerProductItem) ? get_class($getSellingManagerInventoryResponseTypeSellingManagerProductItem) : gettype($getSellingManagerInventoryResponseTypeSellingManagerProductItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($sellingManagerProductArrayErrorMessage = self::validateSellingManagerProductForArrayConstraintsFromSetSellingManagerProduct($sellingManagerProduct))) {
+            throw new InvalidArgumentException($sellingManagerProductArrayErrorMessage, __LINE__);
         }
         $this->SellingManagerProduct = $sellingManagerProduct;
+        
         return $this;
     }
     /**
      * Add item to SellingManagerProduct value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\SellingManagerProductType $item
      * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerInventoryResponseType
      */
-    public function addToSellingManagerProduct(\macropage\ebaysdk\trading\StructType\SellingManagerProductType $item)
+    public function addToSellingManagerProduct(\macropage\ebaysdk\trading\StructType\SellingManagerProductType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\SellingManagerProductType) {
-            throw new \InvalidArgumentException(sprintf('The SellingManagerProduct property can only contain items of \macropage\ebaysdk\trading\StructType\SellingManagerProductType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The SellingManagerProduct property can only contain items of type \macropage\ebaysdk\trading\StructType\SellingManagerProductType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->SellingManagerProduct[] = $item;
+        
         return $this;
     }
     /**
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -129,29 +156,10 @@ class GetSellingManagerInventoryResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerInventoryResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetSellingManagerInventoryResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

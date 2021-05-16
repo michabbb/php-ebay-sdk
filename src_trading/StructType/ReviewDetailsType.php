@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviewDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class ReviewDetailsType extends AbstractStructBase
 {
     /**
      * The AverageRating
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $AverageRating;
+    protected ?float $AverageRating = null;
     /**
      * The Review
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReviewType[]
      */
-    public $Review;
+    protected array $Review = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ReviewDetailsType
      * @uses ReviewDetailsType::setAverageRating()
@@ -41,9 +44,9 @@ class ReviewDetailsType extends AbstractStructBase
      * @uses ReviewDetailsType::setAny()
      * @param float $averageRating
      * @param \macropage\ebaysdk\trading\StructType\ReviewType[] $review
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($averageRating = null, array $review = array(), \DOMDocument $any = null)
+    public function __construct(?float $averageRating = null, array $review = [], $any = null)
     {
         $this
             ->setAverageRating($averageRating)
@@ -54,7 +57,7 @@ class ReviewDetailsType extends AbstractStructBase
      * Get AverageRating value
      * @return float|null
      */
-    public function getAverageRating()
+    public function getAverageRating(): ?float
     {
         return $this->AverageRating;
     }
@@ -63,101 +66,110 @@ class ReviewDetailsType extends AbstractStructBase
      * @param float $averageRating
      * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
      */
-    public function setAverageRating($averageRating = null)
+    public function setAverageRating(?float $averageRating = null): self
     {
+        // validation for constraint: float
+        if (!is_null($averageRating) && !(is_float($averageRating) || is_numeric($averageRating))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($averageRating, true), gettype($averageRating)), __LINE__);
+        }
         $this->AverageRating = $averageRating;
+        
         return $this;
     }
     /**
      * Get Review value
-     * @return \macropage\ebaysdk\trading\StructType\ReviewType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ReviewType[]
      */
-    public function getReview()
+    public function getReview(): array
     {
         return $this->Review;
     }
     /**
+     * This method is responsible for validating the values passed to the setReview method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setReview method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateReviewForArrayConstraintsFromSetReview(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $reviewDetailsTypeReviewItem) {
+            // validation for constraint: itemType
+            if (!$reviewDetailsTypeReviewItem instanceof \macropage\ebaysdk\trading\StructType\ReviewType) {
+                $invalidValues[] = is_object($reviewDetailsTypeReviewItem) ? get_class($reviewDetailsTypeReviewItem) : sprintf('%s(%s)', gettype($reviewDetailsTypeReviewItem), var_export($reviewDetailsTypeReviewItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Review property can only contain items of type \macropage\ebaysdk\trading\StructType\ReviewType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Review value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ReviewType[] $review
      * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
      */
-    public function setReview(array $review = array())
+    public function setReview(array $review = []): self
     {
-        foreach ($review as $reviewDetailsTypeReviewItem) {
-            // validation for constraint: itemType
-            if (!$reviewDetailsTypeReviewItem instanceof \macropage\ebaysdk\trading\StructType\ReviewType) {
-                throw new \InvalidArgumentException(sprintf('The Review property can only contain items of \macropage\ebaysdk\trading\StructType\ReviewType, "%s" given', is_object($reviewDetailsTypeReviewItem) ? get_class($reviewDetailsTypeReviewItem) : gettype($reviewDetailsTypeReviewItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($reviewArrayErrorMessage = self::validateReviewForArrayConstraintsFromSetReview($review))) {
+            throw new InvalidArgumentException($reviewArrayErrorMessage, __LINE__);
         }
         $this->Review = $review;
+        
         return $this;
     }
     /**
      * Add item to Review value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ReviewType $item
      * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
      */
-    public function addToReview(\macropage\ebaysdk\trading\StructType\ReviewType $item)
+    public function addToReview(\macropage\ebaysdk\trading\StructType\ReviewType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ReviewType) {
-            throw new \InvalidArgumentException(sprintf('The Review property can only contain items of \macropage\ebaysdk\trading\StructType\ReviewType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Review property can only contain items of type \macropage\ebaysdk\trading\StructType\ReviewType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Review[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ReviewDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

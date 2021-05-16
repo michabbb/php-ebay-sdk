@@ -1,46 +1,50 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BrandMPNType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Type defining the <b>BrandMPN</b> container which is used to identify a product (through unique product brand and Manufacturer Part Number combination). <br> <br> <span class="tablenote"><b>Note:</b> If a Brand/MPN pair is required
- * for the category/brand, these values must still be input through the <b>BrandMPN</b> container, but a catalog product match is only possible with an ePID or one of the GTINs. </span>
+ * Meta information extracted from the WSDL
+ * - documentation: Type defining the <b>BrandMPN</b> container which is used to identify a product (through a unique product brand and Manufacturer Part Number combination). <br> <br> <span class="tablenote"><b>Note:</b> If a brand and/or MPN value is
+ * required for a category, it is highly recommended that the brand and MPN name/value pair is also passed in through an <b>ItemSpecifics.NameValueList</b> container, since brand and MPN values may be dropped from the listing if eBay is not able to find
+ * a eBay catalog product match based on the provided Brand/MPN pair. </span>
  * @subpackage Structs
  */
 class BrandMPNType extends AbstractStructBase
 {
     /**
      * The Brand
-     * Meta informations extracted from the WSDL
-     * - documentation: The brand of the product. Both <b>Brand</b> and <b>MPN</b> must be specified if the <b>BrandMPN</b> container is used or an error will occur. If Brand is a required or recommended item specific for a category, but an MPN is not
+     * Meta information extracted from the WSDL
+     * - documentation: The brand of the product. Both <b>Brand</b> and <b>MPN</b> should be specified if the <b>BrandMPN</b> container is used, or an error may occur. If Brand is a required or recommended item specific for a category, but an MPN is not
      * applicable to the category/product, the Brand value should be specified in an <b>Item.ItemSpecifics.NameValueList</b> container instead. <br> <br> <span class="tablenote"><b>Note:</b> The <b>BrandMPN</b> container is not applicable for
      * multiple-variation listings. For multiple-variation listings that use MPNs, the <b>Brand</b> value should be specified through an <b>ItemSpecifics.NameValueList</b> container, and the Manufacturer Part Numbers (MPNs) for each product variation should
      * be specified through a <b>VariationSpecifics.NameValueList</b> container. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Brand;
+    protected ?string $Brand = null;
     /**
      * The MPN
-     * Meta informations extracted from the WSDL
-     * - documentation: The manufacturer part number of the product. Use the value specified by the manufacturer. Both <b>Brand</b> and <b>MPN</b> must be specified if the <b>BrandMPN</b> container is used or an error will occur. <br/><br/> <span
-     * class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects an MPN value, but one doesn't exist for the product, the seller must pass in the text that can be found in the
-     * <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a
-     * <b>DetailName</b> value in the call request. </span> <br> <span class="tablenote"><b>Note:</b> The <b>BrandMPN</b> container is not applicable for multiple-variation listings. For multiple-variation listings that use MPNs, the <b>Brand</b> value
-     * should be specified through an <b>ItemSpecifics.NameValueList</b> container, and the Manufacturer Part Numbers (MPNs) for each product variation should be specified through a <b>VariationSpecifics.NameValueList</b> container. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: The manufacturer part number of the product. Use the value specified by the manufacturer. Both <b>Brand</b> and <b>MPN</b> must be specified if the <b>BrandMPN</b> container is used or an error may occur. <br/><br/> If the listing is
+     * being posted to a category that expects an MPN value, but one doesn't exist for the product, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response.
+     * To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. <br><br> <span class="tablenote"><b>Note:</b> The
+     * <b>BrandMPN</b> container is not applicable for multiple-variation listings. For multiple-variation listings that use MPNs, the <b>Brand</b> value should be specified through an <b>ItemSpecifics.NameValueList</b> container, and the Manufacturer Part
+     * Numbers (MPNs) for each product variation should be specified through a <b>VariationSpecifics.NameValueList</b> container. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MPN;
+    protected ?string $MPN = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BrandMPNType
      * @uses BrandMPNType::setBrand()
@@ -48,9 +52,9 @@ class BrandMPNType extends AbstractStructBase
      * @uses BrandMPNType::setAny()
      * @param string $brand
      * @param string $mPN
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($brand = null, $mPN = null, \DOMDocument $any = null)
+    public function __construct(?string $brand = null, ?string $mPN = null, $any = null)
     {
         $this
             ->setBrand($brand)
@@ -61,7 +65,7 @@ class BrandMPNType extends AbstractStructBase
      * Get Brand value
      * @return string|null
      */
-    public function getBrand()
+    public function getBrand(): ?string
     {
         return $this->Brand;
     }
@@ -70,20 +74,21 @@ class BrandMPNType extends AbstractStructBase
      * @param string $brand
      * @return \macropage\ebaysdk\trading\StructType\BrandMPNType
      */
-    public function setBrand($brand = null)
+    public function setBrand(?string $brand = null): self
     {
         // validation for constraint: string
         if (!is_null($brand) && !is_string($brand)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($brand)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brand, true), gettype($brand)), __LINE__);
         }
         $this->Brand = $brand;
+        
         return $this;
     }
     /**
      * Get MPN value
      * @return string|null
      */
-    public function getMPN()
+    public function getMPN(): ?string
     {
         return $this->MPN;
     }
@@ -92,65 +97,47 @@ class BrandMPNType extends AbstractStructBase
      * @param string $mPN
      * @return \macropage\ebaysdk\trading\StructType\BrandMPNType
      */
-    public function setMPN($mPN = null)
+    public function setMPN(?string $mPN = null): self
     {
         // validation for constraint: string
         if (!is_null($mPN) && !is_string($mPN)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($mPN)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($mPN, true), gettype($mPN)), __LINE__);
         }
         $this->MPN = $mPN;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BrandMPNType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BrandMPNType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BrandMPNType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

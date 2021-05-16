@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for MyMessagesMessageType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Container for the message information for each message specified in MessageIDs. The amount and type of information returned varies based on the requested detail level.
  * @subpackage Structs
  */
@@ -14,225 +17,227 @@ class MyMessagesMessageType extends AbstractStructBase
 {
     /**
      * The Sender
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Display name of the eBay user that sent the message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Sender;
+    protected ?string $Sender = null;
     /**
      * The RecipientUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Displayable user ID of the recipient.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RecipientUserID;
+    protected ?string $RecipientUserID = null;
     /**
      * The SendToName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Displayable name of the user or eBay application to which the message is sent. Only returned for M2M, and if a value exists.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SendToName;
+    protected ?string $SendToName = null;
     /**
      * The Subject
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Subject of the message.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Subject;
+    protected ?string $Subject = null;
     /**
      * The MessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID that uniquely identifies a message for a given user. <br/> <br/> This value is not the same as the value used for the GetMemberMessages MessageID. Use the GetMemberMessages value (used as the GetMyMessages ExternalID) instead. |
      * Type defining the <b>MessageID</b> field used in <b>GetMyMessages</b>, <b>ReviseMyMessages</b>, and <b>DeleteMyMessages</b> to identify a specific eBay message to retrieve, revise, or delete, respectively. Up to 10 <b>MessageID</b> values can be
      * specified in one API call.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageID;
+    protected ?string $MessageID = null;
     /**
      * The ExternalMessageID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID used by an external application to uniquely identify a message. Returned only when specified by the external application on message creation. <br><br> This value is equivalent to the value used for MessageID in GetMemberMessages.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalMessageID;
+    protected ?string $ExternalMessageID = null;
     /**
      * The ContentType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Content type of the body text. The three acceptable values are "TEXT", "HTML", and "XML" (Note: This is case sensitive).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ContentType;
+    protected ?string $ContentType = null;
     /**
      * The Text
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the message content, and can contain a threaded message. This field can contain plain text or HTML, depending on the format of the original message. The API does not check the email-format preferences in My Messages on the
      * eBay Web site.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Text;
+    protected ?string $Text = null;
     /**
      * The Flagged
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if the message is displayed with a flag in the seller's My Messages mailbox on eBay. It is strongly recommended that the seller act on the message by the specified date (or within 60 days, if not specified).
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Flagged;
+    protected ?bool $Flagged = null;
     /**
      * The Read
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if a message has been viewed by a given user. Note that retrieving a message with the API does not mark it as read.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Read;
+    protected ?bool $Read = null;
     /**
      * The CreationDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date and time that a message was created by the sender.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreationDate;
+    protected ?string $CreationDate = null;
     /**
      * The ReceiveDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date and time that a message was received by My Messages and stored in a database for the recipient.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReceiveDate;
+    protected ?string $ReceiveDate = null;
     /**
      * The ExpirationDate
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date and time at which a message expires.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExpirationDate;
+    protected ?string $ExpirationDate = null;
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique item ID. Not returned for messages that haven't been associated with a specific item. | Type that represents the unique identifier for an eBay listing.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier of an eBay listing. This field is returned if the corresponding message is associated with a specific listing. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The ResponseDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Details relating to the response to a message.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType|null
      */
-    public $ResponseDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $ResponseDetails = null;
     /**
      * The ForwardDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Details relating to the forwarding of a message. Only returned if the message is forwarded.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
      */
-    public $ForwardDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $ForwardDetails = null;
     /**
      * The Folder
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Details relating to a My Messages folder.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderType
+     * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderType|null
      */
-    public $Folder;
+    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $Folder = null;
     /**
      * The Content
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Message body in plain text format. The message body is displayed in plain text even if the eBay user's Preferred Email Format preference on My eBay is set to HTML. Graphics and text formatting are dropped if the eBay user's
      * preference is set to HTML.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Content;
+    protected ?string $Content = null;
     /**
      * The MessageType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Type of message being retrieved through GetMyMessages. This is available only on the US site.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $MessageType;
+    protected ?string $MessageType = null;
     /**
      * The ListingStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies an active or ended listing's status in eBay's processing workflow. If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., total price and buyer/high bidder) and the final value fee. This
      * processing can take several minutes. If you retrieve a sold item and no details about the buyer/high bidder are returned or no final value fee is available, use this listing status information to determine whether eBay has finished processing the
      * listing. <br><br> <span class="tablenote"><b>Note:</b> For GetMyMessages, the listing status reflects the status of the listing at the time the question was created. The listing status for this call must not match the listing status returned by other
      * calls (such as GetItemTransactions). This is returned only if Messages.Message.MessageType is AskSellerQuestion. This tag is no longer returned in the Sandbox environment. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingStatus;
+    protected ?string $ListingStatus = null;
     /**
      * The QuestionType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Currently available only on the US site. Context of the question (e.g. Shipping, General). Corresponds to the message subject. Applies if Messages.Message.MessageType is AskSellerQuestion.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $QuestionType;
+    protected ?string $QuestionType = null;
     /**
      * The Replied
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if there has been a reply to the message.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Replied;
+    protected ?bool $Replied = null;
     /**
      * The HighPriority
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if this message is marked as a high-priority message.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HighPriority;
+    protected ?bool $HighPriority = null;
     /**
      * The ItemEndTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date and time for the ended item.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemEndTime;
+    protected ?string $ItemEndTime = null;
     /**
      * The ItemTitle
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Title of the item listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemTitle;
+    protected ?string $ItemTitle = null;
     /**
      * The MessageMedia
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Media details stored as part of the message.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public $MessageMedia;
+    protected array $MessageMedia = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for MyMessagesMessageType
      * @uses MyMessagesMessageType::setSender()
@@ -288,9 +293,9 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $itemEndTime
      * @param string $itemTitle
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sender = null, $recipientUserID = null, $sendToName = null, $subject = null, $messageID = null, $externalMessageID = null, $contentType = null, $text = null, $flagged = null, $read = null, $creationDate = null, $receiveDate = null, $expirationDate = null, $itemID = null, \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, $content = null, $messageType = null, $listingStatus = null, $questionType = null, $replied = null, $highPriority = null, $itemEndTime = null, $itemTitle = null, array $messageMedia = array(), \DOMDocument $any = null)
+    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $sendToName = null, ?string $subject = null, ?string $messageID = null, ?string $externalMessageID = null, ?string $contentType = null, ?string $text = null, ?bool $flagged = null, ?bool $read = null, ?string $creationDate = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, ?string $content = null, ?string $messageType = null, ?string $listingStatus = null, ?string $questionType = null, ?bool $replied = null, ?bool $highPriority = null, ?string $itemEndTime = null, ?string $itemTitle = null, array $messageMedia = [], $any = null)
     {
         $this
             ->setSender($sender)
@@ -325,7 +330,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * Get Sender value
      * @return string|null
      */
-    public function getSender()
+    public function getSender(): ?string
     {
         return $this->Sender;
     }
@@ -334,20 +339,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $sender
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setSender($sender = null)
+    public function setSender(?string $sender = null): self
     {
         // validation for constraint: string
         if (!is_null($sender) && !is_string($sender)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sender)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sender, true), gettype($sender)), __LINE__);
         }
         $this->Sender = $sender;
+        
         return $this;
     }
     /**
      * Get RecipientUserID value
      * @return string|null
      */
-    public function getRecipientUserID()
+    public function getRecipientUserID(): ?string
     {
         return $this->RecipientUserID;
     }
@@ -356,20 +362,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $recipientUserID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setRecipientUserID($recipientUserID = null)
+    public function setRecipientUserID(?string $recipientUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($recipientUserID) && !is_string($recipientUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($recipientUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($recipientUserID, true), gettype($recipientUserID)), __LINE__);
         }
         $this->RecipientUserID = $recipientUserID;
+        
         return $this;
     }
     /**
      * Get SendToName value
      * @return string|null
      */
-    public function getSendToName()
+    public function getSendToName(): ?string
     {
         return $this->SendToName;
     }
@@ -378,20 +385,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $sendToName
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setSendToName($sendToName = null)
+    public function setSendToName(?string $sendToName = null): self
     {
         // validation for constraint: string
         if (!is_null($sendToName) && !is_string($sendToName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sendToName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sendToName, true), gettype($sendToName)), __LINE__);
         }
         $this->SendToName = $sendToName;
+        
         return $this;
     }
     /**
      * Get Subject value
      * @return string|null
      */
-    public function getSubject()
+    public function getSubject(): ?string
     {
         return $this->Subject;
     }
@@ -400,20 +408,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $subject
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setSubject($subject = null)
+    public function setSubject(?string $subject = null): self
     {
         // validation for constraint: string
         if (!is_null($subject) && !is_string($subject)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($subject)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($subject, true), gettype($subject)), __LINE__);
         }
         $this->Subject = $subject;
+        
         return $this;
     }
     /**
      * Get MessageID value
      * @return string|null
      */
-    public function getMessageID()
+    public function getMessageID(): ?string
     {
         return $this->MessageID;
     }
@@ -422,20 +431,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $messageID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setMessageID($messageID = null)
+    public function setMessageID(?string $messageID = null): self
     {
         // validation for constraint: string
         if (!is_null($messageID) && !is_string($messageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($messageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($messageID, true), gettype($messageID)), __LINE__);
         }
         $this->MessageID = $messageID;
+        
         return $this;
     }
     /**
      * Get ExternalMessageID value
      * @return string|null
      */
-    public function getExternalMessageID()
+    public function getExternalMessageID(): ?string
     {
         return $this->ExternalMessageID;
     }
@@ -444,20 +454,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $externalMessageID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setExternalMessageID($externalMessageID = null)
+    public function setExternalMessageID(?string $externalMessageID = null): self
     {
         // validation for constraint: string
         if (!is_null($externalMessageID) && !is_string($externalMessageID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalMessageID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalMessageID, true), gettype($externalMessageID)), __LINE__);
         }
         $this->ExternalMessageID = $externalMessageID;
+        
         return $this;
     }
     /**
      * Get ContentType value
      * @return string|null
      */
-    public function getContentType()
+    public function getContentType(): ?string
     {
         return $this->ContentType;
     }
@@ -466,20 +477,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $contentType
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setContentType($contentType = null)
+    public function setContentType(?string $contentType = null): self
     {
         // validation for constraint: string
         if (!is_null($contentType) && !is_string($contentType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($contentType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($contentType, true), gettype($contentType)), __LINE__);
         }
         $this->ContentType = $contentType;
+        
         return $this;
     }
     /**
      * Get Text value
      * @return string|null
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->Text;
     }
@@ -488,20 +500,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $text
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setText($text = null)
+    public function setText(?string $text = null): self
     {
         // validation for constraint: string
         if (!is_null($text) && !is_string($text)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($text)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($text, true), gettype($text)), __LINE__);
         }
         $this->Text = $text;
+        
         return $this;
     }
     /**
      * Get Flagged value
      * @return bool|null
      */
-    public function getFlagged()
+    public function getFlagged(): ?bool
     {
         return $this->Flagged;
     }
@@ -510,20 +523,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param bool $flagged
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setFlagged($flagged = null)
+    public function setFlagged(?bool $flagged = null): self
     {
         // validation for constraint: boolean
         if (!is_null($flagged) && !is_bool($flagged)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($flagged)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($flagged, true), gettype($flagged)), __LINE__);
         }
         $this->Flagged = $flagged;
+        
         return $this;
     }
     /**
      * Get Read value
      * @return bool|null
      */
-    public function getRead()
+    public function getRead(): ?bool
     {
         return $this->Read;
     }
@@ -532,20 +546,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param bool $read
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setRead($read = null)
+    public function setRead(?bool $read = null): self
     {
         // validation for constraint: boolean
         if (!is_null($read) && !is_bool($read)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($read)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($read, true), gettype($read)), __LINE__);
         }
         $this->Read = $read;
+        
         return $this;
     }
     /**
      * Get CreationDate value
      * @return string|null
      */
-    public function getCreationDate()
+    public function getCreationDate(): ?string
     {
         return $this->CreationDate;
     }
@@ -554,20 +569,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $creationDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setCreationDate($creationDate = null)
+    public function setCreationDate(?string $creationDate = null): self
     {
         // validation for constraint: string
         if (!is_null($creationDate) && !is_string($creationDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($creationDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationDate, true), gettype($creationDate)), __LINE__);
         }
         $this->CreationDate = $creationDate;
+        
         return $this;
     }
     /**
      * Get ReceiveDate value
      * @return string|null
      */
-    public function getReceiveDate()
+    public function getReceiveDate(): ?string
     {
         return $this->ReceiveDate;
     }
@@ -576,20 +592,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $receiveDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setReceiveDate($receiveDate = null)
+    public function setReceiveDate(?string $receiveDate = null): self
     {
         // validation for constraint: string
         if (!is_null($receiveDate) && !is_string($receiveDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($receiveDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($receiveDate, true), gettype($receiveDate)), __LINE__);
         }
         $this->ReceiveDate = $receiveDate;
+        
         return $this;
     }
     /**
      * Get ExpirationDate value
      * @return string|null
      */
-    public function getExpirationDate()
+    public function getExpirationDate(): ?string
     {
         return $this->ExpirationDate;
     }
@@ -598,20 +615,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $expirationDate
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setExpirationDate($expirationDate = null)
+    public function setExpirationDate(?string $expirationDate = null): self
     {
         // validation for constraint: string
         if (!is_null($expirationDate) && !is_string($expirationDate)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($expirationDate)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($expirationDate, true), gettype($expirationDate)), __LINE__);
         }
         $this->ExpirationDate = $expirationDate;
+        
         return $this;
     }
     /**
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -620,20 +638,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get ResponseDetails value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType|null
      */
-    public function getResponseDetails()
+    public function getResponseDetails(): ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType
     {
         return $this->ResponseDetails;
     }
@@ -642,16 +661,17 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setResponseDetails(\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null)
+    public function setResponseDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null): self
     {
         $this->ResponseDetails = $responseDetails;
+        
         return $this;
     }
     /**
      * Get ForwardDetails value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
      */
-    public function getForwardDetails()
+    public function getForwardDetails(): ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType
     {
         return $this->ForwardDetails;
     }
@@ -660,16 +680,17 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setForwardDetails(\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null)
+    public function setForwardDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null): self
     {
         $this->ForwardDetails = $forwardDetails;
+        
         return $this;
     }
     /**
      * Get Folder value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderType|null
      */
-    public function getFolder()
+    public function getFolder(): ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType
     {
         return $this->Folder;
     }
@@ -678,16 +699,17 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setFolder(\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null)
+    public function setFolder(?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null): self
     {
         $this->Folder = $folder;
+        
         return $this;
     }
     /**
      * Get Content value
      * @return string|null
      */
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->Content;
     }
@@ -696,20 +718,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $content
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setContent($content = null)
+    public function setContent(?string $content = null): self
     {
         // validation for constraint: string
         if (!is_null($content) && !is_string($content)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($content)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($content, true), gettype($content)), __LINE__);
         }
         $this->Content = $content;
+        
         return $this;
     }
     /**
      * Get MessageType value
      * @return string|null
      */
-    public function getMessageType()
+    public function getMessageType(): ?string
     {
         return $this->MessageType;
     }
@@ -717,24 +740,25 @@ class MyMessagesMessageType extends AbstractStructBase
      * Set MessageType value
      * @uses \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $messageType
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setMessageType($messageType = null)
+    public function setMessageType(?string $messageType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::valueIsValid($messageType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $messageType, implode(', ', \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType', is_array($messageType) ? implode(', ', $messageType) : var_export($messageType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\MessageTypeCodeType::getValidValues())), __LINE__);
         }
         $this->MessageType = $messageType;
+        
         return $this;
     }
     /**
      * Get ListingStatus value
      * @return string|null
      */
-    public function getListingStatus()
+    public function getListingStatus(): ?string
     {
         return $this->ListingStatus;
     }
@@ -742,24 +766,25 @@ class MyMessagesMessageType extends AbstractStructBase
      * Set ListingStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingStatus
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setListingStatus($listingStatus = null)
+    public function setListingStatus(?string $listingStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingStatusCodeType::valueIsValid($listingStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingStatusCodeType', is_array($listingStatus) ? implode(', ', $listingStatus) : var_export($listingStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingStatusCodeType::getValidValues())), __LINE__);
         }
         $this->ListingStatus = $listingStatus;
+        
         return $this;
     }
     /**
      * Get QuestionType value
      * @return string|null
      */
-    public function getQuestionType()
+    public function getQuestionType(): ?string
     {
         return $this->QuestionType;
     }
@@ -767,24 +792,25 @@ class MyMessagesMessageType extends AbstractStructBase
      * Set QuestionType value
      * @uses \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $questionType
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setQuestionType($questionType = null)
+    public function setQuestionType(?string $questionType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::valueIsValid($questionType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $questionType, implode(', ', \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType', is_array($questionType) ? implode(', ', $questionType) : var_export($questionType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\QuestionTypeCodeType::getValidValues())), __LINE__);
         }
         $this->QuestionType = $questionType;
+        
         return $this;
     }
     /**
      * Get Replied value
      * @return bool|null
      */
-    public function getReplied()
+    public function getReplied(): ?bool
     {
         return $this->Replied;
     }
@@ -793,20 +819,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param bool $replied
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setReplied($replied = null)
+    public function setReplied(?bool $replied = null): self
     {
         // validation for constraint: boolean
         if (!is_null($replied) && !is_bool($replied)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($replied)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($replied, true), gettype($replied)), __LINE__);
         }
         $this->Replied = $replied;
+        
         return $this;
     }
     /**
      * Get HighPriority value
      * @return bool|null
      */
-    public function getHighPriority()
+    public function getHighPriority(): ?bool
     {
         return $this->HighPriority;
     }
@@ -815,20 +842,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param bool $highPriority
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setHighPriority($highPriority = null)
+    public function setHighPriority(?bool $highPriority = null): self
     {
         // validation for constraint: boolean
         if (!is_null($highPriority) && !is_bool($highPriority)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($highPriority)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($highPriority, true), gettype($highPriority)), __LINE__);
         }
         $this->HighPriority = $highPriority;
+        
         return $this;
     }
     /**
      * Get ItemEndTime value
      * @return string|null
      */
-    public function getItemEndTime()
+    public function getItemEndTime(): ?string
     {
         return $this->ItemEndTime;
     }
@@ -837,20 +865,21 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $itemEndTime
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setItemEndTime($itemEndTime = null)
+    public function setItemEndTime(?string $itemEndTime = null): self
     {
         // validation for constraint: string
         if (!is_null($itemEndTime) && !is_string($itemEndTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemEndTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemEndTime, true), gettype($itemEndTime)), __LINE__);
         }
         $this->ItemEndTime = $itemEndTime;
+        
         return $this;
     }
     /**
      * Get ItemTitle value
      * @return string|null
      */
-    public function getItemTitle()
+    public function getItemTitle(): ?string
     {
         return $this->ItemTitle;
     }
@@ -859,105 +888,110 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $itemTitle
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setItemTitle($itemTitle = null)
+    public function setItemTitle(?string $itemTitle = null): self
     {
         // validation for constraint: string
         if (!is_null($itemTitle) && !is_string($itemTitle)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemTitle)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemTitle, true), gettype($itemTitle)), __LINE__);
         }
         $this->ItemTitle = $itemTitle;
+        
         return $this;
     }
     /**
      * Get MessageMedia value
-     * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public function getMessageMedia()
+    public function getMessageMedia(): array
     {
         return $this->MessageMedia;
     }
     /**
+     * This method is responsible for validating the values passed to the setMessageMedia method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setMessageMedia method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $myMessagesMessageTypeMessageMediaItem) {
+            // validation for constraint: itemType
+            if (!$myMessagesMessageTypeMessageMediaItem instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
+                $invalidValues[] = is_object($myMessagesMessageTypeMessageMediaItem) ? get_class($myMessagesMessageTypeMessageMediaItem) : sprintf('%s(%s)', gettype($myMessagesMessageTypeMessageMediaItem), var_export($myMessagesMessageTypeMessageMediaItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The MessageMedia property can only contain items of type \macropage\ebaysdk\trading\StructType\MessageMediaType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set MessageMedia value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setMessageMedia(array $messageMedia = array())
+    public function setMessageMedia(array $messageMedia = []): self
     {
-        foreach ($messageMedia as $myMessagesMessageTypeMessageMediaItem) {
-            // validation for constraint: itemType
-            if (!$myMessagesMessageTypeMessageMediaItem instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
-                throw new \InvalidArgumentException(sprintf('The MessageMedia property can only contain items of \macropage\ebaysdk\trading\StructType\MessageMediaType, "%s" given', is_object($myMessagesMessageTypeMessageMediaItem) ? get_class($myMessagesMessageTypeMessageMediaItem) : gettype($myMessagesMessageTypeMessageMediaItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($messageMediaArrayErrorMessage = self::validateMessageMediaForArrayConstraintsFromSetMessageMedia($messageMedia))) {
+            throw new InvalidArgumentException($messageMediaArrayErrorMessage, __LINE__);
         }
         $this->MessageMedia = $messageMedia;
+        
         return $this;
     }
     /**
      * Add item to MessageMedia value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType $item
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function addToMessageMedia(\macropage\ebaysdk\trading\StructType\MessageMediaType $item)
+    public function addToMessageMedia(\macropage\ebaysdk\trading\StructType\MessageMediaType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\MessageMediaType) {
-            throw new \InvalidArgumentException(sprintf('The MessageMedia property can only contain items of \macropage\ebaysdk\trading\StructType\MessageMediaType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The MessageMedia property can only contain items of type \macropage\ebaysdk\trading\StructType\MessageMediaType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->MessageMedia[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\MyMessagesMessageType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

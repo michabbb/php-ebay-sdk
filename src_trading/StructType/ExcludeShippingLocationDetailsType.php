@@ -1,63 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ExcludeShippingLocationDetailsType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Container for the list of site-specific locations supported by the Exclude Ship To Locations feature.
+ * Meta information extracted from the WSDL
+ * - documentation: Type used by the <b>ExcludeShippingLocationDetails</b> containers that are returned in the <b>GeteBayDetails</b> response. The values returned in the <b>ExcludeShippingLocationDetails.Location</b> fields are the values that can be
+ * specified when specifying excluded shipping locations in an Add/Revise/Relist item call, or in a shipping business policy.
  * @subpackage Structs
  */
 class ExcludeShippingLocationDetailsType extends AbstractStructBase
 {
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The localized location name.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The Location
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The location or region code to be used with the AddItem family of calls. These codes are also returned by GetItem. This code reflects the <a href=
      * "http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm" >ISO 3166</a> codes.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Location;
+    protected ?string $Location = null;
     /**
      * The Region
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The region code to which the location belongs.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Region;
+    protected ?string $Region = null;
     /**
      * The DetailVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Returns the current version number of the ExcludeShippingLocation data. Use the version number to determine if you need to refresh your cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailVersion;
+    protected ?string $DetailVersion = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The time in GMT that the feature flags for the details were last updated. Use this timestamp to determine if you need to refresh your cached client data.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ExcludeShippingLocationDetailsType
      * @uses ExcludeShippingLocationDetailsType::setDescription()
@@ -71,9 +75,9 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $region
      * @param string $detailVersion
      * @param string $updateTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($description = null, $location = null, $region = null, $detailVersion = null, $updateTime = null, \DOMDocument $any = null)
+    public function __construct(?string $description = null, ?string $location = null, ?string $region = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setDescription($description)
@@ -87,7 +91,7 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -96,20 +100,21 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get Location value
      * @return string|null
      */
-    public function getLocation()
+    public function getLocation(): ?string
     {
         return $this->Location;
     }
@@ -118,20 +123,21 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $location
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setLocation($location = null)
+    public function setLocation(?string $location = null): self
     {
         // validation for constraint: string
         if (!is_null($location) && !is_string($location)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($location)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($location, true), gettype($location)), __LINE__);
         }
         $this->Location = $location;
+        
         return $this;
     }
     /**
      * Get Region value
      * @return string|null
      */
-    public function getRegion()
+    public function getRegion(): ?string
     {
         return $this->Region;
     }
@@ -140,20 +146,21 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $region
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setRegion($region = null)
+    public function setRegion(?string $region = null): self
     {
         // validation for constraint: string
         if (!is_null($region) && !is_string($region)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($region)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($region, true), gettype($region)), __LINE__);
         }
         $this->Region = $region;
+        
         return $this;
     }
     /**
      * Get DetailVersion value
      * @return string|null
      */
-    public function getDetailVersion()
+    public function getDetailVersion(): ?string
     {
         return $this->DetailVersion;
     }
@@ -162,20 +169,21 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $detailVersion
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setDetailVersion($detailVersion = null)
+    public function setDetailVersion(?string $detailVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($detailVersion) && !is_string($detailVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailVersion, true), gettype($detailVersion)), __LINE__);
         }
         $this->DetailVersion = $detailVersion;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -184,65 +192,47 @@ class ExcludeShippingLocationDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

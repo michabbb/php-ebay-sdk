@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SMSSubscriptionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: User data related to notifications. Note that SMS is currently reserved for future use.
  * @subpackage Structs
  */
@@ -14,49 +17,50 @@ class SMSSubscriptionType extends AbstractStructBase
 {
     /**
      * The SMSPhone
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The wireless phone number to be used for receiving SMS messages. Max length of phone number varies by country.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SMSPhone;
+    protected ?string $SMSPhone = null;
     /**
      * The UserStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Registered/Unregistered/Pending.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserStatus;
+    protected ?string $UserStatus = null;
     /**
      * The CarrierID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The wireless carrier ID.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CarrierID;
+    protected ?string $CarrierID = null;
     /**
      * The ErrorCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reason for SMS subscription error (postback from thired-party integrator).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ErrorCode;
+    protected ?string $ErrorCode = null;
     /**
      * The ItemToUnsubscribe
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: ID of item to unsubscribe from SMS notification. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemToUnsubscribe;
+    protected ?string $ItemToUnsubscribe = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SMSSubscriptionType
      * @uses SMSSubscriptionType::setSMSPhone()
@@ -70,9 +74,9 @@ class SMSSubscriptionType extends AbstractStructBase
      * @param string $carrierID
      * @param string $errorCode
      * @param string $itemToUnsubscribe
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sMSPhone = null, $userStatus = null, $carrierID = null, $errorCode = null, $itemToUnsubscribe = null, \DOMDocument $any = null)
+    public function __construct(?string $sMSPhone = null, ?string $userStatus = null, ?string $carrierID = null, ?string $errorCode = null, ?string $itemToUnsubscribe = null, $any = null)
     {
         $this
             ->setSMSPhone($sMSPhone)
@@ -86,7 +90,7 @@ class SMSSubscriptionType extends AbstractStructBase
      * Get SMSPhone value
      * @return string|null
      */
-    public function getSMSPhone()
+    public function getSMSPhone(): ?string
     {
         return $this->SMSPhone;
     }
@@ -95,20 +99,21 @@ class SMSSubscriptionType extends AbstractStructBase
      * @param string $sMSPhone
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setSMSPhone($sMSPhone = null)
+    public function setSMSPhone(?string $sMSPhone = null): self
     {
         // validation for constraint: string
         if (!is_null($sMSPhone) && !is_string($sMSPhone)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sMSPhone)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sMSPhone, true), gettype($sMSPhone)), __LINE__);
         }
         $this->SMSPhone = $sMSPhone;
+        
         return $this;
     }
     /**
      * Get UserStatus value
      * @return string|null
      */
-    public function getUserStatus()
+    public function getUserStatus(): ?string
     {
         return $this->UserStatus;
     }
@@ -116,24 +121,25 @@ class SMSSubscriptionType extends AbstractStructBase
      * Set UserStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $userStatus
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setUserStatus($userStatus = null)
+    public function setUserStatus(?string $userStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType::valueIsValid($userStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $userStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType', is_array($userStatus) ? implode(', ', $userStatus) : var_export($userStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SMSSubscriptionUserStatusCodeType::getValidValues())), __LINE__);
         }
         $this->UserStatus = $userStatus;
+        
         return $this;
     }
     /**
      * Get CarrierID value
      * @return string|null
      */
-    public function getCarrierID()
+    public function getCarrierID(): ?string
     {
         return $this->CarrierID;
     }
@@ -141,24 +147,25 @@ class SMSSubscriptionType extends AbstractStructBase
      * Set CarrierID value
      * @uses \macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $carrierID
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setCarrierID($carrierID = null)
+    public function setCarrierID(?string $carrierID = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType::valueIsValid($carrierID)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $carrierID, implode(', ', \macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType', is_array($carrierID) ? implode(', ', $carrierID) : var_export($carrierID, true), implode(', ', \macropage\ebaysdk\trading\EnumType\WirelessCarrierIDCodeType::getValidValues())), __LINE__);
         }
         $this->CarrierID = $carrierID;
+        
         return $this;
     }
     /**
      * Get ErrorCode value
      * @return string|null
      */
-    public function getErrorCode()
+    public function getErrorCode(): ?string
     {
         return $this->ErrorCode;
     }
@@ -166,24 +173,25 @@ class SMSSubscriptionType extends AbstractStructBase
      * Set ErrorCode value
      * @uses \macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $errorCode
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setErrorCode($errorCode = null)
+    public function setErrorCode(?string $errorCode = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType::valueIsValid($errorCode)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $errorCode, implode(', ', \macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType', is_array($errorCode) ? implode(', ', $errorCode) : var_export($errorCode, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SMSSubscriptionErrorCodeCodeType::getValidValues())), __LINE__);
         }
         $this->ErrorCode = $errorCode;
+        
         return $this;
     }
     /**
      * Get ItemToUnsubscribe value
      * @return string|null
      */
-    public function getItemToUnsubscribe()
+    public function getItemToUnsubscribe(): ?string
     {
         return $this->ItemToUnsubscribe;
     }
@@ -192,65 +200,47 @@ class SMSSubscriptionType extends AbstractStructBase
      * @param string $itemToUnsubscribe
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setItemToUnsubscribe($itemToUnsubscribe = null)
+    public function setItemToUnsubscribe(?string $itemToUnsubscribe = null): self
     {
         // validation for constraint: string
         if (!is_null($itemToUnsubscribe) && !is_string($itemToUnsubscribe)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemToUnsubscribe)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemToUnsubscribe, true), gettype($itemToUnsubscribe)), __LINE__);
         }
         $this->ItemToUnsubscribe = $itemToUnsubscribe;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SMSSubscriptionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SMSSubscriptionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,199 +1,208 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DisputeType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Contains all information describing a dispute. <br/><br/> <span class="tablenote"><strong>Note:</strong> These are not eBay money back guarantee disputes. </span>
+ * Meta information extracted from the WSDL
+ * - documentation: Contains all information describing a dispute. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee
+ * program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a
+ * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
  * @subpackage Structs
  */
 class DisputeType extends AbstractStructBase
 {
     /**
      * The DisputeID
-     * Meta informations extracted from the WSDL
-     * - documentation: The unique identifier of an eBay dispute. | An identifier of a dispute. <br/><br/> <span class="tablenote"><strong>Note:</strong> These are not eBay money back guarantee disputes. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: The unique identifier of an eBay dispute. | The unique identifier of a dispute between a buyer and seller regarding an order. <br/><br/> <span class="tablenote"><strong>Note:</strong> The dispute calls in the Trading API are not
+     * compatible with 'Item Not Received' or 'Significantly Not As Described' cases initiated by buyers through the eBay Money Back Guarantee program. The <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a>
+     * is used to retrieve and/or respond to eBay Money Back Guarantee cases programmatically. </span>
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeID;
+    protected ?string $DisputeID = null;
     /**
      * The DisputeRecordType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A value to indicate the type of dispute.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeRecordType;
+    protected ?string $DisputeRecordType = null;
     /**
      * The DisputeState
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The internal state of the dispute. The value determines which values of <b>DisputeActivity</b> are valid when responding to a dispute.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeState;
+    protected ?string $DisputeState = null;
     /**
      * The DisputeStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The status of the dispute, which provides additional information about the dispute state.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeStatus;
+    protected ?string $DisputeStatus = null;
     /**
      * The OtherPartyRole
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The role of the person involved in the dispute who is not taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OtherPartyRole;
+    protected ?string $OtherPartyRole = null;
     /**
      * The OtherPartyName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The user name of the person involved in the dispute who is not taking action or requesting information.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OtherPartyName;
+    protected ?string $OtherPartyName = null;
     /**
      * The UserRole
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The role of the person involved in the dispute who is taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserRole;
+    protected ?string $UserRole = null;
     /**
      * The BuyerUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay user ID of the buyer involved in the dispute. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd,
      * FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be
      * returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BuyerUserID;
+    protected ?string $BuyerUserID = null;
     /**
      * The SellerUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The eBay user ID of the seller involved in the dispute. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd,
      * FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be
      * returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerUserID;
+    protected ?string $SellerUserID = null;
     /**
      * The TransactionID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the order line item (transaction) under dispute. An order line item is created once there is a commitment from a buyer to purchase an item. In the case of <b>GetDispute</b> and <b>GetUserDisputes</b>
-     * responses, this value identifies the order line item involved in the dispute.
+     * responses, this value identifies the order line item involved in the dispute. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $TransactionID;
+    protected ?string $TransactionID = null;
     /**
      * The Item
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of high-level details about the item involved in the dispute.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ItemType
+     * @var \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public $Item;
+    protected ?\macropage\ebaysdk\trading\StructType\ItemType $Item = null;
     /**
      * The DisputeReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The top-level reason for the dispute. The value of <b>DisputeReason</b> determines which values of <b>DisputeExplanation</b> are valid. See <b>DisputeExplanationCodeList</b> for details.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeReason;
+    protected ?string $DisputeReason = null;
     /**
      * The DisputeExplanation
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The detailed explanation for the dispute. Valid values depend on the value of <b>DisputeReason</b>. See <b>DisputeExplanationCodeList</b> for details.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeExplanation;
+    protected ?string $DisputeExplanation = null;
     /**
      * The DisputeCreditEligibility
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A value to indicate whether or not the seller is currently eligible for a Final Value Fee credit. The seller becomes eligible for a Final Value Fee credit after filing and winning an Unpaid Item case. This tag only indicates credit
-     * eligibility and does not mean that the case can be closed. The seller can open a UPI case as soon as two days after the listing ends. <br>
+     * eligibility and does not mean that the case can be closed. The seller can open an Unpaid Item case as soon as two days after the listing ends. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeCreditEligibility;
+    protected ?string $DisputeCreditEligibility = null;
     /**
      * The DisputeCreatedTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date and time the dispute was created, in GMT.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeCreatedTime;
+    protected ?string $DisputeCreatedTime = null;
     /**
      * The DisputeModifiedTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The date and time the dispute was modified, in GMT.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisputeModifiedTime;
+    protected ?string $DisputeModifiedTime = null;
     /**
      * The DisputeResolution
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The action resulting from the dispute resolution. The action might include a Final Value Fee credit to the seller, a strike to the buyer, a reversal, or an appeal.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DisputeResolutionType[]
      */
-    public $DisputeResolution;
+    protected array $DisputeResolution = [];
     /**
      * The DisputeMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A response or message posted to a dispute, either by an application or by a user on the eBay site.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DisputeMessageType[]
      */
-    public $DisputeMessage;
+    protected array $DisputeMessage = [];
     /**
      * The Escalation
-     * Meta informations extracted from the WSDL
-     * - documentation: Whether the buyer can close a dispute unhappy and escalate it to the eBay Standard Purchase Protection Program. To escalate, the buyer must be eligible for the PPP. Used in Item Not Received disputes.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the buyer is eligible to appeal a closed Item Not Received dispute.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Escalation;
+    protected ?bool $Escalation = null;
     /**
      * The PurchaseProtection
-     * Meta informations extracted from the WSDL
-     * - documentation: Whether the buyer is eligible for the eBay Standard Purchase Protection Program. The eligibility rules are described in the eBay site online help. Used in Item Not Received disputes.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the buyer used PayPal to pay for the item, and is eligible for PayPal's Standard Purchase Protection.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PurchaseProtection;
+    protected ?bool $PurchaseProtection = null;
     /**
      * The OrderLineItemID
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item and is based upon the concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two IDs. In the case of <b>GetDispute</b> and
-     * <b>GetUserDisputes</b> responses, this value identifies the order line item involved in the dispute. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. In the case of <b>GetDispute</b> and <b>GetUserDisputes</b> responses, this value identifies the order line item involved in the dispute. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderLineItemID;
+    protected ?string $OrderLineItemID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for DisputeType
      * @uses DisputeType::setDisputeID()
@@ -239,9 +248,9 @@ class DisputeType extends AbstractStructBase
      * @param bool $escalation
      * @param bool $purchaseProtection
      * @param string $orderLineItemID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($disputeID = null, $disputeRecordType = null, $disputeState = null, $disputeStatus = null, $otherPartyRole = null, $otherPartyName = null, $userRole = null, $buyerUserID = null, $sellerUserID = null, $transactionID = null, \macropage\ebaysdk\trading\StructType\ItemType $item = null, $disputeReason = null, $disputeExplanation = null, $disputeCreditEligibility = null, $disputeCreatedTime = null, $disputeModifiedTime = null, array $disputeResolution = array(), array $disputeMessage = array(), $escalation = null, $purchaseProtection = null, $orderLineItemID = null, \DOMDocument $any = null)
+    public function __construct(?string $disputeID = null, ?string $disputeRecordType = null, ?string $disputeState = null, ?string $disputeStatus = null, ?string $otherPartyRole = null, ?string $otherPartyName = null, ?string $userRole = null, ?string $buyerUserID = null, ?string $sellerUserID = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?string $disputeReason = null, ?string $disputeExplanation = null, ?string $disputeCreditEligibility = null, ?string $disputeCreatedTime = null, ?string $disputeModifiedTime = null, array $disputeResolution = [], array $disputeMessage = [], ?bool $escalation = null, ?bool $purchaseProtection = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setDisputeID($disputeID)
@@ -271,7 +280,7 @@ class DisputeType extends AbstractStructBase
      * Get DisputeID value
      * @return string|null
      */
-    public function getDisputeID()
+    public function getDisputeID(): ?string
     {
         return $this->DisputeID;
     }
@@ -280,20 +289,21 @@ class DisputeType extends AbstractStructBase
      * @param string $disputeID
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeID($disputeID = null)
+    public function setDisputeID(?string $disputeID = null): self
     {
         // validation for constraint: string
         if (!is_null($disputeID) && !is_string($disputeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($disputeID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($disputeID, true), gettype($disputeID)), __LINE__);
         }
         $this->DisputeID = $disputeID;
+        
         return $this;
     }
     /**
      * Get DisputeRecordType value
      * @return string|null
      */
-    public function getDisputeRecordType()
+    public function getDisputeRecordType(): ?string
     {
         return $this->DisputeRecordType;
     }
@@ -301,24 +311,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeRecordType value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeRecordType
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeRecordType($disputeRecordType = null)
+    public function setDisputeRecordType(?string $disputeRecordType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType::valueIsValid($disputeRecordType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeRecordType, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType', is_array($disputeRecordType) ? implode(', ', $disputeRecordType) : var_export($disputeRecordType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeRecordTypeCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeRecordType = $disputeRecordType;
+        
         return $this;
     }
     /**
      * Get DisputeState value
      * @return string|null
      */
-    public function getDisputeState()
+    public function getDisputeState(): ?string
     {
         return $this->DisputeState;
     }
@@ -326,24 +337,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeState value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeStateCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeStateCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeState
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeState($disputeState = null)
+    public function setDisputeState(?string $disputeState = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeStateCodeType::valueIsValid($disputeState)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeState, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeStateCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeStateCodeType', is_array($disputeState) ? implode(', ', $disputeState) : var_export($disputeState, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeStateCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeState = $disputeState;
+        
         return $this;
     }
     /**
      * Get DisputeStatus value
      * @return string|null
      */
-    public function getDisputeStatus()
+    public function getDisputeStatus(): ?string
     {
         return $this->DisputeStatus;
     }
@@ -351,24 +363,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeStatus
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeStatus($disputeStatus = null)
+    public function setDisputeStatus(?string $disputeStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType::valueIsValid($disputeStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType', is_array($disputeStatus) ? implode(', ', $disputeStatus) : var_export($disputeStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeStatusCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeStatus = $disputeStatus;
+        
         return $this;
     }
     /**
      * Get OtherPartyRole value
      * @return string|null
      */
-    public function getOtherPartyRole()
+    public function getOtherPartyRole(): ?string
     {
         return $this->OtherPartyRole;
     }
@@ -376,24 +389,25 @@ class DisputeType extends AbstractStructBase
      * Set OtherPartyRole value
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $otherPartyRole
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setOtherPartyRole($otherPartyRole = null)
+    public function setOtherPartyRole(?string $otherPartyRole = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid($otherPartyRole)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $otherPartyRole, implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType', is_array($otherPartyRole) ? implode(', ', $otherPartyRole) : var_export($otherPartyRole, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
         }
         $this->OtherPartyRole = $otherPartyRole;
+        
         return $this;
     }
     /**
      * Get OtherPartyName value
      * @return string|null
      */
-    public function getOtherPartyName()
+    public function getOtherPartyName(): ?string
     {
         return $this->OtherPartyName;
     }
@@ -402,20 +416,21 @@ class DisputeType extends AbstractStructBase
      * @param string $otherPartyName
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setOtherPartyName($otherPartyName = null)
+    public function setOtherPartyName(?string $otherPartyName = null): self
     {
         // validation for constraint: string
         if (!is_null($otherPartyName) && !is_string($otherPartyName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($otherPartyName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($otherPartyName, true), gettype($otherPartyName)), __LINE__);
         }
         $this->OtherPartyName = $otherPartyName;
+        
         return $this;
     }
     /**
      * Get UserRole value
      * @return string|null
      */
-    public function getUserRole()
+    public function getUserRole(): ?string
     {
         return $this->UserRole;
     }
@@ -423,24 +438,25 @@ class DisputeType extends AbstractStructBase
      * Set UserRole value
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $userRole
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setUserRole($userRole = null)
+    public function setUserRole(?string $userRole = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid($userRole)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $userRole, implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType', is_array($userRole) ? implode(', ', $userRole) : var_export($userRole, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
         }
         $this->UserRole = $userRole;
+        
         return $this;
     }
     /**
      * Get BuyerUserID value
      * @return string|null
      */
-    public function getBuyerUserID()
+    public function getBuyerUserID(): ?string
     {
         return $this->BuyerUserID;
     }
@@ -449,20 +465,21 @@ class DisputeType extends AbstractStructBase
      * @param string $buyerUserID
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setBuyerUserID($buyerUserID = null)
+    public function setBuyerUserID(?string $buyerUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($buyerUserID) && !is_string($buyerUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($buyerUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($buyerUserID, true), gettype($buyerUserID)), __LINE__);
         }
         $this->BuyerUserID = $buyerUserID;
+        
         return $this;
     }
     /**
      * Get SellerUserID value
      * @return string|null
      */
-    public function getSellerUserID()
+    public function getSellerUserID(): ?string
     {
         return $this->SellerUserID;
     }
@@ -471,20 +488,21 @@ class DisputeType extends AbstractStructBase
      * @param string $sellerUserID
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setSellerUserID($sellerUserID = null)
+    public function setSellerUserID(?string $sellerUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerUserID) && !is_string($sellerUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerUserID, true), gettype($sellerUserID)), __LINE__);
         }
         $this->SellerUserID = $sellerUserID;
+        
         return $this;
     }
     /**
      * Get TransactionID value
      * @return string|null
      */
-    public function getTransactionID()
+    public function getTransactionID(): ?string
     {
         return $this->TransactionID;
     }
@@ -493,20 +511,21 @@ class DisputeType extends AbstractStructBase
      * @param string $transactionID
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setTransactionID($transactionID = null)
+    public function setTransactionID(?string $transactionID = null): self
     {
         // validation for constraint: string
         if (!is_null($transactionID) && !is_string($transactionID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($transactionID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($transactionID, true), gettype($transactionID)), __LINE__);
         }
         $this->TransactionID = $transactionID;
+        
         return $this;
     }
     /**
      * Get Item value
      * @return \macropage\ebaysdk\trading\StructType\ItemType|null
      */
-    public function getItem()
+    public function getItem(): ?\macropage\ebaysdk\trading\StructType\ItemType
     {
         return $this->Item;
     }
@@ -515,16 +534,17 @@ class DisputeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setItem(\macropage\ebaysdk\trading\StructType\ItemType $item = null)
+    public function setItem(?\macropage\ebaysdk\trading\StructType\ItemType $item = null): self
     {
         $this->Item = $item;
+        
         return $this;
     }
     /**
      * Get DisputeReason value
      * @return string|null
      */
-    public function getDisputeReason()
+    public function getDisputeReason(): ?string
     {
         return $this->DisputeReason;
     }
@@ -532,24 +552,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeReason value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeReason
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeReason($disputeReason = null)
+    public function setDisputeReason(?string $disputeReason = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType::valueIsValid($disputeReason)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeReason, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType', is_array($disputeReason) ? implode(', ', $disputeReason) : var_export($disputeReason, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeReasonCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeReason = $disputeReason;
+        
         return $this;
     }
     /**
      * Get DisputeExplanation value
      * @return string|null
      */
-    public function getDisputeExplanation()
+    public function getDisputeExplanation(): ?string
     {
         return $this->DisputeExplanation;
     }
@@ -557,24 +578,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeExplanation value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeExplanation
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeExplanation($disputeExplanation = null)
+    public function setDisputeExplanation(?string $disputeExplanation = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType::valueIsValid($disputeExplanation)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeExplanation, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType', is_array($disputeExplanation) ? implode(', ', $disputeExplanation) : var_export($disputeExplanation, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeExplanationCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeExplanation = $disputeExplanation;
+        
         return $this;
     }
     /**
      * Get DisputeCreditEligibility value
      * @return string|null
      */
-    public function getDisputeCreditEligibility()
+    public function getDisputeCreditEligibility(): ?string
     {
         return $this->DisputeCreditEligibility;
     }
@@ -582,24 +604,25 @@ class DisputeType extends AbstractStructBase
      * Set DisputeCreditEligibility value
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $disputeCreditEligibility
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeCreditEligibility($disputeCreditEligibility = null)
+    public function setDisputeCreditEligibility(?string $disputeCreditEligibility = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType::valueIsValid($disputeCreditEligibility)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $disputeCreditEligibility, implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType', is_array($disputeCreditEligibility) ? implode(', ', $disputeCreditEligibility) : var_export($disputeCreditEligibility, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DisputeCreditEligibilityCodeType::getValidValues())), __LINE__);
         }
         $this->DisputeCreditEligibility = $disputeCreditEligibility;
+        
         return $this;
     }
     /**
      * Get DisputeCreatedTime value
      * @return string|null
      */
-    public function getDisputeCreatedTime()
+    public function getDisputeCreatedTime(): ?string
     {
         return $this->DisputeCreatedTime;
     }
@@ -608,20 +631,21 @@ class DisputeType extends AbstractStructBase
      * @param string $disputeCreatedTime
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeCreatedTime($disputeCreatedTime = null)
+    public function setDisputeCreatedTime(?string $disputeCreatedTime = null): self
     {
         // validation for constraint: string
         if (!is_null($disputeCreatedTime) && !is_string($disputeCreatedTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($disputeCreatedTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($disputeCreatedTime, true), gettype($disputeCreatedTime)), __LINE__);
         }
         $this->DisputeCreatedTime = $disputeCreatedTime;
+        
         return $this;
     }
     /**
      * Get DisputeModifiedTime value
      * @return string|null
      */
-    public function getDisputeModifiedTime()
+    public function getDisputeModifiedTime(): ?string
     {
         return $this->DisputeModifiedTime;
     }
@@ -630,100 +654,147 @@ class DisputeType extends AbstractStructBase
      * @param string $disputeModifiedTime
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeModifiedTime($disputeModifiedTime = null)
+    public function setDisputeModifiedTime(?string $disputeModifiedTime = null): self
     {
         // validation for constraint: string
         if (!is_null($disputeModifiedTime) && !is_string($disputeModifiedTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($disputeModifiedTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($disputeModifiedTime, true), gettype($disputeModifiedTime)), __LINE__);
         }
         $this->DisputeModifiedTime = $disputeModifiedTime;
+        
         return $this;
     }
     /**
      * Get DisputeResolution value
-     * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType[]
      */
-    public function getDisputeResolution()
+    public function getDisputeResolution(): array
     {
         return $this->DisputeResolution;
     }
     /**
+     * This method is responsible for validating the values passed to the setDisputeResolution method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setDisputeResolution method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateDisputeResolutionForArrayConstraintsFromSetDisputeResolution(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $disputeTypeDisputeResolutionItem) {
+            // validation for constraint: itemType
+            if (!$disputeTypeDisputeResolutionItem instanceof \macropage\ebaysdk\trading\StructType\DisputeResolutionType) {
+                $invalidValues[] = is_object($disputeTypeDisputeResolutionItem) ? get_class($disputeTypeDisputeResolutionItem) : sprintf('%s(%s)', gettype($disputeTypeDisputeResolutionItem), var_export($disputeTypeDisputeResolutionItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The DisputeResolution property can only contain items of type \macropage\ebaysdk\trading\StructType\DisputeResolutionType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set DisputeResolution value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\DisputeResolutionType[] $disputeResolution
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeResolution(array $disputeResolution = array())
+    public function setDisputeResolution(array $disputeResolution = []): self
     {
-        foreach ($disputeResolution as $disputeTypeDisputeResolutionItem) {
-            // validation for constraint: itemType
-            if (!$disputeTypeDisputeResolutionItem instanceof \macropage\ebaysdk\trading\StructType\DisputeResolutionType) {
-                throw new \InvalidArgumentException(sprintf('The DisputeResolution property can only contain items of \macropage\ebaysdk\trading\StructType\DisputeResolutionType, "%s" given', is_object($disputeTypeDisputeResolutionItem) ? get_class($disputeTypeDisputeResolutionItem) : gettype($disputeTypeDisputeResolutionItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($disputeResolutionArrayErrorMessage = self::validateDisputeResolutionForArrayConstraintsFromSetDisputeResolution($disputeResolution))) {
+            throw new InvalidArgumentException($disputeResolutionArrayErrorMessage, __LINE__);
         }
         $this->DisputeResolution = $disputeResolution;
+        
         return $this;
     }
     /**
      * Add item to DisputeResolution value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\DisputeResolutionType $item
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function addToDisputeResolution(\macropage\ebaysdk\trading\StructType\DisputeResolutionType $item)
+    public function addToDisputeResolution(\macropage\ebaysdk\trading\StructType\DisputeResolutionType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\DisputeResolutionType) {
-            throw new \InvalidArgumentException(sprintf('The DisputeResolution property can only contain items of \macropage\ebaysdk\trading\StructType\DisputeResolutionType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The DisputeResolution property can only contain items of type \macropage\ebaysdk\trading\StructType\DisputeResolutionType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->DisputeResolution[] = $item;
+        
         return $this;
     }
     /**
      * Get DisputeMessage value
-     * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType[]
      */
-    public function getDisputeMessage()
+    public function getDisputeMessage(): array
     {
         return $this->DisputeMessage;
     }
     /**
+     * This method is responsible for validating the values passed to the setDisputeMessage method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setDisputeMessage method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateDisputeMessageForArrayConstraintsFromSetDisputeMessage(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $disputeTypeDisputeMessageItem) {
+            // validation for constraint: itemType
+            if (!$disputeTypeDisputeMessageItem instanceof \macropage\ebaysdk\trading\StructType\DisputeMessageType) {
+                $invalidValues[] = is_object($disputeTypeDisputeMessageItem) ? get_class($disputeTypeDisputeMessageItem) : sprintf('%s(%s)', gettype($disputeTypeDisputeMessageItem), var_export($disputeTypeDisputeMessageItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The DisputeMessage property can only contain items of type \macropage\ebaysdk\trading\StructType\DisputeMessageType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set DisputeMessage value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\DisputeMessageType[] $disputeMessage
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeMessage(array $disputeMessage = array())
+    public function setDisputeMessage(array $disputeMessage = []): self
     {
-        foreach ($disputeMessage as $disputeTypeDisputeMessageItem) {
-            // validation for constraint: itemType
-            if (!$disputeTypeDisputeMessageItem instanceof \macropage\ebaysdk\trading\StructType\DisputeMessageType) {
-                throw new \InvalidArgumentException(sprintf('The DisputeMessage property can only contain items of \macropage\ebaysdk\trading\StructType\DisputeMessageType, "%s" given', is_object($disputeTypeDisputeMessageItem) ? get_class($disputeTypeDisputeMessageItem) : gettype($disputeTypeDisputeMessageItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($disputeMessageArrayErrorMessage = self::validateDisputeMessageForArrayConstraintsFromSetDisputeMessage($disputeMessage))) {
+            throw new InvalidArgumentException($disputeMessageArrayErrorMessage, __LINE__);
         }
         $this->DisputeMessage = $disputeMessage;
+        
         return $this;
     }
     /**
      * Add item to DisputeMessage value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\DisputeMessageType $item
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function addToDisputeMessage(\macropage\ebaysdk\trading\StructType\DisputeMessageType $item)
+    public function addToDisputeMessage(\macropage\ebaysdk\trading\StructType\DisputeMessageType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\DisputeMessageType) {
-            throw new \InvalidArgumentException(sprintf('The DisputeMessage property can only contain items of \macropage\ebaysdk\trading\StructType\DisputeMessageType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The DisputeMessage property can only contain items of type \macropage\ebaysdk\trading\StructType\DisputeMessageType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->DisputeMessage[] = $item;
+        
         return $this;
     }
     /**
      * Get Escalation value
      * @return bool|null
      */
-    public function getEscalation()
+    public function getEscalation(): ?bool
     {
         return $this->Escalation;
     }
@@ -732,20 +803,21 @@ class DisputeType extends AbstractStructBase
      * @param bool $escalation
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setEscalation($escalation = null)
+    public function setEscalation(?bool $escalation = null): self
     {
         // validation for constraint: boolean
         if (!is_null($escalation) && !is_bool($escalation)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($escalation)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($escalation, true), gettype($escalation)), __LINE__);
         }
         $this->Escalation = $escalation;
+        
         return $this;
     }
     /**
      * Get PurchaseProtection value
      * @return bool|null
      */
-    public function getPurchaseProtection()
+    public function getPurchaseProtection(): ?bool
     {
         return $this->PurchaseProtection;
     }
@@ -754,20 +826,21 @@ class DisputeType extends AbstractStructBase
      * @param bool $purchaseProtection
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setPurchaseProtection($purchaseProtection = null)
+    public function setPurchaseProtection(?bool $purchaseProtection = null): self
     {
         // validation for constraint: boolean
         if (!is_null($purchaseProtection) && !is_bool($purchaseProtection)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($purchaseProtection)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($purchaseProtection, true), gettype($purchaseProtection)), __LINE__);
         }
         $this->PurchaseProtection = $purchaseProtection;
+        
         return $this;
     }
     /**
      * Get OrderLineItemID value
      * @return string|null
      */
-    public function getOrderLineItemID()
+    public function getOrderLineItemID(): ?string
     {
         return $this->OrderLineItemID;
     }
@@ -776,65 +849,47 @@ class DisputeType extends AbstractStructBase
      * @param string $orderLineItemID
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setOrderLineItemID($orderLineItemID = null)
+    public function setOrderLineItemID(?string $orderLineItemID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderLineItemID) && !is_string($orderLineItemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderLineItemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderLineItemID, true), gettype($orderLineItemID)), __LINE__);
         }
         $this->OrderLineItemID = $orderLineItemID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\DisputeType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DisputeType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

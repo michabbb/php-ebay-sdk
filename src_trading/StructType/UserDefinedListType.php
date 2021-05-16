@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for UserDefinedListType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains the items, searches and sellers that the user has saved to this list using the "Add to list" feature. The name of the list is given by the "Name" element.
  * @subpackage Structs
  */
@@ -14,65 +17,65 @@ class UserDefinedListType extends AbstractStructBase
 {
     /**
      * The Name
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The user's chosen name for this list.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The ItemCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The value in this field indicates the total number of items in the user-defined list. The number of <b>Item</b> nodes in the <b>ItemArray</b> should match this value.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemCount;
+    protected ?int $ItemCount = null;
     /**
      * The FavoriteSearcheCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is not supported.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FavoriteSearcheCount;
+    protected ?int $FavoriteSearcheCount = null;
     /**
      * The FavoriteSellerCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The value in this field indicates the total number of favorite sellers in the user-defined list. The number of <b>FavoriteSeller</b> nodes returned in the response should match this value.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $FavoriteSellerCount;
+    protected ?int $FavoriteSellerCount = null;
     /**
      * The ItemArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An array of Items that the user has added to the user-defined list.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public $ItemArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $ItemArray = null;
     /**
      * The FavoriteSearches
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An array of Favorite Searches that the user has added to the user-defined list.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
+     * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType|null
      */
-    public $FavoriteSearches;
+    protected ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $FavoriteSearches = null;
     /**
      * The FavoriteSellers
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: An array of Favorite Sellers that the user has added to the user-defined list.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType
+     * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType|null
      */
-    public $FavoriteSellers;
+    protected ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $FavoriteSellers = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for UserDefinedListType
      * @uses UserDefinedListType::setName()
@@ -90,9 +93,9 @@ class UserDefinedListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($name = null, $itemCount = null, $favoriteSearcheCount = null, $favoriteSellerCount = null, \macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null, \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, \DOMDocument $any = null)
+    public function __construct(?string $name = null, ?int $itemCount = null, ?int $favoriteSearcheCount = null, ?int $favoriteSellerCount = null, ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, $any = null)
     {
         $this
             ->setName($name)
@@ -108,7 +111,7 @@ class UserDefinedListType extends AbstractStructBase
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -117,20 +120,21 @@ class UserDefinedListType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get ItemCount value
      * @return int|null
      */
-    public function getItemCount()
+    public function getItemCount(): ?int
     {
         return $this->ItemCount;
     }
@@ -139,20 +143,21 @@ class UserDefinedListType extends AbstractStructBase
      * @param int $itemCount
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setItemCount($itemCount = null)
+    public function setItemCount(?int $itemCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemCount) && !is_numeric($itemCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemCount)), __LINE__);
+        if (!is_null($itemCount) && !(is_int($itemCount) || ctype_digit($itemCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemCount, true), gettype($itemCount)), __LINE__);
         }
         $this->ItemCount = $itemCount;
+        
         return $this;
     }
     /**
      * Get FavoriteSearcheCount value
      * @return int|null
      */
-    public function getFavoriteSearcheCount()
+    public function getFavoriteSearcheCount(): ?int
     {
         return $this->FavoriteSearcheCount;
     }
@@ -161,20 +166,21 @@ class UserDefinedListType extends AbstractStructBase
      * @param int $favoriteSearcheCount
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setFavoriteSearcheCount($favoriteSearcheCount = null)
+    public function setFavoriteSearcheCount(?int $favoriteSearcheCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($favoriteSearcheCount) && !is_numeric($favoriteSearcheCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($favoriteSearcheCount)), __LINE__);
+        if (!is_null($favoriteSearcheCount) && !(is_int($favoriteSearcheCount) || ctype_digit($favoriteSearcheCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($favoriteSearcheCount, true), gettype($favoriteSearcheCount)), __LINE__);
         }
         $this->FavoriteSearcheCount = $favoriteSearcheCount;
+        
         return $this;
     }
     /**
      * Get FavoriteSellerCount value
      * @return int|null
      */
-    public function getFavoriteSellerCount()
+    public function getFavoriteSellerCount(): ?int
     {
         return $this->FavoriteSellerCount;
     }
@@ -183,20 +189,21 @@ class UserDefinedListType extends AbstractStructBase
      * @param int $favoriteSellerCount
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setFavoriteSellerCount($favoriteSellerCount = null)
+    public function setFavoriteSellerCount(?int $favoriteSellerCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($favoriteSellerCount) && !is_numeric($favoriteSellerCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($favoriteSellerCount)), __LINE__);
+        if (!is_null($favoriteSellerCount) && !(is_int($favoriteSellerCount) || ctype_digit($favoriteSellerCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($favoriteSellerCount, true), gettype($favoriteSellerCount)), __LINE__);
         }
         $this->FavoriteSellerCount = $favoriteSellerCount;
+        
         return $this;
     }
     /**
      * Get ItemArray value
      * @return \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public function getItemArray()
+    public function getItemArray(): ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType
     {
         return $this->ItemArray;
     }
@@ -205,16 +212,17 @@ class UserDefinedListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setItemArray(\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null)
+    public function setItemArray(?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null): self
     {
         $this->ItemArray = $itemArray;
+        
         return $this;
     }
     /**
      * Get FavoriteSearches value
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType|null
      */
-    public function getFavoriteSearches()
+    public function getFavoriteSearches(): ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
     {
         return $this->FavoriteSearches;
     }
@@ -223,16 +231,17 @@ class UserDefinedListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setFavoriteSearches(\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null)
+    public function setFavoriteSearches(?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null): self
     {
         $this->FavoriteSearches = $favoriteSearches;
+        
         return $this;
     }
     /**
      * Get FavoriteSellers value
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType|null
      */
-    public function getFavoriteSellers()
+    public function getFavoriteSellers(): ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType
     {
         return $this->FavoriteSellers;
     }
@@ -241,61 +250,43 @@ class UserDefinedListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setFavoriteSellers(\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null)
+    public function setFavoriteSellers(?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null): self
     {
         $this->FavoriteSellers = $favoriteSellers;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\UserDefinedListType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

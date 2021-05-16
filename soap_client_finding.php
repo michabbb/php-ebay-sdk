@@ -1,13 +1,14 @@
 <?php
+declare(strict_types=1);
 
 namespace macropage\ebaysdk\base;
 
 class soap_client_finding extends \SoapClient {
 
-    public function __construct($wsdl, array $options = null) {
+    public function __construct(string $wsdl, array $options = []) {
         $new_options = [];
         foreach ($options as $key => $data) {
-            if (strpos($key,'wsdl_',0)!==false) {
+            if (str_contains($key, 'wsdl_')) {
                 $new_options[substr($key,5)] = $data;
             } else {
                 $new_options[$key] = $data;
@@ -16,14 +17,26 @@ class soap_client_finding extends \SoapClient {
         parent::__construct($wsdl, $new_options);
     }
 
-    public function __doRequest($request, $location, $action, $version, $one_way = 0) {
+    /**
+     * @param string $request
+     * @param string $location
+     * @param string $action
+     * @param int    $version
+     * @param int    $oneWay
+     *
+     * @return string
+     */
+    public function __doRequest($request, $location, $action, $version, $oneWay = 0): string
+    {
         preg_match_all('/(<\/?(\w*)>)/',$request,$matches);
         $toreplace = array_unique($matches[2]);
         foreach ($toreplace as $node) {
-            $request = preg_replace('/<'.$node.'>/','<ns1:'.$node.'>',$request);
-            $request = preg_replace('/<\/'.$node.'>/','</ns1:'.$node.'>',$request);
+            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+            $request = preg_replace('/<' . $node . '>/', '<ns1:' . $node . '>', $request);
+            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
+            $request = preg_replace('/<\/' . $node . '>/', '</ns1:' . $node . '>', $request);
         }
-        return parent::__doRequest($request, $location, $action, $version, $one_way);
+        return parent::__doRequest($request, $location, $action, $version, $oneWay);
     }
 
 }

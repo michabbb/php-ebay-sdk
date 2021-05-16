@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetCategoriesRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves the latest eBay category hierarchy for a given eBay site. Information returned for each category includes the category name and the unique ID for the category (unique within the eBay site for which categories are
  * retrieved). A category ID is a required input when you list most items.
  * @subpackage Structs
@@ -15,41 +18,46 @@ class GetCategoriesRequestType extends AbstractRequestType
 {
     /**
      * The CategorySiteID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is used if the user wants to retrieve category data for another eBay site (other than the one specified in the <code>X-EBAY-API-SITEID</code> request header). <br> <br> If the user wishes to retrieve category data for the
      * US eBay Motors site, the user must set the Site ID in the <code>X-EBAY-API-SITEID</code> request header to <code>0</code>, and then set this field's value to <code>100</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategorySiteID;
+    protected ?string $CategorySiteID = null;
     /**
      * The CategoryParent
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the ID of the highest-level category to return, along with its subcategories. If no parent category is specified, all categories are returned for the specified site. (Please do not pass a value of 0; zero (0) is an invalid
-     * value for CategoryParent.) To determine available category IDs, call GetCategories with no filters and use a DetailLevel value of ReturnAll. If you specify multiple parent categories, the hierarchy for each one is returned.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is used if the user wishes to retrieve category hierarchy information on one or more specific eBay categories, and optionally, one or more levels of each category's children (if a category has one or more levels of
+     * children). For example, if you wanted to view the entire category hierarchy under the <em>Home & Garden</em> L1 category, you would include this field and set its value to <code>11700</code>. As long as the <b>LevelLimit</b> field is omitted, all of
+     * <em>Home & Garden</em>'s child categories are returned. If you only wanted to see the next level (L2s) of <em>Home & Garden</em> categories, you would include the <b>LevelLimit</b> field and set its value to <code>2</code>, allowing the L1 category
+     * (<em>Home & Garden</em>) and all of its L2 categories to appear in the response. <br> <br> If you wanted to see all of the Category IDs for the eBay site's L1 categories, you could omit the <b>CategoryParent</b> field but include the
+     * <b>LevelLimit</b> field and set its value to <code>1</code>. <br> <br> <span class="tablenote"><b>Note:</b> Numerous Category IDs may be specified under multiple <b>CategoryParent</b> fields in a <b>GetCategories</b> request, but if multiple
+     * <b>CategoryParent</b> fields are used, the specified Category IDs should all be at the same level (L1, L2, L3, etc.). </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $CategoryParent;
+    protected array $CategoryParent = [];
     /**
      * The LevelLimit
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the maximum depth of the category hierarchy to retrieve, where the top-level categories (meta-categories) are at level 1. Retrieves all category nodes with a category level less than or equal to this value. If not
-     * specified, retrieves categories at all applicable levels. As with all calls, the actual data returned will vary depending on how you configure other fields in the request (including <b>DetailLevel</b>).
+     * Meta information extracted from the WSDL
+     * - documentation: This field is used if the user wants to control the maximum depth of the category hierarchy to retrieve, or in other words, how many levels of eBay categories that are returned in the response. If this field is omitted, every eBay
+     * category from the root on down will be returned, or, if a <b>CategoryParent</b> category is specified, the specified category and all of its children (down to the leaf categories) are returned. <br> <br> If the <b>CategoryParent</b> is not used, but
+     * the <b>LevelLimit</b> field is used and set to <code>1</code>, only the top-level categories (also known as L1 categories) are returned in the response.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $LevelLimit;
+    protected ?int $LevelLimit = null;
     /**
      * The ViewAllNodes
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This flag controls whether all eBay categories (that satisfy input filters) are returned, or only leaf categories (you can only list items in leaf categories) are returned. The default value is 'true', so if this field is omitted,
-     * all eBay categories will be returned. If you only want to retrieve leaf categories, include this flag and set it to 'false'. The actual data returned will vary depending on how you configure other fields in the request.
+     * all eBay categories will be returned. If you only want to retrieve leaf categories, include this flag and set it to <code>false</code>. <br>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ViewAllNodes;
+    protected ?bool $ViewAllNodes = null;
     /**
      * Constructor method for GetCategoriesRequestType
      * @uses GetCategoriesRequestType::setCategorySiteID()
@@ -61,7 +69,7 @@ class GetCategoriesRequestType extends AbstractRequestType
      * @param int $levelLimit
      * @param bool $viewAllNodes
      */
-    public function __construct($categorySiteID = null, array $categoryParent = array(), $levelLimit = null, $viewAllNodes = null)
+    public function __construct(?string $categorySiteID = null, array $categoryParent = [], ?int $levelLimit = null, ?bool $viewAllNodes = null)
     {
         $this
             ->setCategorySiteID($categorySiteID)
@@ -73,7 +81,7 @@ class GetCategoriesRequestType extends AbstractRequestType
      * Get CategorySiteID value
      * @return string|null
      */
-    public function getCategorySiteID()
+    public function getCategorySiteID(): ?string
     {
         return $this->CategorySiteID;
     }
@@ -82,60 +90,84 @@ class GetCategoriesRequestType extends AbstractRequestType
      * @param string $categorySiteID
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
      */
-    public function setCategorySiteID($categorySiteID = null)
+    public function setCategorySiteID(?string $categorySiteID = null): self
     {
         // validation for constraint: string
         if (!is_null($categorySiteID) && !is_string($categorySiteID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categorySiteID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categorySiteID, true), gettype($categorySiteID)), __LINE__);
         }
         $this->CategorySiteID = $categorySiteID;
+        
         return $this;
     }
     /**
      * Get CategoryParent value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getCategoryParent()
+    public function getCategoryParent(): array
     {
         return $this->CategoryParent;
     }
     /**
+     * This method is responsible for validating the values passed to the setCategoryParent method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCategoryParent method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCategoryParentForArrayConstraintsFromSetCategoryParent(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $getCategoriesRequestTypeCategoryParentItem) {
+            // validation for constraint: itemType
+            if (!is_string($getCategoriesRequestTypeCategoryParentItem)) {
+                $invalidValues[] = is_object($getCategoriesRequestTypeCategoryParentItem) ? get_class($getCategoriesRequestTypeCategoryParentItem) : sprintf('%s(%s)', gettype($getCategoriesRequestTypeCategoryParentItem), var_export($getCategoriesRequestTypeCategoryParentItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The CategoryParent property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set CategoryParent value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $categoryParent
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
      */
-    public function setCategoryParent(array $categoryParent = array())
+    public function setCategoryParent(array $categoryParent = []): self
     {
-        foreach ($categoryParent as $getCategoriesRequestTypeCategoryParentItem) {
-            // validation for constraint: itemType
-            if (!is_string($getCategoriesRequestTypeCategoryParentItem)) {
-                throw new \InvalidArgumentException(sprintf('The CategoryParent property can only contain items of string, "%s" given', is_object($getCategoriesRequestTypeCategoryParentItem) ? get_class($getCategoriesRequestTypeCategoryParentItem) : gettype($getCategoriesRequestTypeCategoryParentItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($categoryParentArrayErrorMessage = self::validateCategoryParentForArrayConstraintsFromSetCategoryParent($categoryParent))) {
+            throw new InvalidArgumentException($categoryParentArrayErrorMessage, __LINE__);
         }
         $this->CategoryParent = $categoryParent;
+        
         return $this;
     }
     /**
      * Add item to CategoryParent value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
      */
-    public function addToCategoryParent($item)
+    public function addToCategoryParent(string $item): self
     {
         // validation for constraint: itemType
         if (!is_string($item)) {
-            throw new \InvalidArgumentException(sprintf('The CategoryParent property can only contain items of string, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The CategoryParent property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->CategoryParent[] = $item;
+        
         return $this;
     }
     /**
      * Get LevelLimit value
      * @return int|null
      */
-    public function getLevelLimit()
+    public function getLevelLimit(): ?int
     {
         return $this->LevelLimit;
     }
@@ -144,20 +176,21 @@ class GetCategoriesRequestType extends AbstractRequestType
      * @param int $levelLimit
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
      */
-    public function setLevelLimit($levelLimit = null)
+    public function setLevelLimit(?int $levelLimit = null): self
     {
         // validation for constraint: int
-        if (!is_null($levelLimit) && !is_numeric($levelLimit)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($levelLimit)), __LINE__);
+        if (!is_null($levelLimit) && !(is_int($levelLimit) || ctype_digit($levelLimit))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($levelLimit, true), gettype($levelLimit)), __LINE__);
         }
         $this->LevelLimit = $levelLimit;
+        
         return $this;
     }
     /**
      * Get ViewAllNodes value
      * @return bool|null
      */
-    public function getViewAllNodes()
+    public function getViewAllNodes(): ?bool
     {
         return $this->ViewAllNodes;
     }
@@ -166,33 +199,14 @@ class GetCategoriesRequestType extends AbstractRequestType
      * @param bool $viewAllNodes
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
      */
-    public function setViewAllNodes($viewAllNodes = null)
+    public function setViewAllNodes(?bool $viewAllNodes = null): self
     {
         // validation for constraint: boolean
         if (!is_null($viewAllNodes) && !is_bool($viewAllNodes)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($viewAllNodes)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($viewAllNodes, true), gettype($viewAllNodes)), __LINE__);
         }
         $this->ViewAllNodes = $viewAllNodes;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

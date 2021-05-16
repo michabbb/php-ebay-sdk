@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for NameValueListArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: A list of one or more valid names and corresponding values used to identify Item Specifics at the listing level and at the variation level for individual variations within a multiple-variation listing. For the <b>FindProducts</b>
  * call, this container is also used to express the Item Specifics for an eBay Catalog product.
  * @subpackage Arrays
@@ -15,7 +18,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
 {
     /**
      * The NameValueList
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This list is an array of Item Specifics name-value pairs for an eBay Catalog product (if <b>FindProducts</b> is used) or Item Specifics name-value pairs for a single-variation listing or individual variation within a
      * multiple-variation listing (if <b>GetSingleItem</b> or <b>GetMultipleItems</b> is used). <br><br> For example, Item Specifics for a motor vehicle might include a field like Make=Toyota (where <code>Make</code> is returned in <b>Name</b> field, and
      * <code>Toyota</code> is returned in <b>Value</b> field) and Model=Prius (where <code>Model</code> is returned in <b>Name</b> field, and <code>Prius</code> is returned in <b>Value</b> field).<br> <br> In multiple-variation listings, the same name
@@ -26,55 +29,62 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    public $NameValueList;
+    protected array $NameValueList = [];
     /**
      * Constructor method for NameValueListArrayType
      * @uses NameValueListArrayType::setNameValueList()
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType[] $nameValueList
      */
-    public function __construct(array $nameValueList = array())
+    public function __construct(array $nameValueList = [])
     {
         $this
             ->setNameValueList($nameValueList);
     }
     /**
      * Get NameValueList value
-     * @return \macropage\ebaysdk\shopping\StructType\NameValueListType[]|null
+     * @return \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    public function getNameValueList()
+    public function getNameValueList(): array
     {
         return $this->NameValueList;
     }
     /**
+     * This method is responsible for validating the values passed to the setNameValueList method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setNameValueList method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $nameValueListArrayTypeNameValueListItem) {
+            // validation for constraint: itemType
+            if (!$nameValueListArrayTypeNameValueListItem instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
+                $invalidValues[] = is_object($nameValueListArrayTypeNameValueListItem) ? get_class($nameValueListArrayTypeNameValueListItem) : sprintf('%s(%s)', gettype($nameValueListArrayTypeNameValueListItem), var_export($nameValueListArrayTypeNameValueListItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The NameValueList property can only contain items of type \macropage\ebaysdk\shopping\StructType\NameValueListType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set NameValueList value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType
      */
-    public function setNameValueList(array $nameValueList = array())
+    public function setNameValueList(array $nameValueList = []): self
     {
-        foreach ($nameValueList as $nameValueListArrayTypeNameValueListItem) {
-            // validation for constraint: itemType
-            if (!$nameValueListArrayTypeNameValueListItem instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
-                throw new \InvalidArgumentException(sprintf('The NameValueList property can only contain items of \macropage\ebaysdk\shopping\StructType\NameValueListType, "%s" given', is_object($nameValueListArrayTypeNameValueListItem) ? get_class($nameValueListArrayTypeNameValueListItem) : gettype($nameValueListArrayTypeNameValueListItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {
+            throw new InvalidArgumentException($nameValueListArrayErrorMessage, __LINE__);
         }
         $this->NameValueList = $nameValueList;
-        return $this;
-    }
-    /**
-     * Add item to NameValueList value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\shopping\StructType\NameValueListType $item
-     * @return \macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType
-     */
-    public function addToNameValueList(\macropage\ebaysdk\shopping\StructType\NameValueListType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
-            throw new \InvalidArgumentException(sprintf('The NameValueList property can only contain items of \macropage\ebaysdk\shopping\StructType\NameValueListType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->NameValueList[] = $item;
+        
         return $this;
     }
     /**
@@ -82,7 +92,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\shopping\StructType\NameValueListType
     {
         return parent::current();
     }
@@ -92,7 +102,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\shopping\StructType\NameValueListType
     {
         return parent::item($index);
     }
@@ -101,7 +111,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\shopping\StructType\NameValueListType
     {
         return parent::first();
     }
@@ -110,7 +120,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\shopping\StructType\NameValueListType
     {
         return parent::last();
     }
@@ -120,37 +130,32 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\shopping\StructType\NameValueListType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\shopping\StructType\NameValueListType $item
+     * @return \macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\shopping\StructType\NameValueListType) {
+            throw new InvalidArgumentException(sprintf('The NameValueList property can only contain items of type \macropage\ebaysdk\shopping\StructType\NameValueListType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string NameValueList
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'NameValueList';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

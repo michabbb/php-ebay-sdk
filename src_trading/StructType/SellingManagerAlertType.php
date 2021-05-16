@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerAlertType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the Alert container, which contains summary information on one type of Selling Manager alert.
  * @subpackage Structs
  */
@@ -14,73 +17,73 @@ class SellingManagerAlertType extends AbstractStructBase
 {
     /**
      * The AlertType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field indicates the type of Selling Manager alert returned to the seller. This field is always returned with the <b>Alert</b> container in the <b>GetSellingManagerAlerts</b> response.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AlertType;
+    protected ?string $AlertType = null;
     /**
      * The SoldAlert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates an alert related to a sold item. This field is only returned if <b>AlertType</b>='Sold'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SoldAlert;
+    protected ?string $SoldAlert = null;
     /**
      * The InventoryAlert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates an alert related to the seller's inventory, such as a restocking alert. This field is only returned if <b>AlertType</b>='Inventory'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InventoryAlert;
+    protected ?string $InventoryAlert = null;
     /**
      * The AutomationAlert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates an alert related to listing automation, and may be received when a listing does not conform to listing automation rules. This field is only returned if <b>AlertType</b>='Automation'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AutomationAlert;
+    protected ?string $AutomationAlert = null;
     /**
      * The PaisaPayAlert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates an alert related to a PaisaPay issue. This field is only returned if <b>AlertType</b>='PaisaPay'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaisaPayAlert;
+    protected ?string $PaisaPayAlert = null;
     /**
      * The GeneralAlert
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates a general alert was received, such as negative feedback received or an unpaid item dispute. This field is only returned if <b> AlertType</b>='General'.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $GeneralAlert;
+    protected ?string $GeneralAlert = null;
     /**
      * The DurationInDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Represents the duration for which this alert is computed. This field is only returned if the alert is based on duration.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $DurationInDays;
+    protected ?int $DurationInDays = null;
     /**
      * The Count
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field indicates the number of items affected by the alert. This field is not returned if the count is 0.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Count;
+    protected ?int $Count = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerAlertType
      * @uses SellingManagerAlertType::setAlertType()
@@ -100,9 +103,9 @@ class SellingManagerAlertType extends AbstractStructBase
      * @param string $generalAlert
      * @param int $durationInDays
      * @param int $count
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($alertType = null, $soldAlert = null, $inventoryAlert = null, $automationAlert = null, $paisaPayAlert = null, $generalAlert = null, $durationInDays = null, $count = null, \DOMDocument $any = null)
+    public function __construct(?string $alertType = null, ?string $soldAlert = null, ?string $inventoryAlert = null, ?string $automationAlert = null, ?string $paisaPayAlert = null, ?string $generalAlert = null, ?int $durationInDays = null, ?int $count = null, $any = null)
     {
         $this
             ->setAlertType($alertType)
@@ -119,7 +122,7 @@ class SellingManagerAlertType extends AbstractStructBase
      * Get AlertType value
      * @return string|null
      */
-    public function getAlertType()
+    public function getAlertType(): ?string
     {
         return $this->AlertType;
     }
@@ -127,24 +130,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set AlertType value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $alertType
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setAlertType($alertType = null)
+    public function setAlertType(?string $alertType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType::valueIsValid($alertType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $alertType, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType', is_array($alertType) ? implode(', ', $alertType) : var_export($alertType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAlertTypeCodeType::getValidValues())), __LINE__);
         }
         $this->AlertType = $alertType;
+        
         return $this;
     }
     /**
      * Get SoldAlert value
      * @return string|null
      */
-    public function getSoldAlert()
+    public function getSoldAlert(): ?string
     {
         return $this->SoldAlert;
     }
@@ -152,24 +156,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set SoldAlert value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $soldAlert
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setSoldAlert($soldAlert = null)
+    public function setSoldAlert(?string $soldAlert = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType::valueIsValid($soldAlert)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $soldAlert, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType', is_array($soldAlert) ? implode(', ', $soldAlert) : var_export($soldAlert, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerSoldListingsPropertyTypeCodeType::getValidValues())), __LINE__);
         }
         $this->SoldAlert = $soldAlert;
+        
         return $this;
     }
     /**
      * Get InventoryAlert value
      * @return string|null
      */
-    public function getInventoryAlert()
+    public function getInventoryAlert(): ?string
     {
         return $this->InventoryAlert;
     }
@@ -177,24 +182,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set InventoryAlert value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $inventoryAlert
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setInventoryAlert($inventoryAlert = null)
+    public function setInventoryAlert(?string $inventoryAlert = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType::valueIsValid($inventoryAlert)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $inventoryAlert, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType', is_array($inventoryAlert) ? implode(', ', $inventoryAlert) : var_export($inventoryAlert, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerInventoryPropertyTypeCodeType::getValidValues())), __LINE__);
         }
         $this->InventoryAlert = $inventoryAlert;
+        
         return $this;
     }
     /**
      * Get AutomationAlert value
      * @return string|null
      */
-    public function getAutomationAlert()
+    public function getAutomationAlert(): ?string
     {
         return $this->AutomationAlert;
     }
@@ -202,24 +208,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set AutomationAlert value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $automationAlert
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setAutomationAlert($automationAlert = null)
+    public function setAutomationAlert(?string $automationAlert = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType::valueIsValid($automationAlert)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $automationAlert, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType', is_array($automationAlert) ? implode(', ', $automationAlert) : var_export($automationAlert, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerAutomationPropertyTypeCodeType::getValidValues())), __LINE__);
         }
         $this->AutomationAlert = $automationAlert;
+        
         return $this;
     }
     /**
      * Get PaisaPayAlert value
      * @return string|null
      */
-    public function getPaisaPayAlert()
+    public function getPaisaPayAlert(): ?string
     {
         return $this->PaisaPayAlert;
     }
@@ -227,24 +234,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set PaisaPayAlert value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paisaPayAlert
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setPaisaPayAlert($paisaPayAlert = null)
+    public function setPaisaPayAlert(?string $paisaPayAlert = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType::valueIsValid($paisaPayAlert)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paisaPayAlert, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType', is_array($paisaPayAlert) ? implode(', ', $paisaPayAlert) : var_export($paisaPayAlert, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerPaisaPayPropertyTypeCodeType::getValidValues())), __LINE__);
         }
         $this->PaisaPayAlert = $paisaPayAlert;
+        
         return $this;
     }
     /**
      * Get GeneralAlert value
      * @return string|null
      */
-    public function getGeneralAlert()
+    public function getGeneralAlert(): ?string
     {
         return $this->GeneralAlert;
     }
@@ -252,24 +260,25 @@ class SellingManagerAlertType extends AbstractStructBase
      * Set GeneralAlert value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $generalAlert
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setGeneralAlert($generalAlert = null)
+    public function setGeneralAlert(?string $generalAlert = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType::valueIsValid($generalAlert)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $generalAlert, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType', is_array($generalAlert) ? implode(', ', $generalAlert) : var_export($generalAlert, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerGeneralPropertyTypeCodeType::getValidValues())), __LINE__);
         }
         $this->GeneralAlert = $generalAlert;
+        
         return $this;
     }
     /**
      * Get DurationInDays value
      * @return int|null
      */
-    public function getDurationInDays()
+    public function getDurationInDays(): ?int
     {
         return $this->DurationInDays;
     }
@@ -278,20 +287,21 @@ class SellingManagerAlertType extends AbstractStructBase
      * @param int $durationInDays
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setDurationInDays($durationInDays = null)
+    public function setDurationInDays(?int $durationInDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($durationInDays) && !is_numeric($durationInDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($durationInDays)), __LINE__);
+        if (!is_null($durationInDays) && !(is_int($durationInDays) || ctype_digit($durationInDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($durationInDays, true), gettype($durationInDays)), __LINE__);
         }
         $this->DurationInDays = $durationInDays;
+        
         return $this;
     }
     /**
      * Get Count value
      * @return int|null
      */
-    public function getCount()
+    public function getCount(): ?int
     {
         return $this->Count;
     }
@@ -300,65 +310,47 @@ class SellingManagerAlertType extends AbstractStructBase
      * @param int $count
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setCount($count = null)
+    public function setCount(?int $count = null): self
     {
         // validation for constraint: int
-        if (!is_null($count) && !is_numeric($count)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($count)), __LINE__);
+        if (!is_null($count) && !(is_int($count) || ctype_digit($count))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($count, true), gettype($count)), __LINE__);
         }
         $this->Count = $count;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerAlertType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerAlertType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

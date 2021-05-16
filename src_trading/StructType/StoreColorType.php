@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreColorType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Store color set.
  * @subpackage Structs
  */
@@ -14,33 +17,33 @@ class StoreColorType extends AbstractStructBase
 {
     /**
      * The Primary
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Primary color for the Store. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Primary;
+    protected ?string $Primary = null;
     /**
      * The Secondary
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Secondary color for the Store. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Secondary;
+    protected ?string $Secondary = null;
     /**
      * The Accent
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Accent color for the Store. Specified in 6-digit Hex format. For example: F6F6C9
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Accent;
+    protected ?string $Accent = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreColorType
      * @uses StoreColorType::setPrimary()
@@ -50,9 +53,9 @@ class StoreColorType extends AbstractStructBase
      * @param string $primary
      * @param string $secondary
      * @param string $accent
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($primary = null, $secondary = null, $accent = null, \DOMDocument $any = null)
+    public function __construct(?string $primary = null, ?string $secondary = null, ?string $accent = null, $any = null)
     {
         $this
             ->setPrimary($primary)
@@ -64,7 +67,7 @@ class StoreColorType extends AbstractStructBase
      * Get Primary value
      * @return string|null
      */
-    public function getPrimary()
+    public function getPrimary(): ?string
     {
         return $this->Primary;
     }
@@ -73,20 +76,21 @@ class StoreColorType extends AbstractStructBase
      * @param string $primary
      * @return \macropage\ebaysdk\trading\StructType\StoreColorType
      */
-    public function setPrimary($primary = null)
+    public function setPrimary(?string $primary = null): self
     {
         // validation for constraint: string
         if (!is_null($primary) && !is_string($primary)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($primary)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($primary, true), gettype($primary)), __LINE__);
         }
         $this->Primary = $primary;
+        
         return $this;
     }
     /**
      * Get Secondary value
      * @return string|null
      */
-    public function getSecondary()
+    public function getSecondary(): ?string
     {
         return $this->Secondary;
     }
@@ -95,20 +99,21 @@ class StoreColorType extends AbstractStructBase
      * @param string $secondary
      * @return \macropage\ebaysdk\trading\StructType\StoreColorType
      */
-    public function setSecondary($secondary = null)
+    public function setSecondary(?string $secondary = null): self
     {
         // validation for constraint: string
         if (!is_null($secondary) && !is_string($secondary)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($secondary)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($secondary, true), gettype($secondary)), __LINE__);
         }
         $this->Secondary = $secondary;
+        
         return $this;
     }
     /**
      * Get Accent value
      * @return string|null
      */
-    public function getAccent()
+    public function getAccent(): ?string
     {
         return $this->Accent;
     }
@@ -117,65 +122,47 @@ class StoreColorType extends AbstractStructBase
      * @param string $accent
      * @return \macropage\ebaysdk\trading\StructType\StoreColorType
      */
-    public function setAccent($accent = null)
+    public function setAccent(?string $accent = null): self
     {
         // validation for constraint: string
         if (!is_null($accent) && !is_string($accent)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($accent)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($accent, true), gettype($accent)), __LINE__);
         }
         $this->Accent = $accent;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreColorType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreColorType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreColorType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

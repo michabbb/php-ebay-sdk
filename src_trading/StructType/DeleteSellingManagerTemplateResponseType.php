@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DeleteSellingManagerTemplateResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Response for deleting a Selling Manager template.
  * @subpackage Structs
  */
@@ -14,20 +17,20 @@ class DeleteSellingManagerTemplateResponseType extends AbstractResponseType
 {
     /**
      * The DeletedSaleTemplateID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the Selling Manager template.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DeletedSaleTemplateID;
+    protected ?string $DeletedSaleTemplateID = null;
     /**
      * The DeletedSaleTemplateName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of the Selling Manager template.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DeletedSaleTemplateName;
+    protected ?string $DeletedSaleTemplateName = null;
     /**
      * Constructor method for DeleteSellingManagerTemplateResponseType
      * @uses DeleteSellingManagerTemplateResponseType::setDeletedSaleTemplateID()
@@ -35,7 +38,7 @@ class DeleteSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $deletedSaleTemplateID
      * @param string $deletedSaleTemplateName
      */
-    public function __construct($deletedSaleTemplateID = null, $deletedSaleTemplateName = null)
+    public function __construct(?string $deletedSaleTemplateID = null, ?string $deletedSaleTemplateName = null)
     {
         $this
             ->setDeletedSaleTemplateID($deletedSaleTemplateID)
@@ -45,7 +48,7 @@ class DeleteSellingManagerTemplateResponseType extends AbstractResponseType
      * Get DeletedSaleTemplateID value
      * @return string|null
      */
-    public function getDeletedSaleTemplateID()
+    public function getDeletedSaleTemplateID(): ?string
     {
         return $this->DeletedSaleTemplateID;
     }
@@ -54,20 +57,21 @@ class DeleteSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $deletedSaleTemplateID
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateResponseType
      */
-    public function setDeletedSaleTemplateID($deletedSaleTemplateID = null)
+    public function setDeletedSaleTemplateID(?string $deletedSaleTemplateID = null): self
     {
         // validation for constraint: string
         if (!is_null($deletedSaleTemplateID) && !is_string($deletedSaleTemplateID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($deletedSaleTemplateID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($deletedSaleTemplateID, true), gettype($deletedSaleTemplateID)), __LINE__);
         }
         $this->DeletedSaleTemplateID = $deletedSaleTemplateID;
+        
         return $this;
     }
     /**
      * Get DeletedSaleTemplateName value
      * @return string|null
      */
-    public function getDeletedSaleTemplateName()
+    public function getDeletedSaleTemplateName(): ?string
     {
         return $this->DeletedSaleTemplateName;
     }
@@ -76,33 +80,14 @@ class DeleteSellingManagerTemplateResponseType extends AbstractResponseType
      * @param string $deletedSaleTemplateName
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateResponseType
      */
-    public function setDeletedSaleTemplateName($deletedSaleTemplateName = null)
+    public function setDeletedSaleTemplateName(?string $deletedSaleTemplateName = null): self
     {
         // validation for constraint: string
         if (!is_null($deletedSaleTemplateName) && !is_string($deletedSaleTemplateName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($deletedSaleTemplateName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($deletedSaleTemplateName, true), gettype($deletedSaleTemplateName)), __LINE__);
         }
         $this->DeletedSaleTemplateName = $deletedSaleTemplateName;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

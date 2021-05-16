@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DeleteSellingManagerTemplateRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Deletes a Selling Manager template. This call is subject to change without notice; the deprecation process is inapplicable to this call.
  * @subpackage Structs
  */
@@ -14,18 +17,18 @@ class DeleteSellingManagerTemplateRequestType extends AbstractRequestType
 {
     /**
      * The SaleTemplateID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier of the Selling Manager template to be deleted. You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SaleTemplateID;
+    protected ?int $SaleTemplateID = null;
     /**
      * Constructor method for DeleteSellingManagerTemplateRequestType
      * @uses DeleteSellingManagerTemplateRequestType::setSaleTemplateID()
      * @param int $saleTemplateID
      */
-    public function __construct($saleTemplateID = null)
+    public function __construct(?int $saleTemplateID = null)
     {
         $this
             ->setSaleTemplateID($saleTemplateID);
@@ -34,7 +37,7 @@ class DeleteSellingManagerTemplateRequestType extends AbstractRequestType
      * Get SaleTemplateID value
      * @return int|null
      */
-    public function getSaleTemplateID()
+    public function getSaleTemplateID(): ?int
     {
         return $this->SaleTemplateID;
     }
@@ -43,33 +46,14 @@ class DeleteSellingManagerTemplateRequestType extends AbstractRequestType
      * @param int $saleTemplateID
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateRequestType
      */
-    public function setSaleTemplateID($saleTemplateID = null)
+    public function setSaleTemplateID(?int $saleTemplateID = null): self
     {
         // validation for constraint: int
-        if (!is_null($saleTemplateID) && !is_numeric($saleTemplateID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($saleTemplateID)), __LINE__);
+        if (!is_null($saleTemplateID) && !(is_int($saleTemplateID) || ctype_digit($saleTemplateID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($saleTemplateID, true), gettype($saleTemplateID)), __LINE__);
         }
         $this->SaleTemplateID = $saleTemplateID;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CrossPromotionsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,65 +17,66 @@ class CrossPromotionsType extends AbstractStructBase
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The PrimaryScheme
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PrimaryScheme;
+    protected ?string $PrimaryScheme = null;
     /**
      * The PromotionMethod
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PromotionMethod;
+    protected ?string $PromotionMethod = null;
     /**
      * The SellerID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerID;
+    protected ?string $SellerID = null;
     /**
      * The ShippingDiscount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var bool
+     * @var bool|null
      */
-    public $ShippingDiscount;
+    protected ?bool $ShippingDiscount = null;
     /**
      * The StoreName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StoreName;
+    protected ?string $StoreName = null;
     /**
      * The PromotedItem
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PromotedItemType[]
      */
-    public $PromotedItem;
+    protected array $PromotedItem = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for CrossPromotionsType
      * @uses CrossPromotionsType::setItemID()
@@ -90,9 +94,9 @@ class CrossPromotionsType extends AbstractStructBase
      * @param bool $shippingDiscount
      * @param string $storeName
      * @param \macropage\ebaysdk\trading\StructType\PromotedItemType[] $promotedItem
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($itemID = null, $primaryScheme = null, $promotionMethod = null, $sellerID = null, $shippingDiscount = null, $storeName = null, array $promotedItem = array(), \DOMDocument $any = null)
+    public function __construct(?string $itemID = null, ?string $primaryScheme = null, ?string $promotionMethod = null, ?string $sellerID = null, ?bool $shippingDiscount = null, ?string $storeName = null, array $promotedItem = [], $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -108,7 +112,7 @@ class CrossPromotionsType extends AbstractStructBase
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -117,20 +121,21 @@ class CrossPromotionsType extends AbstractStructBase
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get PrimaryScheme value
      * @return string|null
      */
-    public function getPrimaryScheme()
+    public function getPrimaryScheme(): ?string
     {
         return $this->PrimaryScheme;
     }
@@ -138,24 +143,25 @@ class CrossPromotionsType extends AbstractStructBase
      * Set PrimaryScheme value
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $primaryScheme
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setPrimaryScheme($primaryScheme = null)
+    public function setPrimaryScheme(?string $primaryScheme = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::valueIsValid($primaryScheme)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $primaryScheme, implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType', is_array($primaryScheme) ? implode(', ', $primaryScheme) : var_export($primaryScheme, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionSchemeCodeType::getValidValues())), __LINE__);
         }
         $this->PrimaryScheme = $primaryScheme;
+        
         return $this;
     }
     /**
      * Get PromotionMethod value
      * @return string|null
      */
-    public function getPromotionMethod()
+    public function getPromotionMethod(): ?string
     {
         return $this->PromotionMethod;
     }
@@ -163,24 +169,25 @@ class CrossPromotionsType extends AbstractStructBase
      * Set PromotionMethod value
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $promotionMethod
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setPromotionMethod($promotionMethod = null)
+    public function setPromotionMethod(?string $promotionMethod = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::valueIsValid($promotionMethod)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $promotionMethod, implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType', is_array($promotionMethod) ? implode(', ', $promotionMethod) : var_export($promotionMethod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PromotionMethodCodeType::getValidValues())), __LINE__);
         }
         $this->PromotionMethod = $promotionMethod;
+        
         return $this;
     }
     /**
      * Get SellerID value
      * @return string|null
      */
-    public function getSellerID()
+    public function getSellerID(): ?string
     {
         return $this->SellerID;
     }
@@ -189,20 +196,21 @@ class CrossPromotionsType extends AbstractStructBase
      * @param string $sellerID
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setSellerID($sellerID = null)
+    public function setSellerID(?string $sellerID = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerID) && !is_string($sellerID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerID, true), gettype($sellerID)), __LINE__);
         }
         $this->SellerID = $sellerID;
+        
         return $this;
     }
     /**
      * Get ShippingDiscount value
      * @return bool|null
      */
-    public function getShippingDiscount()
+    public function getShippingDiscount(): ?bool
     {
         return $this->ShippingDiscount;
     }
@@ -211,20 +219,21 @@ class CrossPromotionsType extends AbstractStructBase
      * @param bool $shippingDiscount
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setShippingDiscount($shippingDiscount = null)
+    public function setShippingDiscount(?bool $shippingDiscount = null): self
     {
         // validation for constraint: boolean
         if (!is_null($shippingDiscount) && !is_bool($shippingDiscount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($shippingDiscount)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($shippingDiscount, true), gettype($shippingDiscount)), __LINE__);
         }
         $this->ShippingDiscount = $shippingDiscount;
+        
         return $this;
     }
     /**
      * Get StoreName value
      * @return string|null
      */
-    public function getStoreName()
+    public function getStoreName(): ?string
     {
         return $this->StoreName;
     }
@@ -233,105 +242,110 @@ class CrossPromotionsType extends AbstractStructBase
      * @param string $storeName
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setStoreName($storeName = null)
+    public function setStoreName(?string $storeName = null): self
     {
         // validation for constraint: string
         if (!is_null($storeName) && !is_string($storeName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($storeName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($storeName, true), gettype($storeName)), __LINE__);
         }
         $this->StoreName = $storeName;
+        
         return $this;
     }
     /**
      * Get PromotedItem value
-     * @return \macropage\ebaysdk\trading\StructType\PromotedItemType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\PromotedItemType[]
      */
-    public function getPromotedItem()
+    public function getPromotedItem(): array
     {
         return $this->PromotedItem;
     }
     /**
+     * This method is responsible for validating the values passed to the setPromotedItem method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPromotedItem method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePromotedItemForArrayConstraintsFromSetPromotedItem(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $crossPromotionsTypePromotedItemItem) {
+            // validation for constraint: itemType
+            if (!$crossPromotionsTypePromotedItemItem instanceof \macropage\ebaysdk\trading\StructType\PromotedItemType) {
+                $invalidValues[] = is_object($crossPromotionsTypePromotedItemItem) ? get_class($crossPromotionsTypePromotedItemItem) : sprintf('%s(%s)', gettype($crossPromotionsTypePromotedItemItem), var_export($crossPromotionsTypePromotedItemItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The PromotedItem property can only contain items of type \macropage\ebaysdk\trading\StructType\PromotedItemType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set PromotedItem value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PromotedItemType[] $promotedItem
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setPromotedItem(array $promotedItem = array())
+    public function setPromotedItem(array $promotedItem = []): self
     {
-        foreach ($promotedItem as $crossPromotionsTypePromotedItemItem) {
-            // validation for constraint: itemType
-            if (!$crossPromotionsTypePromotedItemItem instanceof \macropage\ebaysdk\trading\StructType\PromotedItemType) {
-                throw new \InvalidArgumentException(sprintf('The PromotedItem property can only contain items of \macropage\ebaysdk\trading\StructType\PromotedItemType, "%s" given', is_object($crossPromotionsTypePromotedItemItem) ? get_class($crossPromotionsTypePromotedItemItem) : gettype($crossPromotionsTypePromotedItemItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($promotedItemArrayErrorMessage = self::validatePromotedItemForArrayConstraintsFromSetPromotedItem($promotedItem))) {
+            throw new InvalidArgumentException($promotedItemArrayErrorMessage, __LINE__);
         }
         $this->PromotedItem = $promotedItem;
+        
         return $this;
     }
     /**
      * Add item to PromotedItem value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\PromotedItemType $item
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function addToPromotedItem(\macropage\ebaysdk\trading\StructType\PromotedItemType $item)
+    public function addToPromotedItem(\macropage\ebaysdk\trading\StructType\PromotedItemType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\PromotedItemType) {
-            throw new \InvalidArgumentException(sprintf('The PromotedItem property can only contain items of \macropage\ebaysdk\trading\StructType\PromotedItemType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The PromotedItem property can only contain items of type \macropage\ebaysdk\trading\StructType\PromotedItemType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->PromotedItem[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CrossPromotionsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

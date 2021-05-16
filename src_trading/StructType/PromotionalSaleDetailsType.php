@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PromotionalSaleDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: If a seller has reduced the price of a listed item with the Promotional Price Display feature, this type contains the original price of the discounted item and other information.
  * @subpackage Structs
  */
@@ -14,33 +17,33 @@ class PromotionalSaleDetailsType extends AbstractStructBase
 {
     /**
      * The OriginalPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Original price of an item whose price a seller has reduced with the Promotional Price Display feature.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $OriginalPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $OriginalPrice = null;
     /**
      * The StartTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Start time of a discount for an item whose price a seller has reduced with the Promotional Price Display feature.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTime;
+    protected ?string $StartTime = null;
     /**
      * The EndTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: End time of a discount for an item whose price a seller has reduced with the Promotional Price Display feature.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTime;
+    protected ?string $EndTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PromotionalSaleDetailsType
      * @uses PromotionalSaleDetailsType::setOriginalPrice()
@@ -50,9 +53,9 @@ class PromotionalSaleDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $originalPrice
      * @param string $startTime
      * @param string $endTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\AmountType $originalPrice = null, $startTime = null, $endTime = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $originalPrice = null, ?string $startTime = null, ?string $endTime = null, $any = null)
     {
         $this
             ->setOriginalPrice($originalPrice)
@@ -64,7 +67,7 @@ class PromotionalSaleDetailsType extends AbstractStructBase
      * Get OriginalPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getOriginalPrice()
+    public function getOriginalPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->OriginalPrice;
     }
@@ -73,16 +76,17 @@ class PromotionalSaleDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $originalPrice
      * @return \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType
      */
-    public function setOriginalPrice(\macropage\ebaysdk\trading\StructType\AmountType $originalPrice = null)
+    public function setOriginalPrice(?\macropage\ebaysdk\trading\StructType\AmountType $originalPrice = null): self
     {
         $this->OriginalPrice = $originalPrice;
+        
         return $this;
     }
     /**
      * Get StartTime value
      * @return string|null
      */
-    public function getStartTime()
+    public function getStartTime(): ?string
     {
         return $this->StartTime;
     }
@@ -91,20 +95,21 @@ class PromotionalSaleDetailsType extends AbstractStructBase
      * @param string $startTime
      * @return \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType
      */
-    public function setStartTime($startTime = null)
+    public function setStartTime(?string $startTime = null): self
     {
         // validation for constraint: string
         if (!is_null($startTime) && !is_string($startTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTime, true), gettype($startTime)), __LINE__);
         }
         $this->StartTime = $startTime;
+        
         return $this;
     }
     /**
      * Get EndTime value
      * @return string|null
      */
-    public function getEndTime()
+    public function getEndTime(): ?string
     {
         return $this->EndTime;
     }
@@ -113,65 +118,47 @@ class PromotionalSaleDetailsType extends AbstractStructBase
      * @param string $endTime
      * @return \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType
      */
-    public function setEndTime($endTime = null)
+    public function setEndTime(?string $endTime = null): self
     {
         // validation for constraint: string
         if (!is_null($endTime) && !is_string($endTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTime, true), gettype($endTime)), __LINE__);
         }
         $this->EndTime = $endTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

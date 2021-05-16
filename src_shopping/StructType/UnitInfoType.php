@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for UnitInfoType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type provides information about the weight, volume or other quantity measurement of a listed item. The European Union requires listings for certain types of products to include the price per unit so buyers can accurately compare
  * prices. eBay uses the <strong>UnitType</strong> and <strong>UnitQuantity</strong> values and the item's listed price to calculate and display the per-unit price on eBay EU sites.
  * @subpackage Structs
@@ -15,27 +18,27 @@ class UnitInfoType extends AbstractStructBase
 {
     /**
      * The UnitType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Designation of size, weight, volume or count to be used to specify the unit quantity of the item. This value can be one of the following: <br/> <pre> Kg 100g 10g L 100ml 10ml M M2 M3 Unit </pre> This field is returned only when you
      * provide <strong>IncludeSelector</strong> in the request and set it to <code>ItemSpecifics</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UnitType;
+    protected ?string $UnitType = null;
     /**
      * The UnitQuantity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Number of units of size, weight, volume or count of the specified unit type for the item. eBay divides the item price by this number to get the price per unit to be displayed in the item listing for comparison purposes. <br/><br/>
      * This field is returned only when you provide <strong>IncludeSelector</strong> in the request and set it to <code>ItemSpecifics</code>.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $UnitQuantity;
+    protected ?float $UnitQuantity = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for UnitInfoType
      * @uses UnitInfoType::setUnitType()
@@ -43,9 +46,9 @@ class UnitInfoType extends AbstractStructBase
      * @uses UnitInfoType::setAny()
      * @param string $unitType
      * @param float $unitQuantity
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($unitType = null, $unitQuantity = null, \DOMDocument $any = null)
+    public function __construct(?string $unitType = null, ?float $unitQuantity = null, $any = null)
     {
         $this
             ->setUnitType($unitType)
@@ -56,7 +59,7 @@ class UnitInfoType extends AbstractStructBase
      * Get UnitType value
      * @return string|null
      */
-    public function getUnitType()
+    public function getUnitType(): ?string
     {
         return $this->UnitType;
     }
@@ -65,20 +68,21 @@ class UnitInfoType extends AbstractStructBase
      * @param string $unitType
      * @return \macropage\ebaysdk\shopping\StructType\UnitInfoType
      */
-    public function setUnitType($unitType = null)
+    public function setUnitType(?string $unitType = null): self
     {
         // validation for constraint: string
         if (!is_null($unitType) && !is_string($unitType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($unitType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($unitType, true), gettype($unitType)), __LINE__);
         }
         $this->UnitType = $unitType;
+        
         return $this;
     }
     /**
      * Get UnitQuantity value
      * @return float|null
      */
-    public function getUnitQuantity()
+    public function getUnitQuantity(): ?float
     {
         return $this->UnitQuantity;
     }
@@ -87,61 +91,47 @@ class UnitInfoType extends AbstractStructBase
      * @param float $unitQuantity
      * @return \macropage\ebaysdk\shopping\StructType\UnitInfoType
      */
-    public function setUnitQuantity($unitQuantity = null)
+    public function setUnitQuantity(?float $unitQuantity = null): self
     {
+        // validation for constraint: float
+        if (!is_null($unitQuantity) && !(is_float($unitQuantity) || is_numeric($unitQuantity))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($unitQuantity, true), gettype($unitQuantity)), __LINE__);
+        }
         $this->UnitQuantity = $unitQuantity;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\UnitInfoType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\UnitInfoType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\UnitInfoType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

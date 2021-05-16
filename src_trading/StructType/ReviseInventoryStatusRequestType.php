@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ReviseInventoryStatusRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Enables a seller to change the price and/or quantity of one to four active, fixed-price listings. The fixed-price listing to modify is identified with the <b>ItemID</b> of the listing and/or the <b>SKU</b> value of the item (if a
  * seller-defined SKU value exists for the listing). If the seller is modifying one or more variations within a multiple-variation listing, the <b>ItemID</b> and <b>SKU</b> fields in the <b>InventoryStatus</b> container become required, with the
  * <b>ItemID</b> value identifying the listing, and the <b>SKU</b> value identifying the specific product variation within that multiple-variation listing. Each variation within a multiple-variation listing requires a seller-defined SKU value.
@@ -17,122 +20,85 @@ class ReviseInventoryStatusRequestType extends AbstractRequestType
 {
     /**
      * The InventoryStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: One <b>InventoryStatus</b> container is required for each item or item variation that is being revised. Whether updating the price and/or quantity of a single-variation listing or a specific variation within a multiple-variation
      * listing, the limit of items or item variations that can be modified with one call is four.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    public $InventoryStatus;
-    /**
-     * The any
-     * @var \DOMDocument
-     */
-    public $any;
+    protected array $InventoryStatus = [];
     /**
      * Constructor method for ReviseInventoryStatusRequestType
      * @uses ReviseInventoryStatusRequestType::setInventoryStatus()
-     * @uses ReviseInventoryStatusRequestType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
-     * @param \DOMDocument $any
      */
-    public function __construct(array $inventoryStatus = array(), \DOMDocument $any = null)
+    public function __construct(array $inventoryStatus = [])
     {
         $this
-            ->setInventoryStatus($inventoryStatus)
-            ->setAny($any);
+            ->setInventoryStatus($inventoryStatus);
     }
     /**
      * Get InventoryStatus value
-     * @return \macropage\ebaysdk\trading\StructType\InventoryStatusType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    public function getInventoryStatus()
+    public function getInventoryStatus(): array
     {
         return $this->InventoryStatus;
     }
     /**
+     * This method is responsible for validating the values passed to the setInventoryStatus method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setInventoryStatus method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateInventoryStatusForArrayConstraintsFromSetInventoryStatus(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $reviseInventoryStatusRequestTypeInventoryStatusItem) {
+            // validation for constraint: itemType
+            if (!$reviseInventoryStatusRequestTypeInventoryStatusItem instanceof \macropage\ebaysdk\trading\StructType\InventoryStatusType) {
+                $invalidValues[] = is_object($reviseInventoryStatusRequestTypeInventoryStatusItem) ? get_class($reviseInventoryStatusRequestTypeInventoryStatusItem) : sprintf('%s(%s)', gettype($reviseInventoryStatusRequestTypeInventoryStatusItem), var_export($reviseInventoryStatusRequestTypeInventoryStatusItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The InventoryStatus property can only contain items of type \macropage\ebaysdk\trading\StructType\InventoryStatusType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set InventoryStatus value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType
      */
-    public function setInventoryStatus(array $inventoryStatus = array())
+    public function setInventoryStatus(array $inventoryStatus = []): self
     {
-        foreach ($inventoryStatus as $reviseInventoryStatusRequestTypeInventoryStatusItem) {
-            // validation for constraint: itemType
-            if (!$reviseInventoryStatusRequestTypeInventoryStatusItem instanceof \macropage\ebaysdk\trading\StructType\InventoryStatusType) {
-                throw new \InvalidArgumentException(sprintf('The InventoryStatus property can only contain items of \macropage\ebaysdk\trading\StructType\InventoryStatusType, "%s" given', is_object($reviseInventoryStatusRequestTypeInventoryStatusItem) ? get_class($reviseInventoryStatusRequestTypeInventoryStatusItem) : gettype($reviseInventoryStatusRequestTypeInventoryStatusItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($inventoryStatusArrayErrorMessage = self::validateInventoryStatusForArrayConstraintsFromSetInventoryStatus($inventoryStatus))) {
+            throw new InvalidArgumentException($inventoryStatusArrayErrorMessage, __LINE__);
         }
         $this->InventoryStatus = $inventoryStatus;
+        
         return $this;
     }
     /**
      * Add item to InventoryStatus value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType $item
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType
      */
-    public function addToInventoryStatus(\macropage\ebaysdk\trading\StructType\InventoryStatusType $item)
+    public function addToInventoryStatus(\macropage\ebaysdk\trading\StructType\InventoryStatusType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\InventoryStatusType) {
-            throw new \InvalidArgumentException(sprintf('The InventoryStatus property can only contain items of \macropage\ebaysdk\trading\StructType\InventoryStatusType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The InventoryStatus property can only contain items of type \macropage\ebaysdk\trading\StructType\InventoryStatusType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->InventoryStatus[] = $item;
+        
         return $this;
-    }
-    /**
-     * Get any value
-     * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType::setAny()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
-     */
-    public function getAny($asString = true)
-    {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
-        }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
-    }
-    /**
-     * Set any value
-     * @param \DOMDocument $any
-     * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType
-     */
-    public function setAny(\DOMDocument $any = null)
-    {
-        $this->any = $any;
-        return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

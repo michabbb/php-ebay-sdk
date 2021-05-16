@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetRecommendationsResponseContainerType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,81 +17,81 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
 {
     /**
      * The ListingAnalyzerRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType|null
      */
-    public $ListingAnalyzerRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $ListingAnalyzerRecommendations = null;
     /**
      * The SIFFTASRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType|null
      */
-    public $SIFFTASRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $SIFFTASRecommendations = null;
     /**
      * The PricingRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PricingRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\PricingRecommendationsType|null
      */
-    public $PricingRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\PricingRecommendationsType $PricingRecommendations = null;
     /**
      * The AttributeRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AttributeRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\AttributeRecommendationsType|null
      */
-    public $AttributeRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $AttributeRecommendations = null;
     /**
      * The ProductRecommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ProductRecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\ProductRecommendationsType|null
      */
-    public $ProductRecommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\ProductRecommendationsType $ProductRecommendations = null;
     /**
      * The CorrelationID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CorrelationID;
+    protected ?string $CorrelationID = null;
     /**
      * The Recommendations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\RecommendationsType
+     * @var \macropage\ebaysdk\trading\StructType\RecommendationsType|null
      */
-    public $Recommendations;
+    protected ?\macropage\ebaysdk\trading\StructType\RecommendationsType $Recommendations = null;
     /**
      * The ProductListingDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ProductListingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ProductListingDetailsType|null
      */
-    public $ProductListingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $ProductListingDetails = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for GetRecommendationsResponseContainerType
      * @uses GetRecommendationsResponseContainerType::setListingAnalyzerRecommendations()
@@ -110,9 +113,9 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations
      * @param \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails
      * @param string $title
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $listingAnalyzerRecommendations = null, \macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $sIFFTASRecommendations = null, \macropage\ebaysdk\trading\StructType\PricingRecommendationsType $pricingRecommendations = null, \macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $attributeRecommendations = null, \macropage\ebaysdk\trading\StructType\ProductRecommendationsType $productRecommendations = null, $correlationID = null, \macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations = null, \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null, $title = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $listingAnalyzerRecommendations = null, ?\macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $sIFFTASRecommendations = null, ?\macropage\ebaysdk\trading\StructType\PricingRecommendationsType $pricingRecommendations = null, ?\macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $attributeRecommendations = null, ?\macropage\ebaysdk\trading\StructType\ProductRecommendationsType $productRecommendations = null, ?string $correlationID = null, ?\macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations = null, ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null, ?string $title = null, $any = null)
     {
         $this
             ->setListingAnalyzerRecommendations($listingAnalyzerRecommendations)
@@ -130,7 +133,7 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * Get ListingAnalyzerRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType|null
      */
-    public function getListingAnalyzerRecommendations()
+    public function getListingAnalyzerRecommendations(): ?\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType
     {
         return $this->ListingAnalyzerRecommendations;
     }
@@ -139,16 +142,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $listingAnalyzerRecommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setListingAnalyzerRecommendations(\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $listingAnalyzerRecommendations = null)
+    public function setListingAnalyzerRecommendations(?\macropage\ebaysdk\trading\StructType\ListingAnalyzerRecommendationsType $listingAnalyzerRecommendations = null): self
     {
         $this->ListingAnalyzerRecommendations = $listingAnalyzerRecommendations;
+        
         return $this;
     }
     /**
      * Get SIFFTASRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType|null
      */
-    public function getSIFFTASRecommendations()
+    public function getSIFFTASRecommendations(): ?\macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType
     {
         return $this->SIFFTASRecommendations;
     }
@@ -157,16 +161,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $sIFFTASRecommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setSIFFTASRecommendations(\macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $sIFFTASRecommendations = null)
+    public function setSIFFTASRecommendations(?\macropage\ebaysdk\trading\StructType\SIFFTASRecommendationsType $sIFFTASRecommendations = null): self
     {
         $this->SIFFTASRecommendations = $sIFFTASRecommendations;
+        
         return $this;
     }
     /**
      * Get PricingRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\PricingRecommendationsType|null
      */
-    public function getPricingRecommendations()
+    public function getPricingRecommendations(): ?\macropage\ebaysdk\trading\StructType\PricingRecommendationsType
     {
         return $this->PricingRecommendations;
     }
@@ -175,16 +180,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PricingRecommendationsType $pricingRecommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setPricingRecommendations(\macropage\ebaysdk\trading\StructType\PricingRecommendationsType $pricingRecommendations = null)
+    public function setPricingRecommendations(?\macropage\ebaysdk\trading\StructType\PricingRecommendationsType $pricingRecommendations = null): self
     {
         $this->PricingRecommendations = $pricingRecommendations;
+        
         return $this;
     }
     /**
      * Get AttributeRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\AttributeRecommendationsType|null
      */
-    public function getAttributeRecommendations()
+    public function getAttributeRecommendations(): ?\macropage\ebaysdk\trading\StructType\AttributeRecommendationsType
     {
         return $this->AttributeRecommendations;
     }
@@ -193,16 +199,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $attributeRecommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setAttributeRecommendations(\macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $attributeRecommendations = null)
+    public function setAttributeRecommendations(?\macropage\ebaysdk\trading\StructType\AttributeRecommendationsType $attributeRecommendations = null): self
     {
         $this->AttributeRecommendations = $attributeRecommendations;
+        
         return $this;
     }
     /**
      * Get ProductRecommendations value
      * @return \macropage\ebaysdk\trading\StructType\ProductRecommendationsType|null
      */
-    public function getProductRecommendations()
+    public function getProductRecommendations(): ?\macropage\ebaysdk\trading\StructType\ProductRecommendationsType
     {
         return $this->ProductRecommendations;
     }
@@ -211,16 +218,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductRecommendationsType $productRecommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setProductRecommendations(\macropage\ebaysdk\trading\StructType\ProductRecommendationsType $productRecommendations = null)
+    public function setProductRecommendations(?\macropage\ebaysdk\trading\StructType\ProductRecommendationsType $productRecommendations = null): self
     {
         $this->ProductRecommendations = $productRecommendations;
+        
         return $this;
     }
     /**
      * Get CorrelationID value
      * @return string|null
      */
-    public function getCorrelationID()
+    public function getCorrelationID(): ?string
     {
         return $this->CorrelationID;
     }
@@ -229,20 +237,21 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param string $correlationID
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setCorrelationID($correlationID = null)
+    public function setCorrelationID(?string $correlationID = null): self
     {
         // validation for constraint: string
         if (!is_null($correlationID) && !is_string($correlationID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($correlationID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($correlationID, true), gettype($correlationID)), __LINE__);
         }
         $this->CorrelationID = $correlationID;
+        
         return $this;
     }
     /**
      * Get Recommendations value
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType|null
      */
-    public function getRecommendations()
+    public function getRecommendations(): ?\macropage\ebaysdk\trading\StructType\RecommendationsType
     {
         return $this->Recommendations;
     }
@@ -251,16 +260,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setRecommendations(\macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations = null)
+    public function setRecommendations(?\macropage\ebaysdk\trading\StructType\RecommendationsType $recommendations = null): self
     {
         $this->Recommendations = $recommendations;
+        
         return $this;
     }
     /**
      * Get ProductListingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ProductListingDetailsType|null
      */
-    public function getProductListingDetails()
+    public function getProductListingDetails(): ?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType
     {
         return $this->ProductListingDetails;
     }
@@ -269,16 +279,17 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setProductListingDetails(\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null)
+    public function setProductListingDetails(?\macropage\ebaysdk\trading\StructType\ProductListingDetailsType $productListingDetails = null): self
     {
         $this->ProductListingDetails = $productListingDetails;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -287,65 +298,47 @@ class GetRecommendationsResponseContainerType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsResponseContainerType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

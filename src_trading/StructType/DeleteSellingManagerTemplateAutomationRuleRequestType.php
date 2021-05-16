@@ -1,13 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for DeleteSellingManagerTemplateAutomationRuleRequestType
  * StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Removes the association of Selling Manager automation rules to a template. Returns the remaining rules in the response. This call is subject to change without notice; the deprecation process is inapplicable to this call.
  * @subpackage Structs
  */
@@ -15,36 +18,36 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
 {
     /**
      * The SaleTemplateID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the Selling Manager template from which you want to remove automation rules. You can obtain a <b>SaleTemplateID</b> by calling <b>GetSellingManagerInventory</b>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $SaleTemplateID;
+    protected ?int $SaleTemplateID = null;
     /**
      * The DeleteAutomatedListingRule
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is included and set to <code>true</code> if the user would like to disable the automated listing rule for the Selling Manager template.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DeleteAutomatedListingRule;
+    protected ?bool $DeleteAutomatedListingRule = null;
     /**
      * The DeleteAutomatedRelistingRule
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is included and set to <code>true</code> if the user would like to disable the automated relisting rule for the Selling Manager template.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DeleteAutomatedRelistingRule;
+    protected ?bool $DeleteAutomatedRelistingRule = null;
     /**
      * The DeleteAutomatedSecondChanceOfferRule
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is included and set to <code>true</code> if the user would like to disable the automated Second Chance Offer rule for the Selling Manager template.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DeleteAutomatedSecondChanceOfferRule;
+    protected ?bool $DeleteAutomatedSecondChanceOfferRule = null;
     /**
      * Constructor method for DeleteSellingManagerTemplateAutomationRuleRequestType
      * @uses DeleteSellingManagerTemplateAutomationRuleRequestType::setSaleTemplateID()
@@ -56,7 +59,7 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * @param bool $deleteAutomatedRelistingRule
      * @param bool $deleteAutomatedSecondChanceOfferRule
      */
-    public function __construct($saleTemplateID = null, $deleteAutomatedListingRule = null, $deleteAutomatedRelistingRule = null, $deleteAutomatedSecondChanceOfferRule = null)
+    public function __construct(?int $saleTemplateID = null, ?bool $deleteAutomatedListingRule = null, ?bool $deleteAutomatedRelistingRule = null, ?bool $deleteAutomatedSecondChanceOfferRule = null)
     {
         $this
             ->setSaleTemplateID($saleTemplateID)
@@ -68,7 +71,7 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * Get SaleTemplateID value
      * @return int|null
      */
-    public function getSaleTemplateID()
+    public function getSaleTemplateID(): ?int
     {
         return $this->SaleTemplateID;
     }
@@ -77,20 +80,21 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * @param int $saleTemplateID
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateAutomationRuleRequestType
      */
-    public function setSaleTemplateID($saleTemplateID = null)
+    public function setSaleTemplateID(?int $saleTemplateID = null): self
     {
         // validation for constraint: int
-        if (!is_null($saleTemplateID) && !is_numeric($saleTemplateID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($saleTemplateID)), __LINE__);
+        if (!is_null($saleTemplateID) && !(is_int($saleTemplateID) || ctype_digit($saleTemplateID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($saleTemplateID, true), gettype($saleTemplateID)), __LINE__);
         }
         $this->SaleTemplateID = $saleTemplateID;
+        
         return $this;
     }
     /**
      * Get DeleteAutomatedListingRule value
      * @return bool|null
      */
-    public function getDeleteAutomatedListingRule()
+    public function getDeleteAutomatedListingRule(): ?bool
     {
         return $this->DeleteAutomatedListingRule;
     }
@@ -99,20 +103,21 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * @param bool $deleteAutomatedListingRule
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateAutomationRuleRequestType
      */
-    public function setDeleteAutomatedListingRule($deleteAutomatedListingRule = null)
+    public function setDeleteAutomatedListingRule(?bool $deleteAutomatedListingRule = null): self
     {
         // validation for constraint: boolean
         if (!is_null($deleteAutomatedListingRule) && !is_bool($deleteAutomatedListingRule)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($deleteAutomatedListingRule)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($deleteAutomatedListingRule, true), gettype($deleteAutomatedListingRule)), __LINE__);
         }
         $this->DeleteAutomatedListingRule = $deleteAutomatedListingRule;
+        
         return $this;
     }
     /**
      * Get DeleteAutomatedRelistingRule value
      * @return bool|null
      */
-    public function getDeleteAutomatedRelistingRule()
+    public function getDeleteAutomatedRelistingRule(): ?bool
     {
         return $this->DeleteAutomatedRelistingRule;
     }
@@ -121,20 +126,21 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * @param bool $deleteAutomatedRelistingRule
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateAutomationRuleRequestType
      */
-    public function setDeleteAutomatedRelistingRule($deleteAutomatedRelistingRule = null)
+    public function setDeleteAutomatedRelistingRule(?bool $deleteAutomatedRelistingRule = null): self
     {
         // validation for constraint: boolean
         if (!is_null($deleteAutomatedRelistingRule) && !is_bool($deleteAutomatedRelistingRule)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($deleteAutomatedRelistingRule)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($deleteAutomatedRelistingRule, true), gettype($deleteAutomatedRelistingRule)), __LINE__);
         }
         $this->DeleteAutomatedRelistingRule = $deleteAutomatedRelistingRule;
+        
         return $this;
     }
     /**
      * Get DeleteAutomatedSecondChanceOfferRule value
      * @return bool|null
      */
-    public function getDeleteAutomatedSecondChanceOfferRule()
+    public function getDeleteAutomatedSecondChanceOfferRule(): ?bool
     {
         return $this->DeleteAutomatedSecondChanceOfferRule;
     }
@@ -143,33 +149,14 @@ class DeleteSellingManagerTemplateAutomationRuleRequestType extends AbstractRequ
      * @param bool $deleteAutomatedSecondChanceOfferRule
      * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateAutomationRuleRequestType
      */
-    public function setDeleteAutomatedSecondChanceOfferRule($deleteAutomatedSecondChanceOfferRule = null)
+    public function setDeleteAutomatedSecondChanceOfferRule(?bool $deleteAutomatedSecondChanceOfferRule = null): self
     {
         // validation for constraint: boolean
         if (!is_null($deleteAutomatedSecondChanceOfferRule) && !is_bool($deleteAutomatedSecondChanceOfferRule)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($deleteAutomatedSecondChanceOfferRule)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($deleteAutomatedSecondChanceOfferRule, true), gettype($deleteAutomatedSecondChanceOfferRule)), __LINE__);
         }
         $this->DeleteAutomatedSecondChanceOfferRule = $deleteAutomatedSecondChanceOfferRule;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\DeleteSellingManagerTemplateAutomationRuleRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreThemeArrayType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Set of Store themes.
  * @subpackage Structs
  */
@@ -14,26 +17,26 @@ class StoreThemeArrayType extends AbstractStructBase
 {
     /**
      * The Theme
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A Store theme.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreThemeType[]
      */
-    public $Theme;
+    protected array $Theme = [];
     /**
      * The GenericColorSchemeArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Set of color schemes. This set is for use with those themes that do not explicitly list a color scheme in the theme definition (these themes are also known as advanced themes).
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType|null
      */
-    public $GenericColorSchemeArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $GenericColorSchemeArray = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreThemeArrayType
      * @uses StoreThemeArrayType::setTheme()
@@ -41,9 +44,9 @@ class StoreThemeArrayType extends AbstractStructBase
      * @uses StoreThemeArrayType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\StoreThemeType[] $theme
      * @param \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $theme = array(), \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null, \DOMDocument $any = null)
+    public function __construct(array $theme = [], ?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null, $any = null)
     {
         $this
             ->setTheme($theme)
@@ -52,49 +55,72 @@ class StoreThemeArrayType extends AbstractStructBase
     }
     /**
      * Get Theme value
-     * @return \macropage\ebaysdk\trading\StructType\StoreThemeType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\StoreThemeType[]
      */
-    public function getTheme()
+    public function getTheme(): array
     {
         return $this->Theme;
     }
     /**
+     * This method is responsible for validating the values passed to the setTheme method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setTheme method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateThemeForArrayConstraintsFromSetTheme(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $storeThemeArrayTypeThemeItem) {
+            // validation for constraint: itemType
+            if (!$storeThemeArrayTypeThemeItem instanceof \macropage\ebaysdk\trading\StructType\StoreThemeType) {
+                $invalidValues[] = is_object($storeThemeArrayTypeThemeItem) ? get_class($storeThemeArrayTypeThemeItem) : sprintf('%s(%s)', gettype($storeThemeArrayTypeThemeItem), var_export($storeThemeArrayTypeThemeItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Theme property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreThemeType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Theme value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreThemeType[] $theme
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
      */
-    public function setTheme(array $theme = array())
+    public function setTheme(array $theme = []): self
     {
-        foreach ($theme as $storeThemeArrayTypeThemeItem) {
-            // validation for constraint: itemType
-            if (!$storeThemeArrayTypeThemeItem instanceof \macropage\ebaysdk\trading\StructType\StoreThemeType) {
-                throw new \InvalidArgumentException(sprintf('The Theme property can only contain items of \macropage\ebaysdk\trading\StructType\StoreThemeType, "%s" given', is_object($storeThemeArrayTypeThemeItem) ? get_class($storeThemeArrayTypeThemeItem) : gettype($storeThemeArrayTypeThemeItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($themeArrayErrorMessage = self::validateThemeForArrayConstraintsFromSetTheme($theme))) {
+            throw new InvalidArgumentException($themeArrayErrorMessage, __LINE__);
         }
         $this->Theme = $theme;
+        
         return $this;
     }
     /**
      * Add item to Theme value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreThemeType $item
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
      */
-    public function addToTheme(\macropage\ebaysdk\trading\StructType\StoreThemeType $item)
+    public function addToTheme(\macropage\ebaysdk\trading\StructType\StoreThemeType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\StoreThemeType) {
-            throw new \InvalidArgumentException(sprintf('The Theme property can only contain items of \macropage\ebaysdk\trading\StructType\StoreThemeType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Theme property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreThemeType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Theme[] = $item;
+        
         return $this;
     }
     /**
      * Get GenericColorSchemeArray value
      * @return \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType|null
      */
-    public function getGenericColorSchemeArray()
+    public function getGenericColorSchemeArray(): ?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType
     {
         return $this->GenericColorSchemeArray;
     }
@@ -103,61 +129,43 @@ class StoreThemeArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
      */
-    public function setGenericColorSchemeArray(\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null)
+    public function setGenericColorSchemeArray(?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null): self
     {
         $this->GenericColorSchemeArray = $genericColorSchemeArray;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreThemeArrayType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

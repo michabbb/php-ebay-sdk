@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for OrderTransactionType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains an order or a transaction. A transaction is the sale of one or more items from a seller's listing to a buyer. An order combines two or more transactions into a single payment.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class OrderTransactionType extends AbstractStructBase
 {
     /**
      * The Order
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the information describing an order.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\OrderType
+     * @var \macropage\ebaysdk\trading\StructType\OrderType|null
      */
-    public $Order;
+    protected ?\macropage\ebaysdk\trading\StructType\OrderType $Order = null;
     /**
      * The Transaction
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the information describing a transaction.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\TransactionType
+     * @var \macropage\ebaysdk\trading\StructType\TransactionType|null
      */
-    public $Transaction;
+    protected ?\macropage\ebaysdk\trading\StructType\TransactionType $Transaction = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for OrderTransactionType
      * @uses OrderTransactionType::setOrder()
@@ -40,9 +43,9 @@ class OrderTransactionType extends AbstractStructBase
      * @uses OrderTransactionType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\OrderType $order
      * @param \macropage\ebaysdk\trading\StructType\TransactionType $transaction
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\OrderType $order = null, \macropage\ebaysdk\trading\StructType\TransactionType $transaction = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\OrderType $order = null, ?\macropage\ebaysdk\trading\StructType\TransactionType $transaction = null, $any = null)
     {
         $this
             ->setOrder($order)
@@ -53,7 +56,7 @@ class OrderTransactionType extends AbstractStructBase
      * Get Order value
      * @return \macropage\ebaysdk\trading\StructType\OrderType|null
      */
-    public function getOrder()
+    public function getOrder(): ?\macropage\ebaysdk\trading\StructType\OrderType
     {
         return $this->Order;
     }
@@ -62,16 +65,17 @@ class OrderTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\OrderType $order
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType
      */
-    public function setOrder(\macropage\ebaysdk\trading\StructType\OrderType $order = null)
+    public function setOrder(?\macropage\ebaysdk\trading\StructType\OrderType $order = null): self
     {
         $this->Order = $order;
+        
         return $this;
     }
     /**
      * Get Transaction value
      * @return \macropage\ebaysdk\trading\StructType\TransactionType|null
      */
-    public function getTransaction()
+    public function getTransaction(): ?\macropage\ebaysdk\trading\StructType\TransactionType
     {
         return $this->Transaction;
     }
@@ -80,61 +84,43 @@ class OrderTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionType $transaction
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType
      */
-    public function setTransaction(\macropage\ebaysdk\trading\StructType\TransactionType $transaction = null)
+    public function setTransaction(?\macropage\ebaysdk\trading\StructType\TransactionType $transaction = null): self
     {
         $this->Transaction = $transaction;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\OrderTransactionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

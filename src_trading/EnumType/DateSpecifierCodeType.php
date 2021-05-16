@@ -1,45 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for DateSpecifierCodeType EnumType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Enumerations
  */
-class DateSpecifierCodeType
+class DateSpecifierCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'M'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'M'
      */
     const VALUE_M = 'M';
     /**
      * Constant for value 'D'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'D'
      */
     const VALUE_D = 'D';
     /**
      * Constant for value 'Y'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'Y'
      */
     const VALUE_Y = 'Y';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_M
@@ -48,21 +50,13 @@ class DateSpecifierCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_M,
             self::VALUE_D,
             self::VALUE_Y,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

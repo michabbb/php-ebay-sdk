@@ -1,76 +1,80 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetSellerListResponseType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Contains a list of the items listed by the seller specified as input. The list of items is returned in an ItemArrayType object, in which are returned zero, one, or multiple ItemType objects. Each ItemType object contains the detail
- * data for one item listing.
+ * Meta information extracted from the WSDL
+ * - documentation: This is the base response type of the <b>GetSellerList</b> call. The <b>GetSellerList</b> response includes an array of one or more listings that matched the input criteria, as well as pagination data.
  * @subpackage Structs
  */
 class GetSellerListResponseType extends AbstractResponseType
 {
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains information regarding the pagination of data (if pagination is used), including total number of pages and total number of entries.
+     * Meta information extracted from the WSDL
+     * - documentation: This container shows the total number or pages in the result set, as well as the total number of listings that match the current input criteria.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The HasMoreItems
-     * Meta informations extracted from the WSDL
-     * - documentation: If true, there are more items yet to be retrieved. Additional <b>GetSellerList</b> calls with higher page numbers or more items per page must be made to retrieve these items. Not returned if no items match the request.
+     * Meta information extracted from the WSDL
+     * - documentation: This field's value is returned as <code>true</code> if there are more pages in the current result set to view, or <code>false</code> if the current page being viewed is the last (or only) page of the result set. <br/><br/> If there
+     * are more listings to view in the result set, additional <b>GetSellerList</b> calls can be made but with changes to the <b>Pagination</b> values in the request. For example, if the <b>Pagination.PageNumber</b> value in the request for the last call
+     * was <code>1</code>, you can make another <b>GetSellerList</b> call, keeping everything the same except changing the value of the <b>Pagination.PageNumber</b> field from <code>1</code> to <code>2</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HasMoreItems;
+    protected ?bool $HasMoreItems = null;
     /**
      * The ItemArray
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains the list of the seller's items, one <b>ItemType</b> object per item. Returns empty if no items are available that match the request.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is an array of one or more listings that match the input criteria. If none of the seller's listings match the input criteria, this container is returned as an empty tag.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public $ItemArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $ItemArray = null;
     /**
      * The ItemsPerPage
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the number of items that are being returned per page of data (i.e., per call). Will be the same as the value specified in the <b>Pagination.EntriesPerPage</b> input. Only returned if items are returned.
+     * Meta information extracted from the WSDL
+     * - documentation: This value reflects the value that was set in the <b>Pagination.EntriesPerPage</b> field in the request. This is the maximum number of listings that may be returned per page of the result set. Note that this value is only the maximum
+     * threshold and does not necessarily reflect the number of listings appearing on the current page of data.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ItemsPerPage;
+    protected ?int $ItemsPerPage = null;
     /**
      * The PageNumber
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which page of data was just returned. Will be the same as the value specified in the <b>Pagination.PageNumber</b> input. (If the input is higher than the total number of pages, the call fails with an error.) Only returned
-     * if items are returned.
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the current page of data in the result set that is being displayed. This value reflects the value specified in the <b>Pagination.PageNumber</b> field in the request. Note that page number defaults to
+     * <code>1</code> if the <b>Pagination.PageNumber</b> field was not included in the request.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $PageNumber;
+    protected ?int $PageNumber = null;
     /**
      * The ReturnedItemCountActual
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the total number of items returned (i.e., the number of ItemType objects in ItemArray).
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the total number of listings being shown on the current page of the results set.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ReturnedItemCountActual;
+    protected ?int $ReturnedItemCountActual = null;
     /**
      * The Seller
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the seller whose items are returned. The seller is the eBay member whose <b>UserID</b> was passed in the request. If <b>UserID</b> was not specified, the seller is the user who made the request (identified by
-     * eBayAuthToken).
+     * Meta information extracted from the WSDL
+     * - documentation: This container consists of detailed information about the seller and the seller's account. This container is only returned if the <b>GranularityLevel</b> field is included in the request and set to <code>Fine</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UserType
+     * @var \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public $Seller;
+    protected ?\macropage\ebaysdk\trading\StructType\UserType $Seller = null;
     /**
      * Constructor method for GetSellerListResponseType
      * @uses GetSellerListResponseType::setPaginationResult()
@@ -88,7 +92,7 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param int $returnedItemCountActual
      * @param \macropage\ebaysdk\trading\StructType\UserType $seller
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $hasMoreItems = null, \macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null, $itemsPerPage = null, $pageNumber = null, $returnedItemCountActual = null, \macropage\ebaysdk\trading\StructType\UserType $seller = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreItems = null, ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null, ?int $itemsPerPage = null, ?int $pageNumber = null, ?int $returnedItemCountActual = null, ?\macropage\ebaysdk\trading\StructType\UserType $seller = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -103,7 +107,7 @@ class GetSellerListResponseType extends AbstractResponseType
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -112,16 +116,17 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get HasMoreItems value
      * @return bool|null
      */
-    public function getHasMoreItems()
+    public function getHasMoreItems(): ?bool
     {
         return $this->HasMoreItems;
     }
@@ -130,20 +135,21 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param bool $hasMoreItems
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setHasMoreItems($hasMoreItems = null)
+    public function setHasMoreItems(?bool $hasMoreItems = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hasMoreItems) && !is_bool($hasMoreItems)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hasMoreItems)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hasMoreItems, true), gettype($hasMoreItems)), __LINE__);
         }
         $this->HasMoreItems = $hasMoreItems;
+        
         return $this;
     }
     /**
      * Get ItemArray value
      * @return \macropage\ebaysdk\trading\ArrayType\ItemArrayType|null
      */
-    public function getItemArray()
+    public function getItemArray(): ?\macropage\ebaysdk\trading\ArrayType\ItemArrayType
     {
         return $this->ItemArray;
     }
@@ -152,16 +158,17 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setItemArray(\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null)
+    public function setItemArray(?\macropage\ebaysdk\trading\ArrayType\ItemArrayType $itemArray = null): self
     {
         $this->ItemArray = $itemArray;
+        
         return $this;
     }
     /**
      * Get ItemsPerPage value
      * @return int|null
      */
-    public function getItemsPerPage()
+    public function getItemsPerPage(): ?int
     {
         return $this->ItemsPerPage;
     }
@@ -170,20 +177,21 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param int $itemsPerPage
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setItemsPerPage($itemsPerPage = null)
+    public function setItemsPerPage(?int $itemsPerPage = null): self
     {
         // validation for constraint: int
-        if (!is_null($itemsPerPage) && !is_numeric($itemsPerPage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($itemsPerPage)), __LINE__);
+        if (!is_null($itemsPerPage) && !(is_int($itemsPerPage) || ctype_digit($itemsPerPage))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($itemsPerPage, true), gettype($itemsPerPage)), __LINE__);
         }
         $this->ItemsPerPage = $itemsPerPage;
+        
         return $this;
     }
     /**
      * Get PageNumber value
      * @return int|null
      */
-    public function getPageNumber()
+    public function getPageNumber(): ?int
     {
         return $this->PageNumber;
     }
@@ -192,20 +200,21 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param int $pageNumber
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setPageNumber($pageNumber = null)
+    public function setPageNumber(?int $pageNumber = null): self
     {
         // validation for constraint: int
-        if (!is_null($pageNumber) && !is_numeric($pageNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($pageNumber)), __LINE__);
+        if (!is_null($pageNumber) && !(is_int($pageNumber) || ctype_digit($pageNumber))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($pageNumber, true), gettype($pageNumber)), __LINE__);
         }
         $this->PageNumber = $pageNumber;
+        
         return $this;
     }
     /**
      * Get ReturnedItemCountActual value
      * @return int|null
      */
-    public function getReturnedItemCountActual()
+    public function getReturnedItemCountActual(): ?int
     {
         return $this->ReturnedItemCountActual;
     }
@@ -214,20 +223,21 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param int $returnedItemCountActual
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setReturnedItemCountActual($returnedItemCountActual = null)
+    public function setReturnedItemCountActual(?int $returnedItemCountActual = null): self
     {
         // validation for constraint: int
-        if (!is_null($returnedItemCountActual) && !is_numeric($returnedItemCountActual)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($returnedItemCountActual)), __LINE__);
+        if (!is_null($returnedItemCountActual) && !(is_int($returnedItemCountActual) || ctype_digit($returnedItemCountActual))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($returnedItemCountActual, true), gettype($returnedItemCountActual)), __LINE__);
         }
         $this->ReturnedItemCountActual = $returnedItemCountActual;
+        
         return $this;
     }
     /**
      * Get Seller value
      * @return \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public function getSeller()
+    public function getSeller(): ?\macropage\ebaysdk\trading\StructType\UserType
     {
         return $this->Seller;
     }
@@ -236,29 +246,10 @@ class GetSellerListResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\UserType $seller
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
      */
-    public function setSeller(\macropage\ebaysdk\trading\StructType\UserType $seller = null)
+    public function setSeller(?\macropage\ebaysdk\trading\StructType\UserType $seller = null): self
     {
         $this->Seller = $seller;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

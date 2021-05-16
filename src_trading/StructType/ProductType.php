@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ProductType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,79 +17,79 @@ class ProductType extends AbstractStructBase
 {
     /**
      * The CharacteristicsSet
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CharacteristicsSetType
+     * @var \macropage\ebaysdk\trading\StructType\CharacteristicsSetType|null
      */
-    public $CharacteristicsSet;
+    protected ?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $CharacteristicsSet = null;
     /**
      * The DetailsURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DetailsURL;
+    protected ?string $DetailsURL = null;
     /**
      * The NumItems
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NumItems;
+    protected ?int $NumItems = null;
     /**
      * The MinPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MinPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MinPrice = null;
     /**
      * The MaxPrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MaxPrice;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MaxPrice = null;
     /**
      * The ProductReferenceID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductReferenceID;
+    protected ?string $ProductReferenceID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * The productID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - use: optional
-     * @var string
+     * @var string|null
      */
-    public $productID;
+    protected ?string $productID = null;
     /**
      * The stockPhotoURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var string
+     * @var string|null
      */
-    public $stockPhotoURL;
+    protected ?string $stockPhotoURL = null;
     /**
      * The title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
-     * @var string
+     * @var string|null
      */
-    public $title;
+    protected ?string $title = null;
     /**
      * Constructor method for ProductType
      * @uses ProductType::setCharacteristicsSet()
@@ -105,12 +108,12 @@ class ProductType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $minPrice
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxPrice
      * @param string $productReferenceID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      * @param string $productID
      * @param string $stockPhotoURL
      * @param string $title
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null, $detailsURL = null, $numItems = null, \macropage\ebaysdk\trading\StructType\AmountType $minPrice = null, \macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null, $productReferenceID = null, \DOMDocument $any = null, $productID = null, $stockPhotoURL = null, $title = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null, ?string $detailsURL = null, ?int $numItems = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null, ?string $productReferenceID = null, $any = null, ?string $productID = null, ?string $stockPhotoURL = null, ?string $title = null)
     {
         $this
             ->setCharacteristicsSet($characteristicsSet)
@@ -128,7 +131,7 @@ class ProductType extends AbstractStructBase
      * Get CharacteristicsSet value
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicsSetType|null
      */
-    public function getCharacteristicsSet()
+    public function getCharacteristicsSet(): ?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType
     {
         return $this->CharacteristicsSet;
     }
@@ -137,16 +140,17 @@ class ProductType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setCharacteristicsSet(\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null)
+    public function setCharacteristicsSet(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null): self
     {
         $this->CharacteristicsSet = $characteristicsSet;
+        
         return $this;
     }
     /**
      * Get DetailsURL value
      * @return string|null
      */
-    public function getDetailsURL()
+    public function getDetailsURL(): ?string
     {
         return $this->DetailsURL;
     }
@@ -155,20 +159,21 @@ class ProductType extends AbstractStructBase
      * @param string $detailsURL
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setDetailsURL($detailsURL = null)
+    public function setDetailsURL(?string $detailsURL = null): self
     {
         // validation for constraint: string
         if (!is_null($detailsURL) && !is_string($detailsURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($detailsURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($detailsURL, true), gettype($detailsURL)), __LINE__);
         }
         $this->DetailsURL = $detailsURL;
+        
         return $this;
     }
     /**
      * Get NumItems value
      * @return int|null
      */
-    public function getNumItems()
+    public function getNumItems(): ?int
     {
         return $this->NumItems;
     }
@@ -177,20 +182,21 @@ class ProductType extends AbstractStructBase
      * @param int $numItems
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setNumItems($numItems = null)
+    public function setNumItems(?int $numItems = null): self
     {
         // validation for constraint: int
-        if (!is_null($numItems) && !is_numeric($numItems)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($numItems)), __LINE__);
+        if (!is_null($numItems) && !(is_int($numItems) || ctype_digit($numItems))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($numItems, true), gettype($numItems)), __LINE__);
         }
         $this->NumItems = $numItems;
+        
         return $this;
     }
     /**
      * Get MinPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMinPrice()
+    public function getMinPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MinPrice;
     }
@@ -199,16 +205,17 @@ class ProductType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $minPrice
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setMinPrice(\macropage\ebaysdk\trading\StructType\AmountType $minPrice = null)
+    public function setMinPrice(?\macropage\ebaysdk\trading\StructType\AmountType $minPrice = null): self
     {
         $this->MinPrice = $minPrice;
+        
         return $this;
     }
     /**
      * Get MaxPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMaxPrice()
+    public function getMaxPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MaxPrice;
     }
@@ -217,16 +224,17 @@ class ProductType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxPrice
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setMaxPrice(\macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null)
+    public function setMaxPrice(?\macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null): self
     {
         $this->MaxPrice = $maxPrice;
+        
         return $this;
     }
     /**
      * Get ProductReferenceID value
      * @return string|null
      */
-    public function getProductReferenceID()
+    public function getProductReferenceID(): ?string
     {
         return $this->ProductReferenceID;
     }
@@ -235,52 +243,54 @@ class ProductType extends AbstractStructBase
      * @param string $productReferenceID
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setProductReferenceID($productReferenceID = null)
+    public function setProductReferenceID(?string $productReferenceID = null): self
     {
         // validation for constraint: string
         if (!is_null($productReferenceID) && !is_string($productReferenceID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productReferenceID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productReferenceID, true), gettype($productReferenceID)), __LINE__);
         }
         $this->ProductReferenceID = $productReferenceID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ProductType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
     }
     /**
      * Get productID value
      * @return string|null
      */
-    public function getProductID()
+    public function getProductID(): ?string
     {
         return $this->productID;
     }
@@ -289,20 +299,21 @@ class ProductType extends AbstractStructBase
      * @param string $productID
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setProductID($productID = null)
+    public function setProductID(?string $productID = null): self
     {
         // validation for constraint: string
         if (!is_null($productID) && !is_string($productID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($productID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($productID, true), gettype($productID)), __LINE__);
         }
         $this->productID = $productID;
+        
         return $this;
     }
     /**
      * Get stockPhotoURL value
      * @return string|null
      */
-    public function getStockPhotoURL()
+    public function getStockPhotoURL(): ?string
     {
         return $this->stockPhotoURL;
     }
@@ -311,20 +322,21 @@ class ProductType extends AbstractStructBase
      * @param string $stockPhotoURL
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setStockPhotoURL($stockPhotoURL = null)
+    public function setStockPhotoURL(?string $stockPhotoURL = null): self
     {
         // validation for constraint: string
         if (!is_null($stockPhotoURL) && !is_string($stockPhotoURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($stockPhotoURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($stockPhotoURL, true), gettype($stockPhotoURL)), __LINE__);
         }
         $this->stockPhotoURL = $stockPhotoURL;
+        
         return $this;
     }
     /**
      * Get title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -333,33 +345,14 @@ class ProductType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\ProductType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->title = $title;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ProductType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

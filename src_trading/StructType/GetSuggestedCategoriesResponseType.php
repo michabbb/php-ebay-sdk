@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetSuggestedCategoriesResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: The base response of a <b>GetSuggestedCategories</b> call. This response includes an array of categories with the highest number of listings whose listing titles or descriptions contain the keywords specified in the <b>Query</b>
  * field of the call request.
  * @subpackage Structs
@@ -15,21 +18,21 @@ class GetSuggestedCategoriesResponseType extends AbstractResponseType
 {
     /**
      * The SuggestedCategoryArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of an array of suggested listing categories for an item based on the keywords that were specified in the <b>Query</b> field of the call request. Up to 10 suggested categories may be returned. This container
-     * will not returned if no eBay categories match the query in the call request.
+     * will always be returned unless the query in the request exceeds the maximum allowed characters. The quality/accuracy of the results may depend on the quality of the query string.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType
+     * @var \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType|null
      */
-    public $SuggestedCategoryArray;
+    protected ?\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $SuggestedCategoryArray = null;
     /**
      * The CategoryCount
-     * Meta informations extracted from the WSDL
-     * - documentation: This integer value Indicates the number of suggested categories that were found that matched the keywords.
+     * Meta information extracted from the WSDL
+     * - documentation: This integer value indicates the number of suggested categories that were found that matched the keywords.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CategoryCount;
+    protected ?int $CategoryCount = null;
     /**
      * Constructor method for GetSuggestedCategoriesResponseType
      * @uses GetSuggestedCategoriesResponseType::setSuggestedCategoryArray()
@@ -37,7 +40,7 @@ class GetSuggestedCategoriesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray
      * @param int $categoryCount
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray = null, $categoryCount = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray = null, ?int $categoryCount = null)
     {
         $this
             ->setSuggestedCategoryArray($suggestedCategoryArray)
@@ -47,7 +50,7 @@ class GetSuggestedCategoriesResponseType extends AbstractResponseType
      * Get SuggestedCategoryArray value
      * @return \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType|null
      */
-    public function getSuggestedCategoryArray()
+    public function getSuggestedCategoryArray(): ?\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType
     {
         return $this->SuggestedCategoryArray;
     }
@@ -56,16 +59,17 @@ class GetSuggestedCategoriesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray
      * @return \macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesResponseType
      */
-    public function setSuggestedCategoryArray(\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray = null)
+    public function setSuggestedCategoryArray(?\macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType $suggestedCategoryArray = null): self
     {
         $this->SuggestedCategoryArray = $suggestedCategoryArray;
+        
         return $this;
     }
     /**
      * Get CategoryCount value
      * @return int|null
      */
-    public function getCategoryCount()
+    public function getCategoryCount(): ?int
     {
         return $this->CategoryCount;
     }
@@ -74,33 +78,14 @@ class GetSuggestedCategoriesResponseType extends AbstractResponseType
      * @param int $categoryCount
      * @return \macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesResponseType
      */
-    public function setCategoryCount($categoryCount = null)
+    public function setCategoryCount(?int $categoryCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($categoryCount) && !is_numeric($categoryCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($categoryCount)), __LINE__);
+        if (!is_null($categoryCount) && !(is_int($categoryCount) || ctype_digit($categoryCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($categoryCount, true), gettype($categoryCount)), __LINE__);
         }
         $this->CategoryCount = $categoryCount;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

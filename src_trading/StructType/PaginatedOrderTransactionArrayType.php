@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for PaginatedOrderTransactionArrayType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains a paginated list of orders.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class PaginatedOrderTransactionArrayType extends AbstractStructBase
 {
     /**
      * The OrderTransactionArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the list of orders.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType|null
      */
-    public $OrderTransactionArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $OrderTransactionArray = null;
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies information about the list, including number of pages and number of entries.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for PaginatedOrderTransactionArrayType
      * @uses PaginatedOrderTransactionArrayType::setOrderTransactionArray()
@@ -40,9 +43,9 @@ class PaginatedOrderTransactionArrayType extends AbstractStructBase
      * @uses PaginatedOrderTransactionArrayType::setAny()
      * @param \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray = null, \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, \DOMDocument $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray = null, ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $any = null)
     {
         $this
             ->setOrderTransactionArray($orderTransactionArray)
@@ -53,7 +56,7 @@ class PaginatedOrderTransactionArrayType extends AbstractStructBase
      * Get OrderTransactionArray value
      * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType|null
      */
-    public function getOrderTransactionArray()
+    public function getOrderTransactionArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
     {
         return $this->OrderTransactionArray;
     }
@@ -62,16 +65,17 @@ class PaginatedOrderTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray
      * @return \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType
      */
-    public function setOrderTransactionArray(\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray = null)
+    public function setOrderTransactionArray(?\macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType $orderTransactionArray = null): self
     {
         $this->OrderTransactionArray = $orderTransactionArray;
+        
         return $this;
     }
     /**
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -80,61 +84,43 @@ class PaginatedOrderTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

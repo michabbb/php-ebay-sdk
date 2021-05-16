@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AttributeType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is only applicable for Half.com listings, and since the Half.com site was taken down, this type is no longer applicable.
  * @subpackage Structs
  */
@@ -14,32 +17,32 @@ class AttributeType extends AbstractStructBase
 {
     /**
      * The Value
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <b>AttributeType</b> and all of its elements are only applicable for Half.com listings, and since the Half.com site was taken down, this field is no longer applicable.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public $Value;
+    protected array $Value = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * The attributeID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <b>AttributeType</b> and all of its elements are only applicable for Half.com listings, and since the Half.com site was taken down, this field is no longer applicable.
-     * @var int
+     * @var int|null
      */
-    public $attributeID;
+    protected ?int $attributeID = null;
     /**
      * The attributeLabel
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <b>AttributeType</b> and all of its elements are only applicable for Half.com listings, and since the Half.com site was taken down, this field is no longer applicable.
-     * @var string
+     * @var string|null
      */
-    public $attributeLabel;
+    protected ?string $attributeLabel = null;
     /**
      * Constructor method for AttributeType
      * @uses AttributeType::setValue()
@@ -47,11 +50,11 @@ class AttributeType extends AbstractStructBase
      * @uses AttributeType::setAttributeID()
      * @uses AttributeType::setAttributeLabel()
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $value
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      * @param int $attributeID
      * @param string $attributeLabel
      */
-    public function __construct(array $value = array(), \DOMDocument $any = null, $attributeID = null, $attributeLabel = null)
+    public function __construct(array $value = [], $any = null, ?int $attributeID = null, ?string $attributeLabel = null)
     {
         $this
             ->setValue($value)
@@ -61,81 +64,105 @@ class AttributeType extends AbstractStructBase
     }
     /**
      * Get Value value
-     * @return \macropage\ebaysdk\trading\StructType\ValType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public function getValue()
+    public function getValue(): array
     {
         return $this->Value;
     }
     /**
+     * This method is responsible for validating the values passed to the setValue method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setValue method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateValueForArrayConstraintsFromSetValue(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $attributeTypeValueItem) {
+            // validation for constraint: itemType
+            if (!$attributeTypeValueItem instanceof \macropage\ebaysdk\trading\StructType\ValType) {
+                $invalidValues[] = is_object($attributeTypeValueItem) ? get_class($attributeTypeValueItem) : sprintf('%s(%s)', gettype($attributeTypeValueItem), var_export($attributeTypeValueItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The Value property can only contain items of type \macropage\ebaysdk\trading\StructType\ValType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set Value value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $value
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function setValue(array $value = array())
+    public function setValue(array $value = []): self
     {
-        foreach ($value as $attributeTypeValueItem) {
-            // validation for constraint: itemType
-            if (!$attributeTypeValueItem instanceof \macropage\ebaysdk\trading\StructType\ValType) {
-                throw new \InvalidArgumentException(sprintf('The Value property can only contain items of \macropage\ebaysdk\trading\StructType\ValType, "%s" given', is_object($attributeTypeValueItem) ? get_class($attributeTypeValueItem) : gettype($attributeTypeValueItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($valueArrayErrorMessage = self::validateValueForArrayConstraintsFromSetValue($value))) {
+            throw new InvalidArgumentException($valueArrayErrorMessage, __LINE__);
         }
         $this->Value = $value;
+        
         return $this;
     }
     /**
      * Add item to Value value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ValType $item
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function addToValue(\macropage\ebaysdk\trading\StructType\ValType $item)
+    public function addToValue(\macropage\ebaysdk\trading\StructType\ValType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ValType) {
-            throw new \InvalidArgumentException(sprintf('The Value property can only contain items of \macropage\ebaysdk\trading\StructType\ValType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The Value property can only contain items of type \macropage\ebaysdk\trading\StructType\ValType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->Value[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\AttributeType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
     }
     /**
      * Get attributeID value
      * @return int|null
      */
-    public function getAttributeID()
+    public function getAttributeID(): ?int
     {
         return $this->attributeID;
     }
@@ -144,20 +171,21 @@ class AttributeType extends AbstractStructBase
      * @param int $attributeID
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function setAttributeID($attributeID = null)
+    public function setAttributeID(?int $attributeID = null): self
     {
         // validation for constraint: int
-        if (!is_null($attributeID) && !is_numeric($attributeID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($attributeID)), __LINE__);
+        if (!is_null($attributeID) && !(is_int($attributeID) || ctype_digit($attributeID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($attributeID, true), gettype($attributeID)), __LINE__);
         }
         $this->attributeID = $attributeID;
+        
         return $this;
     }
     /**
      * Get attributeLabel value
      * @return string|null
      */
-    public function getAttributeLabel()
+    public function getAttributeLabel(): ?string
     {
         return $this->attributeLabel;
     }
@@ -166,33 +194,14 @@ class AttributeType extends AbstractStructBase
      * @param string $attributeLabel
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function setAttributeLabel($attributeLabel = null)
+    public function setAttributeLabel(?string $attributeLabel = null): self
     {
         // validation for constraint: string
         if (!is_null($attributeLabel) && !is_string($attributeLabel)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($attributeLabel)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($attributeLabel, true), gettype($attributeLabel)), __LINE__);
         }
         $this->attributeLabel = $attributeLabel;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\AttributeType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

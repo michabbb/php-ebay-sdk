@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FeatureEligibilityType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Indicates whether the seller making the request can list with certain features. A seller's eligibility is determined by their Feedback score.
  * @subpackage Structs
  */
@@ -14,53 +17,53 @@ class FeatureEligibilityType extends AbstractStructBase
 {
     /**
      * The QualifiesForBuyItNow
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller is eligible to create auction listings enabled with the 'Buy It Now' option. A value of <code>true</code> means that the seller is eligible; a value of <code>false</code> indicates that they are not
      * eligible.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $QualifiesForBuyItNow;
+    protected ?bool $QualifiesForBuyItNow = null;
     /**
      * The QualifiesForBuyItNowMultiple
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller is eligible to specify the 'Buy It Now' option for multiple-quantity listings. A value of <code>true</code> means that the seller is eligible; a value of <code>false</code> indicates that they are not
      * eligible.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $QualifiesForBuyItNowMultiple;
+    protected ?bool $QualifiesForBuyItNowMultiple = null;
     /**
      * The QualifiedForFixedPriceOneDayDuration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller is eligible to create fixed-price listings with a one-day listing duration. A value of <code>true</code> means that the seller is eligible; a value of <code>false</code> indicates that the seller is not
      * eligible. Note that this field only controls user eligibility. The listing type and category must support this feature for this field to be applicable.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $QualifiedForFixedPriceOneDayDuration;
+    protected ?bool $QualifiedForFixedPriceOneDayDuration = null;
     /**
      * The QualifiesForVariations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not the seller is eligible to create multiple-variation, fixed-price listings.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $QualifiesForVariations;
+    protected ?bool $QualifiesForVariations = null;
     /**
      * The QualifiedForAuctionOneDayDuration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the seller is eligible to create an auction listing with a one-day duration. Limitation: the Adult-Only and Motor Vehicle categories do not support one-day auctions, so the seller cannot create one-day auction
      * listings in these categories, even if the seller has the eligibility.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $QualifiedForAuctionOneDayDuration;
+    protected ?bool $QualifiedForAuctionOneDayDuration = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for FeatureEligibilityType
      * @uses FeatureEligibilityType::setQualifiesForBuyItNow()
@@ -74,9 +77,9 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiedForFixedPriceOneDayDuration
      * @param bool $qualifiesForVariations
      * @param bool $qualifiedForAuctionOneDayDuration
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($qualifiesForBuyItNow = null, $qualifiesForBuyItNowMultiple = null, $qualifiedForFixedPriceOneDayDuration = null, $qualifiesForVariations = null, $qualifiedForAuctionOneDayDuration = null, \DOMDocument $any = null)
+    public function __construct(?bool $qualifiesForBuyItNow = null, ?bool $qualifiesForBuyItNowMultiple = null, ?bool $qualifiedForFixedPriceOneDayDuration = null, ?bool $qualifiesForVariations = null, ?bool $qualifiedForAuctionOneDayDuration = null, $any = null)
     {
         $this
             ->setQualifiesForBuyItNow($qualifiesForBuyItNow)
@@ -90,7 +93,7 @@ class FeatureEligibilityType extends AbstractStructBase
      * Get QualifiesForBuyItNow value
      * @return bool|null
      */
-    public function getQualifiesForBuyItNow()
+    public function getQualifiesForBuyItNow(): ?bool
     {
         return $this->QualifiesForBuyItNow;
     }
@@ -99,20 +102,21 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiesForBuyItNow
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setQualifiesForBuyItNow($qualifiesForBuyItNow = null)
+    public function setQualifiesForBuyItNow(?bool $qualifiesForBuyItNow = null): self
     {
         // validation for constraint: boolean
         if (!is_null($qualifiesForBuyItNow) && !is_bool($qualifiesForBuyItNow)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($qualifiesForBuyItNow)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiesForBuyItNow, true), gettype($qualifiesForBuyItNow)), __LINE__);
         }
         $this->QualifiesForBuyItNow = $qualifiesForBuyItNow;
+        
         return $this;
     }
     /**
      * Get QualifiesForBuyItNowMultiple value
      * @return bool|null
      */
-    public function getQualifiesForBuyItNowMultiple()
+    public function getQualifiesForBuyItNowMultiple(): ?bool
     {
         return $this->QualifiesForBuyItNowMultiple;
     }
@@ -121,20 +125,21 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiesForBuyItNowMultiple
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setQualifiesForBuyItNowMultiple($qualifiesForBuyItNowMultiple = null)
+    public function setQualifiesForBuyItNowMultiple(?bool $qualifiesForBuyItNowMultiple = null): self
     {
         // validation for constraint: boolean
         if (!is_null($qualifiesForBuyItNowMultiple) && !is_bool($qualifiesForBuyItNowMultiple)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($qualifiesForBuyItNowMultiple)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiesForBuyItNowMultiple, true), gettype($qualifiesForBuyItNowMultiple)), __LINE__);
         }
         $this->QualifiesForBuyItNowMultiple = $qualifiesForBuyItNowMultiple;
+        
         return $this;
     }
     /**
      * Get QualifiedForFixedPriceOneDayDuration value
      * @return bool|null
      */
-    public function getQualifiedForFixedPriceOneDayDuration()
+    public function getQualifiedForFixedPriceOneDayDuration(): ?bool
     {
         return $this->QualifiedForFixedPriceOneDayDuration;
     }
@@ -143,20 +148,21 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiedForFixedPriceOneDayDuration
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setQualifiedForFixedPriceOneDayDuration($qualifiedForFixedPriceOneDayDuration = null)
+    public function setQualifiedForFixedPriceOneDayDuration(?bool $qualifiedForFixedPriceOneDayDuration = null): self
     {
         // validation for constraint: boolean
         if (!is_null($qualifiedForFixedPriceOneDayDuration) && !is_bool($qualifiedForFixedPriceOneDayDuration)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($qualifiedForFixedPriceOneDayDuration)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiedForFixedPriceOneDayDuration, true), gettype($qualifiedForFixedPriceOneDayDuration)), __LINE__);
         }
         $this->QualifiedForFixedPriceOneDayDuration = $qualifiedForFixedPriceOneDayDuration;
+        
         return $this;
     }
     /**
      * Get QualifiesForVariations value
      * @return bool|null
      */
-    public function getQualifiesForVariations()
+    public function getQualifiesForVariations(): ?bool
     {
         return $this->QualifiesForVariations;
     }
@@ -165,20 +171,21 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiesForVariations
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setQualifiesForVariations($qualifiesForVariations = null)
+    public function setQualifiesForVariations(?bool $qualifiesForVariations = null): self
     {
         // validation for constraint: boolean
         if (!is_null($qualifiesForVariations) && !is_bool($qualifiesForVariations)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($qualifiesForVariations)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiesForVariations, true), gettype($qualifiesForVariations)), __LINE__);
         }
         $this->QualifiesForVariations = $qualifiesForVariations;
+        
         return $this;
     }
     /**
      * Get QualifiedForAuctionOneDayDuration value
      * @return bool|null
      */
-    public function getQualifiedForAuctionOneDayDuration()
+    public function getQualifiedForAuctionOneDayDuration(): ?bool
     {
         return $this->QualifiedForAuctionOneDayDuration;
     }
@@ -187,65 +194,47 @@ class FeatureEligibilityType extends AbstractStructBase
      * @param bool $qualifiedForAuctionOneDayDuration
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setQualifiedForAuctionOneDayDuration($qualifiedForAuctionOneDayDuration = null)
+    public function setQualifiedForAuctionOneDayDuration(?bool $qualifiedForAuctionOneDayDuration = null): self
     {
         // validation for constraint: boolean
         if (!is_null($qualifiedForAuctionOneDayDuration) && !is_bool($qualifiedForAuctionOneDayDuration)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($qualifiedForAuctionOneDayDuration)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiedForAuctionOneDayDuration, true), gettype($qualifiedForAuctionOneDayDuration)), __LINE__);
         }
         $this->QualifiedForAuctionOneDayDuration = $qualifiedForAuctionOneDayDuration;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\FeatureEligibilityType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\FeatureEligibilityType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

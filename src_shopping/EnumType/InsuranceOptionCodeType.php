@@ -1,55 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\EnumType;
+
+use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 
 /**
  * This class stands for InsuranceOptionCodeType EnumType
- * Meta informations extracted from the WSDL
- * - documentation: This type is deprecated, as shipping insurance is no longer applicable or supported in eBay APIs.
+ * Meta information extracted from the WSDL
+ * - documentation: Shipping insurance is no longer applicable or supported in eBay APIs, but the <b>InsuranceOption</b> field is still getting returned with the <code>NotOfferedOnSite</code> value.
  * @subpackage Enumerations
  */
-class InsuranceOptionCodeType
+class InsuranceOptionCodeType extends AbstractStructEnumBase
 {
     /**
      * Constant for value 'Optional'
+     * Meta information extracted from the WSDL
+     * - documentation: This value is no longer applicable, and should not be returned.
      * @return string 'Optional'
      */
     const VALUE_OPTIONAL = 'Optional';
     /**
      * Constant for value 'Required'
+     * Meta information extracted from the WSDL
+     * - documentation: This value is no longer applicable, and should not be returned.
      * @return string 'Required'
      */
     const VALUE_REQUIRED = 'Required';
     /**
      * Constant for value 'NotOffered'
+     * Meta information extracted from the WSDL
+     * - documentation: A seller can no longer offer shipping insurance to the buyer, but the <b>InsuranceOption</b> or <b>InternationalInsuranceOption</b> fields may still be returned with this value.
      * @return string 'NotOffered'
      */
     const VALUE_NOT_OFFERED = 'NotOffered';
     /**
      * Constant for value 'IncludedInShippingHandling'
+     * Meta information extracted from the WSDL
+     * - documentation: This value is no longer applicable, and should not be returned.
      * @return string 'IncludedInShippingHandling'
      */
     const VALUE_INCLUDED_IN_SHIPPING_HANDLING = 'IncludedInShippingHandling';
     /**
      * Constant for value 'NotOfferedOnSite'
+     * Meta information extracted from the WSDL
+     * - documentation: A seller can no longer offer shipping insurance to the buyer, but the <b>InsuranceOption</b> field is still returned with this value.
      * @return string 'NotOfferedOnSite'
      */
     const VALUE_NOT_OFFERED_ON_SITE = 'NotOfferedOnSite';
     /**
      * Constant for value 'CustomCode'
+     * Meta information extracted from the WSDL
+     * - documentation: Placeholder value.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
-    /**
-     * Return true if value is allowed
-     * @uses self::getValidValues()
-     * @param mixed $value value
-     * @return bool true|false
-     */
-    public static function valueIsValid($value)
-    {
-        return ($value === null) || in_array($value, self::getValidValues(), true);
-    }
     /**
      * Return allowed values
      * @uses self::VALUE_OPTIONAL
@@ -60,23 +66,15 @@ class InsuranceOptionCodeType
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
-    public static function getValidValues()
+    public static function getValidValues(): array
     {
-        return array(
+        return [
             self::VALUE_OPTIONAL,
             self::VALUE_REQUIRED,
             self::VALUE_NOT_OFFERED,
             self::VALUE_INCLUDED_IN_SHIPPING_HANDLING,
             self::VALUE_NOT_OFFERED_ON_SITE,
             self::VALUE_CUSTOM_CODE,
-        );
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
+        ];
     }
 }

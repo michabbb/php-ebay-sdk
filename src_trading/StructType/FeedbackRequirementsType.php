@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for FeedbackRequirementsType StructType
@@ -12,16 +15,16 @@ class FeedbackRequirementsType extends AbstractStructBase
 {
     /**
      * The _
-     * @var bool
+     * @var bool|null
      */
-    public $_;
+    protected ?bool $_ = null;
     /**
      * The minimum
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This type is deprecated.
-     * @var string
+     * @var string|null
      */
-    public $minimum;
+    protected ?string $minimum = null;
     /**
      * Constructor method for FeedbackRequirementsType
      * @uses FeedbackRequirementsType::set_()
@@ -29,7 +32,7 @@ class FeedbackRequirementsType extends AbstractStructBase
      * @param bool $_
      * @param string $minimum
      */
-    public function __construct($_ = null, $minimum = null)
+    public function __construct(?bool $_ = null, ?string $minimum = null)
     {
         $this
             ->set_($_)
@@ -39,7 +42,7 @@ class FeedbackRequirementsType extends AbstractStructBase
      * Get _ value
      * @return bool|null
      */
-    public function get_()
+    public function get_(): ?bool
     {
         return $this->_;
     }
@@ -48,20 +51,21 @@ class FeedbackRequirementsType extends AbstractStructBase
      * @param bool $_
      * @return \macropage\ebaysdk\trading\StructType\FeedbackRequirementsType
      */
-    public function set_($_ = null)
+    public function set_(?bool $_ = null): self
     {
         // validation for constraint: boolean
         if (!is_null($_) && !is_bool($_)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($_)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($_, true), gettype($_)), __LINE__);
         }
         $this->_ = $_;
+        
         return $this;
     }
     /**
      * Get minimum value
      * @return string|null
      */
-    public function getMinimum()
+    public function getMinimum(): ?string
     {
         return $this->minimum;
     }
@@ -70,33 +74,14 @@ class FeedbackRequirementsType extends AbstractStructBase
      * @param string $minimum
      * @return \macropage\ebaysdk\trading\StructType\FeedbackRequirementsType
      */
-    public function setMinimum($minimum = null)
+    public function setMinimum(?string $minimum = null): self
     {
         // validation for constraint: string
         if (!is_null($minimum) && !is_string($minimum)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($minimum)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($minimum, true), gettype($minimum)), __LINE__);
         }
         $this->minimum = $minimum;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\FeedbackRequirementsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

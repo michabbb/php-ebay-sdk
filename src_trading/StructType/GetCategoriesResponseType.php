@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetCategoriesResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains the category data for the eBay site specified as input. The category data is contained in a CategoryArrayType object, within which are zero, one, or multiple CategoryType objects. Each CategoryType object contains the detail
  * data for one category. Other fields tell how many categories are returned in a call, when the category hierarchy was last updated, and the version of the category hierarchy (all three of which can differ from one eBay site to the next).
  * @subpackage Structs
@@ -15,66 +18,66 @@ class GetCategoriesResponseType extends AbstractResponseType
 {
     /**
      * The CategoryArray
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: List of the returned categories. The category array contains one CategoryType object for each returned category. Returns empty if no detail level is specified.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\CategoryArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\CategoryArrayType|null
      */
-    public $CategoryArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\CategoryArrayType $CategoryArray = null;
     /**
      * The CategoryCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the number of categories returned (i.e., the number of CategoryType objects in CategoryArray).
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CategoryCount;
+    protected ?int $CategoryCount = null;
     /**
      * The UpdateTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the last date and time that eBay modified the category hierarchy for the specified eBay site.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UpdateTime;
+    protected ?string $UpdateTime = null;
     /**
      * The CategoryVersion
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the version of the category hierarchy on the specified eBay site.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryVersion;
+    protected ?string $CategoryVersion = null;
     /**
      * The ReservePriceAllowed
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If true, <b>ReservePriceAllowed</b> indicates that all categories on the site allow the seller to specify a reserve price for an item. If false, this field is not returned in the response and all categories on the site do not
      * normally allow sellers to specify reserve prices. The Category.ORPA (override reserve price allowed) field can override (or toggle) the reserve price allowed setting for a given category. For example, if <b>ReservePriceAllowed</b> is false and
      * Category.ORPA is true, the category overrides the site setting and supports reserve prices. If <b>ReservePriceAllowed</b> is true and Category.ORPA is true, the category overrides the site setting and does does not support reserve prices.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReservePriceAllowed;
+    protected ?bool $ReservePriceAllowed = null;
     /**
      * The MinimumReservePrice
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the lowest possible reserve price allowed for any item listed in any category on the site. You can use the fields returned by <b>GetCategoryFeatures</b> to determine if a different Minimum Reserve Price is defined for the
      * category you want to use.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $MinimumReservePrice;
+    protected ?float $MinimumReservePrice = null;
     /**
      * The ReduceReserveAllowed
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If true, <b>ReduceReserveAllowed</b> indicates that all categories on the site allow the seller to reduce an item's reserve price. If false, this field is not returned in the response and all categories on the site do not normally
      * allow sellers to reduce an item's reserve price. The Category.ORRA (override reduce reserve price) field can override (or toggle) the reserve price reduction setting for a given category. For example, if <b>ReduceReserveAllowed</b> is false and
      * Category.ORRA is true, the category overrides the site setting and supports reducing reserve prices. If <b>ReduceReserveAllowed</b> is true and Category.ORRA is true, the category overrides the site setting and does does not support reducing reserve
      * prices.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReduceReserveAllowed;
+    protected ?bool $ReduceReserveAllowed = null;
     /**
      * Constructor method for GetCategoriesResponseType
      * @uses GetCategoriesResponseType::setCategoryArray()
@@ -92,7 +95,7 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param float $minimumReservePrice
      * @param bool $reduceReserveAllowed
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\CategoryArrayType $categoryArray = null, $categoryCount = null, $updateTime = null, $categoryVersion = null, $reservePriceAllowed = null, $minimumReservePrice = null, $reduceReserveAllowed = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\CategoryArrayType $categoryArray = null, ?int $categoryCount = null, ?string $updateTime = null, ?string $categoryVersion = null, ?bool $reservePriceAllowed = null, ?float $minimumReservePrice = null, ?bool $reduceReserveAllowed = null)
     {
         $this
             ->setCategoryArray($categoryArray)
@@ -107,7 +110,7 @@ class GetCategoriesResponseType extends AbstractResponseType
      * Get CategoryArray value
      * @return \macropage\ebaysdk\trading\ArrayType\CategoryArrayType|null
      */
-    public function getCategoryArray()
+    public function getCategoryArray(): ?\macropage\ebaysdk\trading\ArrayType\CategoryArrayType
     {
         return $this->CategoryArray;
     }
@@ -116,16 +119,17 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\CategoryArrayType $categoryArray
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setCategoryArray(\macropage\ebaysdk\trading\ArrayType\CategoryArrayType $categoryArray = null)
+    public function setCategoryArray(?\macropage\ebaysdk\trading\ArrayType\CategoryArrayType $categoryArray = null): self
     {
         $this->CategoryArray = $categoryArray;
+        
         return $this;
     }
     /**
      * Get CategoryCount value
      * @return int|null
      */
-    public function getCategoryCount()
+    public function getCategoryCount(): ?int
     {
         return $this->CategoryCount;
     }
@@ -134,20 +138,21 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param int $categoryCount
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setCategoryCount($categoryCount = null)
+    public function setCategoryCount(?int $categoryCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($categoryCount) && !is_numeric($categoryCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($categoryCount)), __LINE__);
+        if (!is_null($categoryCount) && !(is_int($categoryCount) || ctype_digit($categoryCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($categoryCount, true), gettype($categoryCount)), __LINE__);
         }
         $this->CategoryCount = $categoryCount;
+        
         return $this;
     }
     /**
      * Get UpdateTime value
      * @return string|null
      */
-    public function getUpdateTime()
+    public function getUpdateTime(): ?string
     {
         return $this->UpdateTime;
     }
@@ -156,20 +161,21 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param string $updateTime
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setUpdateTime($updateTime = null)
+    public function setUpdateTime(?string $updateTime = null): self
     {
         // validation for constraint: string
         if (!is_null($updateTime) && !is_string($updateTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($updateTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($updateTime, true), gettype($updateTime)), __LINE__);
         }
         $this->UpdateTime = $updateTime;
+        
         return $this;
     }
     /**
      * Get CategoryVersion value
      * @return string|null
      */
-    public function getCategoryVersion()
+    public function getCategoryVersion(): ?string
     {
         return $this->CategoryVersion;
     }
@@ -178,20 +184,21 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param string $categoryVersion
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setCategoryVersion($categoryVersion = null)
+    public function setCategoryVersion(?string $categoryVersion = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryVersion) && !is_string($categoryVersion)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryVersion)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryVersion, true), gettype($categoryVersion)), __LINE__);
         }
         $this->CategoryVersion = $categoryVersion;
+        
         return $this;
     }
     /**
      * Get ReservePriceAllowed value
      * @return bool|null
      */
-    public function getReservePriceAllowed()
+    public function getReservePriceAllowed(): ?bool
     {
         return $this->ReservePriceAllowed;
     }
@@ -200,20 +207,21 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param bool $reservePriceAllowed
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setReservePriceAllowed($reservePriceAllowed = null)
+    public function setReservePriceAllowed(?bool $reservePriceAllowed = null): self
     {
         // validation for constraint: boolean
         if (!is_null($reservePriceAllowed) && !is_bool($reservePriceAllowed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($reservePriceAllowed)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($reservePriceAllowed, true), gettype($reservePriceAllowed)), __LINE__);
         }
         $this->ReservePriceAllowed = $reservePriceAllowed;
+        
         return $this;
     }
     /**
      * Get MinimumReservePrice value
      * @return float|null
      */
-    public function getMinimumReservePrice()
+    public function getMinimumReservePrice(): ?float
     {
         return $this->MinimumReservePrice;
     }
@@ -222,16 +230,21 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param float $minimumReservePrice
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setMinimumReservePrice($minimumReservePrice = null)
+    public function setMinimumReservePrice(?float $minimumReservePrice = null): self
     {
+        // validation for constraint: float
+        if (!is_null($minimumReservePrice) && !(is_float($minimumReservePrice) || is_numeric($minimumReservePrice))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($minimumReservePrice, true), gettype($minimumReservePrice)), __LINE__);
+        }
         $this->MinimumReservePrice = $minimumReservePrice;
+        
         return $this;
     }
     /**
      * Get ReduceReserveAllowed value
      * @return bool|null
      */
-    public function getReduceReserveAllowed()
+    public function getReduceReserveAllowed(): ?bool
     {
         return $this->ReduceReserveAllowed;
     }
@@ -240,33 +253,14 @@ class GetCategoriesResponseType extends AbstractResponseType
      * @param bool $reduceReserveAllowed
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
      */
-    public function setReduceReserveAllowed($reduceReserveAllowed = null)
+    public function setReduceReserveAllowed(?bool $reduceReserveAllowed = null): self
     {
         // validation for constraint: boolean
         if (!is_null($reduceReserveAllowed) && !is_bool($reduceReserveAllowed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($reduceReserveAllowed)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($reduceReserveAllowed, true), gettype($reduceReserveAllowed)), __LINE__);
         }
         $this->ReduceReserveAllowed = $reduceReserveAllowed;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

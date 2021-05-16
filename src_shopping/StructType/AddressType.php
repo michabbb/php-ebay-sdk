@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for AddressType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used to provide details about a Business Seller's address.
  * @subpackage Structs
  */
@@ -14,203 +17,202 @@ class AddressType extends AbstractStructBase
 {
     /**
      * The Name
-     * Meta informations extracted from the WSDL
-     * - documentation: User's name for the address. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The name associated with the Business Seller. This field is only returned if defined and available. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The Street
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is deprecated and no longer returned.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated and no longer returned. It has been replaced by the <b>Street1</b> and <b>Street2</b> fields.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Street;
+    protected ?string $Street = null;
     /**
      * The Street1
-     * Meta informations extracted from the WSDL
-     * - documentation: The first line of the user's street address. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The first line of the Business Seller's street address. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Street1;
+    protected ?string $Street1 = null;
     /**
      * The Street2
-     * Meta informations extracted from the WSDL
-     * - documentation: The second line of the user's street address (such as an apartment number or suite number). Returned if the user specified a second street value for their address. In case of <b>Item.SellerContactDetails</b>, <b>Street2</b> can be
-     * used to provide City, Address, State, and Zip code (if applicable). <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The second line of the Business Seller's street address (such as an apartment number or suite number). Returned if the Business Seller used the second line available for a street address. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Street2;
+    protected ?string $Street2 = null;
     /**
      * The CityName
-     * Meta informations extracted from the WSDL
-     * - documentation: The name of the user's city. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The name of the Business Seller's city. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CityName;
+    protected ?string $CityName = null;
     /**
      * The County
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated and no longer returned.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $County;
+    protected ?string $County = null;
     /**
      * The StateOrProvince
-     * Meta informations extracted from the WSDL
-     * - documentation: The state or province of the user's address. Whether it's a state or a province will depend on the region and/or country. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The state or province of the Business Seller's address. States and/or provinces are not applicable for every country. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StateOrProvince;
+    protected ?string $StateOrProvince = null;
     /**
      * The CountryName
-     * Meta informations extracted from the WSDL
-     * - documentation: The name of the country associated with the Business Seller's address. Also applicable to Half.com (for GetOrders).
+     * Meta information extracted from the WSDL
+     * - documentation: The name of the country associated with the Business Seller's address.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CountryName;
+    protected ?string $CountryName = null;
     /**
      * The Phone
-     * Meta informations extracted from the WSDL
-     * - documentation: User's primary phone number. This may return a value of <code>Invalid Request</code> if you are not authorized to see the user's phone number. <br/><br/> In the US, the area code (3 digits), the prefix (3 digits), the line number (4
-     * digits), and phone extension (if specified by the user) are returned in this field. The extension can be one or more digits. Non-breaking spaces are used as delimiters between these phone number components. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: The Business Seller's primary phone number. This may return a value of <code>Invalid Request</code> if you are not authorized to see the Business Seller's phone number. <br/><br/> In the US, the area code (3 digits), the prefix (3
+     * digits), the line number (4 digits), and phone extension (if specified by the user) are returned in this field. The extension can be one or more digits. Non-breaking spaces are used as delimiters between these phone number components. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Phone;
+    protected ?string $Phone = null;
     /**
      * The PhoneCountryPrefix
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. The full phone number, including the country prefix, is shown in the <b>Phone</b> field.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PhoneCountryPrefix;
+    protected ?string $PhoneCountryPrefix = null;
     /**
      * The PhoneAreaOrCityCode
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. The full phone number, including the area code, is shown in the <b>Phone</b> field.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PhoneAreaOrCityCode;
+    protected ?string $PhoneAreaOrCityCode = null;
     /**
      * The PhoneLocalNumber
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. The full phone number is shown in the <b>Phone</b> field.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PhoneLocalNumber;
+    protected ?string $PhoneLocalNumber = null;
     /**
      * The Phone2CountryPrefix
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. A secondary phone number is no longer supported.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Phone2CountryPrefix;
+    protected ?string $Phone2CountryPrefix = null;
     /**
      * The Phone2AreaOrCityCode
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. A secondary phone number is no longer supported.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Phone2AreaOrCityCode;
+    protected ?string $Phone2AreaOrCityCode = null;
     /**
      * The Phone2LocalNumber
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated. A secondary phone number is no longer supported.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Phone2LocalNumber;
+    protected ?string $Phone2LocalNumber = null;
     /**
      * The PostalCode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The postal code asssociated with the Business Seller's address. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PostalCode;
+    protected ?string $PostalCode = null;
     /**
      * The AddressID
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AddressID;
+    protected ?string $AddressID = null;
     /**
      * The ExternalAddressID
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExternalAddressID;
+    protected ?string $ExternalAddressID = null;
     /**
      * The InternationalName
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InternationalName;
+    protected ?string $InternationalName = null;
     /**
      * The InternationalStateAndCity
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InternationalStateAndCity;
+    protected ?string $InternationalStateAndCity = null;
     /**
      * The InternationalStreet
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is no deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $InternationalStreet;
+    protected ?string $InternationalStreet = null;
     /**
      * The CompanyName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The Business Seller's company name. This field is only returned if defined and available.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CompanyName;
+    protected ?string $CompanyName = null;
     /**
      * The FirstName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The first name of the Business Seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FirstName;
+    protected ?string $FirstName = null;
     /**
      * The LastName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The last name of the Business Seller.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LastName;
+    protected ?string $LastName = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for AddressType
      * @uses AddressType::setName()
@@ -262,9 +264,9 @@ class AddressType extends AbstractStructBase
      * @param string $companyName
      * @param string $firstName
      * @param string $lastName
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($name = null, $street = null, $street1 = null, $street2 = null, $cityName = null, $county = null, $stateOrProvince = null, $countryName = null, $phone = null, $phoneCountryPrefix = null, $phoneAreaOrCityCode = null, $phoneLocalNumber = null, $phone2CountryPrefix = null, $phone2AreaOrCityCode = null, $phone2LocalNumber = null, $postalCode = null, $addressID = null, $externalAddressID = null, $internationalName = null, $internationalStateAndCity = null, $internationalStreet = null, $companyName = null, $firstName = null, $lastName = null, \DOMDocument $any = null)
+    public function __construct(?string $name = null, ?string $street = null, ?string $street1 = null, ?string $street2 = null, ?string $cityName = null, ?string $county = null, ?string $stateOrProvince = null, ?string $countryName = null, ?string $phone = null, ?string $phoneCountryPrefix = null, ?string $phoneAreaOrCityCode = null, ?string $phoneLocalNumber = null, ?string $phone2CountryPrefix = null, ?string $phone2AreaOrCityCode = null, ?string $phone2LocalNumber = null, ?string $postalCode = null, ?string $addressID = null, ?string $externalAddressID = null, ?string $internationalName = null, ?string $internationalStateAndCity = null, ?string $internationalStreet = null, ?string $companyName = null, ?string $firstName = null, ?string $lastName = null, $any = null)
     {
         $this
             ->setName($name)
@@ -297,7 +299,7 @@ class AddressType extends AbstractStructBase
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -306,20 +308,21 @@ class AddressType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get Street value
      * @return string|null
      */
-    public function getStreet()
+    public function getStreet(): ?string
     {
         return $this->Street;
     }
@@ -328,20 +331,21 @@ class AddressType extends AbstractStructBase
      * @param string $street
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setStreet($street = null)
+    public function setStreet(?string $street = null): self
     {
         // validation for constraint: string
         if (!is_null($street) && !is_string($street)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($street)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($street, true), gettype($street)), __LINE__);
         }
         $this->Street = $street;
+        
         return $this;
     }
     /**
      * Get Street1 value
      * @return string|null
      */
-    public function getStreet1()
+    public function getStreet1(): ?string
     {
         return $this->Street1;
     }
@@ -350,20 +354,21 @@ class AddressType extends AbstractStructBase
      * @param string $street1
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setStreet1($street1 = null)
+    public function setStreet1(?string $street1 = null): self
     {
         // validation for constraint: string
         if (!is_null($street1) && !is_string($street1)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($street1)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($street1, true), gettype($street1)), __LINE__);
         }
         $this->Street1 = $street1;
+        
         return $this;
     }
     /**
      * Get Street2 value
      * @return string|null
      */
-    public function getStreet2()
+    public function getStreet2(): ?string
     {
         return $this->Street2;
     }
@@ -372,20 +377,21 @@ class AddressType extends AbstractStructBase
      * @param string $street2
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setStreet2($street2 = null)
+    public function setStreet2(?string $street2 = null): self
     {
         // validation for constraint: string
         if (!is_null($street2) && !is_string($street2)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($street2)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($street2, true), gettype($street2)), __LINE__);
         }
         $this->Street2 = $street2;
+        
         return $this;
     }
     /**
      * Get CityName value
      * @return string|null
      */
-    public function getCityName()
+    public function getCityName(): ?string
     {
         return $this->CityName;
     }
@@ -394,20 +400,21 @@ class AddressType extends AbstractStructBase
      * @param string $cityName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setCityName($cityName = null)
+    public function setCityName(?string $cityName = null): self
     {
         // validation for constraint: string
         if (!is_null($cityName) && !is_string($cityName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($cityName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($cityName, true), gettype($cityName)), __LINE__);
         }
         $this->CityName = $cityName;
+        
         return $this;
     }
     /**
      * Get County value
      * @return string|null
      */
-    public function getCounty()
+    public function getCounty(): ?string
     {
         return $this->County;
     }
@@ -416,20 +423,21 @@ class AddressType extends AbstractStructBase
      * @param string $county
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setCounty($county = null)
+    public function setCounty(?string $county = null): self
     {
         // validation for constraint: string
         if (!is_null($county) && !is_string($county)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($county)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($county, true), gettype($county)), __LINE__);
         }
         $this->County = $county;
+        
         return $this;
     }
     /**
      * Get StateOrProvince value
      * @return string|null
      */
-    public function getStateOrProvince()
+    public function getStateOrProvince(): ?string
     {
         return $this->StateOrProvince;
     }
@@ -438,20 +446,21 @@ class AddressType extends AbstractStructBase
      * @param string $stateOrProvince
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setStateOrProvince($stateOrProvince = null)
+    public function setStateOrProvince(?string $stateOrProvince = null): self
     {
         // validation for constraint: string
         if (!is_null($stateOrProvince) && !is_string($stateOrProvince)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($stateOrProvince)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($stateOrProvince, true), gettype($stateOrProvince)), __LINE__);
         }
         $this->StateOrProvince = $stateOrProvince;
+        
         return $this;
     }
     /**
      * Get CountryName value
      * @return string|null
      */
-    public function getCountryName()
+    public function getCountryName(): ?string
     {
         return $this->CountryName;
     }
@@ -460,20 +469,21 @@ class AddressType extends AbstractStructBase
      * @param string $countryName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setCountryName($countryName = null)
+    public function setCountryName(?string $countryName = null): self
     {
         // validation for constraint: string
         if (!is_null($countryName) && !is_string($countryName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($countryName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($countryName, true), gettype($countryName)), __LINE__);
         }
         $this->CountryName = $countryName;
+        
         return $this;
     }
     /**
      * Get Phone value
      * @return string|null
      */
-    public function getPhone()
+    public function getPhone(): ?string
     {
         return $this->Phone;
     }
@@ -482,20 +492,21 @@ class AddressType extends AbstractStructBase
      * @param string $phone
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhone($phone = null)
+    public function setPhone(?string $phone = null): self
     {
         // validation for constraint: string
         if (!is_null($phone) && !is_string($phone)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phone)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phone, true), gettype($phone)), __LINE__);
         }
         $this->Phone = $phone;
+        
         return $this;
     }
     /**
      * Get PhoneCountryPrefix value
      * @return string|null
      */
-    public function getPhoneCountryPrefix()
+    public function getPhoneCountryPrefix(): ?string
     {
         return $this->PhoneCountryPrefix;
     }
@@ -504,20 +515,21 @@ class AddressType extends AbstractStructBase
      * @param string $phoneCountryPrefix
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhoneCountryPrefix($phoneCountryPrefix = null)
+    public function setPhoneCountryPrefix(?string $phoneCountryPrefix = null): self
     {
         // validation for constraint: string
         if (!is_null($phoneCountryPrefix) && !is_string($phoneCountryPrefix)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phoneCountryPrefix)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phoneCountryPrefix, true), gettype($phoneCountryPrefix)), __LINE__);
         }
         $this->PhoneCountryPrefix = $phoneCountryPrefix;
+        
         return $this;
     }
     /**
      * Get PhoneAreaOrCityCode value
      * @return string|null
      */
-    public function getPhoneAreaOrCityCode()
+    public function getPhoneAreaOrCityCode(): ?string
     {
         return $this->PhoneAreaOrCityCode;
     }
@@ -526,20 +538,21 @@ class AddressType extends AbstractStructBase
      * @param string $phoneAreaOrCityCode
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhoneAreaOrCityCode($phoneAreaOrCityCode = null)
+    public function setPhoneAreaOrCityCode(?string $phoneAreaOrCityCode = null): self
     {
         // validation for constraint: string
         if (!is_null($phoneAreaOrCityCode) && !is_string($phoneAreaOrCityCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phoneAreaOrCityCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phoneAreaOrCityCode, true), gettype($phoneAreaOrCityCode)), __LINE__);
         }
         $this->PhoneAreaOrCityCode = $phoneAreaOrCityCode;
+        
         return $this;
     }
     /**
      * Get PhoneLocalNumber value
      * @return string|null
      */
-    public function getPhoneLocalNumber()
+    public function getPhoneLocalNumber(): ?string
     {
         return $this->PhoneLocalNumber;
     }
@@ -548,20 +561,21 @@ class AddressType extends AbstractStructBase
      * @param string $phoneLocalNumber
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhoneLocalNumber($phoneLocalNumber = null)
+    public function setPhoneLocalNumber(?string $phoneLocalNumber = null): self
     {
         // validation for constraint: string
         if (!is_null($phoneLocalNumber) && !is_string($phoneLocalNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phoneLocalNumber)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phoneLocalNumber, true), gettype($phoneLocalNumber)), __LINE__);
         }
         $this->PhoneLocalNumber = $phoneLocalNumber;
+        
         return $this;
     }
     /**
      * Get Phone2CountryPrefix value
      * @return string|null
      */
-    public function getPhone2CountryPrefix()
+    public function getPhone2CountryPrefix(): ?string
     {
         return $this->Phone2CountryPrefix;
     }
@@ -570,20 +584,21 @@ class AddressType extends AbstractStructBase
      * @param string $phone2CountryPrefix
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhone2CountryPrefix($phone2CountryPrefix = null)
+    public function setPhone2CountryPrefix(?string $phone2CountryPrefix = null): self
     {
         // validation for constraint: string
         if (!is_null($phone2CountryPrefix) && !is_string($phone2CountryPrefix)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phone2CountryPrefix)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phone2CountryPrefix, true), gettype($phone2CountryPrefix)), __LINE__);
         }
         $this->Phone2CountryPrefix = $phone2CountryPrefix;
+        
         return $this;
     }
     /**
      * Get Phone2AreaOrCityCode value
      * @return string|null
      */
-    public function getPhone2AreaOrCityCode()
+    public function getPhone2AreaOrCityCode(): ?string
     {
         return $this->Phone2AreaOrCityCode;
     }
@@ -592,20 +607,21 @@ class AddressType extends AbstractStructBase
      * @param string $phone2AreaOrCityCode
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhone2AreaOrCityCode($phone2AreaOrCityCode = null)
+    public function setPhone2AreaOrCityCode(?string $phone2AreaOrCityCode = null): self
     {
         // validation for constraint: string
         if (!is_null($phone2AreaOrCityCode) && !is_string($phone2AreaOrCityCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phone2AreaOrCityCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phone2AreaOrCityCode, true), gettype($phone2AreaOrCityCode)), __LINE__);
         }
         $this->Phone2AreaOrCityCode = $phone2AreaOrCityCode;
+        
         return $this;
     }
     /**
      * Get Phone2LocalNumber value
      * @return string|null
      */
-    public function getPhone2LocalNumber()
+    public function getPhone2LocalNumber(): ?string
     {
         return $this->Phone2LocalNumber;
     }
@@ -614,20 +630,21 @@ class AddressType extends AbstractStructBase
      * @param string $phone2LocalNumber
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPhone2LocalNumber($phone2LocalNumber = null)
+    public function setPhone2LocalNumber(?string $phone2LocalNumber = null): self
     {
         // validation for constraint: string
         if (!is_null($phone2LocalNumber) && !is_string($phone2LocalNumber)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($phone2LocalNumber)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($phone2LocalNumber, true), gettype($phone2LocalNumber)), __LINE__);
         }
         $this->Phone2LocalNumber = $phone2LocalNumber;
+        
         return $this;
     }
     /**
      * Get PostalCode value
      * @return string|null
      */
-    public function getPostalCode()
+    public function getPostalCode(): ?string
     {
         return $this->PostalCode;
     }
@@ -636,20 +653,21 @@ class AddressType extends AbstractStructBase
      * @param string $postalCode
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setPostalCode($postalCode = null)
+    public function setPostalCode(?string $postalCode = null): self
     {
         // validation for constraint: string
         if (!is_null($postalCode) && !is_string($postalCode)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($postalCode)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($postalCode, true), gettype($postalCode)), __LINE__);
         }
         $this->PostalCode = $postalCode;
+        
         return $this;
     }
     /**
      * Get AddressID value
      * @return string|null
      */
-    public function getAddressID()
+    public function getAddressID(): ?string
     {
         return $this->AddressID;
     }
@@ -658,20 +676,21 @@ class AddressType extends AbstractStructBase
      * @param string $addressID
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setAddressID($addressID = null)
+    public function setAddressID(?string $addressID = null): self
     {
         // validation for constraint: string
         if (!is_null($addressID) && !is_string($addressID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($addressID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($addressID, true), gettype($addressID)), __LINE__);
         }
         $this->AddressID = $addressID;
+        
         return $this;
     }
     /**
      * Get ExternalAddressID value
      * @return string|null
      */
-    public function getExternalAddressID()
+    public function getExternalAddressID(): ?string
     {
         return $this->ExternalAddressID;
     }
@@ -680,20 +699,21 @@ class AddressType extends AbstractStructBase
      * @param string $externalAddressID
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setExternalAddressID($externalAddressID = null)
+    public function setExternalAddressID(?string $externalAddressID = null): self
     {
         // validation for constraint: string
         if (!is_null($externalAddressID) && !is_string($externalAddressID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($externalAddressID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($externalAddressID, true), gettype($externalAddressID)), __LINE__);
         }
         $this->ExternalAddressID = $externalAddressID;
+        
         return $this;
     }
     /**
      * Get InternationalName value
      * @return string|null
      */
-    public function getInternationalName()
+    public function getInternationalName(): ?string
     {
         return $this->InternationalName;
     }
@@ -702,20 +722,21 @@ class AddressType extends AbstractStructBase
      * @param string $internationalName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setInternationalName($internationalName = null)
+    public function setInternationalName(?string $internationalName = null): self
     {
         // validation for constraint: string
         if (!is_null($internationalName) && !is_string($internationalName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($internationalName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($internationalName, true), gettype($internationalName)), __LINE__);
         }
         $this->InternationalName = $internationalName;
+        
         return $this;
     }
     /**
      * Get InternationalStateAndCity value
      * @return string|null
      */
-    public function getInternationalStateAndCity()
+    public function getInternationalStateAndCity(): ?string
     {
         return $this->InternationalStateAndCity;
     }
@@ -724,20 +745,21 @@ class AddressType extends AbstractStructBase
      * @param string $internationalStateAndCity
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setInternationalStateAndCity($internationalStateAndCity = null)
+    public function setInternationalStateAndCity(?string $internationalStateAndCity = null): self
     {
         // validation for constraint: string
         if (!is_null($internationalStateAndCity) && !is_string($internationalStateAndCity)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($internationalStateAndCity)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($internationalStateAndCity, true), gettype($internationalStateAndCity)), __LINE__);
         }
         $this->InternationalStateAndCity = $internationalStateAndCity;
+        
         return $this;
     }
     /**
      * Get InternationalStreet value
      * @return string|null
      */
-    public function getInternationalStreet()
+    public function getInternationalStreet(): ?string
     {
         return $this->InternationalStreet;
     }
@@ -746,20 +768,21 @@ class AddressType extends AbstractStructBase
      * @param string $internationalStreet
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setInternationalStreet($internationalStreet = null)
+    public function setInternationalStreet(?string $internationalStreet = null): self
     {
         // validation for constraint: string
         if (!is_null($internationalStreet) && !is_string($internationalStreet)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($internationalStreet)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($internationalStreet, true), gettype($internationalStreet)), __LINE__);
         }
         $this->InternationalStreet = $internationalStreet;
+        
         return $this;
     }
     /**
      * Get CompanyName value
      * @return string|null
      */
-    public function getCompanyName()
+    public function getCompanyName(): ?string
     {
         return $this->CompanyName;
     }
@@ -768,20 +791,21 @@ class AddressType extends AbstractStructBase
      * @param string $companyName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setCompanyName($companyName = null)
+    public function setCompanyName(?string $companyName = null): self
     {
         // validation for constraint: string
         if (!is_null($companyName) && !is_string($companyName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($companyName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($companyName, true), gettype($companyName)), __LINE__);
         }
         $this->CompanyName = $companyName;
+        
         return $this;
     }
     /**
      * Get FirstName value
      * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->FirstName;
     }
@@ -790,20 +814,21 @@ class AddressType extends AbstractStructBase
      * @param string $firstName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setFirstName($firstName = null)
+    public function setFirstName(?string $firstName = null): self
     {
         // validation for constraint: string
         if (!is_null($firstName) && !is_string($firstName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($firstName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($firstName, true), gettype($firstName)), __LINE__);
         }
         $this->FirstName = $firstName;
+        
         return $this;
     }
     /**
      * Get LastName value
      * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->LastName;
     }
@@ -812,65 +837,47 @@ class AddressType extends AbstractStructBase
      * @param string $lastName
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setLastName($lastName = null)
+    public function setLastName(?string $lastName = null): self
     {
         // validation for constraint: string
         if (!is_null($lastName) && !is_string($lastName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($lastName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($lastName, true), gettype($lastName)), __LINE__);
         }
         $this->LastName = $lastName;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\AddressType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\AddressType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\AddressType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BuyingSummaryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>BuyingSummary</b> container returned in <b>GetMyeBayBuying</b>. The <b>BuyingSummary</b> container consists of data that summarizes the buyer's recent buying activity, including the number of items the user has
  * bid on, the number of items the user is winning, and the number of items the user has won. The <b>BuyingSummary</b> container is only returned if the <b>BuyingSummary.Include</b> field is included in the <b>GetMyeBayBuying</b> request and set to
  * <code>true</code>.
@@ -16,60 +19,60 @@ class BuyingSummaryType extends AbstractStructBase
 {
     /**
      * The BiddingCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of auction items the user has bid on.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BiddingCount;
+    protected ?int $BiddingCount = null;
     /**
      * The WinningCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of active auction listings in which the user is currently the highest bidder.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WinningCount;
+    protected ?int $WinningCount = null;
     /**
      * The TotalWinningCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total cost of items that the user is currently the highest bidder on.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalWinningCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalWinningCost = null;
     /**
      * The WonCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of auction items that the user has won.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WonCount;
+    protected ?int $WonCount = null;
     /**
      * The TotalWonCost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The total cost of auction items that the user has won.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $TotalWonCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $TotalWonCost = null;
     /**
      * The WonDurationInDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The time period for which won items are displayed. Default is 31 days.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $WonDurationInDays;
+    protected ?int $WonDurationInDays = null;
     /**
      * The BestOfferCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The number of items the user has made Best Offers on.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $BestOfferCount;
+    protected ?int $BestOfferCount = null;
     /**
      * Constructor method for BuyingSummaryType
      * @uses BuyingSummaryType::setBiddingCount()
@@ -87,7 +90,7 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $wonDurationInDays
      * @param int $bestOfferCount
      */
-    public function __construct($biddingCount = null, $winningCount = null, \macropage\ebaysdk\trading\StructType\AmountType $totalWinningCost = null, $wonCount = null, \macropage\ebaysdk\trading\StructType\AmountType $totalWonCost = null, $wonDurationInDays = null, $bestOfferCount = null)
+    public function __construct(?int $biddingCount = null, ?int $winningCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalWinningCost = null, ?int $wonCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalWonCost = null, ?int $wonDurationInDays = null, ?int $bestOfferCount = null)
     {
         $this
             ->setBiddingCount($biddingCount)
@@ -102,7 +105,7 @@ class BuyingSummaryType extends AbstractStructBase
      * Get BiddingCount value
      * @return int|null
      */
-    public function getBiddingCount()
+    public function getBiddingCount(): ?int
     {
         return $this->BiddingCount;
     }
@@ -111,20 +114,21 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $biddingCount
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setBiddingCount($biddingCount = null)
+    public function setBiddingCount(?int $biddingCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($biddingCount) && !is_numeric($biddingCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($biddingCount)), __LINE__);
+        if (!is_null($biddingCount) && !(is_int($biddingCount) || ctype_digit($biddingCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($biddingCount, true), gettype($biddingCount)), __LINE__);
         }
         $this->BiddingCount = $biddingCount;
+        
         return $this;
     }
     /**
      * Get WinningCount value
      * @return int|null
      */
-    public function getWinningCount()
+    public function getWinningCount(): ?int
     {
         return $this->WinningCount;
     }
@@ -133,20 +137,21 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $winningCount
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setWinningCount($winningCount = null)
+    public function setWinningCount(?int $winningCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($winningCount) && !is_numeric($winningCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($winningCount)), __LINE__);
+        if (!is_null($winningCount) && !(is_int($winningCount) || ctype_digit($winningCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($winningCount, true), gettype($winningCount)), __LINE__);
         }
         $this->WinningCount = $winningCount;
+        
         return $this;
     }
     /**
      * Get TotalWinningCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalWinningCost()
+    public function getTotalWinningCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalWinningCost;
     }
@@ -155,16 +160,17 @@ class BuyingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalWinningCost
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setTotalWinningCost(\macropage\ebaysdk\trading\StructType\AmountType $totalWinningCost = null)
+    public function setTotalWinningCost(?\macropage\ebaysdk\trading\StructType\AmountType $totalWinningCost = null): self
     {
         $this->TotalWinningCost = $totalWinningCost;
+        
         return $this;
     }
     /**
      * Get WonCount value
      * @return int|null
      */
-    public function getWonCount()
+    public function getWonCount(): ?int
     {
         return $this->WonCount;
     }
@@ -173,20 +179,21 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $wonCount
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setWonCount($wonCount = null)
+    public function setWonCount(?int $wonCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($wonCount) && !is_numeric($wonCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($wonCount)), __LINE__);
+        if (!is_null($wonCount) && !(is_int($wonCount) || ctype_digit($wonCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($wonCount, true), gettype($wonCount)), __LINE__);
         }
         $this->WonCount = $wonCount;
+        
         return $this;
     }
     /**
      * Get TotalWonCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotalWonCost()
+    public function getTotalWonCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->TotalWonCost;
     }
@@ -195,16 +202,17 @@ class BuyingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalWonCost
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setTotalWonCost(\macropage\ebaysdk\trading\StructType\AmountType $totalWonCost = null)
+    public function setTotalWonCost(?\macropage\ebaysdk\trading\StructType\AmountType $totalWonCost = null): self
     {
         $this->TotalWonCost = $totalWonCost;
+        
         return $this;
     }
     /**
      * Get WonDurationInDays value
      * @return int|null
      */
-    public function getWonDurationInDays()
+    public function getWonDurationInDays(): ?int
     {
         return $this->WonDurationInDays;
     }
@@ -213,20 +221,21 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $wonDurationInDays
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setWonDurationInDays($wonDurationInDays = null)
+    public function setWonDurationInDays(?int $wonDurationInDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($wonDurationInDays) && !is_numeric($wonDurationInDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($wonDurationInDays)), __LINE__);
+        if (!is_null($wonDurationInDays) && !(is_int($wonDurationInDays) || ctype_digit($wonDurationInDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($wonDurationInDays, true), gettype($wonDurationInDays)), __LINE__);
         }
         $this->WonDurationInDays = $wonDurationInDays;
+        
         return $this;
     }
     /**
      * Get BestOfferCount value
      * @return int|null
      */
-    public function getBestOfferCount()
+    public function getBestOfferCount(): ?int
     {
         return $this->BestOfferCount;
     }
@@ -235,33 +244,14 @@ class BuyingSummaryType extends AbstractStructBase
      * @param int $bestOfferCount
      * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
      */
-    public function setBestOfferCount($bestOfferCount = null)
+    public function setBestOfferCount(?int $bestOfferCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($bestOfferCount) && !is_numeric($bestOfferCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($bestOfferCount)), __LINE__);
+        if (!is_null($bestOfferCount) && !(is_int($bestOfferCount) || ctype_digit($bestOfferCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($bestOfferCount, true), gettype($bestOfferCount)), __LINE__);
         }
         $this->BestOfferCount = $bestOfferCount;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BuyingSummaryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

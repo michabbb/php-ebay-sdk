@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BotBlockResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is used by the <b>BotBlock</b> container that is returned in the <b>PlaceOffer</b> call response if eBay is requiring that the user supply an authentication token and URL in order for eBay to process the <b>PlaceOffer</b>
  * call. The authentication token and URL values that are returned in the <b>PlaceOffer</b> call response are then passed in the <b>BotBlock</b> container of a subsequent <b>PlaceOffer</b> call.
  * @subpackage Structs
@@ -15,41 +18,41 @@ class BotBlockResponseType extends AbstractStructBase
 {
     /**
      * The BotBlockToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string value is an encrypted token that eBay generates and returns in the <b>BotBlock.BotBlockToken</b> field of the <b>PlaceOffer</b> call response when eBay is requiring that the user supply an authentication token and URL in
      * order for eBay to process the <b>PlaceOffer</b> call. As soon as a user gets a <b>BotBlock</b> container returned in the <b>PlaceOffer</b> call response, that user should grab the authentication token and the URL and then run another
      * <b>PlaceOffer</b> call, but this time using the <b>BotBlock</b> container and passing in the authentication token and the URL values.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BotBlockToken;
+    protected ?string $BotBlockToken = null;
     /**
      * The BotBlockUrl
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string value is a URL to an image that eBay generates and returns in the <b>PlaceOffer</b> call response when eBay is requiring that the user supply an authentication token and URL in order for eBay to process the
      * <b>PlaceOffer</b> call. As soon as a user gets a <b>BotBlock</b> container returned in the <b>PlaceOffer</b> call response, that user should grab the authentication token and this <b>BotBlockUrl</b> and then run another <b>PlaceOffer</b> call, but
      * this time using the <b>BotBlock</b> container and passing in the authentication token and this URL value in the <b>BotBlockUserInput</b> field. For site-impaired users, the <b>BotBlockAudioUrl</b> field might be returned instead, in which case, the
      * <b>BotBlockAudioUrl</b> value should be passed into the<b>BotBlockUserInput</b> field instead.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BotBlockUrl;
+    protected ?string $BotBlockUrl = null;
     /**
      * The BotBlockAudioUrl
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This string value is a URL to an audio clip that eBay generates and returns in the <b>PlaceOffer</b> call response when eBay is requiring that the user supply an authentication token and URL in order for eBay to process the
      * <b>PlaceOffer</b> call. As soon as a user gets a <b>BotBlock</b> container returned in the <b>PlaceOffer</b> call response, that user should grab the authentication token and this <b>BotBlockAudioUrl</b> and then run another <b>PlaceOffer</b> call,
      * but this time using the <b>BotBlock</b> container and passing in the authentication token and this URL value in the <b>BotBlockUserInput</b> field. <br><br> <span class="tablenote"><b>Note:</b> This field will generally only be returned for
      * site-impaired users. If this field is not returned, but the <b>BotBlockUrl</b> field is returned instead, the <b>BotBlockUrl</b> value should be passed into the <b>BotBlockUserInput</b> field of the subsequent <b>PlaceOffer</b> call instead. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BotBlockAudioUrl;
+    protected ?string $BotBlockAudioUrl = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BotBlockResponseType
      * @uses BotBlockResponseType::setBotBlockToken()
@@ -59,9 +62,9 @@ class BotBlockResponseType extends AbstractStructBase
      * @param string $botBlockToken
      * @param string $botBlockUrl
      * @param string $botBlockAudioUrl
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($botBlockToken = null, $botBlockUrl = null, $botBlockAudioUrl = null, \DOMDocument $any = null)
+    public function __construct(?string $botBlockToken = null, ?string $botBlockUrl = null, ?string $botBlockAudioUrl = null, $any = null)
     {
         $this
             ->setBotBlockToken($botBlockToken)
@@ -73,7 +76,7 @@ class BotBlockResponseType extends AbstractStructBase
      * Get BotBlockToken value
      * @return string|null
      */
-    public function getBotBlockToken()
+    public function getBotBlockToken(): ?string
     {
         return $this->BotBlockToken;
     }
@@ -82,20 +85,21 @@ class BotBlockResponseType extends AbstractStructBase
      * @param string $botBlockToken
      * @return \macropage\ebaysdk\trading\StructType\BotBlockResponseType
      */
-    public function setBotBlockToken($botBlockToken = null)
+    public function setBotBlockToken(?string $botBlockToken = null): self
     {
         // validation for constraint: string
         if (!is_null($botBlockToken) && !is_string($botBlockToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($botBlockToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($botBlockToken, true), gettype($botBlockToken)), __LINE__);
         }
         $this->BotBlockToken = $botBlockToken;
+        
         return $this;
     }
     /**
      * Get BotBlockUrl value
      * @return string|null
      */
-    public function getBotBlockUrl()
+    public function getBotBlockUrl(): ?string
     {
         return $this->BotBlockUrl;
     }
@@ -104,20 +108,21 @@ class BotBlockResponseType extends AbstractStructBase
      * @param string $botBlockUrl
      * @return \macropage\ebaysdk\trading\StructType\BotBlockResponseType
      */
-    public function setBotBlockUrl($botBlockUrl = null)
+    public function setBotBlockUrl(?string $botBlockUrl = null): self
     {
         // validation for constraint: string
         if (!is_null($botBlockUrl) && !is_string($botBlockUrl)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($botBlockUrl)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($botBlockUrl, true), gettype($botBlockUrl)), __LINE__);
         }
         $this->BotBlockUrl = $botBlockUrl;
+        
         return $this;
     }
     /**
      * Get BotBlockAudioUrl value
      * @return string|null
      */
-    public function getBotBlockAudioUrl()
+    public function getBotBlockAudioUrl(): ?string
     {
         return $this->BotBlockAudioUrl;
     }
@@ -126,65 +131,47 @@ class BotBlockResponseType extends AbstractStructBase
      * @param string $botBlockAudioUrl
      * @return \macropage\ebaysdk\trading\StructType\BotBlockResponseType
      */
-    public function setBotBlockAudioUrl($botBlockAudioUrl = null)
+    public function setBotBlockAudioUrl(?string $botBlockAudioUrl = null): self
     {
         // validation for constraint: string
         if (!is_null($botBlockAudioUrl) && !is_string($botBlockAudioUrl)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($botBlockAudioUrl)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($botBlockAudioUrl, true), gettype($botBlockAudioUrl)), __LINE__);
         }
         $this->BotBlockAudioUrl = $botBlockAudioUrl;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BotBlockResponseType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BotBlockResponseType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BotBlockResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

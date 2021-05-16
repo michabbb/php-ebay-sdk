@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BuyingGuideType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is not used by any Trading API calls.
  * @subpackage Structs
  */
@@ -14,75 +17,76 @@ class BuyingGuideType extends AbstractStructBase
 {
     /**
      * The Name
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Display name of the buying guide.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The URL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: URL for the buying guide. Your application can present this as a link. Use the value of Name as the link's display name.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $URL;
+    protected ?string $URL = null;
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Identifies the category (if any) that is associated with the buying guide.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The ProductFinderID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Identifies the product finder (if any) that is associated with the buying guide. Only returned for product finder searches.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ProductFinderID;
+    protected ?int $ProductFinderID = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The title of the buying guide.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * The Text
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The text of the guide. If the guide is longer than 2000 characters, the text is cut off and it ends with "...". See BuyingGuide.URL for a link to the full text of the review.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Text;
+    protected ?string $Text = null;
     /**
      * The CreationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The time and date when the guide was posted.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreationTime;
+    protected ?string $CreationTime = null;
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The author's eBay user ID. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd,
      * GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder
      * makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BuyingGuideType
      * @uses BuyingGuideType::setName()
@@ -102,9 +106,9 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $text
      * @param string $creationTime
      * @param string $userID
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($name = null, $uRL = null, $categoryID = null, $productFinderID = null, $title = null, $text = null, $creationTime = null, $userID = null, \DOMDocument $any = null)
+    public function __construct(?string $name = null, ?string $uRL = null, ?string $categoryID = null, ?int $productFinderID = null, ?string $title = null, ?string $text = null, ?string $creationTime = null, ?string $userID = null, $any = null)
     {
         $this
             ->setName($name)
@@ -121,7 +125,7 @@ class BuyingGuideType extends AbstractStructBase
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -130,20 +134,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get URL value
      * @return string|null
      */
-    public function getURL()
+    public function getURL(): ?string
     {
         return $this->URL;
     }
@@ -152,20 +157,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $uRL
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setURL($uRL = null)
+    public function setURL(?string $uRL = null): self
     {
         // validation for constraint: string
         if (!is_null($uRL) && !is_string($uRL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($uRL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($uRL, true), gettype($uRL)), __LINE__);
         }
         $this->URL = $uRL;
+        
         return $this;
     }
     /**
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -174,20 +180,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get ProductFinderID value
      * @return int|null
      */
-    public function getProductFinderID()
+    public function getProductFinderID(): ?int
     {
         return $this->ProductFinderID;
     }
@@ -196,20 +203,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param int $productFinderID
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setProductFinderID($productFinderID = null)
+    public function setProductFinderID(?int $productFinderID = null): self
     {
         // validation for constraint: int
-        if (!is_null($productFinderID) && !is_numeric($productFinderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($productFinderID)), __LINE__);
+        if (!is_null($productFinderID) && !(is_int($productFinderID) || ctype_digit($productFinderID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($productFinderID, true), gettype($productFinderID)), __LINE__);
         }
         $this->ProductFinderID = $productFinderID;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -218,20 +226,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
     }
     /**
      * Get Text value
      * @return string|null
      */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->Text;
     }
@@ -240,20 +249,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $text
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setText($text = null)
+    public function setText(?string $text = null): self
     {
         // validation for constraint: string
         if (!is_null($text) && !is_string($text)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($text)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($text, true), gettype($text)), __LINE__);
         }
         $this->Text = $text;
+        
         return $this;
     }
     /**
      * Get CreationTime value
      * @return string|null
      */
-    public function getCreationTime()
+    public function getCreationTime(): ?string
     {
         return $this->CreationTime;
     }
@@ -262,20 +272,21 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $creationTime
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setCreationTime($creationTime = null)
+    public function setCreationTime(?string $creationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($creationTime) && !is_string($creationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($creationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationTime, true), gettype($creationTime)), __LINE__);
         }
         $this->CreationTime = $creationTime;
+        
         return $this;
     }
     /**
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -284,65 +295,47 @@ class BuyingGuideType extends AbstractStructBase
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BuyingGuideType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BuyingGuideType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

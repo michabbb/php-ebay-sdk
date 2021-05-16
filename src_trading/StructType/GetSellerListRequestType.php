@@ -1,143 +1,148 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetSellerListRequestType StructType
- * Meta informations extracted from the WSDL
- * - documentation: Retrieves a list of the items posted by the authenticated user, including the related item data.
+ * Meta information extracted from the WSDL
+ * - documentation: This call is used to retrieve an array of listings for the seller. The seller must be associated with the user/application token being used to make the call. <br/><br/> This call requires that either the 'Start Time' or 'End Time'
+ * date range filters be used. The date range specified by either of these filters can not exceed 120 days or an error will occur. <br/><br/> This call also requires that pagination be used.
  * @subpackage Structs
  */
 class GetSellerListRequestType extends AbstractRequestType
 {
     /**
      * The UserID
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the seller whose items will be returned. <b>UserID</b> is an optional input. If not specified, retrieves listings for the user identified by the authentication token passed in the request. Note that since user information
-     * is anonymous to everyone except the bidder and the seller (during an active auction), only sellers looking for information about their own listings and bidders who know the user IDs of their sellers will be able to make this API call successfully. |
-     * This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For
-     * GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will
-     * be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><strong>Note:</strong> This field should no longer be used, and will be ignored if it is included in a <b>GetSellerList</b> request. There are plans to remove this field from the public WSDL. The only eBay
+     * user ID that can be used is the one associated with the authentication token. </span> | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
+     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
+     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UserID;
+    protected ?string $UserID = null;
     /**
      * The MotorsDealerUsers
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the list of Motors Dealer sellers for which a special set of metrics can be requested. Applies to eBay Motors Pro applications only.
      * - maxOccurs: 1
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UserIDArrayType
+     * @var \macropage\ebaysdk\trading\StructType\UserIDArrayType|null
      */
-    public $MotorsDealerUsers;
+    protected ?\macropage\ebaysdk\trading\StructType\UserIDArrayType $MotorsDealerUsers = null;
     /**
      * The EndTimeFrom
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the earliest (oldest) date to use in a date range filter based on item end time. Specify either an end-time range or a start-time range filter in every call request. Each of the time ranges must be a value less than 120
      * days.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTimeFrom;
+    protected ?string $EndTimeFrom = null;
     /**
      * The EndTimeTo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the latest (most recent) date to use in a date range filter based on item end time. Must be specified if <b>EndTimeFrom</b> is specified.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EndTimeTo;
+    protected ?string $EndTimeTo = null;
     /**
      * The Sort
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the order in which returned items are sorted (based on the end dates of the item listings). Valid values: <br> 0 = No sorting<br> 1 = Sort in descending order<br> 2 = Sort in ascending order<br>
+     * Meta information extracted from the WSDL
+     * - documentation: This field can be used to control the order in which returned listings are sorted (based on the listings' actual/scheduled end dates). Valid values are as follows: <ul> <li><code>1</code> (descending order)</li> <li>code>2</code>
+     * (ascending order)</li> </ul>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Sort;
+    protected ?int $Sort = null;
     /**
      * The StartTimeFrom
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the earliest (oldest) date to use in a date range filter based on item start time. Each of the time ranges must be a value less than 120 days. In all calls, at least one date-range filter must be specified (i.e., you must
      * specify either the end time range or start time range in every request).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTimeFrom;
+    protected ?string $StartTimeFrom = null;
     /**
      * The StartTimeTo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the latest (most recent) date to use in a date range filter based on item start time. Must be specified if <b>StartTimeFrom</b> is specified.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTimeTo;
+    protected ?string $StartTimeTo = null;
     /**
      * The Pagination
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains the data controlling the pagination of the returned values. If you set a <b>DetailLevel</b> in this call, you must set pagination values. The <b>Pagination</b> field contains the number of items to be returned per page of
-     * data (per call), and the page number to return with the current call.
+     * Meta information extracted from the WSDL
+     * - documentation: This container controls the maximum number of listings that can appear on one page of the result set, as well as the page number of the result to return. <br><br> The <b>GetSellerList</b> call requires that the <b>EntriesPerPage</b>
+     * value be set. The <b>PageNumber</b> field is not required but will default to <code>1</code> if not included.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public $Pagination;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationType $Pagination = null;
     /**
      * The GranularityLevel
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the subset of item and user fields to return. See <b>GetSellerList</b> for a list of the fields that are returned for each granularity level. For <b>GetSellerLis</b>t, use <b>DetailLevel</b> or <b>GranularityLevel</b> in a
-     * request, but not both. For <b>GetSellerList</b>, if <b>GranularityLevel</b> is specified, <b>DetailLevel</b> is ignored.
+     * Meta information extracted from the WSDL
+     * - documentation: This field allows the user to control the amount of data that is returned in the response. See the <a href="#GranularityLevel">Granularity Level</a> table on this page for a list of the fields that are returned for each granularity
+     * level. Either <b>GranularityLevel</b> or <b>DetailLevel</b> can be used in a <b>GetSellerList</b> call, but not both. If both are specified, <b>DetailLevel</b> is ignored. If neither are used, the response fields will be the ones shown for 'Coarse'
+     * granularity.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $GranularityLevel;
+    protected ?string $GranularityLevel = null;
     /**
      * The SKUArray
-     * Meta informations extracted from the WSDL
-     * - documentation: Container for a set of SKUs. Filters (reduces) the response to only include active listings that the seller listed with any of the specified SKUs. If multiple listings include the same SKU, they are all returned (assuming they also
-     * match the other criteria in the GetSellerList request).<br> <br> SKUArray can be used to retrieve items listed by the user identified in AuthToken or in UserID.<br> <br> <span class="tablenote"><b>Note:</b> Listings with matching SKUs are returned
-     * regardless of their Item.InventoryTrackingMethod settings. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This container can be used to specify one or multiple SKUs, and only listings associated with these SKUs are retrieved. Note that all other request criteria are also considered when one or more SKU values are specified. <br> <br>
+     * <span class="tablenote"><b>Note:</b> Listings with matching SKUs are returned regardless of their <b>Item.InventoryTrackingMethod</b> setting. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\SKUArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\SKUArrayType|null
      */
-    public $SKUArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\SKUArrayType $SKUArray = null;
     /**
      * The IncludeWatchCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether to include <b>WatchCount</b> in Item nodes returned. <b>WatchCount</b> is only returned with <b>DetailLevel ReturnAll</b>.
+     * Meta information extracted from the WSDL
+     * - documentation: This field may be included and set to <code>true</code> if the seller wishes to see the number of eBay users that are watching each listing.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeWatchCount;
+    protected ?bool $IncludeWatchCount = null;
     /**
      * The AdminEndedItemsOnly
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether to return only items that were administratively ended based on a policy violation.
+     * Meta information extracted from the WSDL
+     * - documentation: This boolean field can be included and set to <code>true</code> if the seller would like to retrieve any listings that were administratively ended by eBay due to a listing policy violation.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AdminEndedItemsOnly;
+    protected ?bool $AdminEndedItemsOnly = null;
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
-     * - documentation: The category ID for the items retrieved. If you specify <b>CategoryID</b> in a <b>GetSellerList</b> call, the response contains only items in the category you specify.
+     * Meta information extracted from the WSDL
+     * - documentation: If you specify a <b>CategoryID</b> value, the response will only contain listings in the category you specify.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $CategoryID;
+    protected ?int $CategoryID = null;
     /**
      * The IncludeVariations
-     * Meta informations extracted from the WSDL
-     * - documentation: If true, the <b>Variations</b> node is returned for all multi-variation listings in the response.<br> <br> <b>Note:</b> If the seller includes a large number of variations in many listings, using this flag may degrade the call's
-     * performance. Therefore, when you use this flag, you may need to reduce the total number of items you're requesting at once. <br/><br/> For example, you may need to use shorter time ranges in the <b>EndTime</b> or <b>StartTime</b> filters, fewer
-     * entries per page in <b>Pagination</b>, and/or <b>SKUArray</b>.
+     * Meta information extracted from the WSDL
+     * - documentation: If this field is included and set to <code>true</code>, the <b>Variations</b> node is returned for all multi-variation listings in the response. <br> <br> <span class="tablenote"><b>Note: </b> If the seller has many
+     * multiple-variation listings, that seller may not want to include variations in the <b>GetSellerList</b> response. Or, a seller can include variations data, but possibly limit the response by specifying shorter date ranges with the date range filters,
+     * or by reducing the number of listings returned per results (decreasing the <b>Pagination.EntriesPerPage</b> value). </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeVariations;
+    protected ?bool $IncludeVariations = null;
     /**
      * Constructor method for GetSellerListRequestType
      * @uses GetSellerListRequestType::setUserID()
@@ -169,7 +174,7 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param int $categoryID
      * @param bool $includeVariations
      */
-    public function __construct($userID = null, \macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null, $endTimeFrom = null, $endTimeTo = null, $sort = null, $startTimeFrom = null, $startTimeTo = null, \macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, $granularityLevel = null, \macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null, $includeWatchCount = null, $adminEndedItemsOnly = null, $categoryID = null, $includeVariations = null)
+    public function __construct(?string $userID = null, ?\macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $sort = null, ?string $startTimeFrom = null, ?string $startTimeTo = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $granularityLevel = null, ?\macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null, ?bool $includeWatchCount = null, ?bool $adminEndedItemsOnly = null, ?int $categoryID = null, ?bool $includeVariations = null)
     {
         $this
             ->setUserID($userID)
@@ -191,7 +196,7 @@ class GetSellerListRequestType extends AbstractRequestType
      * Get UserID value
      * @return string|null
      */
-    public function getUserID()
+    public function getUserID(): ?string
     {
         return $this->UserID;
     }
@@ -200,20 +205,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param string $userID
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setUserID($userID = null)
+    public function setUserID(?string $userID = null): self
     {
         // validation for constraint: string
         if (!is_null($userID) && !is_string($userID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($userID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
+        
         return $this;
     }
     /**
      * Get MotorsDealerUsers value
      * @return \macropage\ebaysdk\trading\StructType\UserIDArrayType|null
      */
-    public function getMotorsDealerUsers()
+    public function getMotorsDealerUsers(): ?\macropage\ebaysdk\trading\StructType\UserIDArrayType
     {
         return $this->MotorsDealerUsers;
     }
@@ -222,16 +228,17 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setMotorsDealerUsers(\macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null)
+    public function setMotorsDealerUsers(?\macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null): self
     {
         $this->MotorsDealerUsers = $motorsDealerUsers;
+        
         return $this;
     }
     /**
      * Get EndTimeFrom value
      * @return string|null
      */
-    public function getEndTimeFrom()
+    public function getEndTimeFrom(): ?string
     {
         return $this->EndTimeFrom;
     }
@@ -240,20 +247,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param string $endTimeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setEndTimeFrom($endTimeFrom = null)
+    public function setEndTimeFrom(?string $endTimeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($endTimeFrom) && !is_string($endTimeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTimeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTimeFrom, true), gettype($endTimeFrom)), __LINE__);
         }
         $this->EndTimeFrom = $endTimeFrom;
+        
         return $this;
     }
     /**
      * Get EndTimeTo value
      * @return string|null
      */
-    public function getEndTimeTo()
+    public function getEndTimeTo(): ?string
     {
         return $this->EndTimeTo;
     }
@@ -262,20 +270,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param string $endTimeTo
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setEndTimeTo($endTimeTo = null)
+    public function setEndTimeTo(?string $endTimeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($endTimeTo) && !is_string($endTimeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($endTimeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($endTimeTo, true), gettype($endTimeTo)), __LINE__);
         }
         $this->EndTimeTo = $endTimeTo;
+        
         return $this;
     }
     /**
      * Get Sort value
      * @return int|null
      */
-    public function getSort()
+    public function getSort(): ?int
     {
         return $this->Sort;
     }
@@ -284,20 +293,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param int $sort
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setSort($sort = null)
+    public function setSort(?int $sort = null): self
     {
         // validation for constraint: int
-        if (!is_null($sort) && !is_numeric($sort)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($sort)), __LINE__);
+        if (!is_null($sort) && !(is_int($sort) || ctype_digit($sort))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($sort, true), gettype($sort)), __LINE__);
         }
         $this->Sort = $sort;
+        
         return $this;
     }
     /**
      * Get StartTimeFrom value
      * @return string|null
      */
-    public function getStartTimeFrom()
+    public function getStartTimeFrom(): ?string
     {
         return $this->StartTimeFrom;
     }
@@ -306,20 +316,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param string $startTimeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setStartTimeFrom($startTimeFrom = null)
+    public function setStartTimeFrom(?string $startTimeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($startTimeFrom) && !is_string($startTimeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTimeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTimeFrom, true), gettype($startTimeFrom)), __LINE__);
         }
         $this->StartTimeFrom = $startTimeFrom;
+        
         return $this;
     }
     /**
      * Get StartTimeTo value
      * @return string|null
      */
-    public function getStartTimeTo()
+    public function getStartTimeTo(): ?string
     {
         return $this->StartTimeTo;
     }
@@ -328,20 +339,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param string $startTimeTo
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setStartTimeTo($startTimeTo = null)
+    public function setStartTimeTo(?string $startTimeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($startTimeTo) && !is_string($startTimeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTimeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTimeTo, true), gettype($startTimeTo)), __LINE__);
         }
         $this->StartTimeTo = $startTimeTo;
+        
         return $this;
     }
     /**
      * Get Pagination value
      * @return \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public function getPagination()
+    public function getPagination(): ?\macropage\ebaysdk\trading\StructType\PaginationType
     {
         return $this->Pagination;
     }
@@ -350,16 +362,17 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setPagination(\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function setPagination(?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null): self
     {
         $this->Pagination = $pagination;
+        
         return $this;
     }
     /**
      * Get GranularityLevel value
      * @return string|null
      */
-    public function getGranularityLevel()
+    public function getGranularityLevel(): ?string
     {
         return $this->GranularityLevel;
     }
@@ -367,24 +380,25 @@ class GetSellerListRequestType extends AbstractRequestType
      * Set GranularityLevel value
      * @uses \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $granularityLevel
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setGranularityLevel($granularityLevel = null)
+    public function setGranularityLevel(?string $granularityLevel = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::valueIsValid($granularityLevel)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $granularityLevel, implode(', ', \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType', is_array($granularityLevel) ? implode(', ', $granularityLevel) : var_export($granularityLevel, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GranularityLevelCodeType::getValidValues())), __LINE__);
         }
         $this->GranularityLevel = $granularityLevel;
+        
         return $this;
     }
     /**
      * Get SKUArray value
      * @return \macropage\ebaysdk\trading\ArrayType\SKUArrayType|null
      */
-    public function getSKUArray()
+    public function getSKUArray(): ?\macropage\ebaysdk\trading\ArrayType\SKUArrayType
     {
         return $this->SKUArray;
     }
@@ -393,16 +407,17 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setSKUArray(\macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null)
+    public function setSKUArray(?\macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null): self
     {
         $this->SKUArray = $sKUArray;
+        
         return $this;
     }
     /**
      * Get IncludeWatchCount value
      * @return bool|null
      */
-    public function getIncludeWatchCount()
+    public function getIncludeWatchCount(): ?bool
     {
         return $this->IncludeWatchCount;
     }
@@ -411,20 +426,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param bool $includeWatchCount
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setIncludeWatchCount($includeWatchCount = null)
+    public function setIncludeWatchCount(?bool $includeWatchCount = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeWatchCount) && !is_bool($includeWatchCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeWatchCount)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeWatchCount, true), gettype($includeWatchCount)), __LINE__);
         }
         $this->IncludeWatchCount = $includeWatchCount;
+        
         return $this;
     }
     /**
      * Get AdminEndedItemsOnly value
      * @return bool|null
      */
-    public function getAdminEndedItemsOnly()
+    public function getAdminEndedItemsOnly(): ?bool
     {
         return $this->AdminEndedItemsOnly;
     }
@@ -433,20 +449,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param bool $adminEndedItemsOnly
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setAdminEndedItemsOnly($adminEndedItemsOnly = null)
+    public function setAdminEndedItemsOnly(?bool $adminEndedItemsOnly = null): self
     {
         // validation for constraint: boolean
         if (!is_null($adminEndedItemsOnly) && !is_bool($adminEndedItemsOnly)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($adminEndedItemsOnly)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($adminEndedItemsOnly, true), gettype($adminEndedItemsOnly)), __LINE__);
         }
         $this->AdminEndedItemsOnly = $adminEndedItemsOnly;
+        
         return $this;
     }
     /**
      * Get CategoryID value
      * @return int|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?int
     {
         return $this->CategoryID;
     }
@@ -455,20 +472,21 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param int $categoryID
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?int $categoryID = null): self
     {
         // validation for constraint: int
-        if (!is_null($categoryID) && !is_numeric($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($categoryID)), __LINE__);
+        if (!is_null($categoryID) && !(is_int($categoryID) || ctype_digit($categoryID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get IncludeVariations value
      * @return bool|null
      */
-    public function getIncludeVariations()
+    public function getIncludeVariations(): ?bool
     {
         return $this->IncludeVariations;
     }
@@ -477,33 +495,14 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param bool $includeVariations
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
      */
-    public function setIncludeVariations($includeVariations = null)
+    public function setIncludeVariations(?bool $includeVariations = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeVariations) && !is_bool($includeVariations)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeVariations)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeVariations, true), gettype($includeVariations)), __LINE__);
         }
         $this->IncludeVariations = $includeVariations;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

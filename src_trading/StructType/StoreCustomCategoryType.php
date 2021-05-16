@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreCustomCategoryType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Configuration of a store custom category.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class StoreCustomCategoryType extends AbstractStructBase
 {
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Custom category ID. For SetStoreCategories, required only if Action is set to Rename, Move or Delete.
-     * @var int
+     * @var int|null
      */
-    public $CategoryID;
+    protected ?int $CategoryID = null;
     /**
      * The Name
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Name of the custom category.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Name;
+    protected ?string $Name = null;
     /**
      * The Order
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Order in which the custom category appears in the list of store categories.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Order;
+    protected ?int $Order = null;
     /**
      * The ChildCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Contains the properties of a custom subcategory for an eBay Store. eBay Stores support three category levels.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    public $ChildCategory;
+    protected array $ChildCategory = [];
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreCustomCategoryType
      * @uses StoreCustomCategoryType::setCategoryID()
@@ -60,9 +63,9 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param string $name
      * @param int $order
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $childCategory
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($categoryID = null, $name = null, $order = null, array $childCategory = array(), \DOMDocument $any = null)
+    public function __construct(?int $categoryID = null, ?string $name = null, ?int $order = null, array $childCategory = [], $any = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -75,7 +78,7 @@ class StoreCustomCategoryType extends AbstractStructBase
      * Get CategoryID value
      * @return int|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?int
     {
         return $this->CategoryID;
     }
@@ -84,20 +87,21 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param int $categoryID
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?int $categoryID = null): self
     {
         // validation for constraint: int
-        if (!is_null($categoryID) && !is_numeric($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($categoryID)), __LINE__);
+        if (!is_null($categoryID) && !(is_int($categoryID) || ctype_digit($categoryID))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get Name value
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->Name;
     }
@@ -106,20 +110,21 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param string $name
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setName($name = null)
+    public function setName(?string $name = null): self
     {
         // validation for constraint: string
         if (!is_null($name) && !is_string($name)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($name)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
         }
         $this->Name = $name;
+        
         return $this;
     }
     /**
      * Get Order value
      * @return int|null
      */
-    public function getOrder()
+    public function getOrder(): ?int
     {
         return $this->Order;
     }
@@ -128,105 +133,110 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param int $order
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setOrder($order = null)
+    public function setOrder(?int $order = null): self
     {
         // validation for constraint: int
-        if (!is_null($order) && !is_numeric($order)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($order)), __LINE__);
+        if (!is_null($order) && !(is_int($order) || ctype_digit($order))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($order, true), gettype($order)), __LINE__);
         }
         $this->Order = $order;
+        
         return $this;
     }
     /**
      * Get ChildCategory value
-     * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    public function getChildCategory()
+    public function getChildCategory(): array
     {
         return $this->ChildCategory;
     }
     /**
+     * This method is responsible for validating the values passed to the setChildCategory method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setChildCategory method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateChildCategoryForArrayConstraintsFromSetChildCategory(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $storeCustomCategoryTypeChildCategoryItem) {
+            // validation for constraint: itemType
+            if (!$storeCustomCategoryTypeChildCategoryItem instanceof \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType) {
+                $invalidValues[] = is_object($storeCustomCategoryTypeChildCategoryItem) ? get_class($storeCustomCategoryTypeChildCategoryItem) : sprintf('%s(%s)', gettype($storeCustomCategoryTypeChildCategoryItem), var_export($storeCustomCategoryTypeChildCategoryItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ChildCategory property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ChildCategory value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $childCategory
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setChildCategory(array $childCategory = array())
+    public function setChildCategory(array $childCategory = []): self
     {
-        foreach ($childCategory as $storeCustomCategoryTypeChildCategoryItem) {
-            // validation for constraint: itemType
-            if (!$storeCustomCategoryTypeChildCategoryItem instanceof \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType) {
-                throw new \InvalidArgumentException(sprintf('The ChildCategory property can only contain items of \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType, "%s" given', is_object($storeCustomCategoryTypeChildCategoryItem) ? get_class($storeCustomCategoryTypeChildCategoryItem) : gettype($storeCustomCategoryTypeChildCategoryItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($childCategoryArrayErrorMessage = self::validateChildCategoryForArrayConstraintsFromSetChildCategory($childCategory))) {
+            throw new InvalidArgumentException($childCategoryArrayErrorMessage, __LINE__);
         }
         $this->ChildCategory = $childCategory;
+        
         return $this;
     }
     /**
      * Add item to ChildCategory value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType $item
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function addToChildCategory(\macropage\ebaysdk\trading\StructType\StoreCustomCategoryType $item)
+    public function addToChildCategory(\macropage\ebaysdk\trading\StructType\StoreCustomCategoryType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType) {
-            throw new \InvalidArgumentException(sprintf('The ChildCategory property can only contain items of \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ChildCategory property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ChildCategory[] = $item;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

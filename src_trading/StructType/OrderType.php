@@ -1,421 +1,484 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for OrderType StructType
- * Meta informations extracted from the WSDL
- * - documentation: There are single line item and multiple line item orders. A single payment is made for both order types. <br> <br> We strongly recommend that you avoid mixing digital and non-digital listings in the same <a
- * href="http://developer.ebay.com/DevZone/guides/ebayfeatures/Development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> order.
+ * Meta information extracted from the WSDL
+ * - documentation: This type is used to express the details of an order. An order may contain one or more line items (purchases) from the same buyer. Regardless of how many line items an order has, only one payment is made for the order. <br><br> The
+ * <b>GetOrders</b> and <b>GetOrderTransactions</b> calls return many of the fields of this type. <br><br> The <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> calls will only return order-level details if the <b>IncludeContainingOrder</b>
+ * boolean field is included in the call request and set to <code>true</code>. <br><br> The <b>AddOrder</b> call is used to combine two or more unpaid order line items (between the same seller and buyer) into a 'Combined Invoice' order. While combining
+ * these order line items into one 'Combined Invoice' order, the seller can make adjustments to accepted payment methods, shipping details (including costs), and the total cost of the order. Sometimes, sellers will reduce the cost of shipping if one or
+ * more order line items can be shipped together in the same package. <br><br> The <b>GetMyeBaySelling</b> call returns order details if the seller wishes to view listings that have sold, and the <b>GetMyeBayBuying</b> call returns order details if the
+ * buyer wishes to view items they have won or purchased.
  * @subpackage Structs
  */
 class OrderType extends AbstractStructBase
 {
     /**
      * The OrderID
-     * Meta informations extracted from the WSDL
-     * - documentation: A unique identifier for an eBay order. For a single line item order, this value is actually the <b>OrderLineItemID</b> value, which is a concatenation of <b>ItemID</b> and <b>TransactionID</b>, with a hyphen in between these two
-     * values, such as <code>121124971073-1094989827002</code> for a fixed-price listing, or <code>121124971074-0</code> for an auction listing. For a multiple line item order (known as a Combined Invoice order), the <b>OrderID</b> value is created by eBay
-     * when the buyer/seller combines multiple line items into one order, and the buyer makes one payment for all line items from the same seller. "Combined Invoice" orders are created through the Web flow, or when the buyer or seller creates a "Combined
-     * Invoice" order by using the <a href="AddOrder.html">AddOrder</a> call. An example of "Combined Invoice" order ID is <code>155643809010</code>. <br><br> An <b>OrderID</b> value overrides an <b>OrderLineItemID</b> value or an
-     * <b>ItemID/TransactionID</b> pair if these fields are also specified in the same request. <br/><br/> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> This field is returned with the correct order ID only to the buyer, the
-     * seller, or PayPal (if PayPal is the payment method). For third parties (except PayPal): <ul> <li>If using a Trading WSDL older than version 1019, the Order ID will be returned to third parties as dummy data in the form of <code>1000000000000</code>
-     * or <code>1000000000000-1000000000000</code>.</li> <li>If using Trading WSDL version 1019 or newer, the Order ID will be returned to third parties as an empty field (<code>&lt;OrderID/&gt;</code>).</li> </ul> | A unique identifier for an order.
+     * Meta information extracted from the WSDL
+     * - documentation: A unique identifier for a single or multiple line item eBay order. In the <b>ContainingOrder</b> container of a <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> response, this identifier identifies the parent order of the
+     * order line item. A single buyer payment is made for each order. <br/><br/> <b>For order management calls only:</b> This field is returned with the correct order ID only to the buyer, the seller, and PayPal (if PayPal is the payment method). For third
+     * parties (except PayPal): <ul> <li>If using a Trading WSDL older than version 1019, the Order ID will be returned to third parties as dummy data in the form of <code>1000000000000</code> or <code>1000000000000-1000000000000</code>.</li> <li>If using
+     * Trading WSDL version 1019 or newer, the Order ID will be returned to third parties as an empty field (<code>&lt;OrderID/&gt;</code>).</li> </ul> <br><br> <span class="tablenote"><b>Note: </b> In June 2019, eBay introduced a new order ID format, but
+     * allowed developers/sellers to decide whether to immediately adopt the new format, or to continue working with the old format. Users who wanted to adopt the new format, could either use a Trading WSDL Version 1113 (or newer), or they could even use an
+     * older Trading WSDL but set the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header value to <code>1113</code> in API calls. <b>Beginning in June 2020, only the new order ID format will be returned in response payloads for paid orders, regardless of the
+     * WSDL version number or compatibility level.</b> <br><br> Note that the unique identifier of a 'non-immediate payment' order will change as it goes from an unpaid order to a paid order. Due to this scenario, all calls that accept Order ID values as
+     * filters in the request payload, including the <b>GetOrders</b> and <b>GetOrderTransactions</b> calls, will support the identifiers for both unpaid and paid orders. The new order ID format is a non-parsable string, globally unique across all eBay
+     * marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and
+     * eBay customer support. <br><br> Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the
+     * <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made payment. </span> | Type that represents the unique identifier for an eBay
+     * order. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values. The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line
+     * item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and
+     * sellers who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer
+     * meaning from the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this
+     * Trading API change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older
+     * than Version 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the
+     * <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After
+     * the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span> <br> <span
+     * class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order will change as it goes from unpaid to paid status. Sellers can check to see if an order has been paid by looking for a
+     * value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or
+     * <b>GetSellerTransactions</b> call. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific order(s), either of these order IDs (paid or unpaid status) can be used to retrieve an order. </span>
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderID;
+    protected ?string $OrderID = null;
     /**
      * The OrderStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the current status of the order.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderStatus;
+    protected ?string $OrderStatus = null;
     /**
      * The AdjustmentAmount
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates the dollar amount by which the buyer has adjusted the order total. Adjustments to order costs may include shipping and handling, shipping insurance, buyer discounts, or added services. A positive amount indicates
-     * the amount is an extra charge being paid to the seller by the buyer. A negative value indicates this amount is a credit given to the buyer by the seller.
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the dollar amount by which the buyer has adjusted the order total. Adjustments to order costs may include shipping and handling, buyer discounts, or added services. A positive amount indicates the amount is an
+     * extra charge being paid to the seller by the buyer. A negative value indicates this amount is a credit given to the buyer by the seller.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AdjustmentAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AdjustmentAmount = null;
     /**
      * The AmountPaid
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates the total amount of the order. This amount includes the sale price of each line item, shipping and handling charges, shipping insurance (if offered and selected by the buyer), additional services, and any applied
-     * sales tax. This value is returned after the buyer has completed checkout (the <b>CheckoutStatus.Status</b> output field reads 'Complete'). <br><br> <span class="tablenote"><strong>Note:</strong> For auction listings on North American sites and on
-     * eBay Motors Parts and Accessories, the <b>AmountPaid</b> value minus any applied sales tax is the amount subject to the final value fee calculation. The sales tax amount is returned in the <b>ShippingDetails.SalesTax.SalesTaxAmount</b> field. For
-     * more information on how final value fees are calculated, see the <a href="http://pages.ebay.com/help/sell/fvf.html">final value fees</a> help page. </span><br> <span class="tablenote"><b>Note: </b> The amount in this field will not include any
-     * Australia import tax charged to the buyer for one or more order line items. Australia import tax is only applicable to the Australia site. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the total amount paid by the buyer for the order. This amount includes the sale price of each line item, shipping and handling charges, additional services, and any sales tax that the seller has applied towards
+     * the order. This value is only returned after the buyer has paid for the order. <br><br> <span class="tablenote"><b>Note: </b> As of November 2019, for orders subject to eBay 'Collect and Remit' taxes, PayPal has begun distributing order funds to the
+     * seller's account with the sales tax included. eBay 'Collect and Remit' tax includes US sales tax for numerous states, and 'Good and Services' tax that is applicable to Australian and New Zealand sellers. This 'Collect and Remit' tax amount for the
+     * order will be included in the <b>AmountPaid</b> value. To determine if 'Collect and Remit' taxes were added into <b>AmountPaid</b> value, the user can check for the <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> and the
+     * <b>Transaction.Taxes.TaxDetails</b> containers in the response. If both of these containers appear in the response with a <b>TaxDetails.TaxDescription</b> value of <code>SalesTax</code> (in US) or <code>GST</code> (in Australia or New Zealand), the
+     * tax amount that the buyer paid is in this amount. <br><br> Sellers should be aware that the sales tax that the buyer pays for the order will initially be included when the order funds are distributed to their PayPal account, but that PayPal will pull
+     * out the sales tax amount shortly after the payment clears, and will distribute the sales tax to the appropriate taxing authority. Previous to this change, PayPal would strip out the 'Collect and Remit' tax before distributing order funds to the
+     * seller's account. <br><br> This logic change does not apply to sellers who are in eBay managed payments, so the amount in this field will never reflect any 'Collect and Remit' tax, even if the order is subject to 'Collect and Remit' tax. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AmountPaid;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AmountPaid = null;
     /**
      * The AmountSaved
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates the shipping discount experienced by the buyer as a result of creating a Combined Invoice order. This value is returned as 0.00 for single line item orders.
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates the amount that the buyer saved on the order due to any discounts (item, shipping, promotional) applied to the purchase, or if the seller 'manually' reduced the order total. This field is always returned even
+     * when it is '0.0'.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $AmountSaved;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $AmountSaved = null;
     /**
      * The CheckoutStatus
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of details related to the current checkout status of the order.
+     * Meta information extracted from the WSDL
+     * - documentation: This container indicates the current status of the order, including a timestamp that indicates the last time that the status of the order changed. For orders that have been paid for, the <b>Status</b> value will show as
+     * <code>Complete</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CheckoutStatusType
+     * @var \macropage\ebaysdk\trading\StructType\CheckoutStatusType|null
      */
-    public $CheckoutStatus;
+    protected ?\macropage\ebaysdk\trading\StructType\CheckoutStatusType $CheckoutStatus = null;
     /**
      * The ShippingDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of all shipping-related details for an order, including domestic and international shipping service options, shipment tracking information, and shipping insurance information.
+     * Meta information extracted from the WSDL
+     * - documentation: Container consisting of order-level shipping details. More shipping-related details can be found at the line item level for each line item in the order. <br><br> In an <b>AddOrder</b> call, the seller can use the
+     * <b>ShippingDetails</b> container to make adjustments to shipping details, including the available shipping service options and shipping cost. Sometimes, sellers will reduce the cost of shipping if one or more order line items can be shipped together
+     * in the same package.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingDetailsType|null
      */
-    public $ShippingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $ShippingDetails = null;
     /**
      * The CreatingUserRole
-     * Meta informations extracted from the WSDL
-     * - documentation: This value indicates whether a Combined Invoice order was created by the buyer or by the seller. This field is only returned for Combined Invoice orders.
+     * Meta information extracted from the WSDL
+     * - documentation: This value indicates whether a 'Combined Invoice' order was initiated/created by the buyer or by the seller. This field is only returned for Combined Invoice orders. <br><br> An <b>AddOrder</b> call can be used by a seller or buyer
+     * to combine two or more unpaid order line items into a 'Combined Invoice' order. Once two or more line items are successfully combined into one order, the buyer only needs to make one payment (instead of multiple payments - one for each order line
+     * item). The <b>CreatingUserRole</b> field is required in the <b>AddOrder</b> call request. <br><br> <span class="tablenote"><b>Note: </b> Except for listings that required immediate payment, buyers also may have the opportunity to combine multiple
+     * line items (from the same seller) into a 'Combined Invoice' order through the buy/checkout flow. This may include accepted Best Offers or auctions that the buyer wins. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreatingUserRole;
+    protected ?string $CreatingUserRole = null;
     /**
      * The CreatedTime
-     * Meta informations extracted from the WSDL
-     * - documentation: Timestamp that indicates the date and time that the order was created. For single line item orders, this value is the same as <b>CreatedDate</b> in the <b>Transaction</b> container.
+     * Meta information extracted from the WSDL
+     * - documentation: Timestamp that indicates the date and time that the order was created. <br><br> <span class="tablenote"><b>Note: </b> For single line item orders, this timestamp value is often the same as the <b>CreatedDate</b> field in the
+     * corresponding <b>Transaction</b> container. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreatedTime;
+    protected ?string $CreatedTime = null;
     /**
      * The PaymentMethods
-     * Meta informations extracted from the WSDL
-     * - documentation: This field indicates a payment method available to the buyer to pay for the order. There will be a <b>PaymentMethods</b> field for each payment method available to the buyer.
+     * Meta information extracted from the WSDL
+     * - documentation: In <b>GetOrders</b>, <b>GetOrderTransactions</b>, and <b>OrderReport</b>, a <b>PaymentMethods</b> field will appear for each payment method available to the buyer for the order's purchase. However, once the buyer pays for the order,
+     * any and all of these <b>PaymentMethods</b> fields will stop being returned, and instead, the actual payment method used will be returned in the <b>PaymentMethod</b> field of the <b>CheckoutStatus</b> container. <br> <br> In an <b>AddOrder</b> call,
+     * the seller can use one or more <b>PaymentMethods</b> fields to override whatever available payment methods were already defined for each individual line item. For sellers opted in to eBay managed payments, only the <code>CreditCard</code> enumeration
+     * value should be passed into this field or the call may fail. <br> <br> <span class="tablenote"><b>Note:</b> For sellers in the eBay managed payments program, the enumeration value returned in this field will be <code>CreditCard</code>, regardless of
+     * which payment method that the buyer used (or is planning to use). <br><br>Similarly, for an <b>AddOrder</b> call, a seller opted in to eBay managed payments should only pass a value of <code>CreditCard</code> into this field.<br><br> eBay managed
+     * payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed
+     * Payments</a> landing page. For sellers in the eBay managed payments program, a payment method does not need to be specified at listing/checkout time. </span><br> <span class="tablenote"><b>Note:</b> As of May 1, 2019, eBay no longer supports
+     * electronic payments through a seller's Integrated Merchant Credit Card account. To accept online credit card payments from buyers, a seller must either specify <code>PayPal</code> as an accepted payment method, or opt in to the eBay managed payments
+     * program. If <code>IMCC</code> is passed in as a value, this value will be ignored and dropped (and listing will possibly get blocked if <code>IMCC</code> is the only specified payment method). </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $PaymentMethods;
+    protected array $PaymentMethods = [];
     /**
      * The SellerEmail
-     * Meta informations extracted from the WSDL
-     * - documentation: The email address of the seller involved in the order. The email address of the seller is only returned if it is the same seller making the call.
+     * Meta information extracted from the WSDL
+     * - documentation: The email address of the seller involved in the order. The email address of the seller is only returned if it is the same seller making the call.<br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetOrders</strong> and
+     * <strong>GetOrderTransactions</strong> calls, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerEmail;
+    protected ?string $SellerEmail = null;
     /**
      * The ShippingAddress
-     * Meta informations extracted from the WSDL
-     * - documentation: Container holding the shipping address of the buyer involved in the order.
+     * Meta information extracted from the WSDL
+     * - documentation: This container shows the shipping address for the order. <br> <br> <span class="tablenote"><b>Note:</b> For an Authenticity Guarantee program shipment, this is the address of the authenticator's warehouse. The authenticator is
+     * responsible for delivery to the buyer's shipping address. </span> <span class="tablenote"><b>Note:</b> For GetOrderTransactions, the buyer's shipping address may also be returned at the order line item level in the
+     * <b>Transaction.Buyer.BuyerInfo.ShippingAddress</b> container. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AddressType
+     * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public $ShippingAddress;
+    protected ?\macropage\ebaysdk\trading\StructType\AddressType $ShippingAddress = null;
     /**
      * The ShippingServiceSelected
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of details about the domestic or international shipping service selected by the buyer. <br/><br/> <span class="tablenote"> <strong>Note:</strong> If one or more <strong>OrderID</strong> values are used in the
-     * call request, the "Combined Invoice" Order ID value must be specified for multiple line item orders to ensure that the shipping service and cost information is accurate. If the individual <strong>OrderLineItemID</strong> values for each line item are
-     * specified in the <strong>OrderID</strong> field instead, the shipping service and cost information will not be accurate. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: Container consisting of details about the domestic or international shipping service selected by the buyer for delivery of the order. Note that more shipping service information may be returned at the order line item level in the
+     * <strong>Transaction.ShippingServiceSelected</strong> container.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
+     * @var \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType|null
      */
-    public $ShippingServiceSelected;
+    protected ?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $ShippingServiceSelected = null;
     /**
      * The Subtotal
-     * Meta informations extracted from the WSDL
-     * - documentation: The subtotal amount for the order is the total cost of all order line items. This value does not include any shipping/handling, shipping insurance, or sales tax costs.
+     * Meta information extracted from the WSDL
+     * - documentation: The cumulative item cost for all line items in the order. This value does not take into account any shipping/handling costs, sales tax costs, or any discounts. For a single line item order, the amount in this field should be the same
+     * as the amount in the <strong>Transaction.TransactionPrice</strong> field. For a multiple line item order, the amount in this field should equal the cumulative amount of each <strong>Transaction.TransactionPrice</strong> fields for each order line
+     * item.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Subtotal;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Subtotal = null;
     /**
      * The Total
-     * Meta informations extracted from the WSDL
-     * - documentation: The <b>Total</b> amount equals the <b>Subtotal</b> value plus the shipping/handling, shipping insurance, and sales tax costs.
+     * Meta information extracted from the WSDL
+     * - documentation: The <b>Total</b> amount shows the total cost for the order, including total item cost (shown in <b>Subtotal</b> field), shipping charges (shown in <b>ShippingServiceSelected.ShippingServiceCost</b> field), and seller-applied sales
+     * tax (shown in <b>SalesTax.SalesTaxAmount</b> field). <br><br> In an <b>AddOrder</b> call, the seller can pass in the <b>Total</b> amount for the 'Combined Invoice' order, and this is what the buyer will be expected to pay for the order. <br><br>
+     * <span class="tablenote"><b>Note: </b> As of November 2019, for orders subject to eBay 'Collect and Remit' taxes, PayPal has begun distributing order funds to the seller's account with the sales tax included. eBay 'Collect and Remit' tax includes US
+     * sales tax for numerous states, and 'Good and Services' tax that is applicable to Australian and New Zealand sellers. This 'Collect and Remit' tax amount for the order will be included in the <b>Total</b> value. To determine if 'Collect and Remit'
+     * taxes were added into <b>Total</b> value, the user can check for the <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> and the <b>Transaction.Taxes.TaxDetails</b> containers in the response. If both of these containers appear for one or more
+     * transactions in the response with a <b>TaxDetails.TaxDescription</b> value of <code>SalesTax</code> (in US) or <code>GST</code> (in Australia or New Zealand), the tax amount that the buyer paid is in this amount. For a multiple line item order, the
+     * seller will need to look at and add up the <b>TaxDetails.TaxAmount</b> values for each line item to see how much sales tax is applicable for the whole order. <br><br> Sellers should be aware that the sales tax that the buyer pays for the order will
+     * initially be included when the order funds are distributed to their PayPal account, but that PayPal will pull out the sales tax amount shortly after the payment clears, and will distribute the sales tax to the appropriate taxing authority. Previous
+     * to this change, PayPal would strip out the 'Collect and Remit' tax before distributing order funds to the seller's account. <br><br> This logic change does not apply to sellers who are in eBay managed payments, so the amount in this field will never
+     * reflect any 'Collect and Remit' tax, even if the order is subject to 'Collect and Remit' tax. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Total;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Total = null;
     /**
      * The ExternalTransaction
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of payment details for an eBay order. PayPal transactions may include a buyer payment or refund, or a fee or credit applied to the seller's account. This field is only returned after payment for the order has
-     * occurred. <br/><br/> For orders in which the seller's funds are being held by PayPal, the <b>PaymentHoldDetails</b> container and <b>PaymentHoldStatus</b> field will be returned instead of the <b>ExternalTransaction</b> container. <br><br> <span
-     * class="tablenote"> <strong>Note:</strong> In an upcoming release, <strong>ExternalTransaction</strong> will be replaced by the more versatile <strong>MonetaryDetails</strong> container, so you are encouraged to start using
-     * <strong>MonetaryDetails</strong> now. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: Container consisting of payment details for an eBay order, including an identifier for the monetary transaction and a field to express any fees or credits applied to the monetary transaction. This field is only returned after payment
+     * for the order has occurred. <br><br> <span class="tablenote"> <strong>Note:</strong> The <strong>MonetaryDetails</strong> container also shows payment information for the order. In the future, it is possible that the
+     * <strong>ExternalTransaction</strong> container will be deprecated, so you are encouraged to start using <strong>MonetaryDetails</strong> as soon as possible. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ExternalTransactionType[]
      */
-    public $ExternalTransaction;
+    protected array $ExternalTransaction = [];
     /**
      * The TransactionArray
-     * Meta informations extracted from the WSDL
-     * - documentation: Container consisting of one or more line items that comprise an order. The data for an order line item is stored in the <b>Transaction</b> container. For the <b>AddOrder</b> call, there will always be at least two order line items in
-     * the container, but no more than 40. <br><br> We strongly recommend that you avoid mixing transactions for digital and non-digital listings in the same Combined Invoice order. (In the future, <b>AddOrder</b> may enforce this recommendation.)
+     * Meta information extracted from the WSDL
+     * - documentation: Container consisting of one or more line items that comprise an order. The data for each order line item in the order is stored in a separate <b>Transaction</b> container. <br><br> Under the <b>TransactionArray</b> container in an
+     * <b>AddOrder</b> call, a seller or buyer specifies two or more (up to 40) order line items into a 'Combined Invoice' order.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\TransactionArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\TransactionArrayType|null
      */
-    public $TransactionArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $TransactionArray = null;
     /**
      * The BuyerUserID
-     * Meta informations extracted from the WSDL
-     * - documentation: eBay user ID of the order's buyer. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd,
+     * Meta information extracted from the WSDL
+     * - documentation: The eBay user ID of the order's buyer. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd,
      * GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder
      * makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BuyerUserID;
+    protected ?string $BuyerUserID = null;
     /**
      * The PaidTime
-     * Meta informations extracted from the WSDL
-     * - documentation: Timestamp indicating the date and time of order payment. This field is not returned until payment has been made by the buyer. This field will not be returned for orders where the buyer has received partial or full refunds. <br><br>
-     * This time is specified in GMT (not Pacific time). See <a href="http://developer.ebay.com/DevZone/guides/ebayfeatures/Basics/DataTypes.html#ConvertingBetweenUTCGMTandLocalTime"> eBay Features Guide</a> for information about converting between GMT and
-     * other time zones.
+     * Meta information extracted from the WSDL
+     * - documentation: Timestamp indicating the date and time of order payment. This field is not returned until payment has been made by the buyer. <br><br> This time is specified in GMT (not Pacific time). See <a
+     * href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#basics/DataTypes.html#ConvertingBetweenUTCGMTandLocalTime"> eBay Features Guide</a> for information about converting between GMT and other time zones.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaidTime;
+    protected ?string $PaidTime = null;
     /**
      * The ShippedTime
-     * Meta informations extracted from the WSDL
-     * - documentation: Timestamp indicating the date and time of order shipment. This field is not returned until the order has been marked as shipped. Note that sellers have the ability to set the shipped time up to three calendar days in the future.
-     * <br><br> This time is specified in GMT (not Pacific time). See <a href="http://developer.ebay.com/DevZone/guides/ebayfeatures/Basics/DataTypes.html"> eBay Features Guide</a> for information about converting between GMT and other time zones.
+     * Meta information extracted from the WSDL
+     * - documentation: Timestamp indicating the date and time of order shipment. This field is not returned until shipment tracking is provided for all line items in the order, or if the order has been marked as 'shipped' by the seller. <br><br> This time
+     * is specified in GMT (not Pacific time). See <a href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#basics/DataTypes.html"> eBay Features Guide</a> for information about converting between GMT and other time zones.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShippedTime;
+    protected ?string $ShippedTime = null;
     /**
      * The IntegratedMerchantCreditCardEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the item can be paid for through a payment gateway (Payflow) account. If <b>IntegratedMerchantCreditCardEnabled</b> is true, then integrated merchant credit card (IMCC) is enabled for credit cards because the seller
-     * has a payment gateway account. Therefore, if <b>IntegratedMerchantCreditCardEnabled</b> is true, and 'AmEx', 'Discover', or 'VisaMC' is returned for an item, then on checkout, an online credit-card payment is processed through a payment gateway
-     * account.
+     * Meta information extracted from the WSDL
+     * - documentation: This field being returned with a value of <code>true</code> indicates that the order can be paid for with a credit card through the seller's payment gateway account. <br><br> <span class="tablenote"><b>Note: </b> As of May 1, 2019,
+     * eBay no longer supports electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must specify PayPal as an accepted payment method, or opt in to eBay managed payments program
+     * (if the program is available to that seller). </span> <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only
+     * returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IntegratedMerchantCreditCardEnabled;
+    protected ?bool $IntegratedMerchantCreditCardEnabled = null;
     /**
      * The BundlePurchase
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Reserved for future use.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BundlePurchase;
+    protected ?bool $BundlePurchase = null;
     /**
      * The BuyerCheckoutMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned if the buyer left a message for the seller during checkout.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BuyerCheckoutMessage;
+    protected ?string $BuyerCheckoutMessage = null;
     /**
      * The EIASToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Unique identifier for the user that does not change when the eBay user name is changed. Use when an application needs to associate a new eBay user name with the corresponding eBay user. <br><br> Since a bidder's user info is
      * anonymous, this tag will be returned only to that bidder, and to the seller of an item that the user is bidding on.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EIASToken;
+    protected ?string $EIASToken = null;
     /**
      * The PaymentHoldStatus
-     * Meta informations extracted from the WSDL
-     * - documentation: This field indicates the type and/or status of a payment hold on the item.
+     * Meta information extracted from the WSDL
+     * - documentation: This field indicates the type and/or status of a payment hold on the item. It is always returned for <b>GetOrders</b> and <b>GetOrderTransactions</b>, even if there are no payment holds (in which case, an enumeration value of
+     * <code>None</code> is shown). <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only returned to the seller of the
+     * order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentHoldStatus;
+    protected ?string $PaymentHoldStatus = null;
     /**
      * The PaymentHoldDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of information related to the payment hold on the order, including the reason why the buyer's payment for the order is being held, the expected release date of the funds into the seller's account, and possible
-     * action(s) the seller can take to expedite the payout of funds into their account. This container is only returned if PayPal has placed a payment hold on the order. <br><br> An American seller (selling on US or US Motors sites) and a Canadian seller
-     * (selling on CA and CA- FR sites) may be subject to PayPal payment holds (that last from three to 21 days) if that seller is new to selling on eBay or is classified as a "Below Standard" seller. For other reasons why a seller's funds may be held by
-     * PayPal, see the <b>PaymentHoldReason</b> field.
+     * action(s) the seller can take to expedite the payout of funds into their account. This container is only returned if a payment hold has placed on the order. <br><br> See <b>PaymentHoldReasonCodeType</b> for some details on why/when a seller's funds
+     * may be held, or visit the <a href="https://www.ebay.com/help/selling/getting-paid/getting-paid-items-youve-sold/pending-payments?id=4816">Pending payments</a> help topic for more information on eBay's payment hold policies.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
+     * @var \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType|null
      */
-    public $PaymentHoldDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $PaymentHoldDetails = null;
     /**
      * The RefundAmount
-     * Meta informations extracted from the WSDL
-     * - documentation: Amount of the refund issued to the buyer. This field is only returned if the buyer has received a refund from the seller.
+     * Meta information extracted from the WSDL
+     * - documentation: The amount of the refund due to, or already issued to the buyer for the order. This field is only returned in <b>GetMyeBaySelling</b> if a buyer refund is due, or was issued for the order.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $RefundAmount;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $RefundAmount = null;
     /**
      * The RefundStatus
-     * Meta informations extracted from the WSDL
-     * - documentation: This string value indicates the result of a seller's refund to the buyer. Its value are 'Success', 'Failure' or 'Pending'. This field is only returned if the buyer has received a refund from the seller, or is due to receive a refund.
+     * Meta information extracted from the WSDL
+     * - documentation: This string value indicates the result of a seller's refund to the buyer. Its value are 'Success', 'Failure' or 'Pending'. This field is only returned in <b>GetMyeBaySelling</b> if the buyer has received a refund from the seller, or
+     * is due to receive a refund.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RefundStatus;
+    protected ?string $RefundStatus = null;
     /**
      * The RefundArray
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This container was only used for Half.com orders, and since the Half.com site was taken down, this container is no longer applicable. </span> Container consisting of one or more refunds for
-     * Half.com orders. This container is returned only if a refund to a Half.com buyer has occurred.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note: </b> This container was only used for Half.com orders, and since the Half.com site was taken down, this container is no longer applicable. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\RefundArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\RefundArrayType|null
      */
-    public $RefundArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\RefundArrayType $RefundArray = null;
     /**
      * The IsMultiLegShipping
-     * Meta informations extracted from the WSDL
-     * - documentation: If <strong>IsMultilegShipping</strong> is true, the order or transaction uses the Global Shipping Program, in which the shipment has a domestic leg and an international leg. The buyer's shipping address is in a country other than the
-     * country where the items were listed, and the seller has specified InternationalPriorityShipping as the default international shipping service in the listings of all the items in the shipment. <br/><br/> If <strong>IsMultilegShipping</strong> is
-     * false, the order or transaction doesn't use the Global Shipping Program. The shipment might use a different international shipping service, or it might be domestic. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: If <strong>IsMultilegShipping</strong> is <code>true</code>, at least one order line item in the order will not be shipped directly to the buyer. Instead, the item(s) may be shipped to eBay's Global Shipping Program (GSP) partner who
+     * will handle the international leg of shipment, or the item may be shipped to eBay's Authenticity Guarantee service partner if the item is subject to the Authenticity Guarantee service program. In both cases, the partner's shipping address can be
+     * found in the <strong>MultiLegShippingDetails.SellerShipmentToLogisticsProvider.ShipToAddress</strong> container. <br><br> If an order line item is subject to the Authenticity Guarantee service, the <b>Transaction.Program</b> container will be
+     * returned.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IsMultiLegShipping;
+    protected ?bool $IsMultiLegShipping = null;
     /**
      * The MultiLegShippingDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains details about the domestic leg of a Global Shipping Program shipment. <br/><br/> This information is not returned if <strong>IsMultilegShipping</strong> is false.
+     * Meta information extracted from the WSDL
+     * - documentation: This container consists of details about the domestic leg of a Global Shipping Program (GSP) shipment or shipment to eBay's Authenticity Guarantee service partner. With GSP, the shipment has a domestic leg and an international leg.
+     * In the domestic leg, the seller ships the item to eBay's shipping partner. In the Authenticity Guarantee service, the seller ships the item to the authentication partner, and if the item passes an authentication inspection, the authentication partner
+     * ships it directly to the buyer. <br/><br/> This container is only returned if the order has one or more order line items that require shipping through GSP or shipment to an Authenticity Guarantee service partner. It is not returned if
+     * <strong>IsMultilegShipping</strong> is <code>false</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType|null
      */
-    public $MultiLegShippingDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $MultiLegShippingDetails = null;
     /**
      * The MonetaryDetails
-     * Meta informations extracted from the WSDL
-     * - documentation: Contains information about how funds exchanged for an order are allocated to payees. <br/><br/> For example, for an order made under eBay's Global Shipping Program, users can see the portion of the buyer's payment that is allocated
-     * as shipping and import charges remitted to the international shipping provider. Currently, only payment information is returned. <br/><br/> <span class="tablenote"> <strong>Note:</strong> In an upcoming release, <strong>MonetaryDetails</strong> will
-     * replace the <strong>ExternalTransaction</strong> container, so you are encouraged to start using <strong>MonetaryDetails</strong> now. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: Contains information about each monetary transaction that occurs for the order, including order payment, any refund, a credit, etc. Both the payer and payee are shown in this container. <br/><br/> <span class="tablenote">
+     * <strong>Note:</strong> <strong>MonetaryDetails</strong> can already be used instead of the older <strong>ExternalTransaction</strong> container, and the <strong>ExternalTransaction</strong> container may eventually get deprecated. Due to this
+     * possibility, you are encouraged to start using <strong>MonetaryDetails</strong> as soon as it is convenient. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaymentsInformationType
+     * @var \macropage\ebaysdk\trading\StructType\PaymentsInformationType|null
      */
-    public $MonetaryDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PaymentsInformationType $MonetaryDetails = null;
     /**
      * The PickupDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of an array of <strong>PickupOptions</strong> containers. Each <strong>PickupOptions</strong> container consists of the pickup method and its priority. The priority of each pickup method controls the order
      * (relative to other pickup methods) in which the corresponding pickup method will appear in the View Item and Checkout page. <br/><br/> For <strong>GetOrders</strong> and <strong>GetOrderTransactions</strong>, this container is always returned prior
      * to order payment if the seller created/revised/relisted the item with the <strong>EligibleForPickupInStore</strong> and/or <strong>EligibleForPickupDropOff</strong> flag in the call request set to 'true'. If and when the In-Store pickup method (US
      * only) or 'Click and Collect' pickup method (UK and Australia only) is selected by the buyer and payment for the order is made, this container will no longer be returned in the response, and will essentially be replaced by the
      * <strong>PickupMethodSelected</strong> container. <br/><br/> <span class="tablenote"> <strong>Note:</strong> A seller must be eligible for the In-Store Pickup feature or Click and Collect feature to list an item that is eligible for In-Store Pickup or
-     * Click and Collect. At this time, the In-Store Pickup and Click and Collect features are generally only available to large retail merchants, and can only be applied to multi-quantity, fixed-price listings. Merchants/developers can test In-Store Pickup
-     * or Click and Collect functionality in the Sandbox environment, including listing items enabled with these features, creating store locations and adding inventory to these stores using the Inventory Management API, and informing eBay of pickup status
-     * changes using the Inbound Notifications API. </span>
+     * Click and Collect. At this time, the In-Store Pickup and Click and Collect features are generally only available to large retail merchants, and can only be applied to multiple-quantity, fixed-price listings. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PickupDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\PickupDetailsType|null
      */
-    public $PickupDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\PickupDetailsType $PickupDetails = null;
     /**
      * The PickupMethodSelected
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of details related to the selected pickup method, including the pickup method type, the merchant's store ID, the status of the pickup, and the pickup reference code (if provided by merchant). <br/><br/> This
      * container is only returned when the buyer has selected the In-Store Pickup or Click and Collect option and has paid for the order. All fields in the <strong>PickupMethodSelected</strong> container are static, except for the
      * <strong>PickupStatus</strong> field, which can change states based on the notifications that a merchant sends to eBay through the Inbound Notifications API. <br/><br/> <span class="tablenote"> <strong>Note:</strong> A seller must be eligible for the
      * In-Store Pickup or Click and Collect feature to list an item that is eligible for these features. At this time, the In-Store Pickup and Click and Collect features are generally only available to large retail merchants, and can only be applied to
-     * multi-quantity, fixed-price listings. Merchants/developers can test In-Store Pickup functionality in the Sandbox environment, including listing items enabled with the In-Store Pickup feature, creating store locations and adding inventory to these
-     * stores using the Inventory Management API, and informing eBay of In-Store Pickup status changes using the Inbound Notifications API. </span>
+     * multiple-quantity, fixed-price listings. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PickupMethodSelectedType
+     * @var \macropage\ebaysdk\trading\StructType\PickupMethodSelectedType|null
      */
-    public $PickupMethodSelected;
+    protected ?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $PickupMethodSelected = null;
     /**
      * The SellerUserID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the eBay user ID of the order's seller. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd,
      * FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be
      * returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerUserID;
+    protected ?string $SellerUserID = null;
     /**
      * The SellerEIASToken
-     * Meta informations extracted from the WSDL
-     * - documentation: This is a unique identifier for the seller that does not change when the eBay user name is changed. This is useful when an application needs to associate a new eBay user name with the corresponding eBay user.
+     * Meta information extracted from the WSDL
+     * - documentation: This is a unique identifier for the seller that does not change when the eBay user name is changed. This is useful when an application needs to associate a new eBay user name with the corresponding eBay user. <br> <br> <span
+     * class="tablenote"><b>Note:</b> For the <strong>GetOrders</strong> call, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerEIASToken;
+    protected ?string $SellerEIASToken = null;
     /**
      * The CancelReason
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates the reason why the order cancellation was initiated. This field is only returned if an order cancellation has been initiated by the buyer or seller. Typical buyer-initiated cancellation reasons include
      * 'OrderPlacedByMistake', 'WontArriveInTime', or 'FoundCheaperPrice'. Sellers may initiate an order cancellation on behalf of the buyer. In this scenario, the seller should state the cancellation reason as 'BuyerCancelOrder'. If the seller is
-     * cancelling an order because he/she is out of stock on an item, the seller should state the cancellation reason as 'OutOfStock'. Unfortunately, in this scenario, the seller will receive a seller defect for this cancellation reason. Other order
-     * cancellation reasons are specific to eBay On Demand Delivery orders. eBay On Demand Delivery is similar to the eBay Now service in the US (now retired), and is only available in the UK. See CancelReasonCodeType for the complete list of enumeration
-     * values that can be returned in this field. <br><br> <span class="tablenote"><strong>Note:</strong> Currently, the <b>CancelReason</b> field is being returned under the <b>Order</b> container and under the <b>CancelDetail</b> container. However, there
-     * are plans to deprecate this field from <b>OrderType</b> in the future. </span>
+     * cancelling an order because he/she is out of stock on an item, the seller should state the cancellation reason as 'OutOfStock'. Unfortunately, in this scenario, the seller will receive a seller defect for this cancellation reason. See <a
+     * href="types/CancelReasonCodeType.html">CancelReasonCodeType</a> for the complete list of enumeration values that can be returned in this field. <br><br> <span class="tablenote"><strong>Note:</strong> Only the <b>CancelReason</b> and
+     * <b>CancelStatus</b> fields are returned. The <b>CancelDetail</b> container and the <b>CancelReasonDetails</b> field are no longer returned. A seller can use the <a
+     * href="https://developer.ebay.com/Devzone/post-order/post-order_v2_cancellation_search__get.html">Search Cancellations</a> method of the Post-Order API to retrieve more details on a cancelled order. If the seller does use this method, they can use the
+     * Order ID or Item ID as a filter in the request to retrieve the correct cancellation request. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CancelReason;
+    protected ?string $CancelReason = null;
     /**
      * The CancelStatus
-     * Meta informations extracted from the WSDL
-     * - documentation: The current status for the order cancellation request if it exists. This field is only returned if a cancellation request has been made on the order, or if the order is currently going through the cancellation process, or if the
-     * order has already been cancelled.
+     * Meta information extracted from the WSDL
+     * - documentation: The current status for the order cancellation request (if it exists for the order). This field is only returned if a cancellation request has been made on the order, or if the order is currently going through the cancellation
+     * process, or if the order has already been cancelled. <br><br> <span class="tablenote"><strong>Note:</strong> Only the <b>CancelReason</b> and <b>CancelStatus</b> fields are returned. The <b>CancelDetail</b> container and the
+     * <b>CancelReasonDetails</b> field are no longer returned. A seller can use the <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_cancellation_search__get.html">Search Cancellations</a> method of the Post-Order API to retrieve more
+     * details on a cancelled order. If the seller does use this method, they can use the Order ID or Item ID as a filter in the request to retrieve the correct cancellation request. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CancelStatus;
+    protected ?string $CancelStatus = null;
     /**
      * The CancelReasonDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The detailed reason for the cancellation of an eBay order. This field is only returned if it is available when a cancellation request has been made on the order, or if the order is currently going through the cancellation process, or
-     * if the order has already been cancelled. <br><br> <span class="tablenote"><strong>Note:</strong> Currently, the <b>CancelReasonDetails</b> field is being returned under the <b>Order</b> container and under the <b>CancelDetail</b> container. However,
-     * there are plans to deprecate this field from <b>OrderType</b> in the future. </span>
+     * if the order has already been cancelled. <br><br> <span class="tablenote"><strong>Note:</strong> Only the <b>CancelReason</b> and <b>CancelStatus</b> fields are returned. The <b>CancelDetail</b> container and the <b>CancelReasonDetails</b> field are
+     * no longer returned. A seller can use the <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_cancellation_search__get.html">Search Cancellations</a> method of the Post-Order API to retrieve more details on a cancelled order. If the
+     * seller does use this method, they can use the Order ID or Item ID as a filter in the request to retrieve the correct cancellation request. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CancelReasonDetails;
+    protected ?string $CancelReasonDetails = null;
     /**
      * The ShippingConvenienceCharge
-     * Meta informations extracted from the WSDL
-     * - documentation: The dollar value in this field indicates the amount that the seller is being charged (at order level) for the convenience of an eBay On Demand Delivery. <br><br> <span class="tablenote"><strong>Note:</strong> This field was first
-     * created for eBay Now, but eBay Now has been officially retired in all US locations. However, a feature similar to eBay Now, called 'eBay On Demand Delivery', is available in some parts of London, so this field is still applicable on the eBay UK site.
-     * </span>
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><strong>Note:</strong> This field is no longer applicable/used. It was previously used for eBay Now and 'eBay On Demand Delivery' orders - two features that have been deprecated. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $ShippingConvenienceCharge;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingConvenienceCharge = null;
     /**
      * The CancelDetail
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of details related to an eBay order that has been cancelled or is in the process of possibly being cancelled. Order cancellation requests can be viewed and managed with the cancellation API calls that are
-     * available in the <a href="https://developer.ebay.com/Devzone/post-order/index.html#CallIndex">Post Order API</a>.
+     * available in the <a href="https://developer.ebay.com/Devzone/post-order/index.html#CallIndex">Post Order API</a>. <br><br> <span class="tablenote"><strong>Note:</strong> Only the <b>CancelReason</b> and <b>CancelStatus</b> fields are returned. The
+     * <b>CancelDetail</b> container and the <b>CancelReasonDetails</b> field are no longer returned. A seller can use the <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_cancellation_search__get.html">Search Cancellations</a> method of
+     * the Post-Order API to retrieve more details on a cancelled order. If the seller does use this method, they can use the Order ID or Item ID as a filter in the request to retrieve the correct cancellation request. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CancelDetailType[]
      */
-    public $CancelDetail;
+    protected array $CancelDetail = [];
     /**
      * The LogisticsPlanType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field will be returned at the order level only if the buyer purchased a digital gift card, which is delivered by email, or if the buyer purchased an item that is enabled with the 'Click and Collect' feature. <br/><br/>
      * Currently, <strong>LogisticsPlanType</strong> has two applicable values: <code>PickUpDropOff</code>, which indicates that the buyer selected the 'Click and Collect' option. With Click and Collect, buyers are able to purchase from thousands of sellers
      * on the eBay UK and Australia sites, and then pick up their order from the nearest 'eBay Collection Point', including over 750 Argos stores in the UK. The Click and Collect feature is only available on the eBay UK and Australia sites; or,
      * <code>DigitalDelivery</code>, which indicates that the order is a digital gift card that will be delivered to the buyer or recipient of the gift card by email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LogisticsPlanType;
+    protected ?string $LogisticsPlanType = null;
     /**
      * The BuyerTaxIdentifier
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of taxpayer identification for the buyer. Although this container may be used for other purposes at a later date, it is currently used by sellers selling on the Italy or Spain site to retrieve the taxpayer ID
      * of the buyer. <br/><br/> It is now required that buyers registered on the Italy site provide their Codice Fiscale ID (similar to the Social Security Number for US citizens) before buying an item on the Italy site. <br/><br/> On the Spain site, a
      * Spanish seller has the option to require that Spanish buyers (registered on Spain site) provide a tax ID before checkout. This option is set by the seller at the account level. Once a Spanish buyer provides a tax ID, this tax ID is associated with
@@ -426,52 +489,75 @@ class OrderType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxIdentifierType[]
      */
-    public $BuyerTaxIdentifier;
+    protected array $BuyerTaxIdentifier = [];
     /**
      * The BuyerPackageEnclosures
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container is returned in <b>GetOrders</b> (and other order management calls) if the 'Pay Upon Invoice' option is being offered to the buyer, and the seller is including payment instructions in the shipping package(s) for the
-     * order. The 'Pay Upon Invoice' option is only available on the German site.
+     * order. The 'Pay Upon Invoice' option is only available on the Germany site.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType
+     * @var \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType|null
      */
-    public $BuyerPackageEnclosures;
+    protected ?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $BuyerPackageEnclosures = null;
     /**
      * The ExtendedOrderID
-     * Meta informations extracted from the WSDL
-     * - documentation: A unique identifier for an eBay order. Unlike the <b>OrderID</b> field, the format for this field is the same for both single and multiple line item orders. <b>ExtendedOrderID</b> values will be used to identify orders in the
-     * Post-Order APIs. For Trading API Get calls, <b>OrderID</b> values should still be used. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned
-     * to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct Order ID is returned to the buyer or seller, but a dummy Order ID value of <code>1000000000000</code> will be
-     * returned to all third parties.
+     * Meta information extracted from the WSDL
+     * - documentation: A unique identifier for an eBay order in the new eBay REST API model. <b>ExtendedOrderID</b> values will be used to identify orders in REST-based APIs, including the Post-Order API and the Fulfillment API. <br><br> <b>For GetOrders,
+     * GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version
+     * 1019, the correct Order ID is returned to the buyer or seller, but a dummy Order ID value of <code>1000000000000</code> will be returned to all third parties. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format
+     * of order identifier values, and this new format is relevant to both legacy and REST API-based order ID fields. The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and
+     * multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and sellers
+     * who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from
+     * the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this Trading API
+     * change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older than Version
+     * 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the
+     * <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After
+     * the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExtendedOrderID;
+    protected ?string $ExtendedOrderID = null;
     /**
      * The ContainseBayPlusTransaction
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: If <code>true</code>, the order contains a transaction for an item that was purchased under the eBay Plus program. eBay Plus is a premium account option for buyers, which provides benefits such as fast free domestic shipping and free
-     * returns on selected items. Top Rated eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Sellers must commit to next-day delivery of those items. <br/><br/> <span class="tablenote"><b>Note:</b> Currently, eBay
-     * Plus is available only to buyers in Germany, Austria, and Australia. </span>
+     * returns on selected items. Top-Rated eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Sellers must commit to next-day delivery of those items. <br/><br/> <span class="tablenote"><b>Note:</b> Currently, eBay
+     * Plus is available only to buyers in Germany and Australia. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ContainseBayPlusTransaction;
+    protected ?bool $ContainseBayPlusTransaction = null;
     /**
      * The eBayCollectAndRemitTax
-     * Meta informations extracted from the WSDL
-     * - documentation: This boolean field is returned as <code>true</code> if the order was subject to Australian import tax charged to the buyer. This field is not returned if <code>false</code>. Australian import tax charged to the buyer is collected by
-     * eBay and remitted to the Australian government. A <b>Transaction.eBayCollectAndRemitTaxes</b> container will be returned for any order line items subject to the import tax charged to the buyer, and the amount of this tax will be displayed in the
-     * <b>TaxDetails.TaxAmount</b> field under this container. <br/><br/> <span class="tablenote"><b>Note: </b> At this time, this field is only applicable to the Australia site. </span>
+     * Meta information extracted from the WSDL
+     * - documentation: This boolean field is returned as <code>true</code> if one or more line items in the order are subject to a tax (US sales tax or Australian Goods and Services tax) that eBay will collect and remit to the proper taxing authority on
+     * the buyer's behalf. This field is also returned if <code>false</code> (not subject to eBay Collect and Remit). A <b>Transaction.eBayCollectAndRemitTaxes</b> container is returned for any order line items subject to such a tax, and the type and amount
+     * of this tax is displayed in the <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> container. <br/><br/> Australian 'Goods and Services' tax (GST) is automatically charged to buyers outside of Australia when they purchase items on the eBay
+     * Australia site. Sellers on the Australia site do not have to take any extra steps to enable the collection of GST, as this tax is collected by eBay and remitted to the Australian government. For more information about Australian GST, see the <a
+     * href="https://www.ebay.com.au/help/selling/fees-credits-invoices/taxes-import-charges?id=4121">Taxes and import charges</a> help topic. <br/><br/> As of April 1, 2020, buyers in 40 US states will automatically be charged sales tax for eBay purchases,
+     * and are subject to eBay Collect and Remit Tax. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. Sellers do not have to take any extra steps to enable the collection of this sales tax. If the seller is
+     * employing a Sales Tax Table for the listing, and a sales tax rate is established for a state that is subject to 'eBay Collect and Remit', this sales tax rate will be ignored by eBay. For a list of the US states that are or will become subject to
+     * 'eBay Collect and Remit Tax' (and effective dates), see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayCollectAndRemitTax;
+    protected ?bool $eBayCollectAndRemitTax = null;
+    /**
+     * The OrderLineItemCount
+     * Meta information extracted from the WSDL
+     * - documentation: This field indicates the total number of line items in the order. This field is returned under the <b>ContainingOrder</b> container of a <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. In order for the
+     * <b>ContainingOrder</b> container to be returned, a user must include the <b>IncludeContainingOrder</b> field in the call request and set its value to <b>true</b>. <br/><br/> <span class="tablenote"><b>Note:</b> This field is automatically returned if
+     * the user is using Version 1113 of the Trading WSDL (or newer, as versions roll out). If the user is using Versions 1107 or 1111 of the Trading WSDL, this field will only be returned if the user includes the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP
+     * header and sets its value to <code>1113</code>. If a user is using a Trading WSDL older than 1107, this field will not be returned. </span>
+     * - minOccurs: 0
+     * @var int|null
+     */
+    protected ?int $OrderLineItemCount = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for OrderType
      * @uses OrderType::setOrderID()
@@ -521,6 +607,7 @@ class OrderType extends AbstractStructBase
      * @uses OrderType::setExtendedOrderID()
      * @uses OrderType::setContainseBayPlusTransaction()
      * @uses OrderType::setEBayCollectAndRemitTax()
+     * @uses OrderType::setOrderLineItemCount()
      * @uses OrderType::setAny()
      * @param string $orderID
      * @param string $orderStatus
@@ -569,9 +656,10 @@ class OrderType extends AbstractStructBase
      * @param string $extendedOrderID
      * @param bool $containseBayPlusTransaction
      * @param bool $eBayCollectAndRemitTax
-     * @param \DOMDocument $any
+     * @param int $orderLineItemCount
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($orderID = null, $orderStatus = null, \macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null, \macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, \macropage\ebaysdk\trading\StructType\AmountType $amountSaved = null, \macropage\ebaysdk\trading\StructType\CheckoutStatusType $checkoutStatus = null, \macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, $creatingUserRole = null, $createdTime = null, array $paymentMethods = array(), $sellerEmail = null, \macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null, \macropage\ebaysdk\trading\StructType\AmountType $subtotal = null, \macropage\ebaysdk\trading\StructType\AmountType $total = null, array $externalTransaction = array(), \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, $buyerUserID = null, $paidTime = null, $shippedTime = null, $integratedMerchantCreditCardEnabled = null, $bundlePurchase = null, $buyerCheckoutMessage = null, $eIASToken = null, $paymentHoldStatus = null, \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null, \macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, $refundStatus = null, \macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null, $isMultiLegShipping = null, \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null, \macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null, \macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null, \macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null, $sellerUserID = null, $sellerEIASToken = null, $cancelReason = null, $cancelStatus = null, $cancelReasonDetails = null, \macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null, array $cancelDetail = array(), $logisticsPlanType = null, array $buyerTaxIdentifier = array(), \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null, $extendedOrderID = null, $containseBayPlusTransaction = null, $eBayCollectAndRemitTax = null, \DOMDocument $any = null)
+    public function __construct(?string $orderID = null, ?string $orderStatus = null, ?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountSaved = null, ?\macropage\ebaysdk\trading\StructType\CheckoutStatusType $checkoutStatus = null, ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, ?string $creatingUserRole = null, ?string $createdTime = null, array $paymentMethods = [], ?string $sellerEmail = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null, ?\macropage\ebaysdk\trading\StructType\AmountType $subtotal = null, ?\macropage\ebaysdk\trading\StructType\AmountType $total = null, array $externalTransaction = [], ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, ?string $buyerUserID = null, ?string $paidTime = null, ?string $shippedTime = null, ?bool $integratedMerchantCreditCardEnabled = null, ?bool $bundlePurchase = null, ?string $buyerCheckoutMessage = null, ?string $eIASToken = null, ?string $paymentHoldStatus = null, ?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, ?string $refundStatus = null, ?\macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null, ?bool $isMultiLegShipping = null, ?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null, ?\macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null, ?string $sellerUserID = null, ?string $sellerEIASToken = null, ?string $cancelReason = null, ?string $cancelStatus = null, ?string $cancelReasonDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null, array $cancelDetail = [], ?string $logisticsPlanType = null, array $buyerTaxIdentifier = [], ?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null, ?string $extendedOrderID = null, ?bool $containseBayPlusTransaction = null, ?bool $eBayCollectAndRemitTax = null, ?int $orderLineItemCount = null, $any = null)
     {
         $this
             ->setOrderID($orderID)
@@ -621,13 +709,14 @@ class OrderType extends AbstractStructBase
             ->setExtendedOrderID($extendedOrderID)
             ->setContainseBayPlusTransaction($containseBayPlusTransaction)
             ->setEBayCollectAndRemitTax($eBayCollectAndRemitTax)
+            ->setOrderLineItemCount($orderLineItemCount)
             ->setAny($any);
     }
     /**
      * Get OrderID value
      * @return string|null
      */
-    public function getOrderID()
+    public function getOrderID(): ?string
     {
         return $this->OrderID;
     }
@@ -636,20 +725,21 @@ class OrderType extends AbstractStructBase
      * @param string $orderID
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setOrderID($orderID = null)
+    public function setOrderID(?string $orderID = null): self
     {
         // validation for constraint: string
         if (!is_null($orderID) && !is_string($orderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($orderID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($orderID, true), gettype($orderID)), __LINE__);
         }
         $this->OrderID = $orderID;
+        
         return $this;
     }
     /**
      * Get OrderStatus value
      * @return string|null
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): ?string
     {
         return $this->OrderStatus;
     }
@@ -657,24 +747,25 @@ class OrderType extends AbstractStructBase
      * Set OrderStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $orderStatus
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setOrderStatus($orderStatus = null)
+    public function setOrderStatus(?string $orderStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::valueIsValid($orderStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $orderStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType', is_array($orderStatus) ? implode(', ', $orderStatus) : var_export($orderStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues())), __LINE__);
         }
         $this->OrderStatus = $orderStatus;
+        
         return $this;
     }
     /**
      * Get AdjustmentAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAdjustmentAmount()
+    public function getAdjustmentAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AdjustmentAmount;
     }
@@ -683,16 +774,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setAdjustmentAmount(\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null)
+    public function setAdjustmentAmount(?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null): self
     {
         $this->AdjustmentAmount = $adjustmentAmount;
+        
         return $this;
     }
     /**
      * Get AmountPaid value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAmountPaid()
+    public function getAmountPaid(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AmountPaid;
     }
@@ -701,16 +793,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amountPaid
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setAmountPaid(\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null)
+    public function setAmountPaid(?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null): self
     {
         $this->AmountPaid = $amountPaid;
+        
         return $this;
     }
     /**
      * Get AmountSaved value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getAmountSaved()
+    public function getAmountSaved(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->AmountSaved;
     }
@@ -719,16 +812,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $amountSaved
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setAmountSaved(\macropage\ebaysdk\trading\StructType\AmountType $amountSaved = null)
+    public function setAmountSaved(?\macropage\ebaysdk\trading\StructType\AmountType $amountSaved = null): self
     {
         $this->AmountSaved = $amountSaved;
+        
         return $this;
     }
     /**
      * Get CheckoutStatus value
      * @return \macropage\ebaysdk\trading\StructType\CheckoutStatusType|null
      */
-    public function getCheckoutStatus()
+    public function getCheckoutStatus(): ?\macropage\ebaysdk\trading\StructType\CheckoutStatusType
     {
         return $this->CheckoutStatus;
     }
@@ -737,16 +831,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CheckoutStatusType $checkoutStatus
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCheckoutStatus(\macropage\ebaysdk\trading\StructType\CheckoutStatusType $checkoutStatus = null)
+    public function setCheckoutStatus(?\macropage\ebaysdk\trading\StructType\CheckoutStatusType $checkoutStatus = null): self
     {
         $this->CheckoutStatus = $checkoutStatus;
+        
         return $this;
     }
     /**
      * Get ShippingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType|null
      */
-    public function getShippingDetails()
+    public function getShippingDetails(): ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType
     {
         return $this->ShippingDetails;
     }
@@ -755,16 +850,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setShippingDetails(\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null)
+    public function setShippingDetails(?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null): self
     {
         $this->ShippingDetails = $shippingDetails;
+        
         return $this;
     }
     /**
      * Get CreatingUserRole value
      * @return string|null
      */
-    public function getCreatingUserRole()
+    public function getCreatingUserRole(): ?string
     {
         return $this->CreatingUserRole;
     }
@@ -772,24 +868,25 @@ class OrderType extends AbstractStructBase
      * Set CreatingUserRole value
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $creatingUserRole
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCreatingUserRole($creatingUserRole = null)
+    public function setCreatingUserRole(?string $creatingUserRole = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid($creatingUserRole)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $creatingUserRole, implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType', is_array($creatingUserRole) ? implode(', ', $creatingUserRole) : var_export($creatingUserRole, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
         }
         $this->CreatingUserRole = $creatingUserRole;
+        
         return $this;
     }
     /**
      * Get CreatedTime value
      * @return string|null
      */
-    public function getCreatedTime()
+    public function getCreatedTime(): ?string
     {
         return $this->CreatedTime;
     }
@@ -798,67 +895,88 @@ class OrderType extends AbstractStructBase
      * @param string $createdTime
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCreatedTime($createdTime = null)
+    public function setCreatedTime(?string $createdTime = null): self
     {
         // validation for constraint: string
         if (!is_null($createdTime) && !is_string($createdTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($createdTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($createdTime, true), gettype($createdTime)), __LINE__);
         }
         $this->CreatedTime = $createdTime;
+        
         return $this;
     }
     /**
      * Get PaymentMethods value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
         return $this->PaymentMethods;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setPaymentMethods method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPaymentMethods method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $orderTypePaymentMethodsItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($orderTypePaymentMethodsItem)) {
+                $invalidValues[] = is_object($orderTypePaymentMethodsItem) ? get_class($orderTypePaymentMethodsItem) : sprintf('%s(%s)', gettype($orderTypePaymentMethodsItem), var_export($orderTypePaymentMethodsItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set PaymentMethods value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $paymentMethods
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPaymentMethods(array $paymentMethods = array())
+    public function setPaymentMethods(array $paymentMethods = []): self
     {
-        $invalidValues = array();
-        foreach ($paymentMethods as $orderTypePaymentMethodsItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($orderTypePaymentMethodsItem)) {
-                $invalidValues[] = var_export($orderTypePaymentMethodsItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($paymentMethodsArrayErrorMessage = self::validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods($paymentMethods))) {
+            throw new InvalidArgumentException($paymentMethodsArrayErrorMessage, __LINE__);
         }
         $this->PaymentMethods = $paymentMethods;
+        
         return $this;
     }
     /**
      * Add item to PaymentMethods value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function addToPaymentMethods($item)
+    public function addToPaymentMethods(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentMethods[] = $item;
+        
         return $this;
     }
     /**
      * Get SellerEmail value
      * @return string|null
      */
-    public function getSellerEmail()
+    public function getSellerEmail(): ?string
     {
         return $this->SellerEmail;
     }
@@ -867,20 +985,21 @@ class OrderType extends AbstractStructBase
      * @param string $sellerEmail
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setSellerEmail($sellerEmail = null)
+    public function setSellerEmail(?string $sellerEmail = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerEmail) && !is_string($sellerEmail)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerEmail)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerEmail, true), gettype($sellerEmail)), __LINE__);
         }
         $this->SellerEmail = $sellerEmail;
+        
         return $this;
     }
     /**
      * Get ShippingAddress value
      * @return \macropage\ebaysdk\trading\StructType\AddressType|null
      */
-    public function getShippingAddress()
+    public function getShippingAddress(): ?\macropage\ebaysdk\trading\StructType\AddressType
     {
         return $this->ShippingAddress;
     }
@@ -889,16 +1008,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AddressType $shippingAddress
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setShippingAddress(\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null)
+    public function setShippingAddress(?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null): self
     {
         $this->ShippingAddress = $shippingAddress;
+        
         return $this;
     }
     /**
      * Get ShippingServiceSelected value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType|null
      */
-    public function getShippingServiceSelected()
+    public function getShippingServiceSelected(): ?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
     {
         return $this->ShippingServiceSelected;
     }
@@ -907,16 +1027,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setShippingServiceSelected(\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null)
+    public function setShippingServiceSelected(?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null): self
     {
         $this->ShippingServiceSelected = $shippingServiceSelected;
+        
         return $this;
     }
     /**
      * Get Subtotal value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getSubtotal()
+    public function getSubtotal(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Subtotal;
     }
@@ -925,16 +1046,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $subtotal
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setSubtotal(\macropage\ebaysdk\trading\StructType\AmountType $subtotal = null)
+    public function setSubtotal(?\macropage\ebaysdk\trading\StructType\AmountType $subtotal = null): self
     {
         $this->Subtotal = $subtotal;
+        
         return $this;
     }
     /**
      * Get Total value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getTotal()
+    public function getTotal(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Total;
     }
@@ -943,56 +1065,80 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $total
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setTotal(\macropage\ebaysdk\trading\StructType\AmountType $total = null)
+    public function setTotal(?\macropage\ebaysdk\trading\StructType\AmountType $total = null): self
     {
         $this->Total = $total;
+        
         return $this;
     }
     /**
      * Get ExternalTransaction value
-     * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType[]
      */
-    public function getExternalTransaction()
+    public function getExternalTransaction(): array
     {
         return $this->ExternalTransaction;
     }
     /**
+     * This method is responsible for validating the values passed to the setExternalTransaction method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setExternalTransaction method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateExternalTransactionForArrayConstraintsFromSetExternalTransaction(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $orderTypeExternalTransactionItem) {
+            // validation for constraint: itemType
+            if (!$orderTypeExternalTransactionItem instanceof \macropage\ebaysdk\trading\StructType\ExternalTransactionType) {
+                $invalidValues[] = is_object($orderTypeExternalTransactionItem) ? get_class($orderTypeExternalTransactionItem) : sprintf('%s(%s)', gettype($orderTypeExternalTransactionItem), var_export($orderTypeExternalTransactionItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ExternalTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\ExternalTransactionType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ExternalTransaction value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ExternalTransactionType[] $externalTransaction
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setExternalTransaction(array $externalTransaction = array())
+    public function setExternalTransaction(array $externalTransaction = []): self
     {
-        foreach ($externalTransaction as $orderTypeExternalTransactionItem) {
-            // validation for constraint: itemType
-            if (!$orderTypeExternalTransactionItem instanceof \macropage\ebaysdk\trading\StructType\ExternalTransactionType) {
-                throw new \InvalidArgumentException(sprintf('The ExternalTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\ExternalTransactionType, "%s" given', is_object($orderTypeExternalTransactionItem) ? get_class($orderTypeExternalTransactionItem) : gettype($orderTypeExternalTransactionItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($externalTransactionArrayErrorMessage = self::validateExternalTransactionForArrayConstraintsFromSetExternalTransaction($externalTransaction))) {
+            throw new InvalidArgumentException($externalTransactionArrayErrorMessage, __LINE__);
         }
         $this->ExternalTransaction = $externalTransaction;
+        
         return $this;
     }
     /**
      * Add item to ExternalTransaction value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ExternalTransactionType $item
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function addToExternalTransaction(\macropage\ebaysdk\trading\StructType\ExternalTransactionType $item)
+    public function addToExternalTransaction(\macropage\ebaysdk\trading\StructType\ExternalTransactionType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ExternalTransactionType) {
-            throw new \InvalidArgumentException(sprintf('The ExternalTransaction property can only contain items of \macropage\ebaysdk\trading\StructType\ExternalTransactionType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ExternalTransaction property can only contain items of type \macropage\ebaysdk\trading\StructType\ExternalTransactionType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ExternalTransaction[] = $item;
+        
         return $this;
     }
     /**
      * Get TransactionArray value
      * @return \macropage\ebaysdk\trading\ArrayType\TransactionArrayType|null
      */
-    public function getTransactionArray()
+    public function getTransactionArray(): ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType
     {
         return $this->TransactionArray;
     }
@@ -1001,16 +1147,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setTransactionArray(\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null)
+    public function setTransactionArray(?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null): self
     {
         $this->TransactionArray = $transactionArray;
+        
         return $this;
     }
     /**
      * Get BuyerUserID value
      * @return string|null
      */
-    public function getBuyerUserID()
+    public function getBuyerUserID(): ?string
     {
         return $this->BuyerUserID;
     }
@@ -1019,20 +1166,21 @@ class OrderType extends AbstractStructBase
      * @param string $buyerUserID
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setBuyerUserID($buyerUserID = null)
+    public function setBuyerUserID(?string $buyerUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($buyerUserID) && !is_string($buyerUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($buyerUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($buyerUserID, true), gettype($buyerUserID)), __LINE__);
         }
         $this->BuyerUserID = $buyerUserID;
+        
         return $this;
     }
     /**
      * Get PaidTime value
      * @return string|null
      */
-    public function getPaidTime()
+    public function getPaidTime(): ?string
     {
         return $this->PaidTime;
     }
@@ -1041,20 +1189,21 @@ class OrderType extends AbstractStructBase
      * @param string $paidTime
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPaidTime($paidTime = null)
+    public function setPaidTime(?string $paidTime = null): self
     {
         // validation for constraint: string
         if (!is_null($paidTime) && !is_string($paidTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($paidTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($paidTime, true), gettype($paidTime)), __LINE__);
         }
         $this->PaidTime = $paidTime;
+        
         return $this;
     }
     /**
      * Get ShippedTime value
      * @return string|null
      */
-    public function getShippedTime()
+    public function getShippedTime(): ?string
     {
         return $this->ShippedTime;
     }
@@ -1063,20 +1212,21 @@ class OrderType extends AbstractStructBase
      * @param string $shippedTime
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setShippedTime($shippedTime = null)
+    public function setShippedTime(?string $shippedTime = null): self
     {
         // validation for constraint: string
         if (!is_null($shippedTime) && !is_string($shippedTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($shippedTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($shippedTime, true), gettype($shippedTime)), __LINE__);
         }
         $this->ShippedTime = $shippedTime;
+        
         return $this;
     }
     /**
      * Get IntegratedMerchantCreditCardEnabled value
      * @return bool|null
      */
-    public function getIntegratedMerchantCreditCardEnabled()
+    public function getIntegratedMerchantCreditCardEnabled(): ?bool
     {
         return $this->IntegratedMerchantCreditCardEnabled;
     }
@@ -1085,20 +1235,21 @@ class OrderType extends AbstractStructBase
      * @param bool $integratedMerchantCreditCardEnabled
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setIntegratedMerchantCreditCardEnabled($integratedMerchantCreditCardEnabled = null)
+    public function setIntegratedMerchantCreditCardEnabled(?bool $integratedMerchantCreditCardEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($integratedMerchantCreditCardEnabled) && !is_bool($integratedMerchantCreditCardEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($integratedMerchantCreditCardEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($integratedMerchantCreditCardEnabled, true), gettype($integratedMerchantCreditCardEnabled)), __LINE__);
         }
         $this->IntegratedMerchantCreditCardEnabled = $integratedMerchantCreditCardEnabled;
+        
         return $this;
     }
     /**
      * Get BundlePurchase value
      * @return bool|null
      */
-    public function getBundlePurchase()
+    public function getBundlePurchase(): ?bool
     {
         return $this->BundlePurchase;
     }
@@ -1107,20 +1258,21 @@ class OrderType extends AbstractStructBase
      * @param bool $bundlePurchase
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setBundlePurchase($bundlePurchase = null)
+    public function setBundlePurchase(?bool $bundlePurchase = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bundlePurchase) && !is_bool($bundlePurchase)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bundlePurchase)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bundlePurchase, true), gettype($bundlePurchase)), __LINE__);
         }
         $this->BundlePurchase = $bundlePurchase;
+        
         return $this;
     }
     /**
      * Get BuyerCheckoutMessage value
      * @return string|null
      */
-    public function getBuyerCheckoutMessage()
+    public function getBuyerCheckoutMessage(): ?string
     {
         return $this->BuyerCheckoutMessage;
     }
@@ -1129,20 +1281,21 @@ class OrderType extends AbstractStructBase
      * @param string $buyerCheckoutMessage
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setBuyerCheckoutMessage($buyerCheckoutMessage = null)
+    public function setBuyerCheckoutMessage(?string $buyerCheckoutMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($buyerCheckoutMessage) && !is_string($buyerCheckoutMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($buyerCheckoutMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($buyerCheckoutMessage, true), gettype($buyerCheckoutMessage)), __LINE__);
         }
         $this->BuyerCheckoutMessage = $buyerCheckoutMessage;
+        
         return $this;
     }
     /**
      * Get EIASToken value
      * @return string|null
      */
-    public function getEIASToken()
+    public function getEIASToken(): ?string
     {
         return $this->EIASToken;
     }
@@ -1151,20 +1304,21 @@ class OrderType extends AbstractStructBase
      * @param string $eIASToken
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setEIASToken($eIASToken = null)
+    public function setEIASToken(?string $eIASToken = null): self
     {
         // validation for constraint: string
         if (!is_null($eIASToken) && !is_string($eIASToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eIASToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eIASToken, true), gettype($eIASToken)), __LINE__);
         }
         $this->EIASToken = $eIASToken;
+        
         return $this;
     }
     /**
      * Get PaymentHoldStatus value
      * @return string|null
      */
-    public function getPaymentHoldStatus()
+    public function getPaymentHoldStatus(): ?string
     {
         return $this->PaymentHoldStatus;
     }
@@ -1172,24 +1326,25 @@ class OrderType extends AbstractStructBase
      * Set PaymentHoldStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paymentHoldStatus
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPaymentHoldStatus($paymentHoldStatus = null)
+    public function setPaymentHoldStatus(?string $paymentHoldStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType::valueIsValid($paymentHoldStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paymentHoldStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType', is_array($paymentHoldStatus) ? implode(', ', $paymentHoldStatus) : var_export($paymentHoldStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentHoldStatusCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentHoldStatus = $paymentHoldStatus;
+        
         return $this;
     }
     /**
      * Get PaymentHoldDetails value
      * @return \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType|null
      */
-    public function getPaymentHoldDetails()
+    public function getPaymentHoldDetails(): ?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType
     {
         return $this->PaymentHoldDetails;
     }
@@ -1198,16 +1353,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPaymentHoldDetails(\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null)
+    public function setPaymentHoldDetails(?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null): self
     {
         $this->PaymentHoldDetails = $paymentHoldDetails;
+        
         return $this;
     }
     /**
      * Get RefundAmount value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getRefundAmount()
+    public function getRefundAmount(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->RefundAmount;
     }
@@ -1216,16 +1372,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $refundAmount
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setRefundAmount(\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null)
+    public function setRefundAmount(?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null): self
     {
         $this->RefundAmount = $refundAmount;
+        
         return $this;
     }
     /**
      * Get RefundStatus value
      * @return string|null
      */
-    public function getRefundStatus()
+    public function getRefundStatus(): ?string
     {
         return $this->RefundStatus;
     }
@@ -1234,20 +1391,21 @@ class OrderType extends AbstractStructBase
      * @param string $refundStatus
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setRefundStatus($refundStatus = null)
+    public function setRefundStatus(?string $refundStatus = null): self
     {
         // validation for constraint: string
         if (!is_null($refundStatus) && !is_string($refundStatus)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($refundStatus)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($refundStatus, true), gettype($refundStatus)), __LINE__);
         }
         $this->RefundStatus = $refundStatus;
+        
         return $this;
     }
     /**
      * Get RefundArray value
      * @return \macropage\ebaysdk\trading\ArrayType\RefundArrayType|null
      */
-    public function getRefundArray()
+    public function getRefundArray(): ?\macropage\ebaysdk\trading\ArrayType\RefundArrayType
     {
         return $this->RefundArray;
     }
@@ -1256,16 +1414,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setRefundArray(\macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null)
+    public function setRefundArray(?\macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null): self
     {
         $this->RefundArray = $refundArray;
+        
         return $this;
     }
     /**
      * Get IsMultiLegShipping value
      * @return bool|null
      */
-    public function getIsMultiLegShipping()
+    public function getIsMultiLegShipping(): ?bool
     {
         return $this->IsMultiLegShipping;
     }
@@ -1274,20 +1433,21 @@ class OrderType extends AbstractStructBase
      * @param bool $isMultiLegShipping
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setIsMultiLegShipping($isMultiLegShipping = null)
+    public function setIsMultiLegShipping(?bool $isMultiLegShipping = null): self
     {
         // validation for constraint: boolean
         if (!is_null($isMultiLegShipping) && !is_bool($isMultiLegShipping)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($isMultiLegShipping)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($isMultiLegShipping, true), gettype($isMultiLegShipping)), __LINE__);
         }
         $this->IsMultiLegShipping = $isMultiLegShipping;
+        
         return $this;
     }
     /**
      * Get MultiLegShippingDetails value
      * @return \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType|null
      */
-    public function getMultiLegShippingDetails()
+    public function getMultiLegShippingDetails(): ?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType
     {
         return $this->MultiLegShippingDetails;
     }
@@ -1296,16 +1456,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setMultiLegShippingDetails(\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null)
+    public function setMultiLegShippingDetails(?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null): self
     {
         $this->MultiLegShippingDetails = $multiLegShippingDetails;
+        
         return $this;
     }
     /**
      * Get MonetaryDetails value
      * @return \macropage\ebaysdk\trading\StructType\PaymentsInformationType|null
      */
-    public function getMonetaryDetails()
+    public function getMonetaryDetails(): ?\macropage\ebaysdk\trading\StructType\PaymentsInformationType
     {
         return $this->MonetaryDetails;
     }
@@ -1314,16 +1475,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setMonetaryDetails(\macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null)
+    public function setMonetaryDetails(?\macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null): self
     {
         $this->MonetaryDetails = $monetaryDetails;
+        
         return $this;
     }
     /**
      * Get PickupDetails value
      * @return \macropage\ebaysdk\trading\StructType\PickupDetailsType|null
      */
-    public function getPickupDetails()
+    public function getPickupDetails(): ?\macropage\ebaysdk\trading\StructType\PickupDetailsType
     {
         return $this->PickupDetails;
     }
@@ -1332,16 +1494,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPickupDetails(\macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null)
+    public function setPickupDetails(?\macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null): self
     {
         $this->PickupDetails = $pickupDetails;
+        
         return $this;
     }
     /**
      * Get PickupMethodSelected value
      * @return \macropage\ebaysdk\trading\StructType\PickupMethodSelectedType|null
      */
-    public function getPickupMethodSelected()
+    public function getPickupMethodSelected(): ?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType
     {
         return $this->PickupMethodSelected;
     }
@@ -1350,16 +1513,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setPickupMethodSelected(\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null)
+    public function setPickupMethodSelected(?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null): self
     {
         $this->PickupMethodSelected = $pickupMethodSelected;
+        
         return $this;
     }
     /**
      * Get SellerUserID value
      * @return string|null
      */
-    public function getSellerUserID()
+    public function getSellerUserID(): ?string
     {
         return $this->SellerUserID;
     }
@@ -1368,20 +1532,21 @@ class OrderType extends AbstractStructBase
      * @param string $sellerUserID
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setSellerUserID($sellerUserID = null)
+    public function setSellerUserID(?string $sellerUserID = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerUserID) && !is_string($sellerUserID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerUserID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerUserID, true), gettype($sellerUserID)), __LINE__);
         }
         $this->SellerUserID = $sellerUserID;
+        
         return $this;
     }
     /**
      * Get SellerEIASToken value
      * @return string|null
      */
-    public function getSellerEIASToken()
+    public function getSellerEIASToken(): ?string
     {
         return $this->SellerEIASToken;
     }
@@ -1390,20 +1555,21 @@ class OrderType extends AbstractStructBase
      * @param string $sellerEIASToken
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setSellerEIASToken($sellerEIASToken = null)
+    public function setSellerEIASToken(?string $sellerEIASToken = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerEIASToken) && !is_string($sellerEIASToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerEIASToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerEIASToken, true), gettype($sellerEIASToken)), __LINE__);
         }
         $this->SellerEIASToken = $sellerEIASToken;
+        
         return $this;
     }
     /**
      * Get CancelReason value
      * @return string|null
      */
-    public function getCancelReason()
+    public function getCancelReason(): ?string
     {
         return $this->CancelReason;
     }
@@ -1412,20 +1578,21 @@ class OrderType extends AbstractStructBase
      * @param string $cancelReason
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCancelReason($cancelReason = null)
+    public function setCancelReason(?string $cancelReason = null): self
     {
         // validation for constraint: string
         if (!is_null($cancelReason) && !is_string($cancelReason)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($cancelReason)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($cancelReason, true), gettype($cancelReason)), __LINE__);
         }
         $this->CancelReason = $cancelReason;
+        
         return $this;
     }
     /**
      * Get CancelStatus value
      * @return string|null
      */
-    public function getCancelStatus()
+    public function getCancelStatus(): ?string
     {
         return $this->CancelStatus;
     }
@@ -1433,24 +1600,25 @@ class OrderType extends AbstractStructBase
      * Set CancelStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\CancelStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\CancelStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $cancelStatus
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCancelStatus($cancelStatus = null)
+    public function setCancelStatus(?string $cancelStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\CancelStatusCodeType::valueIsValid($cancelStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $cancelStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\CancelStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\CancelStatusCodeType', is_array($cancelStatus) ? implode(', ', $cancelStatus) : var_export($cancelStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\CancelStatusCodeType::getValidValues())), __LINE__);
         }
         $this->CancelStatus = $cancelStatus;
+        
         return $this;
     }
     /**
      * Get CancelReasonDetails value
      * @return string|null
      */
-    public function getCancelReasonDetails()
+    public function getCancelReasonDetails(): ?string
     {
         return $this->CancelReasonDetails;
     }
@@ -1459,20 +1627,21 @@ class OrderType extends AbstractStructBase
      * @param string $cancelReasonDetails
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCancelReasonDetails($cancelReasonDetails = null)
+    public function setCancelReasonDetails(?string $cancelReasonDetails = null): self
     {
         // validation for constraint: string
         if (!is_null($cancelReasonDetails) && !is_string($cancelReasonDetails)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($cancelReasonDetails)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($cancelReasonDetails, true), gettype($cancelReasonDetails)), __LINE__);
         }
         $this->CancelReasonDetails = $cancelReasonDetails;
+        
         return $this;
     }
     /**
      * Get ShippingConvenienceCharge value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getShippingConvenienceCharge()
+    public function getShippingConvenienceCharge(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->ShippingConvenienceCharge;
     }
@@ -1481,56 +1650,80 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setShippingConvenienceCharge(\macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null)
+    public function setShippingConvenienceCharge(?\macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null): self
     {
         $this->ShippingConvenienceCharge = $shippingConvenienceCharge;
+        
         return $this;
     }
     /**
      * Get CancelDetail value
-     * @return \macropage\ebaysdk\trading\StructType\CancelDetailType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\CancelDetailType[]
      */
-    public function getCancelDetail()
+    public function getCancelDetail(): array
     {
         return $this->CancelDetail;
     }
     /**
+     * This method is responsible for validating the values passed to the setCancelDetail method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setCancelDetail method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateCancelDetailForArrayConstraintsFromSetCancelDetail(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $orderTypeCancelDetailItem) {
+            // validation for constraint: itemType
+            if (!$orderTypeCancelDetailItem instanceof \macropage\ebaysdk\trading\StructType\CancelDetailType) {
+                $invalidValues[] = is_object($orderTypeCancelDetailItem) ? get_class($orderTypeCancelDetailItem) : sprintf('%s(%s)', gettype($orderTypeCancelDetailItem), var_export($orderTypeCancelDetailItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The CancelDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\CancelDetailType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set CancelDetail value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CancelDetailType[] $cancelDetail
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setCancelDetail(array $cancelDetail = array())
+    public function setCancelDetail(array $cancelDetail = []): self
     {
-        foreach ($cancelDetail as $orderTypeCancelDetailItem) {
-            // validation for constraint: itemType
-            if (!$orderTypeCancelDetailItem instanceof \macropage\ebaysdk\trading\StructType\CancelDetailType) {
-                throw new \InvalidArgumentException(sprintf('The CancelDetail property can only contain items of \macropage\ebaysdk\trading\StructType\CancelDetailType, "%s" given', is_object($orderTypeCancelDetailItem) ? get_class($orderTypeCancelDetailItem) : gettype($orderTypeCancelDetailItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($cancelDetailArrayErrorMessage = self::validateCancelDetailForArrayConstraintsFromSetCancelDetail($cancelDetail))) {
+            throw new InvalidArgumentException($cancelDetailArrayErrorMessage, __LINE__);
         }
         $this->CancelDetail = $cancelDetail;
+        
         return $this;
     }
     /**
      * Add item to CancelDetail value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\CancelDetailType $item
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function addToCancelDetail(\macropage\ebaysdk\trading\StructType\CancelDetailType $item)
+    public function addToCancelDetail(\macropage\ebaysdk\trading\StructType\CancelDetailType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\CancelDetailType) {
-            throw new \InvalidArgumentException(sprintf('The CancelDetail property can only contain items of \macropage\ebaysdk\trading\StructType\CancelDetailType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The CancelDetail property can only contain items of type \macropage\ebaysdk\trading\StructType\CancelDetailType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->CancelDetail[] = $item;
+        
         return $this;
     }
     /**
      * Get LogisticsPlanType value
      * @return string|null
      */
-    public function getLogisticsPlanType()
+    public function getLogisticsPlanType(): ?string
     {
         return $this->LogisticsPlanType;
     }
@@ -1539,60 +1732,84 @@ class OrderType extends AbstractStructBase
      * @param string $logisticsPlanType
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setLogisticsPlanType($logisticsPlanType = null)
+    public function setLogisticsPlanType(?string $logisticsPlanType = null): self
     {
         // validation for constraint: string
         if (!is_null($logisticsPlanType) && !is_string($logisticsPlanType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($logisticsPlanType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($logisticsPlanType, true), gettype($logisticsPlanType)), __LINE__);
         }
         $this->LogisticsPlanType = $logisticsPlanType;
+        
         return $this;
     }
     /**
      * Get BuyerTaxIdentifier value
-     * @return \macropage\ebaysdk\trading\StructType\TaxIdentifierType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\TaxIdentifierType[]
      */
-    public function getBuyerTaxIdentifier()
+    public function getBuyerTaxIdentifier(): array
     {
         return $this->BuyerTaxIdentifier;
     }
     /**
+     * This method is responsible for validating the values passed to the setBuyerTaxIdentifier method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setBuyerTaxIdentifier method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateBuyerTaxIdentifierForArrayConstraintsFromSetBuyerTaxIdentifier(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $orderTypeBuyerTaxIdentifierItem) {
+            // validation for constraint: itemType
+            if (!$orderTypeBuyerTaxIdentifierItem instanceof \macropage\ebaysdk\trading\StructType\TaxIdentifierType) {
+                $invalidValues[] = is_object($orderTypeBuyerTaxIdentifierItem) ? get_class($orderTypeBuyerTaxIdentifierItem) : sprintf('%s(%s)', gettype($orderTypeBuyerTaxIdentifierItem), var_export($orderTypeBuyerTaxIdentifierItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The BuyerTaxIdentifier property can only contain items of type \macropage\ebaysdk\trading\StructType\TaxIdentifierType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set BuyerTaxIdentifier value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierType[] $buyerTaxIdentifier
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setBuyerTaxIdentifier(array $buyerTaxIdentifier = array())
+    public function setBuyerTaxIdentifier(array $buyerTaxIdentifier = []): self
     {
-        foreach ($buyerTaxIdentifier as $orderTypeBuyerTaxIdentifierItem) {
-            // validation for constraint: itemType
-            if (!$orderTypeBuyerTaxIdentifierItem instanceof \macropage\ebaysdk\trading\StructType\TaxIdentifierType) {
-                throw new \InvalidArgumentException(sprintf('The BuyerTaxIdentifier property can only contain items of \macropage\ebaysdk\trading\StructType\TaxIdentifierType, "%s" given', is_object($orderTypeBuyerTaxIdentifierItem) ? get_class($orderTypeBuyerTaxIdentifierItem) : gettype($orderTypeBuyerTaxIdentifierItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($buyerTaxIdentifierArrayErrorMessage = self::validateBuyerTaxIdentifierForArrayConstraintsFromSetBuyerTaxIdentifier($buyerTaxIdentifier))) {
+            throw new InvalidArgumentException($buyerTaxIdentifierArrayErrorMessage, __LINE__);
         }
         $this->BuyerTaxIdentifier = $buyerTaxIdentifier;
+        
         return $this;
     }
     /**
      * Add item to BuyerTaxIdentifier value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierType $item
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function addToBuyerTaxIdentifier(\macropage\ebaysdk\trading\StructType\TaxIdentifierType $item)
+    public function addToBuyerTaxIdentifier(\macropage\ebaysdk\trading\StructType\TaxIdentifierType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\TaxIdentifierType) {
-            throw new \InvalidArgumentException(sprintf('The BuyerTaxIdentifier property can only contain items of \macropage\ebaysdk\trading\StructType\TaxIdentifierType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The BuyerTaxIdentifier property can only contain items of type \macropage\ebaysdk\trading\StructType\TaxIdentifierType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->BuyerTaxIdentifier[] = $item;
+        
         return $this;
     }
     /**
      * Get BuyerPackageEnclosures value
      * @return \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType|null
      */
-    public function getBuyerPackageEnclosures()
+    public function getBuyerPackageEnclosures(): ?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType
     {
         return $this->BuyerPackageEnclosures;
     }
@@ -1601,16 +1818,17 @@ class OrderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setBuyerPackageEnclosures(\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null)
+    public function setBuyerPackageEnclosures(?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null): self
     {
         $this->BuyerPackageEnclosures = $buyerPackageEnclosures;
+        
         return $this;
     }
     /**
      * Get ExtendedOrderID value
      * @return string|null
      */
-    public function getExtendedOrderID()
+    public function getExtendedOrderID(): ?string
     {
         return $this->ExtendedOrderID;
     }
@@ -1619,20 +1837,21 @@ class OrderType extends AbstractStructBase
      * @param string $extendedOrderID
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setExtendedOrderID($extendedOrderID = null)
+    public function setExtendedOrderID(?string $extendedOrderID = null): self
     {
         // validation for constraint: string
         if (!is_null($extendedOrderID) && !is_string($extendedOrderID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($extendedOrderID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($extendedOrderID, true), gettype($extendedOrderID)), __LINE__);
         }
         $this->ExtendedOrderID = $extendedOrderID;
+        
         return $this;
     }
     /**
      * Get ContainseBayPlusTransaction value
      * @return bool|null
      */
-    public function getContainseBayPlusTransaction()
+    public function getContainseBayPlusTransaction(): ?bool
     {
         return $this->ContainseBayPlusTransaction;
     }
@@ -1641,20 +1860,21 @@ class OrderType extends AbstractStructBase
      * @param bool $containseBayPlusTransaction
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setContainseBayPlusTransaction($containseBayPlusTransaction = null)
+    public function setContainseBayPlusTransaction(?bool $containseBayPlusTransaction = null): self
     {
         // validation for constraint: boolean
         if (!is_null($containseBayPlusTransaction) && !is_bool($containseBayPlusTransaction)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($containseBayPlusTransaction)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($containseBayPlusTransaction, true), gettype($containseBayPlusTransaction)), __LINE__);
         }
         $this->ContainseBayPlusTransaction = $containseBayPlusTransaction;
+        
         return $this;
     }
     /**
      * Get eBayCollectAndRemitTax value
      * @return bool|null
      */
-    public function getEBayCollectAndRemitTax()
+    public function getEBayCollectAndRemitTax(): ?bool
     {
         return $this->eBayCollectAndRemitTax;
     }
@@ -1663,65 +1883,70 @@ class OrderType extends AbstractStructBase
      * @param bool $eBayCollectAndRemitTax
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setEBayCollectAndRemitTax($eBayCollectAndRemitTax = null)
+    public function setEBayCollectAndRemitTax(?bool $eBayCollectAndRemitTax = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayCollectAndRemitTax) && !is_bool($eBayCollectAndRemitTax)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayCollectAndRemitTax)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayCollectAndRemitTax, true), gettype($eBayCollectAndRemitTax)), __LINE__);
         }
         $this->eBayCollectAndRemitTax = $eBayCollectAndRemitTax;
+        
+        return $this;
+    }
+    /**
+     * Get OrderLineItemCount value
+     * @return int|null
+     */
+    public function getOrderLineItemCount(): ?int
+    {
+        return $this->OrderLineItemCount;
+    }
+    /**
+     * Set OrderLineItemCount value
+     * @param int $orderLineItemCount
+     * @return \macropage\ebaysdk\trading\StructType\OrderType
+     */
+    public function setOrderLineItemCount(?int $orderLineItemCount = null): self
+    {
+        // validation for constraint: int
+        if (!is_null($orderLineItemCount) && !(is_int($orderLineItemCount) || ctype_digit($orderLineItemCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($orderLineItemCount, true), gettype($orderLineItemCount)), __LINE__);
+        }
+        $this->OrderLineItemCount = $orderLineItemCount;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\OrderType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\OrderType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\OrderType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

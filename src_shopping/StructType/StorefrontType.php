@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\shopping\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StorefrontType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Complex type used by the <b>Storefront</b> container used by the <b>GetSingleItem</b> and <b>GetMultipleItems</b> if the seller of the item has an eBay Store subscription.
  * @subpackage Structs
  */
@@ -14,25 +17,25 @@ class StorefrontType extends AbstractStructBase
 {
     /**
      * The StoreURL
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The URL of the seller's eBay Store. This field is always returned with the <b>Storefront</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StoreURL;
+    protected ?string $StoreURL = null;
     /**
      * The StoreName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The name of the seller's eBay Store. This field is always returned with the <b>Storefront</b> container.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StoreName;
+    protected ?string $StoreName = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StorefrontType
      * @uses StorefrontType::setStoreURL()
@@ -40,9 +43,9 @@ class StorefrontType extends AbstractStructBase
      * @uses StorefrontType::setAny()
      * @param string $storeURL
      * @param string $storeName
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($storeURL = null, $storeName = null, \DOMDocument $any = null)
+    public function __construct(?string $storeURL = null, ?string $storeName = null, $any = null)
     {
         $this
             ->setStoreURL($storeURL)
@@ -53,7 +56,7 @@ class StorefrontType extends AbstractStructBase
      * Get StoreURL value
      * @return string|null
      */
-    public function getStoreURL()
+    public function getStoreURL(): ?string
     {
         return $this->StoreURL;
     }
@@ -62,20 +65,21 @@ class StorefrontType extends AbstractStructBase
      * @param string $storeURL
      * @return \macropage\ebaysdk\shopping\StructType\StorefrontType
      */
-    public function setStoreURL($storeURL = null)
+    public function setStoreURL(?string $storeURL = null): self
     {
         // validation for constraint: string
         if (!is_null($storeURL) && !is_string($storeURL)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($storeURL)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($storeURL, true), gettype($storeURL)), __LINE__);
         }
         $this->StoreURL = $storeURL;
+        
         return $this;
     }
     /**
      * Get StoreName value
      * @return string|null
      */
-    public function getStoreName()
+    public function getStoreName(): ?string
     {
         return $this->StoreName;
     }
@@ -84,65 +88,47 @@ class StorefrontType extends AbstractStructBase
      * @param string $storeName
      * @return \macropage\ebaysdk\shopping\StructType\StorefrontType
      */
-    public function setStoreName($storeName = null)
+    public function setStoreName(?string $storeName = null): self
     {
         // validation for constraint: string
         if (!is_null($storeName) && !is_string($storeName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($storeName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($storeName, true), gettype($storeName)), __LINE__);
         }
         $this->StoreName = $storeName;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\shopping\StructType\StorefrontType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\shopping\StructType\StorefrontType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\shopping\StructType\StorefrontType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

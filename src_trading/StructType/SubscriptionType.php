@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SubscriptionType StructType
@@ -12,30 +15,30 @@ class SubscriptionType extends AbstractStructBase
 {
     /**
      * The EIASToken
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EIASToken;
+    protected ?string $EIASToken = null;
     /**
      * The SiteID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SiteID;
+    protected ?string $SiteID = null;
     /**
      * The Active
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Active;
+    protected ?bool $Active = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SubscriptionType
      * @uses SubscriptionType::setEIASToken()
@@ -45,9 +48,9 @@ class SubscriptionType extends AbstractStructBase
      * @param string $eIASToken
      * @param string $siteID
      * @param bool $active
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($eIASToken = null, $siteID = null, $active = null, \DOMDocument $any = null)
+    public function __construct(?string $eIASToken = null, ?string $siteID = null, ?bool $active = null, $any = null)
     {
         $this
             ->setEIASToken($eIASToken)
@@ -59,7 +62,7 @@ class SubscriptionType extends AbstractStructBase
      * Get EIASToken value
      * @return string|null
      */
-    public function getEIASToken()
+    public function getEIASToken(): ?string
     {
         return $this->EIASToken;
     }
@@ -68,20 +71,21 @@ class SubscriptionType extends AbstractStructBase
      * @param string $eIASToken
      * @return \macropage\ebaysdk\trading\StructType\SubscriptionType
      */
-    public function setEIASToken($eIASToken = null)
+    public function setEIASToken(?string $eIASToken = null): self
     {
         // validation for constraint: string
         if (!is_null($eIASToken) && !is_string($eIASToken)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eIASToken)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eIASToken, true), gettype($eIASToken)), __LINE__);
         }
         $this->EIASToken = $eIASToken;
+        
         return $this;
     }
     /**
      * Get SiteID value
      * @return string|null
      */
-    public function getSiteID()
+    public function getSiteID(): ?string
     {
         return $this->SiteID;
     }
@@ -89,24 +93,25 @@ class SubscriptionType extends AbstractStructBase
      * Set SiteID value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $siteID
      * @return \macropage\ebaysdk\trading\StructType\SubscriptionType
      */
-    public function setSiteID($siteID = null)
+    public function setSiteID(?string $siteID = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($siteID)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $siteID, implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($siteID) ? implode(', ', $siteID) : var_export($siteID, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
         }
         $this->SiteID = $siteID;
+        
         return $this;
     }
     /**
      * Get Active value
      * @return bool|null
      */
-    public function getActive()
+    public function getActive(): ?bool
     {
         return $this->Active;
     }
@@ -115,65 +120,47 @@ class SubscriptionType extends AbstractStructBase
      * @param bool $active
      * @return \macropage\ebaysdk\trading\StructType\SubscriptionType
      */
-    public function setActive($active = null)
+    public function setActive(?bool $active = null): self
     {
         // validation for constraint: boolean
         if (!is_null($active) && !is_bool($active)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($active)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($active, true), gettype($active)), __LINE__);
         }
         $this->Active = $active;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SubscriptionType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SubscriptionType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SubscriptionType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

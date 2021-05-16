@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\ArrayType;
 
-use \WsdlToPhp\PackageBase\AbstractStructArrayBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 
 /**
  * This class stands for WantItNowPostArrayType ArrayType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Arrays
  */
@@ -14,61 +17,68 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
 {
     /**
      * The WantItNowPost
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\WantItNowPostType[]
      */
-    public $WantItNowPost;
+    protected array $WantItNowPost = [];
     /**
      * Constructor method for WantItNowPostArrayType
      * @uses WantItNowPostArrayType::setWantItNowPost()
      * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType[] $wantItNowPost
      */
-    public function __construct(array $wantItNowPost = array())
+    public function __construct(array $wantItNowPost = [])
     {
         $this
             ->setWantItNowPost($wantItNowPost);
     }
     /**
      * Get WantItNowPost value
-     * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType[]
      */
-    public function getWantItNowPost()
+    public function getWantItNowPost(): array
     {
         return $this->WantItNowPost;
     }
     /**
+     * This method is responsible for validating the values passed to the setWantItNowPost method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setWantItNowPost method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateWantItNowPostForArrayConstraintsFromSetWantItNowPost(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $wantItNowPostArrayTypeWantItNowPostItem) {
+            // validation for constraint: itemType
+            if (!$wantItNowPostArrayTypeWantItNowPostItem instanceof \macropage\ebaysdk\trading\StructType\WantItNowPostType) {
+                $invalidValues[] = is_object($wantItNowPostArrayTypeWantItNowPostItem) ? get_class($wantItNowPostArrayTypeWantItNowPostItem) : sprintf('%s(%s)', gettype($wantItNowPostArrayTypeWantItNowPostItem), var_export($wantItNowPostArrayTypeWantItNowPostItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The WantItNowPost property can only contain items of type \macropage\ebaysdk\trading\StructType\WantItNowPostType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set WantItNowPost value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType[] $wantItNowPost
      * @return \macropage\ebaysdk\trading\ArrayType\WantItNowPostArrayType
      */
-    public function setWantItNowPost(array $wantItNowPost = array())
+    public function setWantItNowPost(array $wantItNowPost = []): self
     {
-        foreach ($wantItNowPost as $wantItNowPostArrayTypeWantItNowPostItem) {
-            // validation for constraint: itemType
-            if (!$wantItNowPostArrayTypeWantItNowPostItem instanceof \macropage\ebaysdk\trading\StructType\WantItNowPostType) {
-                throw new \InvalidArgumentException(sprintf('The WantItNowPost property can only contain items of \macropage\ebaysdk\trading\StructType\WantItNowPostType, "%s" given', is_object($wantItNowPostArrayTypeWantItNowPostItem) ? get_class($wantItNowPostArrayTypeWantItNowPostItem) : gettype($wantItNowPostArrayTypeWantItNowPostItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($wantItNowPostArrayErrorMessage = self::validateWantItNowPostForArrayConstraintsFromSetWantItNowPost($wantItNowPost))) {
+            throw new InvalidArgumentException($wantItNowPostArrayErrorMessage, __LINE__);
         }
         $this->WantItNowPost = $wantItNowPost;
-        return $this;
-    }
-    /**
-     * Add item to WantItNowPost value
-     * @throws \InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType $item
-     * @return \macropage\ebaysdk\trading\ArrayType\WantItNowPostArrayType
-     */
-    public function addToWantItNowPost(\macropage\ebaysdk\trading\StructType\WantItNowPostType $item)
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\WantItNowPostType) {
-            throw new \InvalidArgumentException(sprintf('The WantItNowPost property can only contain items of \macropage\ebaysdk\trading\StructType\WantItNowPostType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
-        }
-        $this->WantItNowPost[] = $item;
+        
         return $this;
     }
     /**
@@ -76,7 +86,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::current()
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType|null
      */
-    public function current()
+    public function current(): ?\macropage\ebaysdk\trading\StructType\WantItNowPostType
     {
         return parent::current();
     }
@@ -86,7 +96,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @param int $index
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType|null
      */
-    public function item($index)
+    public function item($index): ?\macropage\ebaysdk\trading\StructType\WantItNowPostType
     {
         return parent::item($index);
     }
@@ -95,7 +105,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::first()
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType|null
      */
-    public function first()
+    public function first(): ?\macropage\ebaysdk\trading\StructType\WantItNowPostType
     {
         return parent::first();
     }
@@ -104,7 +114,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @see AbstractStructArrayBase::last()
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType|null
      */
-    public function last()
+    public function last(): ?\macropage\ebaysdk\trading\StructType\WantItNowPostType
     {
         return parent::last();
     }
@@ -114,37 +124,32 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @param int $offset
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType|null
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?\macropage\ebaysdk\trading\StructType\WantItNowPostType
     {
         return parent::offsetGet($offset);
+    }
+    /**
+     * Add element to array
+     * @see AbstractStructArrayBase::add()
+     * @throws InvalidArgumentException
+     * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType $item
+     * @return \macropage\ebaysdk\trading\ArrayType\WantItNowPostArrayType
+     */
+    public function add($item): self
+    {
+        // validation for constraint: itemType
+        if (!$item instanceof \macropage\ebaysdk\trading\StructType\WantItNowPostType) {
+            throw new InvalidArgumentException(sprintf('The WantItNowPost property can only contain items of type \macropage\ebaysdk\trading\StructType\WantItNowPostType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
+        }
+        return parent::add($item);
     }
     /**
      * Returns the attribute name
      * @see AbstractStructArrayBase::getAttributeName()
      * @return string WantItNowPost
      */
-    public function getAttributeName()
+    public function getAttributeName(): string
     {
         return 'WantItNowPost';
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructArrayBase::__set_state()
-     * @uses AbstractStructArrayBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\ArrayType\WantItNowPostArrayType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

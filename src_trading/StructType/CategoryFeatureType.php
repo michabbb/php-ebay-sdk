@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for CategoryFeatureType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>Category</b> container that is returned in the <b>GetCategoryFeatures</b> response. A <b>Category</b> node is returned for each category that is relevant/applicable to the input criteria in the
  * <b>GetCategoryFeatures</b> request. The <b>CategoryID</b> value identifies the eBay category. The rest of the <b>CategoryFeatureType</b> fields that are returned will be dependent on which <b>FeatureID</b> value(s) are specified in the
  * <b>GetCategoryFeatures</b> request.
@@ -16,1357 +19,1388 @@ class CategoryFeatureType extends AbstractStructBase
 {
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the unique identifier of the eBay category. All eBay feature information that is returned under the corresponding <b>Category</b> container is relevant to this eBay category.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The ListingDuration
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A <b>ListingDuration</b> field is returned for each listing type and listing duration combination that is supported for the category. The integer value indicates the number of days of the listing duration, and the <b>type</b>
-     * attribute identifies the supported listing type. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
+     * attribute identifies the supported listing type. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
      * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ListingDurations</code>.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType[]
      */
-    public $ListingDuration;
+    protected array $ListingDuration = [];
     /**
      * The ShippingTermsRequired
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category requires sellers to specify shipping details at listing time. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category requires sellers to specify shipping details at listing time. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ShippingTermsRequired</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ShippingTermsRequired;
+    protected ?bool $ShippingTermsRequired = null;
     /**
      * The BestOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Best Offer feature for listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Best Offer feature for listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
      * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>BestOfferEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BestOfferEnabled;
+    protected ?bool $BestOfferEnabled = null;
     /**
      * The DutchBINEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DutchBINEnabled;
+    protected ?bool $DutchBINEnabled = null;
     /**
      * The UserConsentRequired
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether a bidder must consent to the bid by confirming that he or she read and agrees to the terms in eBay's privacy policy. <br><br> Only returned when this value (or this category's setting) overrides the value inherited
-     * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>UserConsentRequired</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether a bidder must consent to the bid by confirming that he or she read and agrees to the terms in eBay's privacy policy. <br/><br/> Only returned when this value (or this category's setting) overrides the value
+     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * <code>UserConsentRequired</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $UserConsentRequired;
+    protected ?bool $UserConsentRequired = null;
     /**
      * The HomePageFeaturedEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not it is possible to enhance a listing by putting it into a rotation for display on a special area of the eBay home page. Support for this feature varies by site. Item or feedback restrictions may apply.
-     * <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used
-     * in the call request, and one of those values does not include <code>HomePageFeaturedEnabled</code>.
+     * <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are
+     * used in the call request, and one of those values does not include <code>HomePageFeaturedEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HomePageFeaturedEnabled;
+    protected ?bool $HomePageFeaturedEnabled = null;
     /**
      * The ProPackEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Pro Pack Bundle listing upgrade. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Pro Pack Bundle listing upgrade. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
      * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ProPack</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ProPackEnabled;
+    protected ?bool $ProPackEnabled = null;
     /**
      * The BasicUpgradePackEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BasicUpgradePackEnabled;
+    protected ?bool $BasicUpgradePackEnabled = null;
     /**
      * The ValuePackEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Value Pack bundle listing upgrade. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
-     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ValuePack</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Value Pack bundle listing upgrade. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ValuePack</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ValuePackEnabled;
+    protected ?bool $ValuePackEnabled = null;
     /**
      * The ProPackPlusEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Pro Pack Plus bundle listing upgrade. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
-     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ProPackPlus</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Pro Pack Plus bundle listing upgrade. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
+     * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ProPackPlus</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ProPackPlusEnabled;
+    protected ?bool $ProPackPlusEnabled = null;
     /**
      * The AdFormatEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports Classified Ad listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if
-     * one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>AdFormatEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports Classified Ad listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned
+     * if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>AdFormatEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AdFormatEnabled;
+    protected ?string $AdFormatEnabled = null;
     /**
      * The BestOfferCounterEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports sellers offering a counter offer against a buyer's Best Offer, or a buyer offering a counter offer against the seller's counter offer. <br><br> Only returned when this value (or this category's
-     * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
-     * include <code>BestOfferCounterEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports sellers offering a counter offer against a buyer's Best Offer, or a buyer offering a counter offer against the seller's counter offer. <br/><br/> Only returned when this value (or this
+     * category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values
+     * does not include <code>BestOfferCounterEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BestOfferCounterEnabled;
+    protected ?bool $BestOfferCounterEnabled = null;
     /**
      * The BestOfferAutoDeclineEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Best Offer Auto Decline feature. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Best Offer Auto Decline feature. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
      * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>BestOfferAutoDeclineEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BestOfferAutoDeclineEnabled;
+    protected ?bool $BestOfferAutoDeclineEnabled = null;
     /**
      * The LocalMarketSpecialitySubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Speciality level subscription to Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Speciality level subscription to Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>LocalMarketSpecialitySubscription</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketSpecialitySubscription;
+    protected ?bool $LocalMarketSpecialitySubscription = null;
     /**
      * The LocalMarketRegularSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Regular level subscription to Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Regular level subscription to Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketRegularSubscription</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketRegularSubscription;
+    protected ?bool $LocalMarketRegularSubscription = null;
     /**
      * The LocalMarketPremiumSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Premium level subscription Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Premium level subscription Motors Local Market listings. This feature is only available to licensed vehicle dealers. <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketPremiumSubscription</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketPremiumSubscription;
+    protected ?bool $LocalMarketPremiumSubscription = null;
     /**
      * The LocalMarketNonSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports a seller creating a Motors Local Market listing without a subscription. This feature is only available to licensed vehicle dealers. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports a seller creating a Motors Local Market listing without a subscription. This feature is only available to licensed vehicle dealers. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>LocalMarketNonSubscription</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketNonSubscription;
+    protected ?bool $LocalMarketNonSubscription = null;
     /**
      * The ExpressEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressEnabled;
+    protected ?bool $ExpressEnabled = null;
     /**
      * The ExpressPicturesRequired
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressPicturesRequired;
+    protected ?bool $ExpressPicturesRequired = null;
     /**
      * The ExpressConditionRequired
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ExpressConditionRequired;
+    protected ?bool $ExpressConditionRequired = null;
     /**
      * The MinimumReservePrice
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the Minimum Reserve Price for an auction listing in this category. If there is no Minimum Reserve Price, a value of <code>0.0</code> is returned in this field. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the Minimum Reserve Price for an auction listing in this category. If there is no Minimum Reserve Price, a value of <code>0.0</code> is returned in this field. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>MinimumReservePrice</code>.
      * - minOccurs: 0
-     * @var float
+     * @var float|null
      */
-    public $MinimumReservePrice;
+    protected ?float $MinimumReservePrice = null;
     /**
      * The SellerContactDetailsEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports seller-level contact information for Classified Ad listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the
-     * site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>SellerContactDetailsEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports seller-level contact information for Classified Ad listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or
+     * the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>SellerContactDetailsEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SellerContactDetailsEnabled;
+    protected ?bool $SellerContactDetailsEnabled = null;
     /**
      * The TransactionConfirmationRequestEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the Transaction Confirmation Request feature is supported for this category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the Transaction Confirmation Request feature is supported for this category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $TransactionConfirmationRequestEnabled;
+    protected ?bool $TransactionConfirmationRequestEnabled = null;
     /**
      * The StoreInventoryEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $StoreInventoryEnabled;
+    protected ?bool $StoreInventoryEnabled = null;
     /**
      * The SkypeMeTransactionalEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SkypeMeTransactionalEnabled;
+    protected ?bool $SkypeMeTransactionalEnabled = null;
     /**
      * The SkypeMeNonTransactionalEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SkypeMeNonTransactionalEnabled;
+    protected ?bool $SkypeMeNonTransactionalEnabled = null;
     /**
      * The ClassifiedAdPaymentMethodEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the payment method should be displayed to the user for Classified Ad format listings. Even if enabled, checkout may or may not be enabled. <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the payment method should be displayed to the user for Classified Ad format listings. Even if enabled, checkout may or may not be enabled. <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>ClassifiedAdPaymentMethodEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ClassifiedAdPaymentMethodEnabled;
+    protected ?string $ClassifiedAdPaymentMethodEnabled = null;
     /**
      * The ClassifiedAdShippingMethodEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if shipping options are available for Classified Ad listings in the category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
-     * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdShippingMethodEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if shipping options are available for Classified Ad listings in the category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdShippingMethodEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdShippingMethodEnabled;
+    protected ?bool $ClassifiedAdShippingMethodEnabled = null;
     /**
      * The ClassifiedAdBestOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if Best offer is enabled for Classified Ad listings for this category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if Best offer is enabled for Classified Ad listings for this category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
      * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdBestOfferEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ClassifiedAdBestOfferEnabled;
+    protected ?string $ClassifiedAdBestOfferEnabled = null;
     /**
      * The ClassifiedAdCounterOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether counter offers are allowed in Classified Ad listings for this category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether counter offers are allowed in Classified Ad listings for this category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdCounterOfferEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdCounterOfferEnabled;
+    protected ?bool $ClassifiedAdCounterOfferEnabled = null;
     /**
      * The ClassifiedAdAutoDeclineEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether automatic decline for best offers for Classified Ad listings is enabled for this category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent
-     * or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdAutoDeclineEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether automatic decline for best offers for Classified Ad listings is enabled for this category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's
+     * parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdAutoDeclineEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdAutoDeclineEnabled;
+    protected ?bool $ClassifiedAdAutoDeclineEnabled = null;
     /**
      * The ClassifiedAdContactByPhoneEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the telephone as a contact method for Classified Ad listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the
-     * site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdContactByPhoneEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the telephone as a contact method for Classified Ad listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or
+     * the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdContactByPhoneEnabled;
+    protected ?bool $ClassifiedAdContactByPhoneEnabled = null;
     /**
      * The ClassifiedAdContactByEmailEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports email as a contact method for Classified Ad listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports email as a contact method for Classified Ad listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdContactByEmailEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdContactByEmailEnabled;
+    protected ?bool $ClassifiedAdContactByEmailEnabled = null;
     /**
      * The SafePaymentRequired
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether listings in this category need to have a safe payment method. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether listings in this category need to have a safe payment method. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
      * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>SafePaymentRequired</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SafePaymentRequired;
+    protected ?bool $SafePaymentRequired = null;
     /**
      * The ClassifiedAdPayPerLeadEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if pay-per-lead listings are allowed for this category. Pay-per-lead listings can be applicable if the value of <b>ListingType</b> is <code>LeadGeneration</code> and the value of <b>ListingSubtype</b> is
-     * <code>ClassifiedAd</code>. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
+     * <code>ClassifiedAd</code>. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdPayPerLeadEnabled;
+    protected ?bool $ClassifiedAdPayPerLeadEnabled = null;
     /**
      * The ItemSpecificsEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports custom Item Specifics. If enabled, sellers can use the <b>Item.ItemSpecifics</b> node in Add/Revise/Relist calls to specify custom Item Specifics. <br><br> Only returned when this value (or
-     * this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those
-     * values does not include <code>ItemSpecificsEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the use of Item Specifics in listings. If enabled, sellers can use the <b>Item.ItemSpecifics</b> node in Add/Revise/Relist calls to specify Item Specific name-value pairs. <br/><br/> Only
+     * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
+     * request, and one of those values does not include <code>ItemSpecificsEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemSpecificsEnabled;
+    protected ?string $ItemSpecificsEnabled = null;
     /**
      * The PaisaPayFullEscrowEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the <code>PaisaPayEscrow</code> payment method. This feature is only applicable to the India site. <br><br> Only returned when this value (or this category's setting) overrides the value
-     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>PaisaPayFullEscrowEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note:</b> This field is deprecated since it is only applicable to the eBay India site, and this marketplace is no longer available.</span> Indicates whether the category supports the
+     * <code>PaisaPayEscrow</code> payment method. This feature is only applicable to the India site. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>PaisaPayFullEscrowEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PaisaPayFullEscrowEnabled;
+    protected ?bool $PaisaPayFullEscrowEnabled = null;
     /**
      * The BrandMPNIdentifierEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the capability to identify a product using the brand/manufacturer part number combination. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from
-     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>BrandMPNIdentifierEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the capability to identify a product using the brand/manufacturer part number combination. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited
+     * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * <code>BrandMPNIdentifierEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BrandMPNIdentifierEnabled;
+    protected ?bool $BrandMPNIdentifierEnabled = null;
     /**
      * The ClassifiedAdAutoAcceptEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Best Offer Automatic Accept feature for Classified Ad listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent
-     * or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdAutoAcceptEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Best Offer Automatic Accept feature for Classified Ad listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's
+     * parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ClassifiedAdAutoAcceptEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdAutoAcceptEnabled;
+    protected ?bool $ClassifiedAdAutoAcceptEnabled = null;
     /**
      * The BestOfferAutoAcceptEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports the Best Offer Automatic Accept feature for listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports the Best Offer Automatic Accept feature for listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>BestOfferAutoAcceptEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BestOfferAutoAcceptEnabled;
+    protected ?bool $BestOfferAutoAcceptEnabled = null;
     /**
      * The CrossBorderTradeNorthAmericaEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of North America sites (US and Canada (English). <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of North America sites (US and Canada (English). <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>CrossBorderTradeEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CrossBorderTradeNorthAmericaEnabled;
+    protected ?bool $CrossBorderTradeNorthAmericaEnabled = null;
     /**
      * The CrossBorderTradeGBEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of the UK and Ireland sites. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of the UK and Ireland sites. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>CrossBorderTradeEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CrossBorderTradeGBEnabled;
+    protected ?bool $CrossBorderTradeGBEnabled = null;
     /**
      * The CrossBorderTradeAustraliaEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of the Australia site. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from
-     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>CrossBorderTradeEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports specifying that listings be displayed in the default search results of the Australia site. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited
+     * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * <code>CrossBorderTradeEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CrossBorderTradeAustraliaEnabled;
+    protected ?bool $CrossBorderTradeAustraliaEnabled = null;
     /**
      * The PayPalBuyerProtectionEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: For the Australia site, if both <b>PayPalBuyerProtectionEnabled</b> and <b>BuyerGuaranteeEnabled</b> are returned, then buyer protection is allowed for this category. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: For the Australia site, if both <b>PayPalBuyerProtectionEnabled</b> and <b>BuyerGuaranteeEnabled</b> are returned, then buyer protection is allowed for this category. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>PayPalBuyerProtectionEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalBuyerProtectionEnabled;
+    protected ?bool $PayPalBuyerProtectionEnabled = null;
     /**
      * The BuyerGuaranteeEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: For the Australia site, if both <b>PayPalBuyerProtectionEnabled</b> and <b>BuyerGuaranteeEnabled</b> are returned, then buyer protection is allowed for this category. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: For the Australia site, if both <b>PayPalBuyerProtectionEnabled</b> and <b>BuyerGuaranteeEnabled</b> are returned, then buyer protection is allowed for this category. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>PayPalBuyerProtectionEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $BuyerGuaranteeEnabled;
+    protected ?bool $BuyerGuaranteeEnabled = null;
     /**
      * The CombinedFixedPriceTreatmentEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $CombinedFixedPriceTreatmentEnabled;
+    protected ?bool $CombinedFixedPriceTreatmentEnabled = null;
     /**
      * The GalleryFeaturedDurations
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is returned if the Featured Gallery feature is supported for the category. The time unit that is returned in this field indicates how long a gallery will be featured on eBay. <br><br> Only returned when this value (or this
-     * category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values
-     * does not include <code>GalleryFeaturedDurations</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned if the Featured Gallery feature is supported for the category. The time unit that is returned in this field indicates how long a gallery will be featured on eBay. <br/><br/> Only returned when this value (or
+     * this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those
+     * values does not include <code>GalleryFeaturedDurations</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType
+     * @var \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType|null
      */
-    public $GalleryFeaturedDurations;
+    protected ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $GalleryFeaturedDurations = null;
     /**
      * The PayPalRequired
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category requires PayPal as a payment method. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category requires PayPal as a payment method. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be
      * returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>PayPalRequired</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalRequired;
+    protected ?bool $PayPalRequired = null;
     /**
      * The eBayMotorsProAdFormatEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category allows Classified Ad listings on eBay Motors. This element is applicable for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value inherited
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category allows Classified Ad listings on eBay Motors. This element is applicable for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited
      * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProAdFormatEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayMotorsProAdFormatEnabled;
+    protected ?string $eBayMotorsProAdFormatEnabled = null;
     /**
      * The eBayMotorsProContactByPhoneEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including the telephone in the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value
-     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including the telephone in the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the
+     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProContactByPhoneEnabled;
+    protected ?bool $eBayMotorsProContactByPhoneEnabled = null;
     /**
      * The eBayMotorsProPhoneCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which telephone option is enabled for the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which telephone option is enabled for the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the
      * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $eBayMotorsProPhoneCount;
+    protected ?int $eBayMotorsProPhoneCount = null;
     /**
      * The eBayMotorsProContactByAddressEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including the address in the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including the address in the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProContactByAddressEnabled;
+    protected ?bool $eBayMotorsProContactByAddressEnabled = null;
     /**
      * The eBayMotorsProStreetCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which address option is enabled for the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which address option is enabled for the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the
      * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $eBayMotorsProStreetCount;
+    protected ?int $eBayMotorsProStreetCount = null;
     /**
      * The eBayMotorsProCompanyNameEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including the company name in the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including the company name in the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the
      * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProCompanyNameEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProCompanyNameEnabled;
+    protected ?bool $eBayMotorsProCompanyNameEnabled = null;
     /**
      * The eBayMotorsProContactByEmailEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including an email address in the seller's contact information. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including an email address in the seller's contact information. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the
      * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProContactByEmailEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProContactByEmailEnabled;
+    protected ?bool $eBayMotorsProContactByEmailEnabled = null;
     /**
      * The eBayMotorsProBestOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if Best Offer is supported for eBay Motors Classified Ad listings in this category. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if Best Offer is supported for eBay Motors Classified Ad listings in this category. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProBestOfferEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayMotorsProBestOfferEnabled;
+    protected ?string $eBayMotorsProBestOfferEnabled = null;
     /**
      * The eBayMotorsProAutoAcceptEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category allows auto-accept for Best Offers for eBay Motors Classified Ad listings. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category allows auto-accept for Best Offers for eBay Motors Classified Ad listings. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the
      * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProAutoAcceptEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProAutoAcceptEnabled;
+    protected ?bool $eBayMotorsProAutoAcceptEnabled = null;
     /**
      * The eBayMotorsProAutoDeclineEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category allows auto-decline for Best Offers for eBay Motors Classified Ad listings. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the
-     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category allows auto-decline for Best Offers for eBay Motors Classified Ad listings. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides
+     * the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProAutoDeclineEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProAutoDeclineEnabled;
+    protected ?bool $eBayMotorsProAutoDeclineEnabled = null;
     /**
      * The eBayMotorsProPaymentMethodCheckOutEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if the payment method should be displayed to the user for this category in an eBay Motors Classified Ad listing. Even if enabled, checkout may or may not be enabled. This element is for eBay Motors Pro users. <br><br> Only
-     * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
-     * request, and one of those values does not include <code>eBayMotorsProPaymentMethodCheckOutEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if the payment method should be displayed to the user for this category in an eBay Motors Classified Ad listing. Even if enabled, checkout may or may not be enabled. This element is for eBay Motors Pro users. <br/><br/>
+     * Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the
+     * call request, and one of those values does not include <code>eBayMotorsProPaymentMethodCheckOutEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $eBayMotorsProPaymentMethodCheckOutEnabled;
+    protected ?string $eBayMotorsProPaymentMethodCheckOutEnabled = null;
     /**
      * The eBayMotorsProShippingMethodEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if shipping options should be displayed to the user for this category in an eBay Motors Classified Ad listing. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if shipping options should be displayed to the user for this category in an eBay Motors Classified Ad listing. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProShippingMethodEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProShippingMethodEnabled;
+    protected ?bool $eBayMotorsProShippingMethodEnabled = null;
     /**
      * The eBayMotorsProCounterOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether counter offers are allowed on Best Offers for this category in an eBay Motors Classified Ad listing. This element is for eBay Motors Pro users. <br><br> Only returned when this value (or this category's setting)
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether counter offers are allowed on Best Offers for this category in an eBay Motors Classified Ad listing. This element is for eBay Motors Pro users. <br/><br/> Only returned when this value (or this category's setting)
      * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>eBayMotorsProCounterOfferEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProCounterOfferEnabled;
+    protected ?bool $eBayMotorsProCounterOfferEnabled = null;
     /**
      * The eBayMotorsProSellerContactDetailsEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether this category allows seller-level contact information for eBay Motors Classified Ad listings. A value of true means seller-level contact information is available for Classified Ad listings. This element is for eBay
-     * Motors Pro users. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
+     * Motors Pro users. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
      * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>eBayMotorsProSellerContactDetailsEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $eBayMotorsProSellerContactDetailsEnabled;
+    protected ?bool $eBayMotorsProSellerContactDetailsEnabled = null;
     /**
      * The LocalMarketAdFormatEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category supports Motor Local Market Classified Ad listings. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
-     * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>LocalMarketAdFormatEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category supports Motor Local Market Classified Ad listings. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from
+     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>LocalMarketAdFormatEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LocalMarketAdFormatEnabled;
+    protected ?string $LocalMarketAdFormatEnabled = null;
     /**
      * The LocalMarketContactByPhoneEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including the telephone in the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including the telephone in the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketContactByPhoneEnabled;
+    protected ?bool $LocalMarketContactByPhoneEnabled = null;
     /**
      * The LocalMarketPhoneCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which telephone option is enabled for the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which telephone option is enabled for the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the
      * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $LocalMarketPhoneCount;
+    protected ?int $LocalMarketPhoneCount = null;
     /**
      * The LocalMarketContactByAddressEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including the address in the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including the address in the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketContactByAddressEnabled;
+    protected ?bool $LocalMarketContactByAddressEnabled = null;
     /**
      * The LocalMarketStreetCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which address option is enabled for the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which address option is enabled for the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the
      * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $LocalMarketStreetCount;
+    protected ?int $LocalMarketStreetCount = null;
     /**
      * The LocalMarketCompanyNameEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports including a company name in the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports including a company name in the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketCompanyNameEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketCompanyNameEnabled;
+    protected ?bool $LocalMarketCompanyNameEnabled = null;
     /**
      * The LocalMarketContactByEmailEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports including an email address in the seller's contact information. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the value
-     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports including an email address in the seller's contact information. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides the
+     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketContactByEmailEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketContactByEmailEnabled;
+    protected ?bool $LocalMarketContactByEmailEnabled = null;
     /**
      * The LocalMarketBestOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if Best Offer is enabled/required for Motors Local Market Classified Ad listings in this category. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the
-     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if Best Offer is enabled/required for Motors Local Market Classified Ad listings in this category. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides
+     * the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketBestOfferEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LocalMarketBestOfferEnabled;
+    protected ?string $LocalMarketBestOfferEnabled = null;
     /**
      * The LocalMarketAutoAcceptEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category supports auto-accept for Best Offers for Motors Local Market Classified Ads. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the
-     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category supports auto-accept for Best Offers for Motors Local Market Classified Ads. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides
+     * the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketAutoAcceptEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketAutoAcceptEnabled;
+    protected ?bool $LocalMarketAutoAcceptEnabled = null;
     /**
      * The LocalMarketAutoDeclineEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies whether this category supports auto-decline for Best Offers for Motors Local Market Classified Ads. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting) overrides the
-     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies whether this category supports auto-decline for Best Offers for Motors Local Market Classified Ads. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's setting) overrides
+     * the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>LocalMarketAutoDeclineEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketAutoDeclineEnabled;
+    protected ?bool $LocalMarketAutoDeclineEnabled = null;
     /**
      * The LocalMarketPaymentMethodCheckOutEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if the payment method should be displayed to the user for this category in an Motors Local Market Classified Ad listing. Even if enabled, checkout may or may not be enabled. This element is for Local Market dealers.
-     * <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used
-     * in the call request, and one of those values does not include <code>LocalMarketPaymentMethodCheckOutEnabled</code>.
+     * <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are
+     * used in the call request, and one of those values does not include <code>LocalMarketPaymentMethodCheckOutEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $LocalMarketPaymentMethodCheckOutEnabled;
+    protected ?string $LocalMarketPaymentMethodCheckOutEnabled = null;
     /**
      * The LocalMarketShippingMethodEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if shipping methods should be displayed to the user for this category in an Motors Local Market Classified Ad listing. Even if enabled, checkout may or may not be enabled. This element is for Local market dealers. <br><br>
-     * Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the
-     * call request, and one of those values does not include <code>LocalMarketShippingMethodEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if shipping methods should be displayed to the user for this category in an Motors Local Market Classified Ad listing. Even if enabled, checkout may or may not be enabled. This element is for Local market dealers.
+     * <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are
+     * used in the call request, and one of those values does not include <code>LocalMarketShippingMethodEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketShippingMethodEnabled;
+    protected ?bool $LocalMarketShippingMethodEnabled = null;
     /**
      * The LocalMarketCounterOfferEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether counter offers are allowed on Best Offers for this category for Motors Local Market Classified Ad listings. This element is for Local market dealers. <br><br> Only returned when this value (or this category's
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether counter offers are allowed on Best Offers for this category for Motors Local Market Classified Ad listings. This element is for Local market dealers. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>LocalMarketCounterOfferEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketCounterOfferEnabled;
+    protected ?bool $LocalMarketCounterOfferEnabled = null;
     /**
      * The LocalMarketSellerContactDetailsEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the whether this category allows seller-level contact information for Motors Local Market Classified Ad listings. This element is for Local Market dealers. <br><br> Only returned when this value (or this category's setting)
-     * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>LocalMarketSellerContactDetailsEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Specifies the whether this category allows seller-level contact information for Motors Local Market Classified Ad listings. This element is for Local Market dealers. <br/><br/> Only returned when this value (or this category's
+     * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
+     * include <code>LocalMarketSellerContactDetailsEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $LocalMarketSellerContactDetailsEnabled;
+    protected ?bool $LocalMarketSellerContactDetailsEnabled = null;
     /**
      * The ClassifiedAdPhoneCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which telephone option is included in the seller's contact information. This element is for For Sale By Owner listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from
-     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which telephone option is included in the seller's contact information. This element is for For Sale By Owner listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited
+     * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>ClassifiedAdContactByPhoneEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ClassifiedAdPhoneCount;
+    protected ?int $ClassifiedAdPhoneCount = null;
     /**
      * The ClassifiedAdContactByAddressEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including an address in the seller's contact information. This element is for For Sale By Owner listings. <br><br> Only returned when this value (or this category's setting) overrides the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including an address in the seller's contact information. This element is for For Sale By Owner listings. <br/><br/> Only returned when this value (or this category's setting) overrides the
      * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>ClassifiedAdContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdContactByAddressEnabled;
+    protected ?bool $ClassifiedAdContactByAddressEnabled = null;
     /**
      * The ClassifiedAdStreetCount
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates which address option is included in the seller's contact information. This element is for For Sale By Owner listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates which address option is included in the seller's contact information. This element is for For Sale By Owner listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from
      * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>ClassifiedAdContactByAddressEnabled</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ClassifiedAdStreetCount;
+    protected ?int $ClassifiedAdStreetCount = null;
     /**
      * The ClassifiedAdCompanyNameEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether this category supports including a company name in the seller's contact information. This element is for For Sale By Owner listings. <br><br> Only returned when this value (or this category's setting) overrides the
-     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether this category supports including a company name in the seller's contact information. This element is for For Sale By Owner listings. <br/><br/> Only returned when this value (or this category's setting) overrides
+     * the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>ClassifiedAdCompanyNameEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ClassifiedAdCompanyNameEnabled;
+    protected ?bool $ClassifiedAdCompanyNameEnabled = null;
     /**
      * The SpecialitySubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Specialty vehicle subscription. <br><br> Only returned when this value (or this category's setting) overrides the value
-     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Specialty vehicle subscription. <br/><br/> Only returned when this value (or this category's setting) overrides the
+     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>SpecialitySubscription</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SpecialitySubscription;
+    protected ?string $SpecialitySubscription = null;
     /**
      * The RegularSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Regular vehicle subscription. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Regular vehicle subscription. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>RegularSubscription</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $RegularSubscription;
+    protected ?string $RegularSubscription = null;
     /**
      * The PremiumSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Premium vehicle subscription. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller has a Premium vehicle subscription. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>PremiumSubscription</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PremiumSubscription;
+    protected ?string $PremiumSubscription = null;
     /**
      * The NonSubscription
-     * Meta informations extracted from the WSDL
-     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller does not have a vehicle subscription. <br><br> Only returned when this value (or this category's setting) overrides the value
-     * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
+     * Meta information extracted from the WSDL
+     * - documentation: The value in this field indicates whether the category supports Motors Local Market listings if the seller does not have a vehicle subscription. <br/><br/> Only returned when this value (or this category's setting) overrides the
+     * value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>NonSubscription</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $NonSubscription;
+    protected ?string $NonSubscription = null;
     /**
      * The INEscrowWorkflowTimeline
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the escrow workflow version that applies to the category on the India site: Default Workflow, Workflow A or Workflow B. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from
-     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>INEscrowWorkflowTimeline</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note:</b> This field is deprecated since it is only applicable to the eBay India site, and this marketplace is no longer available.</span> Indicates the escrow workflow version that applies to the category
+     * on the India site: Default Workflow, Workflow A or Workflow B. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
+     * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>INEscrowWorkflowTimeline</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $INEscrowWorkflowTimeline;
+    protected ?string $INEscrowWorkflowTimeline = null;
     /**
      * The PayPalRequiredForStoreOwner
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PayPalRequiredForStoreOwner;
+    protected ?bool $PayPalRequiredForStoreOwner = null;
     /**
      * The ReviseQuantityAllowed
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if the category allows the seller to revise the quantity of a multi-quantity, active listing. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if the category allows the seller to revise the quantity of a multi-quantity, active listing. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or
      * the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ReviseQuantityAllowed</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReviseQuantityAllowed;
+    protected ?bool $ReviseQuantityAllowed = null;
     /**
      * The RevisePriceAllowed
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if the category allows the seller to revise the price of a fixed-price listing. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if the category allows the seller to revise the price of a fixed-price listing. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>RevisePriceAllowed</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $RevisePriceAllowed;
+    protected ?bool $RevisePriceAllowed = null;
     /**
      * The StoreOwnerExtendedListingDurationsEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates if an eBay Store owner gets extended listing durations in a given category. When the value of this element is true, it means the listing duration values defined in <b>StoreOwnerExtendedListingDurations</b> are applicable to
-     * fixed-price listings in a given category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
+     * fixed-price listings in a given category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
      * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>StoreOwnerExtendedListingDurationsEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $StoreOwnerExtendedListingDurationsEnabled;
+    protected ?bool $StoreOwnerExtendedListingDurationsEnabled = null;
     /**
      * The StoreOwnerExtendedListingDurations
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Provides additional listings durations that are available to eBay Store owners. The extended listing durations provided here in this element should be merged in with the baseline listing durations provided in the
-     * <b>ListingDurations</b> element. Applies to fixed-price Listings. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
-     * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>StoreOwnerExtendedListingDurations</code>.
+     * <b>ListingDurations</b> element. Applies to fixed-price Listings. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more
+     * <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>StoreOwnerExtendedListingDurations</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType
+     * @var \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType|null
      */
-    public $StoreOwnerExtendedListingDurations;
+    protected ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $StoreOwnerExtendedListingDurations = null;
     /**
      * The ReturnPolicyEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: <b>For most sites:</b> If true, listings in this category require a return policy. <br> <br> <b>For eBay India (IN), Australia (AU), and US eBay Motors Parts and Accessories:</b> If true, the category supports but does not require a
-     * return policy. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a>
+     * Meta information extracted from the WSDL
+     * - documentation: <b>For most sites:</b> If true, listings in this category require a return policy. <br/> <br/> <b>For eBay Australia (AU) and US eBay Motors Parts and Accessories:</b> If true, the category supports but does not require a return
+     * policy. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a>
      * values are used in the call request, and one of those values does not include <code>ReturnPolicyEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReturnPolicyEnabled;
+    protected ?bool $ReturnPolicyEnabled = null;
     /**
      * The HandlingTimeEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if a seller's stated handling time is enabled for a category. A handling time is generally needed for items that are shipped to the buyer, but not necessarily applicable to freight shipping or local pickup. <br> <br> The
-     * handling time is the maximum number of business days the seller commits to for preparing an item to be shipped after receiving a cleared payment. The seller's handling time does not include the shipping time (the carrier's transit time). <br> For a
-     * list of the handling time values allowed for each site, use <code>DispatchTimeMaxDetails</code> in <b>GeteBayDetails</b>.<br> <br> <span class="tablenote"><b>Note:</b> Although the field name ends with "Enabled", a value of true means that a handling
-     * time is NOT supported, and value of false means that a handling time IS supported.</span> <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be
-     * returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>HandlingTimeEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if a seller's stated handling time is enabled for a category. A handling time is generally needed for items that are shipped to the buyer, but not necessarily applicable to freight shipping or local pickup. <br/> <br/> The
+     * handling time is the maximum number of business days the seller commits to for preparing an item to be shipped after receiving a cleared payment. The seller's handling time does not include the shipping time (the carrier's transit time). <br/> For a
+     * list of the handling time values allowed for each site, use <code>DispatchTimeMaxDetails</code> in <b>GeteBayDetails</b>.<br/> <br/> <span class="tablenote"><b>Note:</b> Although the field name ends with "Enabled", a value of true means that a
+     * handling time is NOT supported, and value of false means that a handling time IS supported.</span><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
+     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>HandlingTimeEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HandlingTimeEnabled;
+    protected ?bool $HandlingTimeEnabled = null;
     /**
      * The MaxFlatShippingCost
-     * Meta informations extracted from the WSDL
-     * - documentation: The maximum cost the seller can charge for the first domestic flat-rate shipping service. The total shipping cost is the seller's base flat-rate shipping cost plus the cost of insurance, if insurance is required. Mutually exclusive
-     * with the <b>Group</b><code>N</code><b>MaxFlatShippingCost</b> elements. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or
-     * more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>MaxFlatShippingCost</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: The maximum cost the seller can charge for the first domestic flat-rate shipping service. Mutually exclusive with the <b>Group</b><code>N</code><b>MaxFlatShippingCost</b> elements. <br/><br/> Only returned when this value (or this
+     * category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values
+     * does not include <code>MaxFlatShippingCost</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $MaxFlatShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $MaxFlatShippingCost = null;
     /**
      * The Group1MaxFlatShippingCost
-     * Meta informations extracted from the WSDL
-     * - documentation: Returns the applicable max cap per shipping cost for shipping service group1. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
-     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group1MaxFlatShippingCost</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Returns the applicable max cap per shipping cost for shipping service group1. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group1MaxFlatShippingCost</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Group1MaxFlatShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Group1MaxFlatShippingCost = null;
     /**
      * The Group2MaxFlatShippingCost
-     * Meta informations extracted from the WSDL
-     * - documentation: Returns the applicable max cap per shipping cost for shipping service group2. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
-     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group2MaxFlatShippingCost</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Returns the applicable max cap per shipping cost for shipping service group2. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group2MaxFlatShippingCost</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Group2MaxFlatShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Group2MaxFlatShippingCost = null;
     /**
      * The Group3MaxFlatShippingCost
-     * Meta informations extracted from the WSDL
-     * - documentation: Returns the applicable max cap per shipping cost for shipping service group3. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
-     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group3MaxFlatShippingCost</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Returns the applicable max cap per shipping cost for shipping service group3. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>Group3MaxFlatShippingCost</code>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Group3MaxFlatShippingCost;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Group3MaxFlatShippingCost = null;
     /**
      * The PaymentMethod
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the acceptable payment methods that can be used when listing an item for sale in the corresponding category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the acceptable payment methods that can be used when listing an item for sale in the corresponding category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the
      * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>PaymentMethods</code>.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    public $PaymentMethod;
+    protected array $PaymentMethod = [];
     /**
      * The VariationsEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: If <code>true</code>, you can pass in <b>Item.Variations</b> in an Add/Revise/Relist fixed-price item call when you list in this category.<br> <br> Multi-variation listings contain items that are logically the same product, but that
-     * vary in their manufacturing details or packaging. For example, a particular brand and style of shirt could be available in different sizes and colors, such as "large blue" and "medium black" variations. <br><br> Only returned when this value (or this
-     * category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values
-     * does not include <code>VariationsEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: If <code>true</code>, you can pass in <b>Item.Variations</b> in an Add/Revise/Relist fixed-price item call when you list in this category.<br/> <br/> Multi-variation listings contain items that are logically the same product, but
+     * that vary in their manufacturing details or packaging. For example, a particular brand and style of shirt could be available in different sizes and colors, such as "large blue" and "medium black" variations. <br/><br/> Only returned when this value
+     * (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those
+     * values does not include <code>VariationsEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $VariationsEnabled;
+    protected ?bool $VariationsEnabled = null;
     /**
      * The AttributeConversionEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $AttributeConversionEnabled;
+    protected ?string $AttributeConversionEnabled = null;
     /**
      * The FreeGalleryPlusEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports free, automatic upgrades for Gallery Plus, which enhances pictures in search results. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the
-     * category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>FreeGalleryPlusEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports free, automatic upgrades for Gallery Plus, which enhances pictures in search results. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from
+     * the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>FreeGalleryPlusEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $FreeGalleryPlusEnabled;
+    protected ?bool $FreeGalleryPlusEnabled = null;
     /**
      * The FreePicturePackEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports free, automatic upgrades for Picture Pack, a discount package that includes super-sizing of pictures. <br><br> Only returned when this value (or this category's setting) overrides the value
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports free, automatic upgrades for Picture Pack, a discount package that includes super-sizing of pictures. <br/><br/> Only returned when this value (or this category's setting) overrides the value
      * inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
      * <code>FreePicturePackEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $FreePicturePackEnabled;
+    protected ?bool $FreePicturePackEnabled = null;
     /**
      * The ItemCompatibilityEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether the category supports parts compatibility by application (<b>ByApplication</b>), by specification (<b>BySpecification</b>), or not at all (<b>Disabled</b>). Categories cannot support both types of parts
-     * compatibility. <br><br> Parts Compatibility is supported in limited Parts & Accessories categories for the eBay Motors (US) site (site ID 100) only. <br><br> Only returned when this value (or this category's setting) overrides the value inherited
+     * compatibility. <br/><br/> Parts Compatibility is supported in limited Parts & Accessories categories for the eBay Motors (US) site (site ID 100) only. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited
      * from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>CompatibilityEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemCompatibilityEnabled;
+    protected ?string $ItemCompatibilityEnabled = null;
     /**
      * The MinItemCompatibility
-     * Meta informations extracted from the WSDL
-     * - documentation: This field specifies the minimum number of required compatible applications for listing items. A value of "0" indicates it is not mandatory to specify parts compatibilities when listing. <br><br> This applies to categories that are
+     * Meta information extracted from the WSDL
+     * - documentation: This field specifies the minimum number of required compatible applications for listing items. A value of "0" indicates it is not mandatory to specify parts compatibilities when listing. <br/><br/> This applies to categories that are
      * enabled for compatibility by application only. Parts compatiblity by application can be specified by listing with a catalog product that supports parts compatibility or by specifying parts compatibility by application manually (<b class="con">
-     * Item.ItemCompatibilityList</b>). <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
+     * Item.ItemCompatibilityList</b>). <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a
      * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>MinCompatibleApplications</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MinItemCompatibility;
+    protected ?int $MinItemCompatibility = null;
     /**
      * The MaxItemCompatibility
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field specifies the maximum number of compatible applications allowed per item when adding or revising items. This is relevant for specifying parts compatibility by application manually (<b class="con">
-     * Item.ItemCompatibilityList</b>) only. <br><br> Applicable for the US site only. <br><br> For DE, UK, and AU sites, this field returns the same value as <b>MaxGranularFitmentCount</b>. <br><br> Only returned when this value (or this category's
+     * Item.ItemCompatibilityList</b>) only. <br/><br/> Applicable for the US site only. <br/><br/> For DE, UK, and AU sites, this field returns the same value as <b>MaxGranularFitmentCount</b>. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
      * include <code>MaxCompatibleApplications</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxItemCompatibility;
+    protected ?int $MaxItemCompatibility = null;
     /**
      * The ConditionEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether the category supports (or requires) using <b>Item.ConditionID</b> to specify an item's condition in Add/Revise/Relist calls. See the <b>ConditionValues</b> type for a list of valid condition ID values. <br><br> Only
-     * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
-     * request, and one of those values does not include <code>ConditionEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates whether the category supports, requires, or doesn't support the use item condition for an item listing. For categories that require or support the use of item condition, see the <b>ConditionValues</b> and/or
+     * <b>SpecialFeatures</b> containers for a list of valid item conditions (display names and ID values). <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
+     * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ConditionEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ConditionEnabled;
+    protected ?string $ConditionEnabled = null;
     /**
      * The ConditionValues
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies the supported item conditions for the category, plus related policies and other details. <br><br> Only returned <b>ConditionEnabled</b> value is <code>Enabled</code> or <code>Required</code> and when any of the condition
-     * values are different from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>ConditionValues</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: This container specifies all of the item conditions that are supported for the corresponding category. The display name of the item condiation and the ID associated with the description are both shown. <br/><br/> This container will
+     * not be returned for any eBay categories that don't support the use of an item condition value. To see which categories require, support, or don't support the use of item conditions, you can include a <b>FeatureID</b> value of
+     * <code>ConditionEnabled</code>. Any eBay category that does not support the use of an item condition value will return a <b>ConditionEnabled</b> value of <code>Disabled</code>. <br/><br/> This container will also not be returned if one or more <a
+     * href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ConditionValues</code>. <br/> <br/> <span class="tablenote"><b>Note:</b> The <b>Certified Refurbished</b> condition
+     * (Condition ID 2000) is now returned in the <b>SpecialFeatures</b> container. A seller must be pre-qualified by eBay to list items with the <b>Certified Refurbished</b> condition.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ConditionValuesType
+     * @var \macropage\ebaysdk\trading\StructType\ConditionValuesType|null
      */
-    public $ConditionValues;
+    protected ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $ConditionValues = null;
+    /**
+     * The SpecialFeatures
+     * Meta information extracted from the WSDL
+     * - documentation: This container is only returned if the corresponding category supports a special item condition such as <b>Certified Refurbished</b> condition (Condition ID 2000). A seller must be pre-qualified by eBay to list items with the
+     * <b>Certified Refurbished</b> condition. All other item conditions supported by a category will be returned in the <b>ConditionValues</b> container instead. <br/><br/> Neither the <b>ConditionValues</b> or the <b>SpecialFeatures</b> containers will be
+     * returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ConditionValues</code>.
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\ConditionValuesType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $SpecialFeatures = null;
     /**
      * The ValueCategory
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Some eBay sites may select a few categories and designate them as "value categories". These are typically selected from categories where buyers can find great deals. (Not all categories with great deals are designated as value
-     * categories.) This designation can change over time. <br> <br> While a category is designated as a value category (i.e., when <b>ValueCategory</b> is <code>true</code>), it is subject to the following rule: Items in value categories can only be listed
-     * in one category.<br> <br> For example, if you attempt to list in two categories and the primary category or secondary category is a value category, then eBay drops the secondary category and lists the item in the primary category only. Similarly, if
-     * you attempt to add a secondary category to an existing listing, or you change the category for an existing listing, and if the primary or secondary category is a value category, then eBay drops the secondary category. <br><br> Only returned when this
-     * value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of
-     * those values does not include <code>ValueCategory</code>.
+     * categories.) This designation can change over time. <br/> <br/> While a category is designated as a value category (i.e., when <b>ValueCategory</b> is <code>true</code>), it is subject to the following rule: Items in value categories can only be
+     * listed in one category.<br/> <br/> For example, if you attempt to list in two categories and the primary category or secondary category is a value category, then eBay drops the secondary category and lists the item in the primary category only.
+     * Similarly, if you attempt to add a secondary category to an existing listing, or you change the category for an existing listing, and if the primary or secondary category is a value category, then eBay drops the secondary category. <br/><br/> Only
+     * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
+     * request, and one of those values does not include <code>ValueCategory</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ValueCategory;
+    protected ?bool $ValueCategory = null;
     /**
      * The ProductCreationEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether a category supports (or requires) the creation of a listing using an eBay Catalog product. To create a listing based on an eBay Catalog product, the seller passed in Global Trade Item Number (GTIN) or eBay Product
      * ID (ePID) value in an Add/Revise/Relist call and then eBay tries to match the product identifier to a product in the eBay Catalog. If a match is found, the listing picks up the details of the eBay Catalog product, including product title, product
-     * description, product aspects, primary eBay listing category ID, and links to any product stock photos. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
+     * description, product aspects, primary eBay listing category ID, and links to any product stock photos. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
      * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ProductCreationEnabled</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductCreationEnabled;
+    protected ?string $ProductCreationEnabled = null;
     /**
      * The EANEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not European Article Numbers (EANs) are supported/required when listing products in the category. A value of <code>Disabled</code> indicates that EANs cannot be used for the category, a value of
-     * <code>Enabled</code> indicates that EANs can be used for the category, and a value of <code>Required</code> indicates that an EAN is required when listing a product in this category. <br><br> Only returned when this value (or this category's setting)
-     * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>EANEnabled</code>. <br> <br> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination. So, that
-     * means that they should look for <b>EANEnabled</b>, <b>ISBNEnabled</b>, <b>UPCEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. When Phase 2 of the <a href="
-     * https://developer.ebay.com/pbse/" target="_blank">Product-Based Shopping Experience</a> launches later in 2018, sellers should also start looking for the <b>ProductRequiredEnabled</b> field at the category level in the <b>GetCategoryFeatures</b>
-     * response, as this boolean field will indicate if the eBay category requires that the seller associate an eBay Catalog product to the listing. In Phase 2 of PBSE, an ePID value will have to be passed in at list/revise/relist time if the category
-     * requires that listings in that category be associated with an eBay Catalog product. </span>
+     * <code>Enabled</code> indicates that EANs can be used for the category, and a value of <code>Required</code> indicates that an EAN is required when listing a product in this category. <br/><br/> Only returned when this value (or this category's
+     * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
+     * include <code>EANEnabled</code>. <br/> <br/> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination.
+     * So, that means that they should look for <b>EANEnabled</b>, <b>ISBNEnabled</b>, <b>UPCEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EANEnabled;
+    protected ?string $EANEnabled = null;
     /**
      * The ISBNEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not International Standard Book Numbers (ISBNs) are supported/required when listing products in the category. A value of <code>Disabled</code> indicates that ISBNs cannot be used for the category, a value of
-     * <code>Enabled</code> indicates that ISBNs can be used for the category, and a value of <code>Required</code> indicates that an ISBN is required when listing a product in this category. <br><br> Only returned when this value (or this category's
+     * <code>Enabled</code> indicates that ISBNs can be used for the category, and a value of <code>Required</code> indicates that an ISBN is required when listing a product in this category. <br/><br/> Only returned when this value (or this category's
      * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
-     * include <code>ISBNEnabled</code>. <br> <br> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination.
-     * So, that means that they should look for <b>ISBNEnabled</b>, <b>EANEnabled</b>, <b>UPCEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. When Phase 2 of the <a href="
-     * https://developer.ebay.com/pbse/" target="_blank">Product-Based Shopping Experience</a> launches later in 2018, sellers should also start looking for the <b>ProductRequiredEnabled</b> field at the category level in the <b>GetCategoryFeatures</b>
-     * response, as this boolean field will indicate if the eBay category requires that the seller associate an eBay Catalog product to the listing. In Phase 2 of PBSE, an ePID value will have to be passed in at list/revise/relist time if the category
-     * requires that listings in that category be associated with an eBay Catalog product. </span>
+     * include <code>ISBNEnabled</code>. <br/> <br/> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination.
+     * So, that means that they should look for <b>ISBNEnabled</b>, <b>EANEnabled</b>, <b>UPCEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ISBNEnabled;
+    protected ?string $ISBNEnabled = null;
     /**
      * The UPCEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not Universal Product Codes (UPCs) are supported/required when listing products in the category. A value of <code>Disabled</code> indicates that UPCs cannot be used for the category, a value of
-     * <code>Enabled</code> indicates that UPCs can be used for the category, and a value of <code>Required</code> indicates that a UPC is required when listing a product in this category. <br><br> Only returned when this value (or this category's setting)
-     * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>UPCEnabled</code>. <br> <br> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination. So, that
-     * means that they should look for <b>UPCEnabled</b>, <b>ISBNEnabled</b>, <b>EANEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. When Phase 2 of the <a href="
-     * https://developer.ebay.com/pbse/" target="_blank">Product-Based Shopping Experience</a> launches later in 2018, sellers should also start looking for the <b>ProductRequiredEnabled</b> field at the category level in the <b>GetCategoryFeatures</b>
-     * response, as this boolean field will indicate if the eBay category requires that the seller associate an eBay Catalog product to the listing. In Phase 2 of PBSE, an ePID value will have to be passed in at list/revise/relist time if the category
-     * requires that listings in that category be associated with an eBay Catalog product. </span>
+     * <code>Enabled</code> indicates that UPCs can be used for the category, and a value of <code>Required</code> indicates that a UPC is required when listing a product in this category. <br/><br/> Only returned when this value (or this category's
+     * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
+     * include <code>UPCEnabled</code>. <br/> <br/> <span class="tablenote"><b>Note:</b> It is recommended that sellers always use <b>GetCategoryFeatures</b> to see if an eBay category requires a Global Trade Item Number (GTIN) or a Brand/MPN combination.
+     * So, that means that they should look for <b>UPCEnabled</b>, <b>ISBNEnabled</b>, <b>EANEnabled</b>, and <b>BrandMPNIdentifierEnabled</b> at the category level in the <b>GetCategoryFeatures</b> response. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $UPCEnabled;
+    protected ?string $UPCEnabled = null;
     /**
      * The MaxGranularFitmentCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Indicates the maximum number of compatible applications allowed per item when adding or revising items with compatibilities provided at the most detailed granularity. For example, in Car and Truck Parts on the US site, the most
-     * granular application would include Year, Make, Model, Trim, and Engine. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or
+     * granular application would include Year, Make, Model, Trim, and Engine. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or
      * more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>MaxGranularFitmentCount</code>.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $MaxGranularFitmentCount;
+    protected ?int $MaxGranularFitmentCount = null;
     /**
      * The CompatibleVehicleType
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is for future use. It is currently returned as an empty field, but in the future, the string value in this field will indicate Parts Compatibility vehicle type (e.g. cars, motorcycles, boats). <br><br> Only returned when
+     * Meta information extracted from the WSDL
+     * - documentation: This field is for future use. It is currently returned as an empty field, but in the future, the string value in this field will indicate Parts Compatibility vehicle type (e.g. cars, motorcycles, boats). <br/><br/> Only returned when
      * this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and
      * one of those values does not include <code>CompatibleVehicleType</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CompatibleVehicleType;
+    protected ?string $CompatibleVehicleType = null;
     /**
      * The PaymentOptionsGroup
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentOptionsGroup;
+    protected ?string $PaymentOptionsGroup = null;
     /**
      * The ShippingProfileCategoryGroup
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the Business Policies category group that may be used for Shipping profiles. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
-     * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ShippingProfileCategoryGroup</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the Business Policies category group that may be used for Shipping profiles. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ShippingProfileCategoryGroup</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ShippingProfileCategoryGroup;
+    protected ?string $ShippingProfileCategoryGroup = null;
     /**
      * The PaymentProfileCategoryGroup
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the Business Policies category group that may be used for Payment profiles. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the Business Policies category group that may be used for Payment profiles. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default.
      * Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>PaymentProfileCategoryGroup</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PaymentProfileCategoryGroup;
+    protected ?string $PaymentProfileCategoryGroup = null;
     /**
      * The ReturnPolicyProfileCategoryGroup
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates the Business Policies category group that may be used for Return Policy profiles. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates the Business Policies category group that may be used for Return Policy profiles. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site
      * default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>ReturnPolicyProfileCategoryGroup</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ReturnPolicyProfileCategoryGroup;
+    protected ?string $ReturnPolicyProfileCategoryGroup = null;
     /**
      * The VINSupported
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $VINSupported;
+    protected ?bool $VINSupported = null;
     /**
      * The VRMSupported
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $VRMSupported;
+    protected ?bool $VRMSupported = null;
     /**
      * The SellerProvidedTitleSupported
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the corresponding category supports the use of a seller-provided title for a motor vehicle listing on the US or Canada Motors marketplaces. A seller-provided title is a descriptive
+     * title, given by the seller, that appears below eBay's pre-filled listing title for the motor vehicle. Visually, the seller-provided title is similar to a subtitle on other types of eBay listings (non-vehicle). A seller-provided title can assist in
+     * helping buyers discover the vehicle.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SellerProvidedTitleSupported;
+    protected ?bool $SellerProvidedTitleSupported = null;
     /**
      * The DepositSupported
-     * Meta informations extracted from the WSDL
-     * - documentation: This field is deprecated.
+     * Meta information extracted from the WSDL
+     * - documentation: This field is returned as <code>true</code> if the corresponding category supports the use of a deposit/down payment on a motor vehicle listing. In an <b>AddItem</b> call, the seller can configure a down payment for a motor vehicle
+     * listing using the <b>PaymentDetails</b> container.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DepositSupported;
+    protected ?bool $DepositSupported = null;
     /**
      * The GlobalShippingEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates if the Global Shipping Program (GSP) is supported for the category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not
-     * be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>GlobalShippingEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if the Global Shipping Program (GSP) is supported for the category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will
+     * not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>GlobalShippingEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $GlobalShippingEnabled;
+    protected ?bool $GlobalShippingEnabled = null;
     /**
      * The AdditionalCompatibilityEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field indicates whether or not the category (specified in the <b>Category.CategoryID</b> field) supports Boats and Motorcycles Parts compatibility. If <code>true</code>, parts compatibility name-value pairs for boats and
-     * motorcycles can be added to an item listed in the specified category. <br><br> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or
+     * motorcycles can be added to an item listed in the specified category. <br/><br/> Only returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or
      * more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include <code>AdditionalCompatibilityEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AdditionalCompatibilityEnabled;
+    protected ?bool $AdditionalCompatibilityEnabled = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * The PickupDropOffEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A <code>true</code> value in this field indicates that items listed in the category (specified in the <b>Category.CategoryID</b> field) may be enabled with the 'Click and Collect' feature. With the 'Click and Collect' feature, a
      * buyer can purchase certain items on an eBay site and collect them at a local store. Buyers are notified by eBay once their items are available. A <code>false</code> value in this field indicates that items listed in the category are not eligible for
-     * the 'Click and Collect' feature. <br/><br/> The 'Click and Collect' feature is only available to large merchants on the eBay UK (site ID - 3), eBay Australia (Site ID - 15), and eBay Germany (Site ID - 77) sites. <br><br> Only returned when this
+     * the 'Click and Collect' feature. <br/><br/> The 'Click and Collect' feature is only available to large merchants on the eBay UK (site ID - 3), eBay Australia (Site ID - 15), and eBay Germany (Site ID - 77) sites. <br/><br/> Only returned when this
      * value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of
-     * those values does not include <code>PickupDropOffEnabled</code>. <br> <br> <span class="tablenote"><b>Note:</b> For Click and Collect eligible sellers, the Click and Collect feature can only be enabled at the account level, and then each of the
+     * those values does not include <code>PickupDropOffEnabled</code>. <br/> <br/> <span class="tablenote"><b>Note:</b> For Click and Collect eligible sellers, the Click and Collect feature can only be enabled at the account level, and then each of the
      * seller's listings within an Click and Collect enabled category will be automatically evaluated for Click and Collect eligibility. </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $PickupDropOffEnabled;
+    protected ?bool $PickupDropOffEnabled = null;
     /**
      * The DigitalGoodDeliveryEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A <code>true</code> value in this field indicates that digital gift cards (eBay gift cards or third-party gift cards) can be listed in the category specified in the <b>Category.CategoryID</b> field. A <code>false</code> value in this
      * field indicates that digital gift cards can not be listed in the specified category. <br/><br/> Digital gift cards are currently only supported on the US site. There are some restrictions when it comes to selling gift cards, including the following:
      * <ul> <li>Each seller can only have one gift card listing at any given time </li> <li>The maximum dollar value of the gift card may not exceed 500.00</li> <li>Prepaid credit cards from American Express, Discover, MasterCard, or Visa are not
-     * allowed</li> </ul> For more information on eBay's Gift Card policy, see the <a href=" http://pages.ebay.com/help/policies/gift.html" target="_blank">Gift cards policy Help page</a>. <br><br> Only returned when this value (or this category's setting)
-     * overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not include
-     * <code>DigitalGoodDeliveryEnabled</code>.
+     * allowed</li> </ul> For more information on eBay's Gift Card policy, see the <a href=" http://pages.ebay.com/help/policies/gift.html" target="_blank">Gift cards policy Help page</a>. <br/><br/> Only returned when this value (or this category's
+     * setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of those values does not
+     * include <code>DigitalGoodDeliveryEnabled</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $DigitalGoodDeliveryEnabled;
+    protected ?bool $DigitalGoodDeliveryEnabled = null;
     /**
      * The EpidSupported
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the category supports the use of an eBay Product ID (e.g. ePID) in an Add/Revise/Relist API call to identify which motorcycles and/or scooters are compatible with a motor vehicle part or
      * accessory. ePIDs can only be used to identify motorcycles and scooters on the Germany and UK sites. <br/><br/> For more information on using an ePID to identify a compatible motorcycle or scooter through an Add/Revise/Relist API call on the Germany
-     * or UK site, see the documentation for the <a href=" http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container. <br><br> Only
+     * or UK site, see the documentation for the <a href=" http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container. <br/><br/> Only
      * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
      * request, and one of those values does not include <code>EpidSupported</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $EpidSupported;
+    protected ?bool $EpidSupported = null;
     /**
      * The KTypeSupported
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is returned as <code>true</code> if the category supports the use of a K Type vehicle number in an Add/Revise/Relist API call to identify which cars and/or trucks are compatible with a motor vehicle part or accessory. K
      * type vehicle numbers can only be used to identify cars and trucks on the Germany site. <br/><br/> For more information on using a K Type vehicle number to identify a compatible car or truck through an Add/Revise/Relist API call on the Germany site,
-     * see the documentation for the <a href=" http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container. <br><br> Only returned when this
-     * value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and one of
-     * those values does not include <code>KTypeSupported</code>.
+     * see the documentation for the <a href=" http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container. <br/><br/> Only returned when
+     * this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call request, and
+     * one of those values does not include <code>KTypeSupported</code>.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $KTypeSupported;
+    protected ?bool $KTypeSupported = null;
     /**
      * The ProductRequiredEnabled
-     * Meta informations extracted from the WSDL
-     * - documentation: This field indicates if the category requires association with an eBay Catalog product when listing/revising/relisting an item. This field is only returned if <code>Enabled</code>. <br><br> Until Phase 2 of the Product-Based Shopping
-     * Experience (PBSE) rolls out later in 2018, this field will only be returned in Sandbox. For more information on PBSE, see the <a href=" https://developer.ebay.com/pbse/" target="_blank">Product-Based Shopping Experience</a> page. <br><br> Only
-     * returned when this value (or this category's setting) overrides the value inherited from the category's parent or the site default. Will not be returned if one or more <a href="types/FeatureIDCodeType.html">FeatureID</a> values are used in the call
-     * request, and one of those values does not include <code>ProductRequiredEnabled</code>.
+     * Meta information extracted from the WSDL
+     * - documentation: This field indicates if the category supports Product-Based Shopping Experience listings (listings associated with eBay catalog products). <br/><br/> <span class="tablenote"><b>Note:</b> Due to the rollback of the Product-Based
+     * Shopping Experience mandate for all eBay categories, the value for this field should never get returned as <code>Enabled</code> for any production categories.</span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ProductRequiredEnabled;
+    protected ?string $ProductRequiredEnabled = null;
     /**
      * The DomesticReturnsAcceptedValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The values returned in this field indicate whether or not the seller accepts domestic returns for items listed in the associated marketplace and category. <br><br>While most categories return the <b>ReturnsAccepted</b> flag
      * (indicating the category supports returns), some categories will also return the <b>ReturnsNotAccepted</b> flag to indicate the seller can choose to not accept returns for an item listed in that category. <br><br>The values returned in this field are
      * pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. Here, it's worth noting that not accepting
-     * returns is a return policy. The values returned in this field are valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * returns is a return policy. The values returned in this field are valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span
+     * class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings
+     * in the domestic return policy will be used instead. For more information on setting separate domestic and international return policies, see the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help topic. For the international equivalent of this field, see the
+     * <b>InternationalReturnsAcceptedValues</b> field.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType
+     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType|null
      */
-    public $DomesticReturnsAcceptedValues;
+    protected ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $DomesticReturnsAcceptedValues = null;
     /**
      * The InternationalReturnsAcceptedValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The values returned in this field indicate whether or not the seller can offer international returns. <br><br>The values returned in this field are pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to
      * <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values returned in this field are valid in AddItem and its related family of calls, and in the return policies you
-     * configure for use with the Account and Business Policies Management APIs.
+     * configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate international return policy for items that are shipped to international
+     * customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead. For more information on setting separate domestic and international return policies, see the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help topic. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType
+     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType|null
      */
-    public $InternationalReturnsAcceptedValues;
+    protected ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $InternationalReturnsAcceptedValues = null;
     /**
      * The DomesticReturnsDurationValues
-     * Meta informations extracted from the WSDL
-     * - documentation: The values returned in this field indicate the return-duration options that are available for domestic returns for items listed in the associated marketplace and category. <br><br>The values returned in this field are pertinent only
+     * Meta information extracted from the WSDL
+     * - documentation: The values returned in this field indicate the return duration options that are available for domestic returns for items listed in the associated marketplace and category. <br><br>The values returned in this field are pertinent only
      * if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values returned in this field are valid in AddItem and
-     * its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate
+     * international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead. For more information on setting
+     * separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help topic.
+     * For the international equivalent of this field, see the <b>InternationalReturnsDurationValues</b> field.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType
+     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType|null
      */
-    public $DomesticReturnsDurationValues;
+    protected ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $DomesticReturnsDurationValues = null;
     /**
      * The InternationalReturnsDurationValues
-     * Meta informations extracted from the WSDL
-     * - documentation: The values returned in this field indicate the return-duration options that are available for international returns for items listed in the associated marketplace and category. <br><br>The values returned in this field are pertinent
+     * Meta information extracted from the WSDL
+     * - documentation: The values returned in this field indicate the return duration options that are available for international returns for items listed in the associated marketplace and category. <br><br>The values returned in this field are pertinent
      * only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values returned in this field are valid in AddItem
-     * and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate
+     * international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead. For more information on setting
+     * separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help topic.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType
+     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType|null
      */
-    public $InternationalReturnsDurationValues;
+    protected ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $InternationalReturnsDurationValues = null;
     /**
      * The DomesticReturnsShipmentPayeeValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The values returned in this field indicate the available options for who pays the return shipping for domestic returns. Possible values are <code>BUYER</code> and <code>SELLER</code>. <br><br>The values returned in this field are
      * pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values returned in this field are valid
-     * in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a
+     * separate international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead. For more information on
+     * setting separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help
+     * topic. For the international equivalent of this field, see the <b>InternationalReturnsShipmentPayeeValues</b> field.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType
+     * @var \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType|null
      */
-    public $DomesticReturnsShipmentPayeeValues;
+    protected ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $DomesticReturnsShipmentPayeeValues = null;
     /**
      * The InternationalReturnsShipmentPayeeValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The values returned in this field indicate the available options for who pays the return shipping for international returns. Possible values are <code>BUYER</code> and <code>SELLER</code>. <br><br>The values returned in this field
      * are pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values returned in this field are
-     * valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a
+     * separate international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used instead. For more information on
+     * setting separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help
+     * topic.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType
+     * @var \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType|null
      */
-    public $InternationalReturnsShipmentPayeeValues;
+    protected ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $InternationalReturnsShipmentPayeeValues = null;
     /**
      * The DomesticRefundMethodValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: On the EBAY_US marketplace only, sellers can offer item replacement in addition to offering money back returns. This flag defines the availability of such options for the given US marketplace category. Sellers can offer item
      * replacements only if returns are enabled (<b>returnPolicyEnabled</b> is set to <code>true</code>) for the item. You can specify item replacement in the AddItem family of calls and in the return policy settings of the Account and Business Policies
-     * Management APIs.
+     * Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay added the ability to create a separate international return policy for items that are shipped to international customers. If a seller does not add a separate
+     * international return policy, the settings in the domestic return policy will be used instead. For more information on setting separate domestic and international return policies, see the <a
+     * href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy" target="_blank">International returns policy</a> help topic. For the international equivalent of this field, see the
+     * <b>InternationalRefundMethodValues</b> field.</span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType
+     * @var \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType|null
      */
-    public $DomesticRefundMethodValues;
+    protected ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $DomesticRefundMethodValues = null;
     /**
      * The InternationalRefundMethodValues
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: In US, sellers can offer an item replacement for returns, in addition to offering money back returns. The values returned in this field indicate the availability of such options for the given marketplace and category. <br><br>The
      * values returned in this field are pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values
-     * returned in this field are valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
+     * returned in this field are valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs. <br/><br/> <span class="tablenote"><b>Note:</b> In May 2018, eBay
+     * added the ability to create a separate international return policy for items that are shipped to international customers. If a seller does not add a separate international return policy, the settings in the domestic return policy will be used
+     * instead. For more information on setting separate domestic and international return policies, see the <a href="https://pages.ebay.com/seller-center/seller-updates/2018-summer/simplified-returns.html#international-returns-policy"
+     * target="_blank">International returns policy</a> help topic. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType
+     * @var \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType|null
      */
-    public $InternationalRefundMethodValues;
+    protected ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $InternationalRefundMethodValues = null;
     /**
      * The ReturnPolicyDescriptionEnabled
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: In some EU countries, sellers are legally required to describe the return policy they offer. The value returned by this field indicates if sellers can provide such a description within the given marketplace and category. <br><br>The
      * values returned in this field are pertinent only if <b>ReturnPolicyEnabled</b> in GetCategoryFeatures is set to <code>true</code> for the associated category, which indicates that items listed in the category must include a return policy. The values
      * returned in this field are valid in AddItem and its related family of calls, and in the return policies you configure for use with the Account and Business Policies Management APIs.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ReturnPolicyDescriptionEnabled;
+    protected ?bool $ReturnPolicyDescriptionEnabled = null;
     /**
      * Constructor method for CategoryFeatureType
      * @uses CategoryFeatureType::setCategoryID()
@@ -1476,6 +1510,7 @@ class CategoryFeatureType extends AbstractStructBase
      * @uses CategoryFeatureType::setMaxItemCompatibility()
      * @uses CategoryFeatureType::setConditionEnabled()
      * @uses CategoryFeatureType::setConditionValues()
+     * @uses CategoryFeatureType::setSpecialFeatures()
      * @uses CategoryFeatureType::setValueCategory()
      * @uses CategoryFeatureType::setProductCreationEnabled()
      * @uses CategoryFeatureType::setEANEnabled()
@@ -1615,6 +1650,7 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $maxItemCompatibility
      * @param string $conditionEnabled
      * @param \macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues
+     * @param \macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures
      * @param bool $valueCategory
      * @param string $productCreationEnabled
      * @param string $eANEnabled
@@ -1632,7 +1668,7 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $depositSupported
      * @param bool $globalShippingEnabled
      * @param bool $additionalCompatibilityEnabled
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      * @param bool $pickupDropOffEnabled
      * @param bool $digitalGoodDeliveryEnabled
      * @param bool $epidSupported
@@ -1648,7 +1684,7 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues
      * @param bool $returnPolicyDescriptionEnabled
      */
-    public function __construct($categoryID = null, array $listingDuration = array(), $shippingTermsRequired = null, $bestOfferEnabled = null, $dutchBINEnabled = null, $userConsentRequired = null, $homePageFeaturedEnabled = null, $proPackEnabled = null, $basicUpgradePackEnabled = null, $valuePackEnabled = null, $proPackPlusEnabled = null, $adFormatEnabled = null, $bestOfferCounterEnabled = null, $bestOfferAutoDeclineEnabled = null, $localMarketSpecialitySubscription = null, $localMarketRegularSubscription = null, $localMarketPremiumSubscription = null, $localMarketNonSubscription = null, $expressEnabled = null, $expressPicturesRequired = null, $expressConditionRequired = null, $minimumReservePrice = null, $sellerContactDetailsEnabled = null, $transactionConfirmationRequestEnabled = null, $storeInventoryEnabled = null, $skypeMeTransactionalEnabled = null, $skypeMeNonTransactionalEnabled = null, $classifiedAdPaymentMethodEnabled = null, $classifiedAdShippingMethodEnabled = null, $classifiedAdBestOfferEnabled = null, $classifiedAdCounterOfferEnabled = null, $classifiedAdAutoDeclineEnabled = null, $classifiedAdContactByPhoneEnabled = null, $classifiedAdContactByEmailEnabled = null, $safePaymentRequired = null, $classifiedAdPayPerLeadEnabled = null, $itemSpecificsEnabled = null, $paisaPayFullEscrowEnabled = null, $brandMPNIdentifierEnabled = null, $classifiedAdAutoAcceptEnabled = null, $bestOfferAutoAcceptEnabled = null, $crossBorderTradeNorthAmericaEnabled = null, $crossBorderTradeGBEnabled = null, $crossBorderTradeAustraliaEnabled = null, $payPalBuyerProtectionEnabled = null, $buyerGuaranteeEnabled = null, $combinedFixedPriceTreatmentEnabled = null, \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null, $payPalRequired = null, $eBayMotorsProAdFormatEnabled = null, $eBayMotorsProContactByPhoneEnabled = null, $eBayMotorsProPhoneCount = null, $eBayMotorsProContactByAddressEnabled = null, $eBayMotorsProStreetCount = null, $eBayMotorsProCompanyNameEnabled = null, $eBayMotorsProContactByEmailEnabled = null, $eBayMotorsProBestOfferEnabled = null, $eBayMotorsProAutoAcceptEnabled = null, $eBayMotorsProAutoDeclineEnabled = null, $eBayMotorsProPaymentMethodCheckOutEnabled = null, $eBayMotorsProShippingMethodEnabled = null, $eBayMotorsProCounterOfferEnabled = null, $eBayMotorsProSellerContactDetailsEnabled = null, $localMarketAdFormatEnabled = null, $localMarketContactByPhoneEnabled = null, $localMarketPhoneCount = null, $localMarketContactByAddressEnabled = null, $localMarketStreetCount = null, $localMarketCompanyNameEnabled = null, $localMarketContactByEmailEnabled = null, $localMarketBestOfferEnabled = null, $localMarketAutoAcceptEnabled = null, $localMarketAutoDeclineEnabled = null, $localMarketPaymentMethodCheckOutEnabled = null, $localMarketShippingMethodEnabled = null, $localMarketCounterOfferEnabled = null, $localMarketSellerContactDetailsEnabled = null, $classifiedAdPhoneCount = null, $classifiedAdContactByAddressEnabled = null, $classifiedAdStreetCount = null, $classifiedAdCompanyNameEnabled = null, $specialitySubscription = null, $regularSubscription = null, $premiumSubscription = null, $nonSubscription = null, $iNEscrowWorkflowTimeline = null, $payPalRequiredForStoreOwner = null, $reviseQuantityAllowed = null, $revisePriceAllowed = null, $storeOwnerExtendedListingDurationsEnabled = null, \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null, $returnPolicyEnabled = null, $handlingTimeEnabled = null, \macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null, \macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null, \macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null, \macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null, array $paymentMethod = array(), $variationsEnabled = null, $attributeConversionEnabled = null, $freeGalleryPlusEnabled = null, $freePicturePackEnabled = null, $itemCompatibilityEnabled = null, $minItemCompatibility = null, $maxItemCompatibility = null, $conditionEnabled = null, \macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null, $valueCategory = null, $productCreationEnabled = null, $eANEnabled = null, $iSBNEnabled = null, $uPCEnabled = null, $maxGranularFitmentCount = null, $compatibleVehicleType = null, $paymentOptionsGroup = null, $shippingProfileCategoryGroup = null, $paymentProfileCategoryGroup = null, $returnPolicyProfileCategoryGroup = null, $vINSupported = null, $vRMSupported = null, $sellerProvidedTitleSupported = null, $depositSupported = null, $globalShippingEnabled = null, $additionalCompatibilityEnabled = null, \DOMDocument $any = null, $pickupDropOffEnabled = null, $digitalGoodDeliveryEnabled = null, $epidSupported = null, $kTypeSupported = null, $productRequiredEnabled = null, \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null, \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null, \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null, \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null, \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null, \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null, \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, $returnPolicyDescriptionEnabled = null)
+    public function __construct(?string $categoryID = null, array $listingDuration = [], ?bool $shippingTermsRequired = null, ?bool $bestOfferEnabled = null, ?bool $dutchBINEnabled = null, ?bool $userConsentRequired = null, ?bool $homePageFeaturedEnabled = null, ?bool $proPackEnabled = null, ?bool $basicUpgradePackEnabled = null, ?bool $valuePackEnabled = null, ?bool $proPackPlusEnabled = null, ?string $adFormatEnabled = null, ?bool $bestOfferCounterEnabled = null, ?bool $bestOfferAutoDeclineEnabled = null, ?bool $localMarketSpecialitySubscription = null, ?bool $localMarketRegularSubscription = null, ?bool $localMarketPremiumSubscription = null, ?bool $localMarketNonSubscription = null, ?bool $expressEnabled = null, ?bool $expressPicturesRequired = null, ?bool $expressConditionRequired = null, ?float $minimumReservePrice = null, ?bool $sellerContactDetailsEnabled = null, ?bool $transactionConfirmationRequestEnabled = null, ?bool $storeInventoryEnabled = null, ?bool $skypeMeTransactionalEnabled = null, ?bool $skypeMeNonTransactionalEnabled = null, ?string $classifiedAdPaymentMethodEnabled = null, ?bool $classifiedAdShippingMethodEnabled = null, ?string $classifiedAdBestOfferEnabled = null, ?bool $classifiedAdCounterOfferEnabled = null, ?bool $classifiedAdAutoDeclineEnabled = null, ?bool $classifiedAdContactByPhoneEnabled = null, ?bool $classifiedAdContactByEmailEnabled = null, ?bool $safePaymentRequired = null, ?bool $classifiedAdPayPerLeadEnabled = null, ?string $itemSpecificsEnabled = null, ?bool $paisaPayFullEscrowEnabled = null, ?bool $brandMPNIdentifierEnabled = null, ?bool $classifiedAdAutoAcceptEnabled = null, ?bool $bestOfferAutoAcceptEnabled = null, ?bool $crossBorderTradeNorthAmericaEnabled = null, ?bool $crossBorderTradeGBEnabled = null, ?bool $crossBorderTradeAustraliaEnabled = null, ?bool $payPalBuyerProtectionEnabled = null, ?bool $buyerGuaranteeEnabled = null, ?bool $combinedFixedPriceTreatmentEnabled = null, ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null, ?bool $payPalRequired = null, ?string $eBayMotorsProAdFormatEnabled = null, ?bool $eBayMotorsProContactByPhoneEnabled = null, ?int $eBayMotorsProPhoneCount = null, ?bool $eBayMotorsProContactByAddressEnabled = null, ?int $eBayMotorsProStreetCount = null, ?bool $eBayMotorsProCompanyNameEnabled = null, ?bool $eBayMotorsProContactByEmailEnabled = null, ?string $eBayMotorsProBestOfferEnabled = null, ?bool $eBayMotorsProAutoAcceptEnabled = null, ?bool $eBayMotorsProAutoDeclineEnabled = null, ?string $eBayMotorsProPaymentMethodCheckOutEnabled = null, ?bool $eBayMotorsProShippingMethodEnabled = null, ?bool $eBayMotorsProCounterOfferEnabled = null, ?bool $eBayMotorsProSellerContactDetailsEnabled = null, ?string $localMarketAdFormatEnabled = null, ?bool $localMarketContactByPhoneEnabled = null, ?int $localMarketPhoneCount = null, ?bool $localMarketContactByAddressEnabled = null, ?int $localMarketStreetCount = null, ?bool $localMarketCompanyNameEnabled = null, ?bool $localMarketContactByEmailEnabled = null, ?string $localMarketBestOfferEnabled = null, ?bool $localMarketAutoAcceptEnabled = null, ?bool $localMarketAutoDeclineEnabled = null, ?string $localMarketPaymentMethodCheckOutEnabled = null, ?bool $localMarketShippingMethodEnabled = null, ?bool $localMarketCounterOfferEnabled = null, ?bool $localMarketSellerContactDetailsEnabled = null, ?int $classifiedAdPhoneCount = null, ?bool $classifiedAdContactByAddressEnabled = null, ?int $classifiedAdStreetCount = null, ?bool $classifiedAdCompanyNameEnabled = null, ?string $specialitySubscription = null, ?string $regularSubscription = null, ?string $premiumSubscription = null, ?string $nonSubscription = null, ?string $iNEscrowWorkflowTimeline = null, ?bool $payPalRequiredForStoreOwner = null, ?bool $reviseQuantityAllowed = null, ?bool $revisePriceAllowed = null, ?bool $storeOwnerExtendedListingDurationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null, ?bool $returnPolicyEnabled = null, ?bool $handlingTimeEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null, array $paymentMethod = [], ?bool $variationsEnabled = null, ?string $attributeConversionEnabled = null, ?bool $freeGalleryPlusEnabled = null, ?bool $freePicturePackEnabled = null, ?string $itemCompatibilityEnabled = null, ?int $minItemCompatibility = null, ?int $maxItemCompatibility = null, ?string $conditionEnabled = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures = null, ?bool $valueCategory = null, ?string $productCreationEnabled = null, ?string $eANEnabled = null, ?string $iSBNEnabled = null, ?string $uPCEnabled = null, ?int $maxGranularFitmentCount = null, ?string $compatibleVehicleType = null, ?string $paymentOptionsGroup = null, ?string $shippingProfileCategoryGroup = null, ?string $paymentProfileCategoryGroup = null, ?string $returnPolicyProfileCategoryGroup = null, ?bool $vINSupported = null, ?bool $vRMSupported = null, ?bool $sellerProvidedTitleSupported = null, ?bool $depositSupported = null, ?bool $globalShippingEnabled = null, ?bool $additionalCompatibilityEnabled = null, $any = null, ?bool $pickupDropOffEnabled = null, ?bool $digitalGoodDeliveryEnabled = null, ?bool $epidSupported = null, ?bool $kTypeSupported = null, ?string $productRequiredEnabled = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, ?bool $returnPolicyDescriptionEnabled = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -1758,6 +1794,7 @@ class CategoryFeatureType extends AbstractStructBase
             ->setMaxItemCompatibility($maxItemCompatibility)
             ->setConditionEnabled($conditionEnabled)
             ->setConditionValues($conditionValues)
+            ->setSpecialFeatures($specialFeatures)
             ->setValueCategory($valueCategory)
             ->setProductCreationEnabled($productCreationEnabled)
             ->setEANEnabled($eANEnabled)
@@ -1795,7 +1832,7 @@ class CategoryFeatureType extends AbstractStructBase
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -1804,60 +1841,84 @@ class CategoryFeatureType extends AbstractStructBase
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get ListingDuration value
-     * @return \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType[]
      */
-    public function getListingDuration()
+    public function getListingDuration(): array
     {
         return $this->ListingDuration;
     }
     /**
+     * This method is responsible for validating the values passed to the setListingDuration method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setListingDuration method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateListingDurationForArrayConstraintsFromSetListingDuration(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $categoryFeatureTypeListingDurationItem) {
+            // validation for constraint: itemType
+            if (!$categoryFeatureTypeListingDurationItem instanceof \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType) {
+                $invalidValues[] = is_object($categoryFeatureTypeListingDurationItem) ? get_class($categoryFeatureTypeListingDurationItem) : sprintf('%s(%s)', gettype($categoryFeatureTypeListingDurationItem), var_export($categoryFeatureTypeListingDurationItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The ListingDuration property can only contain items of type \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set ListingDuration value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType[] $listingDuration
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setListingDuration(array $listingDuration = array())
+    public function setListingDuration(array $listingDuration = []): self
     {
-        foreach ($listingDuration as $categoryFeatureTypeListingDurationItem) {
-            // validation for constraint: itemType
-            if (!$categoryFeatureTypeListingDurationItem instanceof \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType) {
-                throw new \InvalidArgumentException(sprintf('The ListingDuration property can only contain items of \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType, "%s" given', is_object($categoryFeatureTypeListingDurationItem) ? get_class($categoryFeatureTypeListingDurationItem) : gettype($categoryFeatureTypeListingDurationItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($listingDurationArrayErrorMessage = self::validateListingDurationForArrayConstraintsFromSetListingDuration($listingDuration))) {
+            throw new InvalidArgumentException($listingDurationArrayErrorMessage, __LINE__);
         }
         $this->ListingDuration = $listingDuration;
+        
         return $this;
     }
     /**
      * Add item to ListingDuration value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType $item
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function addToListingDuration(\macropage\ebaysdk\trading\StructType\ListingDurationReferenceType $item)
+    public function addToListingDuration(\macropage\ebaysdk\trading\StructType\ListingDurationReferenceType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType) {
-            throw new \InvalidArgumentException(sprintf('The ListingDuration property can only contain items of \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The ListingDuration property can only contain items of type \macropage\ebaysdk\trading\StructType\ListingDurationReferenceType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ListingDuration[] = $item;
+        
         return $this;
     }
     /**
      * Get ShippingTermsRequired value
      * @return bool|null
      */
-    public function getShippingTermsRequired()
+    public function getShippingTermsRequired(): ?bool
     {
         return $this->ShippingTermsRequired;
     }
@@ -1866,20 +1927,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $shippingTermsRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setShippingTermsRequired($shippingTermsRequired = null)
+    public function setShippingTermsRequired(?bool $shippingTermsRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($shippingTermsRequired) && !is_bool($shippingTermsRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($shippingTermsRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($shippingTermsRequired, true), gettype($shippingTermsRequired)), __LINE__);
         }
         $this->ShippingTermsRequired = $shippingTermsRequired;
+        
         return $this;
     }
     /**
      * Get BestOfferEnabled value
      * @return bool|null
      */
-    public function getBestOfferEnabled()
+    public function getBestOfferEnabled(): ?bool
     {
         return $this->BestOfferEnabled;
     }
@@ -1888,20 +1950,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $bestOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBestOfferEnabled($bestOfferEnabled = null)
+    public function setBestOfferEnabled(?bool $bestOfferEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bestOfferEnabled) && !is_bool($bestOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bestOfferEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bestOfferEnabled, true), gettype($bestOfferEnabled)), __LINE__);
         }
         $this->BestOfferEnabled = $bestOfferEnabled;
+        
         return $this;
     }
     /**
      * Get DutchBINEnabled value
      * @return bool|null
      */
-    public function getDutchBINEnabled()
+    public function getDutchBINEnabled(): ?bool
     {
         return $this->DutchBINEnabled;
     }
@@ -1910,20 +1973,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $dutchBINEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDutchBINEnabled($dutchBINEnabled = null)
+    public function setDutchBINEnabled(?bool $dutchBINEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($dutchBINEnabled) && !is_bool($dutchBINEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($dutchBINEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($dutchBINEnabled, true), gettype($dutchBINEnabled)), __LINE__);
         }
         $this->DutchBINEnabled = $dutchBINEnabled;
+        
         return $this;
     }
     /**
      * Get UserConsentRequired value
      * @return bool|null
      */
-    public function getUserConsentRequired()
+    public function getUserConsentRequired(): ?bool
     {
         return $this->UserConsentRequired;
     }
@@ -1932,20 +1996,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $userConsentRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setUserConsentRequired($userConsentRequired = null)
+    public function setUserConsentRequired(?bool $userConsentRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($userConsentRequired) && !is_bool($userConsentRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($userConsentRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($userConsentRequired, true), gettype($userConsentRequired)), __LINE__);
         }
         $this->UserConsentRequired = $userConsentRequired;
+        
         return $this;
     }
     /**
      * Get HomePageFeaturedEnabled value
      * @return bool|null
      */
-    public function getHomePageFeaturedEnabled()
+    public function getHomePageFeaturedEnabled(): ?bool
     {
         return $this->HomePageFeaturedEnabled;
     }
@@ -1954,20 +2019,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $homePageFeaturedEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setHomePageFeaturedEnabled($homePageFeaturedEnabled = null)
+    public function setHomePageFeaturedEnabled(?bool $homePageFeaturedEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($homePageFeaturedEnabled) && !is_bool($homePageFeaturedEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($homePageFeaturedEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($homePageFeaturedEnabled, true), gettype($homePageFeaturedEnabled)), __LINE__);
         }
         $this->HomePageFeaturedEnabled = $homePageFeaturedEnabled;
+        
         return $this;
     }
     /**
      * Get ProPackEnabled value
      * @return bool|null
      */
-    public function getProPackEnabled()
+    public function getProPackEnabled(): ?bool
     {
         return $this->ProPackEnabled;
     }
@@ -1976,20 +2042,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $proPackEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setProPackEnabled($proPackEnabled = null)
+    public function setProPackEnabled(?bool $proPackEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($proPackEnabled) && !is_bool($proPackEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($proPackEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($proPackEnabled, true), gettype($proPackEnabled)), __LINE__);
         }
         $this->ProPackEnabled = $proPackEnabled;
+        
         return $this;
     }
     /**
      * Get BasicUpgradePackEnabled value
      * @return bool|null
      */
-    public function getBasicUpgradePackEnabled()
+    public function getBasicUpgradePackEnabled(): ?bool
     {
         return $this->BasicUpgradePackEnabled;
     }
@@ -1998,20 +2065,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $basicUpgradePackEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBasicUpgradePackEnabled($basicUpgradePackEnabled = null)
+    public function setBasicUpgradePackEnabled(?bool $basicUpgradePackEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($basicUpgradePackEnabled) && !is_bool($basicUpgradePackEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($basicUpgradePackEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($basicUpgradePackEnabled, true), gettype($basicUpgradePackEnabled)), __LINE__);
         }
         $this->BasicUpgradePackEnabled = $basicUpgradePackEnabled;
+        
         return $this;
     }
     /**
      * Get ValuePackEnabled value
      * @return bool|null
      */
-    public function getValuePackEnabled()
+    public function getValuePackEnabled(): ?bool
     {
         return $this->ValuePackEnabled;
     }
@@ -2020,20 +2088,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $valuePackEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setValuePackEnabled($valuePackEnabled = null)
+    public function setValuePackEnabled(?bool $valuePackEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($valuePackEnabled) && !is_bool($valuePackEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($valuePackEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($valuePackEnabled, true), gettype($valuePackEnabled)), __LINE__);
         }
         $this->ValuePackEnabled = $valuePackEnabled;
+        
         return $this;
     }
     /**
      * Get ProPackPlusEnabled value
      * @return bool|null
      */
-    public function getProPackPlusEnabled()
+    public function getProPackPlusEnabled(): ?bool
     {
         return $this->ProPackPlusEnabled;
     }
@@ -2042,20 +2111,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $proPackPlusEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setProPackPlusEnabled($proPackPlusEnabled = null)
+    public function setProPackPlusEnabled(?bool $proPackPlusEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($proPackPlusEnabled) && !is_bool($proPackPlusEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($proPackPlusEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($proPackPlusEnabled, true), gettype($proPackPlusEnabled)), __LINE__);
         }
         $this->ProPackPlusEnabled = $proPackPlusEnabled;
+        
         return $this;
     }
     /**
      * Get AdFormatEnabled value
      * @return string|null
      */
-    public function getAdFormatEnabled()
+    public function getAdFormatEnabled(): ?string
     {
         return $this->AdFormatEnabled;
     }
@@ -2063,24 +2133,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set AdFormatEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $adFormatEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setAdFormatEnabled($adFormatEnabled = null)
+    public function setAdFormatEnabled(?string $adFormatEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid($adFormatEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $adFormatEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType', is_array($adFormatEnabled) ? implode(', ', $adFormatEnabled) : var_export($adFormatEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->AdFormatEnabled = $adFormatEnabled;
+        
         return $this;
     }
     /**
      * Get BestOfferCounterEnabled value
      * @return bool|null
      */
-    public function getBestOfferCounterEnabled()
+    public function getBestOfferCounterEnabled(): ?bool
     {
         return $this->BestOfferCounterEnabled;
     }
@@ -2089,20 +2160,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $bestOfferCounterEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBestOfferCounterEnabled($bestOfferCounterEnabled = null)
+    public function setBestOfferCounterEnabled(?bool $bestOfferCounterEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bestOfferCounterEnabled) && !is_bool($bestOfferCounterEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bestOfferCounterEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bestOfferCounterEnabled, true), gettype($bestOfferCounterEnabled)), __LINE__);
         }
         $this->BestOfferCounterEnabled = $bestOfferCounterEnabled;
+        
         return $this;
     }
     /**
      * Get BestOfferAutoDeclineEnabled value
      * @return bool|null
      */
-    public function getBestOfferAutoDeclineEnabled()
+    public function getBestOfferAutoDeclineEnabled(): ?bool
     {
         return $this->BestOfferAutoDeclineEnabled;
     }
@@ -2111,20 +2183,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $bestOfferAutoDeclineEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBestOfferAutoDeclineEnabled($bestOfferAutoDeclineEnabled = null)
+    public function setBestOfferAutoDeclineEnabled(?bool $bestOfferAutoDeclineEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bestOfferAutoDeclineEnabled) && !is_bool($bestOfferAutoDeclineEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bestOfferAutoDeclineEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bestOfferAutoDeclineEnabled, true), gettype($bestOfferAutoDeclineEnabled)), __LINE__);
         }
         $this->BestOfferAutoDeclineEnabled = $bestOfferAutoDeclineEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketSpecialitySubscription value
      * @return bool|null
      */
-    public function getLocalMarketSpecialitySubscription()
+    public function getLocalMarketSpecialitySubscription(): ?bool
     {
         return $this->LocalMarketSpecialitySubscription;
     }
@@ -2133,20 +2206,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketSpecialitySubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketSpecialitySubscription($localMarketSpecialitySubscription = null)
+    public function setLocalMarketSpecialitySubscription(?bool $localMarketSpecialitySubscription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketSpecialitySubscription) && !is_bool($localMarketSpecialitySubscription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketSpecialitySubscription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketSpecialitySubscription, true), gettype($localMarketSpecialitySubscription)), __LINE__);
         }
         $this->LocalMarketSpecialitySubscription = $localMarketSpecialitySubscription;
+        
         return $this;
     }
     /**
      * Get LocalMarketRegularSubscription value
      * @return bool|null
      */
-    public function getLocalMarketRegularSubscription()
+    public function getLocalMarketRegularSubscription(): ?bool
     {
         return $this->LocalMarketRegularSubscription;
     }
@@ -2155,20 +2229,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketRegularSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketRegularSubscription($localMarketRegularSubscription = null)
+    public function setLocalMarketRegularSubscription(?bool $localMarketRegularSubscription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketRegularSubscription) && !is_bool($localMarketRegularSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketRegularSubscription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketRegularSubscription, true), gettype($localMarketRegularSubscription)), __LINE__);
         }
         $this->LocalMarketRegularSubscription = $localMarketRegularSubscription;
+        
         return $this;
     }
     /**
      * Get LocalMarketPremiumSubscription value
      * @return bool|null
      */
-    public function getLocalMarketPremiumSubscription()
+    public function getLocalMarketPremiumSubscription(): ?bool
     {
         return $this->LocalMarketPremiumSubscription;
     }
@@ -2177,20 +2252,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketPremiumSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketPremiumSubscription($localMarketPremiumSubscription = null)
+    public function setLocalMarketPremiumSubscription(?bool $localMarketPremiumSubscription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketPremiumSubscription) && !is_bool($localMarketPremiumSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketPremiumSubscription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketPremiumSubscription, true), gettype($localMarketPremiumSubscription)), __LINE__);
         }
         $this->LocalMarketPremiumSubscription = $localMarketPremiumSubscription;
+        
         return $this;
     }
     /**
      * Get LocalMarketNonSubscription value
      * @return bool|null
      */
-    public function getLocalMarketNonSubscription()
+    public function getLocalMarketNonSubscription(): ?bool
     {
         return $this->LocalMarketNonSubscription;
     }
@@ -2199,20 +2275,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketNonSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketNonSubscription($localMarketNonSubscription = null)
+    public function setLocalMarketNonSubscription(?bool $localMarketNonSubscription = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketNonSubscription) && !is_bool($localMarketNonSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketNonSubscription)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketNonSubscription, true), gettype($localMarketNonSubscription)), __LINE__);
         }
         $this->LocalMarketNonSubscription = $localMarketNonSubscription;
+        
         return $this;
     }
     /**
      * Get ExpressEnabled value
      * @return bool|null
      */
-    public function getExpressEnabled()
+    public function getExpressEnabled(): ?bool
     {
         return $this->ExpressEnabled;
     }
@@ -2221,20 +2298,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $expressEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setExpressEnabled($expressEnabled = null)
+    public function setExpressEnabled(?bool $expressEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressEnabled) && !is_bool($expressEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressEnabled, true), gettype($expressEnabled)), __LINE__);
         }
         $this->ExpressEnabled = $expressEnabled;
+        
         return $this;
     }
     /**
      * Get ExpressPicturesRequired value
      * @return bool|null
      */
-    public function getExpressPicturesRequired()
+    public function getExpressPicturesRequired(): ?bool
     {
         return $this->ExpressPicturesRequired;
     }
@@ -2243,20 +2321,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $expressPicturesRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setExpressPicturesRequired($expressPicturesRequired = null)
+    public function setExpressPicturesRequired(?bool $expressPicturesRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressPicturesRequired) && !is_bool($expressPicturesRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressPicturesRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressPicturesRequired, true), gettype($expressPicturesRequired)), __LINE__);
         }
         $this->ExpressPicturesRequired = $expressPicturesRequired;
+        
         return $this;
     }
     /**
      * Get ExpressConditionRequired value
      * @return bool|null
      */
-    public function getExpressConditionRequired()
+    public function getExpressConditionRequired(): ?bool
     {
         return $this->ExpressConditionRequired;
     }
@@ -2265,20 +2344,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $expressConditionRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setExpressConditionRequired($expressConditionRequired = null)
+    public function setExpressConditionRequired(?bool $expressConditionRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($expressConditionRequired) && !is_bool($expressConditionRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($expressConditionRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressConditionRequired, true), gettype($expressConditionRequired)), __LINE__);
         }
         $this->ExpressConditionRequired = $expressConditionRequired;
+        
         return $this;
     }
     /**
      * Get MinimumReservePrice value
      * @return float|null
      */
-    public function getMinimumReservePrice()
+    public function getMinimumReservePrice(): ?float
     {
         return $this->MinimumReservePrice;
     }
@@ -2287,16 +2367,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param float $minimumReservePrice
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setMinimumReservePrice($minimumReservePrice = null)
+    public function setMinimumReservePrice(?float $minimumReservePrice = null): self
     {
+        // validation for constraint: float
+        if (!is_null($minimumReservePrice) && !(is_float($minimumReservePrice) || is_numeric($minimumReservePrice))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($minimumReservePrice, true), gettype($minimumReservePrice)), __LINE__);
+        }
         $this->MinimumReservePrice = $minimumReservePrice;
+        
         return $this;
     }
     /**
      * Get SellerContactDetailsEnabled value
      * @return bool|null
      */
-    public function getSellerContactDetailsEnabled()
+    public function getSellerContactDetailsEnabled(): ?bool
     {
         return $this->SellerContactDetailsEnabled;
     }
@@ -2305,20 +2390,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $sellerContactDetailsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSellerContactDetailsEnabled($sellerContactDetailsEnabled = null)
+    public function setSellerContactDetailsEnabled(?bool $sellerContactDetailsEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($sellerContactDetailsEnabled) && !is_bool($sellerContactDetailsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($sellerContactDetailsEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($sellerContactDetailsEnabled, true), gettype($sellerContactDetailsEnabled)), __LINE__);
         }
         $this->SellerContactDetailsEnabled = $sellerContactDetailsEnabled;
+        
         return $this;
     }
     /**
      * Get TransactionConfirmationRequestEnabled value
      * @return bool|null
      */
-    public function getTransactionConfirmationRequestEnabled()
+    public function getTransactionConfirmationRequestEnabled(): ?bool
     {
         return $this->TransactionConfirmationRequestEnabled;
     }
@@ -2327,20 +2413,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $transactionConfirmationRequestEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setTransactionConfirmationRequestEnabled($transactionConfirmationRequestEnabled = null)
+    public function setTransactionConfirmationRequestEnabled(?bool $transactionConfirmationRequestEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($transactionConfirmationRequestEnabled) && !is_bool($transactionConfirmationRequestEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($transactionConfirmationRequestEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($transactionConfirmationRequestEnabled, true), gettype($transactionConfirmationRequestEnabled)), __LINE__);
         }
         $this->TransactionConfirmationRequestEnabled = $transactionConfirmationRequestEnabled;
+        
         return $this;
     }
     /**
      * Get StoreInventoryEnabled value
      * @return bool|null
      */
-    public function getStoreInventoryEnabled()
+    public function getStoreInventoryEnabled(): ?bool
     {
         return $this->StoreInventoryEnabled;
     }
@@ -2349,20 +2436,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $storeInventoryEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setStoreInventoryEnabled($storeInventoryEnabled = null)
+    public function setStoreInventoryEnabled(?bool $storeInventoryEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($storeInventoryEnabled) && !is_bool($storeInventoryEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($storeInventoryEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($storeInventoryEnabled, true), gettype($storeInventoryEnabled)), __LINE__);
         }
         $this->StoreInventoryEnabled = $storeInventoryEnabled;
+        
         return $this;
     }
     /**
      * Get SkypeMeTransactionalEnabled value
      * @return bool|null
      */
-    public function getSkypeMeTransactionalEnabled()
+    public function getSkypeMeTransactionalEnabled(): ?bool
     {
         return $this->SkypeMeTransactionalEnabled;
     }
@@ -2371,20 +2459,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $skypeMeTransactionalEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSkypeMeTransactionalEnabled($skypeMeTransactionalEnabled = null)
+    public function setSkypeMeTransactionalEnabled(?bool $skypeMeTransactionalEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($skypeMeTransactionalEnabled) && !is_bool($skypeMeTransactionalEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($skypeMeTransactionalEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($skypeMeTransactionalEnabled, true), gettype($skypeMeTransactionalEnabled)), __LINE__);
         }
         $this->SkypeMeTransactionalEnabled = $skypeMeTransactionalEnabled;
+        
         return $this;
     }
     /**
      * Get SkypeMeNonTransactionalEnabled value
      * @return bool|null
      */
-    public function getSkypeMeNonTransactionalEnabled()
+    public function getSkypeMeNonTransactionalEnabled(): ?bool
     {
         return $this->SkypeMeNonTransactionalEnabled;
     }
@@ -2393,20 +2482,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $skypeMeNonTransactionalEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSkypeMeNonTransactionalEnabled($skypeMeNonTransactionalEnabled = null)
+    public function setSkypeMeNonTransactionalEnabled(?bool $skypeMeNonTransactionalEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($skypeMeNonTransactionalEnabled) && !is_bool($skypeMeNonTransactionalEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($skypeMeNonTransactionalEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($skypeMeNonTransactionalEnabled, true), gettype($skypeMeNonTransactionalEnabled)), __LINE__);
         }
         $this->SkypeMeNonTransactionalEnabled = $skypeMeNonTransactionalEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdPaymentMethodEnabled value
      * @return string|null
      */
-    public function getClassifiedAdPaymentMethodEnabled()
+    public function getClassifiedAdPaymentMethodEnabled(): ?string
     {
         return $this->ClassifiedAdPaymentMethodEnabled;
     }
@@ -2414,24 +2504,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ClassifiedAdPaymentMethodEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $classifiedAdPaymentMethodEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdPaymentMethodEnabled($classifiedAdPaymentMethodEnabled = null)
+    public function setClassifiedAdPaymentMethodEnabled(?string $classifiedAdPaymentMethodEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid($classifiedAdPaymentMethodEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $classifiedAdPaymentMethodEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType', is_array($classifiedAdPaymentMethodEnabled) ? implode(', ', $classifiedAdPaymentMethodEnabled) : var_export($classifiedAdPaymentMethodEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ClassifiedAdPaymentMethodEnabled = $classifiedAdPaymentMethodEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdShippingMethodEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdShippingMethodEnabled()
+    public function getClassifiedAdShippingMethodEnabled(): ?bool
     {
         return $this->ClassifiedAdShippingMethodEnabled;
     }
@@ -2440,20 +2531,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdShippingMethodEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdShippingMethodEnabled($classifiedAdShippingMethodEnabled = null)
+    public function setClassifiedAdShippingMethodEnabled(?bool $classifiedAdShippingMethodEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdShippingMethodEnabled) && !is_bool($classifiedAdShippingMethodEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdShippingMethodEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdShippingMethodEnabled, true), gettype($classifiedAdShippingMethodEnabled)), __LINE__);
         }
         $this->ClassifiedAdShippingMethodEnabled = $classifiedAdShippingMethodEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdBestOfferEnabled value
      * @return string|null
      */
-    public function getClassifiedAdBestOfferEnabled()
+    public function getClassifiedAdBestOfferEnabled(): ?string
     {
         return $this->ClassifiedAdBestOfferEnabled;
     }
@@ -2461,24 +2553,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ClassifiedAdBestOfferEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $classifiedAdBestOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdBestOfferEnabled($classifiedAdBestOfferEnabled = null)
+    public function setClassifiedAdBestOfferEnabled(?string $classifiedAdBestOfferEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid($classifiedAdBestOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $classifiedAdBestOfferEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType', is_array($classifiedAdBestOfferEnabled) ? implode(', ', $classifiedAdBestOfferEnabled) : var_export($classifiedAdBestOfferEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ClassifiedAdBestOfferEnabled = $classifiedAdBestOfferEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdCounterOfferEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdCounterOfferEnabled()
+    public function getClassifiedAdCounterOfferEnabled(): ?bool
     {
         return $this->ClassifiedAdCounterOfferEnabled;
     }
@@ -2487,20 +2580,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdCounterOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdCounterOfferEnabled($classifiedAdCounterOfferEnabled = null)
+    public function setClassifiedAdCounterOfferEnabled(?bool $classifiedAdCounterOfferEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdCounterOfferEnabled) && !is_bool($classifiedAdCounterOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdCounterOfferEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdCounterOfferEnabled, true), gettype($classifiedAdCounterOfferEnabled)), __LINE__);
         }
         $this->ClassifiedAdCounterOfferEnabled = $classifiedAdCounterOfferEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdAutoDeclineEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdAutoDeclineEnabled()
+    public function getClassifiedAdAutoDeclineEnabled(): ?bool
     {
         return $this->ClassifiedAdAutoDeclineEnabled;
     }
@@ -2509,20 +2603,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdAutoDeclineEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdAutoDeclineEnabled($classifiedAdAutoDeclineEnabled = null)
+    public function setClassifiedAdAutoDeclineEnabled(?bool $classifiedAdAutoDeclineEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdAutoDeclineEnabled) && !is_bool($classifiedAdAutoDeclineEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdAutoDeclineEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdAutoDeclineEnabled, true), gettype($classifiedAdAutoDeclineEnabled)), __LINE__);
         }
         $this->ClassifiedAdAutoDeclineEnabled = $classifiedAdAutoDeclineEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdContactByPhoneEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdContactByPhoneEnabled()
+    public function getClassifiedAdContactByPhoneEnabled(): ?bool
     {
         return $this->ClassifiedAdContactByPhoneEnabled;
     }
@@ -2531,20 +2626,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdContactByPhoneEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdContactByPhoneEnabled($classifiedAdContactByPhoneEnabled = null)
+    public function setClassifiedAdContactByPhoneEnabled(?bool $classifiedAdContactByPhoneEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdContactByPhoneEnabled) && !is_bool($classifiedAdContactByPhoneEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdContactByPhoneEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdContactByPhoneEnabled, true), gettype($classifiedAdContactByPhoneEnabled)), __LINE__);
         }
         $this->ClassifiedAdContactByPhoneEnabled = $classifiedAdContactByPhoneEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdContactByEmailEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdContactByEmailEnabled()
+    public function getClassifiedAdContactByEmailEnabled(): ?bool
     {
         return $this->ClassifiedAdContactByEmailEnabled;
     }
@@ -2553,20 +2649,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdContactByEmailEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdContactByEmailEnabled($classifiedAdContactByEmailEnabled = null)
+    public function setClassifiedAdContactByEmailEnabled(?bool $classifiedAdContactByEmailEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdContactByEmailEnabled) && !is_bool($classifiedAdContactByEmailEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdContactByEmailEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdContactByEmailEnabled, true), gettype($classifiedAdContactByEmailEnabled)), __LINE__);
         }
         $this->ClassifiedAdContactByEmailEnabled = $classifiedAdContactByEmailEnabled;
+        
         return $this;
     }
     /**
      * Get SafePaymentRequired value
      * @return bool|null
      */
-    public function getSafePaymentRequired()
+    public function getSafePaymentRequired(): ?bool
     {
         return $this->SafePaymentRequired;
     }
@@ -2575,20 +2672,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $safePaymentRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSafePaymentRequired($safePaymentRequired = null)
+    public function setSafePaymentRequired(?bool $safePaymentRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($safePaymentRequired) && !is_bool($safePaymentRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($safePaymentRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($safePaymentRequired, true), gettype($safePaymentRequired)), __LINE__);
         }
         $this->SafePaymentRequired = $safePaymentRequired;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdPayPerLeadEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdPayPerLeadEnabled()
+    public function getClassifiedAdPayPerLeadEnabled(): ?bool
     {
         return $this->ClassifiedAdPayPerLeadEnabled;
     }
@@ -2597,20 +2695,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdPayPerLeadEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdPayPerLeadEnabled($classifiedAdPayPerLeadEnabled = null)
+    public function setClassifiedAdPayPerLeadEnabled(?bool $classifiedAdPayPerLeadEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdPayPerLeadEnabled) && !is_bool($classifiedAdPayPerLeadEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdPayPerLeadEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdPayPerLeadEnabled, true), gettype($classifiedAdPayPerLeadEnabled)), __LINE__);
         }
         $this->ClassifiedAdPayPerLeadEnabled = $classifiedAdPayPerLeadEnabled;
+        
         return $this;
     }
     /**
      * Get ItemSpecificsEnabled value
      * @return string|null
      */
-    public function getItemSpecificsEnabled()
+    public function getItemSpecificsEnabled(): ?string
     {
         return $this->ItemSpecificsEnabled;
     }
@@ -2618,24 +2717,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ItemSpecificsEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $itemSpecificsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setItemSpecificsEnabled($itemSpecificsEnabled = null)
+    public function setItemSpecificsEnabled(?string $itemSpecificsEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType::valueIsValid($itemSpecificsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $itemSpecificsEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType', is_array($itemSpecificsEnabled) ? implode(', ', $itemSpecificsEnabled) : var_export($itemSpecificsEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemSpecificsEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ItemSpecificsEnabled = $itemSpecificsEnabled;
+        
         return $this;
     }
     /**
      * Get PaisaPayFullEscrowEnabled value
      * @return bool|null
      */
-    public function getPaisaPayFullEscrowEnabled()
+    public function getPaisaPayFullEscrowEnabled(): ?bool
     {
         return $this->PaisaPayFullEscrowEnabled;
     }
@@ -2644,20 +2744,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $paisaPayFullEscrowEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPaisaPayFullEscrowEnabled($paisaPayFullEscrowEnabled = null)
+    public function setPaisaPayFullEscrowEnabled(?bool $paisaPayFullEscrowEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($paisaPayFullEscrowEnabled) && !is_bool($paisaPayFullEscrowEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($paisaPayFullEscrowEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($paisaPayFullEscrowEnabled, true), gettype($paisaPayFullEscrowEnabled)), __LINE__);
         }
         $this->PaisaPayFullEscrowEnabled = $paisaPayFullEscrowEnabled;
+        
         return $this;
     }
     /**
      * Get BrandMPNIdentifierEnabled value
      * @return bool|null
      */
-    public function getBrandMPNIdentifierEnabled()
+    public function getBrandMPNIdentifierEnabled(): ?bool
     {
         return $this->BrandMPNIdentifierEnabled;
     }
@@ -2666,20 +2767,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $brandMPNIdentifierEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBrandMPNIdentifierEnabled($brandMPNIdentifierEnabled = null)
+    public function setBrandMPNIdentifierEnabled(?bool $brandMPNIdentifierEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($brandMPNIdentifierEnabled) && !is_bool($brandMPNIdentifierEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($brandMPNIdentifierEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($brandMPNIdentifierEnabled, true), gettype($brandMPNIdentifierEnabled)), __LINE__);
         }
         $this->BrandMPNIdentifierEnabled = $brandMPNIdentifierEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdAutoAcceptEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdAutoAcceptEnabled()
+    public function getClassifiedAdAutoAcceptEnabled(): ?bool
     {
         return $this->ClassifiedAdAutoAcceptEnabled;
     }
@@ -2688,20 +2790,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdAutoAcceptEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdAutoAcceptEnabled($classifiedAdAutoAcceptEnabled = null)
+    public function setClassifiedAdAutoAcceptEnabled(?bool $classifiedAdAutoAcceptEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdAutoAcceptEnabled) && !is_bool($classifiedAdAutoAcceptEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdAutoAcceptEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdAutoAcceptEnabled, true), gettype($classifiedAdAutoAcceptEnabled)), __LINE__);
         }
         $this->ClassifiedAdAutoAcceptEnabled = $classifiedAdAutoAcceptEnabled;
+        
         return $this;
     }
     /**
      * Get BestOfferAutoAcceptEnabled value
      * @return bool|null
      */
-    public function getBestOfferAutoAcceptEnabled()
+    public function getBestOfferAutoAcceptEnabled(): ?bool
     {
         return $this->BestOfferAutoAcceptEnabled;
     }
@@ -2710,20 +2813,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $bestOfferAutoAcceptEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBestOfferAutoAcceptEnabled($bestOfferAutoAcceptEnabled = null)
+    public function setBestOfferAutoAcceptEnabled(?bool $bestOfferAutoAcceptEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($bestOfferAutoAcceptEnabled) && !is_bool($bestOfferAutoAcceptEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($bestOfferAutoAcceptEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bestOfferAutoAcceptEnabled, true), gettype($bestOfferAutoAcceptEnabled)), __LINE__);
         }
         $this->BestOfferAutoAcceptEnabled = $bestOfferAutoAcceptEnabled;
+        
         return $this;
     }
     /**
      * Get CrossBorderTradeNorthAmericaEnabled value
      * @return bool|null
      */
-    public function getCrossBorderTradeNorthAmericaEnabled()
+    public function getCrossBorderTradeNorthAmericaEnabled(): ?bool
     {
         return $this->CrossBorderTradeNorthAmericaEnabled;
     }
@@ -2732,20 +2836,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $crossBorderTradeNorthAmericaEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCrossBorderTradeNorthAmericaEnabled($crossBorderTradeNorthAmericaEnabled = null)
+    public function setCrossBorderTradeNorthAmericaEnabled(?bool $crossBorderTradeNorthAmericaEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($crossBorderTradeNorthAmericaEnabled) && !is_bool($crossBorderTradeNorthAmericaEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($crossBorderTradeNorthAmericaEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($crossBorderTradeNorthAmericaEnabled, true), gettype($crossBorderTradeNorthAmericaEnabled)), __LINE__);
         }
         $this->CrossBorderTradeNorthAmericaEnabled = $crossBorderTradeNorthAmericaEnabled;
+        
         return $this;
     }
     /**
      * Get CrossBorderTradeGBEnabled value
      * @return bool|null
      */
-    public function getCrossBorderTradeGBEnabled()
+    public function getCrossBorderTradeGBEnabled(): ?bool
     {
         return $this->CrossBorderTradeGBEnabled;
     }
@@ -2754,20 +2859,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $crossBorderTradeGBEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCrossBorderTradeGBEnabled($crossBorderTradeGBEnabled = null)
+    public function setCrossBorderTradeGBEnabled(?bool $crossBorderTradeGBEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($crossBorderTradeGBEnabled) && !is_bool($crossBorderTradeGBEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($crossBorderTradeGBEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($crossBorderTradeGBEnabled, true), gettype($crossBorderTradeGBEnabled)), __LINE__);
         }
         $this->CrossBorderTradeGBEnabled = $crossBorderTradeGBEnabled;
+        
         return $this;
     }
     /**
      * Get CrossBorderTradeAustraliaEnabled value
      * @return bool|null
      */
-    public function getCrossBorderTradeAustraliaEnabled()
+    public function getCrossBorderTradeAustraliaEnabled(): ?bool
     {
         return $this->CrossBorderTradeAustraliaEnabled;
     }
@@ -2776,20 +2882,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $crossBorderTradeAustraliaEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCrossBorderTradeAustraliaEnabled($crossBorderTradeAustraliaEnabled = null)
+    public function setCrossBorderTradeAustraliaEnabled(?bool $crossBorderTradeAustraliaEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($crossBorderTradeAustraliaEnabled) && !is_bool($crossBorderTradeAustraliaEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($crossBorderTradeAustraliaEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($crossBorderTradeAustraliaEnabled, true), gettype($crossBorderTradeAustraliaEnabled)), __LINE__);
         }
         $this->CrossBorderTradeAustraliaEnabled = $crossBorderTradeAustraliaEnabled;
+        
         return $this;
     }
     /**
      * Get PayPalBuyerProtectionEnabled value
      * @return bool|null
      */
-    public function getPayPalBuyerProtectionEnabled()
+    public function getPayPalBuyerProtectionEnabled(): ?bool
     {
         return $this->PayPalBuyerProtectionEnabled;
     }
@@ -2798,20 +2905,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $payPalBuyerProtectionEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPayPalBuyerProtectionEnabled($payPalBuyerProtectionEnabled = null)
+    public function setPayPalBuyerProtectionEnabled(?bool $payPalBuyerProtectionEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalBuyerProtectionEnabled) && !is_bool($payPalBuyerProtectionEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalBuyerProtectionEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalBuyerProtectionEnabled, true), gettype($payPalBuyerProtectionEnabled)), __LINE__);
         }
         $this->PayPalBuyerProtectionEnabled = $payPalBuyerProtectionEnabled;
+        
         return $this;
     }
     /**
      * Get BuyerGuaranteeEnabled value
      * @return bool|null
      */
-    public function getBuyerGuaranteeEnabled()
+    public function getBuyerGuaranteeEnabled(): ?bool
     {
         return $this->BuyerGuaranteeEnabled;
     }
@@ -2820,20 +2928,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $buyerGuaranteeEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setBuyerGuaranteeEnabled($buyerGuaranteeEnabled = null)
+    public function setBuyerGuaranteeEnabled(?bool $buyerGuaranteeEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($buyerGuaranteeEnabled) && !is_bool($buyerGuaranteeEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($buyerGuaranteeEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($buyerGuaranteeEnabled, true), gettype($buyerGuaranteeEnabled)), __LINE__);
         }
         $this->BuyerGuaranteeEnabled = $buyerGuaranteeEnabled;
+        
         return $this;
     }
     /**
      * Get CombinedFixedPriceTreatmentEnabled value
      * @return bool|null
      */
-    public function getCombinedFixedPriceTreatmentEnabled()
+    public function getCombinedFixedPriceTreatmentEnabled(): ?bool
     {
         return $this->CombinedFixedPriceTreatmentEnabled;
     }
@@ -2842,20 +2951,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $combinedFixedPriceTreatmentEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCombinedFixedPriceTreatmentEnabled($combinedFixedPriceTreatmentEnabled = null)
+    public function setCombinedFixedPriceTreatmentEnabled(?bool $combinedFixedPriceTreatmentEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($combinedFixedPriceTreatmentEnabled) && !is_bool($combinedFixedPriceTreatmentEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($combinedFixedPriceTreatmentEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($combinedFixedPriceTreatmentEnabled, true), gettype($combinedFixedPriceTreatmentEnabled)), __LINE__);
         }
         $this->CombinedFixedPriceTreatmentEnabled = $combinedFixedPriceTreatmentEnabled;
+        
         return $this;
     }
     /**
      * Get GalleryFeaturedDurations value
      * @return \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType|null
      */
-    public function getGalleryFeaturedDurations()
+    public function getGalleryFeaturedDurations(): ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType
     {
         return $this->GalleryFeaturedDurations;
     }
@@ -2864,16 +2974,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setGalleryFeaturedDurations(\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null)
+    public function setGalleryFeaturedDurations(?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null): self
     {
         $this->GalleryFeaturedDurations = $galleryFeaturedDurations;
+        
         return $this;
     }
     /**
      * Get PayPalRequired value
      * @return bool|null
      */
-    public function getPayPalRequired()
+    public function getPayPalRequired(): ?bool
     {
         return $this->PayPalRequired;
     }
@@ -2882,20 +2993,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $payPalRequired
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPayPalRequired($payPalRequired = null)
+    public function setPayPalRequired(?bool $payPalRequired = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalRequired) && !is_bool($payPalRequired)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalRequired)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalRequired, true), gettype($payPalRequired)), __LINE__);
         }
         $this->PayPalRequired = $payPalRequired;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProAdFormatEnabled value
      * @return string|null
      */
-    public function getEBayMotorsProAdFormatEnabled()
+    public function getEBayMotorsProAdFormatEnabled(): ?string
     {
         return $this->eBayMotorsProAdFormatEnabled;
     }
@@ -2903,24 +3015,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set eBayMotorsProAdFormatEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eBayMotorsProAdFormatEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProAdFormatEnabled($eBayMotorsProAdFormatEnabled = null)
+    public function setEBayMotorsProAdFormatEnabled(?string $eBayMotorsProAdFormatEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid($eBayMotorsProAdFormatEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eBayMotorsProAdFormatEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType', is_array($eBayMotorsProAdFormatEnabled) ? implode(', ', $eBayMotorsProAdFormatEnabled) : var_export($eBayMotorsProAdFormatEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->eBayMotorsProAdFormatEnabled = $eBayMotorsProAdFormatEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProContactByPhoneEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProContactByPhoneEnabled()
+    public function getEBayMotorsProContactByPhoneEnabled(): ?bool
     {
         return $this->eBayMotorsProContactByPhoneEnabled;
     }
@@ -2929,20 +3042,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProContactByPhoneEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProContactByPhoneEnabled($eBayMotorsProContactByPhoneEnabled = null)
+    public function setEBayMotorsProContactByPhoneEnabled(?bool $eBayMotorsProContactByPhoneEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProContactByPhoneEnabled) && !is_bool($eBayMotorsProContactByPhoneEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProContactByPhoneEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProContactByPhoneEnabled, true), gettype($eBayMotorsProContactByPhoneEnabled)), __LINE__);
         }
         $this->eBayMotorsProContactByPhoneEnabled = $eBayMotorsProContactByPhoneEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProPhoneCount value
      * @return int|null
      */
-    public function getEBayMotorsProPhoneCount()
+    public function getEBayMotorsProPhoneCount(): ?int
     {
         return $this->eBayMotorsProPhoneCount;
     }
@@ -2951,20 +3065,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $eBayMotorsProPhoneCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProPhoneCount($eBayMotorsProPhoneCount = null)
+    public function setEBayMotorsProPhoneCount(?int $eBayMotorsProPhoneCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($eBayMotorsProPhoneCount) && !is_numeric($eBayMotorsProPhoneCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($eBayMotorsProPhoneCount)), __LINE__);
+        if (!is_null($eBayMotorsProPhoneCount) && !(is_int($eBayMotorsProPhoneCount) || ctype_digit($eBayMotorsProPhoneCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($eBayMotorsProPhoneCount, true), gettype($eBayMotorsProPhoneCount)), __LINE__);
         }
         $this->eBayMotorsProPhoneCount = $eBayMotorsProPhoneCount;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProContactByAddressEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProContactByAddressEnabled()
+    public function getEBayMotorsProContactByAddressEnabled(): ?bool
     {
         return $this->eBayMotorsProContactByAddressEnabled;
     }
@@ -2973,20 +3088,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProContactByAddressEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProContactByAddressEnabled($eBayMotorsProContactByAddressEnabled = null)
+    public function setEBayMotorsProContactByAddressEnabled(?bool $eBayMotorsProContactByAddressEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProContactByAddressEnabled) && !is_bool($eBayMotorsProContactByAddressEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProContactByAddressEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProContactByAddressEnabled, true), gettype($eBayMotorsProContactByAddressEnabled)), __LINE__);
         }
         $this->eBayMotorsProContactByAddressEnabled = $eBayMotorsProContactByAddressEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProStreetCount value
      * @return int|null
      */
-    public function getEBayMotorsProStreetCount()
+    public function getEBayMotorsProStreetCount(): ?int
     {
         return $this->eBayMotorsProStreetCount;
     }
@@ -2995,20 +3111,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $eBayMotorsProStreetCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProStreetCount($eBayMotorsProStreetCount = null)
+    public function setEBayMotorsProStreetCount(?int $eBayMotorsProStreetCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($eBayMotorsProStreetCount) && !is_numeric($eBayMotorsProStreetCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($eBayMotorsProStreetCount)), __LINE__);
+        if (!is_null($eBayMotorsProStreetCount) && !(is_int($eBayMotorsProStreetCount) || ctype_digit($eBayMotorsProStreetCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($eBayMotorsProStreetCount, true), gettype($eBayMotorsProStreetCount)), __LINE__);
         }
         $this->eBayMotorsProStreetCount = $eBayMotorsProStreetCount;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProCompanyNameEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProCompanyNameEnabled()
+    public function getEBayMotorsProCompanyNameEnabled(): ?bool
     {
         return $this->eBayMotorsProCompanyNameEnabled;
     }
@@ -3017,20 +3134,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProCompanyNameEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProCompanyNameEnabled($eBayMotorsProCompanyNameEnabled = null)
+    public function setEBayMotorsProCompanyNameEnabled(?bool $eBayMotorsProCompanyNameEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProCompanyNameEnabled) && !is_bool($eBayMotorsProCompanyNameEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProCompanyNameEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProCompanyNameEnabled, true), gettype($eBayMotorsProCompanyNameEnabled)), __LINE__);
         }
         $this->eBayMotorsProCompanyNameEnabled = $eBayMotorsProCompanyNameEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProContactByEmailEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProContactByEmailEnabled()
+    public function getEBayMotorsProContactByEmailEnabled(): ?bool
     {
         return $this->eBayMotorsProContactByEmailEnabled;
     }
@@ -3039,20 +3157,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProContactByEmailEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProContactByEmailEnabled($eBayMotorsProContactByEmailEnabled = null)
+    public function setEBayMotorsProContactByEmailEnabled(?bool $eBayMotorsProContactByEmailEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProContactByEmailEnabled) && !is_bool($eBayMotorsProContactByEmailEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProContactByEmailEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProContactByEmailEnabled, true), gettype($eBayMotorsProContactByEmailEnabled)), __LINE__);
         }
         $this->eBayMotorsProContactByEmailEnabled = $eBayMotorsProContactByEmailEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProBestOfferEnabled value
      * @return string|null
      */
-    public function getEBayMotorsProBestOfferEnabled()
+    public function getEBayMotorsProBestOfferEnabled(): ?string
     {
         return $this->eBayMotorsProBestOfferEnabled;
     }
@@ -3060,24 +3179,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set eBayMotorsProBestOfferEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eBayMotorsProBestOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProBestOfferEnabled($eBayMotorsProBestOfferEnabled = null)
+    public function setEBayMotorsProBestOfferEnabled(?string $eBayMotorsProBestOfferEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid($eBayMotorsProBestOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eBayMotorsProBestOfferEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType', is_array($eBayMotorsProBestOfferEnabled) ? implode(', ', $eBayMotorsProBestOfferEnabled) : var_export($eBayMotorsProBestOfferEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->eBayMotorsProBestOfferEnabled = $eBayMotorsProBestOfferEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProAutoAcceptEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProAutoAcceptEnabled()
+    public function getEBayMotorsProAutoAcceptEnabled(): ?bool
     {
         return $this->eBayMotorsProAutoAcceptEnabled;
     }
@@ -3086,20 +3206,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProAutoAcceptEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProAutoAcceptEnabled($eBayMotorsProAutoAcceptEnabled = null)
+    public function setEBayMotorsProAutoAcceptEnabled(?bool $eBayMotorsProAutoAcceptEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProAutoAcceptEnabled) && !is_bool($eBayMotorsProAutoAcceptEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProAutoAcceptEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProAutoAcceptEnabled, true), gettype($eBayMotorsProAutoAcceptEnabled)), __LINE__);
         }
         $this->eBayMotorsProAutoAcceptEnabled = $eBayMotorsProAutoAcceptEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProAutoDeclineEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProAutoDeclineEnabled()
+    public function getEBayMotorsProAutoDeclineEnabled(): ?bool
     {
         return $this->eBayMotorsProAutoDeclineEnabled;
     }
@@ -3108,20 +3229,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProAutoDeclineEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProAutoDeclineEnabled($eBayMotorsProAutoDeclineEnabled = null)
+    public function setEBayMotorsProAutoDeclineEnabled(?bool $eBayMotorsProAutoDeclineEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProAutoDeclineEnabled) && !is_bool($eBayMotorsProAutoDeclineEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProAutoDeclineEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProAutoDeclineEnabled, true), gettype($eBayMotorsProAutoDeclineEnabled)), __LINE__);
         }
         $this->eBayMotorsProAutoDeclineEnabled = $eBayMotorsProAutoDeclineEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProPaymentMethodCheckOutEnabled value
      * @return string|null
      */
-    public function getEBayMotorsProPaymentMethodCheckOutEnabled()
+    public function getEBayMotorsProPaymentMethodCheckOutEnabled(): ?string
     {
         return $this->eBayMotorsProPaymentMethodCheckOutEnabled;
     }
@@ -3129,24 +3251,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set eBayMotorsProPaymentMethodCheckOutEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eBayMotorsProPaymentMethodCheckOutEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProPaymentMethodCheckOutEnabled($eBayMotorsProPaymentMethodCheckOutEnabled = null)
+    public function setEBayMotorsProPaymentMethodCheckOutEnabled(?string $eBayMotorsProPaymentMethodCheckOutEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid($eBayMotorsProPaymentMethodCheckOutEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eBayMotorsProPaymentMethodCheckOutEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType', is_array($eBayMotorsProPaymentMethodCheckOutEnabled) ? implode(', ', $eBayMotorsProPaymentMethodCheckOutEnabled) : var_export($eBayMotorsProPaymentMethodCheckOutEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->eBayMotorsProPaymentMethodCheckOutEnabled = $eBayMotorsProPaymentMethodCheckOutEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProShippingMethodEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProShippingMethodEnabled()
+    public function getEBayMotorsProShippingMethodEnabled(): ?bool
     {
         return $this->eBayMotorsProShippingMethodEnabled;
     }
@@ -3155,20 +3278,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProShippingMethodEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProShippingMethodEnabled($eBayMotorsProShippingMethodEnabled = null)
+    public function setEBayMotorsProShippingMethodEnabled(?bool $eBayMotorsProShippingMethodEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProShippingMethodEnabled) && !is_bool($eBayMotorsProShippingMethodEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProShippingMethodEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProShippingMethodEnabled, true), gettype($eBayMotorsProShippingMethodEnabled)), __LINE__);
         }
         $this->eBayMotorsProShippingMethodEnabled = $eBayMotorsProShippingMethodEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProCounterOfferEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProCounterOfferEnabled()
+    public function getEBayMotorsProCounterOfferEnabled(): ?bool
     {
         return $this->eBayMotorsProCounterOfferEnabled;
     }
@@ -3177,20 +3301,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProCounterOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProCounterOfferEnabled($eBayMotorsProCounterOfferEnabled = null)
+    public function setEBayMotorsProCounterOfferEnabled(?bool $eBayMotorsProCounterOfferEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProCounterOfferEnabled) && !is_bool($eBayMotorsProCounterOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProCounterOfferEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProCounterOfferEnabled, true), gettype($eBayMotorsProCounterOfferEnabled)), __LINE__);
         }
         $this->eBayMotorsProCounterOfferEnabled = $eBayMotorsProCounterOfferEnabled;
+        
         return $this;
     }
     /**
      * Get eBayMotorsProSellerContactDetailsEnabled value
      * @return bool|null
      */
-    public function getEBayMotorsProSellerContactDetailsEnabled()
+    public function getEBayMotorsProSellerContactDetailsEnabled(): ?bool
     {
         return $this->eBayMotorsProSellerContactDetailsEnabled;
     }
@@ -3199,20 +3324,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $eBayMotorsProSellerContactDetailsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEBayMotorsProSellerContactDetailsEnabled($eBayMotorsProSellerContactDetailsEnabled = null)
+    public function setEBayMotorsProSellerContactDetailsEnabled(?bool $eBayMotorsProSellerContactDetailsEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($eBayMotorsProSellerContactDetailsEnabled) && !is_bool($eBayMotorsProSellerContactDetailsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($eBayMotorsProSellerContactDetailsEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eBayMotorsProSellerContactDetailsEnabled, true), gettype($eBayMotorsProSellerContactDetailsEnabled)), __LINE__);
         }
         $this->eBayMotorsProSellerContactDetailsEnabled = $eBayMotorsProSellerContactDetailsEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketAdFormatEnabled value
      * @return string|null
      */
-    public function getLocalMarketAdFormatEnabled()
+    public function getLocalMarketAdFormatEnabled(): ?string
     {
         return $this->LocalMarketAdFormatEnabled;
     }
@@ -3220,24 +3346,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set LocalMarketAdFormatEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $localMarketAdFormatEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketAdFormatEnabled($localMarketAdFormatEnabled = null)
+    public function setLocalMarketAdFormatEnabled(?string $localMarketAdFormatEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::valueIsValid($localMarketAdFormatEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $localMarketAdFormatEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType', is_array($localMarketAdFormatEnabled) ? implode(', ', $localMarketAdFormatEnabled) : var_export($localMarketAdFormatEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AdFormatEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->LocalMarketAdFormatEnabled = $localMarketAdFormatEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketContactByPhoneEnabled value
      * @return bool|null
      */
-    public function getLocalMarketContactByPhoneEnabled()
+    public function getLocalMarketContactByPhoneEnabled(): ?bool
     {
         return $this->LocalMarketContactByPhoneEnabled;
     }
@@ -3246,20 +3373,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketContactByPhoneEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketContactByPhoneEnabled($localMarketContactByPhoneEnabled = null)
+    public function setLocalMarketContactByPhoneEnabled(?bool $localMarketContactByPhoneEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketContactByPhoneEnabled) && !is_bool($localMarketContactByPhoneEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketContactByPhoneEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketContactByPhoneEnabled, true), gettype($localMarketContactByPhoneEnabled)), __LINE__);
         }
         $this->LocalMarketContactByPhoneEnabled = $localMarketContactByPhoneEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketPhoneCount value
      * @return int|null
      */
-    public function getLocalMarketPhoneCount()
+    public function getLocalMarketPhoneCount(): ?int
     {
         return $this->LocalMarketPhoneCount;
     }
@@ -3268,20 +3396,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $localMarketPhoneCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketPhoneCount($localMarketPhoneCount = null)
+    public function setLocalMarketPhoneCount(?int $localMarketPhoneCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($localMarketPhoneCount) && !is_numeric($localMarketPhoneCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($localMarketPhoneCount)), __LINE__);
+        if (!is_null($localMarketPhoneCount) && !(is_int($localMarketPhoneCount) || ctype_digit($localMarketPhoneCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($localMarketPhoneCount, true), gettype($localMarketPhoneCount)), __LINE__);
         }
         $this->LocalMarketPhoneCount = $localMarketPhoneCount;
+        
         return $this;
     }
     /**
      * Get LocalMarketContactByAddressEnabled value
      * @return bool|null
      */
-    public function getLocalMarketContactByAddressEnabled()
+    public function getLocalMarketContactByAddressEnabled(): ?bool
     {
         return $this->LocalMarketContactByAddressEnabled;
     }
@@ -3290,20 +3419,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketContactByAddressEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketContactByAddressEnabled($localMarketContactByAddressEnabled = null)
+    public function setLocalMarketContactByAddressEnabled(?bool $localMarketContactByAddressEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketContactByAddressEnabled) && !is_bool($localMarketContactByAddressEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketContactByAddressEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketContactByAddressEnabled, true), gettype($localMarketContactByAddressEnabled)), __LINE__);
         }
         $this->LocalMarketContactByAddressEnabled = $localMarketContactByAddressEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketStreetCount value
      * @return int|null
      */
-    public function getLocalMarketStreetCount()
+    public function getLocalMarketStreetCount(): ?int
     {
         return $this->LocalMarketStreetCount;
     }
@@ -3312,20 +3442,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $localMarketStreetCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketStreetCount($localMarketStreetCount = null)
+    public function setLocalMarketStreetCount(?int $localMarketStreetCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($localMarketStreetCount) && !is_numeric($localMarketStreetCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($localMarketStreetCount)), __LINE__);
+        if (!is_null($localMarketStreetCount) && !(is_int($localMarketStreetCount) || ctype_digit($localMarketStreetCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($localMarketStreetCount, true), gettype($localMarketStreetCount)), __LINE__);
         }
         $this->LocalMarketStreetCount = $localMarketStreetCount;
+        
         return $this;
     }
     /**
      * Get LocalMarketCompanyNameEnabled value
      * @return bool|null
      */
-    public function getLocalMarketCompanyNameEnabled()
+    public function getLocalMarketCompanyNameEnabled(): ?bool
     {
         return $this->LocalMarketCompanyNameEnabled;
     }
@@ -3334,20 +3465,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketCompanyNameEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketCompanyNameEnabled($localMarketCompanyNameEnabled = null)
+    public function setLocalMarketCompanyNameEnabled(?bool $localMarketCompanyNameEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketCompanyNameEnabled) && !is_bool($localMarketCompanyNameEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketCompanyNameEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketCompanyNameEnabled, true), gettype($localMarketCompanyNameEnabled)), __LINE__);
         }
         $this->LocalMarketCompanyNameEnabled = $localMarketCompanyNameEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketContactByEmailEnabled value
      * @return bool|null
      */
-    public function getLocalMarketContactByEmailEnabled()
+    public function getLocalMarketContactByEmailEnabled(): ?bool
     {
         return $this->LocalMarketContactByEmailEnabled;
     }
@@ -3356,20 +3488,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketContactByEmailEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketContactByEmailEnabled($localMarketContactByEmailEnabled = null)
+    public function setLocalMarketContactByEmailEnabled(?bool $localMarketContactByEmailEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketContactByEmailEnabled) && !is_bool($localMarketContactByEmailEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketContactByEmailEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketContactByEmailEnabled, true), gettype($localMarketContactByEmailEnabled)), __LINE__);
         }
         $this->LocalMarketContactByEmailEnabled = $localMarketContactByEmailEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketBestOfferEnabled value
      * @return string|null
      */
-    public function getLocalMarketBestOfferEnabled()
+    public function getLocalMarketBestOfferEnabled(): ?string
     {
         return $this->LocalMarketBestOfferEnabled;
     }
@@ -3377,24 +3510,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set LocalMarketBestOfferEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $localMarketBestOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketBestOfferEnabled($localMarketBestOfferEnabled = null)
+    public function setLocalMarketBestOfferEnabled(?string $localMarketBestOfferEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::valueIsValid($localMarketBestOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $localMarketBestOfferEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType', is_array($localMarketBestOfferEnabled) ? implode(', ', $localMarketBestOfferEnabled) : var_export($localMarketBestOfferEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdBestOfferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->LocalMarketBestOfferEnabled = $localMarketBestOfferEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketAutoAcceptEnabled value
      * @return bool|null
      */
-    public function getLocalMarketAutoAcceptEnabled()
+    public function getLocalMarketAutoAcceptEnabled(): ?bool
     {
         return $this->LocalMarketAutoAcceptEnabled;
     }
@@ -3403,20 +3537,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketAutoAcceptEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketAutoAcceptEnabled($localMarketAutoAcceptEnabled = null)
+    public function setLocalMarketAutoAcceptEnabled(?bool $localMarketAutoAcceptEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketAutoAcceptEnabled) && !is_bool($localMarketAutoAcceptEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketAutoAcceptEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketAutoAcceptEnabled, true), gettype($localMarketAutoAcceptEnabled)), __LINE__);
         }
         $this->LocalMarketAutoAcceptEnabled = $localMarketAutoAcceptEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketAutoDeclineEnabled value
      * @return bool|null
      */
-    public function getLocalMarketAutoDeclineEnabled()
+    public function getLocalMarketAutoDeclineEnabled(): ?bool
     {
         return $this->LocalMarketAutoDeclineEnabled;
     }
@@ -3425,20 +3560,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketAutoDeclineEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketAutoDeclineEnabled($localMarketAutoDeclineEnabled = null)
+    public function setLocalMarketAutoDeclineEnabled(?bool $localMarketAutoDeclineEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketAutoDeclineEnabled) && !is_bool($localMarketAutoDeclineEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketAutoDeclineEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketAutoDeclineEnabled, true), gettype($localMarketAutoDeclineEnabled)), __LINE__);
         }
         $this->LocalMarketAutoDeclineEnabled = $localMarketAutoDeclineEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketPaymentMethodCheckOutEnabled value
      * @return string|null
      */
-    public function getLocalMarketPaymentMethodCheckOutEnabled()
+    public function getLocalMarketPaymentMethodCheckOutEnabled(): ?string
     {
         return $this->LocalMarketPaymentMethodCheckOutEnabled;
     }
@@ -3446,24 +3582,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set LocalMarketPaymentMethodCheckOutEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $localMarketPaymentMethodCheckOutEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketPaymentMethodCheckOutEnabled($localMarketPaymentMethodCheckOutEnabled = null)
+    public function setLocalMarketPaymentMethodCheckOutEnabled(?string $localMarketPaymentMethodCheckOutEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::valueIsValid($localMarketPaymentMethodCheckOutEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $localMarketPaymentMethodCheckOutEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType', is_array($localMarketPaymentMethodCheckOutEnabled) ? implode(', ', $localMarketPaymentMethodCheckOutEnabled) : var_export($localMarketPaymentMethodCheckOutEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ClassifiedAdPaymentMethodEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->LocalMarketPaymentMethodCheckOutEnabled = $localMarketPaymentMethodCheckOutEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketShippingMethodEnabled value
      * @return bool|null
      */
-    public function getLocalMarketShippingMethodEnabled()
+    public function getLocalMarketShippingMethodEnabled(): ?bool
     {
         return $this->LocalMarketShippingMethodEnabled;
     }
@@ -3472,20 +3609,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketShippingMethodEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketShippingMethodEnabled($localMarketShippingMethodEnabled = null)
+    public function setLocalMarketShippingMethodEnabled(?bool $localMarketShippingMethodEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketShippingMethodEnabled) && !is_bool($localMarketShippingMethodEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketShippingMethodEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketShippingMethodEnabled, true), gettype($localMarketShippingMethodEnabled)), __LINE__);
         }
         $this->LocalMarketShippingMethodEnabled = $localMarketShippingMethodEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketCounterOfferEnabled value
      * @return bool|null
      */
-    public function getLocalMarketCounterOfferEnabled()
+    public function getLocalMarketCounterOfferEnabled(): ?bool
     {
         return $this->LocalMarketCounterOfferEnabled;
     }
@@ -3494,20 +3632,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketCounterOfferEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketCounterOfferEnabled($localMarketCounterOfferEnabled = null)
+    public function setLocalMarketCounterOfferEnabled(?bool $localMarketCounterOfferEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketCounterOfferEnabled) && !is_bool($localMarketCounterOfferEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketCounterOfferEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketCounterOfferEnabled, true), gettype($localMarketCounterOfferEnabled)), __LINE__);
         }
         $this->LocalMarketCounterOfferEnabled = $localMarketCounterOfferEnabled;
+        
         return $this;
     }
     /**
      * Get LocalMarketSellerContactDetailsEnabled value
      * @return bool|null
      */
-    public function getLocalMarketSellerContactDetailsEnabled()
+    public function getLocalMarketSellerContactDetailsEnabled(): ?bool
     {
         return $this->LocalMarketSellerContactDetailsEnabled;
     }
@@ -3516,20 +3655,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $localMarketSellerContactDetailsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setLocalMarketSellerContactDetailsEnabled($localMarketSellerContactDetailsEnabled = null)
+    public function setLocalMarketSellerContactDetailsEnabled(?bool $localMarketSellerContactDetailsEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($localMarketSellerContactDetailsEnabled) && !is_bool($localMarketSellerContactDetailsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($localMarketSellerContactDetailsEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($localMarketSellerContactDetailsEnabled, true), gettype($localMarketSellerContactDetailsEnabled)), __LINE__);
         }
         $this->LocalMarketSellerContactDetailsEnabled = $localMarketSellerContactDetailsEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdPhoneCount value
      * @return int|null
      */
-    public function getClassifiedAdPhoneCount()
+    public function getClassifiedAdPhoneCount(): ?int
     {
         return $this->ClassifiedAdPhoneCount;
     }
@@ -3538,20 +3678,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $classifiedAdPhoneCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdPhoneCount($classifiedAdPhoneCount = null)
+    public function setClassifiedAdPhoneCount(?int $classifiedAdPhoneCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($classifiedAdPhoneCount) && !is_numeric($classifiedAdPhoneCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($classifiedAdPhoneCount)), __LINE__);
+        if (!is_null($classifiedAdPhoneCount) && !(is_int($classifiedAdPhoneCount) || ctype_digit($classifiedAdPhoneCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($classifiedAdPhoneCount, true), gettype($classifiedAdPhoneCount)), __LINE__);
         }
         $this->ClassifiedAdPhoneCount = $classifiedAdPhoneCount;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdContactByAddressEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdContactByAddressEnabled()
+    public function getClassifiedAdContactByAddressEnabled(): ?bool
     {
         return $this->ClassifiedAdContactByAddressEnabled;
     }
@@ -3560,20 +3701,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdContactByAddressEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdContactByAddressEnabled($classifiedAdContactByAddressEnabled = null)
+    public function setClassifiedAdContactByAddressEnabled(?bool $classifiedAdContactByAddressEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdContactByAddressEnabled) && !is_bool($classifiedAdContactByAddressEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdContactByAddressEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdContactByAddressEnabled, true), gettype($classifiedAdContactByAddressEnabled)), __LINE__);
         }
         $this->ClassifiedAdContactByAddressEnabled = $classifiedAdContactByAddressEnabled;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdStreetCount value
      * @return int|null
      */
-    public function getClassifiedAdStreetCount()
+    public function getClassifiedAdStreetCount(): ?int
     {
         return $this->ClassifiedAdStreetCount;
     }
@@ -3582,20 +3724,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $classifiedAdStreetCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdStreetCount($classifiedAdStreetCount = null)
+    public function setClassifiedAdStreetCount(?int $classifiedAdStreetCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($classifiedAdStreetCount) && !is_numeric($classifiedAdStreetCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($classifiedAdStreetCount)), __LINE__);
+        if (!is_null($classifiedAdStreetCount) && !(is_int($classifiedAdStreetCount) || ctype_digit($classifiedAdStreetCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($classifiedAdStreetCount, true), gettype($classifiedAdStreetCount)), __LINE__);
         }
         $this->ClassifiedAdStreetCount = $classifiedAdStreetCount;
+        
         return $this;
     }
     /**
      * Get ClassifiedAdCompanyNameEnabled value
      * @return bool|null
      */
-    public function getClassifiedAdCompanyNameEnabled()
+    public function getClassifiedAdCompanyNameEnabled(): ?bool
     {
         return $this->ClassifiedAdCompanyNameEnabled;
     }
@@ -3604,20 +3747,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $classifiedAdCompanyNameEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setClassifiedAdCompanyNameEnabled($classifiedAdCompanyNameEnabled = null)
+    public function setClassifiedAdCompanyNameEnabled(?bool $classifiedAdCompanyNameEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($classifiedAdCompanyNameEnabled) && !is_bool($classifiedAdCompanyNameEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($classifiedAdCompanyNameEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($classifiedAdCompanyNameEnabled, true), gettype($classifiedAdCompanyNameEnabled)), __LINE__);
         }
         $this->ClassifiedAdCompanyNameEnabled = $classifiedAdCompanyNameEnabled;
+        
         return $this;
     }
     /**
      * Get SpecialitySubscription value
      * @return string|null
      */
-    public function getSpecialitySubscription()
+    public function getSpecialitySubscription(): ?string
     {
         return $this->SpecialitySubscription;
     }
@@ -3625,24 +3769,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set SpecialitySubscription value
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $specialitySubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSpecialitySubscription($specialitySubscription = null)
+    public function setSpecialitySubscription(?string $specialitySubscription = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid($specialitySubscription)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $specialitySubscription, implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType', is_array($specialitySubscription) ? implode(', ', $specialitySubscription) : var_export($specialitySubscription, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
         }
         $this->SpecialitySubscription = $specialitySubscription;
+        
         return $this;
     }
     /**
      * Get RegularSubscription value
      * @return string|null
      */
-    public function getRegularSubscription()
+    public function getRegularSubscription(): ?string
     {
         return $this->RegularSubscription;
     }
@@ -3650,24 +3795,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set RegularSubscription value
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $regularSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setRegularSubscription($regularSubscription = null)
+    public function setRegularSubscription(?string $regularSubscription = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid($regularSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $regularSubscription, implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType', is_array($regularSubscription) ? implode(', ', $regularSubscription) : var_export($regularSubscription, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
         }
         $this->RegularSubscription = $regularSubscription;
+        
         return $this;
     }
     /**
      * Get PremiumSubscription value
      * @return string|null
      */
-    public function getPremiumSubscription()
+    public function getPremiumSubscription(): ?string
     {
         return $this->PremiumSubscription;
     }
@@ -3675,24 +3821,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set PremiumSubscription value
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $premiumSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPremiumSubscription($premiumSubscription = null)
+    public function setPremiumSubscription(?string $premiumSubscription = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid($premiumSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $premiumSubscription, implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType', is_array($premiumSubscription) ? implode(', ', $premiumSubscription) : var_export($premiumSubscription, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
         }
         $this->PremiumSubscription = $premiumSubscription;
+        
         return $this;
     }
     /**
      * Get NonSubscription value
      * @return string|null
      */
-    public function getNonSubscription()
+    public function getNonSubscription(): ?string
     {
         return $this->NonSubscription;
     }
@@ -3700,24 +3847,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set NonSubscription value
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $nonSubscription
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setNonSubscription($nonSubscription = null)
+    public function setNonSubscription(?string $nonSubscription = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::valueIsValid($nonSubscription)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $nonSubscription, implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType', is_array($nonSubscription) ? implode(', ', $nonSubscription) : var_export($nonSubscription, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GeographicExposureCodeType::getValidValues())), __LINE__);
         }
         $this->NonSubscription = $nonSubscription;
+        
         return $this;
     }
     /**
      * Get INEscrowWorkflowTimeline value
      * @return string|null
      */
-    public function getINEscrowWorkflowTimeline()
+    public function getINEscrowWorkflowTimeline(): ?string
     {
         return $this->INEscrowWorkflowTimeline;
     }
@@ -3725,24 +3873,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set INEscrowWorkflowTimeline value
      * @uses \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $iNEscrowWorkflowTimeline
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setINEscrowWorkflowTimeline($iNEscrowWorkflowTimeline = null)
+    public function setINEscrowWorkflowTimeline(?string $iNEscrowWorkflowTimeline = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::valueIsValid($iNEscrowWorkflowTimeline)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $iNEscrowWorkflowTimeline, implode(', ', \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType', is_array($iNEscrowWorkflowTimeline) ? implode(', ', $iNEscrowWorkflowTimeline) : var_export($iNEscrowWorkflowTimeline, true), implode(', ', \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::getValidValues())), __LINE__);
         }
         $this->INEscrowWorkflowTimeline = $iNEscrowWorkflowTimeline;
+        
         return $this;
     }
     /**
      * Get PayPalRequiredForStoreOwner value
      * @return bool|null
      */
-    public function getPayPalRequiredForStoreOwner()
+    public function getPayPalRequiredForStoreOwner(): ?bool
     {
         return $this->PayPalRequiredForStoreOwner;
     }
@@ -3751,20 +3900,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $payPalRequiredForStoreOwner
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPayPalRequiredForStoreOwner($payPalRequiredForStoreOwner = null)
+    public function setPayPalRequiredForStoreOwner(?bool $payPalRequiredForStoreOwner = null): self
     {
         // validation for constraint: boolean
         if (!is_null($payPalRequiredForStoreOwner) && !is_bool($payPalRequiredForStoreOwner)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($payPalRequiredForStoreOwner)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalRequiredForStoreOwner, true), gettype($payPalRequiredForStoreOwner)), __LINE__);
         }
         $this->PayPalRequiredForStoreOwner = $payPalRequiredForStoreOwner;
+        
         return $this;
     }
     /**
      * Get ReviseQuantityAllowed value
      * @return bool|null
      */
-    public function getReviseQuantityAllowed()
+    public function getReviseQuantityAllowed(): ?bool
     {
         return $this->ReviseQuantityAllowed;
     }
@@ -3773,20 +3923,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $reviseQuantityAllowed
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setReviseQuantityAllowed($reviseQuantityAllowed = null)
+    public function setReviseQuantityAllowed(?bool $reviseQuantityAllowed = null): self
     {
         // validation for constraint: boolean
         if (!is_null($reviseQuantityAllowed) && !is_bool($reviseQuantityAllowed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($reviseQuantityAllowed)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($reviseQuantityAllowed, true), gettype($reviseQuantityAllowed)), __LINE__);
         }
         $this->ReviseQuantityAllowed = $reviseQuantityAllowed;
+        
         return $this;
     }
     /**
      * Get RevisePriceAllowed value
      * @return bool|null
      */
-    public function getRevisePriceAllowed()
+    public function getRevisePriceAllowed(): ?bool
     {
         return $this->RevisePriceAllowed;
     }
@@ -3795,20 +3946,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $revisePriceAllowed
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setRevisePriceAllowed($revisePriceAllowed = null)
+    public function setRevisePriceAllowed(?bool $revisePriceAllowed = null): self
     {
         // validation for constraint: boolean
         if (!is_null($revisePriceAllowed) && !is_bool($revisePriceAllowed)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($revisePriceAllowed)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($revisePriceAllowed, true), gettype($revisePriceAllowed)), __LINE__);
         }
         $this->RevisePriceAllowed = $revisePriceAllowed;
+        
         return $this;
     }
     /**
      * Get StoreOwnerExtendedListingDurationsEnabled value
      * @return bool|null
      */
-    public function getStoreOwnerExtendedListingDurationsEnabled()
+    public function getStoreOwnerExtendedListingDurationsEnabled(): ?bool
     {
         return $this->StoreOwnerExtendedListingDurationsEnabled;
     }
@@ -3817,20 +3969,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $storeOwnerExtendedListingDurationsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setStoreOwnerExtendedListingDurationsEnabled($storeOwnerExtendedListingDurationsEnabled = null)
+    public function setStoreOwnerExtendedListingDurationsEnabled(?bool $storeOwnerExtendedListingDurationsEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($storeOwnerExtendedListingDurationsEnabled) && !is_bool($storeOwnerExtendedListingDurationsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($storeOwnerExtendedListingDurationsEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($storeOwnerExtendedListingDurationsEnabled, true), gettype($storeOwnerExtendedListingDurationsEnabled)), __LINE__);
         }
         $this->StoreOwnerExtendedListingDurationsEnabled = $storeOwnerExtendedListingDurationsEnabled;
+        
         return $this;
     }
     /**
      * Get StoreOwnerExtendedListingDurations value
      * @return \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType|null
      */
-    public function getStoreOwnerExtendedListingDurations()
+    public function getStoreOwnerExtendedListingDurations(): ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType
     {
         return $this->StoreOwnerExtendedListingDurations;
     }
@@ -3839,16 +3992,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setStoreOwnerExtendedListingDurations(\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null)
+    public function setStoreOwnerExtendedListingDurations(?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null): self
     {
         $this->StoreOwnerExtendedListingDurations = $storeOwnerExtendedListingDurations;
+        
         return $this;
     }
     /**
      * Get ReturnPolicyEnabled value
      * @return bool|null
      */
-    public function getReturnPolicyEnabled()
+    public function getReturnPolicyEnabled(): ?bool
     {
         return $this->ReturnPolicyEnabled;
     }
@@ -3857,20 +4011,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $returnPolicyEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setReturnPolicyEnabled($returnPolicyEnabled = null)
+    public function setReturnPolicyEnabled(?bool $returnPolicyEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($returnPolicyEnabled) && !is_bool($returnPolicyEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($returnPolicyEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($returnPolicyEnabled, true), gettype($returnPolicyEnabled)), __LINE__);
         }
         $this->ReturnPolicyEnabled = $returnPolicyEnabled;
+        
         return $this;
     }
     /**
      * Get HandlingTimeEnabled value
      * @return bool|null
      */
-    public function getHandlingTimeEnabled()
+    public function getHandlingTimeEnabled(): ?bool
     {
         return $this->HandlingTimeEnabled;
     }
@@ -3879,20 +4034,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $handlingTimeEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setHandlingTimeEnabled($handlingTimeEnabled = null)
+    public function setHandlingTimeEnabled(?bool $handlingTimeEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($handlingTimeEnabled) && !is_bool($handlingTimeEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($handlingTimeEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($handlingTimeEnabled, true), gettype($handlingTimeEnabled)), __LINE__);
         }
         $this->HandlingTimeEnabled = $handlingTimeEnabled;
+        
         return $this;
     }
     /**
      * Get MaxFlatShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getMaxFlatShippingCost()
+    public function getMaxFlatShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->MaxFlatShippingCost;
     }
@@ -3901,16 +4057,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setMaxFlatShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null)
+    public function setMaxFlatShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null): self
     {
         $this->MaxFlatShippingCost = $maxFlatShippingCost;
+        
         return $this;
     }
     /**
      * Get Group1MaxFlatShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getGroup1MaxFlatShippingCost()
+    public function getGroup1MaxFlatShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Group1MaxFlatShippingCost;
     }
@@ -3919,16 +4076,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setGroup1MaxFlatShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null)
+    public function setGroup1MaxFlatShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null): self
     {
         $this->Group1MaxFlatShippingCost = $group1MaxFlatShippingCost;
+        
         return $this;
     }
     /**
      * Get Group2MaxFlatShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getGroup2MaxFlatShippingCost()
+    public function getGroup2MaxFlatShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Group2MaxFlatShippingCost;
     }
@@ -3937,16 +4095,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setGroup2MaxFlatShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null)
+    public function setGroup2MaxFlatShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null): self
     {
         $this->Group2MaxFlatShippingCost = $group2MaxFlatShippingCost;
+        
         return $this;
     }
     /**
      * Get Group3MaxFlatShippingCost value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getGroup3MaxFlatShippingCost()
+    public function getGroup3MaxFlatShippingCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Group3MaxFlatShippingCost;
     }
@@ -3955,63 +4114,84 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setGroup3MaxFlatShippingCost(\macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null)
+    public function setGroup3MaxFlatShippingCost(?\macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null): self
     {
         $this->Group3MaxFlatShippingCost = $group3MaxFlatShippingCost;
+        
         return $this;
     }
     /**
      * Get PaymentMethod value
-     * @return string[]|null
+     * @return string[]
      */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): array
     {
         return $this->PaymentMethod;
+    }
+    /**
+     * This method is responsible for validating the values passed to the setPaymentMethod method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setPaymentMethod method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validatePaymentMethodForArrayConstraintsFromSetPaymentMethod(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $categoryFeatureTypePaymentMethodItem) {
+            // validation for constraint: enumeration
+            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($categoryFeatureTypePaymentMethodItem)) {
+                $invalidValues[] = is_object($categoryFeatureTypePaymentMethodItem) ? get_class($categoryFeatureTypePaymentMethodItem) : sprintf('%s(%s)', gettype($categoryFeatureTypePaymentMethodItem), var_export($categoryFeatureTypePaymentMethodItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()));
+        }
+        unset($invalidValues);
+        
+        return $message;
     }
     /**
      * Set PaymentMethod value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string[] $paymentMethod
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPaymentMethod(array $paymentMethod = array())
+    public function setPaymentMethod(array $paymentMethod = []): self
     {
-        $invalidValues = array();
-        foreach ($paymentMethod as $categoryFeatureTypePaymentMethodItem) {
-            if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($categoryFeatureTypePaymentMethodItem)) {
-                $invalidValues[] = var_export($categoryFeatureTypePaymentMethodItem, true);
-            }
-        }
-        if (!empty($invalidValues)) {
-            throw new \InvalidArgumentException(sprintf('Value(s) "%s" is/are invalid, please use one of: %s', implode(', ', $invalidValues), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+        // validation for constraint: array
+        if ('' !== ($paymentMethodArrayErrorMessage = self::validatePaymentMethodForArrayConstraintsFromSetPaymentMethod($paymentMethod))) {
+            throw new InvalidArgumentException($paymentMethodArrayErrorMessage, __LINE__);
         }
         $this->PaymentMethod = $paymentMethod;
+        
         return $this;
     }
     /**
      * Add item to PaymentMethod value
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $item
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function addToPaymentMethod($item)
+    public function addToPaymentMethod(string $item): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::valueIsValid($item)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $item, implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BuyerPaymentMethodCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentMethod[] = $item;
+        
         return $this;
     }
     /**
      * Get VariationsEnabled value
      * @return bool|null
      */
-    public function getVariationsEnabled()
+    public function getVariationsEnabled(): ?bool
     {
         return $this->VariationsEnabled;
     }
@@ -4020,20 +4200,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $variationsEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setVariationsEnabled($variationsEnabled = null)
+    public function setVariationsEnabled(?bool $variationsEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($variationsEnabled) && !is_bool($variationsEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($variationsEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($variationsEnabled, true), gettype($variationsEnabled)), __LINE__);
         }
         $this->VariationsEnabled = $variationsEnabled;
+        
         return $this;
     }
     /**
      * Get AttributeConversionEnabled value
      * @return string|null
      */
-    public function getAttributeConversionEnabled()
+    public function getAttributeConversionEnabled(): ?string
     {
         return $this->AttributeConversionEnabled;
     }
@@ -4041,24 +4222,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set AttributeConversionEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $attributeConversionEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setAttributeConversionEnabled($attributeConversionEnabled = null)
+    public function setAttributeConversionEnabled(?string $attributeConversionEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType::valueIsValid($attributeConversionEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $attributeConversionEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType', is_array($attributeConversionEnabled) ? implode(', ', $attributeConversionEnabled) : var_export($attributeConversionEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\AttributeConversionEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->AttributeConversionEnabled = $attributeConversionEnabled;
+        
         return $this;
     }
     /**
      * Get FreeGalleryPlusEnabled value
      * @return bool|null
      */
-    public function getFreeGalleryPlusEnabled()
+    public function getFreeGalleryPlusEnabled(): ?bool
     {
         return $this->FreeGalleryPlusEnabled;
     }
@@ -4067,20 +4249,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $freeGalleryPlusEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setFreeGalleryPlusEnabled($freeGalleryPlusEnabled = null)
+    public function setFreeGalleryPlusEnabled(?bool $freeGalleryPlusEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($freeGalleryPlusEnabled) && !is_bool($freeGalleryPlusEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($freeGalleryPlusEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($freeGalleryPlusEnabled, true), gettype($freeGalleryPlusEnabled)), __LINE__);
         }
         $this->FreeGalleryPlusEnabled = $freeGalleryPlusEnabled;
+        
         return $this;
     }
     /**
      * Get FreePicturePackEnabled value
      * @return bool|null
      */
-    public function getFreePicturePackEnabled()
+    public function getFreePicturePackEnabled(): ?bool
     {
         return $this->FreePicturePackEnabled;
     }
@@ -4089,20 +4272,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $freePicturePackEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setFreePicturePackEnabled($freePicturePackEnabled = null)
+    public function setFreePicturePackEnabled(?bool $freePicturePackEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($freePicturePackEnabled) && !is_bool($freePicturePackEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($freePicturePackEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($freePicturePackEnabled, true), gettype($freePicturePackEnabled)), __LINE__);
         }
         $this->FreePicturePackEnabled = $freePicturePackEnabled;
+        
         return $this;
     }
     /**
      * Get ItemCompatibilityEnabled value
      * @return string|null
      */
-    public function getItemCompatibilityEnabled()
+    public function getItemCompatibilityEnabled(): ?string
     {
         return $this->ItemCompatibilityEnabled;
     }
@@ -4110,24 +4294,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ItemCompatibilityEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $itemCompatibilityEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setItemCompatibilityEnabled($itemCompatibilityEnabled = null)
+    public function setItemCompatibilityEnabled(?string $itemCompatibilityEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType::valueIsValid($itemCompatibilityEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $itemCompatibilityEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType', is_array($itemCompatibilityEnabled) ? implode(', ', $itemCompatibilityEnabled) : var_export($itemCompatibilityEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ItemCompatibilityEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ItemCompatibilityEnabled = $itemCompatibilityEnabled;
+        
         return $this;
     }
     /**
      * Get MinItemCompatibility value
      * @return int|null
      */
-    public function getMinItemCompatibility()
+    public function getMinItemCompatibility(): ?int
     {
         return $this->MinItemCompatibility;
     }
@@ -4136,20 +4321,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $minItemCompatibility
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setMinItemCompatibility($minItemCompatibility = null)
+    public function setMinItemCompatibility(?int $minItemCompatibility = null): self
     {
         // validation for constraint: int
-        if (!is_null($minItemCompatibility) && !is_numeric($minItemCompatibility)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($minItemCompatibility)), __LINE__);
+        if (!is_null($minItemCompatibility) && !(is_int($minItemCompatibility) || ctype_digit($minItemCompatibility))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($minItemCompatibility, true), gettype($minItemCompatibility)), __LINE__);
         }
         $this->MinItemCompatibility = $minItemCompatibility;
+        
         return $this;
     }
     /**
      * Get MaxItemCompatibility value
      * @return int|null
      */
-    public function getMaxItemCompatibility()
+    public function getMaxItemCompatibility(): ?int
     {
         return $this->MaxItemCompatibility;
     }
@@ -4158,20 +4344,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $maxItemCompatibility
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setMaxItemCompatibility($maxItemCompatibility = null)
+    public function setMaxItemCompatibility(?int $maxItemCompatibility = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxItemCompatibility) && !is_numeric($maxItemCompatibility)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxItemCompatibility)), __LINE__);
+        if (!is_null($maxItemCompatibility) && !(is_int($maxItemCompatibility) || ctype_digit($maxItemCompatibility))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxItemCompatibility, true), gettype($maxItemCompatibility)), __LINE__);
         }
         $this->MaxItemCompatibility = $maxItemCompatibility;
+        
         return $this;
     }
     /**
      * Get ConditionEnabled value
      * @return string|null
      */
-    public function getConditionEnabled()
+    public function getConditionEnabled(): ?string
     {
         return $this->ConditionEnabled;
     }
@@ -4179,24 +4366,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ConditionEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $conditionEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setConditionEnabled($conditionEnabled = null)
+    public function setConditionEnabled(?string $conditionEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType::valueIsValid($conditionEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $conditionEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType', is_array($conditionEnabled) ? implode(', ', $conditionEnabled) : var_export($conditionEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ConditionEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ConditionEnabled = $conditionEnabled;
+        
         return $this;
     }
     /**
      * Get ConditionValues value
      * @return \macropage\ebaysdk\trading\StructType\ConditionValuesType|null
      */
-    public function getConditionValues()
+    public function getConditionValues(): ?\macropage\ebaysdk\trading\StructType\ConditionValuesType
     {
         return $this->ConditionValues;
     }
@@ -4205,16 +4393,36 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setConditionValues(\macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null)
+    public function setConditionValues(?\macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null): self
     {
         $this->ConditionValues = $conditionValues;
+        
+        return $this;
+    }
+    /**
+     * Get SpecialFeatures value
+     * @return \macropage\ebaysdk\trading\StructType\ConditionValuesType|null
+     */
+    public function getSpecialFeatures(): ?\macropage\ebaysdk\trading\StructType\ConditionValuesType
+    {
+        return $this->SpecialFeatures;
+    }
+    /**
+     * Set SpecialFeatures value
+     * @param \macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures
+     * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
+     */
+    public function setSpecialFeatures(?\macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures = null): self
+    {
+        $this->SpecialFeatures = $specialFeatures;
+        
         return $this;
     }
     /**
      * Get ValueCategory value
      * @return bool|null
      */
-    public function getValueCategory()
+    public function getValueCategory(): ?bool
     {
         return $this->ValueCategory;
     }
@@ -4223,20 +4431,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $valueCategory
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setValueCategory($valueCategory = null)
+    public function setValueCategory(?bool $valueCategory = null): self
     {
         // validation for constraint: boolean
         if (!is_null($valueCategory) && !is_bool($valueCategory)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($valueCategory)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($valueCategory, true), gettype($valueCategory)), __LINE__);
         }
         $this->ValueCategory = $valueCategory;
+        
         return $this;
     }
     /**
      * Get ProductCreationEnabled value
      * @return string|null
      */
-    public function getProductCreationEnabled()
+    public function getProductCreationEnabled(): ?string
     {
         return $this->ProductCreationEnabled;
     }
@@ -4244,24 +4453,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ProductCreationEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $productCreationEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setProductCreationEnabled($productCreationEnabled = null)
+    public function setProductCreationEnabled(?string $productCreationEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType::valueIsValid($productCreationEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $productCreationEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType', is_array($productCreationEnabled) ? implode(', ', $productCreationEnabled) : var_export($productCreationEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductCreationEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ProductCreationEnabled = $productCreationEnabled;
+        
         return $this;
     }
     /**
      * Get EANEnabled value
      * @return string|null
      */
-    public function getEANEnabled()
+    public function getEANEnabled(): ?string
     {
         return $this->EANEnabled;
     }
@@ -4269,24 +4479,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set EANEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $eANEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEANEnabled($eANEnabled = null)
+    public function setEANEnabled(?string $eANEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid($eANEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $eANEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType', is_array($eANEnabled) ? implode(', ', $eANEnabled) : var_export($eANEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->EANEnabled = $eANEnabled;
+        
         return $this;
     }
     /**
      * Get ISBNEnabled value
      * @return string|null
      */
-    public function getISBNEnabled()
+    public function getISBNEnabled(): ?string
     {
         return $this->ISBNEnabled;
     }
@@ -4294,24 +4505,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ISBNEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $iSBNEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setISBNEnabled($iSBNEnabled = null)
+    public function setISBNEnabled(?string $iSBNEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid($iSBNEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $iSBNEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType', is_array($iSBNEnabled) ? implode(', ', $iSBNEnabled) : var_export($iSBNEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ISBNEnabled = $iSBNEnabled;
+        
         return $this;
     }
     /**
      * Get UPCEnabled value
      * @return string|null
      */
-    public function getUPCEnabled()
+    public function getUPCEnabled(): ?string
     {
         return $this->UPCEnabled;
     }
@@ -4319,24 +4531,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set UPCEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $uPCEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setUPCEnabled($uPCEnabled = null)
+    public function setUPCEnabled(?string $uPCEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::valueIsValid($uPCEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $uPCEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType', is_array($uPCEnabled) ? implode(', ', $uPCEnabled) : var_export($uPCEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductIdentiferEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->UPCEnabled = $uPCEnabled;
+        
         return $this;
     }
     /**
      * Get MaxGranularFitmentCount value
      * @return int|null
      */
-    public function getMaxGranularFitmentCount()
+    public function getMaxGranularFitmentCount(): ?int
     {
         return $this->MaxGranularFitmentCount;
     }
@@ -4345,20 +4558,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param int $maxGranularFitmentCount
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setMaxGranularFitmentCount($maxGranularFitmentCount = null)
+    public function setMaxGranularFitmentCount(?int $maxGranularFitmentCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($maxGranularFitmentCount) && !is_numeric($maxGranularFitmentCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($maxGranularFitmentCount)), __LINE__);
+        if (!is_null($maxGranularFitmentCount) && !(is_int($maxGranularFitmentCount) || ctype_digit($maxGranularFitmentCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($maxGranularFitmentCount, true), gettype($maxGranularFitmentCount)), __LINE__);
         }
         $this->MaxGranularFitmentCount = $maxGranularFitmentCount;
+        
         return $this;
     }
     /**
      * Get CompatibleVehicleType value
      * @return string|null
      */
-    public function getCompatibleVehicleType()
+    public function getCompatibleVehicleType(): ?string
     {
         return $this->CompatibleVehicleType;
     }
@@ -4367,20 +4581,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param string $compatibleVehicleType
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setCompatibleVehicleType($compatibleVehicleType = null)
+    public function setCompatibleVehicleType(?string $compatibleVehicleType = null): self
     {
         // validation for constraint: string
         if (!is_null($compatibleVehicleType) && !is_string($compatibleVehicleType)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($compatibleVehicleType)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($compatibleVehicleType, true), gettype($compatibleVehicleType)), __LINE__);
         }
         $this->CompatibleVehicleType = $compatibleVehicleType;
+        
         return $this;
     }
     /**
      * Get PaymentOptionsGroup value
      * @return string|null
      */
-    public function getPaymentOptionsGroup()
+    public function getPaymentOptionsGroup(): ?string
     {
         return $this->PaymentOptionsGroup;
     }
@@ -4388,24 +4603,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set PaymentOptionsGroup value
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paymentOptionsGroup
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPaymentOptionsGroup($paymentOptionsGroup = null)
+    public function setPaymentOptionsGroup(?string $paymentOptionsGroup = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::valueIsValid($paymentOptionsGroup)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paymentOptionsGroup, implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType', is_array($paymentOptionsGroup) ? implode(', ', $paymentOptionsGroup) : var_export($paymentOptionsGroup, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentOptionsGroup = $paymentOptionsGroup;
+        
         return $this;
     }
     /**
      * Get ShippingProfileCategoryGroup value
      * @return string|null
      */
-    public function getShippingProfileCategoryGroup()
+    public function getShippingProfileCategoryGroup(): ?string
     {
         return $this->ShippingProfileCategoryGroup;
     }
@@ -4413,24 +4629,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ShippingProfileCategoryGroup value
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $shippingProfileCategoryGroup
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setShippingProfileCategoryGroup($shippingProfileCategoryGroup = null)
+    public function setShippingProfileCategoryGroup(?string $shippingProfileCategoryGroup = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid($shippingProfileCategoryGroup)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $shippingProfileCategoryGroup, implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType', is_array($shippingProfileCategoryGroup) ? implode(', ', $shippingProfileCategoryGroup) : var_export($shippingProfileCategoryGroup, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
         }
         $this->ShippingProfileCategoryGroup = $shippingProfileCategoryGroup;
+        
         return $this;
     }
     /**
      * Get PaymentProfileCategoryGroup value
      * @return string|null
      */
-    public function getPaymentProfileCategoryGroup()
+    public function getPaymentProfileCategoryGroup(): ?string
     {
         return $this->PaymentProfileCategoryGroup;
     }
@@ -4438,24 +4655,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set PaymentProfileCategoryGroup value
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $paymentProfileCategoryGroup
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPaymentProfileCategoryGroup($paymentProfileCategoryGroup = null)
+    public function setPaymentProfileCategoryGroup(?string $paymentProfileCategoryGroup = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid($paymentProfileCategoryGroup)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $paymentProfileCategoryGroup, implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType', is_array($paymentProfileCategoryGroup) ? implode(', ', $paymentProfileCategoryGroup) : var_export($paymentProfileCategoryGroup, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
         }
         $this->PaymentProfileCategoryGroup = $paymentProfileCategoryGroup;
+        
         return $this;
     }
     /**
      * Get ReturnPolicyProfileCategoryGroup value
      * @return string|null
      */
-    public function getReturnPolicyProfileCategoryGroup()
+    public function getReturnPolicyProfileCategoryGroup(): ?string
     {
         return $this->ReturnPolicyProfileCategoryGroup;
     }
@@ -4463,24 +4681,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ReturnPolicyProfileCategoryGroup value
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $returnPolicyProfileCategoryGroup
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setReturnPolicyProfileCategoryGroup($returnPolicyProfileCategoryGroup = null)
+    public function setReturnPolicyProfileCategoryGroup(?string $returnPolicyProfileCategoryGroup = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::valueIsValid($returnPolicyProfileCategoryGroup)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $returnPolicyProfileCategoryGroup, implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType', is_array($returnPolicyProfileCategoryGroup) ? implode(', ', $returnPolicyProfileCategoryGroup) : var_export($returnPolicyProfileCategoryGroup, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProfileCategoryGroupCodeType::getValidValues())), __LINE__);
         }
         $this->ReturnPolicyProfileCategoryGroup = $returnPolicyProfileCategoryGroup;
+        
         return $this;
     }
     /**
      * Get VINSupported value
      * @return bool|null
      */
-    public function getVINSupported()
+    public function getVINSupported(): ?bool
     {
         return $this->VINSupported;
     }
@@ -4489,20 +4708,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $vINSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setVINSupported($vINSupported = null)
+    public function setVINSupported(?bool $vINSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($vINSupported) && !is_bool($vINSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($vINSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($vINSupported, true), gettype($vINSupported)), __LINE__);
         }
         $this->VINSupported = $vINSupported;
+        
         return $this;
     }
     /**
      * Get VRMSupported value
      * @return bool|null
      */
-    public function getVRMSupported()
+    public function getVRMSupported(): ?bool
     {
         return $this->VRMSupported;
     }
@@ -4511,20 +4731,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $vRMSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setVRMSupported($vRMSupported = null)
+    public function setVRMSupported(?bool $vRMSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($vRMSupported) && !is_bool($vRMSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($vRMSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($vRMSupported, true), gettype($vRMSupported)), __LINE__);
         }
         $this->VRMSupported = $vRMSupported;
+        
         return $this;
     }
     /**
      * Get SellerProvidedTitleSupported value
      * @return bool|null
      */
-    public function getSellerProvidedTitleSupported()
+    public function getSellerProvidedTitleSupported(): ?bool
     {
         return $this->SellerProvidedTitleSupported;
     }
@@ -4533,20 +4754,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $sellerProvidedTitleSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setSellerProvidedTitleSupported($sellerProvidedTitleSupported = null)
+    public function setSellerProvidedTitleSupported(?bool $sellerProvidedTitleSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($sellerProvidedTitleSupported) && !is_bool($sellerProvidedTitleSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($sellerProvidedTitleSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($sellerProvidedTitleSupported, true), gettype($sellerProvidedTitleSupported)), __LINE__);
         }
         $this->SellerProvidedTitleSupported = $sellerProvidedTitleSupported;
+        
         return $this;
     }
     /**
      * Get DepositSupported value
      * @return bool|null
      */
-    public function getDepositSupported()
+    public function getDepositSupported(): ?bool
     {
         return $this->DepositSupported;
     }
@@ -4555,20 +4777,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $depositSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDepositSupported($depositSupported = null)
+    public function setDepositSupported(?bool $depositSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($depositSupported) && !is_bool($depositSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($depositSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($depositSupported, true), gettype($depositSupported)), __LINE__);
         }
         $this->DepositSupported = $depositSupported;
+        
         return $this;
     }
     /**
      * Get GlobalShippingEnabled value
      * @return bool|null
      */
-    public function getGlobalShippingEnabled()
+    public function getGlobalShippingEnabled(): ?bool
     {
         return $this->GlobalShippingEnabled;
     }
@@ -4577,20 +4800,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $globalShippingEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setGlobalShippingEnabled($globalShippingEnabled = null)
+    public function setGlobalShippingEnabled(?bool $globalShippingEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($globalShippingEnabled) && !is_bool($globalShippingEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($globalShippingEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($globalShippingEnabled, true), gettype($globalShippingEnabled)), __LINE__);
         }
         $this->GlobalShippingEnabled = $globalShippingEnabled;
+        
         return $this;
     }
     /**
      * Get AdditionalCompatibilityEnabled value
      * @return bool|null
      */
-    public function getAdditionalCompatibilityEnabled()
+    public function getAdditionalCompatibilityEnabled(): ?bool
     {
         return $this->AdditionalCompatibilityEnabled;
     }
@@ -4599,52 +4823,54 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $additionalCompatibilityEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setAdditionalCompatibilityEnabled($additionalCompatibilityEnabled = null)
+    public function setAdditionalCompatibilityEnabled(?bool $additionalCompatibilityEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($additionalCompatibilityEnabled) && !is_bool($additionalCompatibilityEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($additionalCompatibilityEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($additionalCompatibilityEnabled, true), gettype($additionalCompatibilityEnabled)), __LINE__);
         }
         $this->AdditionalCompatibilityEnabled = $additionalCompatibilityEnabled;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\CategoryFeatureType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
     }
     /**
      * Get PickupDropOffEnabled value
      * @return bool|null
      */
-    public function getPickupDropOffEnabled()
+    public function getPickupDropOffEnabled(): ?bool
     {
         return $this->PickupDropOffEnabled;
     }
@@ -4653,20 +4879,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $pickupDropOffEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setPickupDropOffEnabled($pickupDropOffEnabled = null)
+    public function setPickupDropOffEnabled(?bool $pickupDropOffEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($pickupDropOffEnabled) && !is_bool($pickupDropOffEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($pickupDropOffEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($pickupDropOffEnabled, true), gettype($pickupDropOffEnabled)), __LINE__);
         }
         $this->PickupDropOffEnabled = $pickupDropOffEnabled;
+        
         return $this;
     }
     /**
      * Get DigitalGoodDeliveryEnabled value
      * @return bool|null
      */
-    public function getDigitalGoodDeliveryEnabled()
+    public function getDigitalGoodDeliveryEnabled(): ?bool
     {
         return $this->DigitalGoodDeliveryEnabled;
     }
@@ -4675,20 +4902,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $digitalGoodDeliveryEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDigitalGoodDeliveryEnabled($digitalGoodDeliveryEnabled = null)
+    public function setDigitalGoodDeliveryEnabled(?bool $digitalGoodDeliveryEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($digitalGoodDeliveryEnabled) && !is_bool($digitalGoodDeliveryEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($digitalGoodDeliveryEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($digitalGoodDeliveryEnabled, true), gettype($digitalGoodDeliveryEnabled)), __LINE__);
         }
         $this->DigitalGoodDeliveryEnabled = $digitalGoodDeliveryEnabled;
+        
         return $this;
     }
     /**
      * Get EpidSupported value
      * @return bool|null
      */
-    public function getEpidSupported()
+    public function getEpidSupported(): ?bool
     {
         return $this->EpidSupported;
     }
@@ -4697,20 +4925,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $epidSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setEpidSupported($epidSupported = null)
+    public function setEpidSupported(?bool $epidSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($epidSupported) && !is_bool($epidSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($epidSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($epidSupported, true), gettype($epidSupported)), __LINE__);
         }
         $this->EpidSupported = $epidSupported;
+        
         return $this;
     }
     /**
      * Get KTypeSupported value
      * @return bool|null
      */
-    public function getKTypeSupported()
+    public function getKTypeSupported(): ?bool
     {
         return $this->KTypeSupported;
     }
@@ -4719,20 +4948,21 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $kTypeSupported
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setKTypeSupported($kTypeSupported = null)
+    public function setKTypeSupported(?bool $kTypeSupported = null): self
     {
         // validation for constraint: boolean
         if (!is_null($kTypeSupported) && !is_bool($kTypeSupported)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($kTypeSupported)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($kTypeSupported, true), gettype($kTypeSupported)), __LINE__);
         }
         $this->KTypeSupported = $kTypeSupported;
+        
         return $this;
     }
     /**
      * Get ProductRequiredEnabled value
      * @return string|null
      */
-    public function getProductRequiredEnabled()
+    public function getProductRequiredEnabled(): ?string
     {
         return $this->ProductRequiredEnabled;
     }
@@ -4740,24 +4970,25 @@ class CategoryFeatureType extends AbstractStructBase
      * Set ProductRequiredEnabled value
      * @uses \macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $productRequiredEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setProductRequiredEnabled($productRequiredEnabled = null)
+    public function setProductRequiredEnabled(?string $productRequiredEnabled = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType::valueIsValid($productRequiredEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $productRequiredEnabled, implode(', ', \macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType', is_array($productRequiredEnabled) ? implode(', ', $productRequiredEnabled) : var_export($productRequiredEnabled, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ProductRequiredEnabledCodeType::getValidValues())), __LINE__);
         }
         $this->ProductRequiredEnabled = $productRequiredEnabled;
+        
         return $this;
     }
     /**
      * Get DomesticReturnsAcceptedValues value
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType|null
      */
-    public function getDomesticReturnsAcceptedValues()
+    public function getDomesticReturnsAcceptedValues(): ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType
     {
         return $this->DomesticReturnsAcceptedValues;
     }
@@ -4766,16 +4997,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDomesticReturnsAcceptedValues(\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null)
+    public function setDomesticReturnsAcceptedValues(?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null): self
     {
         $this->DomesticReturnsAcceptedValues = $domesticReturnsAcceptedValues;
+        
         return $this;
     }
     /**
      * Get InternationalReturnsAcceptedValues value
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType|null
      */
-    public function getInternationalReturnsAcceptedValues()
+    public function getInternationalReturnsAcceptedValues(): ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType
     {
         return $this->InternationalReturnsAcceptedValues;
     }
@@ -4784,16 +5016,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setInternationalReturnsAcceptedValues(\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null)
+    public function setInternationalReturnsAcceptedValues(?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null): self
     {
         $this->InternationalReturnsAcceptedValues = $internationalReturnsAcceptedValues;
+        
         return $this;
     }
     /**
      * Get DomesticReturnsDurationValues value
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType|null
      */
-    public function getDomesticReturnsDurationValues()
+    public function getDomesticReturnsDurationValues(): ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType
     {
         return $this->DomesticReturnsDurationValues;
     }
@@ -4802,16 +5035,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDomesticReturnsDurationValues(\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null)
+    public function setDomesticReturnsDurationValues(?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null): self
     {
         $this->DomesticReturnsDurationValues = $domesticReturnsDurationValues;
+        
         return $this;
     }
     /**
      * Get InternationalReturnsDurationValues value
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType|null
      */
-    public function getInternationalReturnsDurationValues()
+    public function getInternationalReturnsDurationValues(): ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType
     {
         return $this->InternationalReturnsDurationValues;
     }
@@ -4820,16 +5054,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setInternationalReturnsDurationValues(\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null)
+    public function setInternationalReturnsDurationValues(?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null): self
     {
         $this->InternationalReturnsDurationValues = $internationalReturnsDurationValues;
+        
         return $this;
     }
     /**
      * Get DomesticReturnsShipmentPayeeValues value
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType|null
      */
-    public function getDomesticReturnsShipmentPayeeValues()
+    public function getDomesticReturnsShipmentPayeeValues(): ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType
     {
         return $this->DomesticReturnsShipmentPayeeValues;
     }
@@ -4838,16 +5073,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDomesticReturnsShipmentPayeeValues(\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null)
+    public function setDomesticReturnsShipmentPayeeValues(?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null): self
     {
         $this->DomesticReturnsShipmentPayeeValues = $domesticReturnsShipmentPayeeValues;
+        
         return $this;
     }
     /**
      * Get InternationalReturnsShipmentPayeeValues value
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType|null
      */
-    public function getInternationalReturnsShipmentPayeeValues()
+    public function getInternationalReturnsShipmentPayeeValues(): ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType
     {
         return $this->InternationalReturnsShipmentPayeeValues;
     }
@@ -4856,16 +5092,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setInternationalReturnsShipmentPayeeValues(\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null)
+    public function setInternationalReturnsShipmentPayeeValues(?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null): self
     {
         $this->InternationalReturnsShipmentPayeeValues = $internationalReturnsShipmentPayeeValues;
+        
         return $this;
     }
     /**
      * Get DomesticRefundMethodValues value
      * @return \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType|null
      */
-    public function getDomesticRefundMethodValues()
+    public function getDomesticRefundMethodValues(): ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType
     {
         return $this->DomesticRefundMethodValues;
     }
@@ -4874,16 +5111,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setDomesticRefundMethodValues(\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null)
+    public function setDomesticRefundMethodValues(?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null): self
     {
         $this->DomesticRefundMethodValues = $domesticRefundMethodValues;
+        
         return $this;
     }
     /**
      * Get InternationalRefundMethodValues value
      * @return \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType|null
      */
-    public function getInternationalRefundMethodValues()
+    public function getInternationalRefundMethodValues(): ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType
     {
         return $this->InternationalRefundMethodValues;
     }
@@ -4892,16 +5130,17 @@ class CategoryFeatureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setInternationalRefundMethodValues(\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null)
+    public function setInternationalRefundMethodValues(?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null): self
     {
         $this->InternationalRefundMethodValues = $internationalRefundMethodValues;
+        
         return $this;
     }
     /**
      * Get ReturnPolicyDescriptionEnabled value
      * @return bool|null
      */
-    public function getReturnPolicyDescriptionEnabled()
+    public function getReturnPolicyDescriptionEnabled(): ?bool
     {
         return $this->ReturnPolicyDescriptionEnabled;
     }
@@ -4910,33 +5149,14 @@ class CategoryFeatureType extends AbstractStructBase
      * @param bool $returnPolicyDescriptionEnabled
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
      */
-    public function setReturnPolicyDescriptionEnabled($returnPolicyDescriptionEnabled = null)
+    public function setReturnPolicyDescriptionEnabled(?bool $returnPolicyDescriptionEnabled = null): self
     {
         // validation for constraint: boolean
         if (!is_null($returnPolicyDescriptionEnabled) && !is_bool($returnPolicyDescriptionEnabled)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($returnPolicyDescriptionEnabled)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($returnPolicyDescriptionEnabled, true), gettype($returnPolicyDescriptionEnabled)), __LINE__);
         }
         $this->ReturnPolicyDescriptionEnabled = $returnPolicyDescriptionEnabled;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

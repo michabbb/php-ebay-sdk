@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for WantItNowPostType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,60 +17,61 @@ class WantItNowPostType extends AbstractStructBase
 {
     /**
      * The CategoryID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CategoryID;
+    protected ?string $CategoryID = null;
     /**
      * The Description
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Description;
+    protected ?string $Description = null;
     /**
      * The PostID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $PostID;
+    protected ?string $PostID = null;
     /**
      * The Site
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Site;
+    protected ?string $Site = null;
     /**
      * The StartTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StartTime;
+    protected ?string $StartTime = null;
     /**
      * The ResponseCount
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $ResponseCount;
+    protected ?int $ResponseCount = null;
     /**
      * The Title
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Title;
+    protected ?string $Title = null;
     /**
      * Constructor method for WantItNowPostType
      * @uses WantItNowPostType::setCategoryID()
@@ -85,7 +89,7 @@ class WantItNowPostType extends AbstractStructBase
      * @param int $responseCount
      * @param string $title
      */
-    public function __construct($categoryID = null, $description = null, $postID = null, $site = null, $startTime = null, $responseCount = null, $title = null)
+    public function __construct(?string $categoryID = null, ?string $description = null, ?string $postID = null, ?string $site = null, ?string $startTime = null, ?int $responseCount = null, ?string $title = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -100,7 +104,7 @@ class WantItNowPostType extends AbstractStructBase
      * Get CategoryID value
      * @return string|null
      */
-    public function getCategoryID()
+    public function getCategoryID(): ?string
     {
         return $this->CategoryID;
     }
@@ -109,20 +113,21 @@ class WantItNowPostType extends AbstractStructBase
      * @param string $categoryID
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setCategoryID($categoryID = null)
+    public function setCategoryID(?string $categoryID = null): self
     {
         // validation for constraint: string
         if (!is_null($categoryID) && !is_string($categoryID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($categoryID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($categoryID, true), gettype($categoryID)), __LINE__);
         }
         $this->CategoryID = $categoryID;
+        
         return $this;
     }
     /**
      * Get Description value
      * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->Description;
     }
@@ -131,20 +136,21 @@ class WantItNowPostType extends AbstractStructBase
      * @param string $description
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setDescription($description = null)
+    public function setDescription(?string $description = null): self
     {
         // validation for constraint: string
         if (!is_null($description) && !is_string($description)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($description)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
         $this->Description = $description;
+        
         return $this;
     }
     /**
      * Get PostID value
      * @return string|null
      */
-    public function getPostID()
+    public function getPostID(): ?string
     {
         return $this->PostID;
     }
@@ -153,20 +159,21 @@ class WantItNowPostType extends AbstractStructBase
      * @param string $postID
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setPostID($postID = null)
+    public function setPostID(?string $postID = null): self
     {
         // validation for constraint: string
         if (!is_null($postID) && !is_string($postID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($postID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($postID, true), gettype($postID)), __LINE__);
         }
         $this->PostID = $postID;
+        
         return $this;
     }
     /**
      * Get Site value
      * @return string|null
      */
-    public function getSite()
+    public function getSite(): ?string
     {
         return $this->Site;
     }
@@ -174,24 +181,25 @@ class WantItNowPostType extends AbstractStructBase
      * Set Site value
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $site
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setSite($site = null)
+    public function setSite(?string $site = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SiteCodeType::valueIsValid($site)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $site, implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SiteCodeType', is_array($site) ? implode(', ', $site) : var_export($site, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SiteCodeType::getValidValues())), __LINE__);
         }
         $this->Site = $site;
+        
         return $this;
     }
     /**
      * Get StartTime value
      * @return string|null
      */
-    public function getStartTime()
+    public function getStartTime(): ?string
     {
         return $this->StartTime;
     }
@@ -200,20 +208,21 @@ class WantItNowPostType extends AbstractStructBase
      * @param string $startTime
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setStartTime($startTime = null)
+    public function setStartTime(?string $startTime = null): self
     {
         // validation for constraint: string
         if (!is_null($startTime) && !is_string($startTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($startTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($startTime, true), gettype($startTime)), __LINE__);
         }
         $this->StartTime = $startTime;
+        
         return $this;
     }
     /**
      * Get ResponseCount value
      * @return int|null
      */
-    public function getResponseCount()
+    public function getResponseCount(): ?int
     {
         return $this->ResponseCount;
     }
@@ -222,20 +231,21 @@ class WantItNowPostType extends AbstractStructBase
      * @param int $responseCount
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setResponseCount($responseCount = null)
+    public function setResponseCount(?int $responseCount = null): self
     {
         // validation for constraint: int
-        if (!is_null($responseCount) && !is_numeric($responseCount)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($responseCount)), __LINE__);
+        if (!is_null($responseCount) && !(is_int($responseCount) || ctype_digit($responseCount))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($responseCount, true), gettype($responseCount)), __LINE__);
         }
         $this->ResponseCount = $responseCount;
+        
         return $this;
     }
     /**
      * Get Title value
      * @return string|null
      */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->Title;
     }
@@ -244,33 +254,14 @@ class WantItNowPostType extends AbstractStructBase
      * @param string $title
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
      */
-    public function setTitle($title = null)
+    public function setTitle(?string $title = null): self
     {
         // validation for constraint: string
         if (!is_null($title) && !is_string($title)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($title)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($title, true), gettype($title)), __LINE__);
         }
         $this->Title = $title;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

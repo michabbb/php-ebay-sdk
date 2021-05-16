@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for BestOfferType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>BestOffer</b> container, which consists of information on one Best Offer or counter offer. This information includes the price of the offer, the expiration of the offer, and any messaging provided by the
  * prospective buyer or seller.
  * @subpackage Structs
@@ -15,107 +18,107 @@ class BestOfferType extends AbstractStructBase
 {
     /**
      * The BestOfferID
-     * Meta informations extracted from the WSDL
-     * - documentation: Unique identifier for a Best Offer. This identifier is created once a prospective buyer makes a Best Offer on an item. | Unique identifier for a Best Offer. This identifier is created once a prospective buyer makes a Best Offer on an
-     * item.
+     * Meta information extracted from the WSDL
+     * - documentation: Unique identifier for a Best Offer. This identifier is created once a prospective buyer makes a Best Offer on an item.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BestOfferID;
+    protected ?string $BestOfferID = null;
     /**
      * The ExpirationTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Timestamp indicating when a Best Offer will naturally expire (if the seller has not accepted or declined the offer).
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ExpirationTime;
+    protected ?string $ExpirationTime = null;
     /**
      * The Buyer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Container consisting of information about the prospective buyer who made the Best Offer.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UserType
+     * @var \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public $Buyer;
+    protected ?\macropage\ebaysdk\trading\StructType\UserType $Buyer = null;
     /**
      * The Price
-     * Meta informations extracted from the WSDL
-     * - documentation: The amount of the Best Offer or counter offer.
+     * Meta information extracted from the WSDL
+     * - documentation: The amount of the Best Offer or counter offer. For this field to be returned, the user must have a relationship to the Best Offer, either as the seller, buyer, or potential buyer who has made the Best Offer or counter offer.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public $Price;
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $Price = null;
     /**
      * The Status
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The status of the Best Offer or counter offer. For <b>PlaceOffer</b>, the only applicable values are <code>Accepted</code>, <code>AdminEnded</code>, <code>Declined</code>, and <code>Expired</code>.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Status;
+    protected ?string $Status = null;
     /**
      * The Quantity
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The quantity of the item for which the buyer is making a Best Offer. This value will usually be <code>1</code>, unless the buyer is making an offer on multiple quantity of a line item in a multi-quantity listing.
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $Quantity;
+    protected ?int $Quantity = null;
     /**
      * The BuyerMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A prospective buyer has the option to include a comment when placing a Best Offer or making a counter offer to the seller's counter offer. This field will display that comment.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BuyerMessage;
+    protected ?string $BuyerMessage = null;
     /**
      * The SellerMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: A seller has the option to include a comment when making a counter offer to the prospective buyer's Best Offer. This field will display that comment.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerMessage;
+    protected ?string $SellerMessage = null;
     /**
      * The BestOfferCodeType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This value indicates whether the corresponding offer is a Best Offer, a seller's counter offer, or a buyer counter offer to the seller's counter offer.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $BestOfferCodeType;
+    protected ?string $BestOfferCodeType = null;
     /**
      * The CallStatus
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The value in this field (<code>Success</code> or <code>Failure</code>) will indicate whether or not the seller's attempt to accept, decline, or counter offer a Best Offer was successful. This field is only used by the
      * <b>RespondToBestOffer</b> response.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CallStatus;
+    protected ?string $CallStatus = null;
     /**
      * The NewBestOffer
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is no longer applicable, as it formerly supported the Best Offer Beta feature which is no longer active.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $NewBestOffer;
+    protected ?bool $NewBestOffer = null;
     /**
      * The ImmediatePayEligible
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is no longer applicable, as it formerly supported the Best Offer Beta feature which is no longer active.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $ImmediatePayEligible;
+    protected ?bool $ImmediatePayEligible = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for BestOfferType
      * @uses BestOfferType::setBestOfferID()
@@ -143,9 +146,9 @@ class BestOfferType extends AbstractStructBase
      * @param string $callStatus
      * @param bool $newBestOffer
      * @param bool $immediatePayEligible
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($bestOfferID = null, $expirationTime = null, \macropage\ebaysdk\trading\StructType\UserType $buyer = null, \macropage\ebaysdk\trading\StructType\AmountType $price = null, $status = null, $quantity = null, $buyerMessage = null, $sellerMessage = null, $bestOfferCodeType = null, $callStatus = null, $newBestOffer = null, $immediatePayEligible = null, \DOMDocument $any = null)
+    public function __construct(?string $bestOfferID = null, ?string $expirationTime = null, ?\macropage\ebaysdk\trading\StructType\UserType $buyer = null, ?\macropage\ebaysdk\trading\StructType\AmountType $price = null, ?string $status = null, ?int $quantity = null, ?string $buyerMessage = null, ?string $sellerMessage = null, ?string $bestOfferCodeType = null, ?string $callStatus = null, ?bool $newBestOffer = null, ?bool $immediatePayEligible = null, $any = null)
     {
         $this
             ->setBestOfferID($bestOfferID)
@@ -166,7 +169,7 @@ class BestOfferType extends AbstractStructBase
      * Get BestOfferID value
      * @return string|null
      */
-    public function getBestOfferID()
+    public function getBestOfferID(): ?string
     {
         return $this->BestOfferID;
     }
@@ -175,20 +178,21 @@ class BestOfferType extends AbstractStructBase
      * @param string $bestOfferID
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setBestOfferID($bestOfferID = null)
+    public function setBestOfferID(?string $bestOfferID = null): self
     {
         // validation for constraint: string
         if (!is_null($bestOfferID) && !is_string($bestOfferID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($bestOfferID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($bestOfferID, true), gettype($bestOfferID)), __LINE__);
         }
         $this->BestOfferID = $bestOfferID;
+        
         return $this;
     }
     /**
      * Get ExpirationTime value
      * @return string|null
      */
-    public function getExpirationTime()
+    public function getExpirationTime(): ?string
     {
         return $this->ExpirationTime;
     }
@@ -197,20 +201,21 @@ class BestOfferType extends AbstractStructBase
      * @param string $expirationTime
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setExpirationTime($expirationTime = null)
+    public function setExpirationTime(?string $expirationTime = null): self
     {
         // validation for constraint: string
         if (!is_null($expirationTime) && !is_string($expirationTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($expirationTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($expirationTime, true), gettype($expirationTime)), __LINE__);
         }
         $this->ExpirationTime = $expirationTime;
+        
         return $this;
     }
     /**
      * Get Buyer value
      * @return \macropage\ebaysdk\trading\StructType\UserType|null
      */
-    public function getBuyer()
+    public function getBuyer(): ?\macropage\ebaysdk\trading\StructType\UserType
     {
         return $this->Buyer;
     }
@@ -219,16 +224,17 @@ class BestOfferType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UserType $buyer
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setBuyer(\macropage\ebaysdk\trading\StructType\UserType $buyer = null)
+    public function setBuyer(?\macropage\ebaysdk\trading\StructType\UserType $buyer = null): self
     {
         $this->Buyer = $buyer;
+        
         return $this;
     }
     /**
      * Get Price value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
-    public function getPrice()
+    public function getPrice(): ?\macropage\ebaysdk\trading\StructType\AmountType
     {
         return $this->Price;
     }
@@ -237,16 +243,17 @@ class BestOfferType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $price
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setPrice(\macropage\ebaysdk\trading\StructType\AmountType $price = null)
+    public function setPrice(?\macropage\ebaysdk\trading\StructType\AmountType $price = null): self
     {
         $this->Price = $price;
+        
         return $this;
     }
     /**
      * Get Status value
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->Status;
     }
@@ -254,24 +261,25 @@ class BestOfferType extends AbstractStructBase
      * Set Status value
      * @uses \macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $status
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setStatus($status = null)
+    public function setStatus(?string $status = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType::valueIsValid($status)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $status, implode(', ', \macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType', is_array($status) ? implode(', ', $status) : var_export($status, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BestOfferStatusCodeType::getValidValues())), __LINE__);
         }
         $this->Status = $status;
+        
         return $this;
     }
     /**
      * Get Quantity value
      * @return int|null
      */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
         return $this->Quantity;
     }
@@ -280,20 +288,21 @@ class BestOfferType extends AbstractStructBase
      * @param int $quantity
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setQuantity($quantity = null)
+    public function setQuantity(?int $quantity = null): self
     {
         // validation for constraint: int
-        if (!is_null($quantity) && !is_numeric($quantity)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($quantity)), __LINE__);
+        if (!is_null($quantity) && !(is_int($quantity) || ctype_digit($quantity))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($quantity, true), gettype($quantity)), __LINE__);
         }
         $this->Quantity = $quantity;
+        
         return $this;
     }
     /**
      * Get BuyerMessage value
      * @return string|null
      */
-    public function getBuyerMessage()
+    public function getBuyerMessage(): ?string
     {
         return $this->BuyerMessage;
     }
@@ -302,20 +311,21 @@ class BestOfferType extends AbstractStructBase
      * @param string $buyerMessage
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setBuyerMessage($buyerMessage = null)
+    public function setBuyerMessage(?string $buyerMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($buyerMessage) && !is_string($buyerMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($buyerMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($buyerMessage, true), gettype($buyerMessage)), __LINE__);
         }
         $this->BuyerMessage = $buyerMessage;
+        
         return $this;
     }
     /**
      * Get SellerMessage value
      * @return string|null
      */
-    public function getSellerMessage()
+    public function getSellerMessage(): ?string
     {
         return $this->SellerMessage;
     }
@@ -324,20 +334,21 @@ class BestOfferType extends AbstractStructBase
      * @param string $sellerMessage
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setSellerMessage($sellerMessage = null)
+    public function setSellerMessage(?string $sellerMessage = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerMessage) && !is_string($sellerMessage)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerMessage)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerMessage, true), gettype($sellerMessage)), __LINE__);
         }
         $this->SellerMessage = $sellerMessage;
+        
         return $this;
     }
     /**
      * Get BestOfferCodeType value
      * @return string|null
      */
-    public function getBestOfferCodeType()
+    public function getBestOfferCodeType(): ?string
     {
         return $this->BestOfferCodeType;
     }
@@ -345,24 +356,25 @@ class BestOfferType extends AbstractStructBase
      * Set BestOfferCodeType value
      * @uses \macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $bestOfferCodeType
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setBestOfferCodeType($bestOfferCodeType = null)
+    public function setBestOfferCodeType(?string $bestOfferCodeType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType::valueIsValid($bestOfferCodeType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $bestOfferCodeType, implode(', ', \macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType', is_array($bestOfferCodeType) ? implode(', ', $bestOfferCodeType) : var_export($bestOfferCodeType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\BestOfferTypeCodeType::getValidValues())), __LINE__);
         }
         $this->BestOfferCodeType = $bestOfferCodeType;
+        
         return $this;
     }
     /**
      * Get CallStatus value
      * @return string|null
      */
-    public function getCallStatus()
+    public function getCallStatus(): ?string
     {
         return $this->CallStatus;
     }
@@ -371,20 +383,21 @@ class BestOfferType extends AbstractStructBase
      * @param string $callStatus
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setCallStatus($callStatus = null)
+    public function setCallStatus(?string $callStatus = null): self
     {
         // validation for constraint: string
         if (!is_null($callStatus) && !is_string($callStatus)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($callStatus)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($callStatus, true), gettype($callStatus)), __LINE__);
         }
         $this->CallStatus = $callStatus;
+        
         return $this;
     }
     /**
      * Get NewBestOffer value
      * @return bool|null
      */
-    public function getNewBestOffer()
+    public function getNewBestOffer(): ?bool
     {
         return $this->NewBestOffer;
     }
@@ -393,20 +406,21 @@ class BestOfferType extends AbstractStructBase
      * @param bool $newBestOffer
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setNewBestOffer($newBestOffer = null)
+    public function setNewBestOffer(?bool $newBestOffer = null): self
     {
         // validation for constraint: boolean
         if (!is_null($newBestOffer) && !is_bool($newBestOffer)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($newBestOffer)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($newBestOffer, true), gettype($newBestOffer)), __LINE__);
         }
         $this->NewBestOffer = $newBestOffer;
+        
         return $this;
     }
     /**
      * Get ImmediatePayEligible value
      * @return bool|null
      */
-    public function getImmediatePayEligible()
+    public function getImmediatePayEligible(): ?bool
     {
         return $this->ImmediatePayEligible;
     }
@@ -415,65 +429,47 @@ class BestOfferType extends AbstractStructBase
      * @param bool $immediatePayEligible
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setImmediatePayEligible($immediatePayEligible = null)
+    public function setImmediatePayEligible(?bool $immediatePayEligible = null): self
     {
         // validation for constraint: boolean
         if (!is_null($immediatePayEligible) && !is_bool($immediatePayEligible)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($immediatePayEligible)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($immediatePayEligible, true), gettype($immediatePayEligible)), __LINE__);
         }
         $this->ImmediatePayEligible = $immediatePayEligible;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\BestOfferType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\BestOfferType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

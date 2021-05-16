@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for SellingManagerEmailLogType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Contains list of Email log.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class SellingManagerEmailLogType extends AbstractStructBase
 {
     /**
      * The EmailType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies the type of Selling Manager email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EmailType;
+    protected ?string $EmailType = null;
     /**
      * The CustomEmailName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Template name of the custom email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CustomEmailName;
+    protected ?string $CustomEmailName = null;
     /**
      * The EmailState
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Success or failure state of this email.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EmailState;
+    protected ?string $EmailState = null;
     /**
      * The EventTime
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Date on which this email event occurred.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $EventTime;
+    protected ?string $EventTime = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for SellingManagerEmailLogType
      * @uses SellingManagerEmailLogType::setEmailType()
@@ -60,9 +63,9 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * @param string $customEmailName
      * @param string $emailState
      * @param string $eventTime
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($emailType = null, $customEmailName = null, $emailState = null, $eventTime = null, \DOMDocument $any = null)
+    public function __construct(?string $emailType = null, ?string $customEmailName = null, ?string $emailState = null, ?string $eventTime = null, $any = null)
     {
         $this
             ->setEmailType($emailType)
@@ -75,7 +78,7 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * Get EmailType value
      * @return string|null
      */
-    public function getEmailType()
+    public function getEmailType(): ?string
     {
         return $this->EmailType;
     }
@@ -83,24 +86,25 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * Set EmailType value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $emailType
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
      */
-    public function setEmailType($emailType = null)
+    public function setEmailType(?string $emailType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType::valueIsValid($emailType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $emailType, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType', is_array($emailType) ? implode(', ', $emailType) : var_export($emailType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerEmailTypeCodeType::getValidValues())), __LINE__);
         }
         $this->EmailType = $emailType;
+        
         return $this;
     }
     /**
      * Get CustomEmailName value
      * @return string|null
      */
-    public function getCustomEmailName()
+    public function getCustomEmailName(): ?string
     {
         return $this->CustomEmailName;
     }
@@ -109,20 +113,21 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * @param string $customEmailName
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
      */
-    public function setCustomEmailName($customEmailName = null)
+    public function setCustomEmailName(?string $customEmailName = null): self
     {
         // validation for constraint: string
         if (!is_null($customEmailName) && !is_string($customEmailName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($customEmailName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($customEmailName, true), gettype($customEmailName)), __LINE__);
         }
         $this->CustomEmailName = $customEmailName;
+        
         return $this;
     }
     /**
      * Get EmailState value
      * @return string|null
      */
-    public function getEmailState()
+    public function getEmailState(): ?string
     {
         return $this->EmailState;
     }
@@ -130,24 +135,25 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * Set EmailState value
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $emailState
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
      */
-    public function setEmailState($emailState = null)
+    public function setEmailState(?string $emailState = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType::valueIsValid($emailState)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $emailState, implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType', is_array($emailState) ? implode(', ', $emailState) : var_export($emailState, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellingManagerEmailSentStatusCodeType::getValidValues())), __LINE__);
         }
         $this->EmailState = $emailState;
+        
         return $this;
     }
     /**
      * Get EventTime value
      * @return string|null
      */
-    public function getEventTime()
+    public function getEventTime(): ?string
     {
         return $this->EventTime;
     }
@@ -156,65 +162,47 @@ class SellingManagerEmailLogType extends AbstractStructBase
      * @param string $eventTime
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
      */
-    public function setEventTime($eventTime = null)
+    public function setEventTime(?string $eventTime = null): self
     {
         // validation for constraint: string
         if (!is_null($eventTime) && !is_string($eventTime)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($eventTime)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($eventTime, true), gettype($eventTime)), __LINE__);
         }
         $this->EventTime = $eventTime;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerEmailLogType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

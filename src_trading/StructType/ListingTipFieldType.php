@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ListingTipFieldType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,41 +17,41 @@ class ListingTipFieldType extends AbstractStructBase
 {
     /**
      * The ListingTipFieldID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingTipFieldID;
+    protected ?string $ListingTipFieldID = null;
     /**
      * The FieldTip
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $FieldTip;
+    protected ?string $FieldTip = null;
     /**
      * The CurrentFieldText
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CurrentFieldText;
+    protected ?string $CurrentFieldText = null;
     /**
      * The CurrentFieldValue
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CurrentFieldValue;
+    protected ?string $CurrentFieldValue = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ListingTipFieldType
      * @uses ListingTipFieldType::setListingTipFieldID()
@@ -60,9 +63,9 @@ class ListingTipFieldType extends AbstractStructBase
      * @param string $fieldTip
      * @param string $currentFieldText
      * @param string $currentFieldValue
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($listingTipFieldID = null, $fieldTip = null, $currentFieldText = null, $currentFieldValue = null, \DOMDocument $any = null)
+    public function __construct(?string $listingTipFieldID = null, ?string $fieldTip = null, ?string $currentFieldText = null, ?string $currentFieldValue = null, $any = null)
     {
         $this
             ->setListingTipFieldID($listingTipFieldID)
@@ -75,7 +78,7 @@ class ListingTipFieldType extends AbstractStructBase
      * Get ListingTipFieldID value
      * @return string|null
      */
-    public function getListingTipFieldID()
+    public function getListingTipFieldID(): ?string
     {
         return $this->ListingTipFieldID;
     }
@@ -84,20 +87,21 @@ class ListingTipFieldType extends AbstractStructBase
      * @param string $listingTipFieldID
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
      */
-    public function setListingTipFieldID($listingTipFieldID = null)
+    public function setListingTipFieldID(?string $listingTipFieldID = null): self
     {
         // validation for constraint: string
         if (!is_null($listingTipFieldID) && !is_string($listingTipFieldID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($listingTipFieldID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($listingTipFieldID, true), gettype($listingTipFieldID)), __LINE__);
         }
         $this->ListingTipFieldID = $listingTipFieldID;
+        
         return $this;
     }
     /**
      * Get FieldTip value
      * @return string|null
      */
-    public function getFieldTip()
+    public function getFieldTip(): ?string
     {
         return $this->FieldTip;
     }
@@ -106,20 +110,21 @@ class ListingTipFieldType extends AbstractStructBase
      * @param string $fieldTip
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
      */
-    public function setFieldTip($fieldTip = null)
+    public function setFieldTip(?string $fieldTip = null): self
     {
         // validation for constraint: string
         if (!is_null($fieldTip) && !is_string($fieldTip)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($fieldTip)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($fieldTip, true), gettype($fieldTip)), __LINE__);
         }
         $this->FieldTip = $fieldTip;
+        
         return $this;
     }
     /**
      * Get CurrentFieldText value
      * @return string|null
      */
-    public function getCurrentFieldText()
+    public function getCurrentFieldText(): ?string
     {
         return $this->CurrentFieldText;
     }
@@ -128,20 +133,21 @@ class ListingTipFieldType extends AbstractStructBase
      * @param string $currentFieldText
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
      */
-    public function setCurrentFieldText($currentFieldText = null)
+    public function setCurrentFieldText(?string $currentFieldText = null): self
     {
         // validation for constraint: string
         if (!is_null($currentFieldText) && !is_string($currentFieldText)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($currentFieldText)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($currentFieldText, true), gettype($currentFieldText)), __LINE__);
         }
         $this->CurrentFieldText = $currentFieldText;
+        
         return $this;
     }
     /**
      * Get CurrentFieldValue value
      * @return string|null
      */
-    public function getCurrentFieldValue()
+    public function getCurrentFieldValue(): ?string
     {
         return $this->CurrentFieldValue;
     }
@@ -150,65 +156,47 @@ class ListingTipFieldType extends AbstractStructBase
      * @param string $currentFieldValue
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
      */
-    public function setCurrentFieldValue($currentFieldValue = null)
+    public function setCurrentFieldValue(?string $currentFieldValue = null): self
     {
         // validation for constraint: string
         if (!is_null($currentFieldValue) && !is_string($currentFieldValue)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($currentFieldValue)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($currentFieldValue, true), gettype($currentFieldValue)), __LINE__);
         }
         $this->CurrentFieldValue = $currentFieldValue;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ListingTipFieldType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ListingTipFieldType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

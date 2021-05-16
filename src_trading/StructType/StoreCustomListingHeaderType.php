@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for StoreCustomListingHeaderType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Configuration of a Store custom listing header.
  * @subpackage Structs
  */
@@ -14,58 +17,58 @@ class StoreCustomListingHeaderType extends AbstractStructBase
 {
     /**
      * The DisplayType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Display type for the custom listing header.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $DisplayType;
+    protected ?string $DisplayType = null;
     /**
      * The Logo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the custom header has a logo.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $Logo;
+    protected ?bool $Logo = null;
     /**
      * The SearchBox
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the custom header has a search box.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SearchBox;
+    protected ?bool $SearchBox = null;
     /**
      * The LinkToInclude
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Link to include in the custom header.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[]
      */
-    public $LinkToInclude;
+    protected array $LinkToInclude = [];
     /**
      * The AddToFavoriteStores
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the custom header has a link to Add to Favorite Stores.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $AddToFavoriteStores;
+    protected ?bool $AddToFavoriteStores = null;
     /**
      * The SignUpForStoreNewsletter
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the custom header has a link to Sign up for Store Newsletter.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $SignUpForStoreNewsletter;
+    protected ?bool $SignUpForStoreNewsletter = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for StoreCustomListingHeaderType
      * @uses StoreCustomListingHeaderType::setDisplayType()
@@ -81,9 +84,9 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[] $linkToInclude
      * @param bool $addToFavoriteStores
      * @param bool $signUpForStoreNewsletter
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($displayType = null, $logo = null, $searchBox = null, array $linkToInclude = array(), $addToFavoriteStores = null, $signUpForStoreNewsletter = null, \DOMDocument $any = null)
+    public function __construct(?string $displayType = null, ?bool $logo = null, ?bool $searchBox = null, array $linkToInclude = [], ?bool $addToFavoriteStores = null, ?bool $signUpForStoreNewsletter = null, $any = null)
     {
         $this
             ->setDisplayType($displayType)
@@ -98,7 +101,7 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * Get DisplayType value
      * @return string|null
      */
-    public function getDisplayType()
+    public function getDisplayType(): ?string
     {
         return $this->DisplayType;
     }
@@ -106,24 +109,25 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * Set DisplayType value
      * @uses \macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $displayType
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setDisplayType($displayType = null)
+    public function setDisplayType(?string $displayType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType::valueIsValid($displayType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $displayType, implode(', ', \macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType', is_array($displayType) ? implode(', ', $displayType) : var_export($displayType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\StoreCustomListingHeaderDisplayCodeType::getValidValues())), __LINE__);
         }
         $this->DisplayType = $displayType;
+        
         return $this;
     }
     /**
      * Get Logo value
      * @return bool|null
      */
-    public function getLogo()
+    public function getLogo(): ?bool
     {
         return $this->Logo;
     }
@@ -132,20 +136,21 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param bool $logo
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setLogo($logo = null)
+    public function setLogo(?bool $logo = null): self
     {
         // validation for constraint: boolean
         if (!is_null($logo) && !is_bool($logo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($logo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($logo, true), gettype($logo)), __LINE__);
         }
         $this->Logo = $logo;
+        
         return $this;
     }
     /**
      * Get SearchBox value
      * @return bool|null
      */
-    public function getSearchBox()
+    public function getSearchBox(): ?bool
     {
         return $this->SearchBox;
     }
@@ -154,60 +159,84 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param bool $searchBox
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setSearchBox($searchBox = null)
+    public function setSearchBox(?bool $searchBox = null): self
     {
         // validation for constraint: boolean
         if (!is_null($searchBox) && !is_bool($searchBox)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($searchBox)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($searchBox, true), gettype($searchBox)), __LINE__);
         }
         $this->SearchBox = $searchBox;
+        
         return $this;
     }
     /**
      * Get LinkToInclude value
-     * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[]|null
+     * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[]
      */
-    public function getLinkToInclude()
+    public function getLinkToInclude(): array
     {
         return $this->LinkToInclude;
     }
     /**
+     * This method is responsible for validating the values passed to the setLinkToInclude method
+     * This method is willingly generated in order to preserve the one-line inline validation within the setLinkToInclude method
+     * @param array $values
+     * @return string A non-empty message if the values does not match the validation rules
+     */
+    public static function validateLinkToIncludeForArrayConstraintsFromSetLinkToInclude(array $values = []): string
+    {
+        $message = '';
+        $invalidValues = [];
+        foreach ($values as $storeCustomListingHeaderTypeLinkToIncludeItem) {
+            // validation for constraint: itemType
+            if (!$storeCustomListingHeaderTypeLinkToIncludeItem instanceof \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType) {
+                $invalidValues[] = is_object($storeCustomListingHeaderTypeLinkToIncludeItem) ? get_class($storeCustomListingHeaderTypeLinkToIncludeItem) : sprintf('%s(%s)', gettype($storeCustomListingHeaderTypeLinkToIncludeItem), var_export($storeCustomListingHeaderTypeLinkToIncludeItem, true));
+            }
+        }
+        if (!empty($invalidValues)) {
+            $message = sprintf('The LinkToInclude property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
+        }
+        unset($invalidValues);
+        
+        return $message;
+    }
+    /**
      * Set LinkToInclude value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[] $linkToInclude
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setLinkToInclude(array $linkToInclude = array())
+    public function setLinkToInclude(array $linkToInclude = []): self
     {
-        foreach ($linkToInclude as $storeCustomListingHeaderTypeLinkToIncludeItem) {
-            // validation for constraint: itemType
-            if (!$storeCustomListingHeaderTypeLinkToIncludeItem instanceof \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType) {
-                throw new \InvalidArgumentException(sprintf('The LinkToInclude property can only contain items of \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType, "%s" given', is_object($storeCustomListingHeaderTypeLinkToIncludeItem) ? get_class($storeCustomListingHeaderTypeLinkToIncludeItem) : gettype($storeCustomListingHeaderTypeLinkToIncludeItem)), __LINE__);
-            }
+        // validation for constraint: array
+        if ('' !== ($linkToIncludeArrayErrorMessage = self::validateLinkToIncludeForArrayConstraintsFromSetLinkToInclude($linkToInclude))) {
+            throw new InvalidArgumentException($linkToIncludeArrayErrorMessage, __LINE__);
         }
         $this->LinkToInclude = $linkToInclude;
+        
         return $this;
     }
     /**
      * Add item to LinkToInclude value
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType $item
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function addToLinkToInclude(\macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType $item)
+    public function addToLinkToInclude(\macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType $item): self
     {
         // validation for constraint: itemType
         if (!$item instanceof \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType) {
-            throw new \InvalidArgumentException(sprintf('The LinkToInclude property can only contain items of \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType, "%s" given', is_object($item) ? get_class($item) : gettype($item)), __LINE__);
+            throw new InvalidArgumentException(sprintf('The LinkToInclude property can only contain items of type \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->LinkToInclude[] = $item;
+        
         return $this;
     }
     /**
      * Get AddToFavoriteStores value
      * @return bool|null
      */
-    public function getAddToFavoriteStores()
+    public function getAddToFavoriteStores(): ?bool
     {
         return $this->AddToFavoriteStores;
     }
@@ -216,20 +245,21 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param bool $addToFavoriteStores
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setAddToFavoriteStores($addToFavoriteStores = null)
+    public function setAddToFavoriteStores(?bool $addToFavoriteStores = null): self
     {
         // validation for constraint: boolean
         if (!is_null($addToFavoriteStores) && !is_bool($addToFavoriteStores)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($addToFavoriteStores)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($addToFavoriteStores, true), gettype($addToFavoriteStores)), __LINE__);
         }
         $this->AddToFavoriteStores = $addToFavoriteStores;
+        
         return $this;
     }
     /**
      * Get SignUpForStoreNewsletter value
      * @return bool|null
      */
-    public function getSignUpForStoreNewsletter()
+    public function getSignUpForStoreNewsletter(): ?bool
     {
         return $this->SignUpForStoreNewsletter;
     }
@@ -238,65 +268,47 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param bool $signUpForStoreNewsletter
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setSignUpForStoreNewsletter($signUpForStoreNewsletter = null)
+    public function setSignUpForStoreNewsletter(?bool $signUpForStoreNewsletter = null): self
     {
         // validation for constraint: boolean
         if (!is_null($signUpForStoreNewsletter) && !is_bool($signUpForStoreNewsletter)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($signUpForStoreNewsletter)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($signUpForStoreNewsletter, true), gettype($signUpForStoreNewsletter)), __LINE__);
         }
         $this->SignUpForStoreNewsletter = $signUpForStoreNewsletter;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

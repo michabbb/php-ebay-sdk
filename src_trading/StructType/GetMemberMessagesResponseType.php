@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetMemberMessagesResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves a list of the messages buyers have posted about your active item listings.
  * @subpackage Structs
  */
@@ -14,28 +17,28 @@ class GetMemberMessagesResponseType extends AbstractResponseType
 {
     /**
      * The MemberMessage
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The returned member messages. Returned if messages that meet the request criteria exist. Note that <b>GetMemberMessages</b> does not return messages when, in the request, the <b>MailMessageType</b> is <b>AskSellerQuestion</b>.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType|null
      */
-    public $MemberMessage;
+    protected ?\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $MemberMessage = null;
     /**
      * The PaginationResult
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Shows the pagination of data returned by requests.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public $PaginationResult;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationResultType $PaginationResult = null;
     /**
      * The HasMoreItems
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: Specifies whether the response has more items.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $HasMoreItems;
+    protected ?bool $HasMoreItems = null;
     /**
      * Constructor method for GetMemberMessagesResponseType
      * @uses GetMemberMessagesResponseType::setMemberMessage()
@@ -45,7 +48,7 @@ class GetMemberMessagesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @param bool $hasMoreItems
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $memberMessage = null, \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, $hasMoreItems = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $memberMessage = null, ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreItems = null)
     {
         $this
             ->setMemberMessage($memberMessage)
@@ -56,7 +59,7 @@ class GetMemberMessagesResponseType extends AbstractResponseType
      * Get MemberMessage value
      * @return \macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType|null
      */
-    public function getMemberMessage()
+    public function getMemberMessage(): ?\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType
     {
         return $this->MemberMessage;
     }
@@ -65,16 +68,17 @@ class GetMemberMessagesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $memberMessage
      * @return \macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType
      */
-    public function setMemberMessage(\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $memberMessage = null)
+    public function setMemberMessage(?\macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType $memberMessage = null): self
     {
         $this->MemberMessage = $memberMessage;
+        
         return $this;
     }
     /**
      * Get PaginationResult value
      * @return \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
-    public function getPaginationResult()
+    public function getPaginationResult(): ?\macropage\ebaysdk\trading\StructType\PaginationResultType
     {
         return $this->PaginationResult;
     }
@@ -83,16 +87,17 @@ class GetMemberMessagesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @return \macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType
      */
-    public function setPaginationResult(\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function setPaginationResult(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null): self
     {
         $this->PaginationResult = $paginationResult;
+        
         return $this;
     }
     /**
      * Get HasMoreItems value
      * @return bool|null
      */
-    public function getHasMoreItems()
+    public function getHasMoreItems(): ?bool
     {
         return $this->HasMoreItems;
     }
@@ -101,33 +106,14 @@ class GetMemberMessagesResponseType extends AbstractResponseType
      * @param bool $hasMoreItems
      * @return \macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType
      */
-    public function setHasMoreItems($hasMoreItems = null)
+    public function setHasMoreItems(?bool $hasMoreItems = null): self
     {
         // validation for constraint: boolean
         if (!is_null($hasMoreItems) && !is_bool($hasMoreItems)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($hasMoreItems)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hasMoreItems, true), gettype($hasMoreItems)), __LINE__);
         }
         $this->HasMoreItems = $hasMoreItems;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

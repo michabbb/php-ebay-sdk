@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetAllBiddersRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This is the base request type for the <b>GetAllBidders</b> call, which is used to retrieve bidders from an active or recently-ended auction listing.
  * @subpackage Structs
  */
@@ -14,31 +17,32 @@ class GetAllBiddersRequestType extends AbstractRequestType
 {
     /**
      * The ItemID
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This is the unique identifier of the auction listing for which bidders are being retrieved. This auction listing can be active or recently ended. However, to retrieve bidders for an active auction listing, the only <b>CallMode</b>
      * enumeration value that can be used is <code>ViewAll</code>. | Type that represents the unique identifier for an eBay listing.
+     * - base: xs:string
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ItemID;
+    protected ?string $ItemID = null;
     /**
      * The CallMode
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The enumeration value that is passed into this field will control the set of bidders that will be retrieved in the response. To retrieve bidders from a recently-ended auction listing, any of the three values can be used. To retrieve
-     * bidders for an active auction listing, only the <code>ViewAll</code> enumeration value can be used. These values are discussed in <b>GetAllBiddersModeCodeType</b>.
+     * bidders for an active auction listing, only the <code>ViewAll</code> enumeration value can be used. These values are discussed in <b>GetAllBiddersModeCodeType</b>. <br/>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CallMode;
+    protected ?string $CallMode = null;
     /**
      * The IncludeBiddingSummary
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The user must include this field and set its value to <code>true</code> if the user wishes to retrieve the <b>BiddingSummary</b> container for each bidder. The <b>BiddingSummary</b> container consists of more detailed bidding
      * information on each bidder.
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeBiddingSummary;
+    protected ?bool $IncludeBiddingSummary = null;
     /**
      * Constructor method for GetAllBiddersRequestType
      * @uses GetAllBiddersRequestType::setItemID()
@@ -48,7 +52,7 @@ class GetAllBiddersRequestType extends AbstractRequestType
      * @param string $callMode
      * @param bool $includeBiddingSummary
      */
-    public function __construct($itemID = null, $callMode = null, $includeBiddingSummary = null)
+    public function __construct(?string $itemID = null, ?string $callMode = null, ?bool $includeBiddingSummary = null)
     {
         $this
             ->setItemID($itemID)
@@ -59,7 +63,7 @@ class GetAllBiddersRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string|null
      */
-    public function getItemID()
+    public function getItemID(): ?string
     {
         return $this->ItemID;
     }
@@ -68,20 +72,21 @@ class GetAllBiddersRequestType extends AbstractRequestType
      * @param string $itemID
      * @return \macropage\ebaysdk\trading\StructType\GetAllBiddersRequestType
      */
-    public function setItemID($itemID = null)
+    public function setItemID(?string $itemID = null): self
     {
         // validation for constraint: string
         if (!is_null($itemID) && !is_string($itemID)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($itemID)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($itemID, true), gettype($itemID)), __LINE__);
         }
         $this->ItemID = $itemID;
+        
         return $this;
     }
     /**
      * Get CallMode value
      * @return string|null
      */
-    public function getCallMode()
+    public function getCallMode(): ?string
     {
         return $this->CallMode;
     }
@@ -89,24 +94,25 @@ class GetAllBiddersRequestType extends AbstractRequestType
      * Set CallMode value
      * @uses \macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $callMode
      * @return \macropage\ebaysdk\trading\StructType\GetAllBiddersRequestType
      */
-    public function setCallMode($callMode = null)
+    public function setCallMode(?string $callMode = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType::valueIsValid($callMode)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $callMode, implode(', ', \macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType', is_array($callMode) ? implode(', ', $callMode) : var_export($callMode, true), implode(', ', \macropage\ebaysdk\trading\EnumType\GetAllBiddersModeCodeType::getValidValues())), __LINE__);
         }
         $this->CallMode = $callMode;
+        
         return $this;
     }
     /**
      * Get IncludeBiddingSummary value
      * @return bool|null
      */
-    public function getIncludeBiddingSummary()
+    public function getIncludeBiddingSummary(): ?bool
     {
         return $this->IncludeBiddingSummary;
     }
@@ -115,33 +121,14 @@ class GetAllBiddersRequestType extends AbstractRequestType
      * @param bool $includeBiddingSummary
      * @return \macropage\ebaysdk\trading\StructType\GetAllBiddersRequestType
      */
-    public function setIncludeBiddingSummary($includeBiddingSummary = null)
+    public function setIncludeBiddingSummary(?bool $includeBiddingSummary = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeBiddingSummary) && !is_bool($includeBiddingSummary)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeBiddingSummary)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeBiddingSummary, true), gettype($includeBiddingSummary)), __LINE__);
         }
         $this->IncludeBiddingSummary = $includeBiddingSummary;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetAllBiddersRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

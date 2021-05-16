@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetOrdersRequestType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Retrieves the orders for which the authenticated user is a participant, either as the buyer or the seller. The call returns all the orders that meet the request criteria. Orders older than 90 days old will not be returned.
  * @subpackage Structs
  */
@@ -14,120 +17,142 @@ class GetOrdersRequestType extends AbstractRequestType
 {
     /**
      * The OrderIDArray
-     * Meta informations extracted from the WSDL
-     * - documentation: A container for eBay order IDs. If one or more order IDs are specified in this container, no other call-specific input fields are applicable.
+     * Meta information extracted from the WSDL
+     * - documentation: This container is used if the user wants to retrieve one or more specific orders in which they are involved as either the seller or buyer. If one or more order IDs are specified in this container, any order role, order status, or
+     * date range filters are ignored if specified in the request. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values. The new format is a non-parsable string, globally unique across all
+     * eBay marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer
+     * and eBay customer support. <br><br> For developers and sellers who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g.,
+     * <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is
+     * dependent upon the old identifier format, eBay is rolling out this Trading API change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the
+     * transition period, for developers/sellers using a Trading WSDL older than Version 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call
+     * response payloads. To get the new <b>OrderID</b> format, the value of the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will
+     * still be supported/accepted in all Trading API call request payloads. After the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL
+     * version used or specified compatibility level. </span> <br> <span class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order will change as it goes from unpaid to paid status.
+     * Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in
+     * the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made payment. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific order(s), either
+     * of these order IDs (paid or unpaid status) can be used to retrieve an order. </span>
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType
+     * @var \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType|null
      */
-    public $OrderIDArray;
+    protected ?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $OrderIDArray = null;
     /**
      * The CreateTimeFrom
-     * Meta informations extracted from the WSDL
-     * - documentation: The <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields specify a date range for retrieving orders. The <b>CreateTimeFrom</b> field is the starting date range. All eBay orders that were created within this date range are returned in
-     * the output. The maximum date range that may be specified with the <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields is 90 days. <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> date filters are ignored if the <b>NumberOfDays</b> date filter is used in
-     * the request, or if one or more order IDs are passed in the request. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales older than 90 days old.
+     * Meta information extracted from the WSDL
+     * - documentation: The <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields specify a date range for retrieving orders that were created during this time period. The <b>CreateTimeFrom</b> field is the starting date range. All eBay orders that were
+     * created within this date range are returned in the output. The maximum date range that may be specified with the <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields is 90 days. <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> date filters are ignored if
+     * the <b>NumberOfDays</b> date filter is used in the request, or if one or more order IDs are passed in the request. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales older than 90 days old. <br><br> <span
+     * class="tablenote"><strong>Note:</strong> Unless one or more <b>OrderID</b> values are used, one of the three available date range filters must be used. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreateTimeFrom;
+    protected ?string $CreateTimeFrom = null;
     /**
      * The CreateTimeTo
-     * Meta informations extracted from the WSDL
-     * - documentation: The <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields specify a date range for retrieving orders. The <b>CreateTimeTo</b> field is the ending date range. All eBay orders that were created within this date range are returned in the
-     * output. The maximum date range that may be specified with the <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields is 90 days. If the <b>CreateTimeFrom</b> field is used and the <b>CreateTimeTo</b> field is omitted, the "TimeTo" value defaults to the
-     * present time or to 90 days past the <b>CreateTimeFrom</b> value (if <b>CreateTimeFrom</b> value is more than 90 days in the past). <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> date filters are ignored if the <b>NumberOfDays</b> date filter is used in
-     * the request, or if one or more order IDs are passed in the request. <br><br> <span class="tablenote"><strong>Note:</strong> If a GetOrders call is made within a few seconds after the creation of a multiple line item order, the caller runs the risk of
-     * retrieving orders that are in an inconsistent state, since the order consolidation involved in a multi-line item order may not have been completed. For this reason, it is recommended that sellers include the <b>CreateTimeTo</b> field in the call, and
-     * set its value to: <i> Current Time</i> - 2 minutes.
+     * Meta information extracted from the WSDL
+     * - documentation: The <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields specify a date range for retrieving orders that were created during this time period. The <b>CreateTimeTo</b> field is the ending date range. All eBay orders that were created
+     * within this date range are returned in the output. The maximum date range that may be specified with the <b>CreateTimeFrom</b> and <b>CreateTimeTo</b> fields is 90 days. If the <b>CreateTimeFrom</b> field is used and the <b>CreateTimeTo</b> field is
+     * omitted, the "TimeTo" value defaults to the present time or to 90 days past the <b>CreateTimeFrom</b> value (if <b>CreateTimeFrom</b> value is more than 90 days in the past). <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> date filters are ignored if the
+     * <b>NumberOfDays</b> date filter is used in the request, or if one or more order IDs are passed in the request. <br><br> <span class="tablenote"><strong>Note:</strong> If a <b>GetOrders</b> call is made within a few seconds after the creation of a
+     * multiple line item order, the caller runs the risk of retrieving orders that are in an inconsistent state, since the order consolidation involved in a multiple line item order may not have been completed. For this reason, it is recommended that
+     * sellers include the <b>CreateTimeTo</b> field in the call, and set its value to: <i>Current Time</i> - 2 minutes. </span> <br> <span class="tablenote"><strong>Note:</strong> Unless one or more <b>OrderID</b> values are used, one of the three
+     * available date range filters must be used. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $CreateTimeTo;
+    protected ?string $CreateTimeTo = null;
     /**
      * The OrderRole
-     * Meta informations extracted from the WSDL
-     * - documentation: Filters the returned orders based on the role of the user. The user's role is either buyer or seller. If this field is used with a date filter, returned orders must satisfy both the date range and the <b>OrderRole</b> value.
+     * Meta information extracted from the WSDL
+     * - documentation: This filter is used to toggle between retrieving orders based on the role of the user (seller or buyer). The order role defaults to <code>Seller</code> if this field is not used. If this field is used with a date filter, returned
+     * orders must satisfy both the date range and the <b>OrderRole</b> value. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderRole;
+    protected ?string $OrderRole = null;
     /**
      * The OrderStatus
-     * Meta informations extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> Since the Half.com site has been shut down, the <code>Shipped</code> value is no longer applicable since this value is only used for retrieving Half.com listings. </span> The field is used to
-     * retrieve eBay orders that are in a specific state. If this field is used with a date filter, only orders that satisfy both the date range and the <b>OrderStatus</b> value are retrieved. <br><br> If one or more <b>OrderID</b> values are specified
-     * through the <b>OrderIDArray</b> container, the <b>OrderStatus</b> field should not be used, and it is ignored if it is used.
+     * Meta information extracted from the WSDL
+     * - documentation: The field is used to retrieve eBay orders that are in a specific state. If this field is used with a date filter, only orders that satisfy both the date range and the <b>OrderStatus</b> value are retrieved. <br><br> If one or more
+     * <b>OrderID</b> values are specified through the <b>OrderIDArray</b> container, the <b>OrderStatus</b> field should not be used, and it is ignored if it is used. If an <b>OrderStatus</b> value is not used and no <b>OrderID</b> values are specified,
+     * orders in all states are returned. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $OrderStatus;
+    protected ?string $OrderStatus = null;
     /**
      * The ListingType
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: <span class="tablenote"><b>Note: </b> This field's purpose was to allow the seller to retrieve only Half.com listings. Since the Half.com site has been shut down, this field is no longer applicable. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ListingType;
+    protected ?string $ListingType = null;
     /**
      * The Pagination
-     * Meta informations extracted from the WSDL
-     * - documentation: If many orders are available to retrieve, you may need to call GetOrders multiple times to retrieve all the data. Each result set is returned as a page of entries. Use the Pagination filters to control the maximum number of entries
-     * to retrieve per page (i.e., per call), the page number to retrieve, and other data.
+     * Meta information extracted from the WSDL
+     * - documentation: If many orders are available to retrieve, you may need to call <b>GetOrders</b> multiple times to retrieve all the data. Each result set is returned as a page of orders. Use the <b>Pagination</b> filters to control the maximum number
+     * of orders to retrieve per page (i.e., per call), and the page number to retrieve.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginationType
+     * @var \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public $Pagination;
+    protected ?\macropage\ebaysdk\trading\StructType\PaginationType $Pagination = null;
     /**
      * The ModTimeFrom
-     * Meta informations extracted from the WSDL
-     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields specify a date range for retrieving existing orders that have been modified within this time window (for example, <code>Incomplete</code> status to <code>Pending</code> status or
-     * <code>Pending</code> status to <code>Complete</code> status). The <b>ModTimeFrom</b> field is the starting date range. All eBay orders that were last modified within this date range are returned in the output. The maximum date range that may be
-     * specified with the <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields is 30 days. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales older than 90 days old. <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters are
-     * ignored if the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>NumberOfDays</b> date filters are used in the request, or if one or more order IDs are passed in the request.
+     * Meta information extracted from the WSDL
+     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields specify a date range for retrieving existing orders that have been modified within this time period (for example, <code>Incomplete</code> status to <code>Pending</code> status or
+     * <code>Pending</code> status to <code>Complete</code> status). The <b>ModTimeFrom</b> field is the starting date range. All eBay orders that were last modified within this date range are returned in the output. Unlike the
+     * <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> filters, which may cover a maximum period of 90 days, the maximum date range that may be specified with the <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields is only 30 days. This value cannot be set back more
+     * than 90 days in the past, as this call cannot retrieve sales older than 90 days old. <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters are ignored if the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>NumberOfDays</b> date filters are used in the
+     * request, or if one or more order IDs are passed in the request. <br><br> <span class="tablenote"><strong>Note:</strong> Unless one or more <b>OrderID</b> values are used, one of the three available date range filters must be used. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ModTimeFrom;
+    protected ?string $ModTimeFrom = null;
     /**
      * The ModTimeTo
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields specify a date range for retrieving existing orders that have been modified within this time window (for example, <code>Incomplete</code> status to <code>Pending</code> status or
-     * <code>Pending</code> status to <code>Complete</code> status). The <b>ModTimeTo</b> field is the ending date range. All eBay orders that were last modified within this date range are returned in the output. The maximum date range that may be specified
-     * with the <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields is 30 days. If the <b>ModTimeFrom</b> field is used and the <b>ModTimeTo</b> field is omitted, the "TimeTo" value defaults to the present time (if <b>ModTimeFrom</b> value is less than 30 days
-     * in the past) or to 30 days past the <b>ModTimeFrom</b> value. <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters are ignored if the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>NumberOfDays</b> date filters are used in the request, or if one or more
-     * order IDs are passed in the request.
+     * <code>Pending</code> status to <code>Complete</code> status). The <b>ModTimeTo</b> field is the ending date range. All eBay orders that were last modified within this date range are returned in the output. Unlike the
+     * <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> filters, which may cover a maximum period of 90 days, the maximum date range that may be specified with the <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields is 30 days. If the <b>ModTimeFrom</b> field is used
+     * and the <b>ModTimeTo</b> field is omitted, the 'TimeTo' value defaults to the present time (if <b>ModTimeFrom</b> value is less than 30 days in the past) or to 30 days past the <b>ModTimeFrom</b> value. <b>ModTimeFrom</b>/<b>ModTimeTo</b> date
+     * filters are ignored if the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>NumberOfDays</b> date filters are used in the request, or if one or more order IDs are passed in the request. <br><br> <span class="tablenote"><strong>Note:</strong> Unless
+     * one or more <b>OrderID</b> values are used, one of the three available date range filters must be used. </span>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $ModTimeTo;
+    protected ?string $ModTimeTo = null;
     /**
      * The NumberOfDays
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This filter specifies the number of days (24-hour periods) in the past to search for orders. All eBay orders that were either created or modified within this period are returned in the output. This field cannot be used in conjunction
-     * with the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters. <br>
+     * with the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters. <br><br> <span class="tablenote"><strong>Note:</strong> This date filter only allows you to retrieve orders created/modified within the last 30
+     * days. So, if you wish to retrieve orders created and/or modified more than 30 days in the past, the <b>CreateTimeFrom</b>/<b>CreateTimeTo</b> or <b>ModTimeFrom</b>/<b>ModTimeTo</b> date filters should be used instead. </span> <br> <span
+     * class="tablenote"><strong>Note:</strong> Unless one or more <b>OrderID</b> values are used, one of the three available date range filters must be used. </span>
      * - minOccurs: 0
-     * @var int
+     * @var int|null
      */
-    public $NumberOfDays;
+    protected ?int $NumberOfDays = null;
     /**
      * The IncludeFinalValueFee
-     * Meta informations extracted from the WSDL
-     * - documentation: Indicates whether to include the Final Value Fee (FVF) for all Transaction objects in the response. The Final Value Fee is returned in Transaction.FinalValueFee. The Final Value Fee is assessed right after the creation of an eBay
-     * order line item. <br>
+     * Meta information extracted from the WSDL
+     * - documentation: This field is included and set to <code>true</code> if the user wants to view the Final Value Fee (FVF) for all order line items in the response. The Final Value Fee is returned in the <b>Transaction.FinalValueFee</b> field. The
+     * Final Value Fee is assessed right after the creation of an order line item. <br> <br> <span class="tablenote"><b>Note:</b> The calculation of the Final Value Fee is changing for managed payments sellers, so the value returned in the
+     * <b>FinalValueFee</b> fields for each order line item in the response should only be considered as estimated values. The <b>getTransactions</b> method of the <b>Finances API</b> can be used to get accurate Final Value Fee values. <br><br> See the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees for managed payments sellers</a> help page for more information about how Final Value Fees are changing for managed payments sellers.
+     * </span>
      * - minOccurs: 0
-     * @var bool
+     * @var bool|null
      */
-    public $IncludeFinalValueFee;
+    protected ?bool $IncludeFinalValueFee = null;
     /**
      * The SortingOrder
-     * Meta informations extracted from the WSDL
-     * - documentation: Specifies how orders returned by this call should be sorted (using <strong>LastModifiedTime</strong> as the sort key). A value of <code>Ascending</code> returns the earliest modified orders first, and a value of
-     * <code>Descending</code> returns the latest modified orders first. <br/><br/> Default: <code>Ascending</code>
+     * Meta information extracted from the WSDL
+     * - documentation: This filter controls whether orders are retrieved in ascending order (oldest to newest according to modification date) or descending order (newest to oldest according to modification date). The default is <code>Ascending</code>, so
+     * the user will need to include this field and set it to <code>Descending</code> if the user wishes to view the most recent orders first in the retrieved output. <br>
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SortingOrder;
+    protected ?string $SortingOrder = null;
     /**
      * Constructor method for GetOrdersRequestType
      * @uses GetOrdersRequestType::setOrderIDArray()
@@ -155,7 +180,7 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param bool $includeFinalValueFee
      * @param string $sortingOrder
      */
-    public function __construct(\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null, $createTimeFrom = null, $createTimeTo = null, $orderRole = null, $orderStatus = null, $listingType = null, \macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, $modTimeFrom = null, $modTimeTo = null, $numberOfDays = null, $includeFinalValueFee = null, $sortingOrder = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null, ?string $createTimeFrom = null, ?string $createTimeTo = null, ?string $orderRole = null, ?string $orderStatus = null, ?string $listingType = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $modTimeFrom = null, ?string $modTimeTo = null, ?int $numberOfDays = null, ?bool $includeFinalValueFee = null, ?string $sortingOrder = null)
     {
         $this
             ->setOrderIDArray($orderIDArray)
@@ -175,7 +200,7 @@ class GetOrdersRequestType extends AbstractRequestType
      * Get OrderIDArray value
      * @return \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType|null
      */
-    public function getOrderIDArray()
+    public function getOrderIDArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType
     {
         return $this->OrderIDArray;
     }
@@ -184,16 +209,17 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setOrderIDArray(\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null)
+    public function setOrderIDArray(?\macropage\ebaysdk\trading\ArrayType\OrderIDArrayType $orderIDArray = null): self
     {
         $this->OrderIDArray = $orderIDArray;
+        
         return $this;
     }
     /**
      * Get CreateTimeFrom value
      * @return string|null
      */
-    public function getCreateTimeFrom()
+    public function getCreateTimeFrom(): ?string
     {
         return $this->CreateTimeFrom;
     }
@@ -202,20 +228,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param string $createTimeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setCreateTimeFrom($createTimeFrom = null)
+    public function setCreateTimeFrom(?string $createTimeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($createTimeFrom) && !is_string($createTimeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($createTimeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($createTimeFrom, true), gettype($createTimeFrom)), __LINE__);
         }
         $this->CreateTimeFrom = $createTimeFrom;
+        
         return $this;
     }
     /**
      * Get CreateTimeTo value
      * @return string|null
      */
-    public function getCreateTimeTo()
+    public function getCreateTimeTo(): ?string
     {
         return $this->CreateTimeTo;
     }
@@ -224,20 +251,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param string $createTimeTo
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setCreateTimeTo($createTimeTo = null)
+    public function setCreateTimeTo(?string $createTimeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($createTimeTo) && !is_string($createTimeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($createTimeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($createTimeTo, true), gettype($createTimeTo)), __LINE__);
         }
         $this->CreateTimeTo = $createTimeTo;
+        
         return $this;
     }
     /**
      * Get OrderRole value
      * @return string|null
      */
-    public function getOrderRole()
+    public function getOrderRole(): ?string
     {
         return $this->OrderRole;
     }
@@ -245,24 +273,25 @@ class GetOrdersRequestType extends AbstractRequestType
      * Set OrderRole value
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $orderRole
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setOrderRole($orderRole = null)
+    public function setOrderRole(?string $orderRole = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::valueIsValid($orderRole)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $orderRole, implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType', is_array($orderRole) ? implode(', ', $orderRole) : var_export($orderRole, true), implode(', ', \macropage\ebaysdk\trading\EnumType\TradingRoleCodeType::getValidValues())), __LINE__);
         }
         $this->OrderRole = $orderRole;
+        
         return $this;
     }
     /**
      * Get OrderStatus value
      * @return string|null
      */
-    public function getOrderStatus()
+    public function getOrderStatus(): ?string
     {
         return $this->OrderStatus;
     }
@@ -270,24 +299,25 @@ class GetOrdersRequestType extends AbstractRequestType
      * Set OrderStatus value
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $orderStatus
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setOrderStatus($orderStatus = null)
+    public function setOrderStatus(?string $orderStatus = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::valueIsValid($orderStatus)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $orderStatus, implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType', is_array($orderStatus) ? implode(', ', $orderStatus) : var_export($orderStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\OrderStatusCodeType::getValidValues())), __LINE__);
         }
         $this->OrderStatus = $orderStatus;
+        
         return $this;
     }
     /**
      * Get ListingType value
      * @return string|null
      */
-    public function getListingType()
+    public function getListingType(): ?string
     {
         return $this->ListingType;
     }
@@ -295,24 +325,25 @@ class GetOrdersRequestType extends AbstractRequestType
      * Set ListingType value
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $listingType
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setListingType($listingType = null)
+    public function setListingType(?string $listingType = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::valueIsValid($listingType)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $listingType, implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType', is_array($listingType) ? implode(', ', $listingType) : var_export($listingType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ListingTypeCodeType::getValidValues())), __LINE__);
         }
         $this->ListingType = $listingType;
+        
         return $this;
     }
     /**
      * Get Pagination value
      * @return \macropage\ebaysdk\trading\StructType\PaginationType|null
      */
-    public function getPagination()
+    public function getPagination(): ?\macropage\ebaysdk\trading\StructType\PaginationType
     {
         return $this->Pagination;
     }
@@ -321,16 +352,17 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setPagination(\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null)
+    public function setPagination(?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null): self
     {
         $this->Pagination = $pagination;
+        
         return $this;
     }
     /**
      * Get ModTimeFrom value
      * @return string|null
      */
-    public function getModTimeFrom()
+    public function getModTimeFrom(): ?string
     {
         return $this->ModTimeFrom;
     }
@@ -339,20 +371,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param string $modTimeFrom
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setModTimeFrom($modTimeFrom = null)
+    public function setModTimeFrom(?string $modTimeFrom = null): self
     {
         // validation for constraint: string
         if (!is_null($modTimeFrom) && !is_string($modTimeFrom)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($modTimeFrom)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($modTimeFrom, true), gettype($modTimeFrom)), __LINE__);
         }
         $this->ModTimeFrom = $modTimeFrom;
+        
         return $this;
     }
     /**
      * Get ModTimeTo value
      * @return string|null
      */
-    public function getModTimeTo()
+    public function getModTimeTo(): ?string
     {
         return $this->ModTimeTo;
     }
@@ -361,20 +394,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param string $modTimeTo
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setModTimeTo($modTimeTo = null)
+    public function setModTimeTo(?string $modTimeTo = null): self
     {
         // validation for constraint: string
         if (!is_null($modTimeTo) && !is_string($modTimeTo)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($modTimeTo)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($modTimeTo, true), gettype($modTimeTo)), __LINE__);
         }
         $this->ModTimeTo = $modTimeTo;
+        
         return $this;
     }
     /**
      * Get NumberOfDays value
      * @return int|null
      */
-    public function getNumberOfDays()
+    public function getNumberOfDays(): ?int
     {
         return $this->NumberOfDays;
     }
@@ -383,20 +417,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param int $numberOfDays
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setNumberOfDays($numberOfDays = null)
+    public function setNumberOfDays(?int $numberOfDays = null): self
     {
         // validation for constraint: int
-        if (!is_null($numberOfDays) && !is_numeric($numberOfDays)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a numeric value, "%s" given', gettype($numberOfDays)), __LINE__);
+        if (!is_null($numberOfDays) && !(is_int($numberOfDays) || ctype_digit($numberOfDays))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($numberOfDays, true), gettype($numberOfDays)), __LINE__);
         }
         $this->NumberOfDays = $numberOfDays;
+        
         return $this;
     }
     /**
      * Get IncludeFinalValueFee value
      * @return bool|null
      */
-    public function getIncludeFinalValueFee()
+    public function getIncludeFinalValueFee(): ?bool
     {
         return $this->IncludeFinalValueFee;
     }
@@ -405,20 +440,21 @@ class GetOrdersRequestType extends AbstractRequestType
      * @param bool $includeFinalValueFee
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setIncludeFinalValueFee($includeFinalValueFee = null)
+    public function setIncludeFinalValueFee(?bool $includeFinalValueFee = null): self
     {
         // validation for constraint: boolean
         if (!is_null($includeFinalValueFee) && !is_bool($includeFinalValueFee)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a bool, "%s" given', gettype($includeFinalValueFee)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeFinalValueFee, true), gettype($includeFinalValueFee)), __LINE__);
         }
         $this->IncludeFinalValueFee = $includeFinalValueFee;
+        
         return $this;
     }
     /**
      * Get SortingOrder value
      * @return string|null
      */
-    public function getSortingOrder()
+    public function getSortingOrder(): ?string
     {
         return $this->SortingOrder;
     }
@@ -426,37 +462,18 @@ class GetOrdersRequestType extends AbstractRequestType
      * Set SortingOrder value
      * @uses \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $sortingOrder
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
      */
-    public function setSortingOrder($sortingOrder = null)
+    public function setSortingOrder(?string $sortingOrder = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\SortOrderCodeType::valueIsValid($sortingOrder)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $sortingOrder, implode(', ', \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SortOrderCodeType', is_array($sortingOrder) ? implode(', ', $sortingOrder) : var_export($sortingOrder, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SortOrderCodeType::getValidValues())), __LINE__);
         }
         $this->SortingOrder = $sortingOrder;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetOrdersRequestType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

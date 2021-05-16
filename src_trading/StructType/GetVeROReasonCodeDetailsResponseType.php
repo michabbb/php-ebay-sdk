@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for GetVeROReasonCodeDetailsResponseType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: Base response of the <strong>GetVeROReasonCodeDetails</strong> call. This response will consists of one or more VeRO Program copyright/intellectual property infringement violation types.
  * @subpackage Structs
  */
@@ -14,18 +17,18 @@ class GetVeROReasonCodeDetailsResponseType extends AbstractResponseType
 {
     /**
      * The VeROReasonCodeDetails
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This container consists of one or more VeRO Program copyright/intellectual property infringement violation types for one or more eBay sites.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType
+     * @var \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType|null
      */
-    public $VeROReasonCodeDetails;
+    protected ?\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $VeROReasonCodeDetails = null;
     /**
      * Constructor method for GetVeROReasonCodeDetailsResponseType
      * @uses GetVeROReasonCodeDetailsResponseType::setVeROReasonCodeDetails()
      * @param \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails
      */
-    public function __construct(\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails = null)
     {
         $this
             ->setVeROReasonCodeDetails($veROReasonCodeDetails);
@@ -34,7 +37,7 @@ class GetVeROReasonCodeDetailsResponseType extends AbstractResponseType
      * Get VeROReasonCodeDetails value
      * @return \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType|null
      */
-    public function getVeROReasonCodeDetails()
+    public function getVeROReasonCodeDetails(): ?\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType
     {
         return $this->VeROReasonCodeDetails;
     }
@@ -43,29 +46,10 @@ class GetVeROReasonCodeDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsResponseType
      */
-    public function setVeROReasonCodeDetails(\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails = null)
+    public function setVeROReasonCodeDetails(?\macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType $veROReasonCodeDetails = null): self
     {
         $this->VeROReasonCodeDetails = $veROReasonCodeDetails;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsResponseType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }

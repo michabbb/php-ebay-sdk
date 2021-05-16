@@ -1,12 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace macropage\ebaysdk\trading\StructType;
 
-use \WsdlToPhp\PackageBase\AbstractStructBase;
+use InvalidArgumentException;
+use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
  * This class stands for ProStoresDetailsType StructType
- * Meta informations extracted from the WSDL
+ * Meta information extracted from the WSDL
  * - documentation: This type is deprecated.
  * @subpackage Structs
  */
@@ -14,33 +17,33 @@ class ProStoresDetailsType extends AbstractStructBase
 {
     /**
      * The SellerThirdPartyUsername
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $SellerThirdPartyUsername;
+    protected ?string $SellerThirdPartyUsername = null;
     /**
      * The StoreName
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $StoreName;
+    protected ?string $StoreName = null;
     /**
      * The Status
-     * Meta informations extracted from the WSDL
+     * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
      * - minOccurs: 0
-     * @var string
+     * @var string|null
      */
-    public $Status;
+    protected ?string $Status = null;
     /**
      * The any
-     * @var \DOMDocument
+     * @var \DOMDocument|string|null
      */
-    public $any;
+    protected $any = null;
     /**
      * Constructor method for ProStoresDetailsType
      * @uses ProStoresDetailsType::setSellerThirdPartyUsername()
@@ -50,9 +53,9 @@ class ProStoresDetailsType extends AbstractStructBase
      * @param string $sellerThirdPartyUsername
      * @param string $storeName
      * @param string $status
-     * @param \DOMDocument $any
+     * @param \DOMDocument|string|null $any
      */
-    public function __construct($sellerThirdPartyUsername = null, $storeName = null, $status = null, \DOMDocument $any = null)
+    public function __construct(?string $sellerThirdPartyUsername = null, ?string $storeName = null, ?string $status = null, $any = null)
     {
         $this
             ->setSellerThirdPartyUsername($sellerThirdPartyUsername)
@@ -64,7 +67,7 @@ class ProStoresDetailsType extends AbstractStructBase
      * Get SellerThirdPartyUsername value
      * @return string|null
      */
-    public function getSellerThirdPartyUsername()
+    public function getSellerThirdPartyUsername(): ?string
     {
         return $this->SellerThirdPartyUsername;
     }
@@ -73,20 +76,21 @@ class ProStoresDetailsType extends AbstractStructBase
      * @param string $sellerThirdPartyUsername
      * @return \macropage\ebaysdk\trading\StructType\ProStoresDetailsType
      */
-    public function setSellerThirdPartyUsername($sellerThirdPartyUsername = null)
+    public function setSellerThirdPartyUsername(?string $sellerThirdPartyUsername = null): self
     {
         // validation for constraint: string
         if (!is_null($sellerThirdPartyUsername) && !is_string($sellerThirdPartyUsername)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($sellerThirdPartyUsername)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerThirdPartyUsername, true), gettype($sellerThirdPartyUsername)), __LINE__);
         }
         $this->SellerThirdPartyUsername = $sellerThirdPartyUsername;
+        
         return $this;
     }
     /**
      * Get StoreName value
      * @return string|null
      */
-    public function getStoreName()
+    public function getStoreName(): ?string
     {
         return $this->StoreName;
     }
@@ -95,20 +99,21 @@ class ProStoresDetailsType extends AbstractStructBase
      * @param string $storeName
      * @return \macropage\ebaysdk\trading\StructType\ProStoresDetailsType
      */
-    public function setStoreName($storeName = null)
+    public function setStoreName(?string $storeName = null): self
     {
         // validation for constraint: string
         if (!is_null($storeName) && !is_string($storeName)) {
-            throw new \InvalidArgumentException(sprintf('Invalid value, please provide a string, "%s" given', gettype($storeName)), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($storeName, true), gettype($storeName)), __LINE__);
         }
         $this->StoreName = $storeName;
+        
         return $this;
     }
     /**
      * Get Status value
      * @return string|null
      */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->Status;
     }
@@ -116,69 +121,51 @@ class ProStoresDetailsType extends AbstractStructBase
      * Set Status value
      * @uses \macropage\ebaysdk\trading\EnumType\EnableCodeType::valueIsValid()
      * @uses \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues()
-     * @throws \InvalidArgumentException
+     * @throws InvalidArgumentException
      * @param string $status
      * @return \macropage\ebaysdk\trading\StructType\ProStoresDetailsType
      */
-    public function setStatus($status = null)
+    public function setStatus(?string $status = null): self
     {
         // validation for constraint: enumeration
         if (!\macropage\ebaysdk\trading\EnumType\EnableCodeType::valueIsValid($status)) {
-            throw new \InvalidArgumentException(sprintf('Value "%s" is invalid, please use one of: %s', $status, implode(', ', \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues())), __LINE__);
+            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\EnableCodeType', is_array($status) ? implode(', ', $status) : var_export($status, true), implode(', ', \macropage\ebaysdk\trading\EnumType\EnableCodeType::getValidValues())), __LINE__);
         }
         $this->Status = $status;
+        
         return $this;
     }
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @uses \DOMDocument::hasChildNodes()
-     * @uses \DOMDocument::saveXML()
-     * @uses \DOMNode::item()
-     * @uses \macropage\ebaysdk\trading\StructType\ProStoresDetailsType::setAny()
      * @param bool $asString true: returns XML string, false: returns \DOMDocument
-     * @return \DOMDocument|null
+     * @return \DOMDocument|string|null
      */
-    public function getAny($asString = true)
+    public function getAny(bool $asDomDocument = false)
     {
-        if (!empty($this->any) && !($this->any instanceof \DOMDocument)) {
-            $dom = new \DOMDocument('1.0', 'UTF-8');
-            $dom->formatOutput = true;
-            if ($dom->loadXML($this->any)) {
-                $this->setAny($dom);
-            }
-            unset($dom);
+        $domDocument = null;
+        if (!empty($this->any) && $asDomDocument) {
+            $domDocument = new \DOMDocument('1.0', 'UTF-8');
+            $domDocument->loadXML($this->any);
         }
-        return ($asString && ($this->any instanceof \DOMDocument) && $this->any->hasChildNodes()) ? $this->any->saveXML($this->any->childNodes->item(0)) : $this->any;
+        return $asDomDocument ? $domDocument : $this->any;
     }
     /**
      * Set any value
-     * @param \DOMDocument $any
+     * @uses \DOMDocument::hasChildNodes()
+     * @uses \DOMDocument::saveXML()
+     * @uses \DOMNode::item()
+     * @param \DOMDocument|string|null $any
      * @return \macropage\ebaysdk\trading\StructType\ProStoresDetailsType
      */
-    public function setAny(\DOMDocument $any = null)
+    public function setAny($any = null): self
     {
-        $this->any = $any;
+        // validation for constraint: xml
+        if (!is_null($any) && !$any instanceof \DOMDocument && (!is_string($any) || (is_string($any) && (empty($any) || (($anyDoc = new \DOMDocument()) && false === $anyDoc->loadXML($any)))))) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a valid XML string', var_export($any, true)), __LINE__);
+        }
+        $this->any = ($any instanceof \DOMDocument) ? $any->saveXML($any->hasChildNodes() ? $any->childNodes->item(0) : null) : $any;
+        
         return $this;
-    }
-    /**
-     * Method called when an object has been exported with var_export() functions
-     * It allows to return an object instantiated with the values
-     * @see AbstractStructBase::__set_state()
-     * @uses AbstractStructBase::__set_state()
-     * @param array $array the exported values
-     * @return \macropage\ebaysdk\trading\StructType\ProStoresDetailsType
-     */
-    public static function __set_state(array $array)
-    {
-        return parent::__set_state($array);
-    }
-    /**
-     * Method returning the class name
-     * @return string __CLASS__
-     */
-    public function __toString()
-    {
-        return __CLASS__;
     }
 }
