@@ -10,12 +10,25 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for TaxesType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the Taxes container, which contains detailed sales tax information for an order line item. The Taxes container is only returned if the seller is using the Vertex- based Premium Sales Tax Engine solution. The information
- * in this container supercedes/overrides the sales tax information in the ShippingDetails.SalesTax container.
+ * - documentation: Type defining the <b>Taxes</b> container, which contains detailed tax information (sales tax and VAT) for an order line item. The information in this container supercedes/overrides the sales tax information in the
+ * <b>ShippingDetails.SalesTax</b> container.
  * @subpackage Structs
  */
 class TaxesType extends AbstractStructBase
 {
+    /**
+     * The eBayReference
+     * Meta information extracted from the WSDL
+     * - documentation: The value returned in this field is the VAT ID for eBay, and this value may vary based on the region or country. The <b>eBayReference</b> field's <b>name</b> attribute will show the type of VAT ID, such as <code>IOSS</code>,
+     * <code>OSS</code>, or <code>ABN</code>. This field will be returned if VAT tax is applicable for the order. See the <a href="types/eBayTaxReferenceValue.html">eBayTaxReferenceValue</a> type page for more information on the VAT tax type strings that
+     * may appear for the <b>name</b> attribute. <br> <br> <span class="tablenote"><b>Note: </b> The eBay VAT ID and buyer VATIN fields will not start getting returned until June 30, 2021. <br> <br> Going forward after June 30, developers will need to use a
+     * Trading WSDL with a version number of 1211 (or newer) for the VAT ID/VATIN values to be returned in the new fields. Otherwise, the VAT information will be returned in the <b>Order.ShippingAddress.Street2</b> field. Developers will also have the
+     * option of using an older version than 1211, but setting the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> header value to 1211 or higher. <br> <br> On January 31, 2022, the <b>Order.ShippingAddress.Street2</b> will stop being used to return VAT information
+     * regardless of WSDL version or compatibility level. </span> <br>
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue $eBayReference = null;
     /**
      * The TotalTaxAmount
      * Meta information extracted from the WSDL
@@ -46,19 +59,41 @@ class TaxesType extends AbstractStructBase
     protected $any = null;
     /**
      * Constructor method for TaxesType
+     * @uses TaxesType::setEBayReference()
      * @uses TaxesType::setTotalTaxAmount()
      * @uses TaxesType::setTaxDetails()
      * @uses TaxesType::setAny()
+     * @param \macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue $eBayReference
      * @param \macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount
      * @param \macropage\ebaysdk\trading\StructType\TaxDetailsType[] $taxDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, array $taxDetails = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue $eBayReference = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalTaxAmount = null, array $taxDetails = [], $any = null)
     {
         $this
+            ->setEBayReference($eBayReference)
             ->setTotalTaxAmount($totalTaxAmount)
             ->setTaxDetails($taxDetails)
             ->setAny($any);
+    }
+    /**
+     * Get eBayReference value
+     * @return \macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue|null
+     */
+    public function getEBayReference(): ?\macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue
+    {
+        return $this->eBayReference;
+    }
+    /**
+     * Set eBayReference value
+     * @param \macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue $eBayReference
+     * @return \macropage\ebaysdk\trading\StructType\TaxesType
+     */
+    public function setEBayReference(?\macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue $eBayReference = null): self
+    {
+        $this->eBayReference = $eBayReference;
+        
+        return $this;
     }
     /**
      * Get TotalTaxAmount value

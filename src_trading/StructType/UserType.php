@@ -246,7 +246,7 @@ class UserType extends AbstractStructBase
     /**
      * The CharityAffiliations
      * Meta information extracted from the WSDL
-     * - documentation: This type is deprecated. Use instead <b>User.SellerInfo.CharityAffiliationDetail</b>.
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharityAffiliationsType|null
      */

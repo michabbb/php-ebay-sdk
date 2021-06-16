@@ -10,8 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for TaxIdentifierType StructType
  * Meta information extracted from the WSDL
- * - documentation: This type defines the <b>BuyerTaxIdentifier</b> container that is returned in order management calls. This container consists of taxpayer identification information for the buyer and it is currently used by sellers selling on the
- * Italy or Spain site to retrieve the taxpayer ID of buyers registered on the Italy or Spain sites.
+ * - documentation: This type defines the <b>BuyerTaxIdentifier</b> container that is returned in order management calls. This container will either consist of VAT or Codice Fiscale taxpayer identification information for the buyer.
  * @subpackage Structs
  */
 class TaxIdentifierType extends AbstractStructBase

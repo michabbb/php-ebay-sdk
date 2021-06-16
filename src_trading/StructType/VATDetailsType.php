@@ -46,7 +46,8 @@ class VATDetailsType extends AbstractStructBase
      * - documentation: This container is used in an Add/Revise/Relist call to set the VAT (Value-added Tax) percentage rate that will be charged to buyers when an item is purchased from the listing. <br/><br/> VAT is not applicable to all countries,
      * including the US. Allowed VAT percentage rates can vary by region/country, so sellers should be aware of the rates they are legally required/allowed to charge, and they are responsible for charging the correct VAT rate. <br/><br/> If VAT is charged
      * on a listing, the seller can choose to print an invoice for the buyer that shows the item's net price, the VAT percentage rate, the VAT amount, and the total price. <br/><br/> This field is returned in 'Get' calls only if the listing is subject to
-     * VAT. <br> <br> <span class="tablenote"><b>Note:</b> The float value input into an Add/Revise/Relist call can have up to three digits beyond the decimal point (e.g. 12.346). </span>
+     * VAT. <br> <br> <span class="tablenote"><b>Note:</b> Previously, up to three digits beyond the decimal point were allowed for this float value, but now a seller can include only one digit beyond the decimal point (e.g. 12.3) when using an
+     * Add/Revise/Relist call to set this value. An error will occur if more digits beyond the decimal point are specified. </span>
      * - minOccurs: 0
      * @var float|null
      */

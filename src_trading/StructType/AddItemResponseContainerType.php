@@ -123,20 +123,6 @@ class AddItemResponseContainerType extends AbstractStructBase
      */
     protected array $DiscountReason = [];
     /**
-     * The ListingRecommendations
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This container is deprecated, and will no longer be returned after June 1, 2021. eBay recommends that you integrate with the REST-based <a href="/api-docs/sell/recommendation/overview.html"
-     * target="_blank">Recommendation API</a> to retrieve recommendations for improving your listings and sales performance, or with the <a href="/api-docs/sell/compliance/overview.html" target="_blank">Compliance API</a> to discover non-compliant listings
-     * or listings that are at risk at becoming non-compliant in the future. </span> <br><br> Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be
-     * improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in
-     * a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge. <br><br> This container is only returned if the
-     * <b>IncludeRecommendations</b> flag was included and set to 'true' in the <b>AddItems</b> request, and if at least one listing recommendation exists for the newly created listing. If one or more listing recommendations are returned for one or more of
-     * the newly created listings, it will be at the seller's discretion about whether to revise the item(s) based on eBay's listing recommendation(s).
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $ListingRecommendations = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -153,7 +139,6 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @uses AddItemResponseContainerType::setErrors()
      * @uses AddItemResponseContainerType::setMessage()
      * @uses AddItemResponseContainerType::setDiscountReason()
-     * @uses AddItemResponseContainerType::setListingRecommendations()
      * @uses AddItemResponseContainerType::setAny()
      * @param string $itemID
      * @param string $startTime
@@ -165,10 +150,9 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @param string $message
      * @param string[] $discountReason
-     * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?string $correlationID = null, array $errors = [], ?string $message = null, array $discountReason = [], ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null, $any = null)
+    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?string $correlationID = null, array $errors = [], ?string $message = null, array $discountReason = [], $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -181,7 +165,6 @@ class AddItemResponseContainerType extends AbstractStructBase
             ->setErrors($errors)
             ->setMessage($message)
             ->setDiscountReason($discountReason)
-            ->setListingRecommendations($listingRecommendations)
             ->setAny($any);
     }
     /**
@@ -491,25 +474,6 @@ class AddItemResponseContainerType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\DiscountReasonCodeType::getValidValues())), __LINE__);
         }
         $this->DiscountReason[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get ListingRecommendations value
-     * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
-     */
-    public function getListingRecommendations(): ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType
-    {
-        return $this->ListingRecommendations;
-    }
-    /**
-     * Set ListingRecommendations value
-     * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
-     * @return \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType
-     */
-    public function setListingRecommendations(?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null): self
-    {
-        $this->ListingRecommendations = $listingRecommendations;
         
         return $this;
     }

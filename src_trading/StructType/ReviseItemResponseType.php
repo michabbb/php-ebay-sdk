@@ -105,20 +105,6 @@ class ReviseItemResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $ProductSuggestions = null;
     /**
-     * The ListingRecommendations
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This container is deprecated, and will no longer be returned after June 1, 2021. eBay recommends that you integrate with the REST-based <a href="/api-docs/sell/recommendation/overview.html"
-     * target="_blank">Recommendation API</a> to retrieve recommendations for improving your listings and sales performance, or with the <a href="/api-docs/sell/compliance/overview.html" target="_blank">Compliance API</a> to discover non-compliant listings
-     * or listings that are at risk at becoming non-compliant in the future. </span> <br><br> Container consisting of one or more <b>Recommendation</b> containers. Each <b>Recommendation</b> container provides a message to the seller on how a listing can be
-     * improved or brought up to standard in regards to top-rated seller/listing requirements, mandated or recommended Item Specifics, picture quality requirements, pricing and/or listing format recommendations, recommended keywords and/or Item Specifics in
-     * a Title, and/or a recommendation to offer fast handling (same-day handling or handling time of 1 day) and/or a free shipping option in order to qualify the listing for a Fast 'N Free badge. <br><br> This container is only returned if the
-     * <b>IncludeRecommendations</b> flag was included and set to 'true' in the <b>ReviseItem</b> request, and if at least one listing recommendation exists for the listing about to be revised. If one or more listing recommendations are returned, it will be
-     * at the seller's discretion about whether to revise the item again based on eBay's listing recommendation(s).
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $ListingRecommendations = null;
-    /**
      * Constructor method for ReviseItemResponseType
      * @uses ReviseItemResponseType::setItemID()
      * @uses ReviseItemResponseType::setStartTime()
@@ -129,7 +115,6 @@ class ReviseItemResponseType extends AbstractResponseType
      * @uses ReviseItemResponseType::setVerifyOnly()
      * @uses ReviseItemResponseType::setDiscountReason()
      * @uses ReviseItemResponseType::setProductSuggestions()
-     * @uses ReviseItemResponseType::setListingRecommendations()
      * @param string $itemID
      * @param string $startTime
      * @param string $endTime
@@ -139,9 +124,8 @@ class ReviseItemResponseType extends AbstractResponseType
      * @param bool $verifyOnly
      * @param string[] $discountReason
      * @param \macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions
-     * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
      */
-    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?bool $verifyOnly = null, array $discountReason = [], ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null, ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null)
+    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?bool $verifyOnly = null, array $discountReason = [], ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null)
     {
         $this
             ->setItemID($itemID)
@@ -152,8 +136,7 @@ class ReviseItemResponseType extends AbstractResponseType
             ->setCategory2ID($category2ID)
             ->setVerifyOnly($verifyOnly)
             ->setDiscountReason($discountReason)
-            ->setProductSuggestions($productSuggestions)
-            ->setListingRecommendations($listingRecommendations);
+            ->setProductSuggestions($productSuggestions);
     }
     /**
      * Get ItemID value
@@ -395,25 +378,6 @@ class ReviseItemResponseType extends AbstractResponseType
     public function setProductSuggestions(?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null): self
     {
         $this->ProductSuggestions = $productSuggestions;
-        
-        return $this;
-    }
-    /**
-     * Get ListingRecommendations value
-     * @return \macropage\ebaysdk\trading\StructType\ListingRecommendationsType|null
-     */
-    public function getListingRecommendations(): ?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType
-    {
-        return $this->ListingRecommendations;
-    }
-    /**
-     * Set ListingRecommendations value
-     * @param \macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations
-     * @return \macropage\ebaysdk\trading\StructType\ReviseItemResponseType
-     */
-    public function setListingRecommendations(?\macropage\ebaysdk\trading\StructType\ListingRecommendationsType $listingRecommendations = null): self
-    {
-        $this->ListingRecommendations = $listingRecommendations;
         
         return $this;
     }

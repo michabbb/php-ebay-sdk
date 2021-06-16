@@ -14,17 +14,18 @@ use macropage\ebaysdk\shopping\ServiceType\Service as ShoppingService;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use SoapFault;
+use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
 class base
 {
 
-    protected string                                        $appid;
-    protected FindingService|TradingService|ShoppingService $Service;
-    protected int                                           $version;
-    protected LoggerInterface                               $logger;
-    protected string                                        $soap_url_location = '';
-    protected string                                        $siteId;
-    protected string                                        $api_endpoint;
+    protected string                 $appid;
+    protected AbstractSoapClientBase $Service;
+    protected int                    $version;
+    protected LoggerInterface        $logger;
+    protected string                 $soap_url_location = '';
+    protected string                 $siteId;
+    protected string                 $api_endpoint;
 
     public function setSOAPLocation($location): void
     {
@@ -47,22 +48,34 @@ class base
         return $this->logger;
     }
 
-    public function getLastRequest(): DOMDocument|string|null
+    /**
+     * @return DOMDocument|string|null
+     */
+    public function getLastRequest()
     {
         return $this->Service->getLastRequest();
     }
 
-    public function getLastResponse(): DOMDocument|string|null
+    /**
+     * @return DOMDocument|string|null
+     */
+    public function getLastResponse()
     {
         return $this->Service->getLastResponse();
     }
 
-    public function getLastRequestHeaders(): array|string|null
+    /**
+     * @return array|string|null
+     */
+    public function getLastRequestHeaders()
     {
         return $this->Service->getLastRequestHeaders();
     }
 
-    public function getLastResponseHeaders(): array|string|null
+    /**
+     * @return array|string|null
+     */
+    public function getLastResponseHeaders()
     {
         return $this->Service->getLastResponseHeaders();
     }
@@ -84,7 +97,7 @@ class base
      * @return mixed
      * @throws SoapFault
      */
-    public function call($method, $args): mixed
+    public function call($method, $args)
     {
         switch ((string)$this->Service) {
             case 'macropage\ebaysdk\finding\ServiceType\Service': //finding
@@ -147,15 +160,7 @@ class base
         }
     }
 
-    #[ArrayShape([
-        'ApiEndpoint'         => "",
-        'SoapUrlLocation'     => "",
-        'LastRequestHeaders'  => "mixed",
-        'LastRequest'         => "\DOMDocument|null|string",
-        'LastResponseHeaders' => "mixed",
-        'LastResponse'        => "\DOMDocument|null|string",
-        'LastError'           => "array|null"
-    ])] protected function getDebugInfos(): array
+    protected function getDebugInfos(): array
     {
         return [
             'ApiEndpoint'         => $this->api_endpoint,
@@ -192,7 +197,7 @@ class base
      * @param string $reponse_xml
      * @param mixed  $last_error
      */
-    private function logRequest(string $url, string $name, string $headers_request, string $request_xml, string $headers_response, string $reponse_xml, mixed $last_error): void
+    private function logRequest(string $url, string $name, string $headers_request, string $request_xml, string $headers_response, string $reponse_xml, $last_error): void
     {
         if ($this->logger) {
             $faulstring        = '';
@@ -246,8 +251,8 @@ class base
         date_default_timezone_set('UTC');
         try {
             $new_date = new DateTime($datetime);
-        } catch (Exception) {
-            throw new RuntimeException('unable to parese date: ' . $datetime);
+        } catch (Exception $e) {
+            throw new RuntimeException('unable to parese date: ' . $datetime.' Error: '.$e->getMessage());
         }
         $new_date->setTimezone(new DateTimeZone($default_timezone));
         date_default_timezone_set($default_timezone);

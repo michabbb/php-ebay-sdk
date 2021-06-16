@@ -37,9 +37,9 @@ class GetOrdersResponseType extends AbstractResponseType
      * Meta information extracted from the WSDL
      * - documentation: The set of orders that match the order IDs or filter criteria specified.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
+     * @var \macropage\ebaysdk\trading\StructType\OrderArrayType|null
      */
-    protected ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $OrderArray = null;
+    protected ?\macropage\ebaysdk\trading\StructType\OrderArrayType $OrderArray = null;
     /**
      * The OrdersPerPage
      * Meta information extracted from the WSDL
@@ -75,12 +75,12 @@ class GetOrdersResponseType extends AbstractResponseType
      * @uses GetOrdersResponseType::setReturnedOrderCountActual()
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @param bool $hasMoreOrders
-     * @param \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray
+     * @param \macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray
      * @param int $ordersPerPage
      * @param int $pageNumber
      * @param int $returnedOrderCountActual
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreOrders = null, ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null, ?int $ordersPerPage = null, ?int $pageNumber = null, ?int $returnedOrderCountActual = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreOrders = null, ?\macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray = null, ?int $ordersPerPage = null, ?int $pageNumber = null, ?int $returnedOrderCountActual = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -134,18 +134,18 @@ class GetOrdersResponseType extends AbstractResponseType
     }
     /**
      * Get OrderArray value
-     * @return \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
+     * @return \macropage\ebaysdk\trading\StructType\OrderArrayType|null
      */
-    public function getOrderArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType
+    public function getOrderArray(): ?\macropage\ebaysdk\trading\StructType\OrderArrayType
     {
         return $this->OrderArray;
     }
     /**
      * Set OrderArray value
-     * @param \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray
+     * @param \macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType
      */
-    public function setOrderArray(?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null): self
+    public function setOrderArray(?\macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray = null): self
     {
         $this->OrderArray = $orderArray;
         

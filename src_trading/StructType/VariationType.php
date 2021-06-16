@@ -87,14 +87,6 @@ class VariationType extends AbstractStructBase
      */
     protected ?int $UnitsAvailable = null;
     /**
-     * The UnitCost
-     * Meta information extracted from the WSDL
-     * - documentation: Cost of the Selling Manager product that matches this variation.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\AmountType $UnitCost = null;
-    /**
      * The SellingStatus
      * Meta information extracted from the WSDL
      * - documentation: Contains the variation's quantity sold. Always returned when variations are present.
@@ -133,14 +125,6 @@ class VariationType extends AbstractStructBase
      * @var bool|null
      */
     protected ?bool $Delete = null;
-    /**
-     * The SellingManagerProductInventoryStatus
-     * Meta information extracted from the WSDL
-     * - documentation: Container for statistics about the Selling Manager product that is associated with this variation.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType $SellingManagerProductInventoryStatus = null;
     /**
      * The WatchCount
      * Meta information extracted from the WSDL
@@ -195,12 +179,10 @@ class VariationType extends AbstractStructBase
      * @uses VariationType::setQuantity()
      * @uses VariationType::setVariationSpecifics()
      * @uses VariationType::setUnitsAvailable()
-     * @uses VariationType::setUnitCost()
      * @uses VariationType::setSellingStatus()
      * @uses VariationType::setVariationTitle()
      * @uses VariationType::setVariationViewItemURL()
      * @uses VariationType::setDelete()
-     * @uses VariationType::setSellingManagerProductInventoryStatus()
      * @uses VariationType::setWatchCount()
      * @uses VariationType::setPrivateNotes()
      * @uses VariationType::setDiscountPriceInfo()
@@ -211,19 +193,17 @@ class VariationType extends AbstractStructBase
      * @param int $quantity
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics
      * @param int $unitsAvailable
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $unitCost
      * @param \macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus
      * @param string $variationTitle
      * @param string $variationViewItemURL
      * @param bool $delete
-     * @param \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType $sellingManagerProductInventoryStatus
      * @param int $watchCount
      * @param string $privateNotes
      * @param \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo
      * @param \macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?int $unitsAvailable = null, ?\macropage\ebaysdk\trading\StructType\AmountType $unitCost = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?\macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType $sellingManagerProductInventoryStatus = null, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, $any = null)
+    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?int $unitsAvailable = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, $any = null)
     {
         $this
             ->setSKU($sKU)
@@ -231,12 +211,10 @@ class VariationType extends AbstractStructBase
             ->setQuantity($quantity)
             ->setVariationSpecifics($variationSpecifics)
             ->setUnitsAvailable($unitsAvailable)
-            ->setUnitCost($unitCost)
             ->setSellingStatus($sellingStatus)
             ->setVariationTitle($variationTitle)
             ->setVariationViewItemURL($variationViewItemURL)
             ->setDelete($delete)
-            ->setSellingManagerProductInventoryStatus($sellingManagerProductInventoryStatus)
             ->setWatchCount($watchCount)
             ->setPrivateNotes($privateNotes)
             ->setDiscountPriceInfo($discountPriceInfo)
@@ -351,25 +329,6 @@ class VariationType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get UnitCost value
-     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    public function getUnitCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
-    {
-        return $this->UnitCost;
-    }
-    /**
-     * Set UnitCost value
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $unitCost
-     * @return \macropage\ebaysdk\trading\StructType\VariationType
-     */
-    public function setUnitCost(?\macropage\ebaysdk\trading\StructType\AmountType $unitCost = null): self
-    {
-        $this->UnitCost = $unitCost;
-        
-        return $this;
-    }
-    /**
      * Get SellingStatus value
      * @return \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
@@ -454,25 +413,6 @@ class VariationType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($delete, true), gettype($delete)), __LINE__);
         }
         $this->Delete = $delete;
-        
-        return $this;
-    }
-    /**
-     * Get SellingManagerProductInventoryStatus value
-     * @return \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType|null
-     */
-    public function getSellingManagerProductInventoryStatus(): ?\macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType
-    {
-        return $this->SellingManagerProductInventoryStatus;
-    }
-    /**
-     * Set SellingManagerProductInventoryStatus value
-     * @param \macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType $sellingManagerProductInventoryStatus
-     * @return \macropage\ebaysdk\trading\StructType\VariationType
-     */
-    public function setSellingManagerProductInventoryStatus(?\macropage\ebaysdk\trading\StructType\SellingManagerProductInventoryStatusType $sellingManagerProductInventoryStatus = null): self
-    {
-        $this->SellingManagerProductInventoryStatus = $sellingManagerProductInventoryStatus;
         
         return $this;
     }

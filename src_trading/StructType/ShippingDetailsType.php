@@ -179,10 +179,10 @@ class ShippingDetailsType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: The sale record ID. Applicable to Selling Manager users. When an item is sold, Selling Manager generates a sale record. A sale record contains buyer information, shipping, and other information. A sale record is displayed in the Sold
      * view in Selling Manager. Each sale record has a sale record ID. <br/><br/> In the following calls, the value for the sale record ID is in the <b>SellingManagerSalesRecordNumber</b> field: <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>,
-     * <b>GetOrders</b>, <b>GetOrderTransactions</b>. In the Selling Manager calls, the value for the sale record ID is in the <b>SaleRecordID</b> field. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading
-     * WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the real record number is only returned to the buyer or seller, and
-     * a dummy value of <code>0</code> will be returned to all third parties. <br/><br/> The sale record ID can be for a single or a multiple line item order. <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>,
-     * <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
+     * <b>GetOrders</b>, <b>GetOrderTransactions</b>. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer
+     * returned at all to third parties. If using a Trading WSDL older than Version 1019, the real record number is only returned to the buyer or seller, and a dummy value of <code>0</code> will be returned to all third parties. <br/><br/> The sale record
+     * ID can be for a single or a multiple line item order. <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only
+     * returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
      * @var int|null
      */

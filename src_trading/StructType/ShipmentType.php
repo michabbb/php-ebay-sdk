@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for ShipmentType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>Shipment</b> container, which is used by the seller in <b>CompleteSale</b> to provide shipping information. The <b>Shipment</b> container is also returned in the <b>GetSellingManagerSaleRecord</b> response.
+ * - documentation: Type defining the <b>Shipment</b> container, which is used by the seller in <b>CompleteSale</b> to provide shipping information.
  * @subpackage Structs
  */
 class ShipmentType extends AbstractStructBase
@@ -230,14 +230,6 @@ class ShipmentType extends AbstractStructBase
      */
     protected array $ShipmentTrackingDetails = [];
     /**
-     * The ShipmentLineItem
-     * Meta information extracted from the WSDL
-     * - documentation: Contains information about one or more order line items in a Global Shipping Program package. Required or returned if the value of <strong>ShippingCarrierUsed</strong> is <code>PBI</code>.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShipmentLineItemType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ShipmentLineItemType $ShipmentLineItem = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -271,7 +263,6 @@ class ShipmentType extends AbstractStructBase
      * @uses ShipmentType::setShippedTime()
      * @uses ShipmentType::setNotes()
      * @uses ShipmentType::setShipmentTrackingDetails()
-     * @uses ShipmentType::setShipmentLineItem()
      * @uses ShipmentType::setAny()
      * @param string $estimatedDeliveryDate
      * @param \macropage\ebaysdk\trading\StructType\AmountType $insuredValue
@@ -300,10 +291,9 @@ class ShipmentType extends AbstractStructBase
      * @param string $shippedTime
      * @param string $notes
      * @param \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[] $shipmentTrackingDetails
-     * @param \macropage\ebaysdk\trading\StructType\ShipmentLineItemType $shipmentLineItem
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $estimatedDeliveryDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuredValue = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageDepth = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageLength = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageWidth = null, ?string $payPalShipmentID = null, ?int $shipmentID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $postageTotal = null, ?string $printedTime = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shipFromAddress = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?string $shippingCarrierUsed = null, array $shippingFeature = [], ?string $shippingPackage = null, ?string $shippingServiceUsed = null, ?string $shipmentTrackingNumber = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMajor = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMinor = null, array $itemTransactionID = [], ?string $deliveryDate = null, ?string $deliveryStatus = null, ?string $refundGrantedTime = null, ?string $refundRequestedTime = null, ?string $status = null, ?string $shippedTime = null, ?string $notes = null, array $shipmentTrackingDetails = [], ?\macropage\ebaysdk\trading\StructType\ShipmentLineItemType $shipmentLineItem = null, $any = null)
+    public function __construct(?string $estimatedDeliveryDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuredValue = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageDepth = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageLength = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageWidth = null, ?string $payPalShipmentID = null, ?int $shipmentID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $postageTotal = null, ?string $printedTime = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shipFromAddress = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?string $shippingCarrierUsed = null, array $shippingFeature = [], ?string $shippingPackage = null, ?string $shippingServiceUsed = null, ?string $shipmentTrackingNumber = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMajor = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMinor = null, array $itemTransactionID = [], ?string $deliveryDate = null, ?string $deliveryStatus = null, ?string $refundGrantedTime = null, ?string $refundRequestedTime = null, ?string $status = null, ?string $shippedTime = null, ?string $notes = null, array $shipmentTrackingDetails = [], $any = null)
     {
         $this
             ->setEstimatedDeliveryDate($estimatedDeliveryDate)
@@ -333,7 +323,6 @@ class ShipmentType extends AbstractStructBase
             ->setShippedTime($shippedTime)
             ->setNotes($notes)
             ->setShipmentTrackingDetails($shipmentTrackingDetails)
-            ->setShipmentLineItem($shipmentLineItem)
             ->setAny($any);
     }
     /**
@@ -1051,25 +1040,6 @@ class ShipmentType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('The ShipmentTrackingDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ShipmentTrackingDetails[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get ShipmentLineItem value
-     * @return \macropage\ebaysdk\trading\StructType\ShipmentLineItemType|null
-     */
-    public function getShipmentLineItem(): ?\macropage\ebaysdk\trading\StructType\ShipmentLineItemType
-    {
-        return $this->ShipmentLineItem;
-    }
-    /**
-     * Set ShipmentLineItem value
-     * @param \macropage\ebaysdk\trading\StructType\ShipmentLineItemType $shipmentLineItem
-     * @return \macropage\ebaysdk\trading\StructType\ShipmentType
-     */
-    public function setShipmentLineItem(?\macropage\ebaysdk\trading\StructType\ShipmentLineItemType $shipmentLineItem = null): self
-    {
-        $this->ShipmentLineItem = $shipmentLineItem;
         
         return $this;
     }

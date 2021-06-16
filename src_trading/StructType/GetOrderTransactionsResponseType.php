@@ -21,33 +21,33 @@ class GetOrderTransactionsResponseType extends AbstractResponseType
      * Meta information extracted from the WSDL
      * - documentation: This container consists of an array of eBay orders that match the input criteria that was passed into the call request.
      * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
+     * @var \macropage\ebaysdk\trading\StructType\OrderArrayType|null
      */
-    protected ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $OrderArray = null;
+    protected ?\macropage\ebaysdk\trading\StructType\OrderArrayType $OrderArray = null;
     /**
      * Constructor method for GetOrderTransactionsResponseType
      * @uses GetOrderTransactionsResponseType::setOrderArray()
-     * @param \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray
+     * @param \macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray
      */
-    public function __construct(?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray = null)
     {
         $this
             ->setOrderArray($orderArray);
     }
     /**
      * Get OrderArray value
-     * @return \macropage\ebaysdk\trading\ArrayType\OrderArrayType|null
+     * @return \macropage\ebaysdk\trading\StructType\OrderArrayType|null
      */
-    public function getOrderArray(): ?\macropage\ebaysdk\trading\ArrayType\OrderArrayType
+    public function getOrderArray(): ?\macropage\ebaysdk\trading\StructType\OrderArrayType
     {
         return $this->OrderArray;
     }
     /**
      * Set OrderArray value
-     * @param \macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray
+     * @param \macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray
      * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsResponseType
      */
-    public function setOrderArray(?\macropage\ebaysdk\trading\ArrayType\OrderArrayType $orderArray = null): self
+    public function setOrderArray(?\macropage\ebaysdk\trading\StructType\OrderArrayType $orderArray = null): self
     {
         $this->OrderArray = $orderArray;
         

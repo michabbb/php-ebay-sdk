@@ -2073,16 +2073,15 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FeeAd'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a fee charged for an Ad on eBay. This Ad fee is charged only for sellers who sign up to create Promoted Listings campaigns. When sellers advertise their listings, the
-     * listings are displayed on the search results pages based on buyer search query. When a buyer clicks on an ad and then goes on to purchase that same item within 30 days of click, the seller is charged an Ad fee. The Ad fee that is charged is at the
-     * rate set by seller themselves. They choose the bid percentage for each item listing.
+     * - documentation: This enumeration value indicates that the account entry is a fee charged for a Standard Promoted Listing ad on eBay. With Standard Promoted Listings, the seller is charged a fee when a buyer clicks on the ad and then goes on to
+     * purchase that same item within 30 days of that click. The seller chooses the bid percentage for the ad, and this rate is applied toward the total purchase price.
      * @return string 'FeeAd'
      */
     const VALUE_FEE_AD = 'FeeAd';
     /**
      * Constant for value 'CreditAd'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit issued by eBay for an Ad charge.
+     * - documentation: This enumeration value indicates that the account entry is a credit issued toward a Standard Promoted Listing ad fee.
      * @return string 'CreditAd'
      */
     const VALUE_CREDIT_AD = 'CreditAd';
@@ -2201,14 +2200,15 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'AdFeePremium'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the invoice charge is for a Premium Ad Fee.
+     * - documentation: This enumeration value indicates that the account entry is a fee charged for a Advanced Promoted Listing ad on eBay. With Advanced Promoted Listings, the seller uses keywords to promote the listing, and if buyers find the listing
+     * based on a keyword defined in the seller's Promoted Listings campaign, the seller is charged a fee each time the ad is clicked. The seller chooses the bid percentage rate for the ad, and this rate is charged for each click on the ad.
      * @return string 'AdFeePremium'
      */
     const VALUE_AD_FEE_PREMIUM = 'AdFeePremium';
     /**
      * Constant for value 'AdFeePremiumCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that a credit was issued for a Premium Ad Fee charge.
+     * - documentation: This enumeration value indicates that a credit was issued toward an Advanced Promoted Listing ad fee.
      * @return string 'AdFeePremiumCredit'
      */
     const VALUE_AD_FEE_PREMIUM_CREDIT = 'AdFeePremiumCredit';
@@ -2547,6 +2547,34 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * @return string 'AdFeeExpressCredit'
      */
     const VALUE_AD_FEE_EXPRESS_CREDIT = 'AdFeeExpressCredit';
+    /**
+     * Constant for value 'DepositProcessingVariableFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the account entry is a Deposit Processing Variable fee.
+     * @return string 'DepositProcessingVariableFee'
+     */
+    const VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE = 'DepositProcessingVariableFee';
+    /**
+     * Constant for value 'DepositProcessingVariableFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the account entry is a credit applied against a Deposit Processing Variable fee.
+     * @return string 'DepositProcessingVariableFeeCredit'
+     */
+    const VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT = 'DepositProcessingVariableFeeCredit';
+    /**
+     * Constant for value 'DepositProcessingFixedFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the account entry is a Deposit Processing Fixed fee.
+     * @return string 'DepositProcessingFixedFee'
+     */
+    const VALUE_DEPOSIT_PROCESSING_FIXED_FEE = 'DepositProcessingFixedFee';
+    /**
+     * Constant for value 'DepositProcessingFixedFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the account entry is a credit applied against a Deposit Processing Fixed fee.
+     * @return string 'DepositProcessingFixedFeeCredit'
+     */
+    const VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT = 'DepositProcessingFixedFeeCredit';
     /**
      * Return allowed values
      * @uses self::VALUE_UNKNOWN
@@ -2895,6 +2923,10 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * @uses self::VALUE_FINAL_VALUE_FEE_BELOW_STANDARD_CREDIT
      * @uses self::VALUE_AD_FEE_EXPRESS
      * @uses self::VALUE_AD_FEE_EXPRESS_CREDIT
+     * @uses self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE
+     * @uses self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT
+     * @uses self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE
+     * @uses self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT
      * @return string[]
      */
     public static function getValidValues(): array
@@ -3246,6 +3278,10 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
             self::VALUE_FINAL_VALUE_FEE_BELOW_STANDARD_CREDIT,
             self::VALUE_AD_FEE_EXPRESS,
             self::VALUE_AD_FEE_EXPRESS_CREDIT,
+            self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE,
+            self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT,
+            self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE,
+            self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT,
         ];
     }
 }
