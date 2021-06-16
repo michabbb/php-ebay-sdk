@@ -58,7 +58,7 @@ to get an idea, how it´s working, take look into `test.php`.
 
 |API|Version|
 |----|----|
-|Trading|1203|
+|Trading|1209|
 |Shopping|1199|
 |Finding|1.13.0|
 
