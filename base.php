@@ -22,7 +22,7 @@ class base
     protected string                 $appid;
     protected AbstractSoapClientBase $Service;
     protected int                    $version;
-    protected LoggerInterface        $logger;
+    protected ?LoggerInterface       $logger = null;
     protected string                 $soap_url_location = '';
     protected string                 $siteId;
     protected string                 $api_endpoint;
