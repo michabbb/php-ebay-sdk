@@ -36,7 +36,7 @@ class soap_client_finding extends \SoapClient {
             $request = preg_replace('/<ns1:' . $node . '>/', '<' . $node . '>', $request);
             $request = preg_replace('/<\/ns1:' . $node . '>/', '</' . $node . '>', $request);
         }
-        return parent::__doRequest($request, $location, $action, $version, $oneWay);
+        return parent::__doRequest($request, $location, (string)$action, $version, $oneWay);
     }
 
 }
