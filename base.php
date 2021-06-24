@@ -189,15 +189,15 @@ class base
     /**
      * Logs the request details.
      *
-     * @param string $url  API endpoint.
-     * @param string $name The name of the operation.
-     * @param string $headers_request
-     * @param string $request_xml
-     * @param string $headers_response
-     * @param string $reponse_xml
-     * @param mixed  $last_error
+     * @param string      $url  API endpoint.
+     * @param string      $name The name of the operation.
+     * @param string      $headers_request
+     * @param string      $request_xml
+     * @param string      $headers_response
+     * @param string|null $reponse_xml
+     * @param mixed       $last_error
      */
-    private function logRequest(string $url, string $name, string $headers_request, string $request_xml, string $headers_response, string $reponse_xml, $last_error): void
+    private function logRequest(string $url, string $name, string $headers_request, string $request_xml, string $headers_response, ?string $reponse_xml, $last_error): void
     {
         if ($this->logger) {
             $faulstring        = '';
