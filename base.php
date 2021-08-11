@@ -48,6 +48,11 @@ class base
         return $this->logger;
     }
 
+    public function disableLogger():void
+    {
+        $this->logger = null;
+    }
+
     /**
      * @return DOMDocument|string|null
      */
