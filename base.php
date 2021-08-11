@@ -47,7 +47,15 @@ class base
         return $this->logger;
     }
 
-    public function getLastRequest(): DOMDocument|string|null
+    public function disableLogger(): void
+    {
+        $this->logger = null;
+    }
+
+    /**
+     * @return DOMDocument|string|null
+     */
+    public function getLastRequest()
     {
         return $this->Service->getLastRequest();
     }
