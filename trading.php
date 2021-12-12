@@ -199,7 +199,7 @@ class trading extends base {
 		return $this->call($name,$arguments);
 	}
 
-	public function setCredentials(string $appid, string $devid, string $authtoken): void
+	public function setCredentials(string $appid, string $devid, string $certid, string $authtoken): void
     {
 		$this->appid                         = $appid;
 		$CustomSecurityHeader                = new CustomSecurityHeaderType();
@@ -208,6 +208,7 @@ class trading extends base {
 			$appid,
 			$devid
 		);
+		$Credentials->setAuthCert($certid);
 		$CustomSecurityHeader->setCredentials($Credentials);
 		$this->Service->setSoapHeaderRequesterCredentials($CustomSecurityHeader);
 	}
