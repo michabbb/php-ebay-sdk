@@ -21,7 +21,7 @@ class base
 
     protected string                 $appid;
     protected AbstractSoapClientBase $Service;
-    protected int                    $version;
+    protected string                 $version;
     protected ?LoggerInterface       $logger = null;
     protected string                 $soap_url_location = '';
     protected string                 $siteId;
@@ -90,7 +90,7 @@ class base
         $this->siteId = $siteid;
     }
 
-    public function setVersion(int $version): void
+    public function setVersion(string $version): void
     {
         $this->version = $version;
     }
@@ -131,7 +131,7 @@ class base
                             is_object($args[0]) &&
                             method_exists($args[0], 'setVersion')
                         ) {
-                            $args[0]->setVersion((string)$this->version);
+                            $args[0]->setVersion($this->version);
                         }
 
                         $this->Service->setLocation($this->api_endpoint . '?callname=' . $method . '&siteid=' . $this->siteId . '&appid=' . $this->appid . '&version=' . $this->version . '&routing=new');
