@@ -33,13 +33,13 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    protected array $NameValueList = [];
+    protected ?array $NameValueList = null;
     /**
      * Constructor method for NameValueListArrayType
      * @uses NameValueListArrayType::setNameValueList()
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      */
-    public function __construct(array $nameValueList = [])
+    public function __construct(?array $nameValueList = null)
     {
         $this
             ->setNameValueList($nameValueList);
@@ -48,7 +48,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * Get NameValueList value
      * @return \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    public function getNameValueList(): array
+    public function getNameValueList(): ?array
     {
         return $this->NameValueList;
     }
@@ -58,8 +58,11 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $nameValueListArrayTypeNameValueListItem) {
@@ -81,7 +84,7 @@ class NameValueListArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType
      */
-    public function setNameValueList(array $nameValueList = []): self
+    public function setNameValueList(?array $nameValueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {

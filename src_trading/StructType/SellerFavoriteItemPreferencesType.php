@@ -72,7 +72,7 @@ class SellerFavoriteItemPreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $FavoriteItemID = [];
+    protected ?array $FavoriteItemID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -97,7 +97,7 @@ class SellerFavoriteItemPreferencesType extends AbstractStructBase
      * @param string[] $favoriteItemID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $searchKeywords = null, ?int $storeCategoryID = null, ?string $listingType = null, ?string $searchSortOrder = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null, array $favoriteItemID = [], $any = null)
+    public function __construct(?string $searchKeywords = null, ?int $storeCategoryID = null, ?string $listingType = null, ?string $searchSortOrder = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxPrice = null, ?array $favoriteItemID = null, $any = null)
     {
         $this
             ->setSearchKeywords($searchKeywords)
@@ -249,7 +249,7 @@ class SellerFavoriteItemPreferencesType extends AbstractStructBase
      * Get FavoriteItemID value
      * @return string[]
      */
-    public function getFavoriteItemID(): array
+    public function getFavoriteItemID(): ?array
     {
         return $this->FavoriteItemID;
     }
@@ -259,8 +259,11 @@ class SellerFavoriteItemPreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFavoriteItemIDForArrayConstraintsFromSetFavoriteItemID(array $values = []): string
+    public static function validateFavoriteItemIDForArrayConstraintsFromSetFavoriteItemID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sellerFavoriteItemPreferencesTypeFavoriteItemIDItem) {
@@ -282,7 +285,7 @@ class SellerFavoriteItemPreferencesType extends AbstractStructBase
      * @param string[] $favoriteItemID
      * @return \macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType
      */
-    public function setFavoriteItemID(array $favoriteItemID = []): self
+    public function setFavoriteItemID(?array $favoriteItemID = null): self
     {
         // validation for constraint: array
         if ('' !== ($favoriteItemIDArrayErrorMessage = self::validateFavoriteItemIDForArrayConstraintsFromSetFavoriteItemID($favoriteItemID))) {

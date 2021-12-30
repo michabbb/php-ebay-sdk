@@ -39,7 +39,7 @@ class ProductSearchPageType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharacteristicType[]
      */
-    protected array $SortCharacteristics = [];
+    protected ?array $SortCharacteristics = null;
     /**
      * The DataElementSet
      * Meta information extracted from the WSDL
@@ -48,7 +48,7 @@ class ProductSearchPageType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DataElementSetType[]
      */
-    protected array $DataElementSet = [];
+    protected ?array $DataElementSet = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -67,7 +67,7 @@ class ProductSearchPageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DataElementSetType[] $dataElementSet
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $searchCharacteristicsSet = null, ?string $searchType = null, array $sortCharacteristics = [], array $dataElementSet = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $searchCharacteristicsSet = null, ?string $searchType = null, ?array $sortCharacteristics = null, ?array $dataElementSet = null, $any = null)
     {
         $this
             ->setSearchCharacteristicsSet($searchCharacteristicsSet)
@@ -125,7 +125,7 @@ class ProductSearchPageType extends AbstractStructBase
      * Get SortCharacteristics value
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType[]
      */
-    public function getSortCharacteristics(): array
+    public function getSortCharacteristics(): ?array
     {
         return $this->SortCharacteristics;
     }
@@ -135,8 +135,11 @@ class ProductSearchPageType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSortCharacteristicsForArrayConstraintsFromSetSortCharacteristics(array $values = []): string
+    public static function validateSortCharacteristicsForArrayConstraintsFromSetSortCharacteristics(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productSearchPageTypeSortCharacteristicsItem) {
@@ -158,7 +161,7 @@ class ProductSearchPageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicType[] $sortCharacteristics
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchPageType
      */
-    public function setSortCharacteristics(array $sortCharacteristics = []): self
+    public function setSortCharacteristics(?array $sortCharacteristics = null): self
     {
         // validation for constraint: array
         if ('' !== ($sortCharacteristicsArrayErrorMessage = self::validateSortCharacteristicsForArrayConstraintsFromSetSortCharacteristics($sortCharacteristics))) {
@@ -188,7 +191,7 @@ class ProductSearchPageType extends AbstractStructBase
      * Get DataElementSet value
      * @return \macropage\ebaysdk\trading\StructType\DataElementSetType[]
      */
-    public function getDataElementSet(): array
+    public function getDataElementSet(): ?array
     {
         return $this->DataElementSet;
     }
@@ -198,8 +201,11 @@ class ProductSearchPageType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDataElementSetForArrayConstraintsFromSetDataElementSet(array $values = []): string
+    public static function validateDataElementSetForArrayConstraintsFromSetDataElementSet(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productSearchPageTypeDataElementSetItem) {
@@ -221,7 +227,7 @@ class ProductSearchPageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DataElementSetType[] $dataElementSet
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchPageType
      */
-    public function setDataElementSet(array $dataElementSet = []): self
+    public function setDataElementSet(?array $dataElementSet = null): self
     {
         // validation for constraint: array
         if ('' !== ($dataElementSetArrayErrorMessage = self::validateDataElementSetForArrayConstraintsFromSetDataElementSet($dataElementSet))) {

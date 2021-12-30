@@ -26,7 +26,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ItemID = [];
+    protected ?array $ItemID = null;
     /**
      * The RemoveAllItems
      * Meta information extracted from the WSDL
@@ -45,7 +45,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationKeyType[]
      */
-    protected array $VariationKey = [];
+    protected ?array $VariationKey = null;
     /**
      * Constructor method for RemoveFromWatchListRequestType
      * @uses RemoveFromWatchListRequestType::setItemID()
@@ -55,7 +55,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * @param bool $removeAllItems
      * @param \macropage\ebaysdk\trading\StructType\VariationKeyType[] $variationKey
      */
-    public function __construct(array $itemID = [], ?bool $removeAllItems = null, array $variationKey = [])
+    public function __construct(?array $itemID = null, ?bool $removeAllItems = null, ?array $variationKey = null)
     {
         $this
             ->setItemID($itemID)
@@ -66,7 +66,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string[]
      */
-    public function getItemID(): array
+    public function getItemID(): ?array
     {
         return $this->ItemID;
     }
@@ -76,8 +76,11 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemIDForArrayConstraintsFromSetItemID(array $values = []): string
+    public static function validateItemIDForArrayConstraintsFromSetItemID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $removeFromWatchListRequestTypeItemIDItem) {
@@ -99,7 +102,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @return \macropage\ebaysdk\trading\StructType\RemoveFromWatchListRequestType
      */
-    public function setItemID(array $itemID = []): self
+    public function setItemID(?array $itemID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemIDArrayErrorMessage = self::validateItemIDForArrayConstraintsFromSetItemID($itemID))) {
@@ -152,7 +155,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * Get VariationKey value
      * @return \macropage\ebaysdk\trading\StructType\VariationKeyType[]
      */
-    public function getVariationKey(): array
+    public function getVariationKey(): ?array
     {
         return $this->VariationKey;
     }
@@ -162,8 +165,11 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVariationKeyForArrayConstraintsFromSetVariationKey(array $values = []): string
+    public static function validateVariationKeyForArrayConstraintsFromSetVariationKey(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $removeFromWatchListRequestTypeVariationKeyItem) {
@@ -185,7 +191,7 @@ class RemoveFromWatchListRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\VariationKeyType[] $variationKey
      * @return \macropage\ebaysdk\trading\StructType\RemoveFromWatchListRequestType
      */
-    public function setVariationKey(array $variationKey = []): self
+    public function setVariationKey(?array $variationKey = null): self
     {
         // validation for constraint: array
         if ('' !== ($variationKeyArrayErrorMessage = self::validateVariationKeyForArrayConstraintsFromSetVariationKey($variationKey))) {

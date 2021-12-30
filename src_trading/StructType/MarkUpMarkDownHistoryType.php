@@ -24,13 +24,13 @@ class MarkUpMarkDownHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType[]
      */
-    protected array $MarkUpMarkDownEvent = [];
+    protected ?array $MarkUpMarkDownEvent = null;
     /**
      * Constructor method for MarkUpMarkDownHistoryType
      * @uses MarkUpMarkDownHistoryType::setMarkUpMarkDownEvent()
      * @param \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType[] $markUpMarkDownEvent
      */
-    public function __construct(array $markUpMarkDownEvent = [])
+    public function __construct(?array $markUpMarkDownEvent = null)
     {
         $this
             ->setMarkUpMarkDownEvent($markUpMarkDownEvent);
@@ -39,7 +39,7 @@ class MarkUpMarkDownHistoryType extends AbstractStructBase
      * Get MarkUpMarkDownEvent value
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType[]
      */
-    public function getMarkUpMarkDownEvent(): array
+    public function getMarkUpMarkDownEvent(): ?array
     {
         return $this->MarkUpMarkDownEvent;
     }
@@ -49,8 +49,11 @@ class MarkUpMarkDownHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMarkUpMarkDownEventForArrayConstraintsFromSetMarkUpMarkDownEvent(array $values = []): string
+    public static function validateMarkUpMarkDownEventForArrayConstraintsFromSetMarkUpMarkDownEvent(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $markUpMarkDownHistoryTypeMarkUpMarkDownEventItem) {
@@ -72,7 +75,7 @@ class MarkUpMarkDownHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MarkUpMarkDownEventType[] $markUpMarkDownEvent
      * @return \macropage\ebaysdk\trading\StructType\MarkUpMarkDownHistoryType
      */
-    public function setMarkUpMarkDownEvent(array $markUpMarkDownEvent = []): self
+    public function setMarkUpMarkDownEvent(?array $markUpMarkDownEvent = null): self
     {
         // validation for constraint: array
         if ('' !== ($markUpMarkDownEventArrayErrorMessage = self::validateMarkUpMarkDownEventForArrayConstraintsFromSetMarkUpMarkDownEvent($markUpMarkDownEvent))) {

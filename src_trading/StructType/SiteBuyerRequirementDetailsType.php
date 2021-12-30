@@ -19,7 +19,8 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
     /**
      * The LinkedPayPalAccount
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This field is no longer applicable, as sellers can no longer set the Buyer Requirement that buyers must have a PayPal account linked to their eBay account in order to purchase an item. </span>
+     * - documentation: <span class="tablenote"><b>Note: </b> Although this field is currently still returned (always as <code>false</code>), it is no longer applicable since having an eBay account linked to a PayPal account is no longer a requirement of
+     * any eBay user. </span>
      * - minOccurs: 0
      * @var bool|null
      */

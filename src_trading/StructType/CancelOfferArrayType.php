@@ -23,7 +23,7 @@ class CancelOfferArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CancelOfferType[]
      */
-    protected array $CancelOffer = [];
+    protected ?array $CancelOffer = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class CancelOfferArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CancelOfferType[] $cancelOffer
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $cancelOffer = [], $any = null)
+    public function __construct(?array $cancelOffer = null, $any = null)
     {
         $this
             ->setCancelOffer($cancelOffer)
@@ -46,7 +46,7 @@ class CancelOfferArrayType extends AbstractStructBase
      * Get CancelOffer value
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferType[]
      */
-    public function getCancelOffer(): array
+    public function getCancelOffer(): ?array
     {
         return $this->CancelOffer;
     }
@@ -56,8 +56,11 @@ class CancelOfferArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCancelOfferForArrayConstraintsFromSetCancelOffer(array $values = []): string
+    public static function validateCancelOfferForArrayConstraintsFromSetCancelOffer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $cancelOfferArrayTypeCancelOfferItem) {
@@ -79,7 +82,7 @@ class CancelOfferArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CancelOfferType[] $cancelOffer
      * @return \macropage\ebaysdk\trading\StructType\CancelOfferArrayType
      */
-    public function setCancelOffer(array $cancelOffer = []): self
+    public function setCancelOffer(?array $cancelOffer = null): self
     {
         // validation for constraint: array
         if ('' !== ($cancelOfferArrayErrorMessage = self::validateCancelOfferForArrayConstraintsFromSetCancelOffer($cancelOffer))) {

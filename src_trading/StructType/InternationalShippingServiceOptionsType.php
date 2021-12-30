@@ -74,7 +74,7 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShipToLocation = [];
+    protected ?array $ShipToLocation = null;
     /**
      * The ShippingInsuranceCost
      * Meta information extracted from the WSDL
@@ -127,7 +127,7 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * @param string $shippingServiceCutOffTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, array $shipToLocation = [], ?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?string $shippingServiceCutOffTime = null, $any = null)
+    public function __construct(?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?array $shipToLocation = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?string $shippingServiceCutOffTime = null, $any = null)
     {
         $this
             ->setShippingService($shippingService)
@@ -228,7 +228,7 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * Get ShipToLocation value
      * @return string[]
      */
-    public function getShipToLocation(): array
+    public function getShipToLocation(): ?array
     {
         return $this->ShipToLocation;
     }
@@ -238,8 +238,11 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShipToLocationForArrayConstraintsFromSetShipToLocation(array $values = []): string
+    public static function validateShipToLocationForArrayConstraintsFromSetShipToLocation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $internationalShippingServiceOptionsTypeShipToLocationItem) {
@@ -261,7 +264,7 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * @param string[] $shipToLocation
      * @return \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType
      */
-    public function setShipToLocation(array $shipToLocation = []): self
+    public function setShipToLocation(?array $shipToLocation = null): self
     {
         // validation for constraint: array
         if ('' !== ($shipToLocationArrayErrorMessage = self::validateShipToLocationForArrayConstraintsFromSetShipToLocation($shipToLocation))) {

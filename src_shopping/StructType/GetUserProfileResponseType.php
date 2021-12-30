@@ -43,7 +43,7 @@ class GetUserProfileResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackDetailType[]
      */
-    protected array $FeedbackDetails = [];
+    protected ?array $FeedbackDetails = null;
     /**
      * Constructor method for GetUserProfileResponseType
      * @uses GetUserProfileResponseType::setUser()
@@ -53,7 +53,7 @@ class GetUserProfileResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType $feedbackHistory
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackDetailType[] $feedbackDetails
      */
-    public function __construct(?\macropage\ebaysdk\shopping\StructType\SimpleUserType $user = null, ?\macropage\ebaysdk\shopping\StructType\FeedbackHistoryType $feedbackHistory = null, array $feedbackDetails = [])
+    public function __construct(?\macropage\ebaysdk\shopping\StructType\SimpleUserType $user = null, ?\macropage\ebaysdk\shopping\StructType\FeedbackHistoryType $feedbackHistory = null, ?array $feedbackDetails = null)
     {
         $this
             ->setUser($user)
@@ -102,7 +102,7 @@ class GetUserProfileResponseType extends AbstractResponseType
      * Get FeedbackDetails value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackDetailType[]
      */
-    public function getFeedbackDetails(): array
+    public function getFeedbackDetails(): ?array
     {
         return $this->FeedbackDetails;
     }
@@ -112,8 +112,11 @@ class GetUserProfileResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeedbackDetailsForArrayConstraintsFromSetFeedbackDetails(array $values = []): string
+    public static function validateFeedbackDetailsForArrayConstraintsFromSetFeedbackDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getUserProfileResponseTypeFeedbackDetailsItem) {
@@ -135,7 +138,7 @@ class GetUserProfileResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackDetailType[] $feedbackDetails
      * @return \macropage\ebaysdk\shopping\StructType\GetUserProfileResponseType
      */
-    public function setFeedbackDetails(array $feedbackDetails = []): self
+    public function setFeedbackDetails(?array $feedbackDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($feedbackDetailsArrayErrorMessage = self::validateFeedbackDetailsForArrayConstraintsFromSetFeedbackDetails($feedbackDetails))) {

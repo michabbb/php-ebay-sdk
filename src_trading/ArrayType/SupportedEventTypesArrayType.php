@@ -20,13 +20,13 @@ class SupportedEventTypesArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $EventType = [];
+    protected ?array $EventType = null;
     /**
      * Constructor method for SupportedEventTypesArrayType
      * @uses SupportedEventTypesArrayType::setEventType()
      * @param string[] $eventType
      */
-    public function __construct(array $eventType = [])
+    public function __construct(?array $eventType = null)
     {
         $this
             ->setEventType($eventType);
@@ -35,7 +35,7 @@ class SupportedEventTypesArrayType extends AbstractStructArrayBase
      * Get EventType value
      * @return string[]
      */
-    public function getEventType(): array
+    public function getEventType(): ?array
     {
         return $this->EventType;
     }
@@ -45,8 +45,11 @@ class SupportedEventTypesArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEventTypeForArrayConstraintsFromSetEventType(array $values = []): string
+    public static function validateEventTypeForArrayConstraintsFromSetEventType(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $supportedEventTypesArrayTypeEventTypeItem) {
@@ -70,7 +73,7 @@ class SupportedEventTypesArrayType extends AbstractStructArrayBase
      * @param string[] $eventType
      * @return \macropage\ebaysdk\trading\ArrayType\SupportedEventTypesArrayType
      */
-    public function setEventType(array $eventType = []): self
+    public function setEventType(?array $eventType = null): self
     {
         // validation for constraint: array
         if ('' !== ($eventTypeArrayErrorMessage = self::validateEventTypeForArrayConstraintsFromSetEventType($eventType))) {

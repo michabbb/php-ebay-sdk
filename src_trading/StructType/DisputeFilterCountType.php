@@ -10,9 +10,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for DisputeFilterCountType StructType
  * Meta information extracted from the WSDL
- * - documentation: The number of disputes that match a given filter. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee
- * program, are not returned with <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a
- * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: This type is used by the <strong>DisputeFilterCount</strong> containers of the <b>GetUserDisputes</b> response to show how many disputes of a certain type that the user is involved in. <br/><br/> <span
+ * class="tablenote"><strong>Note:</strong> The <b>GetUserDisputes</b> call now only retrieves Unpaid Item cases, and is no longer used to retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay
+ * buyers. However, the <b>GetUserDisputes</b> call is still currently returning counts for <b>ItemNotReceivedDisputes</b>, but the count is most likely to be 0. </span>
  * @subpackage Structs
  */
 class DisputeFilterCountType extends AbstractStructBase
@@ -20,8 +20,7 @@ class DisputeFilterCountType extends AbstractStructBase
     /**
      * The DisputeFilterType
      * Meta information extracted from the WSDL
-     * - documentation: A filter used to reduce the number of disputes returned. The filter uses criteria such as whether the dispute is awaiting a response, is closed, or is eligible for credit. Both <i>Unpaid Item</i> and <i>Item Not Received</i> disputes
-     * can be returned for the same filter value.
+     * - documentation: The enumeration value returned here indicates the type/category of the dispute for which a count is being shown. For example, disputes awaiting a response, closed disputes, disputes eligible for Final Value Fee credit, etc.
      * - minOccurs: 0
      * @var string|null
      */
@@ -29,7 +28,8 @@ class DisputeFilterCountType extends AbstractStructBase
     /**
      * The TotalAvailable
      * Meta information extracted from the WSDL
-     * - documentation: The number of disputes that match the filter. In the <b>GetUserDisputes</b> response, not returned for the filter type that was used in the request.
+     * - documentation: This integer value indicates the number of disputes that match the input criteria for the corresponding type/category of dispute. <br/><br/> Note that this field will not be returned for the type/category of dispute that was used as
+     * a filter in the <b>DisputeFilterType</b> field of the request, or if this filter is not used at all, this field (with the count) will not be returned for <code>DisputesAwaitingMyResponse</code>, which is the default value.
      * - minOccurs: 0
      * @var int|null
      */

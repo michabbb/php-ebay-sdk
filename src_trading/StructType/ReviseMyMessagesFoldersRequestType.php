@@ -36,7 +36,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $FolderID = [];
+    protected ?array $FolderID = null;
     /**
      * The FolderName
      * Meta information extracted from the WSDL
@@ -50,7 +50,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $FolderName = [];
+    protected ?array $FolderName = null;
     /**
      * Constructor method for ReviseMyMessagesFoldersRequestType
      * @uses ReviseMyMessagesFoldersRequestType::setOperation()
@@ -60,7 +60,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * @param int[] $folderID
      * @param string[] $folderName
      */
-    public function __construct(?string $operation = null, array $folderID = [], array $folderName = [])
+    public function __construct(?string $operation = null, ?array $folderID = null, ?array $folderName = null)
     {
         $this
             ->setOperation($operation)
@@ -97,7 +97,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * Get FolderID value
      * @return int[]
      */
-    public function getFolderID(): array
+    public function getFolderID(): ?array
     {
         return $this->FolderID;
     }
@@ -107,8 +107,11 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFolderIDForArrayConstraintsFromSetFolderID(array $values = []): string
+    public static function validateFolderIDForArrayConstraintsFromSetFolderID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseMyMessagesFoldersRequestTypeFolderIDItem) {
@@ -130,7 +133,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * @param int[] $folderID
      * @return \macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersRequestType
      */
-    public function setFolderID(array $folderID = []): self
+    public function setFolderID(?array $folderID = null): self
     {
         // validation for constraint: array
         if ('' !== ($folderIDArrayErrorMessage = self::validateFolderIDForArrayConstraintsFromSetFolderID($folderID))) {
@@ -160,7 +163,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * Get FolderName value
      * @return string[]
      */
-    public function getFolderName(): array
+    public function getFolderName(): ?array
     {
         return $this->FolderName;
     }
@@ -170,8 +173,11 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFolderNameForArrayConstraintsFromSetFolderName(array $values = []): string
+    public static function validateFolderNameForArrayConstraintsFromSetFolderName(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseMyMessagesFoldersRequestTypeFolderNameItem) {
@@ -193,7 +199,7 @@ class ReviseMyMessagesFoldersRequestType extends AbstractRequestType
      * @param string[] $folderName
      * @return \macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersRequestType
      */
-    public function setFolderName(array $folderName = []): self
+    public function setFolderName(?array $folderName = null): self
     {
         // validation for constraint: array
         if ('' !== ($folderNameArrayErrorMessage = self::validateFolderNameForArrayConstraintsFromSetFolderName($folderName))) {

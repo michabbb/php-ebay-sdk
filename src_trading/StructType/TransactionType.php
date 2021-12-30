@@ -23,13 +23,7 @@ class TransactionType extends AbstractStructBase
      * the total for an order, the buyer is able to change the total up until the time when Checkout status is Complete. Determine whether the buyer changed the amount by retrieving the order line item data and comparing the <b>AmountPaid</b> value to what
      * the seller expected. If multiple order line items between the same buyer and seller have been combined into a 'Combined Invoice' order, the <b>AmountPaid</b> value returned for each line item in the order reflects the total amount paid for the entire
      * order, and not for the individual order line item. In a <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call, you can determine which order line items belong to the same 'Combined Invoice' order by checking to see if the
-     * <b>ContainingOrder.OrderID</b> value is the same. <br><br> <span class="tablenote"><b>Note: </b> As of November 2019, for orders subject to eBay 'Collect and Remit' taxes, PayPal has begun distributing order funds to the seller's account with the
-     * sales tax included. eBay 'Collect and Remit' tax includes US sales tax for numerous states, and 'Good and Services' tax that is applicable to Australian and New Zealand sellers. This 'Collect and Remit' tax amount for the order will be included in
-     * the <b>AmountPaid</b> value. To determine if 'Collect and Remit' taxes were added into <b>AmountPaid</b> value, the user can check for the <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> and the <b>Transaction.Taxes.TaxDetails</b> containers
-     * in the response. If both of these containers appear in the response with a <b>TaxDetails.TaxDescription</b> value of <code>SalesTax</code> (in US) or <code>GST</code> (in Australia or New Zealand), the tax amount that the buyer paid is in this
-     * amount. <br><br> Sellers should be aware that the sales tax that the buyer pays for the order will initially be included when the order funds are distributed to their PayPal account, but that PayPal will pull out the sales tax amount shortly after
-     * the payment clears, and will distribute the sales tax to the appropriate taxing authority. Previous to this change, PayPal would strip out the 'Collect and Remit' tax before distributing order funds to the seller's account. <br><br> This logic change
-     * does not apply to sellers who are in eBay managed payments, so the amount in this field will never reflect any 'Collect and Remit' tax, even if the order is subject to 'Collect and Remit' tax. </span>
+     * <b>ContainingOrder.OrderID</b> value is the same.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -78,14 +72,7 @@ class TransactionType extends AbstractStructBase
      * The ConvertedAmountPaid
      * Meta information extracted from the WSDL
      * - documentation: This field shows the converted value of <b>AmountPaid</b> in the currency of the site that returned the response. Refresh this value every 24 hours to pick up the current conversion rates. <br><br> This field is always returned for
-     * paid orders. This value should be the same as the value in <b>AmountPaid</b> if the eBay listing site and the site that returned the response are the same, or use the same currency. <br><br> <span class="tablenote"><b>Note: </b> As of November 2019,
-     * for orders subject to eBay 'Collect and Remit' taxes, PayPal has begun distributing order funds to the seller's account with the sales tax included. eBay 'Collect and Remit' tax includes US sales tax for numerous states, and 'Good and Services' tax
-     * that is applicable to Australian and New Zealand sellers. This 'Collect and Remit' tax amount for the order will be included in the <b>ConvertedAmountPaid</b> value. To determine if 'Collect and Remit' taxes were added into <b>ConvertedAmountPaid</b>
-     * value, the user can check for the <b>Transaction.eBayCollectAndRemitTaxes.TaxDetails</b> and the <b>Transaction.Taxes.TaxDetails</b> containers in the response. If both of these containers appear in the response with a
-     * <b>TaxDetails.TaxDescription</b> value of <code>SalesTax</code> (in US) or <code>GST</code> (in Australia or New Zealand), the tax amount that the buyer paid is in this amount. <br><br> Sellers should be aware that the sales tax that the buyer pays
-     * for the order will initially be included when the order funds are distributed to their PayPal account, but that PayPal will pull out the sales tax amount shortly after the payment clears, and will distribute the sales tax to the appropriate taxing
-     * authority. Previous to this change, PayPal would strip out the 'Collect and Remit' tax before distributing order funds to the seller's account. <br><br> This logic change does not apply to sellers who are in eBay managed payments, so the amount in
-     * this field will never reflect any 'Collect and Remit' tax, even if the order is subject to 'Collect and Remit' tax. </span>
+     * paid orders. This value should be the same as the value in <b>AmountPaid</b> if the eBay listing site and the site that returned the response are the same, or use the same currency.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -112,8 +99,8 @@ class TransactionType extends AbstractStructBase
     /**
      * The DepositType
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates whether or not the seller requires a deposit for the purchase of a motor vehicle. This field is only applicable to motor vehicle listings that require an initial deposit. For these listings, its value is returned
-     * as 'OtherMethod'. For any other type of listing, its value is returned as 'None'.
+     * - documentation: This value indicates whether or not the seller requires a deposit for the purchase of a motor vehicle. This field is only applicable to motor vehicle listings that require an initial deposit. A value of 'OtherMethod' will be returned
+     * if the motor vehicle listing requires an initial deposit, or a value of 'None' if an initial deposit is not required.
      * - minOccurs: 0
      * @var string|null
      */
@@ -150,9 +137,8 @@ class TransactionType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay sales transaction. This identifier is created once there is a commitment from a buyer to purchase an item, or if/when the buyer actually purchases the line item through a 'Buy it Now' option. An
      * <b>ItemID</b>/<b>TransactionID</b> pair can be used and referenced during an order checkout flow to identify a line item. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning
-     * bidder/one sale for an auction listing. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer, seller, or PayPal (if payment
-     * method is PayPal), and no longer returned at all to third parties (except for PayPal). If using a Trading WSDL older than Version 1019, transaction ID is only returned to the buyer, seller or PayPal, and a dummy value of <code>10000000000000</code>
-     * will be returned to all third parties (except for PayPal).
+     * bidder/one sale for an auction listing. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer and seller, and no longer returned
+     * at all to third parties. If using a Trading WSDL older than Version 1019, transaction ID is only returned to the buyer and seller, and a dummy value of <code>10000000000000</code> will be returned to all third parties.
      * - minOccurs: 0
      * @var string|null
      */
@@ -199,7 +185,7 @@ class TransactionType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ExternalTransactionType[]
      */
-    protected array $ExternalTransaction = [];
+    protected ?array $ExternalTransaction = null;
     /**
      * The SellingManagerProductDetails
      * Meta information extracted from the WSDL
@@ -253,7 +239,7 @@ class TransactionType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: Indicates the time when the buyer paid for the order and/or order was marked as 'Paid' by the seller. This field is returned once payment has been made by the buyer. <br><br> This value will only be visible to the user on either side
      * of the order. An order can be marked as 'Paid' in the following ways: <ul> <li>Automatically when a payment is made through eBay's system</li> <li>Seller marks the item as paid in My eBay or through Selling Manager Pro </li> <li>Programmatically by
-     * the seller through the <b>ReviseCheckoutStatus</b> or <b>CompleteSale</b> calls.</li> </ul>
+     * the seller through the <b>CompleteSale</b> call.</li> </ul>
      * - minOccurs: 0
      * @var string|null
      */
@@ -262,9 +248,8 @@ class TransactionType extends AbstractStructBase
      * The ShippedTime
      * Meta information extracted from the WSDL
      * - documentation: Indicates the time when the line item was marked as 'Shipped'. This value will only be visible to the user on either side of the order. An order can be marked as 'Shipped' by purchasing an eBay shipping label, providing shipment
-     * tracking in My eBay or through Selling Manager Pro, or programmatically by the seller through the <b>ReviseCheckoutStatus</b> or <b>CompleteSale</b> call. <br><br> <span class="tablenote"><b>Note:</b> This field does not appear in Merchant Data API's
-     * <b>OrderReport</b> responses, because once shipment tracking information is provided to the buyer (or marked as shipped), the order/order line item is considered acknowledged, and acknowledged orders do not show up in <b>OrderReport</b> responses.
-     * </span>
+     * tracking in My eBay or through Selling Manager Pro, or programmatically by the seller through the <b>CompleteSale</b> call. <br><br> <span class="tablenote"><b>Note:</b> This field does not appear in Merchant Data API's <b>OrderReport</b> responses,
+     * because once shipment tracking information is provided to the buyer (or marked as shipped), the order/order line item is considered acknowledged, and acknowledged orders do not show up in <b>OrderReport</b> responses. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -310,10 +295,7 @@ class TransactionType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: A Final Value Fee is calculated and charged to a seller's account immediately upon creation of an order line item. Note that this fee is created before the buyer makes a payment. As long as the <b>IncludeFinalValueFee</b> field is
      * included in the call request and set to 'true', the Final Value Fee for each order line item is returned, regardless of the checkout status. <br><br> If a seller requests a Final Value Fee credit, the value of <b>Transaction.FinalValueFee</b> will
-     * not change if a credit is issued. The credit only appears in the seller's account data. <br> <br> <span class="tablenote"><b>Note:</b> The calculation of the Final Value Fee is changing for managed payments sellers, so the value returned in this
-     * field should only be considered as an estimated value. The <b>getTransactions</b> method of the <b>Finances API</b> can be used to get accurate Final Value Fee values. <br><br> See the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees for managed payments sellers</a> help page for more information about how Final Value Fees are changing for managed payments sellers.
-     * </span>
+     * not change if a credit is issued. The credit only appears in the seller's account data.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -370,7 +352,7 @@ class TransactionType extends AbstractStructBase
     /**
      * The PayPalEmailAddress
      * Meta information extracted from the WSDL
-     * - documentation: The seller's PayPal email address. This value is only revealed if it is the seller making the call.
+     * - documentation: This field is no longer applicable, as eBay now controls all electronic payment methods and handles the payment from the buyer.
      * - minOccurs: 0
      * @var string|null
      */
@@ -378,7 +360,7 @@ class TransactionType extends AbstractStructBase
     /**
      * The PaisaPayID
      * Meta information extracted from the WSDL
-     * - documentation: Unique identifier for a <b>PaisaPay</b> transaction. Only applicable if <b>PaisaPay</b> was the payment method used.
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
      * @var string|null
      */
@@ -386,8 +368,7 @@ class TransactionType extends AbstractStructBase
     /**
      * The BuyerGuaranteePrice
      * Meta information extracted from the WSDL
-     * - documentation: For the Australia site, <b>BuyerGuaranteePrice</b> is the PayPal Buyer Protection coverage, offered for the item at the time of purchase. Details of coverage are in the following sections of the View Item page: the Buy Safely section
-     * and the Payment Details section.
+     * - documentation: The Buyer Guarantee price. This field is only applicable to the Australian site.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -526,7 +507,7 @@ class TransactionType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: If <strong>IsMultilegShipping</strong> is <code>true</code>, the order line item will not be shipped directly to the buyer. Instead, the item may be shipped to eBay's Global Shipping Program (GSP) partner who will handle the
      * international leg of shipment, or the item may be shipped to eBay's Authenticity Guarantee service partner if the item is subject to the Authenticity Guarantee service program. In both cases, the partner's shipping address can be found in the
-     * <strong>MultiLegShippingDetails.SellerShipmentToLogisticsProvider.ShipToAddress</strong> container. <br><br> If an order line item is subject to the Authenticity Guarantee service, the <b>Transaction.Program<b> container will be returned.
+     * <strong>MultiLegShippingDetails.SellerShipmentToLogisticsProvider.ShipToAddress</strong> container. <br><br> If an order line item is subject to the Authenticity Guarantee service, the <b>Transaction.Program</b> container will be returned.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -641,16 +622,10 @@ class TransactionType extends AbstractStructBase
      * GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version
      * 1019, the correct Order ID is returned to the buyer or seller, but a dummy Order ID value of <code>1000000000000</code> will be returned to all third parties. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format
      * of order identifier values, and this new format is relevant to both legacy and REST API-based order ID fields. The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and
-     * multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and sellers
-     * who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from
-     * the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this Trading API
-     * change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older than Version
-     * 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the
-     * <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After
-     * the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span> <br> <span
-     * class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order (for <b>OrderID</b> and <b>ExtendedOrderID</b>) will change as it goes from unpaid to paid status. Sellers can check to
-     * see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of
-     * <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made payment. </span>
+     * multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> Please note that the
+     * identifier for an order (for <b>OrderID</b> and <b>ExtendedOrderID</b>) will change as it goes from unpaid to paid status. Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b>
+     * field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Both the paid and unpaid Order IDs will be
+     * accepted in all Trading API call request payloads. </span> <br>
      * - minOccurs: 0
      * @var string|null
      */
@@ -724,10 +699,9 @@ class TransactionType extends AbstractStructBase
      * field is also returned if <code>false</code> (not subject to eBay Collect and Remit). An <b>eBayCollectAndRemitTaxes</b> container is returned if the order line item is subject to such a tax, and the type and amount of this tax is displayed in the
      * <b>eBayCollectAndRemitTaxes.TaxDetails</b> container. <br/><br/> Australian 'Goods and Services' tax (GST) is automatically charged to buyers outside of Australia when they purchase items on the eBay Australia site. Sellers on the Australia site do
      * not have to take any extra steps to enable the collection of GST, as this tax is collected by eBay and remitted to the Australian government. For more information about Australian GST, see the <a
-     * href="https://www.ebay.com.au/help/selling/fees-credits-invoices/taxes-import-charges?id=4121">Taxes and import charges</a> help topic. <br/><br/> As of April 1, 2020, buyers in 40 US states will automatically be charged sales tax for eBay purchases,
-     * and are subject to eBay Collect and Remit Tax. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. Sellers do not have to take any extra steps to enable the collection of this sales tax. If the seller is
-     * employing a Sales Tax Table for the listing, and a sales tax rate is established for a state that is subject to 'eBay Collect and Remit', this sales tax rate will be ignored by eBay. For a list of the US states that are or will become subject to
-     * 'eBay Collect and Remit Tax' (and effective dates), see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic.
+     * href="https://www.ebay.com.au/help/selling/fees-credits-invoices/taxes-import-charges?id=4121">Taxes and import charges</a> help topic. <br/><br/> As of November 2021, buyers in all US states except for Missouri (and several US territories), will
+     * automatically be charged sales tax for purchases, and the seller does not set this rate. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. For more US state-level information on sales tax, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -738,10 +712,9 @@ class TransactionType extends AbstractStructBase
      * - documentation: This container is returned if the order line item is subject to a tax (US sales tax or Australian Goods and Services tax) that eBay will collect and remit to the proper taxing authority on the buyer's behalf. The type of tax will be
      * shown in the <b>TaxDetails.Imposition</b> and <b>TaxDetails.TaxDescription</b> fields, and the amount of this tax will be displayed in the <b>TaxDetails.TaxAmount</b> field. <br/><br/> Australian 'Goods and Services' tax (GST) is automatically
      * charged to buyers outside of Australia when they purchase items on the eBay Australia site. Sellers on the Australia site do not have to take any extra steps to enable the collection of GST, as this tax is collected by eBay and remitted to the
-     * Australian government. For more information about Australian GST, see the <a href="https://www.ebay.com.au/help/selling/fees-credits-invoices/taxes-import-charges?id=4121">Taxes and import charges</a> help topic. <br/><br/> As of April 1, 2020,
-     * buyers in 41 US states will automatically be charged sales tax for eBay purchases. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. Sellers do not have to take any extra steps to enable the collection
-     * of this sales tax. If the seller is employing a Sales Tax Table for the listing, and a sales tax rate is established for a state that is subject to 'eBay Collect and Remit', this sales tax rate will be ignored by eBay. For a list of the US states
-     * that will become subject to 'eBay Collect and Remit' (and effective dates), see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic.
+     * Australian government. For more information about Australian GST, see the <a href="https://www.ebay.com.au/help/selling/fees-credits-invoices/taxes-import-charges?id=4121">Taxes and import charges</a> help topic. <br/><br/> As of November 2021,
+     * buyers in all US states except for Missouri (and several US territories), will automatically be charged sales tax for purchases, and the seller does not set this rate. eBay will collect and remit this sales tax to the proper taxing authority on the
+     * buyer's behalf. For more US state-level information on sales tax, see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxesType|null
      */
@@ -917,7 +890,7 @@ class TransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionProgramType $program
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedAdjustmentAmount = null, ?\macropage\ebaysdk\trading\StructType\UserType $buyer = null, ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedAmountPaid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedTransactionPrice = null, ?string $createdDate = null, ?string $depositType = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?int $quantityPurchased = null, ?\macropage\ebaysdk\trading\StructType\TransactionStatusType $status = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null, ?bool $bestOfferSale = null, ?float $vATPercent = null, array $externalTransaction = [], ?\macropage\ebaysdk\trading\StructType\SellingManagerProductDetailsType $sellingManagerProductDetails = null, ?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null, ?string $buyerMessage = null, ?\macropage\ebaysdk\trading\StructType\AmountType $dutchAuctionBid = null, ?string $buyerPaidStatus = null, ?string $sellerPaidStatus = null, ?string $paidTime = null, ?string $shippedTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalPrice = null, ?\macropage\ebaysdk\trading\StructType\FeedbackInfoType $feedbackLeft = null, ?\macropage\ebaysdk\trading\StructType\FeedbackInfoType $feedbackReceived = null, ?\macropage\ebaysdk\trading\StructType\OrderType $containingOrder = null, ?\macropage\ebaysdk\trading\StructType\AmountType $finalValueFee = null, ?\macropage\ebaysdk\trading\StructType\ListingCheckoutRedirectPreferenceType $listingCheckoutRedirectPreference = null, ?\macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null, ?string $transactionSiteID = null, ?string $platform = null, ?string $cartID = null, ?bool $sellerContactBuyerByEmail = null, ?string $payPalEmailAddress = null, ?string $paisaPayID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null, ?\macropage\ebaysdk\trading\StructType\VariationType $variation = null, ?string $buyerCheckoutMessage = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalTransactionPrice = null, ?\macropage\ebaysdk\trading\StructType\TaxesType $taxes = null, ?bool $bundlePurchase = null, ?\macropage\ebaysdk\trading\StructType\AmountType $actualShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $actualHandlingCost = null, ?string $orderLineItemID = null, ?string $eBayPaymentID = null, ?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null, ?\macropage\ebaysdk\trading\StructType\SellerDiscountsType $sellerDiscounts = null, ?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, ?string $refundStatus = null, ?string $codiceFiscale = null, ?bool $isMultiLegShipping = null, ?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null, ?string $invoiceSentTime = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemType $unpaidItem = null, ?bool $intangibleItem = null, ?\macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null, ?string $logisticsPlanType = null, ?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null, ?string $inventoryReservationID = null, ?string $extendedOrderID = null, ?bool $eBayPlusTransaction = null, ?\macropage\ebaysdk\trading\StructType\GiftSummaryType $giftSummary = null, ?\macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType $digitalDeliverySelected = null, ?bool $gift = null, ?bool $guaranteedShipping = null, ?bool $guaranteedDelivery = null, ?bool $eBayCollectAndRemitTax = null, ?\macropage\ebaysdk\trading\StructType\TaxesType $eBayCollectAndRemitTaxes = null, ?\macropage\ebaysdk\trading\StructType\TransactionProgramType $program = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $amountPaid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedAdjustmentAmount = null, ?\macropage\ebaysdk\trading\StructType\UserType $buyer = null, ?\macropage\ebaysdk\trading\StructType\ShippingDetailsType $shippingDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedAmountPaid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedTransactionPrice = null, ?string $createdDate = null, ?string $depositType = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?int $quantityPurchased = null, ?\macropage\ebaysdk\trading\StructType\TransactionStatusType $status = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $transactionPrice = null, ?bool $bestOfferSale = null, ?float $vATPercent = null, ?array $externalTransaction = null, ?\macropage\ebaysdk\trading\StructType\SellingManagerProductDetailsType $sellingManagerProductDetails = null, ?\macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType $shippingServiceSelected = null, ?string $buyerMessage = null, ?\macropage\ebaysdk\trading\StructType\AmountType $dutchAuctionBid = null, ?string $buyerPaidStatus = null, ?string $sellerPaidStatus = null, ?string $paidTime = null, ?string $shippedTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalPrice = null, ?\macropage\ebaysdk\trading\StructType\FeedbackInfoType $feedbackLeft = null, ?\macropage\ebaysdk\trading\StructType\FeedbackInfoType $feedbackReceived = null, ?\macropage\ebaysdk\trading\StructType\OrderType $containingOrder = null, ?\macropage\ebaysdk\trading\StructType\AmountType $finalValueFee = null, ?\macropage\ebaysdk\trading\StructType\ListingCheckoutRedirectPreferenceType $listingCheckoutRedirectPreference = null, ?\macropage\ebaysdk\trading\ArrayType\RefundArrayType $refundArray = null, ?string $transactionSiteID = null, ?string $platform = null, ?string $cartID = null, ?bool $sellerContactBuyerByEmail = null, ?string $payPalEmailAddress = null, ?string $paisaPayID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $buyerGuaranteePrice = null, ?\macropage\ebaysdk\trading\StructType\VariationType $variation = null, ?string $buyerCheckoutMessage = null, ?\macropage\ebaysdk\trading\StructType\AmountType $totalTransactionPrice = null, ?\macropage\ebaysdk\trading\StructType\TaxesType $taxes = null, ?bool $bundlePurchase = null, ?\macropage\ebaysdk\trading\StructType\AmountType $actualShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $actualHandlingCost = null, ?string $orderLineItemID = null, ?string $eBayPaymentID = null, ?\macropage\ebaysdk\trading\StructType\PaymentHoldDetailType $paymentHoldDetails = null, ?\macropage\ebaysdk\trading\StructType\SellerDiscountsType $sellerDiscounts = null, ?\macropage\ebaysdk\trading\StructType\AmountType $refundAmount = null, ?string $refundStatus = null, ?string $codiceFiscale = null, ?bool $isMultiLegShipping = null, ?\macropage\ebaysdk\trading\StructType\MultiLegShippingDetailsType $multiLegShippingDetails = null, ?string $invoiceSentTime = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemType $unpaidItem = null, ?bool $intangibleItem = null, ?\macropage\ebaysdk\trading\StructType\PaymentsInformationType $monetaryDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupDetailsType $pickupDetails = null, ?\macropage\ebaysdk\trading\StructType\PickupMethodSelectedType $pickupMethodSelected = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingConvenienceCharge = null, ?string $logisticsPlanType = null, ?\macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType $buyerPackageEnclosures = null, ?string $inventoryReservationID = null, ?string $extendedOrderID = null, ?bool $eBayPlusTransaction = null, ?\macropage\ebaysdk\trading\StructType\GiftSummaryType $giftSummary = null, ?\macropage\ebaysdk\trading\StructType\DigitalDeliverySelectedType $digitalDeliverySelected = null, ?bool $gift = null, ?bool $guaranteedShipping = null, ?bool $guaranteedDelivery = null, ?bool $eBayCollectAndRemitTax = null, ?\macropage\ebaysdk\trading\StructType\TaxesType $eBayCollectAndRemitTaxes = null, ?\macropage\ebaysdk\trading\StructType\TransactionProgramType $program = null, $any = null)
     {
         $this
             ->setAmountPaid($amountPaid)
@@ -1332,7 +1305,7 @@ class TransactionType extends AbstractStructBase
      * Get ExternalTransaction value
      * @return \macropage\ebaysdk\trading\StructType\ExternalTransactionType[]
      */
-    public function getExternalTransaction(): array
+    public function getExternalTransaction(): ?array
     {
         return $this->ExternalTransaction;
     }
@@ -1342,8 +1315,11 @@ class TransactionType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExternalTransactionForArrayConstraintsFromSetExternalTransaction(array $values = []): string
+    public static function validateExternalTransactionForArrayConstraintsFromSetExternalTransaction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $transactionTypeExternalTransactionItem) {
@@ -1365,7 +1341,7 @@ class TransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ExternalTransactionType[] $externalTransaction
      * @return \macropage\ebaysdk\trading\StructType\TransactionType
      */
-    public function setExternalTransaction(array $externalTransaction = []): self
+    public function setExternalTransaction(?array $externalTransaction = null): self
     {
         // validation for constraint: array
         if ('' !== ($externalTransactionArrayErrorMessage = self::validateExternalTransactionForArrayConstraintsFromSetExternalTransaction($externalTransaction))) {

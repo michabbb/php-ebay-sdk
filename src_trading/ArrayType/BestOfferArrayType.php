@@ -25,13 +25,13 @@ class BestOfferArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BestOfferType[]
      */
-    protected array $BestOffer = [];
+    protected ?array $BestOffer = null;
     /**
      * Constructor method for BestOfferArrayType
      * @uses BestOfferArrayType::setBestOffer()
      * @param \macropage\ebaysdk\trading\StructType\BestOfferType[] $bestOffer
      */
-    public function __construct(array $bestOffer = [])
+    public function __construct(?array $bestOffer = null)
     {
         $this
             ->setBestOffer($bestOffer);
@@ -40,7 +40,7 @@ class BestOfferArrayType extends AbstractStructArrayBase
      * Get BestOffer value
      * @return \macropage\ebaysdk\trading\StructType\BestOfferType[]
      */
-    public function getBestOffer(): array
+    public function getBestOffer(): ?array
     {
         return $this->BestOffer;
     }
@@ -50,8 +50,11 @@ class BestOfferArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBestOfferForArrayConstraintsFromSetBestOffer(array $values = []): string
+    public static function validateBestOfferForArrayConstraintsFromSetBestOffer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $bestOfferArrayTypeBestOfferItem) {
@@ -73,7 +76,7 @@ class BestOfferArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\BestOfferType[] $bestOffer
      * @return \macropage\ebaysdk\trading\ArrayType\BestOfferArrayType
      */
-    public function setBestOffer(array $bestOffer = []): self
+    public function setBestOffer(?array $bestOffer = null): self
     {
         // validation for constraint: array
         if ('' !== ($bestOfferArrayErrorMessage = self::validateBestOfferForArrayConstraintsFromSetBestOffer($bestOffer))) {

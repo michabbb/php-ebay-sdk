@@ -9,7 +9,8 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for AddressOwnerCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type used by <b>AddressType</b> to indicate whether a shipping address is on file with eBay or on file with PayPal.
+ * - documentation: Enumerated type used by the <b>ShippingAddress.AddressOwner</b> field in order management calls to indicate whether a shipping address is on file with eBay or on file with PayPal. <br/><br/> <span
+ * class="tablenote"><strong>Note:</strong> eBay now fully manages the payment process for all orders, so the <code>eBay</code> value should always be returned in the <b>ShippingAddress.AddressOwner</b> field. </span>
  * @subpackage Enumerations
  */
 class AddressOwnerCodeType extends AbstractStructEnumBase
@@ -17,14 +18,14 @@ class AddressOwnerCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPal'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the shipping address being referenced is on file with PayPal.
+     * - documentation: This value is deprecated, as the buyer's shipping address should no longer be gathered from PayPal's system.
      * @return string 'PayPal'
      */
     const VALUE_PAY_PAL = 'PayPal';
     /**
      * Constant for value 'eBay'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the shipping address being referenced is on file with eBay.
+     * - documentation: This value indicates that the buyer's shipping address being referenced is on file with eBay.
      * @return string 'eBay'
      */
     const VALUE_E_BAY = 'eBay';

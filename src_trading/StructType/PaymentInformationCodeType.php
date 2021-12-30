@@ -23,7 +23,7 @@ class PaymentInformationCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PaymentTransactionCodeType[]
      */
-    protected array $Payment = [];
+    protected ?array $Payment = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class PaymentInformationCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaymentTransactionCodeType[] $payment
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $payment = [], $any = null)
+    public function __construct(?array $payment = null, $any = null)
     {
         $this
             ->setPayment($payment)
@@ -46,7 +46,7 @@ class PaymentInformationCodeType extends AbstractStructBase
      * Get Payment value
      * @return \macropage\ebaysdk\trading\StructType\PaymentTransactionCodeType[]
      */
-    public function getPayment(): array
+    public function getPayment(): ?array
     {
         return $this->Payment;
     }
@@ -56,8 +56,11 @@ class PaymentInformationCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentForArrayConstraintsFromSetPayment(array $values = []): string
+    public static function validatePaymentForArrayConstraintsFromSetPayment(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $paymentInformationCodeTypePaymentItem) {
@@ -79,7 +82,7 @@ class PaymentInformationCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PaymentTransactionCodeType[] $payment
      * @return \macropage\ebaysdk\trading\StructType\PaymentInformationCodeType
      */
-    public function setPayment(array $payment = []): self
+    public function setPayment(?array $payment = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentArrayErrorMessage = self::validatePaymentForArrayConstraintsFromSetPayment($payment))) {

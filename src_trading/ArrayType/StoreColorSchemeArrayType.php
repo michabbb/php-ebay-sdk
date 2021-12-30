@@ -23,13 +23,13 @@ class StoreColorSchemeArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreColorSchemeType[]
      */
-    protected array $ColorScheme = [];
+    protected ?array $ColorScheme = null;
     /**
      * Constructor method for StoreColorSchemeArrayType
      * @uses StoreColorSchemeArrayType::setColorScheme()
      * @param \macropage\ebaysdk\trading\StructType\StoreColorSchemeType[] $colorScheme
      */
-    public function __construct(array $colorScheme = [])
+    public function __construct(?array $colorScheme = null)
     {
         $this
             ->setColorScheme($colorScheme);
@@ -38,7 +38,7 @@ class StoreColorSchemeArrayType extends AbstractStructArrayBase
      * Get ColorScheme value
      * @return \macropage\ebaysdk\trading\StructType\StoreColorSchemeType[]
      */
-    public function getColorScheme(): array
+    public function getColorScheme(): ?array
     {
         return $this->ColorScheme;
     }
@@ -48,8 +48,11 @@ class StoreColorSchemeArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateColorSchemeForArrayConstraintsFromSetColorScheme(array $values = []): string
+    public static function validateColorSchemeForArrayConstraintsFromSetColorScheme(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeColorSchemeArrayTypeColorSchemeItem) {
@@ -71,7 +74,7 @@ class StoreColorSchemeArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\StoreColorSchemeType[] $colorScheme
      * @return \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType
      */
-    public function setColorScheme(array $colorScheme = []): self
+    public function setColorScheme(?array $colorScheme = null): self
     {
         // validation for constraint: array
         if ('' !== ($colorSchemeArrayErrorMessage = self::validateColorSchemeForArrayConstraintsFromSetColorScheme($colorScheme))) {

@@ -26,13 +26,13 @@ class MyMessagesExternalMessageIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExternalMessageID = [];
+    protected ?array $ExternalMessageID = null;
     /**
      * Constructor method for MyMessagesExternalMessageIDArrayType
      * @uses MyMessagesExternalMessageIDArrayType::setExternalMessageID()
      * @param string[] $externalMessageID
      */
-    public function __construct(array $externalMessageID = [])
+    public function __construct(?array $externalMessageID = null)
     {
         $this
             ->setExternalMessageID($externalMessageID);
@@ -41,7 +41,7 @@ class MyMessagesExternalMessageIDArrayType extends AbstractStructArrayBase
      * Get ExternalMessageID value
      * @return string[]
      */
-    public function getExternalMessageID(): array
+    public function getExternalMessageID(): ?array
     {
         return $this->ExternalMessageID;
     }
@@ -51,8 +51,11 @@ class MyMessagesExternalMessageIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExternalMessageIDForArrayConstraintsFromSetExternalMessageID(array $values = []): string
+    public static function validateExternalMessageIDForArrayConstraintsFromSetExternalMessageID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesExternalMessageIDArrayTypeExternalMessageIDItem) {
@@ -74,7 +77,7 @@ class MyMessagesExternalMessageIDArrayType extends AbstractStructArrayBase
      * @param string[] $externalMessageID
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesExternalMessageIDArrayType
      */
-    public function setExternalMessageID(array $externalMessageID = []): self
+    public function setExternalMessageID(?array $externalMessageID = null): self
     {
         // validation for constraint: array
         if ('' !== ($externalMessageIDArrayErrorMessage = self::validateExternalMessageIDForArrayConstraintsFromSetExternalMessageID($externalMessageID))) {

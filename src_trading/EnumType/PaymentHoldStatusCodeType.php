@@ -9,7 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for PaymentHoldStatusCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that contains the list of possible values that can be returned in the PaymentHoldStatus container.
+ * - documentation: Enumerated type that contains the list of possible values that can be returned in the <b>PaymentHoldStatus</b> container.
  * @subpackage Enumerations
  */
 class PaymentHoldStatusCodeType extends AbstractStructEnumBase
@@ -17,45 +17,42 @@ class PaymentHoldStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaymentReview'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates a possible issue with a buyer. If this value is returned, the TransactionArray.Transaction.SellerPaidStatus field is returned as NotPaid in GetMyeBaySelling, and the TransactionArray.Transaction.BuyerPaidStatus
-     * field is returned as PaidWithPayPal in GetMyeBayBuying.
+     * - documentation: This value indicates a possible issue with the buyer that needs to be reviewed by eBay.
      * @return string 'PaymentReview'
      */
     const VALUE_PAYMENT_REVIEW = 'PaymentReview';
     /**
      * Constant for value 'MerchantHold'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates a possible issue with a seller. If this value is returned, the TransactionArray.Transaction.SellerPaidStatus field is returned as PaidWithPayPal in GetMyeBaySelling, and the
-     * TransactionArray.Transaction.BuyerPaidStatus field is returned as PaidWithPayPal in GetMyeBayBuying.
+     * - documentation: This value indicates a possible issue with the seller that needs to be reviewed by eBay.
      * @return string 'MerchantHold'
      */
     const VALUE_MERCHANT_HOLD = 'MerchantHold';
     /**
      * Constant for value 'Released'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that a payment hold on the item has been released.
+     * - documentation: This value indicates that a payment hold on the order has been released.
      * @return string 'Released'
      */
     const VALUE_RELEASED = 'Released';
     /**
      * Constant for value 'None'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that there is no payment hold on the item.
+     * - documentation: This value indicates that there is no payment hold on the order.
      * @return string 'None'
      */
     const VALUE_NONE = 'None';
     /**
      * Constant for value 'NewSellerHold'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that there is a "new seller hold" on the item. PayPal may hold payments to a new seller for up to 21 days. Sellers are considered "new" until they have met all three criteria below: <ul> <li>More than 90 days
-     * have passed since first successful sale</li> <li>More than 25 domestic sales</li> <li>More than $250.00 in total sales</li> </ul>
+     * - documentation: This value indicates that there is a "new seller hold" on the order. eBay may hold payments to a new seller for up to 21 days.
      * @return string 'NewSellerHold'
      */
     const VALUE_NEW_SELLER_HOLD = 'NewSellerHold';
     /**
      * Constant for value 'PaymentHold'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that there is a payment hold on the item.
+     * - documentation: This value indicates that there is a payment hold on the order.
      * @return string 'PaymentHold'
      */
     const VALUE_PAYMENT_HOLD = 'PaymentHold';
@@ -69,7 +66,7 @@ class PaymentHoldStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ReleaseConfirmed'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the funds are available in the seller's PayPal account.
+     * - documentation: This value indicates that the funds are available in the seller's account.
      * @return string 'ReleaseConfirmed'
      */
     const VALUE_RELEASE_CONFIRMED = 'ReleaseConfirmed';

@@ -23,7 +23,7 @@ class StoreThemeArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreThemeType[]
      */
-    protected array $Theme = [];
+    protected ?array $Theme = null;
     /**
      * The GenericColorSchemeArray
      * Meta information extracted from the WSDL
@@ -46,7 +46,7 @@ class StoreThemeArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $theme = [], ?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null, $any = null)
+    public function __construct(?array $theme = null, ?\macropage\ebaysdk\trading\ArrayType\StoreColorSchemeArrayType $genericColorSchemeArray = null, $any = null)
     {
         $this
             ->setTheme($theme)
@@ -57,7 +57,7 @@ class StoreThemeArrayType extends AbstractStructBase
      * Get Theme value
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeType[]
      */
-    public function getTheme(): array
+    public function getTheme(): ?array
     {
         return $this->Theme;
     }
@@ -67,8 +67,11 @@ class StoreThemeArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateThemeForArrayConstraintsFromSetTheme(array $values = []): string
+    public static function validateThemeForArrayConstraintsFromSetTheme(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeThemeArrayTypeThemeItem) {
@@ -90,7 +93,7 @@ class StoreThemeArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreThemeType[] $theme
      * @return \macropage\ebaysdk\trading\StructType\StoreThemeArrayType
      */
-    public function setTheme(array $theme = []): self
+    public function setTheme(?array $theme = null): self
     {
         // validation for constraint: array
         if ('' !== ($themeArrayErrorMessage = self::validateThemeForArrayConstraintsFromSetTheme($theme))) {

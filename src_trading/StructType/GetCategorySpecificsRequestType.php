@@ -27,7 +27,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $CategoryID = [];
+    protected ?array $CategoryID = null;
     /**
      * The LastUpdateTime
      * Meta information extracted from the WSDL
@@ -90,7 +90,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CategoryItemSpecificsType[]
      */
-    protected array $CategorySpecific = [];
+    protected ?array $CategorySpecific = null;
     /**
      * The ExcludeRelationships
      * Meta information extracted from the WSDL
@@ -143,7 +143,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * @param bool $includeConfidence
      * @param bool $categorySpecificsFileInfo
      */
-    public function __construct(array $categoryID = [], ?string $lastUpdateTime = null, ?int $maxNames = null, ?int $maxValuesPerName = null, ?string $name = null, array $categorySpecific = [], ?bool $excludeRelationships = null, ?bool $includeConfidence = null, ?bool $categorySpecificsFileInfo = null)
+    public function __construct(?array $categoryID = null, ?string $lastUpdateTime = null, ?int $maxNames = null, ?int $maxValuesPerName = null, ?string $name = null, ?array $categorySpecific = null, ?bool $excludeRelationships = null, ?bool $includeConfidence = null, ?bool $categorySpecificsFileInfo = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -160,7 +160,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * Get CategoryID value
      * @return string[]
      */
-    public function getCategoryID(): array
+    public function getCategoryID(): ?array
     {
         return $this->CategoryID;
     }
@@ -170,8 +170,11 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryIDForArrayConstraintsFromSetCategoryID(array $values = []): string
+    public static function validateCategoryIDForArrayConstraintsFromSetCategoryID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategorySpecificsRequestTypeCategoryIDItem) {
@@ -193,7 +196,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * @param string[] $categoryID
      * @return \macropage\ebaysdk\trading\StructType\GetCategorySpecificsRequestType
      */
-    public function setCategoryID(array $categoryID = []): self
+    public function setCategoryID(?array $categoryID = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryIDArrayErrorMessage = self::validateCategoryIDForArrayConstraintsFromSetCategoryID($categoryID))) {
@@ -315,7 +318,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * Get CategorySpecific value
      * @return \macropage\ebaysdk\trading\StructType\CategoryItemSpecificsType[]
      */
-    public function getCategorySpecific(): array
+    public function getCategorySpecific(): ?array
     {
         return $this->CategorySpecific;
     }
@@ -325,8 +328,11 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategorySpecificForArrayConstraintsFromSetCategorySpecific(array $values = []): string
+    public static function validateCategorySpecificForArrayConstraintsFromSetCategorySpecific(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategorySpecificsRequestTypeCategorySpecificItem) {
@@ -348,7 +354,7 @@ class GetCategorySpecificsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\CategoryItemSpecificsType[] $categorySpecific
      * @return \macropage\ebaysdk\trading\StructType\GetCategorySpecificsRequestType
      */
-    public function setCategorySpecific(array $categorySpecific = []): self
+    public function setCategorySpecific(?array $categorySpecific = null): self
     {
         // validation for constraint: array
         if ('' !== ($categorySpecificArrayErrorMessage = self::validateCategorySpecificForArrayConstraintsFromSetCategorySpecific($categorySpecific))) {

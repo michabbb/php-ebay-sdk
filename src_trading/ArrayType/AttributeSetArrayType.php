@@ -23,13 +23,13 @@ class AttributeSetArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AttributeSetType[]
      */
-    protected array $AttributeSet = [];
+    protected ?array $AttributeSet = null;
     /**
      * Constructor method for AttributeSetArrayType
      * @uses AttributeSetArrayType::setAttributeSet()
      * @param \macropage\ebaysdk\trading\StructType\AttributeSetType[] $attributeSet
      */
-    public function __construct(array $attributeSet = [])
+    public function __construct(?array $attributeSet = null)
     {
         $this
             ->setAttributeSet($attributeSet);
@@ -38,7 +38,7 @@ class AttributeSetArrayType extends AbstractStructArrayBase
      * Get AttributeSet value
      * @return \macropage\ebaysdk\trading\StructType\AttributeSetType[]
      */
-    public function getAttributeSet(): array
+    public function getAttributeSet(): ?array
     {
         return $this->AttributeSet;
     }
@@ -48,8 +48,11 @@ class AttributeSetArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAttributeSetForArrayConstraintsFromSetAttributeSet(array $values = []): string
+    public static function validateAttributeSetForArrayConstraintsFromSetAttributeSet(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $attributeSetArrayTypeAttributeSetItem) {
@@ -71,7 +74,7 @@ class AttributeSetArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\AttributeSetType[] $attributeSet
      * @return \macropage\ebaysdk\trading\ArrayType\AttributeSetArrayType
      */
-    public function setAttributeSet(array $attributeSet = []): self
+    public function setAttributeSet(?array $attributeSet = null): self
     {
         // validation for constraint: array
         if ('' !== ($attributeSetArrayErrorMessage = self::validateAttributeSetForArrayConstraintsFromSetAttributeSet($attributeSet))) {

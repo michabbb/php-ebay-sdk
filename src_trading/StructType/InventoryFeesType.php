@@ -33,7 +33,7 @@ class InventoryFeesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeeType[]
      */
-    protected array $Fee = [];
+    protected ?array $Fee = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -48,7 +48,7 @@ class InventoryFeesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FeeType[] $fee
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, array $fee = [], $any = null)
+    public function __construct(?string $itemID = null, ?array $fee = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -82,7 +82,7 @@ class InventoryFeesType extends AbstractStructBase
      * Get Fee value
      * @return \macropage\ebaysdk\trading\StructType\FeeType[]
      */
-    public function getFee(): array
+    public function getFee(): ?array
     {
         return $this->Fee;
     }
@@ -92,8 +92,11 @@ class InventoryFeesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeeForArrayConstraintsFromSetFee(array $values = []): string
+    public static function validateFeeForArrayConstraintsFromSetFee(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $inventoryFeesTypeFeeItem) {
@@ -115,7 +118,7 @@ class InventoryFeesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FeeType[] $fee
      * @return \macropage\ebaysdk\trading\StructType\InventoryFeesType
      */
-    public function setFee(array $fee = []): self
+    public function setFee(?array $fee = null): self
     {
         // validation for constraint: array
         if ('' !== ($feeArrayErrorMessage = self::validateFeeForArrayConstraintsFromSetFee($fee))) {

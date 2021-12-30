@@ -30,7 +30,7 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludeShipToLocation = [];
+    protected ?array $ExcludeShipToLocation = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -43,7 +43,7 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $excludeShipToLocation = [], $any = null)
+    public function __construct(?array $excludeShipToLocation = null, $any = null)
     {
         $this
             ->setExcludeShipToLocation($excludeShipToLocation)
@@ -53,7 +53,7 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * Get ExcludeShipToLocation value
      * @return string[]
      */
-    public function getExcludeShipToLocation(): array
+    public function getExcludeShipToLocation(): ?array
     {
         return $this->ExcludeShipToLocation;
     }
@@ -63,8 +63,11 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(array $values = []): string
+    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sellerExcludeShipToLocationPreferencesTypeExcludeShipToLocationItem) {
@@ -86,7 +89,7 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @return \macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType
      */
-    public function setExcludeShipToLocation(array $excludeShipToLocation = []): self
+    public function setExcludeShipToLocation(?array $excludeShipToLocation = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeShipToLocationArrayErrorMessage = self::validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation($excludeShipToLocation))) {

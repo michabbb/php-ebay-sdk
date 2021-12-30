@@ -9,8 +9,8 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for CombinedPaymentOptionCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that defines the seller's preference for allowing <a href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> orders that pass on
- * a shipping discounts to the buyer.
+ * - documentation: Enumerated type that defines the seller's preference for allowing <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> orders that pass
+ * on a shipping discounts to the buyer.
  * @subpackage Enumerations
  */
 class CombinedPaymentOptionCodeType extends AbstractStructEnumBase

@@ -39,7 +39,7 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    protected array $FlatRateInsuranceRangeCost = [];
+    protected ?array $FlatRateInsuranceRangeCost = null;
     /**
      * The FlatShippingRateOption
      * Meta information extracted from the WSDL
@@ -76,7 +76,7 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param string $insuranceOption
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null, ?\macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null, array $flatRateInsuranceRangeCost = [], ?string $flatShippingRateOption = null, ?string $insuranceOption = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $amountPerAdditionalItem = null, ?\macropage\ebaysdk\trading\StructType\AmountType $deductionAmountPerAdditionalItem = null, ?array $flatRateInsuranceRangeCost = null, ?string $flatShippingRateOption = null, ?string $insuranceOption = null, $any = null)
     {
         $this
             ->setAmountPerAdditionalItem($amountPerAdditionalItem)
@@ -128,7 +128,7 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * Get FlatRateInsuranceRangeCost value
      * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    public function getFlatRateInsuranceRangeCost(): array
+    public function getFlatRateInsuranceRangeCost(): ?array
     {
         return $this->FlatRateInsuranceRangeCost;
     }
@@ -138,8 +138,11 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost(array $values = []): string
+    public static function validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $flatShippingPreferencesTypeFlatRateInsuranceRangeCostItem) {
@@ -161,7 +164,7 @@ class FlatShippingPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[] $flatRateInsuranceRangeCost
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingPreferencesType
      */
-    public function setFlatRateInsuranceRangeCost(array $flatRateInsuranceRangeCost = []): self
+    public function setFlatRateInsuranceRangeCost(?array $flatRateInsuranceRangeCost = null): self
     {
         // validation for constraint: array
         if ('' !== ($flatRateInsuranceRangeCostArrayErrorMessage = self::validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost($flatRateInsuranceRangeCost))) {

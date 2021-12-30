@@ -25,7 +25,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CountryDetailsType[]
      */
-    protected array $CountryDetails = [];
+    protected ?array $CountryDetails = null;
     /**
      * The CurrencyDetails
      * Meta information extracted from the WSDL
@@ -35,7 +35,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CurrencyDetailsType[]
      */
-    protected array $CurrencyDetails = [];
+    protected ?array $CurrencyDetails = null;
     /**
      * The DispatchTimeMaxDetails
      * Meta information extracted from the WSDL
@@ -46,7 +46,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType[]
      */
-    protected array $DispatchTimeMaxDetails = [];
+    protected ?array $DispatchTimeMaxDetails = null;
     /**
      * The PaymentOptionDetails
      * Meta information extracted from the WSDL
@@ -56,7 +56,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PaymentOptionDetailsType[]
      */
-    protected array $PaymentOptionDetails = [];
+    protected ?array $PaymentOptionDetails = null;
     /**
      * The RegionDetails
      * Meta information extracted from the WSDL
@@ -66,7 +66,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RegionDetailsType[]
      */
-    protected array $RegionDetails = [];
+    protected ?array $RegionDetails = null;
     /**
      * The ShippingLocationDetails
      * Meta information extracted from the WSDL
@@ -76,7 +76,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingLocationDetailsType[]
      */
-    protected array $ShippingLocationDetails = [];
+    protected ?array $ShippingLocationDetails = null;
     /**
      * The ShippingServiceDetails
      * Meta information extracted from the WSDL
@@ -86,7 +86,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType[]
      */
-    protected array $ShippingServiceDetails = [];
+    protected ?array $ShippingServiceDetails = null;
     /**
      * The SiteDetails
      * Meta information extracted from the WSDL
@@ -96,7 +96,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SiteDetailsType[]
      */
-    protected array $SiteDetails = [];
+    protected ?array $SiteDetails = null;
     /**
      * The TaxJurisdiction
      * Meta information extracted from the WSDL
@@ -107,7 +107,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxJurisdictionType[]
      */
-    protected array $TaxJurisdiction = [];
+    protected ?array $TaxJurisdiction = null;
     /**
      * The URLDetails
      * Meta information extracted from the WSDL
@@ -117,7 +117,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\URLDetailsType[]
      */
-    protected array $URLDetails = [];
+    protected ?array $URLDetails = null;
     /**
      * The TimeZoneDetails
      * Meta information extracted from the WSDL
@@ -127,7 +127,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TimeZoneDetailsType[]
      */
-    protected array $TimeZoneDetails = [];
+    protected ?array $TimeZoneDetails = null;
     /**
      * The ItemSpecificDetails
      * Meta information extracted from the WSDL
@@ -137,7 +137,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemSpecificDetailsType[]
      */
-    protected array $ItemSpecificDetails = [];
+    protected ?array $ItemSpecificDetails = null;
     /**
      * The UnitOfMeasurementDetails
      * Meta information extracted from the WSDL
@@ -146,7 +146,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[]
      */
-    protected array $UnitOfMeasurementDetails = [];
+    protected ?array $UnitOfMeasurementDetails = null;
     /**
      * The RegionOfOriginDetails
      * Meta information extracted from the WSDL
@@ -156,7 +156,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RegionOfOriginDetailsType[]
      */
-    protected array $RegionOfOriginDetails = [];
+    protected ?array $RegionOfOriginDetails = null;
     /**
      * The ShippingPackageDetails
      * Meta information extracted from the WSDL
@@ -166,7 +166,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType[]
      */
-    protected array $ShippingPackageDetails = [];
+    protected ?array $ShippingPackageDetails = null;
     /**
      * The ShippingCarrierDetails
      * Meta information extracted from the WSDL
@@ -176,7 +176,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingCarrierDetailsType[]
      */
-    protected array $ShippingCarrierDetails = [];
+    protected ?array $ShippingCarrierDetails = null;
     /**
      * The ReturnPolicyDetails
      * Meta information extracted from the WSDL
@@ -205,7 +205,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ListingStartPriceDetailsType[]
      */
-    protected array $ListingStartPriceDetails = [];
+    protected ?array $ListingStartPriceDetails = null;
     /**
      * The BuyerRequirementDetails
      * Meta information extracted from the WSDL
@@ -217,7 +217,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SiteBuyerRequirementDetailsType[]
      */
-    protected array $BuyerRequirementDetails = [];
+    protected ?array $BuyerRequirementDetails = null;
     /**
      * The ListingFeatureDetails
      * Meta information extracted from the WSDL
@@ -227,7 +227,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ListingFeatureDetailsType[]
      */
-    protected array $ListingFeatureDetails = [];
+    protected ?array $ListingFeatureDetails = null;
     /**
      * The VariationDetails
      * Meta information extracted from the WSDL
@@ -247,7 +247,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType[]
      */
-    protected array $ExcludeShippingLocationDetails = [];
+    protected ?array $ExcludeShippingLocationDetails = null;
     /**
      * The UpdateTime
      * Meta information extracted from the WSDL
@@ -265,7 +265,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RecoupmentPolicyDetailsType[]
      */
-    protected array $RecoupmentPolicyDetails = [];
+    protected ?array $RecoupmentPolicyDetails = null;
     /**
      * The ShippingCategoryDetails
      * Meta information extracted from the WSDL
@@ -279,7 +279,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingCategoryDetailsType[]
      */
-    protected array $ShippingCategoryDetails = [];
+    protected ?array $ShippingCategoryDetails = null;
     /**
      * The ProductDetails
      * Meta information extracted from the WSDL
@@ -348,7 +348,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingCategoryDetailsType[] $shippingCategoryDetails
      * @param \macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails
      */
-    public function __construct(array $countryDetails = [], array $currencyDetails = [], array $dispatchTimeMaxDetails = [], array $paymentOptionDetails = [], array $regionDetails = [], array $shippingLocationDetails = [], array $shippingServiceDetails = [], array $siteDetails = [], array $taxJurisdiction = [], array $uRLDetails = [], array $timeZoneDetails = [], array $itemSpecificDetails = [], array $unitOfMeasurementDetails = [], array $regionOfOriginDetails = [], array $shippingPackageDetails = [], array $shippingCarrierDetails = [], ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails = null, array $listingStartPriceDetails = [], array $buyerRequirementDetails = [], array $listingFeatureDetails = [], ?\macropage\ebaysdk\trading\StructType\VariationDetailsType $variationDetails = null, array $excludeShippingLocationDetails = [], ?string $updateTime = null, array $recoupmentPolicyDetails = [], array $shippingCategoryDetails = [], ?\macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails = null)
+    public function __construct(?array $countryDetails = null, ?array $currencyDetails = null, ?array $dispatchTimeMaxDetails = null, ?array $paymentOptionDetails = null, ?array $regionDetails = null, ?array $shippingLocationDetails = null, ?array $shippingServiceDetails = null, ?array $siteDetails = null, ?array $taxJurisdiction = null, ?array $uRLDetails = null, ?array $timeZoneDetails = null, ?array $itemSpecificDetails = null, ?array $unitOfMeasurementDetails = null, ?array $regionOfOriginDetails = null, ?array $shippingPackageDetails = null, ?array $shippingCarrierDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails = null, ?array $listingStartPriceDetails = null, ?array $buyerRequirementDetails = null, ?array $listingFeatureDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationDetailsType $variationDetails = null, ?array $excludeShippingLocationDetails = null, ?string $updateTime = null, ?array $recoupmentPolicyDetails = null, ?array $shippingCategoryDetails = null, ?\macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails = null)
     {
         $this
             ->setCountryDetails($countryDetails)
@@ -383,7 +383,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get CountryDetails value
      * @return \macropage\ebaysdk\trading\StructType\CountryDetailsType[]
      */
-    public function getCountryDetails(): array
+    public function getCountryDetails(): ?array
     {
         return $this->CountryDetails;
     }
@@ -393,8 +393,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCountryDetailsForArrayConstraintsFromSetCountryDetails(array $values = []): string
+    public static function validateCountryDetailsForArrayConstraintsFromSetCountryDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeCountryDetailsItem) {
@@ -416,7 +419,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CountryDetailsType[] $countryDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setCountryDetails(array $countryDetails = []): self
+    public function setCountryDetails(?array $countryDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($countryDetailsArrayErrorMessage = self::validateCountryDetailsForArrayConstraintsFromSetCountryDetails($countryDetails))) {
@@ -446,7 +449,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get CurrencyDetails value
      * @return \macropage\ebaysdk\trading\StructType\CurrencyDetailsType[]
      */
-    public function getCurrencyDetails(): array
+    public function getCurrencyDetails(): ?array
     {
         return $this->CurrencyDetails;
     }
@@ -456,8 +459,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCurrencyDetailsForArrayConstraintsFromSetCurrencyDetails(array $values = []): string
+    public static function validateCurrencyDetailsForArrayConstraintsFromSetCurrencyDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeCurrencyDetailsItem) {
@@ -479,7 +485,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CurrencyDetailsType[] $currencyDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setCurrencyDetails(array $currencyDetails = []): self
+    public function setCurrencyDetails(?array $currencyDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($currencyDetailsArrayErrorMessage = self::validateCurrencyDetailsForArrayConstraintsFromSetCurrencyDetails($currencyDetails))) {
@@ -509,7 +515,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get DispatchTimeMaxDetails value
      * @return \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType[]
      */
-    public function getDispatchTimeMaxDetails(): array
+    public function getDispatchTimeMaxDetails(): ?array
     {
         return $this->DispatchTimeMaxDetails;
     }
@@ -519,8 +525,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDispatchTimeMaxDetailsForArrayConstraintsFromSetDispatchTimeMaxDetails(array $values = []): string
+    public static function validateDispatchTimeMaxDetailsForArrayConstraintsFromSetDispatchTimeMaxDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeDispatchTimeMaxDetailsItem) {
@@ -542,7 +551,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\DispatchTimeMaxDetailsType[] $dispatchTimeMaxDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setDispatchTimeMaxDetails(array $dispatchTimeMaxDetails = []): self
+    public function setDispatchTimeMaxDetails(?array $dispatchTimeMaxDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($dispatchTimeMaxDetailsArrayErrorMessage = self::validateDispatchTimeMaxDetailsForArrayConstraintsFromSetDispatchTimeMaxDetails($dispatchTimeMaxDetails))) {
@@ -572,7 +581,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get PaymentOptionDetails value
      * @return \macropage\ebaysdk\trading\StructType\PaymentOptionDetailsType[]
      */
-    public function getPaymentOptionDetails(): array
+    public function getPaymentOptionDetails(): ?array
     {
         return $this->PaymentOptionDetails;
     }
@@ -582,8 +591,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentOptionDetailsForArrayConstraintsFromSetPaymentOptionDetails(array $values = []): string
+    public static function validatePaymentOptionDetailsForArrayConstraintsFromSetPaymentOptionDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypePaymentOptionDetailsItem) {
@@ -605,7 +617,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaymentOptionDetailsType[] $paymentOptionDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setPaymentOptionDetails(array $paymentOptionDetails = []): self
+    public function setPaymentOptionDetails(?array $paymentOptionDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentOptionDetailsArrayErrorMessage = self::validatePaymentOptionDetailsForArrayConstraintsFromSetPaymentOptionDetails($paymentOptionDetails))) {
@@ -635,7 +647,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get RegionDetails value
      * @return \macropage\ebaysdk\trading\StructType\RegionDetailsType[]
      */
-    public function getRegionDetails(): array
+    public function getRegionDetails(): ?array
     {
         return $this->RegionDetails;
     }
@@ -645,8 +657,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRegionDetailsForArrayConstraintsFromSetRegionDetails(array $values = []): string
+    public static function validateRegionDetailsForArrayConstraintsFromSetRegionDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeRegionDetailsItem) {
@@ -668,7 +683,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\RegionDetailsType[] $regionDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setRegionDetails(array $regionDetails = []): self
+    public function setRegionDetails(?array $regionDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($regionDetailsArrayErrorMessage = self::validateRegionDetailsForArrayConstraintsFromSetRegionDetails($regionDetails))) {
@@ -698,7 +713,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ShippingLocationDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingLocationDetailsType[]
      */
-    public function getShippingLocationDetails(): array
+    public function getShippingLocationDetails(): ?array
     {
         return $this->ShippingLocationDetails;
     }
@@ -708,8 +723,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingLocationDetailsForArrayConstraintsFromSetShippingLocationDetails(array $values = []): string
+    public static function validateShippingLocationDetailsForArrayConstraintsFromSetShippingLocationDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeShippingLocationDetailsItem) {
@@ -731,7 +749,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingLocationDetailsType[] $shippingLocationDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setShippingLocationDetails(array $shippingLocationDetails = []): self
+    public function setShippingLocationDetails(?array $shippingLocationDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingLocationDetailsArrayErrorMessage = self::validateShippingLocationDetailsForArrayConstraintsFromSetShippingLocationDetails($shippingLocationDetails))) {
@@ -761,7 +779,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ShippingServiceDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType[]
      */
-    public function getShippingServiceDetails(): array
+    public function getShippingServiceDetails(): ?array
     {
         return $this->ShippingServiceDetails;
     }
@@ -771,8 +789,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServiceDetailsForArrayConstraintsFromSetShippingServiceDetails(array $values = []): string
+    public static function validateShippingServiceDetailsForArrayConstraintsFromSetShippingServiceDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeShippingServiceDetailsItem) {
@@ -794,7 +815,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType[] $shippingServiceDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setShippingServiceDetails(array $shippingServiceDetails = []): self
+    public function setShippingServiceDetails(?array $shippingServiceDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServiceDetailsArrayErrorMessage = self::validateShippingServiceDetailsForArrayConstraintsFromSetShippingServiceDetails($shippingServiceDetails))) {
@@ -824,7 +845,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get SiteDetails value
      * @return \macropage\ebaysdk\trading\StructType\SiteDetailsType[]
      */
-    public function getSiteDetails(): array
+    public function getSiteDetails(): ?array
     {
         return $this->SiteDetails;
     }
@@ -834,8 +855,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSiteDetailsForArrayConstraintsFromSetSiteDetails(array $values = []): string
+    public static function validateSiteDetailsForArrayConstraintsFromSetSiteDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeSiteDetailsItem) {
@@ -857,7 +881,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SiteDetailsType[] $siteDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setSiteDetails(array $siteDetails = []): self
+    public function setSiteDetails(?array $siteDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($siteDetailsArrayErrorMessage = self::validateSiteDetailsForArrayConstraintsFromSetSiteDetails($siteDetails))) {
@@ -887,7 +911,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get TaxJurisdiction value
      * @return \macropage\ebaysdk\trading\StructType\TaxJurisdictionType[]
      */
-    public function getTaxJurisdiction(): array
+    public function getTaxJurisdiction(): ?array
     {
         return $this->TaxJurisdiction;
     }
@@ -897,8 +921,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction(array $values = []): string
+    public static function validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeTaxJurisdictionItem) {
@@ -920,7 +947,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\TaxJurisdictionType[] $taxJurisdiction
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setTaxJurisdiction(array $taxJurisdiction = []): self
+    public function setTaxJurisdiction(?array $taxJurisdiction = null): self
     {
         // validation for constraint: array
         if ('' !== ($taxJurisdictionArrayErrorMessage = self::validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction($taxJurisdiction))) {
@@ -950,7 +977,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get URLDetails value
      * @return \macropage\ebaysdk\trading\StructType\URLDetailsType[]
      */
-    public function getURLDetails(): array
+    public function getURLDetails(): ?array
     {
         return $this->URLDetails;
     }
@@ -960,8 +987,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateURLDetailsForArrayConstraintsFromSetURLDetails(array $values = []): string
+    public static function validateURLDetailsForArrayConstraintsFromSetURLDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeURLDetailsItem) {
@@ -983,7 +1013,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\URLDetailsType[] $uRLDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setURLDetails(array $uRLDetails = []): self
+    public function setURLDetails(?array $uRLDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($uRLDetailsArrayErrorMessage = self::validateURLDetailsForArrayConstraintsFromSetURLDetails($uRLDetails))) {
@@ -1013,7 +1043,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get TimeZoneDetails value
      * @return \macropage\ebaysdk\trading\StructType\TimeZoneDetailsType[]
      */
-    public function getTimeZoneDetails(): array
+    public function getTimeZoneDetails(): ?array
     {
         return $this->TimeZoneDetails;
     }
@@ -1023,8 +1053,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTimeZoneDetailsForArrayConstraintsFromSetTimeZoneDetails(array $values = []): string
+    public static function validateTimeZoneDetailsForArrayConstraintsFromSetTimeZoneDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeTimeZoneDetailsItem) {
@@ -1046,7 +1079,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\TimeZoneDetailsType[] $timeZoneDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setTimeZoneDetails(array $timeZoneDetails = []): self
+    public function setTimeZoneDetails(?array $timeZoneDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($timeZoneDetailsArrayErrorMessage = self::validateTimeZoneDetailsForArrayConstraintsFromSetTimeZoneDetails($timeZoneDetails))) {
@@ -1076,7 +1109,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ItemSpecificDetails value
      * @return \macropage\ebaysdk\trading\StructType\ItemSpecificDetailsType[]
      */
-    public function getItemSpecificDetails(): array
+    public function getItemSpecificDetails(): ?array
     {
         return $this->ItemSpecificDetails;
     }
@@ -1086,8 +1119,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemSpecificDetailsForArrayConstraintsFromSetItemSpecificDetails(array $values = []): string
+    public static function validateItemSpecificDetailsForArrayConstraintsFromSetItemSpecificDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeItemSpecificDetailsItem) {
@@ -1109,7 +1145,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ItemSpecificDetailsType[] $itemSpecificDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setItemSpecificDetails(array $itemSpecificDetails = []): self
+    public function setItemSpecificDetails(?array $itemSpecificDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemSpecificDetailsArrayErrorMessage = self::validateItemSpecificDetailsForArrayConstraintsFromSetItemSpecificDetails($itemSpecificDetails))) {
@@ -1139,7 +1175,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get UnitOfMeasurementDetails value
      * @return \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[]
      */
-    public function getUnitOfMeasurementDetails(): array
+    public function getUnitOfMeasurementDetails(): ?array
     {
         return $this->UnitOfMeasurementDetails;
     }
@@ -1149,8 +1185,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUnitOfMeasurementDetailsForArrayConstraintsFromSetUnitOfMeasurementDetails(array $values = []): string
+    public static function validateUnitOfMeasurementDetailsForArrayConstraintsFromSetUnitOfMeasurementDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem) {
@@ -1172,7 +1211,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[] $unitOfMeasurementDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setUnitOfMeasurementDetails(array $unitOfMeasurementDetails = []): self
+    public function setUnitOfMeasurementDetails(?array $unitOfMeasurementDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($unitOfMeasurementDetailsArrayErrorMessage = self::validateUnitOfMeasurementDetailsForArrayConstraintsFromSetUnitOfMeasurementDetails($unitOfMeasurementDetails))) {
@@ -1202,7 +1241,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get RegionOfOriginDetails value
      * @return \macropage\ebaysdk\trading\StructType\RegionOfOriginDetailsType[]
      */
-    public function getRegionOfOriginDetails(): array
+    public function getRegionOfOriginDetails(): ?array
     {
         return $this->RegionOfOriginDetails;
     }
@@ -1212,8 +1251,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRegionOfOriginDetailsForArrayConstraintsFromSetRegionOfOriginDetails(array $values = []): string
+    public static function validateRegionOfOriginDetailsForArrayConstraintsFromSetRegionOfOriginDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeRegionOfOriginDetailsItem) {
@@ -1235,7 +1277,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\RegionOfOriginDetailsType[] $regionOfOriginDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setRegionOfOriginDetails(array $regionOfOriginDetails = []): self
+    public function setRegionOfOriginDetails(?array $regionOfOriginDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($regionOfOriginDetailsArrayErrorMessage = self::validateRegionOfOriginDetailsForArrayConstraintsFromSetRegionOfOriginDetails($regionOfOriginDetails))) {
@@ -1265,7 +1307,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ShippingPackageDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType[]
      */
-    public function getShippingPackageDetails(): array
+    public function getShippingPackageDetails(): ?array
     {
         return $this->ShippingPackageDetails;
     }
@@ -1275,8 +1317,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingPackageDetailsForArrayConstraintsFromSetShippingPackageDetails(array $values = []): string
+    public static function validateShippingPackageDetailsForArrayConstraintsFromSetShippingPackageDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeShippingPackageDetailsItem) {
@@ -1298,7 +1343,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType[] $shippingPackageDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setShippingPackageDetails(array $shippingPackageDetails = []): self
+    public function setShippingPackageDetails(?array $shippingPackageDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingPackageDetailsArrayErrorMessage = self::validateShippingPackageDetailsForArrayConstraintsFromSetShippingPackageDetails($shippingPackageDetails))) {
@@ -1328,7 +1373,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ShippingCarrierDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingCarrierDetailsType[]
      */
-    public function getShippingCarrierDetails(): array
+    public function getShippingCarrierDetails(): ?array
     {
         return $this->ShippingCarrierDetails;
     }
@@ -1338,8 +1383,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingCarrierDetailsForArrayConstraintsFromSetShippingCarrierDetails(array $values = []): string
+    public static function validateShippingCarrierDetailsForArrayConstraintsFromSetShippingCarrierDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeShippingCarrierDetailsItem) {
@@ -1361,7 +1409,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingCarrierDetailsType[] $shippingCarrierDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setShippingCarrierDetails(array $shippingCarrierDetails = []): self
+    public function setShippingCarrierDetails(?array $shippingCarrierDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingCarrierDetailsArrayErrorMessage = self::validateShippingCarrierDetailsForArrayConstraintsFromSetShippingCarrierDetails($shippingCarrierDetails))) {
@@ -1429,7 +1477,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ListingStartPriceDetails value
      * @return \macropage\ebaysdk\trading\StructType\ListingStartPriceDetailsType[]
      */
-    public function getListingStartPriceDetails(): array
+    public function getListingStartPriceDetails(): ?array
     {
         return $this->ListingStartPriceDetails;
     }
@@ -1439,8 +1487,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateListingStartPriceDetailsForArrayConstraintsFromSetListingStartPriceDetails(array $values = []): string
+    public static function validateListingStartPriceDetailsForArrayConstraintsFromSetListingStartPriceDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeListingStartPriceDetailsItem) {
@@ -1462,7 +1513,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ListingStartPriceDetailsType[] $listingStartPriceDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setListingStartPriceDetails(array $listingStartPriceDetails = []): self
+    public function setListingStartPriceDetails(?array $listingStartPriceDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($listingStartPriceDetailsArrayErrorMessage = self::validateListingStartPriceDetailsForArrayConstraintsFromSetListingStartPriceDetails($listingStartPriceDetails))) {
@@ -1492,7 +1543,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get BuyerRequirementDetails value
      * @return \macropage\ebaysdk\trading\StructType\SiteBuyerRequirementDetailsType[]
      */
-    public function getBuyerRequirementDetails(): array
+    public function getBuyerRequirementDetails(): ?array
     {
         return $this->BuyerRequirementDetails;
     }
@@ -1502,8 +1553,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBuyerRequirementDetailsForArrayConstraintsFromSetBuyerRequirementDetails(array $values = []): string
+    public static function validateBuyerRequirementDetailsForArrayConstraintsFromSetBuyerRequirementDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeBuyerRequirementDetailsItem) {
@@ -1525,7 +1579,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SiteBuyerRequirementDetailsType[] $buyerRequirementDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setBuyerRequirementDetails(array $buyerRequirementDetails = []): self
+    public function setBuyerRequirementDetails(?array $buyerRequirementDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($buyerRequirementDetailsArrayErrorMessage = self::validateBuyerRequirementDetailsForArrayConstraintsFromSetBuyerRequirementDetails($buyerRequirementDetails))) {
@@ -1555,7 +1609,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ListingFeatureDetails value
      * @return \macropage\ebaysdk\trading\StructType\ListingFeatureDetailsType[]
      */
-    public function getListingFeatureDetails(): array
+    public function getListingFeatureDetails(): ?array
     {
         return $this->ListingFeatureDetails;
     }
@@ -1565,8 +1619,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateListingFeatureDetailsForArrayConstraintsFromSetListingFeatureDetails(array $values = []): string
+    public static function validateListingFeatureDetailsForArrayConstraintsFromSetListingFeatureDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeListingFeatureDetailsItem) {
@@ -1588,7 +1645,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ListingFeatureDetailsType[] $listingFeatureDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setListingFeatureDetails(array $listingFeatureDetails = []): self
+    public function setListingFeatureDetails(?array $listingFeatureDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($listingFeatureDetailsArrayErrorMessage = self::validateListingFeatureDetailsForArrayConstraintsFromSetListingFeatureDetails($listingFeatureDetails))) {
@@ -1637,7 +1694,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ExcludeShippingLocationDetails value
      * @return \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType[]
      */
-    public function getExcludeShippingLocationDetails(): array
+    public function getExcludeShippingLocationDetails(): ?array
     {
         return $this->ExcludeShippingLocationDetails;
     }
@@ -1647,8 +1704,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeShippingLocationDetailsForArrayConstraintsFromSetExcludeShippingLocationDetails(array $values = []): string
+    public static function validateExcludeShippingLocationDetailsForArrayConstraintsFromSetExcludeShippingLocationDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeExcludeShippingLocationDetailsItem) {
@@ -1670,7 +1730,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ExcludeShippingLocationDetailsType[] $excludeShippingLocationDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setExcludeShippingLocationDetails(array $excludeShippingLocationDetails = []): self
+    public function setExcludeShippingLocationDetails(?array $excludeShippingLocationDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeShippingLocationDetailsArrayErrorMessage = self::validateExcludeShippingLocationDetailsForArrayConstraintsFromSetExcludeShippingLocationDetails($excludeShippingLocationDetails))) {
@@ -1723,7 +1783,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get RecoupmentPolicyDetails value
      * @return \macropage\ebaysdk\trading\StructType\RecoupmentPolicyDetailsType[]
      */
-    public function getRecoupmentPolicyDetails(): array
+    public function getRecoupmentPolicyDetails(): ?array
     {
         return $this->RecoupmentPolicyDetails;
     }
@@ -1733,8 +1793,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRecoupmentPolicyDetailsForArrayConstraintsFromSetRecoupmentPolicyDetails(array $values = []): string
+    public static function validateRecoupmentPolicyDetailsForArrayConstraintsFromSetRecoupmentPolicyDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeRecoupmentPolicyDetailsItem) {
@@ -1756,7 +1819,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\RecoupmentPolicyDetailsType[] $recoupmentPolicyDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setRecoupmentPolicyDetails(array $recoupmentPolicyDetails = []): self
+    public function setRecoupmentPolicyDetails(?array $recoupmentPolicyDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($recoupmentPolicyDetailsArrayErrorMessage = self::validateRecoupmentPolicyDetailsForArrayConstraintsFromSetRecoupmentPolicyDetails($recoupmentPolicyDetails))) {
@@ -1786,7 +1849,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * Get ShippingCategoryDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingCategoryDetailsType[]
      */
-    public function getShippingCategoryDetails(): array
+    public function getShippingCategoryDetails(): ?array
     {
         return $this->ShippingCategoryDetails;
     }
@@ -1796,8 +1859,11 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingCategoryDetailsForArrayConstraintsFromSetShippingCategoryDetails(array $values = []): string
+    public static function validateShippingCategoryDetailsForArrayConstraintsFromSetShippingCategoryDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsResponseTypeShippingCategoryDetailsItem) {
@@ -1819,7 +1885,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingCategoryDetailsType[] $shippingCategoryDetails
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
      */
-    public function setShippingCategoryDetails(array $shippingCategoryDetails = []): self
+    public function setShippingCategoryDetails(?array $shippingCategoryDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingCategoryDetailsArrayErrorMessage = self::validateShippingCategoryDetailsForArrayConstraintsFromSetShippingCategoryDetails($shippingCategoryDetails))) {

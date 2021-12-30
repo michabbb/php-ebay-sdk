@@ -10,8 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for DiscountType StructType
  * Meta information extracted from the WSDL
- * - documentation: The type is used to indicate the discount type and amount applied to an account entry. <br> <br> <span class="tablenote"><b>Note: </b> The discount amount will only be shown if the corresponding fee was deducted from a seller payout
- * for a managed payments seller. </span>
+ * - documentation: The type is used to indicate the discount type and amount applied to an account entry. <br> <br> <span class="tablenote"><b>Note: </b> The discount amount will only be shown if the corresponding fee was deducted from a seller payout.
+ * </span>
  * @subpackage Structs
  */
 class DiscountType extends AbstractStructBase
@@ -27,8 +27,8 @@ class DiscountType extends AbstractStructBase
     /**
      * The Amount
      * Meta information extracted from the WSDL
-     * - documentation: The amount of the discount in the currency indicated in the <b>currencyID</b> attribute.<br> <br> <span class="tablenote"><b>Note: </b> The discount amount will only be shown if the corresponding fee was deducted from a seller payout
-     * for a managed payments seller. </span>
+     * - documentation: The amount of the discount in the currency indicated in the <b>currencyID</b> attribute.<br> <br> <span class="tablenote"><b>Note: </b> The discount amount will only be shown if the corresponding fee was deducted from a seller
+     * payout. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */

@@ -10,8 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for PaymentHoldDetailType StructType
  * Meta information extracted from the WSDL
- * - documentation: This type defines the <b>PaymentHoldDetails</b> container, which consists of information related to the payment hold on the order, including the reason why the buyer's payment for the order is being held, the expected release date of
- * the funds into the seller's account, and possible action(s) the seller can take to expedite the payout of funds into their account.
+ * - documentation: This type defines the <b>PaymentHoldDetails</b> container, which consists of information related to eBay holding the payment proceeds for an order, including the reason why eBay is holding the money, the expected release date of the
+ * funds to the seller, and possible action(s) the seller can take to expedite the release of funds.
  * @subpackage Structs
  */
 class PaymentHoldDetailType extends AbstractStructBase
@@ -19,7 +19,7 @@ class PaymentHoldDetailType extends AbstractStructBase
     /**
      * The ExpectedReleaseDate
      * Meta information extracted from the WSDL
-     * - documentation: Timestamp that indicates the expected date in which eBay/PayPal will distribute the funds to the seller's account. This is not a firm date and is subject to change. This field is only returned after checkout is complete and if the
+     * - documentation: Timestamp that indicates the expected date in which eBay will distribute the funds to the seller's account. This is not a firm date and is subject to change. This field is only returned after checkout is complete and if the
      * <b>PaymentHoldStatus</b> indicates a hold has been placed on payment.
      * - minOccurs: 0
      * @var string|null
@@ -45,8 +45,7 @@ class PaymentHoldDetailType extends AbstractStructBase
     /**
      * The PaymentHoldReason
      * Meta information extracted from the WSDL
-     * - documentation: Enumerated value that indicates why the buyer's payment for the order is being held by PayPal instead of being distributed to the seller's account. A seller's funds for an order can be held by PayPal for as little as three days after
-     * the buyer receives the order, but the hold can be up to 21 days based on the scenario, and in some cases, the seller's lack of action in helping to expedite the release of funds.
+     * - documentation: Enumerated value that indicates why the buyer's payment for the order is being held by eBay instead of being distributed to the seller's account.
      * - minOccurs: 0
      * @var string|null
      */

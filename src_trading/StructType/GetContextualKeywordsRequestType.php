@@ -39,7 +39,7 @@ class GetContextualKeywordsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $CategoryID = [];
+    protected ?array $CategoryID = null;
     /**
      * Constructor method for GetContextualKeywordsRequestType
      * @uses GetContextualKeywordsRequestType::setURL()
@@ -49,7 +49,7 @@ class GetContextualKeywordsRequestType extends AbstractRequestType
      * @param string $encoding
      * @param string[] $categoryID
      */
-    public function __construct(?string $uRL = null, ?string $encoding = null, array $categoryID = [])
+    public function __construct(?string $uRL = null, ?string $encoding = null, ?array $categoryID = null)
     {
         $this
             ->setURL($uRL)
@@ -106,7 +106,7 @@ class GetContextualKeywordsRequestType extends AbstractRequestType
      * Get CategoryID value
      * @return string[]
      */
-    public function getCategoryID(): array
+    public function getCategoryID(): ?array
     {
         return $this->CategoryID;
     }
@@ -116,8 +116,11 @@ class GetContextualKeywordsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryIDForArrayConstraintsFromSetCategoryID(array $values = []): string
+    public static function validateCategoryIDForArrayConstraintsFromSetCategoryID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getContextualKeywordsRequestTypeCategoryIDItem) {
@@ -139,7 +142,7 @@ class GetContextualKeywordsRequestType extends AbstractRequestType
      * @param string[] $categoryID
      * @return \macropage\ebaysdk\trading\StructType\GetContextualKeywordsRequestType
      */
-    public function setCategoryID(array $categoryID = []): self
+    public function setCategoryID(?array $categoryID = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryIDArrayErrorMessage = self::validateCategoryIDForArrayConstraintsFromSetCategoryID($categoryID))) {

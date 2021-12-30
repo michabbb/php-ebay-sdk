@@ -31,7 +31,7 @@ class ReviewDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReviewType[]
      */
-    protected array $Review = [];
+    protected ?array $Review = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class ReviewDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReviewType[] $review
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?float $averageRating = null, array $review = [], $any = null)
+    public function __construct(?float $averageRating = null, ?array $review = null, $any = null)
     {
         $this
             ->setAverageRating($averageRating)
@@ -80,7 +80,7 @@ class ReviewDetailsType extends AbstractStructBase
      * Get Review value
      * @return \macropage\ebaysdk\trading\StructType\ReviewType[]
      */
-    public function getReview(): array
+    public function getReview(): ?array
     {
         return $this->Review;
     }
@@ -90,8 +90,11 @@ class ReviewDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReviewForArrayConstraintsFromSetReview(array $values = []): string
+    public static function validateReviewForArrayConstraintsFromSetReview(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviewDetailsTypeReviewItem) {
@@ -113,7 +116,7 @@ class ReviewDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReviewType[] $review
      * @return \macropage\ebaysdk\trading\StructType\ReviewDetailsType
      */
-    public function setReview(array $review = []): self
+    public function setReview(?array $review = null): self
     {
         // validation for constraint: array
         if ('' !== ($reviewArrayErrorMessage = self::validateReviewForArrayConstraintsFromSetReview($review))) {

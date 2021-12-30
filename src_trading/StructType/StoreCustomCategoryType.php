@@ -46,7 +46,7 @@ class StoreCustomCategoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    protected array $ChildCategory = [];
+    protected ?array $ChildCategory = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -65,7 +65,7 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $childCategory
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $categoryID = null, ?string $name = null, ?int $order = null, array $childCategory = [], $any = null)
+    public function __construct(?int $categoryID = null, ?string $name = null, ?int $order = null, ?array $childCategory = null, $any = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -147,7 +147,7 @@ class StoreCustomCategoryType extends AbstractStructBase
      * Get ChildCategory value
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    public function getChildCategory(): array
+    public function getChildCategory(): ?array
     {
         return $this->ChildCategory;
     }
@@ -157,8 +157,11 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateChildCategoryForArrayConstraintsFromSetChildCategory(array $values = []): string
+    public static function validateChildCategoryForArrayConstraintsFromSetChildCategory(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeCustomCategoryTypeChildCategoryItem) {
@@ -180,7 +183,7 @@ class StoreCustomCategoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $childCategory
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType
      */
-    public function setChildCategory(array $childCategory = []): self
+    public function setChildCategory(?array $childCategory = null): self
     {
         // validation for constraint: array
         if ('' !== ($childCategoryArrayErrorMessage = self::validateChildCategoryForArrayConstraintsFromSetChildCategory($childCategory))) {

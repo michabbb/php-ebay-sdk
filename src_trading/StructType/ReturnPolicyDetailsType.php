@@ -30,7 +30,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundDetailsType[]
      */
-    protected array $Refund = [];
+    protected ?array $Refund = null;
     /**
      * The ReturnsWithin
      * Meta information extracted from the WSDL
@@ -41,7 +41,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReturnsWithinDetailsType[]
      */
-    protected array $ReturnsWithin = [];
+    protected ?array $ReturnsWithin = null;
     /**
      * The ReturnsAccepted
      * Meta information extracted from the WSDL
@@ -53,7 +53,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReturnsAcceptedDetailsType[]
      */
-    protected array $ReturnsAccepted = [];
+    protected ?array $ReturnsAccepted = null;
     /**
      * The Description
      * Meta information extracted from the WSDL
@@ -73,7 +73,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[]
      */
-    protected array $WarrantyOffered = [];
+    protected ?array $WarrantyOffered = null;
     /**
      * The WarrantyType
      * Meta information extracted from the WSDL
@@ -82,7 +82,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[]
      */
-    protected array $WarrantyType = [];
+    protected ?array $WarrantyType = null;
     /**
      * The WarrantyDuration
      * Meta information extracted from the WSDL
@@ -91,7 +91,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[]
      */
-    protected array $WarrantyDuration = [];
+    protected ?array $WarrantyDuration = null;
     /**
      * The EAN
      * Meta information extracted from the WSDL
@@ -109,7 +109,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingCostPaidByDetailsType[]
      */
-    protected array $ShippingCostPaidBy = [];
+    protected ?array $ShippingCostPaidBy = null;
     /**
      * The RestockingFeeValue
      * Meta information extracted from the WSDL
@@ -118,7 +118,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RestockingFeeValueDetailsType[]
      */
-    protected array $RestockingFeeValue = [];
+    protected ?array $RestockingFeeValue = null;
     /**
      * The DetailVersion
      * Meta information extracted from the WSDL
@@ -169,7 +169,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refund = [], array $returnsWithin = [], array $returnsAccepted = [], ?bool $description = null, array $warrantyOffered = [], array $warrantyType = [], array $warrantyDuration = [], ?bool $eAN = null, array $shippingCostPaidBy = [], array $restockingFeeValue = [], ?string $detailVersion = null, ?string $updateTime = null, $any = null)
+    public function __construct(?array $refund = null, ?array $returnsWithin = null, ?array $returnsAccepted = null, ?bool $description = null, ?array $warrantyOffered = null, ?array $warrantyType = null, ?array $warrantyDuration = null, ?bool $eAN = null, ?array $shippingCostPaidBy = null, ?array $restockingFeeValue = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setRefund($refund)
@@ -190,7 +190,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get Refund value
      * @return \macropage\ebaysdk\trading\StructType\RefundDetailsType[]
      */
-    public function getRefund(): array
+    public function getRefund(): ?array
     {
         return $this->Refund;
     }
@@ -200,8 +200,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundForArrayConstraintsFromSetRefund(array $values = []): string
+    public static function validateRefundForArrayConstraintsFromSetRefund(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeRefundItem) {
@@ -223,7 +226,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundDetailsType[] $refund
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setRefund(array $refund = []): self
+    public function setRefund(?array $refund = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundArrayErrorMessage = self::validateRefundForArrayConstraintsFromSetRefund($refund))) {
@@ -253,7 +256,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get ReturnsWithin value
      * @return \macropage\ebaysdk\trading\StructType\ReturnsWithinDetailsType[]
      */
-    public function getReturnsWithin(): array
+    public function getReturnsWithin(): ?array
     {
         return $this->ReturnsWithin;
     }
@@ -263,8 +266,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReturnsWithinForArrayConstraintsFromSetReturnsWithin(array $values = []): string
+    public static function validateReturnsWithinForArrayConstraintsFromSetReturnsWithin(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeReturnsWithinItem) {
@@ -286,7 +292,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReturnsWithinDetailsType[] $returnsWithin
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setReturnsWithin(array $returnsWithin = []): self
+    public function setReturnsWithin(?array $returnsWithin = null): self
     {
         // validation for constraint: array
         if ('' !== ($returnsWithinArrayErrorMessage = self::validateReturnsWithinForArrayConstraintsFromSetReturnsWithin($returnsWithin))) {
@@ -316,7 +322,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get ReturnsAccepted value
      * @return \macropage\ebaysdk\trading\StructType\ReturnsAcceptedDetailsType[]
      */
-    public function getReturnsAccepted(): array
+    public function getReturnsAccepted(): ?array
     {
         return $this->ReturnsAccepted;
     }
@@ -326,8 +332,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReturnsAcceptedForArrayConstraintsFromSetReturnsAccepted(array $values = []): string
+    public static function validateReturnsAcceptedForArrayConstraintsFromSetReturnsAccepted(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeReturnsAcceptedItem) {
@@ -349,7 +358,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReturnsAcceptedDetailsType[] $returnsAccepted
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setReturnsAccepted(array $returnsAccepted = []): self
+    public function setReturnsAccepted(?array $returnsAccepted = null): self
     {
         // validation for constraint: array
         if ('' !== ($returnsAcceptedArrayErrorMessage = self::validateReturnsAcceptedForArrayConstraintsFromSetReturnsAccepted($returnsAccepted))) {
@@ -402,7 +411,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get WarrantyOffered value
      * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[]
      */
-    public function getWarrantyOffered(): array
+    public function getWarrantyOffered(): ?array
     {
         return $this->WarrantyOffered;
     }
@@ -412,8 +421,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateWarrantyOfferedForArrayConstraintsFromSetWarrantyOffered(array $values = []): string
+    public static function validateWarrantyOfferedForArrayConstraintsFromSetWarrantyOffered(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeWarrantyOfferedItem) {
@@ -435,7 +447,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[] $warrantyOffered
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setWarrantyOffered(array $warrantyOffered = []): self
+    public function setWarrantyOffered(?array $warrantyOffered = null): self
     {
         // validation for constraint: array
         if ('' !== ($warrantyOfferedArrayErrorMessage = self::validateWarrantyOfferedForArrayConstraintsFromSetWarrantyOffered($warrantyOffered))) {
@@ -465,7 +477,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get WarrantyType value
      * @return \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[]
      */
-    public function getWarrantyType(): array
+    public function getWarrantyType(): ?array
     {
         return $this->WarrantyType;
     }
@@ -475,8 +487,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateWarrantyTypeForArrayConstraintsFromSetWarrantyType(array $values = []): string
+    public static function validateWarrantyTypeForArrayConstraintsFromSetWarrantyType(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeWarrantyTypeItem) {
@@ -498,7 +513,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[] $warrantyType
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setWarrantyType(array $warrantyType = []): self
+    public function setWarrantyType(?array $warrantyType = null): self
     {
         // validation for constraint: array
         if ('' !== ($warrantyTypeArrayErrorMessage = self::validateWarrantyTypeForArrayConstraintsFromSetWarrantyType($warrantyType))) {
@@ -528,7 +543,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get WarrantyDuration value
      * @return \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[]
      */
-    public function getWarrantyDuration(): array
+    public function getWarrantyDuration(): ?array
     {
         return $this->WarrantyDuration;
     }
@@ -538,8 +553,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateWarrantyDurationForArrayConstraintsFromSetWarrantyDuration(array $values = []): string
+    public static function validateWarrantyDurationForArrayConstraintsFromSetWarrantyDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeWarrantyDurationItem) {
@@ -561,7 +579,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[] $warrantyDuration
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setWarrantyDuration(array $warrantyDuration = []): self
+    public function setWarrantyDuration(?array $warrantyDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($warrantyDurationArrayErrorMessage = self::validateWarrantyDurationForArrayConstraintsFromSetWarrantyDuration($warrantyDuration))) {
@@ -614,7 +632,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get ShippingCostPaidBy value
      * @return \macropage\ebaysdk\trading\StructType\ShippingCostPaidByDetailsType[]
      */
-    public function getShippingCostPaidBy(): array
+    public function getShippingCostPaidBy(): ?array
     {
         return $this->ShippingCostPaidBy;
     }
@@ -624,8 +642,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingCostPaidByForArrayConstraintsFromSetShippingCostPaidBy(array $values = []): string
+    public static function validateShippingCostPaidByForArrayConstraintsFromSetShippingCostPaidBy(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeShippingCostPaidByItem) {
@@ -647,7 +668,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingCostPaidByDetailsType[] $shippingCostPaidBy
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setShippingCostPaidBy(array $shippingCostPaidBy = []): self
+    public function setShippingCostPaidBy(?array $shippingCostPaidBy = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingCostPaidByArrayErrorMessage = self::validateShippingCostPaidByForArrayConstraintsFromSetShippingCostPaidBy($shippingCostPaidBy))) {
@@ -677,7 +698,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * Get RestockingFeeValue value
      * @return \macropage\ebaysdk\trading\StructType\RestockingFeeValueDetailsType[]
      */
-    public function getRestockingFeeValue(): array
+    public function getRestockingFeeValue(): ?array
     {
         return $this->RestockingFeeValue;
     }
@@ -687,8 +708,11 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRestockingFeeValueForArrayConstraintsFromSetRestockingFeeValue(array $values = []): string
+    public static function validateRestockingFeeValueForArrayConstraintsFromSetRestockingFeeValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $returnPolicyDetailsTypeRestockingFeeValueItem) {
@@ -710,7 +734,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RestockingFeeValueDetailsType[] $restockingFeeValue
      * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
      */
-    public function setRestockingFeeValue(array $restockingFeeValue = []): self
+    public function setRestockingFeeValue(?array $restockingFeeValue = null): self
     {
         // validation for constraint: array
         if ('' !== ($restockingFeeValueArrayErrorMessage = self::validateRestockingFeeValueForArrayConstraintsFromSetRestockingFeeValue($restockingFeeValue))) {

@@ -25,13 +25,13 @@ class FeedbackDetailArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeedbackDetailType[]
      */
-    protected array $FeedbackDetail = [];
+    protected ?array $FeedbackDetail = null;
     /**
      * Constructor method for FeedbackDetailArrayType
      * @uses FeedbackDetailArrayType::setFeedbackDetail()
      * @param \macropage\ebaysdk\trading\StructType\FeedbackDetailType[] $feedbackDetail
      */
-    public function __construct(array $feedbackDetail = [])
+    public function __construct(?array $feedbackDetail = null)
     {
         $this
             ->setFeedbackDetail($feedbackDetail);
@@ -40,7 +40,7 @@ class FeedbackDetailArrayType extends AbstractStructArrayBase
      * Get FeedbackDetail value
      * @return \macropage\ebaysdk\trading\StructType\FeedbackDetailType[]
      */
-    public function getFeedbackDetail(): array
+    public function getFeedbackDetail(): ?array
     {
         return $this->FeedbackDetail;
     }
@@ -50,8 +50,11 @@ class FeedbackDetailArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeedbackDetailForArrayConstraintsFromSetFeedbackDetail(array $values = []): string
+    public static function validateFeedbackDetailForArrayConstraintsFromSetFeedbackDetail(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackDetailArrayTypeFeedbackDetailItem) {
@@ -73,7 +76,7 @@ class FeedbackDetailArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\FeedbackDetailType[] $feedbackDetail
      * @return \macropage\ebaysdk\trading\ArrayType\FeedbackDetailArrayType
      */
-    public function setFeedbackDetail(array $feedbackDetail = []): self
+    public function setFeedbackDetail(?array $feedbackDetail = null): self
     {
         // validation for constraint: array
         if ('' !== ($feedbackDetailArrayErrorMessage = self::validateFeedbackDetailForArrayConstraintsFromSetFeedbackDetail($feedbackDetail))) {

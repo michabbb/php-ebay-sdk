@@ -71,7 +71,7 @@ class PromotedItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PromotionDetailsType[]
      */
-    protected array $PromotionDetails = [];
+    protected ?array $PromotionDetails = null;
     /**
      * The TimeLeft
      * Meta information extracted from the WSDL
@@ -106,7 +106,7 @@ class PromotedItemType extends AbstractStructBase
      * @param string $timeLeft
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?string $pictureURL = null, ?int $position = null, ?string $selectionType = null, ?string $title = null, ?string $listingType = null, array $promotionDetails = [], ?string $timeLeft = null, $any = null)
+    public function __construct(?string $itemID = null, ?string $pictureURL = null, ?int $position = null, ?string $selectionType = null, ?string $title = null, ?string $listingType = null, ?array $promotionDetails = null, ?string $timeLeft = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -267,7 +267,7 @@ class PromotedItemType extends AbstractStructBase
      * Get PromotionDetails value
      * @return \macropage\ebaysdk\trading\StructType\PromotionDetailsType[]
      */
-    public function getPromotionDetails(): array
+    public function getPromotionDetails(): ?array
     {
         return $this->PromotionDetails;
     }
@@ -277,8 +277,11 @@ class PromotedItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePromotionDetailsForArrayConstraintsFromSetPromotionDetails(array $values = []): string
+    public static function validatePromotionDetailsForArrayConstraintsFromSetPromotionDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $promotedItemTypePromotionDetailsItem) {
@@ -300,7 +303,7 @@ class PromotedItemType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PromotionDetailsType[] $promotionDetails
      * @return \macropage\ebaysdk\trading\StructType\PromotedItemType
      */
-    public function setPromotionDetails(array $promotionDetails = []): self
+    public function setPromotionDetails(?array $promotionDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($promotionDetailsArrayErrorMessage = self::validatePromotionDetailsForArrayConstraintsFromSetPromotionDetails($promotionDetails))) {

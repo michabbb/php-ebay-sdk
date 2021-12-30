@@ -9,7 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for PaidStatusCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Specifies the payment status of an order, as seen by the buyer and seller.
+ * - documentation: Enumerated type that lists the possible states of buyer payment for an order.
  * @subpackage Enumerations
  */
 class PaidStatusCodeType extends AbstractStructEnumBase
@@ -17,35 +17,36 @@ class PaidStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'NotPaid'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer has completed checkout, but eBay has not recognized that the buyer has paid for the order. It is possible that the buyer has paid with an 'offline' payment method, but the order has not been marked as paid.
+     * - documentation: This enumeration value is returned if the buyer has completed checkout, but eBay cannot confirm whether or not the buyer has paid for the order. It is possible that the buyer has paid with an 'offline' payment method, but the order
+     * has not been marked as paid.
      * @return string 'NotPaid'
      */
     const VALUE_NOT_PAID = 'NotPaid';
     /**
      * Constant for value 'BuyerHasNotCompletedCheckout'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer has not completed the checkout process and so has not made payment.
+     * - documentation: This enumeration value is returned if the buyer has not completed the checkout process and so has not made payment.
      * @return string 'BuyerHasNotCompletedCheckout'
      */
     const VALUE_BUYER_HAS_NOT_COMPLETED_CHECKOUT = 'BuyerHasNotCompletedCheckout';
     /**
      * Constant for value 'PaymentPendingWithPayPal'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer has made a PayPal payment, but the seller has not yet received it.
+     * - documentation: This value is deprecated and should no longer be returned.
      * @return string 'PaymentPendingWithPayPal'
      */
     const VALUE_PAYMENT_PENDING_WITH_PAY_PAL = 'PaymentPendingWithPayPal';
     /**
      * Constant for value 'PaidWithPayPal'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer has made a PayPal payment, and the payment is complete. But please also see the documentation for PaymentHoldStatus and its applicable values. PaymentHoldStatus contains the current status of a hold on a PayPal payment.
+     * - documentation: This value is deprecated and should no longer be returned.
      * @return string 'PaidWithPayPal'
      */
     const VALUE_PAID_WITH_PAY_PAL = 'PaidWithPayPal';
     /**
      * Constant for value 'MarkedAsPaid'
      * Meta information extracted from the WSDL
-     * - documentation: The order is marked as paid by either the buyer or seller.
+     * - documentation: This enumeration value is returned if the order was marked as paid by eBay or the seller.
      * @return string 'MarkedAsPaid'
      */
     const VALUE_MARKED_AS_PAID = 'MarkedAsPaid';
@@ -87,7 +88,7 @@ class PaidStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaymentPending'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer has made a payment other than PayPal, but the payment is still being processed.
+     * - documentation: This enumeration value is returned if the buyer's payment is in process, but not yet complete.
      * @return string 'PaymentPending'
      */
     const VALUE_PAYMENT_PENDING = 'PaymentPending';
@@ -115,7 +116,7 @@ class PaidStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Refunded'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer's payment was refunded.
+     * - documentation: This enumeration value is returned if the buyer's payment was refunded.
      * @return string 'Refunded'
      */
     const VALUE_REFUNDED = 'Refunded';
@@ -143,15 +144,15 @@ class PaidStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Paid'
      * Meta information extracted from the WSDL
-     * - documentation: The order has been paid for.
+     * - documentation: This enumeration value is returned if the buyer has paid for the order.
      * @return string 'Paid'
      */
     const VALUE_PAID = 'Paid';
     /**
      * Constant for value 'PayUponInvoice'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the buyer was offered the 'Pay Upon Invoice' option. The 'Pay Upon Invoice' option is only available to eligible German buyers as part of Progressive Checkout on the German site. If a German buyer is offered
-     * the 'Pay Upon Invoice' option, that buyer is not required to pay for the order until after receiving an order invoice from the seller.
+     * - documentation: This enumeration value is returned if the buyer was offered the 'Pay Upon Invoice' option. The 'Pay Upon Invoice' option is only available to eligible German buyers as part of Progressive Checkout on the German site. If a German
+     * buyer is offered the 'Pay Upon Invoice' option, that buyer is not required to pay for the order until after receiving an order invoice from the seller.
      * @return string 'PayUponInvoice'
      */
     const VALUE_PAY_UPON_INVOICE = 'PayUponInvoice';

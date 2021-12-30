@@ -44,7 +44,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductFamilyType[]
      */
-    protected array $ProductFamilies = [];
+    protected ?array $ProductFamilies = null;
     /**
      * The ProductFinderConstraints
      * Meta information extracted from the WSDL
@@ -53,7 +53,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductFinderConstraintType[]
      */
-    protected array $ProductFinderConstraints = [];
+    protected ?array $ProductFinderConstraints = null;
     /**
      * The TooManyMatchesFound
      * Meta information extracted from the WSDL
@@ -92,7 +92,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * @param int $totalProducts
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $approximatePages = null, ?int $attributeSetID = null, ?bool $hasMore = null, array $productFamilies = [], array $productFinderConstraints = [], ?bool $tooManyMatchesFound = null, ?int $totalProducts = null, $any = null)
+    public function __construct(?int $approximatePages = null, ?int $attributeSetID = null, ?bool $hasMore = null, ?array $productFamilies = null, ?array $productFinderConstraints = null, ?bool $tooManyMatchesFound = null, ?int $totalProducts = null, $any = null)
     {
         $this
             ->setApproximatePages($approximatePages)
@@ -177,7 +177,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * Get ProductFamilies value
      * @return \macropage\ebaysdk\trading\StructType\ProductFamilyType[]
      */
-    public function getProductFamilies(): array
+    public function getProductFamilies(): ?array
     {
         return $this->ProductFamilies;
     }
@@ -187,8 +187,11 @@ class ResponseAttributeSetType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductFamiliesForArrayConstraintsFromSetProductFamilies(array $values = []): string
+    public static function validateProductFamiliesForArrayConstraintsFromSetProductFamilies(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $responseAttributeSetTypeProductFamiliesItem) {
@@ -210,7 +213,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductFamilyType[] $productFamilies
      * @return \macropage\ebaysdk\trading\StructType\ResponseAttributeSetType
      */
-    public function setProductFamilies(array $productFamilies = []): self
+    public function setProductFamilies(?array $productFamilies = null): self
     {
         // validation for constraint: array
         if ('' !== ($productFamiliesArrayErrorMessage = self::validateProductFamiliesForArrayConstraintsFromSetProductFamilies($productFamilies))) {
@@ -240,7 +243,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * Get ProductFinderConstraints value
      * @return \macropage\ebaysdk\trading\StructType\ProductFinderConstraintType[]
      */
-    public function getProductFinderConstraints(): array
+    public function getProductFinderConstraints(): ?array
     {
         return $this->ProductFinderConstraints;
     }
@@ -250,8 +253,11 @@ class ResponseAttributeSetType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductFinderConstraintsForArrayConstraintsFromSetProductFinderConstraints(array $values = []): string
+    public static function validateProductFinderConstraintsForArrayConstraintsFromSetProductFinderConstraints(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $responseAttributeSetTypeProductFinderConstraintsItem) {
@@ -273,7 +279,7 @@ class ResponseAttributeSetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductFinderConstraintType[] $productFinderConstraints
      * @return \macropage\ebaysdk\trading\StructType\ResponseAttributeSetType
      */
-    public function setProductFinderConstraints(array $productFinderConstraints = []): self
+    public function setProductFinderConstraints(?array $productFinderConstraints = null): self
     {
         // validation for constraint: array
         if ('' !== ($productFinderConstraintsArrayErrorMessage = self::validateProductFinderConstraintsForArrayConstraintsFromSetProductFinderConstraints($productFinderConstraints))) {

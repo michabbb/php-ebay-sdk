@@ -44,7 +44,7 @@ class EndItemResponseContainerType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    protected array $Errors = [];
+    protected ?array $Errors = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -61,7 +61,7 @@ class EndItemResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $endTime = null, ?string $correlationID = null, array $errors = [], $any = null)
+    public function __construct(?string $endTime = null, ?string $correlationID = null, ?array $errors = null, $any = null)
     {
         $this
             ->setEndTime($endTime)
@@ -119,7 +119,7 @@ class EndItemResponseContainerType extends AbstractStructBase
      * Get Errors value
      * @return \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->Errors;
     }
@@ -129,8 +129,11 @@ class EndItemResponseContainerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorsForArrayConstraintsFromSetErrors(array $values = []): string
+    public static function validateErrorsForArrayConstraintsFromSetErrors(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $endItemResponseContainerTypeErrorsItem) {
@@ -152,7 +155,7 @@ class EndItemResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @return \macropage\ebaysdk\trading\StructType\EndItemResponseContainerType
      */
-    public function setErrors(array $errors = []): self
+    public function setErrors(?array $errors = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorsArrayErrorMessage = self::validateErrorsForArrayConstraintsFromSetErrors($errors))) {

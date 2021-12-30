@@ -26,13 +26,13 @@ class GeteBayDetailsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DetailName = [];
+    protected ?array $DetailName = null;
     /**
      * Constructor method for GeteBayDetailsRequestType
      * @uses GeteBayDetailsRequestType::setDetailName()
      * @param string[] $detailName
      */
-    public function __construct(array $detailName = [])
+    public function __construct(?array $detailName = null)
     {
         $this
             ->setDetailName($detailName);
@@ -41,7 +41,7 @@ class GeteBayDetailsRequestType extends AbstractRequestType
      * Get DetailName value
      * @return string[]
      */
-    public function getDetailName(): array
+    public function getDetailName(): ?array
     {
         return $this->DetailName;
     }
@@ -51,8 +51,11 @@ class GeteBayDetailsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDetailNameForArrayConstraintsFromSetDetailName(array $values = []): string
+    public static function validateDetailNameForArrayConstraintsFromSetDetailName(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $geteBayDetailsRequestTypeDetailNameItem) {
@@ -76,7 +79,7 @@ class GeteBayDetailsRequestType extends AbstractRequestType
      * @param string[] $detailName
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsRequestType
      */
-    public function setDetailName(array $detailName = []): self
+    public function setDetailName(?array $detailName = null): self
     {
         // validation for constraint: array
         if ('' !== ($detailNameArrayErrorMessage = self::validateDetailNameForArrayConstraintsFromSetDetailName($detailName))) {

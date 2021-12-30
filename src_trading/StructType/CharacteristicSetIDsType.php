@@ -23,13 +23,13 @@ class CharacteristicSetIDsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ID = [];
+    protected ?array $ID = null;
     /**
      * Constructor method for CharacteristicSetIDsType
      * @uses CharacteristicSetIDsType::setID()
      * @param string[] $iD
      */
-    public function __construct(array $iD = [])
+    public function __construct(?array $iD = null)
     {
         $this
             ->setID($iD);
@@ -38,7 +38,7 @@ class CharacteristicSetIDsType extends AbstractStructBase
      * Get ID value
      * @return string[]
      */
-    public function getID(): array
+    public function getID(): ?array
     {
         return $this->ID;
     }
@@ -48,8 +48,11 @@ class CharacteristicSetIDsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateIDForArrayConstraintsFromSetID(array $values = []): string
+    public static function validateIDForArrayConstraintsFromSetID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $characteristicSetIDsTypeIDItem) {
@@ -71,7 +74,7 @@ class CharacteristicSetIDsType extends AbstractStructBase
      * @param string[] $iD
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType
      */
-    public function setID(array $iD = []): self
+    public function setID(?array $iD = null): self
     {
         // validation for constraint: array
         if ('' !== ($iDArrayErrorMessage = self::validateIDForArrayConstraintsFromSetID($iD))) {

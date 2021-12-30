@@ -81,7 +81,7 @@ class MemberMessageType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $RecipientID = [];
+    protected ?array $RecipientID = null;
     /**
      * The Subject
      * Meta information extracted from the WSDL
@@ -123,7 +123,7 @@ class MemberMessageType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    protected array $MessageMedia = [];
+    protected ?array $MessageMedia = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -160,7 +160,7 @@ class MemberMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $messageType = null, ?string $questionType = null, ?bool $emailCopyToSender = null, ?bool $hideSendersEmailAddress = null, ?bool $displayToPublic = null, ?string $senderID = null, ?string $senderEmail = null, array $recipientID = [], ?string $subject = null, ?string $body = null, ?string $messageID = null, ?string $parentMessageID = null, array $messageMedia = [], $any = null)
+    public function __construct(?string $messageType = null, ?string $questionType = null, ?bool $emailCopyToSender = null, ?bool $hideSendersEmailAddress = null, ?bool $displayToPublic = null, ?string $senderID = null, ?string $senderEmail = null, ?array $recipientID = null, ?string $subject = null, ?string $body = null, ?string $messageID = null, ?string $parentMessageID = null, ?array $messageMedia = null, $any = null)
     {
         $this
             ->setMessageType($messageType)
@@ -349,7 +349,7 @@ class MemberMessageType extends AbstractStructBase
      * Get RecipientID value
      * @return string[]
      */
-    public function getRecipientID(): array
+    public function getRecipientID(): ?array
     {
         return $this->RecipientID;
     }
@@ -359,8 +359,11 @@ class MemberMessageType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRecipientIDForArrayConstraintsFromSetRecipientID(array $values = []): string
+    public static function validateRecipientIDForArrayConstraintsFromSetRecipientID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $memberMessageTypeRecipientIDItem) {
@@ -382,7 +385,7 @@ class MemberMessageType extends AbstractStructBase
      * @param string[] $recipientID
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setRecipientID(array $recipientID = []): self
+    public function setRecipientID(?array $recipientID = null): self
     {
         // validation for constraint: array
         if ('' !== ($recipientIDArrayErrorMessage = self::validateRecipientIDForArrayConstraintsFromSetRecipientID($recipientID))) {
@@ -504,7 +507,7 @@ class MemberMessageType extends AbstractStructBase
      * Get MessageMedia value
      * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public function getMessageMedia(): array
+    public function getMessageMedia(): ?array
     {
         return $this->MessageMedia;
     }
@@ -514,8 +517,11 @@ class MemberMessageType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(array $values = []): string
+    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $memberMessageTypeMessageMediaItem) {
@@ -537,7 +543,7 @@ class MemberMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
      */
-    public function setMessageMedia(array $messageMedia = []): self
+    public function setMessageMedia(?array $messageMedia = null): self
     {
         // validation for constraint: array
         if ('' !== ($messageMediaArrayErrorMessage = self::validateMessageMediaForArrayConstraintsFromSetMessageMedia($messageMedia))) {

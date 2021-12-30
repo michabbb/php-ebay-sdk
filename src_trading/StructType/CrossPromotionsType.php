@@ -71,7 +71,7 @@ class CrossPromotionsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PromotedItemType[]
      */
-    protected array $PromotedItem = [];
+    protected ?array $PromotedItem = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -96,7 +96,7 @@ class CrossPromotionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PromotedItemType[] $promotedItem
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?string $primaryScheme = null, ?string $promotionMethod = null, ?string $sellerID = null, ?bool $shippingDiscount = null, ?string $storeName = null, array $promotedItem = [], $any = null)
+    public function __construct(?string $itemID = null, ?string $primaryScheme = null, ?string $promotionMethod = null, ?string $sellerID = null, ?bool $shippingDiscount = null, ?string $storeName = null, ?array $promotedItem = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -256,7 +256,7 @@ class CrossPromotionsType extends AbstractStructBase
      * Get PromotedItem value
      * @return \macropage\ebaysdk\trading\StructType\PromotedItemType[]
      */
-    public function getPromotedItem(): array
+    public function getPromotedItem(): ?array
     {
         return $this->PromotedItem;
     }
@@ -266,8 +266,11 @@ class CrossPromotionsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePromotedItemForArrayConstraintsFromSetPromotedItem(array $values = []): string
+    public static function validatePromotedItemForArrayConstraintsFromSetPromotedItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $crossPromotionsTypePromotedItemItem) {
@@ -289,7 +292,7 @@ class CrossPromotionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PromotedItemType[] $promotedItem
      * @return \macropage\ebaysdk\trading\StructType\CrossPromotionsType
      */
-    public function setPromotedItem(array $promotedItem = []): self
+    public function setPromotedItem(?array $promotedItem = null): self
     {
         // validation for constraint: array
         if ('' !== ($promotedItemArrayErrorMessage = self::validatePromotedItemForArrayConstraintsFromSetPromotedItem($promotedItem))) {

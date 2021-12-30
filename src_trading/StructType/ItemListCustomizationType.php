@@ -67,8 +67,8 @@ class ItemListCustomizationType extends AbstractStructBase
     /**
      * The OrderStatusFilter
      * Meta information extracted from the WSDL
-     * - documentation: Filter to reduce the SoldList response based on whether the seller (or eBay) marked the applicable order as Paid and/or Shipped in My eBay.<br> <br> (Sellers can use CompleteSale or the eBay Web site UI to mark an order as Paid or
-     * Shipped in My eBay. Sellers can also specify PaymentStatus in ReviseCheckoutStatus to mark an order as Paid or awaiting payment in My eBay.)
+     * - documentation: Filter to reduce the <b>SoldList</b> response based on whether the seller (or eBay) marked the applicable order as Paid and/or Shipped in My eBay.<br> <br> Sellers can use <b>CompleteSale</b> or My eBay to mark an order as Paid or
+     * Shipped.
      * - minOccurs: 0
      * @var string|null
      */

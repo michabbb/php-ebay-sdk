@@ -47,7 +47,7 @@ class PictureManagerPictureType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureManagerPictureDisplayType[]
      */
-    protected array $DisplayFormat = [];
+    protected ?array $DisplayFormat = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -66,7 +66,7 @@ class PictureManagerPictureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureDisplayType[] $displayFormat
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $pictureURL = null, ?string $name = null, ?string $date = null, array $displayFormat = [], $any = null)
+    public function __construct(?string $pictureURL = null, ?string $name = null, ?string $date = null, ?array $displayFormat = null, $any = null)
     {
         $this
             ->setPictureURL($pictureURL)
@@ -148,7 +148,7 @@ class PictureManagerPictureType extends AbstractStructBase
      * Get DisplayFormat value
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerPictureDisplayType[]
      */
-    public function getDisplayFormat(): array
+    public function getDisplayFormat(): ?array
     {
         return $this->DisplayFormat;
     }
@@ -158,8 +158,11 @@ class PictureManagerPictureType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDisplayFormatForArrayConstraintsFromSetDisplayFormat(array $values = []): string
+    public static function validateDisplayFormatForArrayConstraintsFromSetDisplayFormat(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pictureManagerPictureTypeDisplayFormatItem) {
@@ -181,7 +184,7 @@ class PictureManagerPictureType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureDisplayType[] $displayFormat
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerPictureType
      */
-    public function setDisplayFormat(array $displayFormat = []): self
+    public function setDisplayFormat(?array $displayFormat = null): self
     {
         // validation for constraint: array
         if ('' !== ($displayFormatArrayErrorMessage = self::validateDisplayFormatForArrayConstraintsFromSetDisplayFormat($displayFormat))) {

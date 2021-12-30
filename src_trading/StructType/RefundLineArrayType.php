@@ -23,7 +23,7 @@ class RefundLineArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundLineType[]
      */
-    protected array $RefundLine = [];
+    protected ?array $RefundLine = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class RefundLineArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundLineType[] $refundLine
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refundLine = [], $any = null)
+    public function __construct(?array $refundLine = null, $any = null)
     {
         $this
             ->setRefundLine($refundLine)
@@ -46,7 +46,7 @@ class RefundLineArrayType extends AbstractStructBase
      * Get RefundLine value
      * @return \macropage\ebaysdk\trading\StructType\RefundLineType[]
      */
-    public function getRefundLine(): array
+    public function getRefundLine(): ?array
     {
         return $this->RefundLine;
     }
@@ -56,8 +56,11 @@ class RefundLineArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundLineForArrayConstraintsFromSetRefundLine(array $values = []): string
+    public static function validateRefundLineForArrayConstraintsFromSetRefundLine(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $refundLineArrayTypeRefundLineItem) {
@@ -79,7 +82,7 @@ class RefundLineArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundLineType[] $refundLine
      * @return \macropage\ebaysdk\trading\StructType\RefundLineArrayType
      */
-    public function setRefundLine(array $refundLine = []): self
+    public function setRefundLine(?array $refundLine = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundLineArrayErrorMessage = self::validateRefundLineForArrayConstraintsFromSetRefundLine($refundLine))) {

@@ -26,8 +26,8 @@ class CompleteStatusCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This value indicates that the order or order line item is complete. Generally speaking, an order or order line item is complete when payment from the buyer has been initiated and has been processed. <br><br> <span
      * class="tablenote"><b>Note:</b> If the <b>PaymentMethodUsed</b> is <code>CashOnPickup</code>, the <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will be <code>Complete</code> at checkout time, even though the seller may not have been
-     * officially paid yet. The <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will remain as <code>Complete</code> even if the seller uses <b>ReviseCheckoutStatus</b> to change the checkout status to <code>Pending</code>. However, the
-     * <b>eBayPaymentStatus</b> value in <b>GetOrders</b> will change from <code>NoPaymentFailure</code> to <code>PaymentInProcess</code>. </span>
+     * officially paid yet. The <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will remain as <code>Complete</code> even if the seller changes the checkout status to Pending. However, the <b>eBayPaymentStatus</b> value in <b>GetOrders</b> will
+     * change from <code>NoPaymentFailure</code> to <code>PaymentInProcess</code>. </span>
      * @return string 'Complete'
      */
     const VALUE_COMPLETE = 'Complete';
@@ -36,8 +36,8 @@ class CompleteStatusCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This value indicates that the order or order line item is in the pending state. Generally speaking, an order is considered pending when payment from the buyer has been initiated but has yet to be fully processed. <br><br> <span
      * class="tablenote"><b>Note:</b> If the payment method is <code>CashOnPickup</code>, the <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will read <code>Complete</code> at checkout time, even though the seller may not have been officially paid
-     * yet. The <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will remain as <code>Complete</code> even if the seller uses <b>ReviseCheckoutStatus</b> to change the checkout status to <code>Pending</code>. However, the <b>eBayPaymentStatus</b>
-     * value in <b>GetOrders</b> will change from <code>NoPaymentFailure</code> to <code>PaymentInProcess</code>. </span>
+     * yet. The <b>CheckoutStatus.Status</b> value in <b>GetOrders</b> will remain as <code>Complete</code> even if the seller changes the checkout status to Pending. However, the <b>eBayPaymentStatus</b> value in <b>GetOrders</b> will change from
+     * <code>NoPaymentFailure</code> to <code>PaymentInProcess</code>. </span>
      * @return string 'Pending'
      */
     const VALUE_PENDING = 'Pending';

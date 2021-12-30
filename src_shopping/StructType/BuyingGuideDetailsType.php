@@ -23,7 +23,7 @@ class BuyingGuideDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\BuyingGuideType[]
      */
-    protected array $BuyingGuide = [];
+    protected ?array $BuyingGuide = null;
     /**
      * The BuyingGuideHub
      * Meta information extracted from the WSDL
@@ -46,7 +46,7 @@ class BuyingGuideDetailsType extends AbstractStructBase
      * @param string $buyingGuideHub
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $buyingGuide = [], ?string $buyingGuideHub = null, $any = null)
+    public function __construct(?array $buyingGuide = null, ?string $buyingGuideHub = null, $any = null)
     {
         $this
             ->setBuyingGuide($buyingGuide)
@@ -57,7 +57,7 @@ class BuyingGuideDetailsType extends AbstractStructBase
      * Get BuyingGuide value
      * @return \macropage\ebaysdk\shopping\StructType\BuyingGuideType[]
      */
-    public function getBuyingGuide(): array
+    public function getBuyingGuide(): ?array
     {
         return $this->BuyingGuide;
     }
@@ -67,8 +67,11 @@ class BuyingGuideDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBuyingGuideForArrayConstraintsFromSetBuyingGuide(array $values = []): string
+    public static function validateBuyingGuideForArrayConstraintsFromSetBuyingGuide(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $buyingGuideDetailsTypeBuyingGuideItem) {
@@ -90,7 +93,7 @@ class BuyingGuideDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\BuyingGuideType[] $buyingGuide
      * @return \macropage\ebaysdk\shopping\StructType\BuyingGuideDetailsType
      */
-    public function setBuyingGuide(array $buyingGuide = []): self
+    public function setBuyingGuide(?array $buyingGuide = null): self
     {
         // validation for constraint: array
         if ('' !== ($buyingGuideArrayErrorMessage = self::validateBuyingGuideForArrayConstraintsFromSetBuyingGuide($buyingGuide))) {

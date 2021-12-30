@@ -25,13 +25,13 @@ class AddItemsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType[]
      */
-    protected array $AddItemResponseContainer = [];
+    protected ?array $AddItemResponseContainer = null;
     /**
      * Constructor method for AddItemsResponseType
      * @uses AddItemsResponseType::setAddItemResponseContainer()
      * @param \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType[] $addItemResponseContainer
      */
-    public function __construct(array $addItemResponseContainer = [])
+    public function __construct(?array $addItemResponseContainer = null)
     {
         $this
             ->setAddItemResponseContainer($addItemResponseContainer);
@@ -40,7 +40,7 @@ class AddItemsResponseType extends AbstractResponseType
      * Get AddItemResponseContainer value
      * @return \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType[]
      */
-    public function getAddItemResponseContainer(): array
+    public function getAddItemResponseContainer(): ?array
     {
         return $this->AddItemResponseContainer;
     }
@@ -50,8 +50,11 @@ class AddItemsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAddItemResponseContainerForArrayConstraintsFromSetAddItemResponseContainer(array $values = []): string
+    public static function validateAddItemResponseContainerForArrayConstraintsFromSetAddItemResponseContainer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addItemsResponseTypeAddItemResponseContainerItem) {
@@ -73,7 +76,7 @@ class AddItemsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType[] $addItemResponseContainer
      * @return \macropage\ebaysdk\trading\StructType\AddItemsResponseType
      */
-    public function setAddItemResponseContainer(array $addItemResponseContainer = []): self
+    public function setAddItemResponseContainer(?array $addItemResponseContainer = null): self
     {
         // validation for constraint: array
         if ('' !== ($addItemResponseContainerArrayErrorMessage = self::validateAddItemResponseContainerForArrayConstraintsFromSetAddItemResponseContainer($addItemResponseContainer))) {

@@ -23,13 +23,13 @@ class StoreLogoArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreLogoType[]
      */
-    protected array $Logo = [];
+    protected ?array $Logo = null;
     /**
      * Constructor method for StoreLogoArrayType
      * @uses StoreLogoArrayType::setLogo()
      * @param \macropage\ebaysdk\trading\StructType\StoreLogoType[] $logo
      */
-    public function __construct(array $logo = [])
+    public function __construct(?array $logo = null)
     {
         $this
             ->setLogo($logo);
@@ -38,7 +38,7 @@ class StoreLogoArrayType extends AbstractStructArrayBase
      * Get Logo value
      * @return \macropage\ebaysdk\trading\StructType\StoreLogoType[]
      */
-    public function getLogo(): array
+    public function getLogo(): ?array
     {
         return $this->Logo;
     }
@@ -48,8 +48,11 @@ class StoreLogoArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateLogoForArrayConstraintsFromSetLogo(array $values = []): string
+    public static function validateLogoForArrayConstraintsFromSetLogo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeLogoArrayTypeLogoItem) {
@@ -71,7 +74,7 @@ class StoreLogoArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\StoreLogoType[] $logo
      * @return \macropage\ebaysdk\trading\ArrayType\StoreLogoArrayType
      */
-    public function setLogo(array $logo = []): self
+    public function setLogo(?array $logo = null): self
     {
         // validation for constraint: array
         if ('' !== ($logoArrayErrorMessage = self::validateLogoForArrayConstraintsFromSetLogo($logo))) {

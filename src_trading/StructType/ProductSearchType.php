@@ -70,7 +70,7 @@ class ProductSearchType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SearchAttributesType[]
      */
-    protected array $SearchAttributes = [];
+    protected ?array $SearchAttributes = null;
     /**
      * The Pagination
      * Meta information extracted from the WSDL
@@ -145,7 +145,7 @@ class ProductSearchType extends AbstractStructBase
      * @param string $productReferenceID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $productSearchID = null, ?int $attributeSetID = null, ?int $productFinderID = null, ?string $productID = null, ?int $sortAttributeID = null, ?int $maxChildrenPerFamily = null, array $searchAttributes = [], ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?bool $availableItemsOnly = null, ?string $queryKeywords = null, ?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null, ?string $productReferenceID = null, $any = null)
+    public function __construct(?string $productSearchID = null, ?int $attributeSetID = null, ?int $productFinderID = null, ?string $productID = null, ?int $sortAttributeID = null, ?int $maxChildrenPerFamily = null, ?array $searchAttributes = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?bool $availableItemsOnly = null, ?string $queryKeywords = null, ?\macropage\ebaysdk\trading\StructType\CharacteristicSetIDsType $characteristicSetIDs = null, ?string $productReferenceID = null, $any = null)
     {
         $this
             ->setProductSearchID($productSearchID)
@@ -304,7 +304,7 @@ class ProductSearchType extends AbstractStructBase
      * Get SearchAttributes value
      * @return \macropage\ebaysdk\trading\StructType\SearchAttributesType[]
      */
-    public function getSearchAttributes(): array
+    public function getSearchAttributes(): ?array
     {
         return $this->SearchAttributes;
     }
@@ -314,8 +314,11 @@ class ProductSearchType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSearchAttributesForArrayConstraintsFromSetSearchAttributes(array $values = []): string
+    public static function validateSearchAttributesForArrayConstraintsFromSetSearchAttributes(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productSearchTypeSearchAttributesItem) {
@@ -337,7 +340,7 @@ class ProductSearchType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SearchAttributesType[] $searchAttributes
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchType
      */
-    public function setSearchAttributes(array $searchAttributes = []): self
+    public function setSearchAttributes(?array $searchAttributes = null): self
     {
         // validation for constraint: array
         if ('' !== ($searchAttributesArrayErrorMessage = self::validateSearchAttributesForArrayConstraintsFromSetSearchAttributes($searchAttributes))) {

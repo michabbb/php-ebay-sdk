@@ -27,9 +27,9 @@ class AccountSummaryType extends AbstractStructBase
     /**
      * The InvoicePayment
      * Meta information extracted from the WSDL
-     * - documentation: This field specifies the payment amount that has been made by the user for the specified/last invoice. This field is only returned if a payment has been made towards the invoice, and if the <b>AccountHistorySelection</b> input
-     * field's value was set to <code>LastInvoice</code> or <code>SpecifiedInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period
-     * (overlapping multiple billing cycles) was specified. If a credit was issued by eBay to the user instead, this credit will be shown in the <b>InvoiceCredit</b> field.
+     * - documentation: This field specifies the payment amount that has been made by the user for the invoice. This field is only returned if a payment has been made towards the invoice, and if the <b>AccountHistorySelection</b> input field's value was set
+     * to <code>LastInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified. If a credit
+     * was issued by eBay to the user instead, this credit will be shown in the <b>InvoiceCredit</b> field.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -37,9 +37,9 @@ class AccountSummaryType extends AbstractStructBase
     /**
      * The InvoiceCredit
      * Meta information extracted from the WSDL
-     * - documentation: This field specifies the credit amount that has been issued to the user's account by eBay for the specified/last invoice. This field is only returned if a credit has been issued towards the invoice, and if the
-     * <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code> or <code>SpecifiedInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to
-     * <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified. If a payment was made by the user instead, this payment amount will be shown in the <b>InvoicePayment</b> field.
+     * - documentation: This field specifies the credit amount that has been issued to the user's account by eBay for the invoice. This field is only returned if a credit has been issued towards the invoice, and if the <b>AccountHistorySelection</b> input
+     * field's value was set to <code>LastInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was
+     * specified. If a payment was made by the user instead, this payment amount will be shown in the <b>InvoicePayment</b> field.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -48,8 +48,8 @@ class AccountSummaryType extends AbstractStructBase
      * The InvoiceNewFee
      * Meta information extracted from the WSDL
      * - documentation: This field specifies the balance of any new fees that have been assessed toward the user's account since the last invoice was created. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to
-     * <code>LastInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> or <code>SpecifiedInvoice</code>. If there have been no fees since the last invoice was
-     * created, this value will be <code>0.0</code>.
+     * <code>LastInvoice</code>. This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> or <code>OrderId</code>. If there have been no fees since the last invoice was created, this
+     * value will be <code>0.0</code>.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -62,7 +62,7 @@ class AccountSummaryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AdditionalAccountType[]
      */
-    protected array $AdditionalAccount = [];
+    protected ?array $AdditionalAccount = null;
     /**
      * The AmountPastDue
      * Meta information extracted from the WSDL
@@ -143,9 +143,8 @@ class AccountSummaryType extends AbstractStructBase
     /**
      * The InvoiceBalance
      * Meta information extracted from the WSDL
-     * - documentation: This field specifies the balance for the specified/last invoice. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code> or <code>SpecifiedInvoice</code>. This field
-     * is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified. The value is positive for debits and negative for
-     * credits.
+     * - documentation: This field specifies the balance for the invoice. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code>. This field is not returned if the
+     * <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified. The value is positive for debits and negative for credits.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -153,8 +152,8 @@ class AccountSummaryType extends AbstractStructBase
     /**
      * The InvoiceDate
      * Meta information extracted from the WSDL
-     * - documentation: This timestamp indicates the date and time of the specified/last invoice. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code> or <code>SpecifiedInvoice</code>.
-     * This field is not returned if the <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified.
+     * - documentation: This timestamp indicates the date and time of the invoice. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code>. This field is not returned if the
+     * <b>AccountHistorySelection</b> input field's value was set to <code>BetweenSpecifiedDates</code> and a custom time period (overlapping multiple billing cycles) was specified.
      * - minOccurs: 0
      * @var string|null
      */
@@ -196,9 +195,7 @@ class AccountSummaryType extends AbstractStructBase
      * The NettedTransactionSummary
      * Meta information extracted from the WSDL
      * - documentation: This container shows the total amount of fees (and credits if applicable) that have already been paid through seller payout deductions. The seller must include the <b>IncludeNettedEntries</b> field in the request and set it to
-     * <code>true</code> in order for this container to be returned. <br> <br> The seller's account has to be enabled for managed payments and the fee netting mechanism must be enabled for the managed payments account in order to retrieve the fee netted
-     * amounts. A seller can check their status for the fee netting mechanism by checking the value in the <b>FeeNettingStatus</b> field. <br> <br> <span class="tablenote"><b>Note: </b> For a limited number of managed payments sellers, final value fees and
-     * payment processing fees will start getting deducted from seller payouts as early as mid-June 2020, but for many other managed payments sellers, these fees won't start getting deducted from seller payouts until mid-July 2020. </span>
+     * <code>true</code> in order for this container to be returned.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType|null
      */
@@ -255,7 +252,7 @@ class AccountSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $accountState = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoicePayment = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceCredit = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceNewFee = null, array $additionalAccount = [], ?\macropage\ebaysdk\trading\StructType\AmountType $amountPastDue = null, ?string $bankAccountInfo = null, ?string $bankModifyDate = null, ?int $billingCycleDate = null, ?string $creditCardExpiration = null, ?string $creditCardInfo = null, ?string $creditCardModifyDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentBalance = null, ?string $email = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceBalance = null, ?string $invoiceDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $lastAmountPaid = null, ?string $lastPaymentDate = null, ?bool $pastDue = null, ?string $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary = null, $any = null)
+    public function __construct(?string $accountState = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoicePayment = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceCredit = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceNewFee = null, ?array $additionalAccount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountPastDue = null, ?string $bankAccountInfo = null, ?string $bankModifyDate = null, ?int $billingCycleDate = null, ?string $creditCardExpiration = null, ?string $creditCardInfo = null, ?string $creditCardModifyDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentBalance = null, ?string $email = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceBalance = null, ?string $invoiceDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $lastAmountPaid = null, ?string $lastPaymentDate = null, ?bool $pastDue = null, ?string $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary = null, $any = null)
     {
         $this
             ->setAccountState($accountState)
@@ -368,7 +365,7 @@ class AccountSummaryType extends AbstractStructBase
      * Get AdditionalAccount value
      * @return \macropage\ebaysdk\trading\StructType\AdditionalAccountType[]
      */
-    public function getAdditionalAccount(): array
+    public function getAdditionalAccount(): ?array
     {
         return $this->AdditionalAccount;
     }
@@ -378,8 +375,11 @@ class AccountSummaryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAdditionalAccountForArrayConstraintsFromSetAdditionalAccount(array $values = []): string
+    public static function validateAdditionalAccountForArrayConstraintsFromSetAdditionalAccount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $accountSummaryTypeAdditionalAccountItem) {
@@ -401,7 +401,7 @@ class AccountSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AdditionalAccountType[] $additionalAccount
      * @return \macropage\ebaysdk\trading\StructType\AccountSummaryType
      */
-    public function setAdditionalAccount(array $additionalAccount = []): self
+    public function setAdditionalAccount(?array $additionalAccount = null): self
     {
         // validation for constraint: array
         if ('' !== ($additionalAccountArrayErrorMessage = self::validateAdditionalAccountForArrayConstraintsFromSetAdditionalAccount($additionalAccount))) {

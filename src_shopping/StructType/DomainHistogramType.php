@@ -23,7 +23,7 @@ class DomainHistogramType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\HistogramEntryType[]
      */
-    protected array $Domain = [];
+    protected ?array $Domain = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class DomainHistogramType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\HistogramEntryType[] $domain
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $domain = [], $any = null)
+    public function __construct(?array $domain = null, $any = null)
     {
         $this
             ->setDomain($domain)
@@ -46,7 +46,7 @@ class DomainHistogramType extends AbstractStructBase
      * Get Domain value
      * @return \macropage\ebaysdk\shopping\StructType\HistogramEntryType[]
      */
-    public function getDomain(): array
+    public function getDomain(): ?array
     {
         return $this->Domain;
     }
@@ -56,8 +56,11 @@ class DomainHistogramType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomainForArrayConstraintsFromSetDomain(array $values = []): string
+    public static function validateDomainForArrayConstraintsFromSetDomain(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $domainHistogramTypeDomainItem) {
@@ -79,7 +82,7 @@ class DomainHistogramType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\HistogramEntryType[] $domain
      * @return \macropage\ebaysdk\shopping\StructType\DomainHistogramType
      */
-    public function setDomain(array $domain = []): self
+    public function setDomain(?array $domain = null): self
     {
         // validation for constraint: array
         if ('' !== ($domainArrayErrorMessage = self::validateDomainForArrayConstraintsFromSetDomain($domain))) {

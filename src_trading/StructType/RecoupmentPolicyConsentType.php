@@ -25,7 +25,7 @@ class RecoupmentPolicyConsentType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Site = [];
+    protected ?array $Site = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -38,7 +38,7 @@ class RecoupmentPolicyConsentType extends AbstractStructBase
      * @param string[] $site
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $site = [], $any = null)
+    public function __construct(?array $site = null, $any = null)
     {
         $this
             ->setSite($site)
@@ -48,7 +48,7 @@ class RecoupmentPolicyConsentType extends AbstractStructBase
      * Get Site value
      * @return string[]
      */
-    public function getSite(): array
+    public function getSite(): ?array
     {
         return $this->Site;
     }
@@ -58,8 +58,11 @@ class RecoupmentPolicyConsentType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSiteForArrayConstraintsFromSetSite(array $values = []): string
+    public static function validateSiteForArrayConstraintsFromSetSite(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $recoupmentPolicyConsentTypeSiteItem) {
@@ -83,7 +86,7 @@ class RecoupmentPolicyConsentType extends AbstractStructBase
      * @param string[] $site
      * @return \macropage\ebaysdk\trading\StructType\RecoupmentPolicyConsentType
      */
-    public function setSite(array $site = []): self
+    public function setSite(?array $site = null): self
     {
         // validation for constraint: array
         if ('' !== ($siteArrayErrorMessage = self::validateSiteForArrayConstraintsFromSetSite($site))) {

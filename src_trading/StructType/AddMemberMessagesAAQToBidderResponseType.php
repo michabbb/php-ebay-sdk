@@ -24,13 +24,13 @@ class AddMemberMessagesAAQToBidderResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseContainerType[]
      */
-    protected array $AddMemberMessagesAAQToBidderResponseContainer = [];
+    protected ?array $AddMemberMessagesAAQToBidderResponseContainer = null;
     /**
      * Constructor method for AddMemberMessagesAAQToBidderResponseType
      * @uses AddMemberMessagesAAQToBidderResponseType::setAddMemberMessagesAAQToBidderResponseContainer()
      * @param \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseContainerType[] $addMemberMessagesAAQToBidderResponseContainer
      */
-    public function __construct(array $addMemberMessagesAAQToBidderResponseContainer = [])
+    public function __construct(?array $addMemberMessagesAAQToBidderResponseContainer = null)
     {
         $this
             ->setAddMemberMessagesAAQToBidderResponseContainer($addMemberMessagesAAQToBidderResponseContainer);
@@ -39,7 +39,7 @@ class AddMemberMessagesAAQToBidderResponseType extends AbstractResponseType
      * Get AddMemberMessagesAAQToBidderResponseContainer value
      * @return \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseContainerType[]
      */
-    public function getAddMemberMessagesAAQToBidderResponseContainer(): array
+    public function getAddMemberMessagesAAQToBidderResponseContainer(): ?array
     {
         return $this->AddMemberMessagesAAQToBidderResponseContainer;
     }
@@ -49,8 +49,11 @@ class AddMemberMessagesAAQToBidderResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAddMemberMessagesAAQToBidderResponseContainerForArrayConstraintsFromSetAddMemberMessagesAAQToBidderResponseContainer(array $values = []): string
+    public static function validateAddMemberMessagesAAQToBidderResponseContainerForArrayConstraintsFromSetAddMemberMessagesAAQToBidderResponseContainer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addMemberMessagesAAQToBidderResponseTypeAddMemberMessagesAAQToBidderResponseContainerItem) {
@@ -72,7 +75,7 @@ class AddMemberMessagesAAQToBidderResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseContainerType[] $addMemberMessagesAAQToBidderResponseContainer
      * @return \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseType
      */
-    public function setAddMemberMessagesAAQToBidderResponseContainer(array $addMemberMessagesAAQToBidderResponseContainer = []): self
+    public function setAddMemberMessagesAAQToBidderResponseContainer(?array $addMemberMessagesAAQToBidderResponseContainer = null): self
     {
         // validation for constraint: array
         if ('' !== ($addMemberMessagesAAQToBidderResponseContainerArrayErrorMessage = self::validateAddMemberMessagesAAQToBidderResponseContainerForArrayConstraintsFromSetAddMemberMessagesAAQToBidderResponseContainer($addMemberMessagesAAQToBidderResponseContainer))) {

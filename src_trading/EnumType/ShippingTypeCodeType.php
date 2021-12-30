@@ -19,7 +19,7 @@ class ShippingTypeCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: Flat shipping model: the seller establishes the cost of shipping and cost of shipping insurance, regardless of what any buyer-selected shipping service might charge the seller. <br/><br/> <span class="tablenote">
      * <strong>Note:</strong> This shipping type includes an option for a <em>Flat Rate Freight</em> shipping service. For details about freight shipping, see <a
-     * href="http://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide. </span>
+     * href="https://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide. </span>
      * @return string 'Flat'
      */
     const VALUE_FLAT = 'Flat';
@@ -35,7 +35,7 @@ class ShippingTypeCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: Freight shipping model. Available only for US domestic shipping. The cost of shipping is automatically determined by an affiliated third party, FreightQuote.com, based on the item location (postal code). <br/><br/> <span
      * class="tablenote"> <strong>Note:</strong> This shipping type cannot be set via API, but it is automatically set by eBay when a buyer selects the FreightQuote.com option on the US eBay website. <br/><br/> For details about types of freight shipping
-     * that you can specify via API, see <a href="http://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide. </span>
+     * that you can specify via API, see <a href="https://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide. </span>
      * @return string 'Freight'
      */
     const VALUE_FREIGHT = 'Freight';
@@ -72,7 +72,7 @@ class ShippingTypeCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: Freight shipping model. Available only for the US, UK, AU, CA and CAFR sites, and only for domestic shipping. <code>FreightFlat</code> applies to shipping with carriers that are not affiliated with eBay. It is negotiated freight, not
      * a flat rate. Sellers negotiate the shipping cost with their chosen carrier and the buyer before completing the sale. FreightFlat shipping may be used when calculated shipping cannot be used due to the greater weight of the item. <br/><br/> For
-     * details about freight shipping, see <a href="http://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide.
+     * details about freight shipping, see <a href="https://developer.ebay.com/devzone/guides/features-guide/default.html#development/Shipping-TypesCosts.html#SpecifyingFreightShipping">Specifying Freight Shipping</a> in the eBay Features Guide.
      * @return string 'FreightFlat'
      */
     const VALUE_FREIGHT_FLAT = 'FreightFlat';

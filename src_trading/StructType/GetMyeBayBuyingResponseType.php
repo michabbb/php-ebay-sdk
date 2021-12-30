@@ -97,7 +97,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    protected array $SecondChanceOffer = [];
+    protected ?array $SecondChanceOffer = null;
     /**
      * The BidAssistantList
      * Meta information extracted from the WSDL
@@ -135,7 +135,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UserDefinedListType[]
      */
-    protected array $UserDefinedList = [];
+    protected ?array $UserDefinedList = null;
     /**
      * Constructor method for GetMyeBayBuyingResponseType
      * @uses GetMyeBayBuyingResponseType::setBuyingSummary()
@@ -165,7 +165,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList
      * @param \macropage\ebaysdk\trading\StructType\UserDefinedListType[] $userDefinedList
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\BuyingSummaryType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $watchList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $wonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, array $secondChanceOffer = [], ?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList = null, array $userDefinedList = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\BuyingSummaryType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $watchList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $wonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, ?array $secondChanceOffer = null, ?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList = null, ?array $userDefinedList = null)
     {
         $this
             ->setBuyingSummary($buyingSummary)
@@ -338,7 +338,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * Get SecondChanceOffer value
      * @return \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    public function getSecondChanceOffer(): array
+    public function getSecondChanceOffer(): ?array
     {
         return $this->SecondChanceOffer;
     }
@@ -348,8 +348,11 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer(array $values = []): string
+    public static function validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getMyeBayBuyingResponseTypeSecondChanceOfferItem) {
@@ -371,7 +374,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $secondChanceOffer
      * @return \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType
      */
-    public function setSecondChanceOffer(array $secondChanceOffer = []): self
+    public function setSecondChanceOffer(?array $secondChanceOffer = null): self
     {
         // validation for constraint: array
         if ('' !== ($secondChanceOfferArrayErrorMessage = self::validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer($secondChanceOffer))) {
@@ -458,7 +461,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * Get UserDefinedList value
      * @return \macropage\ebaysdk\trading\StructType\UserDefinedListType[]
      */
-    public function getUserDefinedList(): array
+    public function getUserDefinedList(): ?array
     {
         return $this->UserDefinedList;
     }
@@ -468,8 +471,11 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUserDefinedListForArrayConstraintsFromSetUserDefinedList(array $values = []): string
+    public static function validateUserDefinedListForArrayConstraintsFromSetUserDefinedList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getMyeBayBuyingResponseTypeUserDefinedListItem) {
@@ -491,7 +497,7 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\UserDefinedListType[] $userDefinedList
      * @return \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType
      */
-    public function setUserDefinedList(array $userDefinedList = []): self
+    public function setUserDefinedList(?array $userDefinedList = null): self
     {
         // validation for constraint: array
         if ('' !== ($userDefinedListArrayErrorMessage = self::validateUserDefinedListForArrayConstraintsFromSetUserDefinedList($userDefinedList))) {

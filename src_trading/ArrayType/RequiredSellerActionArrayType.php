@@ -23,13 +23,13 @@ class RequiredSellerActionArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $RequiredSellerAction = [];
+    protected ?array $RequiredSellerAction = null;
     /**
      * Constructor method for RequiredSellerActionArrayType
      * @uses RequiredSellerActionArrayType::setRequiredSellerAction()
      * @param string[] $requiredSellerAction
      */
-    public function __construct(array $requiredSellerAction = [])
+    public function __construct(?array $requiredSellerAction = null)
     {
         $this
             ->setRequiredSellerAction($requiredSellerAction);
@@ -38,7 +38,7 @@ class RequiredSellerActionArrayType extends AbstractStructArrayBase
      * Get RequiredSellerAction value
      * @return string[]
      */
-    public function getRequiredSellerAction(): array
+    public function getRequiredSellerAction(): ?array
     {
         return $this->RequiredSellerAction;
     }
@@ -48,8 +48,11 @@ class RequiredSellerActionArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRequiredSellerActionForArrayConstraintsFromSetRequiredSellerAction(array $values = []): string
+    public static function validateRequiredSellerActionForArrayConstraintsFromSetRequiredSellerAction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $requiredSellerActionArrayTypeRequiredSellerActionItem) {
@@ -73,7 +76,7 @@ class RequiredSellerActionArrayType extends AbstractStructArrayBase
      * @param string[] $requiredSellerAction
      * @return \macropage\ebaysdk\trading\ArrayType\RequiredSellerActionArrayType
      */
-    public function setRequiredSellerAction(array $requiredSellerAction = []): self
+    public function setRequiredSellerAction(?array $requiredSellerAction = null): self
     {
         // validation for constraint: array
         if ('' !== ($requiredSellerActionArrayErrorMessage = self::validateRequiredSellerActionForArrayConstraintsFromSetRequiredSellerAction($requiredSellerAction))) {

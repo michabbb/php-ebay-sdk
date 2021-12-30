@@ -13,8 +13,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: Returns an array of order line item data for the item specified in the request. The results can be used to create a report of data that is commonly necessary for order processing. Zero, one, or many <b>Transaction</b> objects can be
  * returned in the <b>TransactionArray</b>. The set of order line items returned is limited to those that were modified between the times specified in the request's <b>ModTimeFrom</b> and <b>ModTime</b> filters. Also returns the <b>Item</b> object that
  * spawned the order line items. If pagination filters were specified in the request, returns meta-data describing the effects of those filters on the current response and the estimated effects if the same filters are used in subsequent calls. <br><br>
- * Data from the <b>TransactionArray</b> may be used to trigger the following Platform Notifications: EndOfAuction, AuctionCheckoutComplete, FixedPriceEndOfTransaction, CheckoutBuyerRequestTotal, FixedPriceTransaction, Checkout,
- * FixedPriceTransactionForSeller, FixedPriceTransactionForBuyer, ItemMarkedAsShipped, and ItemMarkedAsPaid. Each notification will be based on the state of the item (a 'snapshot' of the item) at the time the order line item was created.
+ * Data from the <b>TransactionArray</b> may be used to trigger the following Platform Notifications: <b>EndOfAuction</b>, <b>AuctionCheckoutComplete</b>, <b>FixedPriceTransaction</b>, <b>CheckoutBuyerRequestsTotal</b>, <b>ItemMarkedShipped</b>, and
+ * <b>ItemMarkedPaid</b>. Each notification will be based on the state of the item (a 'snapshot' of the item) at the time the order line item was created.
  * @subpackage Structs
  */
 class GetItemTransactionsResponseType extends AbstractResponseType
@@ -81,8 +81,7 @@ class GetItemTransactionsResponseType extends AbstractResponseType
     /**
      * The PayPalPreferred
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether the item's seller has the preference enabled that shows that the seller prefers PayPal as the method of payment for an item. This preference is indicated on an item's View Item page and is intended to influence a
-     * buyer to use PayPal to pay for the item.
+     * - documentation: This field may still be returned for orders currently, but it can be ignored since eBay now manages all online payment methods available to buyers.
      * - minOccurs: 0
      * @var bool|null
      */

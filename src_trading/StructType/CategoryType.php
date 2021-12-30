@@ -27,8 +27,9 @@ class CategoryType extends AbstractStructBase
     /**
      * The AutoPayEnabled
      * Meta information extracted from the WSDL
-     * - documentation: If this field is returned as <code>true</code>, the corresponding category supports immediate payment for listings. Unless the seller is opted in to eBay managed payments, PayPal must be the only accepted payment method for a listing
-     * for the seller to require immediate payment from the buyer. For managed payments sellers, no payment methods are required, as eBay controls which payment methods are available to the buyer. This field is only returned when <code>true</code>.
+     * - documentation: If this field is returned as <code>true</code>, the corresponding category supports immediate payment for listings. The immediate payment feature is applicable to fixed-price listings, to auction listings with the Buy It Now option
+     * enabled, and for a motor vehicle listing that requires an initial deposit. If the immediate payment feature is enabled for a listing, the buyer must pay immediately after clicking the 'Buy it Now' button. This field is only returned when
+     * <code>true</code>.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -91,7 +92,7 @@ class CategoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $CategoryParentID = [];
+    protected ?array $CategoryParentID = null;
     /**
      * The CategoryParentName
      * Meta information extracted from the WSDL
@@ -103,7 +104,7 @@ class CategoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $CategoryParentName = [];
+    protected ?array $CategoryParentName = null;
     /**
      * The ProductSearchPageAvailable
      * Meta information extracted from the WSDL
@@ -120,7 +121,7 @@ class CategoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType[]
      */
-    protected array $ProductFinderIDs = [];
+    protected ?array $ProductFinderIDs = null;
     /**
      * The CharacteristicsSets
      * Meta information extracted from the WSDL
@@ -129,7 +130,7 @@ class CategoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharacteristicsSetType[]
      */
-    protected array $CharacteristicsSets = [];
+    protected ?array $CharacteristicsSets = null;
     /**
      * The Expired
      * Meta information extracted from the WSDL
@@ -272,7 +273,7 @@ class CategoryType extends AbstractStructBase
      * @param string $keywords
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $bestOfferEnabled = null, ?bool $autoPayEnabled = null, ?bool $b2BVATEnabled = null, ?bool $catalogEnabled = null, ?string $categoryID = null, ?int $categoryLevel = null, ?string $categoryName = null, array $categoryParentID = [], array $categoryParentName = [], ?bool $productSearchPageAvailable = null, array $productFinderIDs = [], array $characteristicsSets = [], ?bool $expired = null, ?bool $intlAutosFixedCat = null, ?bool $leafCategory = null, ?bool $virtual = null, ?int $numOfItems = null, ?bool $sellerGuaranteeEligible = null, ?bool $oRPA = null, ?bool $oRRA = null, ?bool $lSD = null, ?string $keywords = null, $any = null)
+    public function __construct(?bool $bestOfferEnabled = null, ?bool $autoPayEnabled = null, ?bool $b2BVATEnabled = null, ?bool $catalogEnabled = null, ?string $categoryID = null, ?int $categoryLevel = null, ?string $categoryName = null, ?array $categoryParentID = null, ?array $categoryParentName = null, ?bool $productSearchPageAvailable = null, ?array $productFinderIDs = null, ?array $characteristicsSets = null, ?bool $expired = null, ?bool $intlAutosFixedCat = null, ?bool $leafCategory = null, ?bool $virtual = null, ?int $numOfItems = null, ?bool $sellerGuaranteeEligible = null, ?bool $oRPA = null, ?bool $oRRA = null, ?bool $lSD = null, ?string $keywords = null, $any = null)
     {
         $this
             ->setBestOfferEnabled($bestOfferEnabled)
@@ -464,7 +465,7 @@ class CategoryType extends AbstractStructBase
      * Get CategoryParentID value
      * @return string[]
      */
-    public function getCategoryParentID(): array
+    public function getCategoryParentID(): ?array
     {
         return $this->CategoryParentID;
     }
@@ -474,8 +475,11 @@ class CategoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryParentIDForArrayConstraintsFromSetCategoryParentID(array $values = []): string
+    public static function validateCategoryParentIDForArrayConstraintsFromSetCategoryParentID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $categoryTypeCategoryParentIDItem) {
@@ -497,7 +501,7 @@ class CategoryType extends AbstractStructBase
      * @param string[] $categoryParentID
      * @return \macropage\ebaysdk\trading\StructType\CategoryType
      */
-    public function setCategoryParentID(array $categoryParentID = []): self
+    public function setCategoryParentID(?array $categoryParentID = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryParentIDArrayErrorMessage = self::validateCategoryParentIDForArrayConstraintsFromSetCategoryParentID($categoryParentID))) {
@@ -527,7 +531,7 @@ class CategoryType extends AbstractStructBase
      * Get CategoryParentName value
      * @return string[]
      */
-    public function getCategoryParentName(): array
+    public function getCategoryParentName(): ?array
     {
         return $this->CategoryParentName;
     }
@@ -537,8 +541,11 @@ class CategoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryParentNameForArrayConstraintsFromSetCategoryParentName(array $values = []): string
+    public static function validateCategoryParentNameForArrayConstraintsFromSetCategoryParentName(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $categoryTypeCategoryParentNameItem) {
@@ -560,7 +567,7 @@ class CategoryType extends AbstractStructBase
      * @param string[] $categoryParentName
      * @return \macropage\ebaysdk\trading\StructType\CategoryType
      */
-    public function setCategoryParentName(array $categoryParentName = []): self
+    public function setCategoryParentName(?array $categoryParentName = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryParentNameArrayErrorMessage = self::validateCategoryParentNameForArrayConstraintsFromSetCategoryParentName($categoryParentName))) {
@@ -613,7 +620,7 @@ class CategoryType extends AbstractStructBase
      * Get ProductFinderIDs value
      * @return \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType[]
      */
-    public function getProductFinderIDs(): array
+    public function getProductFinderIDs(): ?array
     {
         return $this->ProductFinderIDs;
     }
@@ -623,8 +630,11 @@ class CategoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductFinderIDsForArrayConstraintsFromSetProductFinderIDs(array $values = []): string
+    public static function validateProductFinderIDsForArrayConstraintsFromSetProductFinderIDs(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $categoryTypeProductFinderIDsItem) {
@@ -646,7 +656,7 @@ class CategoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ExtendedProductFinderIDType[] $productFinderIDs
      * @return \macropage\ebaysdk\trading\StructType\CategoryType
      */
-    public function setProductFinderIDs(array $productFinderIDs = []): self
+    public function setProductFinderIDs(?array $productFinderIDs = null): self
     {
         // validation for constraint: array
         if ('' !== ($productFinderIDsArrayErrorMessage = self::validateProductFinderIDsForArrayConstraintsFromSetProductFinderIDs($productFinderIDs))) {
@@ -676,7 +686,7 @@ class CategoryType extends AbstractStructBase
      * Get CharacteristicsSets value
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicsSetType[]
      */
-    public function getCharacteristicsSets(): array
+    public function getCharacteristicsSets(): ?array
     {
         return $this->CharacteristicsSets;
     }
@@ -686,8 +696,11 @@ class CategoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharacteristicsSetsForArrayConstraintsFromSetCharacteristicsSets(array $values = []): string
+    public static function validateCharacteristicsSetsForArrayConstraintsFromSetCharacteristicsSets(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $categoryTypeCharacteristicsSetsItem) {
@@ -709,7 +722,7 @@ class CategoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicsSetType[] $characteristicsSets
      * @return \macropage\ebaysdk\trading\StructType\CategoryType
      */
-    public function setCharacteristicsSets(array $characteristicsSets = []): self
+    public function setCharacteristicsSets(?array $characteristicsSets = null): self
     {
         // validation for constraint: array
         if ('' !== ($characteristicsSetsArrayErrorMessage = self::validateCharacteristicsSetsForArrayConstraintsFromSetCharacteristicsSets($characteristicsSets))) {

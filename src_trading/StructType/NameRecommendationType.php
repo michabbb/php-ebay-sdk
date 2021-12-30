@@ -60,7 +60,7 @@ class NameRecommendationType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValueRecommendationType[]
      */
-    protected array $ValueRecommendation = [];
+    protected ?array $ValueRecommendation = null;
     /**
      * The HelpURL
      * Meta information extracted from the WSDL
@@ -110,7 +110,7 @@ class NameRecommendationType extends AbstractStructBase
      * @param string $helpText
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $name = null, ?\macropage\ebaysdk\trading\StructType\RelevanceIndicatorType $relevanceIndicator = null, ?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null, array $valueRecommendation = [], ?string $helpURL = null, ?string $source = null, ?string $helpText = null, $any = null)
+    public function __construct(?string $name = null, ?\macropage\ebaysdk\trading\StructType\RelevanceIndicatorType $relevanceIndicator = null, ?\macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType $validationRules = null, ?array $valueRecommendation = null, ?string $helpURL = null, ?string $source = null, ?string $helpText = null, $any = null)
     {
         $this
             ->setName($name)
@@ -187,7 +187,7 @@ class NameRecommendationType extends AbstractStructBase
      * Get ValueRecommendation value
      * @return \macropage\ebaysdk\trading\StructType\ValueRecommendationType[]
      */
-    public function getValueRecommendation(): array
+    public function getValueRecommendation(): ?array
     {
         return $this->ValueRecommendation;
     }
@@ -197,8 +197,11 @@ class NameRecommendationType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateValueRecommendationForArrayConstraintsFromSetValueRecommendation(array $values = []): string
+    public static function validateValueRecommendationForArrayConstraintsFromSetValueRecommendation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $nameRecommendationTypeValueRecommendationItem) {
@@ -220,7 +223,7 @@ class NameRecommendationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValueRecommendationType[] $valueRecommendation
      * @return \macropage\ebaysdk\trading\StructType\NameRecommendationType
      */
-    public function setValueRecommendation(array $valueRecommendation = []): self
+    public function setValueRecommendation(?array $valueRecommendation = null): self
     {
         // validation for constraint: array
         if ('' !== ($valueRecommendationArrayErrorMessage = self::validateValueRecommendationForArrayConstraintsFromSetValueRecommendation($valueRecommendation))) {

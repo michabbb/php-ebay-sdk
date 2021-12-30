@@ -24,13 +24,13 @@ class MyMessagesMessageArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyMessagesMessageType[]
      */
-    protected array $Message = [];
+    protected ?array $Message = null;
     /**
      * Constructor method for MyMessagesMessageArrayType
      * @uses MyMessagesMessageArrayType::setMessage()
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesMessageType[] $message
      */
-    public function __construct(array $message = [])
+    public function __construct(?array $message = null)
     {
         $this
             ->setMessage($message);
@@ -39,7 +39,7 @@ class MyMessagesMessageArrayType extends AbstractStructArrayBase
      * Get Message value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType[]
      */
-    public function getMessage(): array
+    public function getMessage(): ?array
     {
         return $this->Message;
     }
@@ -49,8 +49,11 @@ class MyMessagesMessageArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMessageForArrayConstraintsFromSetMessage(array $values = []): string
+    public static function validateMessageForArrayConstraintsFromSetMessage(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesMessageArrayTypeMessageItem) {
@@ -72,7 +75,7 @@ class MyMessagesMessageArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesMessageType[] $message
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageArrayType
      */
-    public function setMessage(array $message = []): self
+    public function setMessage(?array $message = null): self
     {
         // validation for constraint: array
         if ('' !== ($messageArrayErrorMessage = self::validateMessageForArrayConstraintsFromSetMessage($message))) {

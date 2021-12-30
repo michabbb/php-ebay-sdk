@@ -31,7 +31,7 @@ class ProductFamilyType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductType[]
      */
-    protected array $FamilyMembers = [];
+    protected ?array $FamilyMembers = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -55,7 +55,7 @@ class ProductFamilyType extends AbstractStructBase
      * @param \DOMDocument|string|null $any
      * @param bool $hasMoreChildren
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ProductType $parentProduct = null, array $familyMembers = [], $any = null, ?bool $hasMoreChildren = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ProductType $parentProduct = null, ?array $familyMembers = null, $any = null, ?bool $hasMoreChildren = null)
     {
         $this
             ->setParentProduct($parentProduct)
@@ -86,7 +86,7 @@ class ProductFamilyType extends AbstractStructBase
      * Get FamilyMembers value
      * @return \macropage\ebaysdk\trading\StructType\ProductType[]
      */
-    public function getFamilyMembers(): array
+    public function getFamilyMembers(): ?array
     {
         return $this->FamilyMembers;
     }
@@ -96,8 +96,11 @@ class ProductFamilyType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFamilyMembersForArrayConstraintsFromSetFamilyMembers(array $values = []): string
+    public static function validateFamilyMembersForArrayConstraintsFromSetFamilyMembers(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productFamilyTypeFamilyMembersItem) {
@@ -119,7 +122,7 @@ class ProductFamilyType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductType[] $familyMembers
      * @return \macropage\ebaysdk\trading\StructType\ProductFamilyType
      */
-    public function setFamilyMembers(array $familyMembers = []): self
+    public function setFamilyMembers(?array $familyMembers = null): self
     {
         // validation for constraint: array
         if ('' !== ($familyMembersArrayErrorMessage = self::validateFamilyMembersForArrayConstraintsFromSetFamilyMembers($familyMembers))) {

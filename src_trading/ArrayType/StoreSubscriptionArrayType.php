@@ -23,13 +23,13 @@ class StoreSubscriptionArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreSubscriptionType[]
      */
-    protected array $Subscription = [];
+    protected ?array $Subscription = null;
     /**
      * Constructor method for StoreSubscriptionArrayType
      * @uses StoreSubscriptionArrayType::setSubscription()
      * @param \macropage\ebaysdk\trading\StructType\StoreSubscriptionType[] $subscription
      */
-    public function __construct(array $subscription = [])
+    public function __construct(?array $subscription = null)
     {
         $this
             ->setSubscription($subscription);
@@ -38,7 +38,7 @@ class StoreSubscriptionArrayType extends AbstractStructArrayBase
      * Get Subscription value
      * @return \macropage\ebaysdk\trading\StructType\StoreSubscriptionType[]
      */
-    public function getSubscription(): array
+    public function getSubscription(): ?array
     {
         return $this->Subscription;
     }
@@ -48,8 +48,11 @@ class StoreSubscriptionArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSubscriptionForArrayConstraintsFromSetSubscription(array $values = []): string
+    public static function validateSubscriptionForArrayConstraintsFromSetSubscription(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeSubscriptionArrayTypeSubscriptionItem) {
@@ -71,7 +74,7 @@ class StoreSubscriptionArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\StoreSubscriptionType[] $subscription
      * @return \macropage\ebaysdk\trading\ArrayType\StoreSubscriptionArrayType
      */
-    public function setSubscription(array $subscription = []): self
+    public function setSubscription(?array $subscription = null): self
     {
         // validation for constraint: array
         if ('' !== ($subscriptionArrayErrorMessage = self::validateSubscriptionForArrayConstraintsFromSetSubscription($subscription))) {

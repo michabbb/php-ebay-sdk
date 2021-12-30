@@ -23,13 +23,13 @@ class ListingTipArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ListingTipType[]
      */
-    protected array $ListingTip = [];
+    protected ?array $ListingTip = null;
     /**
      * Constructor method for ListingTipArrayType
      * @uses ListingTipArrayType::setListingTip()
      * @param \macropage\ebaysdk\trading\StructType\ListingTipType[] $listingTip
      */
-    public function __construct(array $listingTip = [])
+    public function __construct(?array $listingTip = null)
     {
         $this
             ->setListingTip($listingTip);
@@ -38,7 +38,7 @@ class ListingTipArrayType extends AbstractStructArrayBase
      * Get ListingTip value
      * @return \macropage\ebaysdk\trading\StructType\ListingTipType[]
      */
-    public function getListingTip(): array
+    public function getListingTip(): ?array
     {
         return $this->ListingTip;
     }
@@ -48,8 +48,11 @@ class ListingTipArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateListingTipForArrayConstraintsFromSetListingTip(array $values = []): string
+    public static function validateListingTipForArrayConstraintsFromSetListingTip(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $listingTipArrayTypeListingTipItem) {
@@ -71,7 +74,7 @@ class ListingTipArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\ListingTipType[] $listingTip
      * @return \macropage\ebaysdk\trading\ArrayType\ListingTipArrayType
      */
-    public function setListingTip(array $listingTip = []): self
+    public function setListingTip(?array $listingTip = null): self
     {
         // validation for constraint: array
         if ('' !== ($listingTipArrayErrorMessage = self::validateListingTipForArrayConstraintsFromSetListingTip($listingTip))) {

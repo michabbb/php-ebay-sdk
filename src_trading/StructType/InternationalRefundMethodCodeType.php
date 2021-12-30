@@ -23,7 +23,7 @@ class InternationalRefundMethodCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $InternationalRefundMethod = [];
+    protected ?array $InternationalRefundMethod = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class InternationalRefundMethodCodeType extends AbstractStructBase
      * @param string[] $internationalRefundMethod
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $internationalRefundMethod = [], $any = null)
+    public function __construct(?array $internationalRefundMethod = null, $any = null)
     {
         $this
             ->setInternationalRefundMethod($internationalRefundMethod)
@@ -46,7 +46,7 @@ class InternationalRefundMethodCodeType extends AbstractStructBase
      * Get InternationalRefundMethod value
      * @return string[]
      */
-    public function getInternationalRefundMethod(): array
+    public function getInternationalRefundMethod(): ?array
     {
         return $this->InternationalRefundMethod;
     }
@@ -56,8 +56,11 @@ class InternationalRefundMethodCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalRefundMethodForArrayConstraintsFromSetInternationalRefundMethod(array $values = []): string
+    public static function validateInternationalRefundMethodForArrayConstraintsFromSetInternationalRefundMethod(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $internationalRefundMethodCodeTypeInternationalRefundMethodItem) {
@@ -81,7 +84,7 @@ class InternationalRefundMethodCodeType extends AbstractStructBase
      * @param string[] $internationalRefundMethod
      * @return \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType
      */
-    public function setInternationalRefundMethod(array $internationalRefundMethod = []): self
+    public function setInternationalRefundMethod(?array $internationalRefundMethod = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalRefundMethodArrayErrorMessage = self::validateInternationalRefundMethodForArrayConstraintsFromSetInternationalRefundMethod($internationalRefundMethod))) {

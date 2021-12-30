@@ -18,7 +18,7 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The eBayPaymentStatus
      * Meta information extracted from the WSDL
-     * - documentation: Indicates the success or failure of the buyer's online payment for an order. Applicable for the payment method that the buyer chose for the order. If the payment failed, the value returned indicates the reason for the failure.
+     * - documentation: Indicates the status of the buyer's payment for an order. If the payment was successfuly processed, a value of <code>NoPaymentFailure</code> will be returned.
      * - minOccurs: 0
      * @var string|null
      */
@@ -26,7 +26,7 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The CheckoutStatus
      * Meta information extracted from the WSDL
-     * - documentation: Indicates the current status of the checkout flow for the order.
+     * - documentation: Indicates the current status of the checkout flow for the order. If the payment was successfuly processed, a value of <code>CheckoutComplete</code> will be returned.
      * - minOccurs: 0
      * @var string|null
      */
@@ -42,9 +42,10 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The PaymentMethodUsed
      * Meta information extracted from the WSDL
-     * - documentation: The payment method that the buyer selected to pay for the order. If checkout is not yet complete, <b>PaymentMethodUsed</b>, which is returned by the <b>GetItemTransactions</b> call, is set to whatever the buyer selected as his or her
-     * preference on the Review Your Purchase page. <br> <br> <span class="tablenote"><b>Note:</b> For sellers opted in to the eBay Managed Payments program, the enumeration value returned in this field will be <code>CreditCard</code>, regardless of the
-     * actual payment method used by the buyer to pay for the order. </span>
+     * - documentation: The payment method that the buyer selected to pay for the order. <br><br> <span class="tablenote"><b>Note: </b> Sellers no longer have to specify any electronic payment methods at listing time, but this field is still returned. The
+     * value returned in this field will generally be <code>CreditCard</code>, unless an eBay gift card was used by the buyer to pay a partial or full balance of the order. If this is the case, the value returned in this field will be
+     * <code>CCAccepted</code>. Either of these two values will be returned, but neither accurately reflects the actual payment method that the buyer used. If the order was paid for off of eBay's platform using an 'offline' payment method such as
+     * 'CashOnPickup' or 'MOCC' (money order or cashier's check), and the seller marked the order as paid, either of those values may get returned here. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -78,10 +79,7 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The IntegratedMerchantCreditCardEnabled
      * Meta information extracted from the WSDL
-     * - documentation: This field being returned with a value of <code>true</code> indicates that the order line item can be paid for with a credit card through the seller's payment gateway account. <br><br> <span class="tablenote"><b>Note: </b> Beginning
-     * on May 1, 2019, eBay will no longer support electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must use specify PayPal as an accepted payment method, or opt in to eBay
-     * Managed Payments program (if the program is available to that seller). </span> <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls,
-     * this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
+     * - documentation: This field is no longer applicable as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments.
      * - minOccurs: 0
      * @var bool|null
      */

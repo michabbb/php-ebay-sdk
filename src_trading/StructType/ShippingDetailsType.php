@@ -83,11 +83,7 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * The PaymentInstructions
      * Meta information extracted from the WSDL
-     * - documentation: This free-form string field gives sellers the ability add detailed payment instructions to their listings. The payment instructions appear on eBay's View Item and Checkout pages. <br><br> Sellers can use this field to specify payment
-     * instructions, how soon the item will shipped, feedback instructions, and other items that the buyer should be aware of when they bid on or buy an item. eBay recommends sellers use this field to clarify payment policies for motor vehicle listings on
-     * eBay Motors. For example, sellers can include the specifics on the deposit (if required), pickup/delivery arrangements, and full payment details on the vehicle. <br><br> The field allows only 500 characters as input, but due to the way the eBay web
-     * site UI treats characters, this field can return more than 500 characters in the response. For example, characters like & and ' (ampersand and single quote) count as 5 characters each. <br><br> This field can be specified regardless of the shipping
-     * type. Use <b>DeletedField</b> to remove this value when revising or relisting an item. <br><br> Applicable to eBay Motors (usually used to elaborate on the return policy). <br>
+     * - documentation: This free-form string field gives sellers the ability to add detailed payment instructions to their listings. <br>
      * - minOccurs: 0
      * @var string|null
      */
@@ -99,11 +95,9 @@ class ShippingDetailsType extends AbstractStructBase
      * Add/Revise/Relist/Verify call to set sales tax settings for a specific tax jurisdiction, but it is actually a better practice if a user sets up sales tax rates through the Sales Tax Table tool in My eBay (or by using the <b>SetTaxTable</b> call). A
      * seller's Sales Tax Table is applied to the listing by including the <b>UseTaxTable</b> field in the request and setting its value to <code>true</code>. The <b>GetTaxTable</b> call can be used to retrieve the current sales tax rates for different tax
      * jurisdictions. <br><br> This container is only returned in order management 'Get' calls if sales tax is applicable to the order line item. For eBay Collect and Remit states, the sales tax information is displayed in the <b>Transaction.Taxes</b>
-     * container instead. <br><br> <span class="tablenote"><b>Note: </b> As of September 1, 2020, buyers in over 40 US states will automatically be charged sales tax for eBay purchases. eBay will collect and remit this sales tax to the proper taxing
-     * authority on the buyer's behalf. So, if a sales tax rate is applied by the seller for a state that is subject to 'eBay Collect and Remit', this sales tax rate will be ignored by eBay during checkout process. For a list of the US states that are
-     * currently subject to 'eBay Collect and Remit', see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic. </span> <br> <span class="tablenote"><b>Note:
-     * </b> For eBay managed payment orders that are subject to 'Collect and Remit' taxes, these taxes will only be shown in the <b>eBayCollectAndRemitTaxes</b> container for line items, and the <b>SalesTax</b> will not be returned at all. For non-eBay
-     * managed payment orders, the 'Collect and Remit' taxes will be shown in both the <b>eBayCollectAndRemitTaxes</b> and <b>SalesTax</b> containers. </span>
+     * container instead. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, buyers in all US states except for Missouri (and several US territories), will automatically be charged sales tax for purchases, and the seller does not set this
+     * rate. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. For more US state-level information on sales tax, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SalesTaxType|null
      */
@@ -147,7 +141,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[]
      */
-    protected array $ShippingServiceOptions = [];
+    protected ?array $ShippingServiceOptions = null;
     /**
      * The InternationalShippingServiceOption
      * Meta information extracted from the WSDL
@@ -162,7 +156,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[]
      */
-    protected array $InternationalShippingServiceOption = [];
+    protected ?array $InternationalShippingServiceOption = null;
     /**
      * The ShippingType
      * Meta information extracted from the WSDL
@@ -343,7 +337,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludeShipToLocation = [];
+    protected ?array $ExcludeShipToLocation = null;
     /**
      * The SellerExcludeShipToLocationsPreference
      * Meta information extracted from the WSDL
@@ -366,7 +360,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[]
      */
-    protected array $ShipmentTrackingDetails = [];
+    protected ?array $ShipmentTrackingDetails = null;
     /**
      * The RateTableDetails
      * Meta information extracted from the WSDL
@@ -473,7 +467,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $allowPaymentEdit = null, ?bool $applyShippingDiscount = null, ?bool $globalShipping = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingRateType $calculatedShippingRate = null, ?bool $changePaymentInstructions = null, ?bool $insuranceWanted = null, ?bool $paymentEdited = null, ?string $paymentInstructions = null, ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, ?string $shippingRateType = null, array $shippingServiceOptions = [], array $internationalShippingServiceOption = [], ?string $shippingType = null, ?int $sellingManagerSalesRecordNumber = null, ?bool $thirdPartyCheckout = null, ?\macropage\ebaysdk\trading\StructType\TaxTableType $taxTable = null, ?bool $getItFast = null, ?string $shippingServiceUsed = null, ?\macropage\ebaysdk\trading\StructType\AmountType $defaultShippingCost = null, ?string $shippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?bool $promotionalShippingDiscount = null, ?string $internationalShippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $internationalFlatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $internationalCalculatedShippingDiscount = null, ?bool $internationalPromotionalShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null, array $excludeShipToLocation = [], ?bool $sellerExcludeShipToLocationsPreference = null, array $shipmentTrackingDetails = [], ?\macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails = null, $any = null)
+    public function __construct(?bool $allowPaymentEdit = null, ?bool $applyShippingDiscount = null, ?bool $globalShipping = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingRateType $calculatedShippingRate = null, ?bool $changePaymentInstructions = null, ?bool $insuranceWanted = null, ?bool $paymentEdited = null, ?string $paymentInstructions = null, ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, ?string $shippingRateType = null, ?array $shippingServiceOptions = null, ?array $internationalShippingServiceOption = null, ?string $shippingType = null, ?int $sellingManagerSalesRecordNumber = null, ?bool $thirdPartyCheckout = null, ?\macropage\ebaysdk\trading\StructType\TaxTableType $taxTable = null, ?bool $getItFast = null, ?string $shippingServiceUsed = null, ?\macropage\ebaysdk\trading\StructType\AmountType $defaultShippingCost = null, ?string $shippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?bool $promotionalShippingDiscount = null, ?string $internationalShippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $internationalFlatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $internationalCalculatedShippingDiscount = null, ?bool $internationalPromotionalShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null, ?array $excludeShipToLocation = null, ?bool $sellerExcludeShipToLocationsPreference = null, ?array $shipmentTrackingDetails = null, ?\macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails = null, $any = null)
     {
         $this
             ->setAllowPaymentEdit($allowPaymentEdit)
@@ -764,7 +758,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get ShippingServiceOptions value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[]
      */
-    public function getShippingServiceOptions(): array
+    public function getShippingServiceOptions(): ?array
     {
         return $this->ShippingServiceOptions;
     }
@@ -774,8 +768,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions(array $values = []): string
+    public static function validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeShippingServiceOptionsItem) {
@@ -797,7 +794,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[] $shippingServiceOptions
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
      */
-    public function setShippingServiceOptions(array $shippingServiceOptions = []): self
+    public function setShippingServiceOptions(?array $shippingServiceOptions = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServiceOptionsArrayErrorMessage = self::validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions($shippingServiceOptions))) {
@@ -827,7 +824,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get InternationalShippingServiceOption value
      * @return \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[]
      */
-    public function getInternationalShippingServiceOption(): array
+    public function getInternationalShippingServiceOption(): ?array
     {
         return $this->InternationalShippingServiceOption;
     }
@@ -837,8 +834,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption(array $values = []): string
+    public static function validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeInternationalShippingServiceOptionItem) {
@@ -860,7 +860,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[] $internationalShippingServiceOption
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
      */
-    public function setInternationalShippingServiceOption(array $internationalShippingServiceOption = []): self
+    public function setInternationalShippingServiceOption(?array $internationalShippingServiceOption = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalShippingServiceOptionArrayErrorMessage = self::validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption($internationalShippingServiceOption))) {
@@ -1252,7 +1252,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get ExcludeShipToLocation value
      * @return string[]
      */
-    public function getExcludeShipToLocation(): array
+    public function getExcludeShipToLocation(): ?array
     {
         return $this->ExcludeShipToLocation;
     }
@@ -1262,8 +1262,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(array $values = []): string
+    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeExcludeShipToLocationItem) {
@@ -1285,7 +1288,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
      */
-    public function setExcludeShipToLocation(array $excludeShipToLocation = []): self
+    public function setExcludeShipToLocation(?array $excludeShipToLocation = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeShipToLocationArrayErrorMessage = self::validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation($excludeShipToLocation))) {
@@ -1338,7 +1341,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get ShipmentTrackingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[]
      */
-    public function getShipmentTrackingDetails(): array
+    public function getShipmentTrackingDetails(): ?array
     {
         return $this->ShipmentTrackingDetails;
     }
@@ -1348,8 +1351,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails(array $values = []): string
+    public static function validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeShipmentTrackingDetailsItem) {
@@ -1371,7 +1377,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[] $shipmentTrackingDetails
      * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
      */
-    public function setShipmentTrackingDetails(array $shipmentTrackingDetails = []): self
+    public function setShipmentTrackingDetails(?array $shipmentTrackingDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shipmentTrackingDetailsArrayErrorMessage = self::validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails($shipmentTrackingDetails))) {

@@ -26,13 +26,13 @@ class NotificationEnableArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NotificationEnableType[]
      */
-    protected array $NotificationEnable = [];
+    protected ?array $NotificationEnable = null;
     /**
      * Constructor method for NotificationEnableArrayType
      * @uses NotificationEnableArrayType::setNotificationEnable()
      * @param \macropage\ebaysdk\trading\StructType\NotificationEnableType[] $notificationEnable
      */
-    public function __construct(array $notificationEnable = [])
+    public function __construct(?array $notificationEnable = null)
     {
         $this
             ->setNotificationEnable($notificationEnable);
@@ -41,7 +41,7 @@ class NotificationEnableArrayType extends AbstractStructArrayBase
      * Get NotificationEnable value
      * @return \macropage\ebaysdk\trading\StructType\NotificationEnableType[]
      */
-    public function getNotificationEnable(): array
+    public function getNotificationEnable(): ?array
     {
         return $this->NotificationEnable;
     }
@@ -51,8 +51,11 @@ class NotificationEnableArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNotificationEnableForArrayConstraintsFromSetNotificationEnable(array $values = []): string
+    public static function validateNotificationEnableForArrayConstraintsFromSetNotificationEnable(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $notificationEnableArrayTypeNotificationEnableItem) {
@@ -74,7 +77,7 @@ class NotificationEnableArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\NotificationEnableType[] $notificationEnable
      * @return \macropage\ebaysdk\trading\ArrayType\NotificationEnableArrayType
      */
-    public function setNotificationEnable(array $notificationEnable = []): self
+    public function setNotificationEnable(?array $notificationEnable = null): self
     {
         // validation for constraint: array
         if ('' !== ($notificationEnableArrayErrorMessage = self::validateNotificationEnableForArrayConstraintsFromSetNotificationEnable($notificationEnable))) {

@@ -39,7 +39,7 @@ class ProductSearchResultType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ResponseAttributeSetType[]
      */
-    protected array $AttributeSet = [];
+    protected ?array $AttributeSet = null;
     /**
      * The DisplayStockPhotos
      * Meta information extracted from the WSDL
@@ -66,7 +66,7 @@ class ProductSearchResultType extends AbstractStructBase
      * @param bool $displayStockPhotos
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $iD = null, ?string $numProducts = null, array $attributeSet = [], ?bool $displayStockPhotos = null, $any = null)
+    public function __construct(?string $iD = null, ?string $numProducts = null, ?array $attributeSet = null, ?bool $displayStockPhotos = null, $any = null)
     {
         $this
             ->setID($iD)
@@ -125,7 +125,7 @@ class ProductSearchResultType extends AbstractStructBase
      * Get AttributeSet value
      * @return \macropage\ebaysdk\trading\StructType\ResponseAttributeSetType[]
      */
-    public function getAttributeSet(): array
+    public function getAttributeSet(): ?array
     {
         return $this->AttributeSet;
     }
@@ -135,8 +135,11 @@ class ProductSearchResultType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAttributeSetForArrayConstraintsFromSetAttributeSet(array $values = []): string
+    public static function validateAttributeSetForArrayConstraintsFromSetAttributeSet(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productSearchResultTypeAttributeSetItem) {
@@ -158,7 +161,7 @@ class ProductSearchResultType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ResponseAttributeSetType[] $attributeSet
      * @return \macropage\ebaysdk\trading\StructType\ProductSearchResultType
      */
-    public function setAttributeSet(array $attributeSet = []): self
+    public function setAttributeSet(?array $attributeSet = null): self
     {
         // validation for constraint: array
         if ('' !== ($attributeSetArrayErrorMessage = self::validateAttributeSetForArrayConstraintsFromSetAttributeSet($attributeSet))) {

@@ -24,13 +24,13 @@ class MemberMessageExchangeArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType[]
      */
-    protected array $MemberMessageExchange = [];
+    protected ?array $MemberMessageExchange = null;
     /**
      * Constructor method for MemberMessageExchangeArrayType
      * @uses MemberMessageExchangeArrayType::setMemberMessageExchange()
      * @param \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType[] $memberMessageExchange
      */
-    public function __construct(array $memberMessageExchange = [])
+    public function __construct(?array $memberMessageExchange = null)
     {
         $this
             ->setMemberMessageExchange($memberMessageExchange);
@@ -39,7 +39,7 @@ class MemberMessageExchangeArrayType extends AbstractStructArrayBase
      * Get MemberMessageExchange value
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType[]
      */
-    public function getMemberMessageExchange(): array
+    public function getMemberMessageExchange(): ?array
     {
         return $this->MemberMessageExchange;
     }
@@ -49,8 +49,11 @@ class MemberMessageExchangeArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMemberMessageExchangeForArrayConstraintsFromSetMemberMessageExchange(array $values = []): string
+    public static function validateMemberMessageExchangeForArrayConstraintsFromSetMemberMessageExchange(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $memberMessageExchangeArrayTypeMemberMessageExchangeItem) {
@@ -72,7 +75,7 @@ class MemberMessageExchangeArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType[] $memberMessageExchange
      * @return \macropage\ebaysdk\trading\ArrayType\MemberMessageExchangeArrayType
      */
-    public function setMemberMessageExchange(array $memberMessageExchange = []): self
+    public function setMemberMessageExchange(?array $memberMessageExchange = null): self
     {
         // validation for constraint: array
         if ('' !== ($memberMessageExchangeArrayErrorMessage = self::validateMemberMessageExchangeForArrayConstraintsFromSetMemberMessageExchange($memberMessageExchange))) {

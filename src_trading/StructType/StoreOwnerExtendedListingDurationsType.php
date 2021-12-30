@@ -25,7 +25,7 @@ class StoreOwnerExtendedListingDurationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Duration = [];
+    protected ?array $Duration = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -38,7 +38,7 @@ class StoreOwnerExtendedListingDurationsType extends AbstractStructBase
      * @param string[] $duration
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $duration = [], $any = null)
+    public function __construct(?array $duration = null, $any = null)
     {
         $this
             ->setDuration($duration)
@@ -48,7 +48,7 @@ class StoreOwnerExtendedListingDurationsType extends AbstractStructBase
      * Get Duration value
      * @return string[]
      */
-    public function getDuration(): array
+    public function getDuration(): ?array
     {
         return $this->Duration;
     }
@@ -58,8 +58,11 @@ class StoreOwnerExtendedListingDurationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDurationForArrayConstraintsFromSetDuration(array $values = []): string
+    public static function validateDurationForArrayConstraintsFromSetDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeOwnerExtendedListingDurationsTypeDurationItem) {
@@ -81,7 +84,7 @@ class StoreOwnerExtendedListingDurationsType extends AbstractStructBase
      * @param string[] $duration
      * @return \macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType
      */
-    public function setDuration(array $duration = []): self
+    public function setDuration(?array $duration = null): self
     {
         // validation for constraint: array
         if ('' !== ($durationArrayErrorMessage = self::validateDurationForArrayConstraintsFromSetDuration($duration))) {

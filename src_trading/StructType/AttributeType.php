@@ -23,7 +23,7 @@ class AttributeType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    protected array $Value = [];
+    protected ?array $Value = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -54,7 +54,7 @@ class AttributeType extends AbstractStructBase
      * @param int $attributeID
      * @param string $attributeLabel
      */
-    public function __construct(array $value = [], $any = null, ?int $attributeID = null, ?string $attributeLabel = null)
+    public function __construct(?array $value = null, $any = null, ?int $attributeID = null, ?string $attributeLabel = null)
     {
         $this
             ->setValue($value)
@@ -66,7 +66,7 @@ class AttributeType extends AbstractStructBase
      * Get Value value
      * @return \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public function getValue(): array
+    public function getValue(): ?array
     {
         return $this->Value;
     }
@@ -76,8 +76,11 @@ class AttributeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateValueForArrayConstraintsFromSetValue(array $values = []): string
+    public static function validateValueForArrayConstraintsFromSetValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $attributeTypeValueItem) {
@@ -99,7 +102,7 @@ class AttributeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $value
      * @return \macropage\ebaysdk\trading\StructType\AttributeType
      */
-    public function setValue(array $value = []): self
+    public function setValue(?array $value = null): self
     {
         // validation for constraint: array
         if ('' !== ($valueArrayErrorMessage = self::validateValueForArrayConstraintsFromSetValue($value))) {

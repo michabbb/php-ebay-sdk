@@ -25,13 +25,13 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $MessageID = [];
+    protected ?array $MessageID = null;
     /**
      * Constructor method for MyMessagesMessageIDArrayType
      * @uses MyMessagesMessageIDArrayType::setMessageID()
      * @param string[] $messageID
      */
-    public function __construct(array $messageID = [])
+    public function __construct(?array $messageID = null)
     {
         $this
             ->setMessageID($messageID);
@@ -40,7 +40,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * Get MessageID value
      * @return string[]
      */
-    public function getMessageID(): array
+    public function getMessageID(): ?array
     {
         return $this->MessageID;
     }
@@ -50,8 +50,11 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMessageIDForArrayConstraintsFromSetMessageID(array $values = []): string
+    public static function validateMessageIDForArrayConstraintsFromSetMessageID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesMessageIDArrayTypeMessageIDItem) {
@@ -73,7 +76,7 @@ class MyMessagesMessageIDArrayType extends AbstractStructArrayBase
      * @param string[] $messageID
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType
      */
-    public function setMessageID(array $messageID = []): self
+    public function setMessageID(?array $messageID = null): self
     {
         // validation for constraint: array
         if ('' !== ($messageIDArrayErrorMessage = self::validateMessageIDForArrayConstraintsFromSetMessageID($messageID))) {

@@ -334,7 +334,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'CreditInsertionFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit. If a listed item does not sell or results in an Unpaid Item case/dispute, the seller can relist the item with no additional charge.
+     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit. If a listed item does not sell or results in an Unpaid Item case, the seller can relist the item with no additional charge.
      * @return string 'CreditInsertionFee'
      */
     const VALUE_CREDIT_INSERTION_FEE = 'CreditInsertionFee';
@@ -1131,11 +1131,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that the account entry is a fee charged to the seller when a 'Good 'til Cancelled', fixed-price listing automatically renews after each month (as long as inventory is still available or 'out-of-stock'
      * feature is on). This fee is similar to an insertion fee when a listing is first created. 'GTC' listings automatically renew each month, and these renewed listings may incur insertion fees unless the seller has 'zero insertion fee' credits. eBay
-     * sellers with stores get more 'zero insertion fee' credits than other sellers. <br><br> <span class="tablenote"><b>Note: </b> On July 1, 2019, the Good 'Til Cancelled renewal schedule was modified from every 30 days to once per calendar month. For
-     * example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the following month only has 30 days, the renewal will happen on the 30th in the following month.
-     * Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
-     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
-     * change. </span>
+     * sellers with stores get more 'zero insertion fee' credits than other sellers.
      * @return string 'StoresGTCFee'
      */
     const VALUE_STORES_GTCFEE = 'StoresGTCFee';
@@ -1143,27 +1139,21 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'StoresGTCCredit'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that the account entry is a credit issued by eBay to refund the seller for a 'Good 'til Cancelled' listing renewal/insertion fee. 'GTC' listings automatically renew each, and these renewed listings
-     * may incur insertion fees unless the seller has 'zero insertion fee' credits. eBay sellers with stores get more 'zero insertion fee' credits than other sellers. <br><br> <span class="tablenote"><b>Note: </b> On July 1, 2019, the Good 'Til Cancelled
-     * renewal schedule was modified from every 30 days to once per calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the following
-     * month only has 30 days, the renewal will happen on the 30th in the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
-     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
-     * change. </span>
+     * may incur insertion fees unless the seller has 'zero insertion fee' credits. eBay sellers with stores get more 'zero insertion fee' credits than other sellers.
      * @return string 'StoresGTCCredit'
      */
     const VALUE_STORES_GTCCREDIT = 'StoresGTCCredit';
     /**
      * Constant for value 'ListingDesignerFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a fee for the seller using a Listing Designer theme and layout template for a listing. <br> <br> <span class="tablenote"><b>Note:</b> As of May 31, 2020, sellers are no
-     * longer able to use Listing Designer templates when they create or revise listings, so this fee will soon become inapplicable.</span>
+     * - documentation: This enumeration value is no longer appplicable as sellers are no longer able to use Listing Designer templates when they create or revise listings.
      * @return string 'ListingDesignerFee'
      */
     const VALUE_LISTING_DESIGNER_FEE = 'ListingDesignerFee';
     /**
      * Constant for value 'ListingDesignerCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit issued by eBay to refund the seller using a Listing Designer theme and layout template for a listing. <br> <br> <span class="tablenote"><b>Note:</b> As of May 31,
-     * 2020, sellers are no longer able to use Listing Designer templates when they create or revise listings, so this credit will soon become inapplicable.</span>
+     * - documentation: This enumeration value is no longer appplicable as sellers are no longer able to use Listing Designer templates when they create or revise listings.
      * @return string 'ListingDesignerCredit'
      */
     const VALUE_LISTING_DESIGNER_CREDIT = 'ListingDesignerCredit';
@@ -1184,28 +1174,28 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPalOTPSucc'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is only for internal use, and indicates that the login attempt to PayPal using OTP ('One-Time Pin' or two-factor authentication) was successful.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PayPalOTPSucc'
      */
     const VALUE_PAY_PAL_OTPSUCC = 'PayPalOTPSucc';
     /**
      * Constant for value 'PayPalOTPPend'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is only for internal use, and indicates that the login attempt to PayPal using OTP ('One-Time Pin' or two-factor authentication) is pending.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PayPalOTPPend'
      */
     const VALUE_PAY_PAL_OTPPEND = 'PayPalOTPPend';
     /**
      * Constant for value 'PayPalFailed'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is only for internal use, and indicates that the login attempt to PayPal failed.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PayPalFailed'
      */
     const VALUE_PAY_PAL_FAILED = 'PayPalFailed';
     /**
      * Constant for value 'PayPalChargeBack'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a charge back using PayPal as the payment method.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PayPalChargeBack'
      */
     const VALUE_PAY_PAL_CHARGE_BACK = 'PayPalChargeBack';
@@ -1226,7 +1216,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPalRefund'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a refund using PayPal as the payment method.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PayPalRefund'
      */
     const VALUE_PAY_PAL_REFUND = 'PayPalRefund';
@@ -1324,17 +1314,14 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'SMProListingDesignerFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a fee for the seller using a Listing Designer theme and layout template through the Selling Manager Pro UI, or through a Selling Manager Pro API call. <br> <br> <span
-     * class="tablenote"><b>Note:</b> As of May 31, 2020, sellers are no longer able to use Listing Designer templates when they create or revise listings, so this fee will soon become inapplicable.</span>
+     * - documentation: This enumeration value is no longer appplicable as sellers are no longer able to use Listing Designer templates when they create or revise listings.
      * @return string 'SMProListingDesignerFee'
      */
     const VALUE_SMPRO_LISTING_DESIGNER_FEE = 'SMProListingDesignerFee';
     /**
      * Constant for value 'SMProListingDesignerCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit issued by eBay to the seller for a fee that was charged to the seller for using a Listing Designer theme and layout template through the Selling Manager Pro UI, or
-     * through a Selling Manager Pro API call. <br> <br> <span class="tablenote"><b>Note:</b> As of May 31, 2020, sellers are no longer able to use Listing Designer templates when they create or revise listings, so this credit will soon become
-     * inapplicable.</span>
+     * - documentation: This enumeration value is no longer appplicable as sellers are no longer able to use Listing Designer templates when they create or revise listings.
      * @return string 'SMProListingDesignerCredit'
      */
     const VALUE_SMPRO_LISTING_DESIGNER_CREDIT = 'SMProListingDesignerCredit';
@@ -1446,21 +1433,21 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaypalOnFile'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value acts as a note to indicate that the user's PayPal account information is linked with their eBay account.
+     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
      * @return string 'PaypalOnFile'
      */
     const VALUE_PAYPAL_ON_FILE = 'PaypalOnFile';
     /**
      * Constant for value 'PaypalOnFileByCSR'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value acts as a note to indicate that the user's PayPal account information was linked with their eBay account by an eBay customer support represenative.
+     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
      * @return string 'PaypalOnFileByCSR'
      */
     const VALUE_PAYPAL_ON_FILE_BY_CSR = 'PaypalOnFileByCSR';
     /**
      * Constant for value 'PaypalOffFile'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value acts as a note to indicate that the user's PayPal account information is not linked with their eBay account.
+     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
      * @return string 'PaypalOffFile'
      */
     const VALUE_PAYPAL_OFF_FILE = 'PaypalOffFile';
@@ -1941,17 +1928,16 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FeeReturnRefund'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a fee charged to the seller's account if eBay is forced to refund the buyer in a case where the buyer has used the eBay US Managed Returns process and return shipped the item
-     * to the seller, but the seller has not issued a refund to the buyer within seven business days after receiving the returned item. <br/><br/> This value is equal to the refund ("CreditReturnRefund") issued to the buyer.
+     * - documentation: This enumeration value indicates that the account entry is a fee charged to the seller's account if eBay refunds the buyer in a case where the buyer has used the eBay returns process and return shipped the item to the seller, but the
+     * seller has not issued a refund to the buyer within seven business days after receiving the returned item.
      * @return string 'FeeReturnRefund'
      */
     const VALUE_FEE_RETURN_REFUND = 'FeeReturnRefund';
     /**
      * Constant for value 'CreditReturnRefund'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit issued to the buyer's account by eBay in a case where the buyer has used the eBay US Managed Returns process and return shipped the item to the seller, but the
-     * seller has not issued a refund to the buyer within seven business days after receiving the returned item. The buyer credit amounts to the total purchase price plus any shipping costs if the item was "not as described". <br/><br/> eBay then charges
-     * this expense to the seller's account, and this charge is attached to the "FeeReturnRefund" value.
+     * - documentation: This enumeration value indicates that the account entry is a credit issued to the buyer's account by eBay in a case where the buyer has used the eBay returns process and return shipped the item to the seller, but the seller has not
+     * issued a refund to the buyer within seven business days after receiving the returned item. The buyer credit amounts to the total purchase price plus any shipping costs if the item was 'not as described'.
      * @return string 'CreditReturnRefund'
      */
     const VALUE_CREDIT_RETURN_REFUND = 'CreditReturnRefund';
@@ -2059,14 +2045,14 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FeePromotedListingFeature'
      * Meta information extracted from the WSDL
-     * - documentation: This value is deprecated.
+     * - documentation: This value is deprecated. Instead, Promoted Listing fees are returned as <code>FeeAd</code> for a Standard Promoted Listing ad on eBay or <code>AdFeePremium</code> for an Advanced Promoted Listing ad on eBay.
      * @return string 'FeePromotedListingFeature'
      */
     const VALUE_FEE_PROMOTED_LISTING_FEATURE = 'FeePromotedListingFeature';
     /**
      * Constant for value 'CreditPromotedListingFeature'
      * Meta information extracted from the WSDL
-     * - documentation: This value is deprecated.
+     * - documentation: This value is deprecated. Instead, Promoted Listing credits are returned as <code>CreditAd</code> for a Standard Promoted Listing ad on eBay or <code>AdFeePremiumCredit</code> for an Advanced Promoted Listing ad on eBay.
      * @return string 'CreditPromotedListingFeature'
      */
     const VALUE_CREDIT_PROMOTED_LISTING_FEATURE = 'CreditPromotedListingFeature';
@@ -2117,23 +2103,23 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaymentIntermediationFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the charge is an eBay payment intermediation fee. This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments
-     * has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * - documentation: This enumeration value indicates that the charge is a payment processing fee for the order. This fee is only applied at the order level, and the amount of the fee will be the same, regardless of how many line items are in the order
+     * or on the total cost of the order. Typically, this fee is $0.30.
      * @return string 'PaymentIntermediationFee'
      */
     const VALUE_PAYMENT_INTERMEDIATION_FEE = 'PaymentIntermediationFee';
     /**
      * Constant for value 'PaymentIntermediationFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: (out) Payment Intermediation Fee Credit
+     * - documentation: This enumeration value indicates that the credit is for a payment processing fee for the order.
      * @return string 'PaymentIntermediationFeeCredit'
      */
     const VALUE_PAYMENT_INTERMEDIATION_FEE_CREDIT = 'PaymentIntermediationFeeCredit';
     /**
      * Constant for value 'FeePaymentIntermediationRVI'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the invoice charge is an eBay payment intermediation fee. This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed
-     * payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * - documentation: This enumeration value indicates that the charge is a payment processing fee for the order. This fee is only applied at the order level, and the amount of the fee will be the same, regardless of how many line items are in the order
+     * or on the total cost of the order. Typically, this fee is $0.30.
      * @return string 'FeePaymentIntermediationRVI'
      */
     const VALUE_FEE_PAYMENT_INTERMEDIATION_RVI = 'FeePaymentIntermediationRVI';
@@ -2215,14 +2201,14 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PerListingPaymentsFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the invoice charge is for a Per Listing Payments fee.
+     * - documentation: This enumeration value is no longer applicable, and should not be returned. Instead, the payment processing fee for all orders is represented with the <code>FinalValueFeeFixedFeePerOrder</code> value.
      * @return string 'PerListingPaymentsFee'
      */
     const VALUE_PER_LISTING_PAYMENTS_FEE = 'PerListingPaymentsFee';
     /**
      * Constant for value 'PerListingPaymentsFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that a credit was issued for a Per Listing Payments Fee charge.
+     * - documentation: This enumeration value is no longer applicable, and should not be returned. Instead, any credit for a payment processing fee is represented with the <code>FinalValueFeeFixedFeePerOrderCredit</code> value.
      * @return string 'PerListingPaymentsFeeCredit'
      */
     const VALUE_PER_LISTING_PAYMENTS_FEE_CREDIT = 'PerListingPaymentsFeeCredit';
@@ -2328,31 +2314,28 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'USInternetSalesTax'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Collect and Remit' sales tax amount that was originally deposited to the seller's account. This enumeration value is only applicable to US sellers not opted in to eBay
-     * managed payments, and for orders that are subject to eBay 'Collect and Remit' sales tax. See the corresponding <b>OrderId</b> value to determine which eBay order this sales tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> For US
-     * sellers not enabled for eBay managed payments, PayPal will now deposit the entire order amount, including the 'Collect and Remit' sales tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the seller's
-     * account and submitted to the proper tax authority. This change went into effect on October 24, 2019. Previous to this date, PayPal pulled out the 'Collect and Remit' sales tax before distributing order funds to the seller. </span>
+     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Collect and Remit' sales tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable if the buyer is based in the
+     * US, and their state of residence mandates the collection of sales tax. See the corresponding <b>OrderId</b> value to determine which eBay order this sales tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very
+     * large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'USInternetSalesTax'
      */
     const VALUE_USINTERNET_SALES_TAX = 'USInternetSalesTax';
     /**
      * Constant for value 'USInternetSalesTaxCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has deposited the 'Collect and Remit' sales tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's account. This enumeration value is only
-     * applicable to US sellers not enabled for eBay managed payments, and for orders that are subject to eBay 'Collect and Remit' sales tax. This sales tax will actually get pulled from the seller's account shortly after the order funds clear, and the
-     * seller should then see a <b>USInternetSalesTax</b> account entry with a matching amount. <br><br> <span class="tablenote"><b>Note: </b> For US sellers not enabled for eBay managed payments, PayPal will now deposit the entire order amount, including
-     * the 'Collect and Remit' sales tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the seller's account and submitted to the proper tax authority. This change went into effect on October 24, 2019.
-     * Previous to this date, PayPal pulled out the 'Collect and Remit' sales tax before distributing order funds to the seller. </span>
+     * - documentation: This enumeration value indicates that PayPal has deposited the 'Collect and Remit' sales tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's PayPal account. This enumeration value is only
+     * applicable if the buyer is based in the US, and their state of residence mandates the collection of sales tax. This sales tax will actually get pulled from the seller's PayPal account shortly after the buyer's funds clear, and the seller should then
+     * see a <b>USInternetSalesTax</b> account entry with a matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the
+     * checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'USInternetSalesTaxCredit'
      */
     const VALUE_USINTERNET_SALES_TAX_CREDIT = 'USInternetSalesTaxCredit';
     /**
      * Constant for value 'NewZealandGST'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's account. This enumeration value is only applicable to New Zealand sellers for orders that
-     * are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> PayPal will now deposit the entire order amount, including the
-     * 'Goods and Services' tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the seller's account and submitted to the proper tax authority. This change just went into effect on October 24, 2019. Previous to
-     * this date, PayPal pulled out the 'Goods and Services' tax before distributing order funds to the seller. </span>
+     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable to New Zealand sellers for orders
+     * that are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go
+     * through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'NewZealandGST'
      */
     const VALUE_NEW_ZEALAND_GST = 'NewZealandGST';
@@ -2361,18 +2344,17 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that PayPal has deposited the 'Goods and Services' tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's account. This enumeration value is only applicable to
      * New Zealand sellers for orders that are subject to 'Goods and Services' tax. This tax will actually get pulled from the seller's account shortly after the order funds clear, and the seller should then see a <b>NewZealandGST</b> account entry with a
-     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> PayPal will now deposit the entire order amount, including the 'Goods and Services' tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the
-     * seller's account and submitted to the proper tax authority. This change just went into effect on October 24, 2019. Previous to this date, PayPal pulled out the 'Goods and Services' tax before distributing order funds to the seller. </span>
+     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon
+     * become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'NewZealandGSTCredit'
      */
     const VALUE_NEW_ZEALAND_GSTCREDIT = 'NewZealandGSTCredit';
     /**
      * Constant for value 'AustraliaGST'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's account. This enumeration value is only applicable to Australian sellers for orders that
-     * are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> PayPal will now deposit the entire order amount, including the
-     * 'Goods and Services' tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the seller's account and submitted to the proper tax authority. This change just went into effect on October 24, 2019. Previous to
-     * this date, PayPal pulled out the 'Goods and Services' tax before distributing order funds to the seller. </span>
+     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable to Australian sellers for orders
+     * that are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go
+     * through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'AustraliaGST'
      */
     const VALUE_AUSTRALIA_GST = 'AustraliaGST';
@@ -2380,42 +2362,37 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'AustraliaGSTCredit'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that PayPal has deposited the 'Goods and Services' tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's account. This enumeration value is only applicable to
-     * Australia sellers for orders that are subject to 'Goods and Services' tax. This tax will actually get pulled from the seller's account shortly after the order funds clear, and the seller should then see a <b>AustraliaGST</b> account entry with a
-     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> PayPal will now deposit the entire order amount, including the 'Goods and Services' tax, into the seller's account, and once the order funds clear, this sales tax will be pulled from the
-     * seller's account and submitted to the proper tax authority. This change just went into effect on October 24, 2019. Previous to this date, PayPal pulled out the 'Goods and Services' tax before distributing order funds to the seller. </span>
+     * Australian sellers for orders that are subject to 'Goods and Services' tax. This tax will actually get pulled from the seller's account shortly after the order funds clear, and the seller should then see a <b>AustraliaGST</b> account entry with a
+     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon
+     * become deprecated, but this value may still be relevant for older orders. </span>
      * @return string 'AustraliaGSTCredit'
      */
     const VALUE_AUSTRALIA_GSTCREDIT = 'AustraliaGSTCredit';
     /**
      * Constant for value 'UspsLabelFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that eBay is billing the seller for a USPS shipping label that was purchased through the seller's eBay account. <br><br> This fee is only applicable for sellers in the eBay managed payments program.
-     * For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * - documentation: This enumeration value indicates that eBay is billing the seller for a USPS shipping label that was purchased through the seller's eBay account.
      * @return string 'UspsLabelFee'
      */
     const VALUE_USPS_LABEL_FEE = 'UspsLabelFee';
     /**
      * Constant for value 'UspsLabelFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that eBay is giving a credit to the seller for a USPS shipping label that was purchased through the seller's eBay account. <br><br> This fee is only applicable for sellers in the eBay managed payments
-     * program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * - documentation: This enumeration value indicates that eBay is giving a credit to the seller for a USPS shipping label that was purchased through the seller's eBay account.
      * @return string 'UspsLabelFeeCredit'
      */
     const VALUE_USPS_LABEL_FEE_CREDIT = 'UspsLabelFeeCredit';
     /**
      * Constant for value 'ShippingInsuranceFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that eBay is billing the seller for shipping insurance (such as ShipCover through USPS) that was purchased through the seller's eBay account. <br><br> This fee is only applicable for sellers in the
-     * eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * - documentation: This enumeration value indicates that eBay is billing the seller for shipping insurance (such as ShipCover through USPS) that was purchased through the seller's eBay account.
      * @return string 'ShippingInsuranceFee'
      */
     const VALUE_SHIPPING_INSURANCE_FEE = 'ShippingInsuranceFee';
     /**
      * Constant for value 'ShippingInsuranceFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that eBay is giving a credit to the seller for shipping insurance (such as ShipCover through USPS) that was purchased through the seller's eBay account. <br><br> This fee is only applicable for
-     * sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing
-     * page.
+     * - documentation: This enumeration value indicates that eBay is giving a credit to the seller for shipping insurance (such as ShipCover through USPS) that was purchased through the seller's eBay account.
      * @return string 'ShippingInsuranceFeeCredit'
      */
     const VALUE_SHIPPING_INSURANCE_FEE_CREDIT = 'ShippingInsuranceFeeCredit';
@@ -2423,8 +2400,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'UspsShortpaidFee'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that eBay is billing the seller for underpayment for a USPS shipping label that was purchased through the seller's eBay account. Underpayment may occur if the seller paid for a shipping label based on
-     * specific package weight and dimensions, but either or both package weight and dimensions were not accurate, hence the seller owes more money to USPS for postage. <br><br> This fee is only applicable for sellers in the eBay managed payments program.
-     * For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * specific package weight and dimensions, but either or both package weight and dimensions were not accurate, hence the seller owes more money to USPS for postage.
      * @return string 'UspsShortpaidFee'
      */
     const VALUE_USPS_SHORTPAID_FEE = 'UspsShortpaidFee';
@@ -2432,8 +2408,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'UspsShortpaidFeeCredit'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that eBay is giving credit to the seller for underpayment for a USPS shipping label that was purchased through the seller's eBay account. Underpayment may occur if the seller paid for a shipping label
-     * based on specific package weight and dimensions, but either or both package weight and dimensions were not accurate, hence the seller owes more money to USPS for postage. <br><br> This fee is only applicable for sellers in the eBay managed payments
-     * program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
+     * based on specific package weight and dimensions, but either or both package weight and dimensions were not accurate, hence the seller owes more money to USPS for postage.
      * @return string 'UspsShortpaidFeeCredit'
      */
     const VALUE_USPS_SHORTPAID_FEE_CREDIT = 'UspsShortpaidFeeCredit';
@@ -2454,82 +2429,67 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FinalValueFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a final value fee that has already been deducted from the seller payout associated with the order. This fee is calculated as a percentage of the total amount of the order,
-     * including the purchase price and any shipping and handling charges. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay
-     * managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about how final value fees are handled for managed payments sellers, see the
-     * <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a final value fee, which is a fee that is calculated as a percentage of the total amount of the order, including the purchase price and any shipping and handling charges.
+     * This fee is always deducted directly from the seller payout associated with the order. <br><br> For more information about how final value fees are handled, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees</a> help page. </span>
      * @return string 'FinalValueFee'
      */
     const VALUE_FINAL_VALUE_FEE = 'FinalValueFee';
     /**
      * Constant for value 'FinalValueFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit for final value fee that has already been deducted from the seller payout associated with the order. The seller may get this credit for different reasons, including
-     * if the buyer cancels the order, or the buyer doesn't pay for the order and the sellers files and wins an Unpaid Item case. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program.
-     * For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about how final value
-     * fees are handled for managed payments sellers, see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a credit towards a final value fee calculated for an order. The seller may get this credit for different reasons, including if the buyer cancels the order, or the buyer
+     * doesn't pay for the order and the seller files and wins an Unpaid Item case.
      * @return string 'FinalValueFeeCredit'
      */
     const VALUE_FINAL_VALUE_FEE_CREDIT = 'FinalValueFeeCredit';
     /**
      * Constant for value 'InternationalFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is an international fee that has already been deducted from the seller payout associated with an order that is being shipped to another country. This fee is calculated as a
-     * percentage of the total amount of the sale. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments has
-     * rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about this new international fee for managed payments sellers, see the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section8" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is an international fee, which is a fee that is calculated as a percentage of the total amount of the order, and is applicable for international buyers. This fee is always
+     * deducted directly from the seller payout associated with the order. <br><br> <span class="tablenote"><b>Note: </b> For more information about this international fee, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section8" target="_blank">Selling fees</a> help page. </span>
      * @return string 'InternationalFee'
      */
     const VALUE_INTERNATIONAL_FEE = 'InternationalFee';
     /**
      * Constant for value 'InternationalFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit against an international fee that has already been deducted from the seller payout. This fee is calculated as a percentage of the total amount of the sale. The
-     * seller may get this credit for different reasons, including if the buyer cancels the order, or the buyer doesn't pay for the order and the sellers files and wins an Unpaid Item case. <br><br> <span class="tablenote"><b>Note: </b> This fee is only
-     * applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed
-     * Payments</a> landing page. For more information about this new international fee for managed payments sellers, see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section8" target="_blank">Selling fees for
-     * managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a credit towards an international fee calculated for an order. The seller may get this credit for different reasons, including if the buyer cancels the order, or the buyer
+     * doesn't pay for the order and the seller files and wins an Unpaid Item case.
      * @return string 'InternationalFeeCredit'
      */
     const VALUE_INTERNATIONAL_FEE_CREDIT = 'InternationalFeeCredit';
     /**
      * Constant for value 'FinalValueFeeFixedFeePerOrder'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a payment processing fee that has already been deducted from the seller payout associated with the order. This is a fixed fee that is charged for all orders. This fixed fee
-     * may vary by country, but it is current $0.30 in the US. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed
-     * payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about how final value fees are handled for managed payments sellers, see the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a payment processing fee, which is a fixed fee that is charged for all orders. This fixed fee may vary by country, but it is currently $0.30 in the US. This fee is always
+     * deducted directly from the seller payout associated with the order. <br><br> <span class="tablenote"><b>Note: </b> For more information about how final value fees are handled, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees</a> help page. </span>
      * @return string 'FinalValueFeeFixedFeePerOrder'
      */
     const VALUE_FINAL_VALUE_FEE_FIXED_FEE_PER_ORDER = 'FinalValueFeeFixedFeePerOrder';
     /**
      * Constant for value 'FinalValueFeeFixedFeePerOrderCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit against a payment processing fee that has already been deducted from the seller payout associated with the order. Except for perhaps a very unlikely and unusual
-     * situation, the payment processing fee will not be refunded to the seller. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which
-     * eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about how final value fees are handled for managed payments sellers, see
-     * the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a credit against a payment processing fee. Except for perhaps a very unlikely and unusual situation, the payment processing fee will generally not be refunded to the seller.
      * @return string 'FinalValueFeeFixedFeePerOrderCredit'
      */
     const VALUE_FINAL_VALUE_FEE_FIXED_FEE_PER_ORDER_CREDIT = 'FinalValueFeeFixedFeePerOrderCredit';
     /**
      * Constant for value 'FinalValueFeeBelowStandard'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is an additional final value fee for a Below Standard seller that has already been deducted from the seller payout associated with the order. Typically, this fee will be an
-     * additional 5 percent (on top of standard final value fee) of the total amount of the order, including the purchase price and any shipping and handling charges. It is possible that this fee may also be charged to an Above Standard or Top-rated seller
-     * if that seller is having an issue with 'item not as described' return requests. <br><br> <span class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in
-     * which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about this additional final value fee for managed payments sellers,
-     * see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section6" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is an additional final value fee for a Below Standard seller. Typically, this fee will be an additional 5 percent (on top of standard final value fee) of the total amount of the
+     * order, including the purchase price and any shipping and handling charges. It is possible that this fee may also be charged to an Above Standard or Top-rated seller if that seller is having an issue with 'item not as described' return requests. This
+     * fee is always deducted directly from the seller payout associated with the order. <br><br> <span class="tablenote"><b>Note: </b> For more information about this additional final value fee for sellers, see the <a
+     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section6" target="_blank">Selling fees</a> help page. </span>
      * @return string 'FinalValueFeeBelowStandard'
      */
     const VALUE_FINAL_VALUE_FEE_BELOW_STANDARD = 'FinalValueFeeBelowStandard';
     /**
      * Constant for value 'FinalValueFeeBelowStandardCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit against an additional final value fee for a Below Standard seller that has already been deducted from the seller payout associated with the order. <br><br> <span
-     * class="tablenote"><b>Note: </b> This fee is only applicable for sellers in the eBay managed payments program. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a
-     * href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. For more information about this additional final value fee for managed payments sellers, see the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section6" target="_blank">Selling fees for managed payments sellers</a> page. </span>
+     * - documentation: This enumeration value indicates that the account entry is a credit against an additional final value fee for a Below Standard seller.
      * @return string 'FinalValueFeeBelowStandardCredit'
      */
     const VALUE_FINAL_VALUE_FEE_BELOW_STANDARD_CREDIT = 'FinalValueFeeBelowStandardCredit';

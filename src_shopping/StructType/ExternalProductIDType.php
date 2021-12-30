@@ -43,7 +43,7 @@ class ExternalProductIDType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $AlternateValue = [];
+    protected ?array $AlternateValue = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -62,7 +62,7 @@ class ExternalProductIDType extends AbstractStructBase
      * @param string[] $alternateValue
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $value = null, ?bool $returnSearchResultOnDuplicates = null, ?string $type = null, array $alternateValue = [], $any = null)
+    public function __construct(?string $value = null, ?bool $returnSearchResultOnDuplicates = null, ?string $type = null, ?array $alternateValue = null, $any = null)
     {
         $this
             ->setValue($value)
@@ -147,7 +147,7 @@ class ExternalProductIDType extends AbstractStructBase
      * Get AlternateValue value
      * @return string[]
      */
-    public function getAlternateValue(): array
+    public function getAlternateValue(): ?array
     {
         return $this->AlternateValue;
     }
@@ -157,8 +157,11 @@ class ExternalProductIDType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlternateValueForArrayConstraintsFromSetAlternateValue(array $values = []): string
+    public static function validateAlternateValueForArrayConstraintsFromSetAlternateValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $externalProductIDTypeAlternateValueItem) {
@@ -180,7 +183,7 @@ class ExternalProductIDType extends AbstractStructBase
      * @param string[] $alternateValue
      * @return \macropage\ebaysdk\shopping\StructType\ExternalProductIDType
      */
-    public function setAlternateValue(array $alternateValue = []): self
+    public function setAlternateValue(?array $alternateValue = null): self
     {
         // validation for constraint: array
         if ('' !== ($alternateValueArrayErrorMessage = self::validateAlternateValueForArrayConstraintsFromSetAlternateValue($alternateValue))) {

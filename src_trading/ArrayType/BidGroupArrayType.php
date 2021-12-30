@@ -23,13 +23,13 @@ class BidGroupArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BidGroupType[]
      */
-    protected array $BidGroup = [];
+    protected ?array $BidGroup = null;
     /**
      * Constructor method for BidGroupArrayType
      * @uses BidGroupArrayType::setBidGroup()
      * @param \macropage\ebaysdk\trading\StructType\BidGroupType[] $bidGroup
      */
-    public function __construct(array $bidGroup = [])
+    public function __construct(?array $bidGroup = null)
     {
         $this
             ->setBidGroup($bidGroup);
@@ -38,7 +38,7 @@ class BidGroupArrayType extends AbstractStructArrayBase
      * Get BidGroup value
      * @return \macropage\ebaysdk\trading\StructType\BidGroupType[]
      */
-    public function getBidGroup(): array
+    public function getBidGroup(): ?array
     {
         return $this->BidGroup;
     }
@@ -48,8 +48,11 @@ class BidGroupArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBidGroupForArrayConstraintsFromSetBidGroup(array $values = []): string
+    public static function validateBidGroupForArrayConstraintsFromSetBidGroup(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $bidGroupArrayTypeBidGroupItem) {
@@ -71,7 +74,7 @@ class BidGroupArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\BidGroupType[] $bidGroup
      * @return \macropage\ebaysdk\trading\ArrayType\BidGroupArrayType
      */
-    public function setBidGroup(array $bidGroup = []): self
+    public function setBidGroup(?array $bidGroup = null): self
     {
         // validation for constraint: array
         if ('' !== ($bidGroupArrayErrorMessage = self::validateBidGroupForArrayConstraintsFromSetBidGroup($bidGroup))) {

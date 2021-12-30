@@ -9,7 +9,8 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for PayPalAccountLevelCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that defines PayPal account levels.
+ * - documentation: Enumerated type that defines PayPal account levels. <br><br> <span class="tablenote"><b>Note: </b> Although the <b>PayPalAccountLevel</b> field is still being returned for now, this field now has much less relevance since a seller's
+ * eBay account and PayPal account are no longer linked together, and a seller having a PayPal account is no longer a requirement. </span>
  * @subpackage Enumerations
  */
 class PayPalAccountLevelCodeType extends AbstractStructEnumBase

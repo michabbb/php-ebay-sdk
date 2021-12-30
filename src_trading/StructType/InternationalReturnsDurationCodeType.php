@@ -23,7 +23,7 @@ class InternationalReturnsDurationCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $InternationalReturnsDuration = [];
+    protected ?array $InternationalReturnsDuration = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class InternationalReturnsDurationCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsDuration
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $internationalReturnsDuration = [], $any = null)
+    public function __construct(?array $internationalReturnsDuration = null, $any = null)
     {
         $this
             ->setInternationalReturnsDuration($internationalReturnsDuration)
@@ -46,7 +46,7 @@ class InternationalReturnsDurationCodeType extends AbstractStructBase
      * Get InternationalReturnsDuration value
      * @return string[]
      */
-    public function getInternationalReturnsDuration(): array
+    public function getInternationalReturnsDuration(): ?array
     {
         return $this->InternationalReturnsDuration;
     }
@@ -56,8 +56,11 @@ class InternationalReturnsDurationCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalReturnsDurationForArrayConstraintsFromSetInternationalReturnsDuration(array $values = []): string
+    public static function validateInternationalReturnsDurationForArrayConstraintsFromSetInternationalReturnsDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $internationalReturnsDurationCodeTypeInternationalReturnsDurationItem) {
@@ -81,7 +84,7 @@ class InternationalReturnsDurationCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsDuration
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType
      */
-    public function setInternationalReturnsDuration(array $internationalReturnsDuration = []): self
+    public function setInternationalReturnsDuration(?array $internationalReturnsDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalReturnsDurationArrayErrorMessage = self::validateInternationalReturnsDurationForArrayConstraintsFromSetInternationalReturnsDuration($internationalReturnsDuration))) {

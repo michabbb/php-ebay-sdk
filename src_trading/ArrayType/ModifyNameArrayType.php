@@ -25,13 +25,13 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ModifyNameType[]
      */
-    protected array $ModifyName = [];
+    protected ?array $ModifyName = null;
     /**
      * Constructor method for ModifyNameArrayType
      * @uses ModifyNameArrayType::setModifyName()
      * @param \macropage\ebaysdk\trading\StructType\ModifyNameType[] $modifyName
      */
-    public function __construct(array $modifyName = [])
+    public function __construct(?array $modifyName = null)
     {
         $this
             ->setModifyName($modifyName);
@@ -40,7 +40,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * Get ModifyName value
      * @return \macropage\ebaysdk\trading\StructType\ModifyNameType[]
      */
-    public function getModifyName(): array
+    public function getModifyName(): ?array
     {
         return $this->ModifyName;
     }
@@ -50,8 +50,11 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateModifyNameForArrayConstraintsFromSetModifyName(array $values = []): string
+    public static function validateModifyNameForArrayConstraintsFromSetModifyName(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $modifyNameArrayTypeModifyNameItem) {
@@ -73,7 +76,7 @@ class ModifyNameArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\ModifyNameType[] $modifyName
      * @return \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType
      */
-    public function setModifyName(array $modifyName = []): self
+    public function setModifyName(?array $modifyName = null): self
     {
         // validation for constraint: array
         if ('' !== ($modifyNameArrayErrorMessage = self::validateModifyNameForArrayConstraintsFromSetModifyName($modifyName))) {

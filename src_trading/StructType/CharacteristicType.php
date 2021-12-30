@@ -70,7 +70,7 @@ class CharacteristicType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    protected array $ValueList = [];
+    protected ?array $ValueList = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -95,7 +95,7 @@ class CharacteristicType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $attributeID = null, ?string $dateFormat = null, ?string $displaySequence = null, ?string $displayUOM = null, ?\macropage\ebaysdk\trading\StructType\LabelType $label = null, ?string $sortOrder = null, array $valueList = [], $any = null)
+    public function __construct(?int $attributeID = null, ?string $dateFormat = null, ?string $displaySequence = null, ?string $displayUOM = null, ?\macropage\ebaysdk\trading\StructType\LabelType $label = null, ?string $sortOrder = null, ?array $valueList = null, $any = null)
     {
         $this
             ->setAttributeID($attributeID)
@@ -248,7 +248,7 @@ class CharacteristicType extends AbstractStructBase
      * Get ValueList value
      * @return \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public function getValueList(): array
+    public function getValueList(): ?array
     {
         return $this->ValueList;
     }
@@ -258,8 +258,11 @@ class CharacteristicType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateValueListForArrayConstraintsFromSetValueList(array $values = []): string
+    public static function validateValueListForArrayConstraintsFromSetValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $characteristicTypeValueListItem) {
@@ -281,7 +284,7 @@ class CharacteristicType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType
      */
-    public function setValueList(array $valueList = []): self
+    public function setValueList(?array $valueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($valueListArrayErrorMessage = self::validateValueListForArrayConstraintsFromSetValueList($valueList))) {

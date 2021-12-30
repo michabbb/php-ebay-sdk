@@ -24,13 +24,13 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $AlertID = [];
+    protected ?array $AlertID = null;
     /**
      * Constructor method for MyMessagesAlertIDArrayType
      * @uses MyMessagesAlertIDArrayType::setAlertID()
      * @param string[] $alertID
      */
-    public function __construct(array $alertID = [])
+    public function __construct(?array $alertID = null)
     {
         $this
             ->setAlertID($alertID);
@@ -39,7 +39,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * Get AlertID value
      * @return string[]
      */
-    public function getAlertID(): array
+    public function getAlertID(): ?array
     {
         return $this->AlertID;
     }
@@ -49,8 +49,11 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlertIDForArrayConstraintsFromSetAlertID(array $values = []): string
+    public static function validateAlertIDForArrayConstraintsFromSetAlertID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesAlertIDArrayTypeAlertIDItem) {
@@ -72,7 +75,7 @@ class MyMessagesAlertIDArrayType extends AbstractStructArrayBase
      * @param string[] $alertID
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
      */
-    public function setAlertID(array $alertID = []): self
+    public function setAlertID(?array $alertID = null): self
     {
         // validation for constraint: array
         if ('' !== ($alertIDArrayErrorMessage = self::validateAlertIDForArrayConstraintsFromSetAlertID($alertID))) {

@@ -29,7 +29,7 @@ class GetCategorySpecificsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RecommendationsType[]
      */
-    protected array $Recommendations = [];
+    protected ?array $Recommendations = null;
     /**
      * The TaskReferenceID
      * Meta information extracted from the WSDL
@@ -59,7 +59,7 @@ class GetCategorySpecificsResponseType extends AbstractResponseType
      * @param string $taskReferenceID
      * @param string $fileReferenceID
      */
-    public function __construct(array $recommendations = [], ?string $taskReferenceID = null, ?string $fileReferenceID = null)
+    public function __construct(?array $recommendations = null, ?string $taskReferenceID = null, ?string $fileReferenceID = null)
     {
         $this
             ->setRecommendations($recommendations)
@@ -70,7 +70,7 @@ class GetCategorySpecificsResponseType extends AbstractResponseType
      * Get Recommendations value
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType[]
      */
-    public function getRecommendations(): array
+    public function getRecommendations(): ?array
     {
         return $this->Recommendations;
     }
@@ -80,8 +80,11 @@ class GetCategorySpecificsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRecommendationsForArrayConstraintsFromSetRecommendations(array $values = []): string
+    public static function validateRecommendationsForArrayConstraintsFromSetRecommendations(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategorySpecificsResponseTypeRecommendationsItem) {
@@ -103,7 +106,7 @@ class GetCategorySpecificsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\RecommendationsType[] $recommendations
      * @return \macropage\ebaysdk\trading\StructType\GetCategorySpecificsResponseType
      */
-    public function setRecommendations(array $recommendations = []): self
+    public function setRecommendations(?array $recommendations = null): self
     {
         // validation for constraint: array
         if ('' !== ($recommendationsArrayErrorMessage = self::validateRecommendationsForArrayConstraintsFromSetRecommendations($recommendations))) {

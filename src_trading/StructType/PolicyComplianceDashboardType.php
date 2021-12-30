@@ -31,7 +31,7 @@ class PolicyComplianceDashboardType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[]
      */
-    protected array $Alert = [];
+    protected ?array $Alert = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class PolicyComplianceDashboardType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[] $alert
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $status = null, array $alert = [], $any = null)
+    public function __construct(?string $status = null, ?array $alert = null, $any = null)
     {
         $this
             ->setStatus($status)
@@ -83,7 +83,7 @@ class PolicyComplianceDashboardType extends AbstractStructBase
      * Get Alert value
      * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[]
      */
-    public function getAlert(): array
+    public function getAlert(): ?array
     {
         return $this->Alert;
     }
@@ -93,8 +93,11 @@ class PolicyComplianceDashboardType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlertForArrayConstraintsFromSetAlert(array $values = []): string
+    public static function validateAlertForArrayConstraintsFromSetAlert(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $policyComplianceDashboardTypeAlertItem) {
@@ -116,7 +119,7 @@ class PolicyComplianceDashboardType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[] $alert
      * @return \macropage\ebaysdk\trading\StructType\PolicyComplianceDashboardType
      */
-    public function setAlert(array $alert = []): self
+    public function setAlert(?array $alert = null): self
     {
         // validation for constraint: array
         if ('' !== ($alertArrayErrorMessage = self::validateAlertForArrayConstraintsFromSetAlert($alert))) {

@@ -55,7 +55,7 @@ class CatalogProductType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\ProductIDType[]
      */
-    protected array $ProductID = [];
+    protected ?array $ProductID = null;
     /**
      * The ItemCount
      * Meta information extracted from the WSDL
@@ -141,7 +141,7 @@ class CatalogProductType extends AbstractStructBase
      * @param string $productState
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $domainName = null, ?string $detailsURL = null, ?bool $displayStockPhotos = null, array $productID = [], ?int $itemCount = null, ?\macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType $itemSpecifics = null, ?int $reviewCount = null, ?string $stockPhotoURL = null, ?string $title = null, ?string $productState = null, $any = null)
+    public function __construct(?string $domainName = null, ?string $detailsURL = null, ?bool $displayStockPhotos = null, ?array $productID = null, ?int $itemCount = null, ?\macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType $itemSpecifics = null, ?int $reviewCount = null, ?string $stockPhotoURL = null, ?string $title = null, ?string $productState = null, $any = null)
     {
         $this
             ->setDomainName($domainName)
@@ -229,7 +229,7 @@ class CatalogProductType extends AbstractStructBase
      * Get ProductID value
      * @return \macropage\ebaysdk\shopping\StructType\ProductIDType[]
      */
-    public function getProductID(): array
+    public function getProductID(): ?array
     {
         return $this->ProductID;
     }
@@ -239,8 +239,11 @@ class CatalogProductType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductIDForArrayConstraintsFromSetProductID(array $values = []): string
+    public static function validateProductIDForArrayConstraintsFromSetProductID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $catalogProductTypeProductIDItem) {
@@ -262,7 +265,7 @@ class CatalogProductType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\ProductIDType[] $productID
      * @return \macropage\ebaysdk\shopping\StructType\CatalogProductType
      */
-    public function setProductID(array $productID = []): self
+    public function setProductID(?array $productID = null): self
     {
         // validation for constraint: array
         if ('' !== ($productIDArrayErrorMessage = self::validateProductIDForArrayConstraintsFromSetProductID($productID))) {

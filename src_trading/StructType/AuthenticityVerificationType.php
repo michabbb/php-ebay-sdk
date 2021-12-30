@@ -42,6 +42,14 @@ class AuthenticityVerificationType extends AbstractStructBase
      */
     protected ?string $OutcomeReason = null;
     /**
+     * The ServiceCost
+     * Meta information extracted from the WSDL
+     * - documentation: This container shows service cost to the buyer for an item that will go through the Authenticity Guarantee process.
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\ServiceCostType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\ServiceCostType $ServiceCost = null;
+    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -50,16 +58,19 @@ class AuthenticityVerificationType extends AbstractStructBase
      * Constructor method for AuthenticityVerificationType
      * @uses AuthenticityVerificationType::setStatus()
      * @uses AuthenticityVerificationType::setOutcomeReason()
+     * @uses AuthenticityVerificationType::setServiceCost()
      * @uses AuthenticityVerificationType::setAny()
      * @param string $status
      * @param string $outcomeReason
+     * @param \macropage\ebaysdk\trading\StructType\ServiceCostType $serviceCost
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $status = null, ?string $outcomeReason = null, $any = null)
+    public function __construct(?string $status = null, ?string $outcomeReason = null, ?\macropage\ebaysdk\trading\StructType\ServiceCostType $serviceCost = null, $any = null)
     {
         $this
             ->setStatus($status)
             ->setOutcomeReason($outcomeReason)
+            ->setServiceCost($serviceCost)
             ->setAny($any);
     }
     /**
@@ -105,6 +116,25 @@ class AuthenticityVerificationType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($outcomeReason, true), gettype($outcomeReason)), __LINE__);
         }
         $this->OutcomeReason = $outcomeReason;
+        
+        return $this;
+    }
+    /**
+     * Get ServiceCost value
+     * @return \macropage\ebaysdk\trading\StructType\ServiceCostType|null
+     */
+    public function getServiceCost(): ?\macropage\ebaysdk\trading\StructType\ServiceCostType
+    {
+        return $this->ServiceCost;
+    }
+    /**
+     * Set ServiceCost value
+     * @param \macropage\ebaysdk\trading\StructType\ServiceCostType $serviceCost
+     * @return \macropage\ebaysdk\trading\StructType\AuthenticityVerificationType
+     */
+    public function setServiceCost(?\macropage\ebaysdk\trading\StructType\ServiceCostType $serviceCost = null): self
+    {
+        $this->ServiceCost = $serviceCost;
         
         return $this;
     }

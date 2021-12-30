@@ -26,13 +26,13 @@ class ItemArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    protected array $Item = [];
+    protected ?array $Item = null;
     /**
      * Constructor method for ItemArrayType
      * @uses ItemArrayType::setItem()
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $item
      */
-    public function __construct(array $item = [])
+    public function __construct(?array $item = null)
     {
         $this
             ->setItem($item);
@@ -41,7 +41,7 @@ class ItemArrayType extends AbstractStructArrayBase
      * Get Item value
      * @return \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    public function getItem(): array
+    public function getItem(): ?array
     {
         return $this->Item;
     }
@@ -51,8 +51,11 @@ class ItemArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemForArrayConstraintsFromSetItem(array $values = []): string
+    public static function validateItemForArrayConstraintsFromSetItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemArrayTypeItemItem) {
@@ -74,7 +77,7 @@ class ItemArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $item
      * @return \macropage\ebaysdk\trading\ArrayType\ItemArrayType
      */
-    public function setItem(array $item = []): self
+    public function setItem(?array $item = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemArrayErrorMessage = self::validateItemForArrayConstraintsFromSetItem($item))) {

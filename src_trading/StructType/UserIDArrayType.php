@@ -26,7 +26,7 @@ class UserIDArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $UserID = [];
+    protected ?array $UserID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -39,7 +39,7 @@ class UserIDArrayType extends AbstractStructBase
      * @param string[] $userID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $userID = [], $any = null)
+    public function __construct(?array $userID = null, $any = null)
     {
         $this
             ->setUserID($userID)
@@ -49,7 +49,7 @@ class UserIDArrayType extends AbstractStructBase
      * Get UserID value
      * @return string[]
      */
-    public function getUserID(): array
+    public function getUserID(): ?array
     {
         return $this->UserID;
     }
@@ -59,8 +59,11 @@ class UserIDArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUserIDForArrayConstraintsFromSetUserID(array $values = []): string
+    public static function validateUserIDForArrayConstraintsFromSetUserID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $userIDArrayTypeUserIDItem) {
@@ -82,7 +85,7 @@ class UserIDArrayType extends AbstractStructBase
      * @param string[] $userID
      * @return \macropage\ebaysdk\trading\StructType\UserIDArrayType
      */
-    public function setUserID(array $userID = []): self
+    public function setUserID(?array $userID = null): self
     {
         // validation for constraint: array
         if ('' !== ($userIDArrayErrorMessage = self::validateUserIDForArrayConstraintsFromSetUserID($userID))) {

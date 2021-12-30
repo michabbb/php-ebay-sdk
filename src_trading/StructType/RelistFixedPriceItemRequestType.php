@@ -30,7 +30,7 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
     /**
      * The DeletedField
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the name of the field to delete from a listing. See <a href="http://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Listings-RelistingItems.html">Relisting Items</a> for rules on deleting values
+     * - documentation: Specifies the name of the field to delete from a listing. See <a href="https://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Listings-RelistingItems.html">Relisting Items</a> for rules on deleting values
      * when relisting items. Also see the relevant field descriptions to determine when to use <b>DeletedField</b> (and potential consequences). The request can contain zero, one, or many instances of <b>DeletedField</b> (one for each field to be deleted).
      * <br> <br> Some data (such as <b>Variation</b> nodes within <b>Variations</b>) can't be deleted by using a <b>DeletedField</b> tag. See the relevant field descriptions for how to delete such data. <br> <br> Case-sensitivity must be taken into account
      * when using a <b>DeletedField</b> tag to delete a field. The value passed into a <b>DeletedField</b> tag must either match the case of the schema element names in the full field path (Item.PictureDetails.GalleryURL), or the initial letter of each
@@ -40,7 +40,7 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DeletedField = [];
+    protected ?array $DeletedField = null;
     /**
      * Constructor method for RelistFixedPriceItemRequestType
      * @uses RelistFixedPriceItemRequestType::setItem()
@@ -48,7 +48,7 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @param string[] $deletedField
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, array $deletedField = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?array $deletedField = null)
     {
         $this
             ->setItem($item)
@@ -77,7 +77,7 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
      * Get DeletedField value
      * @return string[]
      */
-    public function getDeletedField(): array
+    public function getDeletedField(): ?array
     {
         return $this->DeletedField;
     }
@@ -87,8 +87,11 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(array $values = []): string
+    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $relistFixedPriceItemRequestTypeDeletedFieldItem) {
@@ -110,7 +113,7 @@ class RelistFixedPriceItemRequestType extends AbstractRequestType
      * @param string[] $deletedField
      * @return \macropage\ebaysdk\trading\StructType\RelistFixedPriceItemRequestType
      */
-    public function setDeletedField(array $deletedField = []): self
+    public function setDeletedField(?array $deletedField = null): self
     {
         // validation for constraint: array
         if ('' !== ($deletedFieldArrayErrorMessage = self::validateDeletedFieldForArrayConstraintsFromSetDeletedField($deletedField))) {

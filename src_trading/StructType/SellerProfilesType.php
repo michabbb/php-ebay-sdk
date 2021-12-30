@@ -19,8 +19,8 @@ class SellerProfilesType extends AbstractStructBase
      * The SellerShippingProfile
      * Meta information extracted from the WSDL
      * - documentation: The <b>SellerShippingProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a specific shipping business policy. Shipping business policies contain detailed
-     * information on domestic and international shipping, including shipping service options and costs, handling time, shipping discount inormation, and excluded ship-to locations. Muliple shipping business policies can be created and saved at the account
-     * level by sellers, and it is possible to make one policy the default policy. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API call is the seller of the listing.
+     * information on domestic and international shipping, including shipping service options and costs, handling time, shipping discount inormation, and excluded ship-to locations. Multiple shipping business policies can be created and saved at the account
+     * level by sellers. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API call is the seller of the listing.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerShippingProfileType|null
      */
@@ -28,10 +28,10 @@ class SellerProfilesType extends AbstractStructBase
     /**
      * The SellerReturnProfile
      * Meta information extracted from the WSDL
-     * - documentation: The <b>SellerReturnProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a return policy business policy. Return policy business policies contain detailed
-     * information on the seller's return policy for domestic and international buyers (if the seller ships internationally), including whether or not the seller accepts returns from domestic and international buyers, how many days the buyer has to return
-     * the item for a refund, and who pays the return shipping costs. Muliple return policy business policies can be created and saved at the account level by sellers, and it is possible to make one policy the default policy. <br/><br/> This container is
-     * only returned in 'Get' calls if Business Policies are set for the listing and the person making the API call is the seller of the listing.
+     * - documentation: The <b>SellerReturnProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a return business policy. Return business policies contain detailed information on the
+     * seller's return policy for domestic and international buyers (if the seller ships internationally), including whether or not the seller accepts returns from domestic and international buyers, how many days the buyer has to return the item for a
+     * refund, and who pays the return shipping costs. Multiple return policy business policies can be created and saved at the account level by sellers. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing
+     * and the person making the API call is the seller of the listing.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerReturnProfileType|null
      */
@@ -39,11 +39,11 @@ class SellerProfilesType extends AbstractStructBase
     /**
      * The SellerPaymentProfile
      * Meta information extracted from the WSDL
-     * - documentation: The <b>SellerPaymentProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a payment business policy. Payment business policies contain accepted payment methods, a
-     * flag to set up the immediate payment feature, a payment instructions field, and a field to specify the seller's PayPal email address. Muliple payment business policies can be created and saved at the account level by sellers, and it is possible to
-     * make one policy the default policy. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API call is the seller of the listing. <br> <br> <span
-     * class="tablenote"><b>Note:</b> For sellers onboarded for eBay managed payments, payment methods do not need to be specified, and the PayPal email address is never relevant. The immediate payment boolean field is available to managed payments sellers
-     * if they want to required immediate payment for 'Buy it Now' items. </span>
+     * - documentation: The <b>SellerPaymentProfile</b> container is used in an Add/Revise/Relist/Verify API call to reference and use the settings/values of a payment business policy. Payment business policies contain a setting to control whether immediate
+     * payment is required, settings to specify due dates for the deposit and full payment of a motor vehicle listing (Motors policy only), and settings to specify which offline payment methods are avaiable to buyers for sales transactions that happen off
+     * of eBay's platform. Multiple payment business policies can be created and saved at the account level by sellers. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API
+     * call is the seller of the listing. <br> <br> <span class="tablenote"><b>Note:</b> Sellers will never have to specify electronic payment methods, but offline payment methods are required for listings where offline payment is required or supported.
+     * </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerPaymentProfileType|null
      */

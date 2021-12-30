@@ -39,7 +39,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Response = [];
+    protected ?array $Response = null;
     /**
      * The MessageStatus
      * Meta information extracted from the WSDL
@@ -72,7 +72,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    protected array $MessageMedia = [];
+    protected ?array $MessageMedia = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -97,7 +97,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?\macropage\ebaysdk\trading\StructType\MemberMessageType $question = null, array $response = [], ?string $messageStatus = null, ?string $creationDate = null, ?string $lastModifiedDate = null, array $messageMedia = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?\macropage\ebaysdk\trading\StructType\MemberMessageType $question = null, ?array $response = null, ?string $messageStatus = null, ?string $creationDate = null, ?string $lastModifiedDate = null, ?array $messageMedia = null, $any = null)
     {
         $this
             ->setItem($item)
@@ -151,7 +151,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * Get Response value
      * @return string[]
      */
-    public function getResponse(): array
+    public function getResponse(): ?array
     {
         return $this->Response;
     }
@@ -161,8 +161,11 @@ class MemberMessageExchangeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateResponseForArrayConstraintsFromSetResponse(array $values = []): string
+    public static function validateResponseForArrayConstraintsFromSetResponse(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $memberMessageExchangeTypeResponseItem) {
@@ -184,7 +187,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * @param string[] $response
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType
      */
-    public function setResponse(array $response = []): self
+    public function setResponse(?array $response = null): self
     {
         // validation for constraint: array
         if ('' !== ($responseArrayErrorMessage = self::validateResponseForArrayConstraintsFromSetResponse($response))) {
@@ -286,7 +289,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * Get MessageMedia value
      * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public function getMessageMedia(): array
+    public function getMessageMedia(): ?array
     {
         return $this->MessageMedia;
     }
@@ -296,8 +299,11 @@ class MemberMessageExchangeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(array $values = []): string
+    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $memberMessageExchangeTypeMessageMediaItem) {
@@ -319,7 +325,7 @@ class MemberMessageExchangeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @return \macropage\ebaysdk\trading\StructType\MemberMessageExchangeType
      */
-    public function setMessageMedia(array $messageMedia = []): self
+    public function setMessageMedia(?array $messageMedia = null): self
     {
         // validation for constraint: array
         if ('' !== ($messageMediaArrayErrorMessage = self::validateMessageMediaForArrayConstraintsFromSetMessageMedia($messageMedia))) {

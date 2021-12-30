@@ -23,7 +23,7 @@ class UnitOfMeasurementType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $AlternateText = [];
+    protected ?array $AlternateText = null;
     /**
      * The SuggestedText
      * Meta information extracted from the WSDL
@@ -46,7 +46,7 @@ class UnitOfMeasurementType extends AbstractStructBase
      * @param string $suggestedText
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $alternateText = [], ?string $suggestedText = null, $any = null)
+    public function __construct(?array $alternateText = null, ?string $suggestedText = null, $any = null)
     {
         $this
             ->setAlternateText($alternateText)
@@ -57,7 +57,7 @@ class UnitOfMeasurementType extends AbstractStructBase
      * Get AlternateText value
      * @return string[]
      */
-    public function getAlternateText(): array
+    public function getAlternateText(): ?array
     {
         return $this->AlternateText;
     }
@@ -67,8 +67,11 @@ class UnitOfMeasurementType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlternateTextForArrayConstraintsFromSetAlternateText(array $values = []): string
+    public static function validateAlternateTextForArrayConstraintsFromSetAlternateText(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $unitOfMeasurementTypeAlternateTextItem) {
@@ -90,7 +93,7 @@ class UnitOfMeasurementType extends AbstractStructBase
      * @param string[] $alternateText
      * @return \macropage\ebaysdk\trading\StructType\UnitOfMeasurementType
      */
-    public function setAlternateText(array $alternateText = []): self
+    public function setAlternateText(?array $alternateText = null): self
     {
         // validation for constraint: array
         if ('' !== ($alternateTextArrayErrorMessage = self::validateAlternateTextForArrayConstraintsFromSetAlternateText($alternateText))) {

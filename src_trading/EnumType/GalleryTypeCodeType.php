@@ -37,7 +37,7 @@ class GalleryTypeCodeType extends AbstractStructEnumBase
      * - documentation: This feature, which is free on all sites, adds a Gallery image in the search results. A Gallery image is an image that was uploaded and copied to EPS (eBay Picture Service). This copy is stored for 30 days or until the image is
      * associated with a listing. Once the image is associated with a listing, the period is extended to 90 days after the item's sale_end date and is extended again if the item is relisted or used in subsequent listings. As part of storing a copy, EPS also
      * makes additional sizes available (thumbnail, main image, supersize, popup, etc.), which are used by the various Gallery enhancements. <br/><br/> All images must comply to the <a
-     * href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-Intro.html">Picture Requirements.</a>
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-Intro.html">Picture Requirements.</a>
      * @return string 'Gallery'
      */
     const VALUE_GALLERY = 'Gallery';

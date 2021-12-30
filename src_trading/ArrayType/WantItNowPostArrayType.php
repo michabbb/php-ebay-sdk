@@ -23,13 +23,13 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\WantItNowPostType[]
      */
-    protected array $WantItNowPost = [];
+    protected ?array $WantItNowPost = null;
     /**
      * Constructor method for WantItNowPostArrayType
      * @uses WantItNowPostArrayType::setWantItNowPost()
      * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType[] $wantItNowPost
      */
-    public function __construct(array $wantItNowPost = [])
+    public function __construct(?array $wantItNowPost = null)
     {
         $this
             ->setWantItNowPost($wantItNowPost);
@@ -38,7 +38,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * Get WantItNowPost value
      * @return \macropage\ebaysdk\trading\StructType\WantItNowPostType[]
      */
-    public function getWantItNowPost(): array
+    public function getWantItNowPost(): ?array
     {
         return $this->WantItNowPost;
     }
@@ -48,8 +48,11 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateWantItNowPostForArrayConstraintsFromSetWantItNowPost(array $values = []): string
+    public static function validateWantItNowPostForArrayConstraintsFromSetWantItNowPost(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $wantItNowPostArrayTypeWantItNowPostItem) {
@@ -71,7 +74,7 @@ class WantItNowPostArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\WantItNowPostType[] $wantItNowPost
      * @return \macropage\ebaysdk\trading\ArrayType\WantItNowPostArrayType
      */
-    public function setWantItNowPost(array $wantItNowPost = []): self
+    public function setWantItNowPost(?array $wantItNowPost = null): self
     {
         // validation for constraint: array
         if ('' !== ($wantItNowPostArrayErrorMessage = self::validateWantItNowPostForArrayConstraintsFromSetWantItNowPost($wantItNowPost))) {

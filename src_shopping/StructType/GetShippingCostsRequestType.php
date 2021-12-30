@@ -13,7 +13,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * - documentation: Gets shipping costs for a listing. This is one of the ways a buyer or seller can obtain shipping cost information for an existing item (for which the caller is either the buyer or seller) at any point in the life of the listing,
  * before or after a buyer has committed to purchasing the item(s). This call works for both flat-rate shipping and calculated shipping. Flat-rate shipping costs are established by the seller before bidding occurs. Calculated shipping costs are
  * calculated by eBay with its shipping partners based on postal code. To determine whether a listing has ended, use <b>GetSingleItem</b>. It is best to call <b>GetShippingCosts</b> only after determining via <b>GetSingleItem</b> or
- * <b>findItemsAdvanced</b> (<a href="http://www.developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) that the item actually has shipping cost information.
+ * <b>findItemsAdvanced</b> (<a href="https://developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) that the item actually has shipping cost information.
  * @subpackage Structs
  */
 class GetShippingCostsRequestType extends AbstractRequestType

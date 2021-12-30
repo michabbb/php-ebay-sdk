@@ -31,7 +31,10 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * shipping service option that is specified with a <b>ShippingServiceOptions</b> container. <br><br> For a list of valid <b>ShippingService</b> values, call <b>GeteBayDetails</b> with <b>DetailName</b> set to <code>ShippingServiceDetails</code>. The
      * <b>ShippingServiceDetails.ValidForSellingFlow</b> flag must also be present. Otherwise, that particular shipping service option is no longer valid and cannot be offered to buyers through a listing. <br><br> To view the full list of domestic shipping
      * service options in the response, look for the <b>ShippingServiceDetails.ShippingService</b> fields. Domestic shipping service options will not have a <b>InternationalService</b> = <code>true</code> field, as this indicates that the
-     * <b>ShippingService</b> value is an International shipping service option.
+     * <b>ShippingService</b> value is an International shipping service option.<br> <br> <span class="tablenote"><strong>Note:</strong> The eBay standard envelope (eSE) is a domestic envelope service with tracking through eBay. This service applies to
+     * specific sub-categories of Trading Cards categories, and to Coins & Paper Money, Postcards, and Stamps. To use this service, send envelopes using the USPS mail and set the <b>ShippingService</b> field to <code>US_eBayStandardEnvelope</code>. See <a
+     * href="https://pages.ebay.com/seller-center/shipping/ebay-standard-envelope.html#lower-cost-way">eBay standard envelope</a> for details and restrictions. For the REST equivalent, see <a href="
+     * https://edp.qa.ebay.com/api-docs/sell/static/seller-accounts/using-the-ebay-standard-envelope-service.html" target=/"_blank/">Using eBay standard envelope (eSE) service</a>. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -138,7 +141,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[]
      */
-    protected array $ShippingPackageInfo = [];
+    protected ?array $ShippingPackageInfo = null;
     /**
      * The ShippingServiceCutOffTime
      * Meta information extracted from the WSDL
@@ -194,7 +197,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param string $logisticPlanType
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?bool $freeShipping = null, ?bool $localPickup = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, array $shippingPackageInfo = [], ?string $shippingServiceCutOffTime = null, ?string $logisticPlanType = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?bool $freeShipping = null, ?bool $localPickup = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?array $shippingPackageInfo = null, ?string $shippingServiceCutOffTime = null, ?string $logisticPlanType = null, $any = null)
     {
         $this
             ->setShippingInsuranceCost($shippingInsuranceCost)
@@ -454,7 +457,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * Get ShippingPackageInfo value
      * @return \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[]
      */
-    public function getShippingPackageInfo(): array
+    public function getShippingPackageInfo(): ?array
     {
         return $this->ShippingPackageInfo;
     }
@@ -464,8 +467,11 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingPackageInfoForArrayConstraintsFromSetShippingPackageInfo(array $values = []): string
+    public static function validateShippingPackageInfoForArrayConstraintsFromSetShippingPackageInfo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceOptionsTypeShippingPackageInfoItem) {
@@ -487,7 +493,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageInfoType[] $shippingPackageInfo
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
      */
-    public function setShippingPackageInfo(array $shippingPackageInfo = []): self
+    public function setShippingPackageInfo(?array $shippingPackageInfo = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingPackageInfoArrayErrorMessage = self::validateShippingPackageInfoForArrayConstraintsFromSetShippingPackageInfo($shippingPackageInfo))) {

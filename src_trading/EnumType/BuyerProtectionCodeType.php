@@ -9,7 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for BuyerProtectionCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: This enumeration type indicates the item's eligibility status for PayPal's buyer protection program or eBay's Money Back Guarantee program.
+ * - documentation: This enumeration type indicates the item's eligibility status for eBay's Money Back Guarantee program.
  * @subpackage Enumerations
  */
 class BuyerProtectionCodeType extends AbstractStructEnumBase

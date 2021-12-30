@@ -23,7 +23,7 @@ class GetAdFormatLeadsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AdFormatLeadType[]
      */
-    protected array $AdFormatLead = [];
+    protected ?array $AdFormatLead = null;
     /**
      * The AdFormatLeadCount
      * Meta information extracted from the WSDL
@@ -39,7 +39,7 @@ class GetAdFormatLeadsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\AdFormatLeadType[] $adFormatLead
      * @param int $adFormatLeadCount
      */
-    public function __construct(array $adFormatLead = [], ?int $adFormatLeadCount = null)
+    public function __construct(?array $adFormatLead = null, ?int $adFormatLeadCount = null)
     {
         $this
             ->setAdFormatLead($adFormatLead)
@@ -49,7 +49,7 @@ class GetAdFormatLeadsResponseType extends AbstractResponseType
      * Get AdFormatLead value
      * @return \macropage\ebaysdk\trading\StructType\AdFormatLeadType[]
      */
-    public function getAdFormatLead(): array
+    public function getAdFormatLead(): ?array
     {
         return $this->AdFormatLead;
     }
@@ -59,8 +59,11 @@ class GetAdFormatLeadsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAdFormatLeadForArrayConstraintsFromSetAdFormatLead(array $values = []): string
+    public static function validateAdFormatLeadForArrayConstraintsFromSetAdFormatLead(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getAdFormatLeadsResponseTypeAdFormatLeadItem) {
@@ -82,7 +85,7 @@ class GetAdFormatLeadsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\AdFormatLeadType[] $adFormatLead
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsResponseType
      */
-    public function setAdFormatLead(array $adFormatLead = []): self
+    public function setAdFormatLead(?array $adFormatLead = null): self
     {
         // validation for constraint: array
         if ('' !== ($adFormatLeadArrayErrorMessage = self::validateAdFormatLeadForArrayConstraintsFromSetAdFormatLead($adFormatLead))) {

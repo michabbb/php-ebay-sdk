@@ -24,13 +24,13 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OrderTransactionType[]
      */
-    protected array $OrderTransaction = [];
+    protected ?array $OrderTransaction = null;
     /**
      * Constructor method for OrderTransactionArrayType
      * @uses OrderTransactionArrayType::setOrderTransaction()
      * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType[] $orderTransaction
      */
-    public function __construct(array $orderTransaction = [])
+    public function __construct(?array $orderTransaction = null)
     {
         $this
             ->setOrderTransaction($orderTransaction);
@@ -39,7 +39,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * Get OrderTransaction value
      * @return \macropage\ebaysdk\trading\StructType\OrderTransactionType[]
      */
-    public function getOrderTransaction(): array
+    public function getOrderTransaction(): ?array
     {
         return $this->OrderTransaction;
     }
@@ -49,8 +49,11 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOrderTransactionForArrayConstraintsFromSetOrderTransaction(array $values = []): string
+    public static function validateOrderTransactionForArrayConstraintsFromSetOrderTransaction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $orderTransactionArrayTypeOrderTransactionItem) {
@@ -72,7 +75,7 @@ class OrderTransactionArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\OrderTransactionType[] $orderTransaction
      * @return \macropage\ebaysdk\trading\ArrayType\OrderTransactionArrayType
      */
-    public function setOrderTransaction(array $orderTransaction = []): self
+    public function setOrderTransaction(?array $orderTransaction = null): self
     {
         // validation for constraint: array
         if ('' !== ($orderTransactionArrayErrorMessage = self::validateOrderTransactionForArrayConstraintsFromSetOrderTransaction($orderTransaction))) {

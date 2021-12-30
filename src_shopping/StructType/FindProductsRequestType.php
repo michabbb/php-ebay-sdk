@@ -53,7 +53,7 @@ class FindProductsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DomainName = [];
+    protected ?array $DomainName = null;
     /**
      * The ProductID
      * Meta information extracted from the WSDL
@@ -160,7 +160,7 @@ class FindProductsRequestType extends AbstractRequestType
      * @param string $categoryID
      * @param bool $hideDuplicateItems
      */
-    public function __construct(?string $includeSelector = null, ?bool $availableItemsOnly = null, array $domainName = [], ?\macropage\ebaysdk\shopping\StructType\ProductIDType $productID = null, ?string $queryKeywords = null, ?string $productSort = null, ?string $sortOrder = null, ?int $maxEntries = null, ?int $pageNumber = null, ?string $categoryID = null, ?bool $hideDuplicateItems = null)
+    public function __construct(?string $includeSelector = null, ?bool $availableItemsOnly = null, ?array $domainName = null, ?\macropage\ebaysdk\shopping\StructType\ProductIDType $productID = null, ?string $queryKeywords = null, ?string $productSort = null, ?string $sortOrder = null, ?int $maxEntries = null, ?int $pageNumber = null, ?string $categoryID = null, ?bool $hideDuplicateItems = null)
     {
         $this
             ->setIncludeSelector($includeSelector)
@@ -225,7 +225,7 @@ class FindProductsRequestType extends AbstractRequestType
      * Get DomainName value
      * @return string[]
      */
-    public function getDomainName(): array
+    public function getDomainName(): ?array
     {
         return $this->DomainName;
     }
@@ -235,8 +235,11 @@ class FindProductsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomainNameForArrayConstraintsFromSetDomainName(array $values = []): string
+    public static function validateDomainNameForArrayConstraintsFromSetDomainName(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $findProductsRequestTypeDomainNameItem) {
@@ -258,7 +261,7 @@ class FindProductsRequestType extends AbstractRequestType
      * @param string[] $domainName
      * @return \macropage\ebaysdk\shopping\StructType\FindProductsRequestType
      */
-    public function setDomainName(array $domainName = []): self
+    public function setDomainName(?array $domainName = null): self
     {
         // validation for constraint: array
         if ('' !== ($domainNameArrayErrorMessage = self::validateDomainNameForArrayConstraintsFromSetDomainName($domainName))) {

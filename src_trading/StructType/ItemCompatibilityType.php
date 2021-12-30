@@ -29,7 +29,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: A name-value pair describing a single compatible application. The allowed names and values are specific to the primary category in which the item is listed. For example, when listing in a Parts & Accessories category, where the
      * applications are vehicles, the allowed names might include Year, Make, and Model, and the values would correspond to specific vehicles in eBay's catalog. For details and examples, see the <a
-     * href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/CompatibleParts-Listing.html#SpecifyingPartsCompatibilityManually" target="_blank">Features Guide</a>. <br><br> The eBay Germany, UK, Austria, France, Italy, and
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/CompatibleParts-Listing.html#SpecifyingPartsCompatibilityManually" target="_blank">Features Guide</a>. <br><br> The eBay Germany, UK, Austria, France, Italy, and
      * Spain sites support the use of <em>K type</em> vehicle numbers to specify vehicle parts compatibility. To use a K type number, set the <b>Name</b> field to "<code>KType</code>" and set the corresponding <b>Value</b> field to the appropriate K type
      * number. <br><br> The DE and UK eBay sites also support the use of an <em>eBay Product ID</em> (or <em>ePID</em>) number/value pair to specify motorcycle and scooter parts compatibility (currently, only DE supports scooter parts compatibily). To use
      * an ePID number to specify part compatibilities, set the <b>Name</b> field to "<code>ePID</code>" and the corresponding <b>Value</b> field to the ePID number that matches the motorcycle for the part(s) you are listing. Motorcycle ePID numbers are
@@ -40,7 +40,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    protected array $NameValueList = [];
+    protected ?array $NameValueList = null;
     /**
      * The CompatibilityNotes
      * Meta information extracted from the WSDL
@@ -65,7 +65,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param string $compatibilityNotes
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $delete = null, array $nameValueList = [], ?string $compatibilityNotes = null, $any = null)
+    public function __construct(?bool $delete = null, ?array $nameValueList = null, ?string $compatibilityNotes = null, $any = null)
     {
         $this
             ->setDelete($delete)
@@ -100,7 +100,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * Get NameValueList value
      * @return \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    public function getNameValueList(): array
+    public function getNameValueList(): ?array
     {
         return $this->NameValueList;
     }
@@ -110,8 +110,11 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemCompatibilityTypeNameValueListItem) {
@@ -133,7 +136,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\trading\StructType\ItemCompatibilityType
      */
-    public function setNameValueList(array $nameValueList = []): self
+    public function setNameValueList(?array $nameValueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {

@@ -24,7 +24,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    protected array $NameValueList = [];
+    protected ?array $NameValueList = null;
     /**
      * The CompatibilityNotes
      * Meta information extracted from the WSDL
@@ -47,7 +47,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param string $compatibilityNotes
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $nameValueList = [], ?string $compatibilityNotes = null, $any = null)
+    public function __construct(?array $nameValueList = null, ?string $compatibilityNotes = null, $any = null)
     {
         $this
             ->setNameValueList($nameValueList)
@@ -58,7 +58,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * Get NameValueList value
      * @return \macropage\ebaysdk\shopping\StructType\NameValueListType[]
      */
-    public function getNameValueList(): array
+    public function getNameValueList(): ?array
     {
         return $this->NameValueList;
     }
@@ -68,8 +68,11 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemCompatibilityTypeNameValueListItem) {
@@ -91,7 +94,7 @@ class ItemCompatibilityType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType
      */
-    public function setNameValueList(array $nameValueList = []): self
+    public function setNameValueList(?array $nameValueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {

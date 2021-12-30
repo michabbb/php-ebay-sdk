@@ -32,7 +32,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The PackageDepth
      * Meta information extracted from the WSDL
-     * - documentation: Depth dimension of the package needed to ship the item after it is sold. <br> For calculated shipping only.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -40,7 +39,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The PackageLength
      * Meta information extracted from the WSDL
-     * - documentation: Length dimension of the package needed to ship the item after it is sold. <br> For calculated shipping only.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -48,7 +46,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The PackageWidth
      * Meta information extracted from the WSDL
-     * - documentation: Width dimension of the package needed to ship the item after it is sold. <br> For calculated shipping only.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -84,7 +81,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The ShipFromAddress
      * Meta information extracted from the WSDL
-     * - documentation: The address from which the item is being shipped.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
@@ -92,7 +88,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The ShippingAddress
      * Meta information extracted from the WSDL
-     * - documentation: The address to which the item is to be shipped.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
@@ -112,11 +107,10 @@ class ShipmentType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShippingFeature = [];
+    protected ?array $ShippingFeature = null;
     /**
      * The ShippingPackage
      * Meta information extracted from the WSDL
-     * - documentation: The size of the package used to ship the item(s). See ShippingPackageCodeType for its possible values. Input.
      * - minOccurs: 0
      * @var string|null
      */
@@ -124,7 +118,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The ShippingServiceUsed
      * Meta information extracted from the WSDL
-     * - documentation: The size of the package used to ship the item(s). See ShippingPackageCodeType for its possible values. Input.
      * - minOccurs: 0
      * @var string|null
      */
@@ -140,7 +133,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The WeightMajor
      * Meta information extracted from the WSDL
-     * - documentation: The 'unit' attribute can have a value of lbs.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -148,7 +140,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The WeightMinor
      * Meta information extracted from the WSDL
-     * - documentation: The 'unit' attribute is optional and assumed to be the minor compared to the value of 'unit' in WeightMajor.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -160,11 +151,10 @@ class ShipmentType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[]
      */
-    protected array $ItemTransactionID = [];
+    protected ?array $ItemTransactionID = null;
     /**
      * The DeliveryDate
      * Meta information extracted from the WSDL
-     * - documentation: Revise only
      * - minOccurs: 0
      * @var string|null
      */
@@ -172,7 +162,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The DeliveryStatus
      * Meta information extracted from the WSDL
-     * - documentation: Revise only
      * - minOccurs: 0
      * @var string|null
      */
@@ -180,7 +169,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The RefundGrantedTime
      * Meta information extracted from the WSDL
-     * - documentation: Revise only
      * - minOccurs: 0
      * @var string|null
      */
@@ -188,7 +176,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The RefundRequestedTime
      * Meta information extracted from the WSDL
-     * - documentation: Revise only
      * - minOccurs: 0
      * @var string|null
      */
@@ -196,7 +183,6 @@ class ShipmentType extends AbstractStructBase
     /**
      * The Status
      * Meta information extracted from the WSDL
-     * - documentation: Status, for revise only
      * - minOccurs: 0
      * @var string|null
      */
@@ -213,8 +199,7 @@ class ShipmentType extends AbstractStructBase
     /**
      * The Notes
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This field is only applicable for Half.com listings, and since API support for Half.com listings is being deprecated, this field is no longer applicable. </span> This string field allows a seller
-     * to provide notes to the buyer regarding shipment of a Half.com item. Only alphanumeric characters can be used in this field. This is an optional field that is only applicable to Half.com items.
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
      * @var string|null
      */
@@ -228,7 +213,7 @@ class ShipmentType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[]
      */
-    protected array $ShipmentTrackingDetails = [];
+    protected ?array $ShipmentTrackingDetails = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -293,7 +278,7 @@ class ShipmentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[] $shipmentTrackingDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $estimatedDeliveryDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuredValue = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageDepth = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageLength = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageWidth = null, ?string $payPalShipmentID = null, ?int $shipmentID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $postageTotal = null, ?string $printedTime = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shipFromAddress = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?string $shippingCarrierUsed = null, array $shippingFeature = [], ?string $shippingPackage = null, ?string $shippingServiceUsed = null, ?string $shipmentTrackingNumber = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMajor = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMinor = null, array $itemTransactionID = [], ?string $deliveryDate = null, ?string $deliveryStatus = null, ?string $refundGrantedTime = null, ?string $refundRequestedTime = null, ?string $status = null, ?string $shippedTime = null, ?string $notes = null, array $shipmentTrackingDetails = [], $any = null)
+    public function __construct(?string $estimatedDeliveryDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuredValue = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageDepth = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageLength = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $packageWidth = null, ?string $payPalShipmentID = null, ?int $shipmentID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $postageTotal = null, ?string $printedTime = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shipFromAddress = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?string $shippingCarrierUsed = null, ?array $shippingFeature = null, ?string $shippingPackage = null, ?string $shippingServiceUsed = null, ?string $shipmentTrackingNumber = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMajor = null, ?\macropage\ebaysdk\trading\StructType\MeasureType $weightMinor = null, ?array $itemTransactionID = null, ?string $deliveryDate = null, ?string $deliveryStatus = null, ?string $refundGrantedTime = null, ?string $refundRequestedTime = null, ?string $status = null, ?string $shippedTime = null, ?string $notes = null, ?array $shipmentTrackingDetails = null, $any = null)
     {
         $this
             ->setEstimatedDeliveryDate($estimatedDeliveryDate)
@@ -577,7 +562,7 @@ class ShipmentType extends AbstractStructBase
      * Get ShippingFeature value
      * @return string[]
      */
-    public function getShippingFeature(): array
+    public function getShippingFeature(): ?array
     {
         return $this->ShippingFeature;
     }
@@ -587,8 +572,11 @@ class ShipmentType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingFeatureForArrayConstraintsFromSetShippingFeature(array $values = []): string
+    public static function validateShippingFeatureForArrayConstraintsFromSetShippingFeature(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shipmentTypeShippingFeatureItem) {
@@ -612,7 +600,7 @@ class ShipmentType extends AbstractStructBase
      * @param string[] $shippingFeature
      * @return \macropage\ebaysdk\trading\StructType\ShipmentType
      */
-    public function setShippingFeature(array $shippingFeature = []): self
+    public function setShippingFeature(?array $shippingFeature = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingFeatureArrayErrorMessage = self::validateShippingFeatureForArrayConstraintsFromSetShippingFeature($shippingFeature))) {
@@ -754,7 +742,7 @@ class ShipmentType extends AbstractStructBase
      * Get ItemTransactionID value
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[]
      */
-    public function getItemTransactionID(): array
+    public function getItemTransactionID(): ?array
     {
         return $this->ItemTransactionID;
     }
@@ -764,8 +752,11 @@ class ShipmentType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID(array $values = []): string
+    public static function validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shipmentTypeItemTransactionIDItem) {
@@ -787,7 +778,7 @@ class ShipmentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[] $itemTransactionID
      * @return \macropage\ebaysdk\trading\StructType\ShipmentType
      */
-    public function setItemTransactionID(array $itemTransactionID = []): self
+    public function setItemTransactionID(?array $itemTransactionID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemTransactionIDArrayErrorMessage = self::validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID($itemTransactionID))) {
@@ -984,7 +975,7 @@ class ShipmentType extends AbstractStructBase
      * Get ShipmentTrackingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[]
      */
-    public function getShipmentTrackingDetails(): array
+    public function getShipmentTrackingDetails(): ?array
     {
         return $this->ShipmentTrackingDetails;
     }
@@ -994,8 +985,11 @@ class ShipmentType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails(array $values = []): string
+    public static function validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shipmentTypeShipmentTrackingDetailsItem) {
@@ -1017,7 +1011,7 @@ class ShipmentType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[] $shipmentTrackingDetails
      * @return \macropage\ebaysdk\trading\StructType\ShipmentType
      */
-    public function setShipmentTrackingDetails(array $shipmentTrackingDetails = []): self
+    public function setShipmentTrackingDetails(?array $shipmentTrackingDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shipmentTrackingDetailsArrayErrorMessage = self::validateShipmentTrackingDetailsForArrayConstraintsFromSetShipmentTrackingDetails($shipmentTrackingDetails))) {

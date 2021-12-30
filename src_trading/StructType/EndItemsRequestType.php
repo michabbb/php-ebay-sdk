@@ -23,13 +23,13 @@ class EndItemsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\EndItemRequestContainerType[]
      */
-    protected array $EndItemRequestContainer = [];
+    protected ?array $EndItemRequestContainer = null;
     /**
      * Constructor method for EndItemsRequestType
      * @uses EndItemsRequestType::setEndItemRequestContainer()
      * @param \macropage\ebaysdk\trading\StructType\EndItemRequestContainerType[] $endItemRequestContainer
      */
-    public function __construct(array $endItemRequestContainer = [])
+    public function __construct(?array $endItemRequestContainer = null)
     {
         $this
             ->setEndItemRequestContainer($endItemRequestContainer);
@@ -38,7 +38,7 @@ class EndItemsRequestType extends AbstractRequestType
      * Get EndItemRequestContainer value
      * @return \macropage\ebaysdk\trading\StructType\EndItemRequestContainerType[]
      */
-    public function getEndItemRequestContainer(): array
+    public function getEndItemRequestContainer(): ?array
     {
         return $this->EndItemRequestContainer;
     }
@@ -48,8 +48,11 @@ class EndItemsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEndItemRequestContainerForArrayConstraintsFromSetEndItemRequestContainer(array $values = []): string
+    public static function validateEndItemRequestContainerForArrayConstraintsFromSetEndItemRequestContainer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $endItemsRequestTypeEndItemRequestContainerItem) {
@@ -71,7 +74,7 @@ class EndItemsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\EndItemRequestContainerType[] $endItemRequestContainer
      * @return \macropage\ebaysdk\trading\StructType\EndItemsRequestType
      */
-    public function setEndItemRequestContainer(array $endItemRequestContainer = []): self
+    public function setEndItemRequestContainer(?array $endItemRequestContainer = null): self
     {
         // validation for constraint: array
         if ('' !== ($endItemRequestContainerArrayErrorMessage = self::validateEndItemRequestContainerForArrayConstraintsFromSetEndItemRequestContainer($endItemRequestContainer))) {

@@ -23,7 +23,7 @@ class GetCategoryMappingsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CategoryMappingType[]
      */
-    protected array $CategoryMapping = [];
+    protected ?array $CategoryMapping = null;
     /**
      * The CategoryVersion
      * Meta information extracted from the WSDL
@@ -41,7 +41,7 @@ class GetCategoryMappingsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CategoryMappingType[] $categoryMapping
      * @param string $categoryVersion
      */
-    public function __construct(array $categoryMapping = [], ?string $categoryVersion = null)
+    public function __construct(?array $categoryMapping = null, ?string $categoryVersion = null)
     {
         $this
             ->setCategoryMapping($categoryMapping)
@@ -51,7 +51,7 @@ class GetCategoryMappingsResponseType extends AbstractResponseType
      * Get CategoryMapping value
      * @return \macropage\ebaysdk\trading\StructType\CategoryMappingType[]
      */
-    public function getCategoryMapping(): array
+    public function getCategoryMapping(): ?array
     {
         return $this->CategoryMapping;
     }
@@ -61,8 +61,11 @@ class GetCategoryMappingsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryMappingForArrayConstraintsFromSetCategoryMapping(array $values = []): string
+    public static function validateCategoryMappingForArrayConstraintsFromSetCategoryMapping(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategoryMappingsResponseTypeCategoryMappingItem) {
@@ -84,7 +87,7 @@ class GetCategoryMappingsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CategoryMappingType[] $categoryMapping
      * @return \macropage\ebaysdk\trading\StructType\GetCategoryMappingsResponseType
      */
-    public function setCategoryMapping(array $categoryMapping = []): self
+    public function setCategoryMapping(?array $categoryMapping = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryMappingArrayErrorMessage = self::validateCategoryMappingForArrayConstraintsFromSetCategoryMapping($categoryMapping))) {

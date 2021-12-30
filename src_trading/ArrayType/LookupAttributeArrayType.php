@@ -23,13 +23,13 @@ class LookupAttributeArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\LookupAttributeType[]
      */
-    protected array $LookupAttribute = [];
+    protected ?array $LookupAttribute = null;
     /**
      * Constructor method for LookupAttributeArrayType
      * @uses LookupAttributeArrayType::setLookupAttribute()
      * @param \macropage\ebaysdk\trading\StructType\LookupAttributeType[] $lookupAttribute
      */
-    public function __construct(array $lookupAttribute = [])
+    public function __construct(?array $lookupAttribute = null)
     {
         $this
             ->setLookupAttribute($lookupAttribute);
@@ -38,7 +38,7 @@ class LookupAttributeArrayType extends AbstractStructArrayBase
      * Get LookupAttribute value
      * @return \macropage\ebaysdk\trading\StructType\LookupAttributeType[]
      */
-    public function getLookupAttribute(): array
+    public function getLookupAttribute(): ?array
     {
         return $this->LookupAttribute;
     }
@@ -48,8 +48,11 @@ class LookupAttributeArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateLookupAttributeForArrayConstraintsFromSetLookupAttribute(array $values = []): string
+    public static function validateLookupAttributeForArrayConstraintsFromSetLookupAttribute(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $lookupAttributeArrayTypeLookupAttributeItem) {
@@ -71,7 +74,7 @@ class LookupAttributeArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\LookupAttributeType[] $lookupAttribute
      * @return \macropage\ebaysdk\trading\ArrayType\LookupAttributeArrayType
      */
-    public function setLookupAttribute(array $lookupAttribute = []): self
+    public function setLookupAttribute(?array $lookupAttribute = null): self
     {
         // validation for constraint: array
         if ('' !== ($lookupAttributeArrayErrorMessage = self::validateLookupAttributeForArrayConstraintsFromSetLookupAttribute($lookupAttribute))) {

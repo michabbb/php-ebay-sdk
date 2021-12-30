@@ -220,7 +220,7 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType[]
      */
-    protected array $eBayPLUSPreference = [];
+    protected ?array $eBayPLUSPreference = null;
     /**
      * Constructor method for GetUserPreferencesResponseType
      * @uses GetUserPreferencesResponseType::setBidderNoticePreferences()
@@ -268,7 +268,7 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @param bool $outOfStockControlPreference
      * @param \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType[] $eBayPLUSPreference
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\BidderNoticePreferencesType $bidderNoticePreferences = null, ?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType $sellerPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType $sellerFavoriteItemPreferences = null, ?\macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences = null, ?bool $emailShipmentTrackingNumberPreference = null, ?bool $requiredShipPhoneNumberPreference = null, ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType $unpaidItemAssistancePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences = null, ?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences = null, ?bool $sellerThirdPartyCheckoutDisabled = null, ?\macropage\ebaysdk\trading\StructType\SellerProfilePreferencesType $sellerProfilePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerReturnPreferencesType $sellerReturnPreferences = null, ?bool $offerGlobalShippingProgramPreference = null, ?\macropage\ebaysdk\trading\StructType\DispatchCutoffTimePreferencesType $dispatchCutoffTimePreference = null, ?bool $globalShippingProgramListingPreference = null, ?bool $overrideGSPServiceWithIntlServicePreference = null, ?bool $pickupDropoffSellerPreference = null, ?bool $outOfStockControlPreference = null, array $eBayPLUSPreference = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\BidderNoticePreferencesType $bidderNoticePreferences = null, ?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType $sellerPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType $sellerFavoriteItemPreferences = null, ?\macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences = null, ?bool $emailShipmentTrackingNumberPreference = null, ?bool $requiredShipPhoneNumberPreference = null, ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType $unpaidItemAssistancePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences = null, ?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences = null, ?bool $sellerThirdPartyCheckoutDisabled = null, ?\macropage\ebaysdk\trading\StructType\SellerProfilePreferencesType $sellerProfilePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerReturnPreferencesType $sellerReturnPreferences = null, ?bool $offerGlobalShippingProgramPreference = null, ?\macropage\ebaysdk\trading\StructType\DispatchCutoffTimePreferencesType $dispatchCutoffTimePreference = null, ?bool $globalShippingProgramListingPreference = null, ?bool $overrideGSPServiceWithIntlServicePreference = null, ?bool $pickupDropoffSellerPreference = null, ?bool $outOfStockControlPreference = null, ?array $eBayPLUSPreference = null)
     {
         $this
             ->setBidderNoticePreferences($bidderNoticePreferences)
@@ -729,7 +729,7 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * Get eBayPLUSPreference value
      * @return \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType[]
      */
-    public function getEBayPLUSPreference(): array
+    public function getEBayPLUSPreference(): ?array
     {
         return $this->eBayPLUSPreference;
     }
@@ -739,8 +739,11 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEBayPLUSPreferenceForArrayConstraintsFromSetEBayPLUSPreference(array $values = []): string
+    public static function validateEBayPLUSPreferenceForArrayConstraintsFromSetEBayPLUSPreference(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getUserPreferencesResponseTypeEBayPLUSPreferenceItem) {
@@ -762,7 +765,7 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType[] $eBayPLUSPreference
      * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType
      */
-    public function setEBayPLUSPreference(array $eBayPLUSPreference = []): self
+    public function setEBayPLUSPreference(?array $eBayPLUSPreference = null): self
     {
         // validation for constraint: array
         if ('' !== ($eBayPLUSPreferenceArrayErrorMessage = self::validateEBayPLUSPreferenceForArrayConstraintsFromSetEBayPLUSPreference($eBayPLUSPreference))) {

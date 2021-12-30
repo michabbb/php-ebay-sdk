@@ -22,7 +22,7 @@ class ShipmentTrackingDetailsType extends AbstractStructBase
      * <strong>ShipmentTrackingNumber</strong>. When you submit <strong>ShipmentTrackingNumber</strong>, you must also supply a value for <strong>ShippingCarrierUsed</strong>. <br/><br/> When the site ID is Austria, Poland, or UK,
      * <strong>ShippingCarrierUsed</strong> can be any value, because it is not checked by eBay. For all other sites, only the following characters are allowed: letters (<code>a-z</code>, <code>A-Z</code>), numbers (<code>0-9</code>), space, and dash
      * (<code>-</code>). The site ID is specified in the <b>CompleteSale</b> request header. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Commonly used shipping carriers can be found by calling <b>GeteBayDetails</b> with <b>DetailName</b> set
-     * to <code>ShippingCarrierDetails</code> and examining the returned <b>ShippingCarrierDetails.ShippingCarrier</b> field. <a href="http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/types/ShippingCarrierCodeType.html">ShippingCarrierCodeType</a>
+     * to <code>ShippingCarrierDetails</code> and examining the returned <b>ShippingCarrierDetails.ShippingCarrier</b> field. <a href="https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/types/ShippingCarrierCodeType.html">ShippingCarrierCodeType</a>
      * also has a list of valid shipping carriers, but eBay cannot guarantee that this enumerated type contains a full, updated list of shipping carriers. </span> <strong>For the CompleteSale call</strong>: <ul> <li>This field is not case sensitive in the
      * <strong>CompleteSale</strong> request.</li> <li>When using UPS Mail Innovations, supply the value <code>UPS-MI</code>. Buyers will subsequently be sent to the UPS Mail Innovations website for tracking status. </li> <li>When using FedEx SmartPost,
      * supply the value <code>FedEx</code>. Buyers will subsequently be sent to the FedEx web site for tracking status. </li> </ul> <strong>For the Get calls</strong>: When using the Global Shipping Program, this field returns a value of <code>PBI</code>.
@@ -34,10 +34,13 @@ class ShipmentTrackingDetailsType extends AbstractStructBase
      * The ShipmentTrackingNumber
      * Meta information extracted from the WSDL
      * - documentation: The tracking number assigned by the shipping carrier to the item shipment. This field and the <b>ShippingCarrierUsed</b> field are mutually dependent. When you submit <strong>ShipmentTrackingNumber</strong>, you must also supply a
-     * value for <strong>ShippingCarrierUsed</strong>. When you submit <strong>ShippingCarrierUsed</strong>, you must also supply a value for <strong>ShipmentTrackingNumber</strong>. <br/><br/> The format of the tracking number must be consistent with the
-     * format used by the specified shipping carrier (<strong>ShippingCarrierUsed</strong>). Typically, you should avoid spaces and hyphens. Returned only if set. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using
-     * Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the real tracking number is only returned to the buyer or
-     * seller, and a string value of <code>Unavailable</code> will be returned to all third parties.
+     * value for <strong>ShippingCarrierUsed</strong>. When you submit <strong>ShippingCarrierUsed</strong>, you must also supply a value for <strong>ShipmentTrackingNumber</strong>. <br/><br/> The seller is responsible for the accuracy of the shipment
+     * tracking number, as eBay only verifies that the tracking number is consistent with the numbering scheme used by the specified shipping carrier, but cannot verify the accuracy of the tracking number. For order management calls, <br><br> <b>For
+     * GetOrders, GetOrderTransactions, GetSellerTransactions, and GetItemTransactions only:</b> This field is only returned if a valid tracking number is set. With the exception of the <b>GetSellerTransactions</b> (where it is only returned to the seller
+     * and not buyer), the tracking number will only be returned to the seller or buyer. If a user is using a Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If
+     * using a Trading WSDL older than Version 1019, this field is returned to third parties, but the string value returned in the field will be <code>Unavailable</code>. <br><br> <span class="tablenote"><b>Note: </b> The Trading API only supports
+     * alphanumeric characters for shipment tracking numbers, and any other characters are not supported, including spaces, hyphens, and all other special characters. Users should not enter spaces even if spaces are shown for the tracking number on the
+     * shipping label. </span>
      * - minOccurs: 0
      * @var string|null
      */

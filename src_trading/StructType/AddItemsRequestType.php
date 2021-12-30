@@ -24,13 +24,13 @@ class AddItemsRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[]
      */
-    protected array $AddItemRequestContainer = [];
+    protected ?array $AddItemRequestContainer = null;
     /**
      * Constructor method for AddItemsRequestType
      * @uses AddItemsRequestType::setAddItemRequestContainer()
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[] $addItemRequestContainer
      */
-    public function __construct(array $addItemRequestContainer = [])
+    public function __construct(?array $addItemRequestContainer = null)
     {
         $this
             ->setAddItemRequestContainer($addItemRequestContainer);
@@ -39,7 +39,7 @@ class AddItemsRequestType extends AbstractRequestType
      * Get AddItemRequestContainer value
      * @return \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[]
      */
-    public function getAddItemRequestContainer(): array
+    public function getAddItemRequestContainer(): ?array
     {
         return $this->AddItemRequestContainer;
     }
@@ -49,8 +49,11 @@ class AddItemsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAddItemRequestContainerForArrayConstraintsFromSetAddItemRequestContainer(array $values = []): string
+    public static function validateAddItemRequestContainerForArrayConstraintsFromSetAddItemRequestContainer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addItemsRequestTypeAddItemRequestContainerItem) {
@@ -72,7 +75,7 @@ class AddItemsRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestContainerType[] $addItemRequestContainer
      * @return \macropage\ebaysdk\trading\StructType\AddItemsRequestType
      */
-    public function setAddItemRequestContainer(array $addItemRequestContainer = []): self
+    public function setAddItemRequestContainer(?array $addItemRequestContainer = null): self
     {
         // validation for constraint: array
         if ('' !== ($addItemRequestContainerArrayErrorMessage = self::validateAddItemRequestContainerForArrayConstraintsFromSetAddItemRequestContainer($addItemRequestContainer))) {

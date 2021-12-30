@@ -27,7 +27,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DescriptionTemplateType[]
      */
-    protected array $DescriptionTemplate = [];
+    protected ?array $DescriptionTemplate = null;
     /**
      * The LayoutTotal
      * Meta information extracted from the WSDL
@@ -44,7 +44,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $ObsoleteLayoutID = [];
+    protected ?array $ObsoleteLayoutID = null;
     /**
      * The ObsoleteThemeID
      * Meta information extracted from the WSDL
@@ -53,7 +53,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $ObsoleteThemeID = [];
+    protected ?array $ObsoleteThemeID = null;
     /**
      * The ThemeGroup
      * Meta information extracted from the WSDL
@@ -63,7 +63,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ThemeGroupType[]
      */
-    protected array $ThemeGroup = [];
+    protected ?array $ThemeGroup = null;
     /**
      * The ThemeTotal
      * Meta information extracted from the WSDL
@@ -87,7 +87,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ThemeGroupType[] $themeGroup
      * @param int $themeTotal
      */
-    public function __construct(array $descriptionTemplate = [], ?int $layoutTotal = null, array $obsoleteLayoutID = [], array $obsoleteThemeID = [], array $themeGroup = [], ?int $themeTotal = null)
+    public function __construct(?array $descriptionTemplate = null, ?int $layoutTotal = null, ?array $obsoleteLayoutID = null, ?array $obsoleteThemeID = null, ?array $themeGroup = null, ?int $themeTotal = null)
     {
         $this
             ->setDescriptionTemplate($descriptionTemplate)
@@ -101,7 +101,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * Get DescriptionTemplate value
      * @return \macropage\ebaysdk\trading\StructType\DescriptionTemplateType[]
      */
-    public function getDescriptionTemplate(): array
+    public function getDescriptionTemplate(): ?array
     {
         return $this->DescriptionTemplate;
     }
@@ -111,8 +111,11 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDescriptionTemplateForArrayConstraintsFromSetDescriptionTemplate(array $values = []): string
+    public static function validateDescriptionTemplateForArrayConstraintsFromSetDescriptionTemplate(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getDescriptionTemplatesResponseTypeDescriptionTemplateItem) {
@@ -134,7 +137,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\DescriptionTemplateType[] $descriptionTemplate
      * @return \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType
      */
-    public function setDescriptionTemplate(array $descriptionTemplate = []): self
+    public function setDescriptionTemplate(?array $descriptionTemplate = null): self
     {
         // validation for constraint: array
         if ('' !== ($descriptionTemplateArrayErrorMessage = self::validateDescriptionTemplateForArrayConstraintsFromSetDescriptionTemplate($descriptionTemplate))) {
@@ -187,7 +190,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * Get ObsoleteLayoutID value
      * @return int[]
      */
-    public function getObsoleteLayoutID(): array
+    public function getObsoleteLayoutID(): ?array
     {
         return $this->ObsoleteLayoutID;
     }
@@ -197,8 +200,11 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateObsoleteLayoutIDForArrayConstraintsFromSetObsoleteLayoutID(array $values = []): string
+    public static function validateObsoleteLayoutIDForArrayConstraintsFromSetObsoleteLayoutID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getDescriptionTemplatesResponseTypeObsoleteLayoutIDItem) {
@@ -220,7 +226,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param int[] $obsoleteLayoutID
      * @return \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType
      */
-    public function setObsoleteLayoutID(array $obsoleteLayoutID = []): self
+    public function setObsoleteLayoutID(?array $obsoleteLayoutID = null): self
     {
         // validation for constraint: array
         if ('' !== ($obsoleteLayoutIDArrayErrorMessage = self::validateObsoleteLayoutIDForArrayConstraintsFromSetObsoleteLayoutID($obsoleteLayoutID))) {
@@ -250,7 +256,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * Get ObsoleteThemeID value
      * @return int[]
      */
-    public function getObsoleteThemeID(): array
+    public function getObsoleteThemeID(): ?array
     {
         return $this->ObsoleteThemeID;
     }
@@ -260,8 +266,11 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateObsoleteThemeIDForArrayConstraintsFromSetObsoleteThemeID(array $values = []): string
+    public static function validateObsoleteThemeIDForArrayConstraintsFromSetObsoleteThemeID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getDescriptionTemplatesResponseTypeObsoleteThemeIDItem) {
@@ -283,7 +292,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param int[] $obsoleteThemeID
      * @return \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType
      */
-    public function setObsoleteThemeID(array $obsoleteThemeID = []): self
+    public function setObsoleteThemeID(?array $obsoleteThemeID = null): self
     {
         // validation for constraint: array
         if ('' !== ($obsoleteThemeIDArrayErrorMessage = self::validateObsoleteThemeIDForArrayConstraintsFromSetObsoleteThemeID($obsoleteThemeID))) {
@@ -313,7 +322,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * Get ThemeGroup value
      * @return \macropage\ebaysdk\trading\StructType\ThemeGroupType[]
      */
-    public function getThemeGroup(): array
+    public function getThemeGroup(): ?array
     {
         return $this->ThemeGroup;
     }
@@ -323,8 +332,11 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateThemeGroupForArrayConstraintsFromSetThemeGroup(array $values = []): string
+    public static function validateThemeGroupForArrayConstraintsFromSetThemeGroup(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getDescriptionTemplatesResponseTypeThemeGroupItem) {
@@ -346,7 +358,7 @@ class GetDescriptionTemplatesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ThemeGroupType[] $themeGroup
      * @return \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType
      */
-    public function setThemeGroup(array $themeGroup = []): self
+    public function setThemeGroup(?array $themeGroup = null): self
     {
         // validation for constraint: array
         if ('' !== ($themeGroupArrayErrorMessage = self::validateThemeGroupForArrayConstraintsFromSetThemeGroup($themeGroup))) {

@@ -70,7 +70,7 @@ class VariationProductListingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    protected array $NameValueList = [];
+    protected ?array $NameValueList = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -91,7 +91,7 @@ class VariationProductListingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?string $productReferenceID = null, array $nameValueList = [], $any = null)
+    public function __construct(?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?string $productReferenceID = null, ?array $nameValueList = null, $any = null)
     {
         $this
             ->setISBN($iSBN)
@@ -197,7 +197,7 @@ class VariationProductListingDetailsType extends AbstractStructBase
      * Get NameValueList value
      * @return \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    public function getNameValueList(): array
+    public function getNameValueList(): ?array
     {
         return $this->NameValueList;
     }
@@ -207,8 +207,11 @@ class VariationProductListingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $variationProductListingDetailsTypeNameValueListItem) {
@@ -230,7 +233,7 @@ class VariationProductListingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType
      */
-    public function setNameValueList(array $nameValueList = []): self
+    public function setNameValueList(?array $nameValueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {

@@ -19,18 +19,18 @@ class DiscountDetailType extends AbstractStructBase
      * The Discount
      * Meta information extracted from the WSDL
      * - documentation: This container indicates the discount type and amount applied to an account entry. <br> <br> <span class="tablenote"><b>Note: </b> The discount type will be shown for any account entry where a discount applies, but the discount
-     * amount will only be shown if the corresponding fee was deducted from a seller payout for a managed payments seller. </span>
+     * amount will only be shown if the corresponding fee was deducted from a seller payout. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DiscountType[]
      */
-    protected array $Discount = [];
+    protected ?array $Discount = null;
     /**
      * Constructor method for DiscountDetailType
      * @uses DiscountDetailType::setDiscount()
      * @param \macropage\ebaysdk\trading\StructType\DiscountType[] $discount
      */
-    public function __construct(array $discount = [])
+    public function __construct(?array $discount = null)
     {
         $this
             ->setDiscount($discount);
@@ -39,7 +39,7 @@ class DiscountDetailType extends AbstractStructBase
      * Get Discount value
      * @return \macropage\ebaysdk\trading\StructType\DiscountType[]
      */
-    public function getDiscount(): array
+    public function getDiscount(): ?array
     {
         return $this->Discount;
     }
@@ -49,8 +49,11 @@ class DiscountDetailType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDiscountForArrayConstraintsFromSetDiscount(array $values = []): string
+    public static function validateDiscountForArrayConstraintsFromSetDiscount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $discountDetailTypeDiscountItem) {
@@ -72,7 +75,7 @@ class DiscountDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DiscountType[] $discount
      * @return \macropage\ebaysdk\trading\StructType\DiscountDetailType
      */
-    public function setDiscount(array $discount = []): self
+    public function setDiscount(?array $discount = null): self
     {
         // validation for constraint: array
         if ('' !== ($discountArrayErrorMessage = self::validateDiscountForArrayConstraintsFromSetDiscount($discount))) {

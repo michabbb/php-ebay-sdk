@@ -19,8 +19,8 @@ class OfferType extends AbstractStructBase
      * The Action
      * Meta information extracted from the WSDL
      * - documentation: Indicates the type of offer being made on the specified listing. If the item is Best Offer-enabled and the buyer makes a Best Offer (or a counter offer), then after the <b>PlaceOffer</b> call, the buyer can get the status of the Best
-     * Offer (and a seller-counter-offer, etc.) using the <b>GetBestOffers</b> call. See the <a href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Feature-BestOffer.html">eBay Features Guide</a> for information about Best
-     * Offer-enabled listings and about <b>GetBestOffers</b>.
+     * Offer (and a seller-counter-offer, etc.) using the <b>GetBestOffers</b> call. See the <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Feature-BestOffer.html">eBay Features Guide</a> for information about
+     * Best Offer-enabled listings and about <b>GetBestOffers</b>.
      * - minOccurs: 0
      * @var string|null
      */

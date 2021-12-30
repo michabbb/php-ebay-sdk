@@ -29,7 +29,7 @@ class VerifiedUserRequirementsDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $FeedbackScore = [];
+    protected ?array $FeedbackScore = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -44,7 +44,7 @@ class VerifiedUserRequirementsDetailsType extends AbstractStructBase
      * @param int[] $feedbackScore
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $verifiedUser = null, array $feedbackScore = [], $any = null)
+    public function __construct(?bool $verifiedUser = null, ?array $feedbackScore = null, $any = null)
     {
         $this
             ->setVerifiedUser($verifiedUser)
@@ -78,7 +78,7 @@ class VerifiedUserRequirementsDetailsType extends AbstractStructBase
      * Get FeedbackScore value
      * @return int[]
      */
-    public function getFeedbackScore(): array
+    public function getFeedbackScore(): ?array
     {
         return $this->FeedbackScore;
     }
@@ -88,8 +88,11 @@ class VerifiedUserRequirementsDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeedbackScoreForArrayConstraintsFromSetFeedbackScore(array $values = []): string
+    public static function validateFeedbackScoreForArrayConstraintsFromSetFeedbackScore(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $verifiedUserRequirementsDetailsTypeFeedbackScoreItem) {
@@ -111,7 +114,7 @@ class VerifiedUserRequirementsDetailsType extends AbstractStructBase
      * @param int[] $feedbackScore
      * @return \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType
      */
-    public function setFeedbackScore(array $feedbackScore = []): self
+    public function setFeedbackScore(?array $feedbackScore = null): self
     {
         // validation for constraint: array
         if ('' !== ($feedbackScoreArrayErrorMessage = self::validateFeedbackScoreForArrayConstraintsFromSetFeedbackScore($feedbackScore))) {

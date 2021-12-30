@@ -64,7 +64,7 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureSetMemberType[]
      */
-    protected array $PictureSetMember = [];
+    protected ?array $PictureSetMember = null;
     /**
      * The ExternalPictureURL
      * Meta information extracted from the WSDL
@@ -109,7 +109,7 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param string $useByDate
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $pictureName = null, ?string $pictureSet = null, ?string $pictureFormat = null, ?string $fullURL = null, ?string $baseURL = null, array $pictureSetMember = [], ?string $externalPictureURL = null, ?string $useByDate = null, $any = null)
+    public function __construct(?string $pictureName = null, ?string $pictureSet = null, ?string $pictureFormat = null, ?string $fullURL = null, ?string $baseURL = null, ?array $pictureSetMember = null, ?string $externalPictureURL = null, ?string $useByDate = null, $any = null)
     {
         $this
             ->setPictureName($pictureName)
@@ -247,7 +247,7 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * Get PictureSetMember value
      * @return \macropage\ebaysdk\trading\StructType\PictureSetMemberType[]
      */
-    public function getPictureSetMember(): array
+    public function getPictureSetMember(): ?array
     {
         return $this->PictureSetMember;
     }
@@ -257,8 +257,11 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureSetMemberForArrayConstraintsFromSetPictureSetMember(array $values = []): string
+    public static function validatePictureSetMemberForArrayConstraintsFromSetPictureSetMember(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $siteHostedPictureDetailsTypePictureSetMemberItem) {
@@ -280,7 +283,7 @@ class SiteHostedPictureDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureSetMemberType[] $pictureSetMember
      * @return \macropage\ebaysdk\trading\StructType\SiteHostedPictureDetailsType
      */
-    public function setPictureSetMember(array $pictureSetMember = []): self
+    public function setPictureSetMember(?array $pictureSetMember = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureSetMemberArrayErrorMessage = self::validatePictureSetMemberForArrayConstraintsFromSetPictureSetMember($pictureSetMember))) {

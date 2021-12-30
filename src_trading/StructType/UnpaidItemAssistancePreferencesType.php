@@ -70,7 +70,7 @@ class UnpaidItemAssistancePreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludedUser = [];
+    protected ?array $ExcludedUser = null;
     /**
      * The AutoOptDonationRefund
      * Meta information extracted from the WSDL
@@ -104,7 +104,7 @@ class UnpaidItemAssistancePreferencesType extends AbstractStructBase
      * @param bool $autoOptDonationRefund
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $delayBeforeOpeningDispute = null, ?bool $optInStatus = null, ?bool $autoRelist = false, ?bool $removeAllExcludedUsers = false, array $excludedUser = [], ?bool $autoOptDonationRefund = null, $any = null)
+    public function __construct(?int $delayBeforeOpeningDispute = null, ?bool $optInStatus = null, ?bool $autoRelist = false, ?bool $removeAllExcludedUsers = false, ?array $excludedUser = null, ?bool $autoOptDonationRefund = null, $any = null)
     {
         $this
             ->setDelayBeforeOpeningDispute($delayBeforeOpeningDispute)
@@ -211,7 +211,7 @@ class UnpaidItemAssistancePreferencesType extends AbstractStructBase
      * Get ExcludedUser value
      * @return string[]
      */
-    public function getExcludedUser(): array
+    public function getExcludedUser(): ?array
     {
         return $this->ExcludedUser;
     }
@@ -221,8 +221,11 @@ class UnpaidItemAssistancePreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludedUserForArrayConstraintsFromSetExcludedUser(array $values = []): string
+    public static function validateExcludedUserForArrayConstraintsFromSetExcludedUser(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $unpaidItemAssistancePreferencesTypeExcludedUserItem) {
@@ -244,7 +247,7 @@ class UnpaidItemAssistancePreferencesType extends AbstractStructBase
      * @param string[] $excludedUser
      * @return \macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType
      */
-    public function setExcludedUser(array $excludedUser = []): self
+    public function setExcludedUser(?array $excludedUser = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludedUserArrayErrorMessage = self::validateExcludedUserForArrayConstraintsFromSetExcludedUser($excludedUser))) {

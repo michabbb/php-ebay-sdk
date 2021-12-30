@@ -25,13 +25,13 @@ class GetCharitiesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharityInfoType[]
      */
-    protected array $Charity = [];
+    protected ?array $Charity = null;
     /**
      * Constructor method for GetCharitiesResponseType
      * @uses GetCharitiesResponseType::setCharity()
      * @param \macropage\ebaysdk\trading\StructType\CharityInfoType[] $charity
      */
-    public function __construct(array $charity = [])
+    public function __construct(?array $charity = null)
     {
         $this
             ->setCharity($charity);
@@ -40,7 +40,7 @@ class GetCharitiesResponseType extends AbstractResponseType
      * Get Charity value
      * @return \macropage\ebaysdk\trading\StructType\CharityInfoType[]
      */
-    public function getCharity(): array
+    public function getCharity(): ?array
     {
         return $this->Charity;
     }
@@ -50,8 +50,11 @@ class GetCharitiesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharityForArrayConstraintsFromSetCharity(array $values = []): string
+    public static function validateCharityForArrayConstraintsFromSetCharity(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCharitiesResponseTypeCharityItem) {
@@ -73,7 +76,7 @@ class GetCharitiesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CharityInfoType[] $charity
      * @return \macropage\ebaysdk\trading\StructType\GetCharitiesResponseType
      */
-    public function setCharity(array $charity = []): self
+    public function setCharity(?array $charity = null): self
     {
         // validation for constraint: array
         if ('' !== ($charityArrayErrorMessage = self::validateCharityForArrayConstraintsFromSetCharity($charity))) {

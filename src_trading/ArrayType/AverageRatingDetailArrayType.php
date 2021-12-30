@@ -23,13 +23,13 @@ class AverageRatingDetailArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AverageRatingDetailsType[]
      */
-    protected array $AverageRatingDetails = [];
+    protected ?array $AverageRatingDetails = null;
     /**
      * Constructor method for AverageRatingDetailArrayType
      * @uses AverageRatingDetailArrayType::setAverageRatingDetails()
      * @param \macropage\ebaysdk\trading\StructType\AverageRatingDetailsType[] $averageRatingDetails
      */
-    public function __construct(array $averageRatingDetails = [])
+    public function __construct(?array $averageRatingDetails = null)
     {
         $this
             ->setAverageRatingDetails($averageRatingDetails);
@@ -38,7 +38,7 @@ class AverageRatingDetailArrayType extends AbstractStructArrayBase
      * Get AverageRatingDetails value
      * @return \macropage\ebaysdk\trading\StructType\AverageRatingDetailsType[]
      */
-    public function getAverageRatingDetails(): array
+    public function getAverageRatingDetails(): ?array
     {
         return $this->AverageRatingDetails;
     }
@@ -48,8 +48,11 @@ class AverageRatingDetailArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails(array $values = []): string
+    public static function validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $averageRatingDetailArrayTypeAverageRatingDetailsItem) {
@@ -71,7 +74,7 @@ class AverageRatingDetailArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\AverageRatingDetailsType[] $averageRatingDetails
      * @return \macropage\ebaysdk\trading\ArrayType\AverageRatingDetailArrayType
      */
-    public function setAverageRatingDetails(array $averageRatingDetails = []): self
+    public function setAverageRatingDetails(?array $averageRatingDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($averageRatingDetailsArrayErrorMessage = self::validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails($averageRatingDetails))) {

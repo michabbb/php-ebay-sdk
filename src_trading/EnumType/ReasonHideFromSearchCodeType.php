@@ -28,7 +28,7 @@ class ReasonHideFromSearchCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This value indicates that the listing is currently hidden from search because the quantity in the listing is zero. However, the listing is still alive and will reappear in the search results when the quantity is set to something
      * greater than zero. The 'Out-of-stock' option is set by the seller at the account level. This option can be enabled in My eBay Site Preferences, or the seller can use the <a
-     * href="http://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">OutOfStockControlPreference</a> field in the <b>SetUserPreferences</b> call.
+     * href="https://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">OutOfStockControlPreference</a> field in the <b>SetUserPreferences</b> call.
      * @return string 'OutOfStock'
      */
     const VALUE_OUT_OF_STOCK = 'OutOfStock';

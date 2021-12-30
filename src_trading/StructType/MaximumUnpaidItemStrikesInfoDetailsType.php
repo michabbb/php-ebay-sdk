@@ -31,7 +31,7 @@ class MaximumUnpaidItemStrikesInfoDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesDurationDetailsType[]
      */
-    protected array $MaximumUnpaidItemStrikesDuration = [];
+    protected ?array $MaximumUnpaidItemStrikesDuration = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class MaximumUnpaidItemStrikesInfoDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesDurationDetailsType[] $maximumUnpaidItemStrikesDuration
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesCountDetailsType $maximumUnpaidItemStrikesCount = null, array $maximumUnpaidItemStrikesDuration = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesCountDetailsType $maximumUnpaidItemStrikesCount = null, ?array $maximumUnpaidItemStrikesDuration = null, $any = null)
     {
         $this
             ->setMaximumUnpaidItemStrikesCount($maximumUnpaidItemStrikesCount)
@@ -76,7 +76,7 @@ class MaximumUnpaidItemStrikesInfoDetailsType extends AbstractStructBase
      * Get MaximumUnpaidItemStrikesDuration value
      * @return \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesDurationDetailsType[]
      */
-    public function getMaximumUnpaidItemStrikesDuration(): array
+    public function getMaximumUnpaidItemStrikesDuration(): ?array
     {
         return $this->MaximumUnpaidItemStrikesDuration;
     }
@@ -86,8 +86,11 @@ class MaximumUnpaidItemStrikesInfoDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMaximumUnpaidItemStrikesDurationForArrayConstraintsFromSetMaximumUnpaidItemStrikesDuration(array $values = []): string
+    public static function validateMaximumUnpaidItemStrikesDurationForArrayConstraintsFromSetMaximumUnpaidItemStrikesDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $maximumUnpaidItemStrikesInfoDetailsTypeMaximumUnpaidItemStrikesDurationItem) {
@@ -109,7 +112,7 @@ class MaximumUnpaidItemStrikesInfoDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesDurationDetailsType[] $maximumUnpaidItemStrikesDuration
      * @return \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesInfoDetailsType
      */
-    public function setMaximumUnpaidItemStrikesDuration(array $maximumUnpaidItemStrikesDuration = []): self
+    public function setMaximumUnpaidItemStrikesDuration(?array $maximumUnpaidItemStrikesDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($maximumUnpaidItemStrikesDurationArrayErrorMessage = self::validateMaximumUnpaidItemStrikesDurationForArrayConstraintsFromSetMaximumUnpaidItemStrikesDuration($maximumUnpaidItemStrikesDuration))) {

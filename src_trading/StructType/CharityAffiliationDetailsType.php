@@ -23,13 +23,13 @@ class CharityAffiliationDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailType[]
      */
-    protected array $CharityAffiliationDetail = [];
+    protected ?array $CharityAffiliationDetail = null;
     /**
      * Constructor method for CharityAffiliationDetailsType
      * @uses CharityAffiliationDetailsType::setCharityAffiliationDetail()
      * @param \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailType[] $charityAffiliationDetail
      */
-    public function __construct(array $charityAffiliationDetail = [])
+    public function __construct(?array $charityAffiliationDetail = null)
     {
         $this
             ->setCharityAffiliationDetail($charityAffiliationDetail);
@@ -38,7 +38,7 @@ class CharityAffiliationDetailsType extends AbstractStructBase
      * Get CharityAffiliationDetail value
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailType[]
      */
-    public function getCharityAffiliationDetail(): array
+    public function getCharityAffiliationDetail(): ?array
     {
         return $this->CharityAffiliationDetail;
     }
@@ -48,8 +48,11 @@ class CharityAffiliationDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharityAffiliationDetailForArrayConstraintsFromSetCharityAffiliationDetail(array $values = []): string
+    public static function validateCharityAffiliationDetailForArrayConstraintsFromSetCharityAffiliationDetail(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $charityAffiliationDetailsTypeCharityAffiliationDetailItem) {
@@ -71,7 +74,7 @@ class CharityAffiliationDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailType[] $charityAffiliationDetail
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailsType
      */
-    public function setCharityAffiliationDetail(array $charityAffiliationDetail = []): self
+    public function setCharityAffiliationDetail(?array $charityAffiliationDetail = null): self
     {
         // validation for constraint: array
         if ('' !== ($charityAffiliationDetailArrayErrorMessage = self::validateCharityAffiliationDetailForArrayConstraintsFromSetCharityAffiliationDetail($charityAffiliationDetail))) {

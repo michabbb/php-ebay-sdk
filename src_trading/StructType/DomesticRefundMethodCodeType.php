@@ -23,7 +23,7 @@ class DomesticRefundMethodCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DomesticRefundMethod = [];
+    protected ?array $DomesticRefundMethod = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class DomesticRefundMethodCodeType extends AbstractStructBase
      * @param string[] $domesticRefundMethod
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $domesticRefundMethod = [], $any = null)
+    public function __construct(?array $domesticRefundMethod = null, $any = null)
     {
         $this
             ->setDomesticRefundMethod($domesticRefundMethod)
@@ -46,7 +46,7 @@ class DomesticRefundMethodCodeType extends AbstractStructBase
      * Get DomesticRefundMethod value
      * @return string[]
      */
-    public function getDomesticRefundMethod(): array
+    public function getDomesticRefundMethod(): ?array
     {
         return $this->DomesticRefundMethod;
     }
@@ -56,8 +56,11 @@ class DomesticRefundMethodCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomesticRefundMethodForArrayConstraintsFromSetDomesticRefundMethod(array $values = []): string
+    public static function validateDomesticRefundMethodForArrayConstraintsFromSetDomesticRefundMethod(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $domesticRefundMethodCodeTypeDomesticRefundMethodItem) {
@@ -81,7 +84,7 @@ class DomesticRefundMethodCodeType extends AbstractStructBase
      * @param string[] $domesticRefundMethod
      * @return \macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType
      */
-    public function setDomesticRefundMethod(array $domesticRefundMethod = []): self
+    public function setDomesticRefundMethod(?array $domesticRefundMethod = null): self
     {
         // validation for constraint: array
         if ('' !== ($domesticRefundMethodArrayErrorMessage = self::validateDomesticRefundMethodForArrayConstraintsFromSetDomesticRefundMethod($domesticRefundMethod))) {

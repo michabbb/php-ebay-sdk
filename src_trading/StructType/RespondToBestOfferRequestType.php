@@ -37,7 +37,7 @@ class RespondToBestOfferRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $BestOfferID = [];
+    protected ?array $BestOfferID = null;
     /**
      * The Action
      * Meta information extracted from the WSDL
@@ -90,7 +90,7 @@ class RespondToBestOfferRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\AmountType $counterOfferPrice
      * @param int $counterOfferQuantity
      */
-    public function __construct(?string $itemID = null, array $bestOfferID = [], ?string $action = null, ?string $sellerResponse = null, ?\macropage\ebaysdk\trading\StructType\AmountType $counterOfferPrice = null, ?int $counterOfferQuantity = null)
+    public function __construct(?string $itemID = null, ?array $bestOfferID = null, ?string $action = null, ?string $sellerResponse = null, ?\macropage\ebaysdk\trading\StructType\AmountType $counterOfferPrice = null, ?int $counterOfferQuantity = null)
     {
         $this
             ->setItemID($itemID)
@@ -127,7 +127,7 @@ class RespondToBestOfferRequestType extends AbstractRequestType
      * Get BestOfferID value
      * @return string[]
      */
-    public function getBestOfferID(): array
+    public function getBestOfferID(): ?array
     {
         return $this->BestOfferID;
     }
@@ -137,8 +137,11 @@ class RespondToBestOfferRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBestOfferIDForArrayConstraintsFromSetBestOfferID(array $values = []): string
+    public static function validateBestOfferIDForArrayConstraintsFromSetBestOfferID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $respondToBestOfferRequestTypeBestOfferIDItem) {
@@ -160,7 +163,7 @@ class RespondToBestOfferRequestType extends AbstractRequestType
      * @param string[] $bestOfferID
      * @return \macropage\ebaysdk\trading\StructType\RespondToBestOfferRequestType
      */
-    public function setBestOfferID(array $bestOfferID = []): self
+    public function setBestOfferID(?array $bestOfferID = null): self
     {
         // validation for constraint: array
         if ('' !== ($bestOfferIDArrayErrorMessage = self::validateBestOfferIDForArrayConstraintsFromSetBestOfferID($bestOfferID))) {

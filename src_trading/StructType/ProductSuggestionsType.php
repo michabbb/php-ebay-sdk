@@ -24,7 +24,7 @@ class ProductSuggestionsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductSuggestionType[]
      */
-    protected array $ProductSuggestion = [];
+    protected ?array $ProductSuggestion = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -37,7 +37,7 @@ class ProductSuggestionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductSuggestionType[] $productSuggestion
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $productSuggestion = [], $any = null)
+    public function __construct(?array $productSuggestion = null, $any = null)
     {
         $this
             ->setProductSuggestion($productSuggestion)
@@ -47,7 +47,7 @@ class ProductSuggestionsType extends AbstractStructBase
      * Get ProductSuggestion value
      * @return \macropage\ebaysdk\trading\StructType\ProductSuggestionType[]
      */
-    public function getProductSuggestion(): array
+    public function getProductSuggestion(): ?array
     {
         return $this->ProductSuggestion;
     }
@@ -57,8 +57,11 @@ class ProductSuggestionsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductSuggestionForArrayConstraintsFromSetProductSuggestion(array $values = []): string
+    public static function validateProductSuggestionForArrayConstraintsFromSetProductSuggestion(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productSuggestionsTypeProductSuggestionItem) {
@@ -80,7 +83,7 @@ class ProductSuggestionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductSuggestionType[] $productSuggestion
      * @return \macropage\ebaysdk\trading\StructType\ProductSuggestionsType
      */
-    public function setProductSuggestion(array $productSuggestion = []): self
+    public function setProductSuggestion(?array $productSuggestion = null): self
     {
         // validation for constraint: array
         if ('' !== ($productSuggestionArrayErrorMessage = self::validateProductSuggestionForArrayConstraintsFromSetProductSuggestion($productSuggestion))) {

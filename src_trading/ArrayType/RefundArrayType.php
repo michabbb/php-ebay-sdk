@@ -25,13 +25,13 @@ class RefundArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundType[]
      */
-    protected array $Refund = [];
+    protected ?array $Refund = null;
     /**
      * Constructor method for RefundArrayType
      * @uses RefundArrayType::setRefund()
      * @param \macropage\ebaysdk\trading\StructType\RefundType[] $refund
      */
-    public function __construct(array $refund = [])
+    public function __construct(?array $refund = null)
     {
         $this
             ->setRefund($refund);
@@ -40,7 +40,7 @@ class RefundArrayType extends AbstractStructArrayBase
      * Get Refund value
      * @return \macropage\ebaysdk\trading\StructType\RefundType[]
      */
-    public function getRefund(): array
+    public function getRefund(): ?array
     {
         return $this->Refund;
     }
@@ -50,8 +50,11 @@ class RefundArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundForArrayConstraintsFromSetRefund(array $values = []): string
+    public static function validateRefundForArrayConstraintsFromSetRefund(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $refundArrayTypeRefundItem) {
@@ -73,7 +76,7 @@ class RefundArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\RefundType[] $refund
      * @return \macropage\ebaysdk\trading\ArrayType\RefundArrayType
      */
-    public function setRefund(array $refund = []): self
+    public function setRefund(?array $refund = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundArrayErrorMessage = self::validateRefundForArrayConstraintsFromSetRefund($refund))) {

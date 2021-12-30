@@ -9,10 +9,10 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisputeMessageSourceCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Defines who added a message to a dispute. Used for both <i>Unpaid Item</i> cases and <i>Item Not Received</i> disputes initiated by buyers through PayPal's platform. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not
- * Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a
- * href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to
- * retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Enumeration type that defines the parties who may be the source of a message related to an <i>Unpaid Item</i> case. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now
+ * only retrieve Unpaid Item cases. They are no longer used to retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and
+ * these calls do not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management
+ * calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Enumerations
  */
 class DisputeMessageSourceCodeType extends AbstractStructEnumBase
@@ -20,14 +20,14 @@ class DisputeMessageSourceCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Buyer'
      * Meta information extracted from the WSDL
-     * - documentation: The buyer of the item under dispute.
+     * - documentation: The buyer involved in the Unpaid Item case.
      * @return string 'Buyer'
      */
     const VALUE_BUYER = 'Buyer';
     /**
      * Constant for value 'Seller'
      * Meta information extracted from the WSDL
-     * - documentation: The seller of the item under dispute.
+     * - documentation: The seller involved in the Unpaid Item case.
      * @return string 'Seller'
      */
     const VALUE_SELLER = 'Seller';

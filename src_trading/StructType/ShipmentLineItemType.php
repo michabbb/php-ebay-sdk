@@ -23,7 +23,7 @@ class ShipmentLineItemType extends AbstractStructBase
      * - minOccurs: 1
      * @var \macropage\ebaysdk\trading\StructType\LineItemType[]
      */
-    protected array $LineItem = [];
+    protected array $LineItem;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -56,8 +56,11 @@ class ShipmentLineItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateLineItemForArrayConstraintsFromSetLineItem(array $values = []): string
+    public static function validateLineItemForArrayConstraintsFromSetLineItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shipmentLineItemTypeLineItemItem) {

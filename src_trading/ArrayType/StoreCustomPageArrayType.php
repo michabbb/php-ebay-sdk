@@ -23,13 +23,13 @@ class StoreCustomPageArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomPageType[]
      */
-    protected array $CustomPage = [];
+    protected ?array $CustomPage = null;
     /**
      * Constructor method for StoreCustomPageArrayType
      * @uses StoreCustomPageArrayType::setCustomPage()
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomPageType[] $customPage
      */
-    public function __construct(array $customPage = [])
+    public function __construct(?array $customPage = null)
     {
         $this
             ->setCustomPage($customPage);
@@ -38,7 +38,7 @@ class StoreCustomPageArrayType extends AbstractStructArrayBase
      * Get CustomPage value
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomPageType[]
      */
-    public function getCustomPage(): array
+    public function getCustomPage(): ?array
     {
         return $this->CustomPage;
     }
@@ -48,8 +48,11 @@ class StoreCustomPageArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCustomPageForArrayConstraintsFromSetCustomPage(array $values = []): string
+    public static function validateCustomPageForArrayConstraintsFromSetCustomPage(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeCustomPageArrayTypeCustomPageItem) {
@@ -71,7 +74,7 @@ class StoreCustomPageArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomPageType[] $customPage
      * @return \macropage\ebaysdk\trading\ArrayType\StoreCustomPageArrayType
      */
-    public function setCustomPage(array $customPage = []): self
+    public function setCustomPage(?array $customPage = null): self
     {
         // validation for constraint: array
         if ('' !== ($customPageArrayErrorMessage = self::validateCustomPageForArrayConstraintsFromSetCustomPage($customPage))) {

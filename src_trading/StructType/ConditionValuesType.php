@@ -18,16 +18,20 @@ class ConditionValuesType extends AbstractStructBase
     /**
      * The Condition
      * Meta information extracted from the WSDL
-     * - documentation: This repeatable container shows the display name and unique identifier of each item condition supported by the corresponding eBay category. <br> <br> <span class="tablenote"><strong>Note:</strong> In all eBay marketplaces, Condition
-     * ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. Any seller who is not eligible for this feature
-     * will be blocked if they try to create a new listing or revise an existing listing with this item condition. Any active listings on any eBay marketplace that had 'Manufacturer Refurbished' as the item condition should have been automatically updated
-     * by eBay to the 'Seller Refurbished' item condition (Condition ID 2500). <br> <br> Any seller that is interested in eligibility requirements to list with 'Certified Refurbished' should see the <a
-     * href="https://pages.ebay.com/seller-center/listing-and-marketing/certified-refurbished-program.html" target="_blank">Certified refurbished program</a> page in Seller Center. </span>
+     * - documentation: This repeatable container shows the display name and unique identifier of each item condition supported by the corresponding eBay category. All refurbished item conditions are returned in the <br> <br> <span
+     * class="tablenote"><strong>Note:</strong> In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified - Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified - Refurbished', a seller must be
+     * pre-qualified by eBay for this feature. Any seller who is not eligible for this feature will be blocked if they try to create a new listing or revise an existing listing with this item condition. <br> <br> Any seller that is interested in eligibility
+     * requirements to list with 'Certified - Refurbished' should see the <a href="https://pages.ebay.com/seller-center/listing-and-marketing/certified-refurbished-program.html" target="_blank">Certified refurbished program</a> page in Seller Center.
+     * </span> <br> <span class="tablenote"><strong>Note:</strong> As of September 1, 2021, condition ID 2500 ('Seller Refurbished') can no longer be used in the <strong>Cell Phones & Smartphones</strong> category (category ID 9355) for the following
+     * marketplaces: US, Canada, UK, Germany, and Australia. The 'Seller Refurbished' item condition will be replaced by one of three new refurbished values, which include condition ID 2010 ('Excellent - Refurbished'), condition ID 2020 ('Very Good -
+     * Refurbished'), and condition ID 2030 ('Good - Refurbished'). Similar to the condition ID 2000 ('Certified - Refurbished') item condition, the three new seller refurbished item conditions will be returned under the
+     * <strong>Category.SpecialFeatures</strong> container. To use any of these new refurbished item conditions in category 9355, sellers must go through an application and qualification process. The new item condition values appearing in the
+     * <strong>Category.SpecialFeatures</strong> container does not necessarily mean that a seller is eligible to list in category 9355 with these item conditions. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ConditionType[]
      */
-    protected array $Condition = [];
+    protected ?array $Condition = null;
     /**
      * The ConditionHelpURL
      * Meta information extracted from the WSDL
@@ -51,7 +55,7 @@ class ConditionValuesType extends AbstractStructBase
      * @param string $conditionHelpURL
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $condition = [], ?string $conditionHelpURL = null, $any = null)
+    public function __construct(?array $condition = null, ?string $conditionHelpURL = null, $any = null)
     {
         $this
             ->setCondition($condition)
@@ -62,7 +66,7 @@ class ConditionValuesType extends AbstractStructBase
      * Get Condition value
      * @return \macropage\ebaysdk\trading\StructType\ConditionType[]
      */
-    public function getCondition(): array
+    public function getCondition(): ?array
     {
         return $this->Condition;
     }
@@ -72,8 +76,11 @@ class ConditionValuesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateConditionForArrayConstraintsFromSetCondition(array $values = []): string
+    public static function validateConditionForArrayConstraintsFromSetCondition(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $conditionValuesTypeConditionItem) {
@@ -95,7 +102,7 @@ class ConditionValuesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ConditionType[] $condition
      * @return \macropage\ebaysdk\trading\StructType\ConditionValuesType
      */
-    public function setCondition(array $condition = []): self
+    public function setCondition(?array $condition = null): self
     {
         // validation for constraint: array
         if ('' !== ($conditionArrayErrorMessage = self::validateConditionForArrayConstraintsFromSetCondition($condition))) {

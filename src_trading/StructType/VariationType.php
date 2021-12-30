@@ -42,7 +42,7 @@ class VariationType extends AbstractStructBase
      * The Quantity
      * Meta information extracted from the WSDL
      * - documentation: This value indicates the quantity of the specific variation that are available for purchase. If you set <b>Variation.Quantity</b> to <code>0</code> when you create, revise, or relist an item listing, the variation is dropped from the
-     * listing. To prevent this, you can set <a href="http://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences.OutOfStockControlPreference</a> to <code>true</code>. <br/><br/>
+     * listing. To prevent this, you can set <a href="https://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences.OutOfStockControlPreference</a> to <code>true</code>. <br/><br/>
      * For <b>GetItem</b> (and other related calls that retrieve the Item object), the <b>Variation.Quantity</b> value indicates the total quantity associated with the variation, including the quantity available and the quantity sold. To calculate the
      * quantity available for sale, subtract <b>SellingStatus.QuantitySold</b> from this value.<br> <br> <b>For RelistFixedPriceItem:</b> <ul> <li>For an item variation that had an available quantity greater than <code>0</code> when the listing ended, the
      * <b>Quantity</b> value of the item variation for the newly relisted item is set to the actual quantity available. For item variations, there is actually no <b>QuantityAvailable</b> field, but this value may be derived if you look at the corresponding
@@ -52,11 +52,11 @@ class VariationType extends AbstractStructBase
      * <b>Variation.Quantity</b> field of a relist call. Alternatively, you can update the correct quantity available by using a <b>ReviseInventoryStatus</b> call and passing in a <b>Quantity</b> value, while also making sure to pass in the correct
      * <b>SKU</b> value(s) to identify the correct item variation. A <b>ReviseInventoryStatus</b> call can be used to revise the quantity of up to four single item listings and/or item variations (from the same or different listings). <br> <br> <b>For
      * ReviseFixedPriceItem:</b> You can revise a variation's quantity at any time, even if it has purchases. However, unless you set the <a
-     * href="http://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">OutOfStockControlPreference</a> boolean field of the <b>SetUserPreferences</b> call to <code>true</code>, at least one
+     * href="https://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">OutOfStockControlPreference</a> boolean field of the <b>SetUserPreferences</b> call to <code>true</code>, at least one
      * variation must remain with a non-zero quantity in order for the listing to remain active. If you set the <b>OutOfStockControlPreference</b> field to <code>true</code>, a multiple-variation listing will remain active but hidden from search even if the
      * quantity of all variations in the listing is set to <code>0</code>. When you modify a variation during revise or relist, you need to include both its <b>StartPrice</b> and <b>Quantity</b>. If you revise the <b>Quantity</b> value for a variation after
      * items have already sold, specify the quantity available for sale. (eBay will automatically add the quantity sold to the value you specify.) If you set the quantity to <code>0</code> and the variation has no purchases, the variation may be dropped
-     * from the listing. <br> <br> <b>For GetSellerTransactions:</b> See <b>Item.Quantity</b> instead.<br> <br> See the <a href="http://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Variations-Updating.html">eBay Features
+     * from the listing. <br> <br> <b>For GetSellerTransactions:</b> See <b>Item.Quantity</b> instead.<br> <br> See the <a href="https://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Variations-Updating.html">eBay Features
      * Guide</a> for more details about setting and modifying a variation's quantity. <br><br> <span class="tablenote"><b>Note:</b> The number in the <b>Variation.Quantity</b> field represents the current quantity of the item variation that is available
      * using the "Ship to home" fulfillment method. This number does not take into account any quantity of the item variation that is available through "local" fulfillment methods such as In-Store Pickup or Click and Collect. This is due to the fact that
      * there is no current implementation (or API field) where the seller informs eBay about the quantity of item variations available through each local fulfillment method. In the case where a listing is only offering the item variations through a local
@@ -168,6 +168,17 @@ class VariationType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $VariationProductListingDetails = null;
     /**
+     * The VariationExtendedProducerResponsibility
+     * Meta information extracted from the WSDL
+     * - documentation: <span class="tablenote"><b>Note:</b> Support for extended producer responsibility regulations and custom policies will become active mid-December 2021. Additional resources such as the custom policies resource (for the <b>Account
+     * API</b>), the <b>getExtendedProducerResponsibilityPolicies</b> method (for the <b>Sell Metadata API</b>), and the <a href="https://www.ebay.com/help/selling/custom-policies/custom-policies?id=5311" target="_blank">Custom Policies</a> help page will
+     * also become active.</span> This container defines variation-specific Extended Producer Responsibility information, specifically the <strong>EcoParticipationFee</strong>.
+     * - maxOccurs: 1
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $VariationExtendedProducerResponsibility = null;
+    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -187,6 +198,7 @@ class VariationType extends AbstractStructBase
      * @uses VariationType::setPrivateNotes()
      * @uses VariationType::setDiscountPriceInfo()
      * @uses VariationType::setVariationProductListingDetails()
+     * @uses VariationType::setVariationExtendedProducerResponsibility()
      * @uses VariationType::setAny()
      * @param string $sKU
      * @param \macropage\ebaysdk\trading\StructType\AmountType $startPrice
@@ -201,9 +213,10 @@ class VariationType extends AbstractStructBase
      * @param string $privateNotes
      * @param \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo
      * @param \macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails
+     * @param \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?int $unitsAvailable = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, $any = null)
+    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?int $unitsAvailable = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility = null, $any = null)
     {
         $this
             ->setSKU($sKU)
@@ -219,6 +232,7 @@ class VariationType extends AbstractStructBase
             ->setPrivateNotes($privateNotes)
             ->setDiscountPriceInfo($discountPriceInfo)
             ->setVariationProductListingDetails($variationProductListingDetails)
+            ->setVariationExtendedProducerResponsibility($variationExtendedProducerResponsibility)
             ->setAny($any);
     }
     /**
@@ -497,6 +511,25 @@ class VariationType extends AbstractStructBase
     public function setVariationProductListingDetails(?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null): self
     {
         $this->VariationProductListingDetails = $variationProductListingDetails;
+        
+        return $this;
+    }
+    /**
+     * Get VariationExtendedProducerResponsibility value
+     * @return \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType|null
+     */
+    public function getVariationExtendedProducerResponsibility(): ?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType
+    {
+        return $this->VariationExtendedProducerResponsibility;
+    }
+    /**
+     * Set VariationExtendedProducerResponsibility value
+     * @param \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility
+     * @return \macropage\ebaysdk\trading\StructType\VariationType
+     */
+    public function setVariationExtendedProducerResponsibility(?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility = null): self
+    {
+        $this->VariationExtendedProducerResponsibility = $variationExtendedProducerResponsibility;
         
         return $this;
     }

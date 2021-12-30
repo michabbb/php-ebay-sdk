@@ -72,7 +72,7 @@ class FindProductsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\CatalogProductType[]
      */
-    protected array $Product = [];
+    protected ?array $Product = null;
     /**
      * The TotalProducts
      * Meta information extracted from the WSDL
@@ -107,7 +107,7 @@ class FindProductsResponseType extends AbstractResponseType
      * @param int $totalProducts
      * @param bool $duplicateItems
      */
-    public function __construct(?int $approximatePages = null, ?bool $moreResults = null, ?\macropage\ebaysdk\shopping\StructType\DomainHistogramType $domainHistogram = null, ?int $pageNumber = null, array $product = [], ?int $totalProducts = null, ?bool $duplicateItems = null)
+    public function __construct(?int $approximatePages = null, ?bool $moreResults = null, ?\macropage\ebaysdk\shopping\StructType\DomainHistogramType $domainHistogram = null, ?int $pageNumber = null, ?array $product = null, ?int $totalProducts = null, ?bool $duplicateItems = null)
     {
         $this
             ->setApproximatePages($approximatePages)
@@ -210,7 +210,7 @@ class FindProductsResponseType extends AbstractResponseType
      * Get Product value
      * @return \macropage\ebaysdk\shopping\StructType\CatalogProductType[]
      */
-    public function getProduct(): array
+    public function getProduct(): ?array
     {
         return $this->Product;
     }
@@ -220,8 +220,11 @@ class FindProductsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductForArrayConstraintsFromSetProduct(array $values = []): string
+    public static function validateProductForArrayConstraintsFromSetProduct(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $findProductsResponseTypeProductItem) {
@@ -243,7 +246,7 @@ class FindProductsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\shopping\StructType\CatalogProductType[] $product
      * @return \macropage\ebaysdk\shopping\StructType\FindProductsResponseType
      */
-    public function setProduct(array $product = []): self
+    public function setProduct(?array $product = null): self
     {
         // validation for constraint: array
         if ('' !== ($productArrayErrorMessage = self::validateProductForArrayConstraintsFromSetProduct($product))) {

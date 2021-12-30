@@ -42,7 +42,7 @@ class SellerType extends AbstractStructBase
      * The CheckoutEnabled
      * Meta information extracted from the WSDL
      * - documentation: This flag indicates whether or not the seller's Checkout Enabled preference is turned on (at account level or at listing level). This preference is managed through Payment Preferences in My eBay. If this preference is enabled, a Pay
-     * Now button will appear in checkout flow pages and in the email notifications that are sent to buyers. This preferance is enabled by default if PayPal is one of the payment methods.
+     * Now button will appear in checkout flow pages and in the email notifications that are sent to buyers.
      * @var bool|null
      */
     protected ?bool $CheckoutEnabled = null;
@@ -57,7 +57,7 @@ class SellerType extends AbstractStructBase
     /**
      * The GoodStanding
      * Meta information extracted from the WSDL
-     * - documentation: If true, indicates that the user is in good standing with eBay. (One of the requirements for listing a new item with Immediate Payment.)
+     * - documentation: If true, indicates that the user is in good standing with eBay. (One of the requirements for listing a new item with immediate payment.)
      * @var bool|null
      */
     protected ?bool $GoodStanding = null;
@@ -105,7 +105,7 @@ class SellerType extends AbstractStructBase
     /**
      * The SchedulingInfo
      * Meta information extracted from the WSDL
-     * - documentation: Container for scheduling limits for the user. Conveys the minimum and maximum minutes the user may schedule listings in advance, as well as the maximum number of items the user may schedule.
+     * - documentation: Container for scheduling limits for the user. Conveys the minimum and maximum minutes the user may schedule listings in advance, as well as the maximum number of items the user may schedule at any given time.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SchedulingInfoType|null
      */
@@ -120,9 +120,7 @@ class SellerType extends AbstractStructBase
     /**
      * The StoreURL
      * Meta information extracted from the WSDL
-     * - documentation: The URL for the seller's eBay Store. This field is only returned if the seller is a store owner. To determine if a seller is a Store owner, check for the <b>User.SellerInfo.StoreOwner</b> and a value of true. The eBay Stores domain
-     * that is returned in this field is based on the <b>SITEID</b> header that is passed in the request, and not on the user's registration address, as was the case prior to version 757. So, if the seller's registration county is the UK, but a
-     * <b>SITEID</b> value of 71 (France) is passed into the call, the eBay Stores domain that is returned would be stores.ebay.fr.
+     * - documentation: The URL for the seller's eBay Store. This field is only returned if the seller is a store owner (look for a value of <code>true</code> in the <b>SellerInfo.StoreOwner</b> field).
      * - minOccurs: 0
      * @var string|null
      */
@@ -130,7 +128,7 @@ class SellerType extends AbstractStructBase
     /**
      * The SellerBusinessType
      * Meta information extracted from the WSDL
-     * - documentation: Type of seller account. This value is returned if the German (ID 77), UK (ID 3), Ireland (ID 205), or US eBay Motors (ID 0) sites are specified.
+     * - documentation: This enumeration value indicates the type of eBay account used by the seller.
      * - minOccurs: 0
      * @var string|null
      */
@@ -146,7 +144,7 @@ class SellerType extends AbstractStructBase
     /**
      * The StoreSite
      * Meta information extracted from the WSDL
-     * - documentation: The site associated with the seller's eBay Store.
+     * - documentation: This enumeration value indicates the eBay marketplace hosting the seller's eBay Store.
      * - minOccurs: 0
      * @var string|null
      */
@@ -154,7 +152,7 @@ class SellerType extends AbstractStructBase
     /**
      * The PaymentMethod
      * Meta information extracted from the WSDL
-     * - documentation: Indicates the method the seller selected to pay eBay with for the account. The payment methods vary from one eBay site to the next.
+     * - documentation: This enumeration value indicates the default payment method that the seller is using to pay eBay fees.
      * - minOccurs: 0
      * @var string|null
      */
@@ -178,8 +176,7 @@ class SellerType extends AbstractStructBase
     /**
      * The SafePaymentExempt
      * Meta information extracted from the WSDL
-     * - documentation: If this field is <code>true</code>, the user is currently exempt from the requirement to offer at least one safe payment method (PayPal/PaisaPay or one of the credit cards specified in <b>Item.PaymentMethods</b>) when listing items.
-     * This value should only return <code>true</code> for sellers who registered before January 17, 2007. Otherwise, it should return <code>false</code>. This setting overrides both the site and category values for <b>SafePaymentRequired</b>.
+     * - documentation: If this field is <code>true</code>, the user is exempt from the requirement to offer at least one safe payment method when listing items.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -212,8 +209,7 @@ class SellerType extends AbstractStructBase
     /**
      * The IntegratedMerchantCreditCardInfo
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> As of May 1, 2019, eBay no longer support electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must use specify PayPal
-     * as an accepted payment method, or opt in to eBay Managed Payments program (if the program is available to that seller). </span> This container is returned if the seller has a payment gateway account on one or more eBay marketplaces.
+     * - documentation: The container is no longer returned in <b>GetUser</b> response, as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType|null
      */
@@ -221,7 +217,7 @@ class SellerType extends AbstractStructBase
     /**
      * The FeatureEligibility
      * Meta information extracted from the WSDL
-     * - documentation: Contains eligibility details about seller- or platform-based features. This is returned only if IncludeFeatureEligibility is set to true in the request.
+     * - documentation: Contains eligibility details about seller- or platform-based features. This is returned only if the <b>IncludeFeatureEligibility</b> field is included and set to <code>true</code> in the request.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeatureEligibilityType|null
      */
@@ -235,7 +231,7 @@ class SellerType extends AbstractStructBase
      * href="http://pages.ebay.com/help/sell/top-rated.html">Becoming a Top Rated Seller and qualifying for Top Rated Plus</a></li> <li>eBay US Motors: <a href="http://pages.ebay.com/help/sell/top-rated.html#becoming">Becoming a Top Rated Seller in Motors
      * vehicles categories</a></li> <li>eBay UK/IE: <a href="http://pages.ebay.co.uk/help/sell/top-rated.html">eBay Top-rated Seller status and the eBay Premium Service</a></li> <li>eBay DE/AT/CH: <a
      * href="http://pages.ebay.de/help/sell/top-rated/2.html">Anforderungen fur den Verkaufer mit Top-Bewertung</a></li> <li>eBay AU: <a href="http://pages.ebay.com.au/help/sell/top-rated.html">Becoming a Top Rated Seller and qualifying for eBay Premium
-     * Service</a></li> </ul> Top Rated Sellers, registered in the US, can qualify for Top Rated Seller programs in other countries as long as they meet the selling requirments in those countries. However, even if US sellers qualify for programs in other
+     * Service</a></li> </ul> Top Rated Sellers, registered in the US, can qualify for Top Rated Seller programs in other countries as long as they meet the selling requirements in those countries. However, even if US sellers qualify for programs in other
      * countries, they will not receive the Final Value Fee discount on sales in those countries. For more information, see the <a href="http://pages.ebay.com/help/sell/top-rated.html#qualifying">Qualifying for Top Rated Seller status on other eBay
      * sites</a> help topic.
      * - minOccurs: 0

@@ -31,7 +31,7 @@ class ShippingServiceCostOverrideListType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideType[]
      */
-    protected array $ShippingServiceCostOverride = [];
+    protected ?array $ShippingServiceCostOverride = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -44,7 +44,7 @@ class ShippingServiceCostOverrideListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideType[] $shippingServiceCostOverride
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $shippingServiceCostOverride = [], $any = null)
+    public function __construct(?array $shippingServiceCostOverride = null, $any = null)
     {
         $this
             ->setShippingServiceCostOverride($shippingServiceCostOverride)
@@ -54,7 +54,7 @@ class ShippingServiceCostOverrideListType extends AbstractStructBase
      * Get ShippingServiceCostOverride value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideType[]
      */
-    public function getShippingServiceCostOverride(): array
+    public function getShippingServiceCostOverride(): ?array
     {
         return $this->ShippingServiceCostOverride;
     }
@@ -64,8 +64,11 @@ class ShippingServiceCostOverrideListType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServiceCostOverrideForArrayConstraintsFromSetShippingServiceCostOverride(array $values = []): string
+    public static function validateShippingServiceCostOverrideForArrayConstraintsFromSetShippingServiceCostOverride(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceCostOverrideListTypeShippingServiceCostOverrideItem) {
@@ -87,7 +90,7 @@ class ShippingServiceCostOverrideListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideType[] $shippingServiceCostOverride
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceCostOverrideListType
      */
-    public function setShippingServiceCostOverride(array $shippingServiceCostOverride = []): self
+    public function setShippingServiceCostOverride(?array $shippingServiceCostOverride = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServiceCostOverrideArrayErrorMessage = self::validateShippingServiceCostOverrideForArrayConstraintsFromSetShippingServiceCostOverride($shippingServiceCostOverride))) {

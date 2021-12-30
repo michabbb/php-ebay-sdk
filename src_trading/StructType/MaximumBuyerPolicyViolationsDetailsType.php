@@ -32,7 +32,7 @@ class MaximumBuyerPolicyViolationsDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PolicyViolationDurationDetailsType[]
      */
-    protected array $PolicyViolationDuration = [];
+    protected ?array $PolicyViolationDuration = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -47,7 +47,7 @@ class MaximumBuyerPolicyViolationsDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PolicyViolationDurationDetailsType[] $policyViolationDuration
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\NumberOfPolicyViolationsDetailsType $numberOfPolicyViolations = null, array $policyViolationDuration = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\NumberOfPolicyViolationsDetailsType $numberOfPolicyViolations = null, ?array $policyViolationDuration = null, $any = null)
     {
         $this
             ->setNumberOfPolicyViolations($numberOfPolicyViolations)
@@ -77,7 +77,7 @@ class MaximumBuyerPolicyViolationsDetailsType extends AbstractStructBase
      * Get PolicyViolationDuration value
      * @return \macropage\ebaysdk\trading\StructType\PolicyViolationDurationDetailsType[]
      */
-    public function getPolicyViolationDuration(): array
+    public function getPolicyViolationDuration(): ?array
     {
         return $this->PolicyViolationDuration;
     }
@@ -87,8 +87,11 @@ class MaximumBuyerPolicyViolationsDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePolicyViolationDurationForArrayConstraintsFromSetPolicyViolationDuration(array $values = []): string
+    public static function validatePolicyViolationDurationForArrayConstraintsFromSetPolicyViolationDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $maximumBuyerPolicyViolationsDetailsTypePolicyViolationDurationItem) {
@@ -110,7 +113,7 @@ class MaximumBuyerPolicyViolationsDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PolicyViolationDurationDetailsType[] $policyViolationDuration
      * @return \macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsDetailsType
      */
-    public function setPolicyViolationDuration(array $policyViolationDuration = []): self
+    public function setPolicyViolationDuration(?array $policyViolationDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($policyViolationDurationArrayErrorMessage = self::validatePolicyViolationDurationForArrayConstraintsFromSetPolicyViolationDuration($policyViolationDuration))) {

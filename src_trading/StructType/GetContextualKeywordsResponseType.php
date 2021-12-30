@@ -23,13 +23,13 @@ class GetContextualKeywordsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ContextSearchAssetType[]
      */
-    protected array $ContextSearchAsset = [];
+    protected ?array $ContextSearchAsset = null;
     /**
      * Constructor method for GetContextualKeywordsResponseType
      * @uses GetContextualKeywordsResponseType::setContextSearchAsset()
      * @param \macropage\ebaysdk\trading\StructType\ContextSearchAssetType[] $contextSearchAsset
      */
-    public function __construct(array $contextSearchAsset = [])
+    public function __construct(?array $contextSearchAsset = null)
     {
         $this
             ->setContextSearchAsset($contextSearchAsset);
@@ -38,7 +38,7 @@ class GetContextualKeywordsResponseType extends AbstractResponseType
      * Get ContextSearchAsset value
      * @return \macropage\ebaysdk\trading\StructType\ContextSearchAssetType[]
      */
-    public function getContextSearchAsset(): array
+    public function getContextSearchAsset(): ?array
     {
         return $this->ContextSearchAsset;
     }
@@ -48,8 +48,11 @@ class GetContextualKeywordsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateContextSearchAssetForArrayConstraintsFromSetContextSearchAsset(array $values = []): string
+    public static function validateContextSearchAssetForArrayConstraintsFromSetContextSearchAsset(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getContextualKeywordsResponseTypeContextSearchAssetItem) {
@@ -71,7 +74,7 @@ class GetContextualKeywordsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ContextSearchAssetType[] $contextSearchAsset
      * @return \macropage\ebaysdk\trading\StructType\GetContextualKeywordsResponseType
      */
-    public function setContextSearchAsset(array $contextSearchAsset = []): self
+    public function setContextSearchAsset(?array $contextSearchAsset = null): self
     {
         // validation for constraint: array
         if ('' !== ($contextSearchAssetArrayErrorMessage = self::validateContextSearchAssetForArrayConstraintsFromSetContextSearchAsset($contextSearchAsset))) {

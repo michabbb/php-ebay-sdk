@@ -97,7 +97,7 @@ class ReviseFixedPriceItemResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DiscountReason = [];
+    protected ?array $DiscountReason = null;
     /**
      * The ProductSuggestions
      * Meta information extracted from the WSDL
@@ -127,7 +127,7 @@ class ReviseFixedPriceItemResponseType extends AbstractResponseType
      * @param string[] $discountReason
      * @param \macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions
      */
-    public function __construct(?string $itemID = null, ?string $sKU = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, array $discountReason = [], ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null)
+    public function __construct(?string $itemID = null, ?string $sKU = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?array $discountReason = null, ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null)
     {
         $this
             ->setItemID($itemID)
@@ -301,7 +301,7 @@ class ReviseFixedPriceItemResponseType extends AbstractResponseType
      * Get DiscountReason value
      * @return string[]
      */
-    public function getDiscountReason(): array
+    public function getDiscountReason(): ?array
     {
         return $this->DiscountReason;
     }
@@ -311,8 +311,11 @@ class ReviseFixedPriceItemResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDiscountReasonForArrayConstraintsFromSetDiscountReason(array $values = []): string
+    public static function validateDiscountReasonForArrayConstraintsFromSetDiscountReason(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseFixedPriceItemResponseTypeDiscountReasonItem) {
@@ -336,7 +339,7 @@ class ReviseFixedPriceItemResponseType extends AbstractResponseType
      * @param string[] $discountReason
      * @return \macropage\ebaysdk\trading\StructType\ReviseFixedPriceItemResponseType
      */
-    public function setDiscountReason(array $discountReason = []): self
+    public function setDiscountReason(?array $discountReason = null): self
     {
         // validation for constraint: array
         if ('' !== ($discountReasonArrayErrorMessage = self::validateDiscountReasonForArrayConstraintsFromSetDiscountReason($discountReason))) {

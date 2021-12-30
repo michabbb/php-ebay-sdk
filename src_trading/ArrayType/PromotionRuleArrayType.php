@@ -23,13 +23,13 @@ class PromotionRuleArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PromotionRuleType[]
      */
-    protected array $PromotionRule = [];
+    protected ?array $PromotionRule = null;
     /**
      * Constructor method for PromotionRuleArrayType
      * @uses PromotionRuleArrayType::setPromotionRule()
      * @param \macropage\ebaysdk\trading\StructType\PromotionRuleType[] $promotionRule
      */
-    public function __construct(array $promotionRule = [])
+    public function __construct(?array $promotionRule = null)
     {
         $this
             ->setPromotionRule($promotionRule);
@@ -38,7 +38,7 @@ class PromotionRuleArrayType extends AbstractStructArrayBase
      * Get PromotionRule value
      * @return \macropage\ebaysdk\trading\StructType\PromotionRuleType[]
      */
-    public function getPromotionRule(): array
+    public function getPromotionRule(): ?array
     {
         return $this->PromotionRule;
     }
@@ -48,8 +48,11 @@ class PromotionRuleArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePromotionRuleForArrayConstraintsFromSetPromotionRule(array $values = []): string
+    public static function validatePromotionRuleForArrayConstraintsFromSetPromotionRule(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $promotionRuleArrayTypePromotionRuleItem) {
@@ -71,7 +74,7 @@ class PromotionRuleArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\PromotionRuleType[] $promotionRule
      * @return \macropage\ebaysdk\trading\ArrayType\PromotionRuleArrayType
      */
-    public function setPromotionRule(array $promotionRule = []): self
+    public function setPromotionRule(?array $promotionRule = null): self
     {
         // validation for constraint: array
         if ('' !== ($promotionRuleArrayErrorMessage = self::validatePromotionRuleForArrayConstraintsFromSetPromotionRule($promotionRule))) {

@@ -23,13 +23,13 @@ class ExtendSiteHostedPicturesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PictureURL = [];
+    protected ?array $PictureURL = null;
     /**
      * Constructor method for ExtendSiteHostedPicturesResponseType
      * @uses ExtendSiteHostedPicturesResponseType::setPictureURL()
      * @param string[] $pictureURL
      */
-    public function __construct(array $pictureURL = [])
+    public function __construct(?array $pictureURL = null)
     {
         $this
             ->setPictureURL($pictureURL);
@@ -38,7 +38,7 @@ class ExtendSiteHostedPicturesResponseType extends AbstractResponseType
      * Get PictureURL value
      * @return string[]
      */
-    public function getPictureURL(): array
+    public function getPictureURL(): ?array
     {
         return $this->PictureURL;
     }
@@ -48,8 +48,11 @@ class ExtendSiteHostedPicturesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(array $values = []): string
+    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $extendSiteHostedPicturesResponseTypePictureURLItem) {
@@ -71,7 +74,7 @@ class ExtendSiteHostedPicturesResponseType extends AbstractResponseType
      * @param string[] $pictureURL
      * @return \macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesResponseType
      */
-    public function setPictureURL(array $pictureURL = []): self
+    public function setPictureURL(?array $pictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureURLArrayErrorMessage = self::validatePictureURLForArrayConstraintsFromSetPictureURL($pictureURL))) {

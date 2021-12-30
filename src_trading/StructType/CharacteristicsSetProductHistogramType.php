@@ -23,7 +23,7 @@ class CharacteristicsSetProductHistogramType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\HistogramEntryType[]
      */
-    protected array $HistogramEntry = [];
+    protected ?array $HistogramEntry = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class CharacteristicsSetProductHistogramType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\HistogramEntryType[] $histogramEntry
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $histogramEntry = [], $any = null)
+    public function __construct(?array $histogramEntry = null, $any = null)
     {
         $this
             ->setHistogramEntry($histogramEntry)
@@ -46,7 +46,7 @@ class CharacteristicsSetProductHistogramType extends AbstractStructBase
      * Get HistogramEntry value
      * @return \macropage\ebaysdk\trading\StructType\HistogramEntryType[]
      */
-    public function getHistogramEntry(): array
+    public function getHistogramEntry(): ?array
     {
         return $this->HistogramEntry;
     }
@@ -56,8 +56,11 @@ class CharacteristicsSetProductHistogramType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateHistogramEntryForArrayConstraintsFromSetHistogramEntry(array $values = []): string
+    public static function validateHistogramEntryForArrayConstraintsFromSetHistogramEntry(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $characteristicsSetProductHistogramTypeHistogramEntryItem) {
@@ -79,7 +82,7 @@ class CharacteristicsSetProductHistogramType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\HistogramEntryType[] $histogramEntry
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicsSetProductHistogramType
      */
-    public function setHistogramEntry(array $histogramEntry = []): self
+    public function setHistogramEntry(?array $histogramEntry = null): self
     {
         // validation for constraint: array
         if ('' !== ($histogramEntryArrayErrorMessage = self::validateHistogramEntryForArrayConstraintsFromSetHistogramEntry($histogramEntry))) {

@@ -85,7 +85,7 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DeliveryURLDetailType[]
      */
-    protected array $DeliveryURLDetails = [];
+    protected ?array $DeliveryURLDetails = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -112,7 +112,7 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DeliveryURLDetailType[] $deliveryURLDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $applicationURL = null, ?string $applicationEnable = null, ?string $alertEmail = null, ?string $alertEnable = null, ?string $notificationPayloadType = null, ?string $deviceType = null, ?string $payloadVersion = null, array $deliveryURLDetails = [], $any = null)
+    public function __construct(?string $applicationURL = null, ?string $applicationEnable = null, ?string $alertEmail = null, ?string $alertEnable = null, ?string $notificationPayloadType = null, ?string $deviceType = null, ?string $payloadVersion = null, ?array $deliveryURLDetails = null, $any = null)
     {
         $this
             ->setApplicationURL($applicationURL)
@@ -302,7 +302,7 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
      * Get DeliveryURLDetails value
      * @return \macropage\ebaysdk\trading\StructType\DeliveryURLDetailType[]
      */
-    public function getDeliveryURLDetails(): array
+    public function getDeliveryURLDetails(): ?array
     {
         return $this->DeliveryURLDetails;
     }
@@ -312,8 +312,11 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDeliveryURLDetailsForArrayConstraintsFromSetDeliveryURLDetails(array $values = []): string
+    public static function validateDeliveryURLDetailsForArrayConstraintsFromSetDeliveryURLDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $applicationDeliveryPreferencesTypeDeliveryURLDetailsItem) {
@@ -335,7 +338,7 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DeliveryURLDetailType[] $deliveryURLDetails
      * @return \macropage\ebaysdk\trading\StructType\ApplicationDeliveryPreferencesType
      */
-    public function setDeliveryURLDetails(array $deliveryURLDetails = []): self
+    public function setDeliveryURLDetails(?array $deliveryURLDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($deliveryURLDetailsArrayErrorMessage = self::validateDeliveryURLDetailsForArrayConstraintsFromSetDeliveryURLDetails($deliveryURLDetails))) {

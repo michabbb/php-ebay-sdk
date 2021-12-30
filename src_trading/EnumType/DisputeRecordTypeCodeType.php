@@ -9,10 +9,10 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisputeRecordTypeCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that lists the different types of order disputes that can occur between buyer and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases,
- * initiated by buyers through the eBay Money Back Guarantee program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a
- * href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to
- * retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Enumerated type that lists the different types of order disputes/cases that can occur between buyer and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only
+ * retrieve Unpaid Item cases. They are no longer used to retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and
+ * these calls do not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management
+ * calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Enumerations
  */
 class DisputeRecordTypeCodeType extends AbstractStructEnumBase
@@ -29,8 +29,7 @@ class DisputeRecordTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ItemNotReceived'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the dispute is an Item Not Received case created by the buyer against the seller through PayPal's platform. <br/><br/> <span class="tablenote"><strong>Note:</strong> As noted above, the
-     * <b>GetDispute</b> or <b>GetUserDisputes</b> calls will not return any eBay Money Back Guarantee cases. </span>
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ItemNotReceived'
      */
     const VALUE_ITEM_NOT_RECEIVED = 'ItemNotReceived';

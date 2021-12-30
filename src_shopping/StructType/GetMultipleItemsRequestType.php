@@ -23,12 +23,12 @@ class GetMultipleItemsRequestType extends AbstractRequestType
      * - documentation: The uniqe ID that identifies the listing for which to retrieve the data. You can provide a maximum of 20 <b>ItemID</b> values. When making a URL request, there are two ways to handle specifying multiple item ID values. You can use
      * multiple <b>ItemID</b> fields, but each one must be specified as an indexed array (e.g., <code>...&ItemID(0)=130310421484&ItemID(1)= 300321408208& ItemID(2)=370214653822...</code>). <br><br> Alternatively, as a shortcut for URL requests, you can
      * specify multipe item ID values as a comma-separated list in a single <b>ItemID</b> field (e.g., ...< code>&ItemID=130310421484,300321408208,370214653822...</code> ) for convenience. <br><br> You can determine an item's ID by calling findItemsAdvanced
-     * (<a href="http://www.developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) or from the eBay Web site. Provide ItemID for every item for which you want information.
+     * (<a href="https://developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) or from the eBay Web site. Provide ItemID for every item for which you want information.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ItemID = [];
+    protected ?array $ItemID = null;
     /**
      * The IncludeSelector
      * Meta information extracted from the WSDL
@@ -49,7 +49,7 @@ class GetMultipleItemsRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @param string $includeSelector
      */
-    public function __construct(array $itemID = [], ?string $includeSelector = null)
+    public function __construct(?array $itemID = null, ?string $includeSelector = null)
     {
         $this
             ->setItemID($itemID)
@@ -59,7 +59,7 @@ class GetMultipleItemsRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string[]
      */
-    public function getItemID(): array
+    public function getItemID(): ?array
     {
         return $this->ItemID;
     }
@@ -69,8 +69,11 @@ class GetMultipleItemsRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemIDForArrayConstraintsFromSetItemID(array $values = []): string
+    public static function validateItemIDForArrayConstraintsFromSetItemID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getMultipleItemsRequestTypeItemIDItem) {
@@ -92,7 +95,7 @@ class GetMultipleItemsRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @return \macropage\ebaysdk\shopping\StructType\GetMultipleItemsRequestType
      */
-    public function setItemID(array $itemID = []): self
+    public function setItemID(?array $itemID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemIDArrayErrorMessage = self::validateItemIDForArrayConstraintsFromSetItemID($itemID))) {

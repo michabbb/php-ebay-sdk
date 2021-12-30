@@ -23,7 +23,7 @@ class NumberOfPolicyViolationsDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $Count = [];
+    protected ?array $Count = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class NumberOfPolicyViolationsDetailsType extends AbstractStructBase
      * @param int[] $count
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $count = [], $any = null)
+    public function __construct(?array $count = null, $any = null)
     {
         $this
             ->setCount($count)
@@ -46,7 +46,7 @@ class NumberOfPolicyViolationsDetailsType extends AbstractStructBase
      * Get Count value
      * @return int[]
      */
-    public function getCount(): array
+    public function getCount(): ?array
     {
         return $this->Count;
     }
@@ -56,8 +56,11 @@ class NumberOfPolicyViolationsDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCountForArrayConstraintsFromSetCount(array $values = []): string
+    public static function validateCountForArrayConstraintsFromSetCount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $numberOfPolicyViolationsDetailsTypeCountItem) {
@@ -79,7 +82,7 @@ class NumberOfPolicyViolationsDetailsType extends AbstractStructBase
      * @param int[] $count
      * @return \macropage\ebaysdk\trading\StructType\NumberOfPolicyViolationsDetailsType
      */
-    public function setCount(array $count = []): self
+    public function setCount(?array $count = null): self
     {
         // validation for constraint: array
         if ('' !== ($countArrayErrorMessage = self::validateCountForArrayConstraintsFromSetCount($count))) {

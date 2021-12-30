@@ -24,7 +24,7 @@ class ExtendSiteHostedPicturesRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PictureURL = [];
+    protected ?array $PictureURL = null;
     /**
      * The ExtensionInDays
      * Meta information extracted from the WSDL
@@ -40,7 +40,7 @@ class ExtendSiteHostedPicturesRequestType extends AbstractRequestType
      * @param string[] $pictureURL
      * @param int $extensionInDays
      */
-    public function __construct(array $pictureURL = [], ?int $extensionInDays = null)
+    public function __construct(?array $pictureURL = null, ?int $extensionInDays = null)
     {
         $this
             ->setPictureURL($pictureURL)
@@ -50,7 +50,7 @@ class ExtendSiteHostedPicturesRequestType extends AbstractRequestType
      * Get PictureURL value
      * @return string[]
      */
-    public function getPictureURL(): array
+    public function getPictureURL(): ?array
     {
         return $this->PictureURL;
     }
@@ -60,8 +60,11 @@ class ExtendSiteHostedPicturesRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(array $values = []): string
+    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $extendSiteHostedPicturesRequestTypePictureURLItem) {
@@ -83,7 +86,7 @@ class ExtendSiteHostedPicturesRequestType extends AbstractRequestType
      * @param string[] $pictureURL
      * @return \macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesRequestType
      */
-    public function setPictureURL(array $pictureURL = []): self
+    public function setPictureURL(?array $pictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureURLArrayErrorMessage = self::validatePictureURLForArrayConstraintsFromSetPictureURL($pictureURL))) {

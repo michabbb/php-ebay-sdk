@@ -79,7 +79,7 @@ class PaymentTransactionCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TransactionReferenceType[]
      */
-    protected array $PaymentReferenceID = [];
+    protected ?array $PaymentReferenceID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -106,7 +106,7 @@ class PaymentTransactionCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionReferenceType[] $paymentReferenceID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $paymentStatus = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payer = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payee = null, ?string $paymentTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $paymentAmount = null, ?\macropage\ebaysdk\trading\StructType\TransactionReferenceType $referenceID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, array $paymentReferenceID = [], $any = null)
+    public function __construct(?string $paymentStatus = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payer = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payee = null, ?string $paymentTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $paymentAmount = null, ?\macropage\ebaysdk\trading\StructType\TransactionReferenceType $referenceID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, ?array $paymentReferenceID = null, $any = null)
     {
         $this
             ->setPaymentStatus($paymentStatus)
@@ -267,7 +267,7 @@ class PaymentTransactionCodeType extends AbstractStructBase
      * Get PaymentReferenceID value
      * @return \macropage\ebaysdk\trading\StructType\TransactionReferenceType[]
      */
-    public function getPaymentReferenceID(): array
+    public function getPaymentReferenceID(): ?array
     {
         return $this->PaymentReferenceID;
     }
@@ -277,8 +277,11 @@ class PaymentTransactionCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentReferenceIDForArrayConstraintsFromSetPaymentReferenceID(array $values = []): string
+    public static function validatePaymentReferenceIDForArrayConstraintsFromSetPaymentReferenceID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $paymentTransactionCodeTypePaymentReferenceIDItem) {
@@ -300,7 +303,7 @@ class PaymentTransactionCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionReferenceType[] $paymentReferenceID
      * @return \macropage\ebaysdk\trading\StructType\PaymentTransactionCodeType
      */
-    public function setPaymentReferenceID(array $paymentReferenceID = []): self
+    public function setPaymentReferenceID(?array $paymentReferenceID = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentReferenceIDArrayErrorMessage = self::validatePaymentReferenceIDForArrayConstraintsFromSetPaymentReferenceID($paymentReferenceID))) {

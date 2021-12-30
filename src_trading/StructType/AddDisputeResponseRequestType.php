@@ -10,9 +10,10 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for AddDisputeResponseRequestType StructType
  * Meta information extracted from the WSDL
- * - documentation: This call enables the seller to respond to an Item Not Received (INR) dispute opened by a buyer through PayPal's Purchase Protection program, or to update an Unpaid Item case. To respond to a case opened by the buyer through eBay's
- * Resolution Center, the seller should use the <a href="http://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b>, the <a
- * href="http://developer.ebay.com/Devzone/resolution-case-management/CallRef/index.html" target="_blank">Resolution Case Management API</a>, or manage the case manually through the eBay Resolution Center.
+ * - documentation: This call enables the seller to update an Unpaid Item case. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <strong>AddDisputeResponse</strong> call now only supports the update of Unpaid Item cases, and no longer
+ * support Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and this call also does
+ * not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the
+ * <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Structs
  */
 class AddDisputeResponseRequestType extends AbstractRequestType
@@ -20,9 +21,11 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The DisputeID
      * Meta information extracted from the WSDL
-     * - documentation: The unique identifier of the eBay Unpaid Item case or PayPal INR dispute. This identifier is created by eBay or PayPal upon case/dispute creation. | The unique identifier of a dispute between a buyer and seller regarding an order.
-     * <br/><br/> <span class="tablenote"><strong>Note:</strong> The dispute calls in the Trading API are not compatible with 'Item Not Received' or 'Significantly Not As Described' cases initiated by buyers through the eBay Money Back Guarantee program.
-     * The <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve and/or respond to eBay Money Back Guarantee cases programmatically. </span>
+     * - documentation: The unique identifier of the Unpaid Item case. This identifier is created by eBay upon case creation. | The unique identifier of an Unpaid Item case involving a buyer and seller. <br/><br/> <span
+     * class="tablenote"><strong>Note:</strong> Despite the name, this type is now only used to identify an Unpaid Item case, and the identifier of an eBay case uses a 'case ID' and not a 'dispute ID'. However, the <strong>DisputeID</strong> field in
+     * Dispute calls handles Unpaid Item case IDs. These calls no longer support Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an
+     * INR case through eBay's Resolution Center, and these calls also do not support eBay Money Back Guarantee cases. <br/><br/> To respond to an eBay Money Back Guarantee case, the seller should use the <a
+     * href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -31,7 +34,8 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The MessageText
      * Meta information extracted from the WSDL
-     * - documentation: The text of a comment or response being posted to the case/dispute. Required when <b>DisputeActivity</b> is <b>SellerAddInformation</b>, <b>SellerComment</b>, or <b>SellerPaymentNotReceived</b>. Otherwise, this field is optional.
+     * - documentation: This field is used to provide a text-based comment regarding the Unpaid Item case. This field is conditionally required when <b>DisputeActivity</b> value is set to <code>SellerAddInformation</code>, <code>SellerComment</code>, or
+     * <code>SellerPaymentNotReceived</code>. Otherwise, this field is optional.
      * - minOccurs: 0
      * @var string|null
      */
@@ -39,7 +43,7 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The DisputeActivity
      * Meta information extracted from the WSDL
-     * - documentation: The type of activity the seller plans to take on the case/dispute. The allowed value is determined by the current state of the case/dispute and whether the seller is updating an Unpaid Item case or responding to a PayPal INR dispute.
+     * - documentation: This field is used to indicate the type of action or update that the seller is making with the <b>AddDisputeResponse</b> call. See <b>DisputeActivityCodeType</b> for more information on the supported enum values.
      * - minOccurs: 0
      * @var string|null
      */
@@ -47,8 +51,7 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The ShippingCarrierUsed
      * Meta information extracted from the WSDL
-     * - documentation: The shipping carrier used to ship the item in dispute. This field is not case sensitive in the <strong>AddDisputeResponse</strong> request. Non-alphanumeric characters are not allowed. This field (along with
-     * <b>ShipmentTrackNumber</b>) is required if the value of <b>DisputeActivity</b> is set to <code>SellerShippedItem</code>.
+     * - documentation: <b>DO NOT USE</b>. This field is no longer applicable. This field was only applicable for PayPal INR disputes, which this call no longer supports.
      * - minOccurs: 0
      * @var string|null
      */
@@ -56,8 +59,7 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The ShipmentTrackNumber
      * Meta information extracted from the WSDL
-     * - documentation: The tracking number associated with one package of a shipment. The seller is responsible for the accuracy of the shipment tracking number, as eBay only verifies that the tracking number is consistent with the numbering scheme used by
-     * the specified shipping carrier, but cannot verify the accuracy of the tracking number. This field (along with <b>ShippingCarrierUsed</b>) is required if the value of <b>DisputeActivity</b> is set to <code>SellerShippedItem</code>.
+     * - documentation: <b>DO NOT USE</b>. This field is no longer applicable. This field was only applicable for PayPal INR disputes, which this call no longer supports.
      * - minOccurs: 0
      * @var string|null
      */
@@ -65,7 +67,7 @@ class AddDisputeResponseRequestType extends AbstractRequestType
     /**
      * The ShippingTime
      * Meta information extracted from the WSDL
-     * - documentation: This timestamp indicates the date and time when the item under dispute was shipped. This field is required if the value of <b>DisputeActivity</b> is set to <code>SellerShippedItem</code>.
+     * - documentation: <b>DO NOT USE</b>. This field is no longer applicable. This field was only applicable for PayPal INR disputes, which this call no longer supports.
      * - minOccurs: 0
      * @var string|null
      */

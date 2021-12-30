@@ -43,7 +43,7 @@ class RecommendationType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $RecommendedValue = [];
+    protected ?array $RecommendedValue = null;
     /**
      * The Message
      * Meta information extracted from the WSDL
@@ -71,7 +71,7 @@ class RecommendationType extends AbstractStructBase
      * @param string $message
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $fieldGroup = null, ?string $fieldName = null, ?string $recommendationCode = null, array $recommendedValue = [], ?string $message = null, $any = null)
+    public function __construct(?string $fieldGroup = null, ?string $fieldName = null, ?string $recommendationCode = null, ?array $recommendedValue = null, ?string $message = null, $any = null)
     {
         $this
             ->setFieldGroup($fieldGroup)
@@ -154,7 +154,7 @@ class RecommendationType extends AbstractStructBase
      * Get RecommendedValue value
      * @return string[]
      */
-    public function getRecommendedValue(): array
+    public function getRecommendedValue(): ?array
     {
         return $this->RecommendedValue;
     }
@@ -164,8 +164,11 @@ class RecommendationType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRecommendedValueForArrayConstraintsFromSetRecommendedValue(array $values = []): string
+    public static function validateRecommendedValueForArrayConstraintsFromSetRecommendedValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $recommendationTypeRecommendedValueItem) {
@@ -187,7 +190,7 @@ class RecommendationType extends AbstractStructBase
      * @param string[] $recommendedValue
      * @return \macropage\ebaysdk\trading\StructType\RecommendationType
      */
-    public function setRecommendedValue(array $recommendedValue = []): self
+    public function setRecommendedValue(?array $recommendedValue = null): self
     {
         // validation for constraint: array
         if ('' !== ($recommendedValueArrayErrorMessage = self::validateRecommendedValueForArrayConstraintsFromSetRecommendedValue($recommendedValue))) {

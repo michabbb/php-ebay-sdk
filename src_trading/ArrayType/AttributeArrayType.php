@@ -23,13 +23,13 @@ class AttributeArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AttributeType[]
      */
-    protected array $Attribute = [];
+    protected ?array $Attribute = null;
     /**
      * Constructor method for AttributeArrayType
      * @uses AttributeArrayType::setAttribute()
      * @param \macropage\ebaysdk\trading\StructType\AttributeType[] $attribute
      */
-    public function __construct(array $attribute = [])
+    public function __construct(?array $attribute = null)
     {
         $this
             ->setAttribute($attribute);
@@ -38,7 +38,7 @@ class AttributeArrayType extends AbstractStructArrayBase
      * Get Attribute value
      * @return \macropage\ebaysdk\trading\StructType\AttributeType[]
      */
-    public function getAttribute(): array
+    public function getAttribute(): ?array
     {
         return $this->Attribute;
     }
@@ -48,8 +48,11 @@ class AttributeArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAttributeForArrayConstraintsFromSetAttribute(array $values = []): string
+    public static function validateAttributeForArrayConstraintsFromSetAttribute(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $attributeArrayTypeAttributeItem) {
@@ -71,7 +74,7 @@ class AttributeArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\AttributeType[] $attribute
      * @return \macropage\ebaysdk\trading\ArrayType\AttributeArrayType
      */
-    public function setAttribute(array $attribute = []): self
+    public function setAttribute(?array $attribute = null): self
     {
         // validation for constraint: array
         if ('' !== ($attributeArrayErrorMessage = self::validateAttributeForArrayConstraintsFromSetAttribute($attribute))) {

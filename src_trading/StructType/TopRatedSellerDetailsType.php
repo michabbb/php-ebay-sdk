@@ -23,7 +23,7 @@ class TopRatedSellerDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $TopRatedProgram = [];
+    protected ?array $TopRatedProgram = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class TopRatedSellerDetailsType extends AbstractStructBase
      * @param string[] $topRatedProgram
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $topRatedProgram = [], $any = null)
+    public function __construct(?array $topRatedProgram = null, $any = null)
     {
         $this
             ->setTopRatedProgram($topRatedProgram)
@@ -46,7 +46,7 @@ class TopRatedSellerDetailsType extends AbstractStructBase
      * Get TopRatedProgram value
      * @return string[]
      */
-    public function getTopRatedProgram(): array
+    public function getTopRatedProgram(): ?array
     {
         return $this->TopRatedProgram;
     }
@@ -56,8 +56,11 @@ class TopRatedSellerDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTopRatedProgramForArrayConstraintsFromSetTopRatedProgram(array $values = []): string
+    public static function validateTopRatedProgramForArrayConstraintsFromSetTopRatedProgram(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $topRatedSellerDetailsTypeTopRatedProgramItem) {
@@ -81,7 +84,7 @@ class TopRatedSellerDetailsType extends AbstractStructBase
      * @param string[] $topRatedProgram
      * @return \macropage\ebaysdk\trading\StructType\TopRatedSellerDetailsType
      */
-    public function setTopRatedProgram(array $topRatedProgram = []): self
+    public function setTopRatedProgram(?array $topRatedProgram = null): self
     {
         // validation for constraint: array
         if ('' !== ($topRatedProgramArrayErrorMessage = self::validateTopRatedProgramForArrayConstraintsFromSetTopRatedProgram($topRatedProgram))) {

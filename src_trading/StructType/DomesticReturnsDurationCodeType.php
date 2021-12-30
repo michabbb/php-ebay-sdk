@@ -23,7 +23,7 @@ class DomesticReturnsDurationCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DomesticReturnsDuration = [];
+    protected ?array $DomesticReturnsDuration = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class DomesticReturnsDurationCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsDuration
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $domesticReturnsDuration = [], $any = null)
+    public function __construct(?array $domesticReturnsDuration = null, $any = null)
     {
         $this
             ->setDomesticReturnsDuration($domesticReturnsDuration)
@@ -46,7 +46,7 @@ class DomesticReturnsDurationCodeType extends AbstractStructBase
      * Get DomesticReturnsDuration value
      * @return string[]
      */
-    public function getDomesticReturnsDuration(): array
+    public function getDomesticReturnsDuration(): ?array
     {
         return $this->DomesticReturnsDuration;
     }
@@ -56,8 +56,11 @@ class DomesticReturnsDurationCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomesticReturnsDurationForArrayConstraintsFromSetDomesticReturnsDuration(array $values = []): string
+    public static function validateDomesticReturnsDurationForArrayConstraintsFromSetDomesticReturnsDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $domesticReturnsDurationCodeTypeDomesticReturnsDurationItem) {
@@ -81,7 +84,7 @@ class DomesticReturnsDurationCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsDuration
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType
      */
-    public function setDomesticReturnsDuration(array $domesticReturnsDuration = []): self
+    public function setDomesticReturnsDuration(?array $domesticReturnsDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($domesticReturnsDurationArrayErrorMessage = self::validateDomesticReturnsDurationForArrayConstraintsFromSetDomesticReturnsDuration($domesticReturnsDuration))) {

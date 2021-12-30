@@ -25,13 +25,13 @@ class VeROReportItemsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VeROReportItemType[]
      */
-    protected array $ReportItem = [];
+    protected ?array $ReportItem = null;
     /**
      * Constructor method for VeROReportItemsType
      * @uses VeROReportItemsType::setReportItem()
      * @param \macropage\ebaysdk\trading\StructType\VeROReportItemType[] $reportItem
      */
-    public function __construct(array $reportItem = [])
+    public function __construct(?array $reportItem = null)
     {
         $this
             ->setReportItem($reportItem);
@@ -40,7 +40,7 @@ class VeROReportItemsType extends AbstractStructBase
      * Get ReportItem value
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType[]
      */
-    public function getReportItem(): array
+    public function getReportItem(): ?array
     {
         return $this->ReportItem;
     }
@@ -50,8 +50,11 @@ class VeROReportItemsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReportItemForArrayConstraintsFromSetReportItem(array $values = []): string
+    public static function validateReportItemForArrayConstraintsFromSetReportItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROReportItemsTypeReportItemItem) {
@@ -73,7 +76,7 @@ class VeROReportItemsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VeROReportItemType[] $reportItem
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemsType
      */
-    public function setReportItem(array $reportItem = []): self
+    public function setReportItem(?array $reportItem = null): self
     {
         // validation for constraint: array
         if ('' !== ($reportItemArrayErrorMessage = self::validateReportItemForArrayConstraintsFromSetReportItem($reportItem))) {

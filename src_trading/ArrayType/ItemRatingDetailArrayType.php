@@ -25,13 +25,13 @@ class ItemRatingDetailArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemRatingDetailsType[]
      */
-    protected array $ItemRatingDetails = [];
+    protected ?array $ItemRatingDetails = null;
     /**
      * Constructor method for ItemRatingDetailArrayType
      * @uses ItemRatingDetailArrayType::setItemRatingDetails()
      * @param \macropage\ebaysdk\trading\StructType\ItemRatingDetailsType[] $itemRatingDetails
      */
-    public function __construct(array $itemRatingDetails = [])
+    public function __construct(?array $itemRatingDetails = null)
     {
         $this
             ->setItemRatingDetails($itemRatingDetails);
@@ -40,7 +40,7 @@ class ItemRatingDetailArrayType extends AbstractStructArrayBase
      * Get ItemRatingDetails value
      * @return \macropage\ebaysdk\trading\StructType\ItemRatingDetailsType[]
      */
-    public function getItemRatingDetails(): array
+    public function getItemRatingDetails(): ?array
     {
         return $this->ItemRatingDetails;
     }
@@ -50,8 +50,11 @@ class ItemRatingDetailArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemRatingDetailsForArrayConstraintsFromSetItemRatingDetails(array $values = []): string
+    public static function validateItemRatingDetailsForArrayConstraintsFromSetItemRatingDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemRatingDetailArrayTypeItemRatingDetailsItem) {
@@ -73,7 +76,7 @@ class ItemRatingDetailArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\ItemRatingDetailsType[] $itemRatingDetails
      * @return \macropage\ebaysdk\trading\ArrayType\ItemRatingDetailArrayType
      */
-    public function setItemRatingDetails(array $itemRatingDetails = []): self
+    public function setItemRatingDetails(?array $itemRatingDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemRatingDetailsArrayErrorMessage = self::validateItemRatingDetailsForArrayConstraintsFromSetItemRatingDetails($itemRatingDetails))) {

@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for GetUserDisputesResponseType StructType
  * Meta information extracted from the WSDL
- * - documentation: Returns a list of disputes that involve the calling user as buyer or seller, in response to a <b>GetUserDisputesRequest</b>.
+ * - documentation: The base response type for the <b>GetUserDisputes</b>, a call that retrieves a list of Unpaid Item cases that the user is involved in as a buyer or seller.
  * @subpackage Structs
  */
 class GetUserDisputesResponseType extends AbstractResponseType
@@ -19,9 +19,11 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * The StartingDisputeID
      * Meta information extracted from the WSDL
      * - documentation: The index of the first dispute in the current result set, relative to the total number of disputes available. Primarily useful for interpreting paginated results. For example, if 228 disputes are available and 200 results are
-     * returned per page: The first page returns a <b>StartingDisputeID</b> value of 1 and the second page returns a <b>StartingDisputeID</b> value of 201. | The unique identifier of a dispute between a buyer and seller regarding an order. <br/><br/> <span
-     * class="tablenote"><strong>Note:</strong> The dispute calls in the Trading API are not compatible with 'Item Not Received' or 'Significantly Not As Described' cases initiated by buyers through the eBay Money Back Guarantee program. The <a
-     * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve and/or respond to eBay Money Back Guarantee cases programmatically. </span>
+     * returned per page: The first page returns a <b>StartingDisputeID</b> value of 0 (since a zero-based index is used) and the second page returns a <b>StartingDisputeID</b> value of 200. | The unique identifier of an Unpaid Item case involving a buyer
+     * and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> Despite the name, this type is now only used to identify an Unpaid Item case, and the identifier of an eBay case uses a 'case ID' and not a 'dispute ID'. However, the
+     * <strong>DisputeID</strong> field in Dispute calls handles Unpaid Item case IDs. These calls no longer support Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay
+     * buyers. eBay buyers must create an INR case through eBay's Resolution Center, and these calls also do not support eBay Money Back Guarantee cases. <br/><br/> To respond to an eBay Money Back Guarantee case, the seller should use the <a
+     * href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -31,9 +33,11 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * The EndingDisputeID
      * Meta information extracted from the WSDL
      * - documentation: The index of the last dispute in the current result set, relative to the total number of disputes available. Primarily useful for interpreting paginated results. For example, if 228 disputes are available and 200 results are returned
-     * per page: The first page returns an <b>EndingDisputeID</b> value of 200 and the second page returns an <b>EndingDisputeID</b> value of 228. | The unique identifier of a dispute between a buyer and seller regarding an order. <br/><br/> <span
-     * class="tablenote"><strong>Note:</strong> The dispute calls in the Trading API are not compatible with 'Item Not Received' or 'Significantly Not As Described' cases initiated by buyers through the eBay Money Back Guarantee program. The <a
-     * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve and/or respond to eBay Money Back Guarantee cases programmatically. </span>
+     * per page: The first page returns an <b>EndingDisputeID</b> value of 199 (since a zero-based index is used) and the second page returns an <b>EndingDisputeID</b> value of 227. | The unique identifier of an Unpaid Item case involving a buyer and
+     * seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> Despite the name, this type is now only used to identify an Unpaid Item case, and the identifier of an eBay case uses a 'case ID' and not a 'dispute ID'. However, the
+     * <strong>DisputeID</strong> field in Dispute calls handles Unpaid Item case IDs. These calls no longer support Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay
+     * buyers. eBay buyers must create an INR case through eBay's Resolution Center, and these calls also do not support eBay Money Back Guarantee cases. <br/><br/> To respond to an eBay Money Back Guarantee case, the seller should use the <a
+     * href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -42,7 +46,7 @@ class GetUserDisputesResponseType extends AbstractResponseType
     /**
      * The DisputeArray
      * Meta information extracted from the WSDL
-     * - documentation: The array of disputes returned.
+     * - documentation: The array of disputes that match the input criteria in the request. It will be returned as empty if no disputes match the input criteria.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\DisputeArrayType|null
      */
@@ -50,7 +54,7 @@ class GetUserDisputesResponseType extends AbstractResponseType
     /**
      * The ItemsPerPage
      * Meta information extracted from the WSDL
-     * - documentation: The number of disputes on each virtual page in the result set. The virtual page returned is determined by <b>PageNumber</b>.
+     * - documentation: The maximum number of records that will be displayed per page of data. This value will always be <code>200</code> since the <b>EntriesPerPage</b> value defaults to and can only be set to <code>200</code>.
      * - minOccurs: 0
      * @var int|null
      */
@@ -58,7 +62,8 @@ class GetUserDisputesResponseType extends AbstractResponseType
     /**
      * The PageNumber
      * Meta information extracted from the WSDL
-     * - documentation: The page of the total result set returned in the call. The entire result set is virtual and the call returns only one page of it.
+     * - documentation: The page number of the result set that is currently being viewed. Keep in mind that the <b>GetUserDisputes</b> call uses a zero-based index for pagination, so the first page of data in the result set will actually have a value of
+     * lt;code>0</code>.
      * - minOccurs: 0
      * @var int|null
      */
@@ -66,16 +71,17 @@ class GetUserDisputesResponseType extends AbstractResponseType
     /**
      * The DisputeFilterCount
      * Meta information extracted from the WSDL
-     * - documentation: The number of disputes that involve the requester as buyer or seller and match a given filter type.
+     * - documentation: This container will be returned for the different types/categories of disputes. The <b>TotalAvailable</b> field will indicate how many disputes of that type/category (identified in the corresponding <b>DisputeFilterType</b> field)
+     * match the input criteria.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DisputeFilterCountType[]
      */
-    protected array $DisputeFilterCount = [];
+    protected ?array $DisputeFilterCount = null;
     /**
      * The PaginationResult
      * Meta information extracted from the WSDL
-     * - documentation: The result of the pagination, including the total number of virtual pages in the result set and the total number of disputes returned.
+     * - documentation: The result of the pagination, including the total number of virtual pages in the result set and the total number of records returned.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PaginationResultType|null
      */
@@ -97,7 +103,7 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\DisputeFilterCountType[] $disputeFilterCount
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      */
-    public function __construct(?string $startingDisputeID = null, ?string $endingDisputeID = null, ?\macropage\ebaysdk\trading\ArrayType\DisputeArrayType $disputeArray = null, ?int $itemsPerPage = null, ?int $pageNumber = null, array $disputeFilterCount = [], ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
+    public function __construct(?string $startingDisputeID = null, ?string $endingDisputeID = null, ?\macropage\ebaysdk\trading\ArrayType\DisputeArrayType $disputeArray = null, ?int $itemsPerPage = null, ?int $pageNumber = null, ?array $disputeFilterCount = null, ?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null)
     {
         $this
             ->setStartingDisputeID($startingDisputeID)
@@ -223,7 +229,7 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * Get DisputeFilterCount value
      * @return \macropage\ebaysdk\trading\StructType\DisputeFilterCountType[]
      */
-    public function getDisputeFilterCount(): array
+    public function getDisputeFilterCount(): ?array
     {
         return $this->DisputeFilterCount;
     }
@@ -233,8 +239,11 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDisputeFilterCountForArrayConstraintsFromSetDisputeFilterCount(array $values = []): string
+    public static function validateDisputeFilterCountForArrayConstraintsFromSetDisputeFilterCount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getUserDisputesResponseTypeDisputeFilterCountItem) {
@@ -256,7 +265,7 @@ class GetUserDisputesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\DisputeFilterCountType[] $disputeFilterCount
      * @return \macropage\ebaysdk\trading\StructType\GetUserDisputesResponseType
      */
-    public function setDisputeFilterCount(array $disputeFilterCount = []): self
+    public function setDisputeFilterCount(?array $disputeFilterCount = null): self
     {
         // validation for constraint: array
         if ('' !== ($disputeFilterCountArrayErrorMessage = self::validateDisputeFilterCountForArrayConstraintsFromSetDisputeFilterCount($disputeFilterCount))) {

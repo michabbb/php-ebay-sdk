@@ -26,13 +26,13 @@ class CategoryArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\CategoryType[]
      */
-    protected array $Category = [];
+    protected ?array $Category = null;
     /**
      * Constructor method for CategoryArrayType
      * @uses CategoryArrayType::setCategory()
      * @param \macropage\ebaysdk\shopping\StructType\CategoryType[] $category
      */
-    public function __construct(array $category = [])
+    public function __construct(?array $category = null)
     {
         $this
             ->setCategory($category);
@@ -41,7 +41,7 @@ class CategoryArrayType extends AbstractStructArrayBase
      * Get Category value
      * @return \macropage\ebaysdk\shopping\StructType\CategoryType[]
      */
-    public function getCategory(): array
+    public function getCategory(): ?array
     {
         return $this->Category;
     }
@@ -51,8 +51,11 @@ class CategoryArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryForArrayConstraintsFromSetCategory(array $values = []): string
+    public static function validateCategoryForArrayConstraintsFromSetCategory(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $categoryArrayTypeCategoryItem) {
@@ -74,7 +77,7 @@ class CategoryArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\shopping\StructType\CategoryType[] $category
      * @return \macropage\ebaysdk\shopping\ArrayType\CategoryArrayType
      */
-    public function setCategory(array $category = []): self
+    public function setCategory(?array $category = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryArrayErrorMessage = self::validateCategoryForArrayConstraintsFromSetCategory($category))) {

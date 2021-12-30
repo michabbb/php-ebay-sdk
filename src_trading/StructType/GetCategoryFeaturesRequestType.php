@@ -56,7 +56,7 @@ class GetCategoryFeaturesRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $FeatureID = [];
+    protected ?array $FeatureID = null;
     /**
      * The AllFeaturesForCategory
      * Meta information extracted from the WSDL
@@ -79,7 +79,7 @@ class GetCategoryFeaturesRequestType extends AbstractRequestType
      * @param string[] $featureID
      * @param bool $allFeaturesForCategory
      */
-    public function __construct(?string $categoryID = null, ?int $levelLimit = null, ?bool $viewAllNodes = null, array $featureID = [], ?bool $allFeaturesForCategory = null)
+    public function __construct(?string $categoryID = null, ?int $levelLimit = null, ?bool $viewAllNodes = null, ?array $featureID = null, ?bool $allFeaturesForCategory = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -161,7 +161,7 @@ class GetCategoryFeaturesRequestType extends AbstractRequestType
      * Get FeatureID value
      * @return string[]
      */
-    public function getFeatureID(): array
+    public function getFeatureID(): ?array
     {
         return $this->FeatureID;
     }
@@ -171,8 +171,11 @@ class GetCategoryFeaturesRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeatureIDForArrayConstraintsFromSetFeatureID(array $values = []): string
+    public static function validateFeatureIDForArrayConstraintsFromSetFeatureID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategoryFeaturesRequestTypeFeatureIDItem) {
@@ -196,7 +199,7 @@ class GetCategoryFeaturesRequestType extends AbstractRequestType
      * @param string[] $featureID
      * @return \macropage\ebaysdk\trading\StructType\GetCategoryFeaturesRequestType
      */
-    public function setFeatureID(array $featureID = []): self
+    public function setFeatureID(?array $featureID = null): self
     {
         // validation for constraint: array
         if ('' !== ($featureIDArrayErrorMessage = self::validateFeatureIDForArrayConstraintsFromSetFeatureID($featureID))) {

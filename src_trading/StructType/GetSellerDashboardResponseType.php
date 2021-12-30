@@ -82,7 +82,7 @@ class GetSellerDashboardResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PerformanceDashboardType[]
      */
-    protected array $Performance = [];
+    protected ?array $Performance = null;
     /**
      * Constructor method for GetSellerDashboardResponseType
      * @uses GetSellerDashboardResponseType::setSearchStanding()
@@ -100,7 +100,7 @@ class GetSellerDashboardResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SellerAccountDashboardType $sellerAccount
      * @param \macropage\ebaysdk\trading\StructType\PerformanceDashboardType[] $performance
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\SearchStandingDashboardType $searchStanding = null, ?\macropage\ebaysdk\trading\StructType\SellerFeeDiscountDashboardType $sellerFeeDiscount = null, ?\macropage\ebaysdk\trading\StructType\PowerSellerDashboardType $powerSellerStatus = null, ?\macropage\ebaysdk\trading\StructType\PolicyComplianceDashboardType $policyCompliance = null, ?\macropage\ebaysdk\trading\StructType\BuyerSatisfactionDashboardType $buyerSatisfaction = null, ?\macropage\ebaysdk\trading\StructType\SellerAccountDashboardType $sellerAccount = null, array $performance = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SearchStandingDashboardType $searchStanding = null, ?\macropage\ebaysdk\trading\StructType\SellerFeeDiscountDashboardType $sellerFeeDiscount = null, ?\macropage\ebaysdk\trading\StructType\PowerSellerDashboardType $powerSellerStatus = null, ?\macropage\ebaysdk\trading\StructType\PolicyComplianceDashboardType $policyCompliance = null, ?\macropage\ebaysdk\trading\StructType\BuyerSatisfactionDashboardType $buyerSatisfaction = null, ?\macropage\ebaysdk\trading\StructType\SellerAccountDashboardType $sellerAccount = null, ?array $performance = null)
     {
         $this
             ->setSearchStanding($searchStanding)
@@ -229,7 +229,7 @@ class GetSellerDashboardResponseType extends AbstractResponseType
      * Get Performance value
      * @return \macropage\ebaysdk\trading\StructType\PerformanceDashboardType[]
      */
-    public function getPerformance(): array
+    public function getPerformance(): ?array
     {
         return $this->Performance;
     }
@@ -239,8 +239,11 @@ class GetSellerDashboardResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePerformanceForArrayConstraintsFromSetPerformance(array $values = []): string
+    public static function validatePerformanceForArrayConstraintsFromSetPerformance(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getSellerDashboardResponseTypePerformanceItem) {
@@ -262,7 +265,7 @@ class GetSellerDashboardResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\PerformanceDashboardType[] $performance
      * @return \macropage\ebaysdk\trading\StructType\GetSellerDashboardResponseType
      */
-    public function setPerformance(array $performance = []): self
+    public function setPerformance(?array $performance = null): self
     {
         // validation for constraint: array
         if ('' !== ($performanceArrayErrorMessage = self::validatePerformanceForArrayConstraintsFromSetPerformance($performance))) {

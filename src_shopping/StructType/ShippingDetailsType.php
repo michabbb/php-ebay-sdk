@@ -50,7 +50,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\InternationalShippingServiceOptionType[]
      */
-    protected array $InternationalShippingServiceOption = [];
+    protected ?array $InternationalShippingServiceOption = null;
     /**
      * The SalesTax
      * Meta information extracted from the WSDL
@@ -77,7 +77,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\ShippingServiceOptionType[]
      */
-    protected array $ShippingServiceOption = [];
+    protected ?array $ShippingServiceOption = null;
     /**
      * The TaxTable
      * Meta information extracted from the WSDL
@@ -123,7 +123,7 @@ class ShippingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludeShipToLocation = [];
+    protected ?array $ExcludeShipToLocation = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -158,7 +158,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $getItFast = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $insuranceCost = null, ?string $insuranceOption = null, array $internationalShippingServiceOption = [], ?\macropage\ebaysdk\shopping\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, array $shippingServiceOption = [], ?\macropage\ebaysdk\shopping\StructType\TaxTableType $taxTable = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $internationalInsuranceCost = null, ?string $internationalInsuranceOption = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $cODCost = null, array $excludeShipToLocation = [], $any = null)
+    public function __construct(?bool $getItFast = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $insuranceCost = null, ?string $insuranceOption = null, ?array $internationalShippingServiceOption = null, ?\macropage\ebaysdk\shopping\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, ?array $shippingServiceOption = null, ?\macropage\ebaysdk\shopping\StructType\TaxTableType $taxTable = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $internationalInsuranceCost = null, ?string $internationalInsuranceOption = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $cODCost = null, ?array $excludeShipToLocation = null, $any = null)
     {
         $this
             ->setGetItFast($getItFast)
@@ -247,7 +247,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get InternationalShippingServiceOption value
      * @return \macropage\ebaysdk\shopping\StructType\InternationalShippingServiceOptionType[]
      */
-    public function getInternationalShippingServiceOption(): array
+    public function getInternationalShippingServiceOption(): ?array
     {
         return $this->InternationalShippingServiceOption;
     }
@@ -257,8 +257,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption(array $values = []): string
+    public static function validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeInternationalShippingServiceOptionItem) {
@@ -280,7 +283,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\InternationalShippingServiceOptionType[] $internationalShippingServiceOption
      * @return \macropage\ebaysdk\shopping\StructType\ShippingDetailsType
      */
-    public function setInternationalShippingServiceOption(array $internationalShippingServiceOption = []): self
+    public function setInternationalShippingServiceOption(?array $internationalShippingServiceOption = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalShippingServiceOptionArrayErrorMessage = self::validateInternationalShippingServiceOptionForArrayConstraintsFromSetInternationalShippingServiceOption($internationalShippingServiceOption))) {
@@ -352,7 +355,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get ShippingServiceOption value
      * @return \macropage\ebaysdk\shopping\StructType\ShippingServiceOptionType[]
      */
-    public function getShippingServiceOption(): array
+    public function getShippingServiceOption(): ?array
     {
         return $this->ShippingServiceOption;
     }
@@ -362,8 +365,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServiceOptionForArrayConstraintsFromSetShippingServiceOption(array $values = []): string
+    public static function validateShippingServiceOptionForArrayConstraintsFromSetShippingServiceOption(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeShippingServiceOptionItem) {
@@ -385,7 +391,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\ShippingServiceOptionType[] $shippingServiceOption
      * @return \macropage\ebaysdk\shopping\StructType\ShippingDetailsType
      */
-    public function setShippingServiceOption(array $shippingServiceOption = []): self
+    public function setShippingServiceOption(?array $shippingServiceOption = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServiceOptionArrayErrorMessage = self::validateShippingServiceOptionForArrayConstraintsFromSetShippingServiceOption($shippingServiceOption))) {
@@ -498,7 +504,7 @@ class ShippingDetailsType extends AbstractStructBase
      * Get ExcludeShipToLocation value
      * @return string[]
      */
-    public function getExcludeShipToLocation(): array
+    public function getExcludeShipToLocation(): ?array
     {
         return $this->ExcludeShipToLocation;
     }
@@ -508,8 +514,11 @@ class ShippingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(array $values = []): string
+    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingDetailsTypeExcludeShipToLocationItem) {
@@ -531,7 +540,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @return \macropage\ebaysdk\shopping\StructType\ShippingDetailsType
      */
-    public function setExcludeShipToLocation(array $excludeShipToLocation = []): self
+    public function setExcludeShipToLocation(?array $excludeShipToLocation = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeShipToLocationArrayErrorMessage = self::validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation($excludeShipToLocation))) {

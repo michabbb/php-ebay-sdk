@@ -24,13 +24,13 @@ class OfferArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OfferType[]
      */
-    protected array $Offer = [];
+    protected ?array $Offer = null;
     /**
      * Constructor method for OfferArrayType
      * @uses OfferArrayType::setOffer()
      * @param \macropage\ebaysdk\trading\StructType\OfferType[] $offer
      */
-    public function __construct(array $offer = [])
+    public function __construct(?array $offer = null)
     {
         $this
             ->setOffer($offer);
@@ -39,7 +39,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * Get Offer value
      * @return \macropage\ebaysdk\trading\StructType\OfferType[]
      */
-    public function getOffer(): array
+    public function getOffer(): ?array
     {
         return $this->Offer;
     }
@@ -49,8 +49,11 @@ class OfferArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOfferForArrayConstraintsFromSetOffer(array $values = []): string
+    public static function validateOfferForArrayConstraintsFromSetOffer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $offerArrayTypeOfferItem) {
@@ -72,7 +75,7 @@ class OfferArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\OfferType[] $offer
      * @return \macropage\ebaysdk\trading\ArrayType\OfferArrayType
      */
-    public function setOffer(array $offer = []): self
+    public function setOffer(?array $offer = null): self
     {
         // validation for constraint: array
         if ('' !== ($offerArrayErrorMessage = self::validateOfferForArrayConstraintsFromSetOffer($offer))) {

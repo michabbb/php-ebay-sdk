@@ -23,7 +23,7 @@ class RefundTransactionArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundTransactionType[]
      */
-    protected array $RefundTransaction = [];
+    protected ?array $RefundTransaction = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class RefundTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionType[] $refundTransaction
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refundTransaction = [], $any = null)
+    public function __construct(?array $refundTransaction = null, $any = null)
     {
         $this
             ->setRefundTransaction($refundTransaction)
@@ -46,7 +46,7 @@ class RefundTransactionArrayType extends AbstractStructBase
      * Get RefundTransaction value
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionType[]
      */
-    public function getRefundTransaction(): array
+    public function getRefundTransaction(): ?array
     {
         return $this->RefundTransaction;
     }
@@ -56,8 +56,11 @@ class RefundTransactionArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundTransactionForArrayConstraintsFromSetRefundTransaction(array $values = []): string
+    public static function validateRefundTransactionForArrayConstraintsFromSetRefundTransaction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $refundTransactionArrayTypeRefundTransactionItem) {
@@ -79,7 +82,7 @@ class RefundTransactionArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionType[] $refundTransaction
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionArrayType
      */
-    public function setRefundTransaction(array $refundTransaction = []): self
+    public function setRefundTransaction(?array $refundTransaction = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundTransactionArrayErrorMessage = self::validateRefundTransactionForArrayConstraintsFromSetRefundTransaction($refundTransaction))) {

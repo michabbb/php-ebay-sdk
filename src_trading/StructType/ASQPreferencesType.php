@@ -37,7 +37,7 @@ class ASQPreferencesType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Subject = [];
+    protected ?array $Subject = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -52,7 +52,7 @@ class ASQPreferencesType extends AbstractStructBase
      * @param string[] $subject
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $resetDefaultSubjects = null, array $subject = [], $any = null)
+    public function __construct(?bool $resetDefaultSubjects = null, ?array $subject = null, $any = null)
     {
         $this
             ->setResetDefaultSubjects($resetDefaultSubjects)
@@ -86,7 +86,7 @@ class ASQPreferencesType extends AbstractStructBase
      * Get Subject value
      * @return string[]
      */
-    public function getSubject(): array
+    public function getSubject(): ?array
     {
         return $this->Subject;
     }
@@ -96,8 +96,11 @@ class ASQPreferencesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSubjectForArrayConstraintsFromSetSubject(array $values = []): string
+    public static function validateSubjectForArrayConstraintsFromSetSubject(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $aSQPreferencesTypeSubjectItem) {
@@ -119,7 +122,7 @@ class ASQPreferencesType extends AbstractStructBase
      * @param string[] $subject
      * @return \macropage\ebaysdk\trading\StructType\ASQPreferencesType
      */
-    public function setSubject(array $subject = []): self
+    public function setSubject(?array $subject = null): self
     {
         // validation for constraint: array
         if ('' !== ($subjectArrayErrorMessage = self::validateSubjectForArrayConstraintsFromSetSubject($subject))) {

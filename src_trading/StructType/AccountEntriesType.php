@@ -23,7 +23,7 @@ class AccountEntriesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AccountEntryType[]
      */
-    protected array $AccountEntry = [];
+    protected ?array $AccountEntry = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class AccountEntriesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AccountEntryType[] $accountEntry
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $accountEntry = [], $any = null)
+    public function __construct(?array $accountEntry = null, $any = null)
     {
         $this
             ->setAccountEntry($accountEntry)
@@ -46,7 +46,7 @@ class AccountEntriesType extends AbstractStructBase
      * Get AccountEntry value
      * @return \macropage\ebaysdk\trading\StructType\AccountEntryType[]
      */
-    public function getAccountEntry(): array
+    public function getAccountEntry(): ?array
     {
         return $this->AccountEntry;
     }
@@ -56,8 +56,11 @@ class AccountEntriesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAccountEntryForArrayConstraintsFromSetAccountEntry(array $values = []): string
+    public static function validateAccountEntryForArrayConstraintsFromSetAccountEntry(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $accountEntriesTypeAccountEntryItem) {
@@ -79,7 +82,7 @@ class AccountEntriesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AccountEntryType[] $accountEntry
      * @return \macropage\ebaysdk\trading\StructType\AccountEntriesType
      */
-    public function setAccountEntry(array $accountEntry = []): self
+    public function setAccountEntry(?array $accountEntry = null): self
     {
         // validation for constraint: array
         if ('' !== ($accountEntryArrayErrorMessage = self::validateAccountEntryForArrayConstraintsFromSetAccountEntry($accountEntry))) {

@@ -161,7 +161,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SearchFlag = [];
+    protected ?array $SearchFlag = null;
     /**
      * The PaymentMethod
      * Meta information extracted from the WSDL
@@ -186,7 +186,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SellerID = [];
+    protected ?array $SellerID = null;
     /**
      * The SellerIDExclude
      * Meta information extracted from the WSDL
@@ -195,7 +195,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SellerIDExclude = [];
+    protected ?array $SellerIDExclude = null;
     /**
      * The ItemsAvailableTo
      * Meta information extracted from the WSDL
@@ -310,7 +310,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param string $quantityOperator
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $searchName = null, ?string $searchQuery = null, ?string $queryKeywords = null, ?string $categoryID = null, ?string $itemSort = null, ?string $sortOrder = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $maxDistance = null, ?string $postalCode = null, ?string $itemType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMax = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMin = null, ?string $currency = null, ?int $bidCountMax = null, ?int $bidCountMin = null, array $searchFlag = [], ?string $paymentMethod = null, ?string $preferredLocation = null, array $sellerID = [], array $sellerIDExclude = [], ?string $itemsAvailableTo = null, ?string $itemsLocatedIn = null, ?string $sellerBusinessType = null, ?string $condition = null, ?int $quantity = null, ?string $quantityOperator = null, $any = null)
+    public function __construct(?string $searchName = null, ?string $searchQuery = null, ?string $queryKeywords = null, ?string $categoryID = null, ?string $itemSort = null, ?string $sortOrder = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $maxDistance = null, ?string $postalCode = null, ?string $itemType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMax = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMin = null, ?string $currency = null, ?int $bidCountMax = null, ?int $bidCountMin = null, ?array $searchFlag = null, ?string $paymentMethod = null, ?string $preferredLocation = null, ?array $sellerID = null, ?array $sellerIDExclude = null, ?string $itemsAvailableTo = null, ?string $itemsLocatedIn = null, ?string $sellerBusinessType = null, ?string $condition = null, ?int $quantity = null, ?string $quantityOperator = null, $any = null)
     {
         $this
             ->setSearchName($searchName)
@@ -718,7 +718,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * Get SearchFlag value
      * @return string[]
      */
-    public function getSearchFlag(): array
+    public function getSearchFlag(): ?array
     {
         return $this->SearchFlag;
     }
@@ -728,8 +728,11 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSearchFlagForArrayConstraintsFromSetSearchFlag(array $values = []): string
+    public static function validateSearchFlagForArrayConstraintsFromSetSearchFlag(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myeBayFavoriteSearchTypeSearchFlagItem) {
@@ -753,7 +756,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param string[] $searchFlag
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType
      */
-    public function setSearchFlag(array $searchFlag = []): self
+    public function setSearchFlag(?array $searchFlag = null): self
     {
         // validation for constraint: array
         if ('' !== ($searchFlagArrayErrorMessage = self::validateSearchFlagForArrayConstraintsFromSetSearchFlag($searchFlag))) {
@@ -837,7 +840,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * Get SellerID value
      * @return string[]
      */
-    public function getSellerID(): array
+    public function getSellerID(): ?array
     {
         return $this->SellerID;
     }
@@ -847,8 +850,11 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSellerIDForArrayConstraintsFromSetSellerID(array $values = []): string
+    public static function validateSellerIDForArrayConstraintsFromSetSellerID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myeBayFavoriteSearchTypeSellerIDItem) {
@@ -870,7 +876,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param string[] $sellerID
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType
      */
-    public function setSellerID(array $sellerID = []): self
+    public function setSellerID(?array $sellerID = null): self
     {
         // validation for constraint: array
         if ('' !== ($sellerIDArrayErrorMessage = self::validateSellerIDForArrayConstraintsFromSetSellerID($sellerID))) {
@@ -900,7 +906,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * Get SellerIDExclude value
      * @return string[]
      */
-    public function getSellerIDExclude(): array
+    public function getSellerIDExclude(): ?array
     {
         return $this->SellerIDExclude;
     }
@@ -910,8 +916,11 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSellerIDExcludeForArrayConstraintsFromSetSellerIDExclude(array $values = []): string
+    public static function validateSellerIDExcludeForArrayConstraintsFromSetSellerIDExclude(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myeBayFavoriteSearchTypeSellerIDExcludeItem) {
@@ -933,7 +942,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param string[] $sellerIDExclude
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType
      */
-    public function setSellerIDExclude(array $sellerIDExclude = []): self
+    public function setSellerIDExclude(?array $sellerIDExclude = null): self
     {
         // validation for constraint: array
         if ('' !== ($sellerIDExcludeArrayErrorMessage = self::validateSellerIDExcludeForArrayConstraintsFromSetSellerIDExclude($sellerIDExclude))) {

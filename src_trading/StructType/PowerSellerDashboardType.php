@@ -32,7 +32,7 @@ class PowerSellerDashboardType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[]
      */
-    protected array $Alert = [];
+    protected ?array $Alert = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -47,7 +47,7 @@ class PowerSellerDashboardType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[] $alert
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $level = null, array $alert = [], $any = null)
+    public function __construct(?string $level = null, ?array $alert = null, $any = null)
     {
         $this
             ->setLevel($level)
@@ -84,7 +84,7 @@ class PowerSellerDashboardType extends AbstractStructBase
      * Get Alert value
      * @return \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[]
      */
-    public function getAlert(): array
+    public function getAlert(): ?array
     {
         return $this->Alert;
     }
@@ -94,8 +94,11 @@ class PowerSellerDashboardType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlertForArrayConstraintsFromSetAlert(array $values = []): string
+    public static function validateAlertForArrayConstraintsFromSetAlert(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $powerSellerDashboardTypeAlertItem) {
@@ -117,7 +120,7 @@ class PowerSellerDashboardType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType[] $alert
      * @return \macropage\ebaysdk\trading\StructType\PowerSellerDashboardType
      */
-    public function setAlert(array $alert = []): self
+    public function setAlert(?array $alert = null): self
     {
         // validation for constraint: array
         if ('' !== ($alertArrayErrorMessage = self::validateAlertForArrayConstraintsFromSetAlert($alert))) {

@@ -153,8 +153,7 @@ class ValueTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'VATIN'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the tax ID in the <b>ID</b> field is a VAT Identification Number for the buyer. <br> <br> <span class="tablenote"><b>Note: </b> The buyer VATIN will not start getting returned until June 30, 2021. See the
-     * 1209 Release Notes for more information. </span> <br>
+     * - documentation: This value indicates that the tax ID in the <b>ID</b> field is a VAT Identification Number for the buyer.
      * @return string 'VATIN'
      */
     const VALUE_VATIN = 'VATIN';

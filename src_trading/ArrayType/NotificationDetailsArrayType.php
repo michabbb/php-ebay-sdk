@@ -25,13 +25,13 @@ class NotificationDetailsArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NotificationDetailsType[]
      */
-    protected array $NotificationDetails = [];
+    protected ?array $NotificationDetails = null;
     /**
      * Constructor method for NotificationDetailsArrayType
      * @uses NotificationDetailsArrayType::setNotificationDetails()
      * @param \macropage\ebaysdk\trading\StructType\NotificationDetailsType[] $notificationDetails
      */
-    public function __construct(array $notificationDetails = [])
+    public function __construct(?array $notificationDetails = null)
     {
         $this
             ->setNotificationDetails($notificationDetails);
@@ -40,7 +40,7 @@ class NotificationDetailsArrayType extends AbstractStructArrayBase
      * Get NotificationDetails value
      * @return \macropage\ebaysdk\trading\StructType\NotificationDetailsType[]
      */
-    public function getNotificationDetails(): array
+    public function getNotificationDetails(): ?array
     {
         return $this->NotificationDetails;
     }
@@ -50,8 +50,11 @@ class NotificationDetailsArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNotificationDetailsForArrayConstraintsFromSetNotificationDetails(array $values = []): string
+    public static function validateNotificationDetailsForArrayConstraintsFromSetNotificationDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $notificationDetailsArrayTypeNotificationDetailsItem) {
@@ -73,7 +76,7 @@ class NotificationDetailsArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\NotificationDetailsType[] $notificationDetails
      * @return \macropage\ebaysdk\trading\ArrayType\NotificationDetailsArrayType
      */
-    public function setNotificationDetails(array $notificationDetails = []): self
+    public function setNotificationDetails(?array $notificationDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($notificationDetailsArrayErrorMessage = self::validateNotificationDetailsForArrayConstraintsFromSetNotificationDetails($notificationDetails))) {

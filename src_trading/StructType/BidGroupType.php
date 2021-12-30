@@ -23,7 +23,7 @@ class BidGroupType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BidGroupItemType[]
      */
-    protected array $BidGroupItem = [];
+    protected ?array $BidGroupItem = null;
     /**
      * The BidGroupID
      * Meta information extracted from the WSDL
@@ -66,7 +66,7 @@ class BidGroupType extends AbstractStructBase
      * @param string $bidGroupStatus
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $bidGroupItem = [], ?int $bidGroupID = null, ?string $bidGroupName = null, ?string $bidGroupStatus = null, $any = null)
+    public function __construct(?array $bidGroupItem = null, ?int $bidGroupID = null, ?string $bidGroupName = null, ?string $bidGroupStatus = null, $any = null)
     {
         $this
             ->setBidGroupItem($bidGroupItem)
@@ -79,7 +79,7 @@ class BidGroupType extends AbstractStructBase
      * Get BidGroupItem value
      * @return \macropage\ebaysdk\trading\StructType\BidGroupItemType[]
      */
-    public function getBidGroupItem(): array
+    public function getBidGroupItem(): ?array
     {
         return $this->BidGroupItem;
     }
@@ -89,8 +89,11 @@ class BidGroupType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBidGroupItemForArrayConstraintsFromSetBidGroupItem(array $values = []): string
+    public static function validateBidGroupItemForArrayConstraintsFromSetBidGroupItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $bidGroupTypeBidGroupItemItem) {
@@ -112,7 +115,7 @@ class BidGroupType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BidGroupItemType[] $bidGroupItem
      * @return \macropage\ebaysdk\trading\StructType\BidGroupType
      */
-    public function setBidGroupItem(array $bidGroupItem = []): self
+    public function setBidGroupItem(?array $bidGroupItem = null): self
     {
         // validation for constraint: array
         if ('' !== ($bidGroupItemArrayErrorMessage = self::validateBidGroupItemForArrayConstraintsFromSetBidGroupItem($bidGroupItem))) {

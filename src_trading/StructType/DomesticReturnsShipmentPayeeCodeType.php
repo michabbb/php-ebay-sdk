@@ -23,7 +23,7 @@ class DomesticReturnsShipmentPayeeCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DomesticReturnsShipmentPayee = [];
+    protected ?array $DomesticReturnsShipmentPayee = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class DomesticReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsShipmentPayee
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $domesticReturnsShipmentPayee = [], $any = null)
+    public function __construct(?array $domesticReturnsShipmentPayee = null, $any = null)
     {
         $this
             ->setDomesticReturnsShipmentPayee($domesticReturnsShipmentPayee)
@@ -46,7 +46,7 @@ class DomesticReturnsShipmentPayeeCodeType extends AbstractStructBase
      * Get DomesticReturnsShipmentPayee value
      * @return string[]
      */
-    public function getDomesticReturnsShipmentPayee(): array
+    public function getDomesticReturnsShipmentPayee(): ?array
     {
         return $this->DomesticReturnsShipmentPayee;
     }
@@ -56,8 +56,11 @@ class DomesticReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomesticReturnsShipmentPayeeForArrayConstraintsFromSetDomesticReturnsShipmentPayee(array $values = []): string
+    public static function validateDomesticReturnsShipmentPayeeForArrayConstraintsFromSetDomesticReturnsShipmentPayee(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $domesticReturnsShipmentPayeeCodeTypeDomesticReturnsShipmentPayeeItem) {
@@ -81,7 +84,7 @@ class DomesticReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsShipmentPayee
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType
      */
-    public function setDomesticReturnsShipmentPayee(array $domesticReturnsShipmentPayee = []): self
+    public function setDomesticReturnsShipmentPayee(?array $domesticReturnsShipmentPayee = null): self
     {
         // validation for constraint: array
         if ('' !== ($domesticReturnsShipmentPayeeArrayErrorMessage = self::validateDomesticReturnsShipmentPayeeForArrayConstraintsFromSetDomesticReturnsShipmentPayee($domesticReturnsShipmentPayee))) {

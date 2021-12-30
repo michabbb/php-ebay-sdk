@@ -10,9 +10,10 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for DisputeType StructType
  * Meta information extracted from the WSDL
- * - documentation: Contains all information describing a dispute. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee
- * program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a
- * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Contains all information describing an Unpaid Item case. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only retrieve Unpaid Item cases. They are no longer used to
+ * retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and these calls do not support eBay Money Back Guarantee cases.
+ * <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases
+ * manually through the eBay Resolution Center. </span>
  * @subpackage Structs
  */
 class DisputeType extends AbstractStructBase
@@ -20,9 +21,11 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeID
      * Meta information extracted from the WSDL
-     * - documentation: The unique identifier of an eBay dispute. | The unique identifier of a dispute between a buyer and seller regarding an order. <br/><br/> <span class="tablenote"><strong>Note:</strong> The dispute calls in the Trading API are not
-     * compatible with 'Item Not Received' or 'Significantly Not As Described' cases initiated by buyers through the eBay Money Back Guarantee program. The <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a>
-     * is used to retrieve and/or respond to eBay Money Back Guarantee cases programmatically. </span>
+     * - documentation: The unique identifier of an Unpaid Item case. | The unique identifier of an Unpaid Item case involving a buyer and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> Despite the name, this type is now only used to
+     * identify an Unpaid Item case, and the identifier of an eBay case uses a 'case ID' and not a 'dispute ID'. However, the <strong>DisputeID</strong> field in Dispute calls handles Unpaid Item case IDs. These calls no longer support Item not Received
+     * (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and these calls also do not support eBay Money
+     * Back Guarantee cases. <br/><br/> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or
+     * manage/respond to cases manually through the eBay Resolution Center. </span>
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -31,7 +34,8 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeRecordType
      * Meta information extracted from the WSDL
-     * - documentation: A value to indicate the type of dispute.
+     * - documentation: A value to indicate the type of dispute. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only retrieve Unpaid Item cases, so the enumeration value returned here
+     * should always be <code>UnpaidItem</code>. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -39,7 +43,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeState
      * Meta information extracted from the WSDL
-     * - documentation: The internal state of the dispute. The value determines which values of <b>DisputeActivity</b> are valid when responding to a dispute.
+     * - documentation: The state of the dispute. The value determines which values of <b>DisputeActivity</b> are valid when responding to an Unpaid Item case with an <b>AddDisputeResponse</b>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -55,7 +59,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The OtherPartyRole
      * Meta information extracted from the WSDL
-     * - documentation: The role of the person involved in the dispute who is not taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
+     * - documentation: The role of the person involved in the Unpaid Item case who is not taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -63,7 +67,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The OtherPartyName
      * Meta information extracted from the WSDL
-     * - documentation: The user name of the person involved in the dispute who is not taking action or requesting information.
+     * - documentation: The user name of the person involved in the Unpaid Item case who is not taking action or requesting information.
      * - minOccurs: 0
      * @var string|null
      */
@@ -71,7 +75,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The UserRole
      * Meta information extracted from the WSDL
-     * - documentation: The role of the person involved in the dispute who is taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
+     * - documentation: The role of the person involved in the Unpaid Item case who is taking action or requesting information. The role is either <b>Buyer</b> or <b>Seller</b>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -79,9 +83,9 @@ class DisputeType extends AbstractStructBase
     /**
      * The BuyerUserID
      * Meta information extracted from the WSDL
-     * - documentation: The eBay user ID of the buyer involved in the dispute. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd,
-     * FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be
-     * returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - documentation: The eBay user ID of the buyer involved in the Unpaid Item case. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
+     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
+     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -90,9 +94,9 @@ class DisputeType extends AbstractStructBase
     /**
      * The SellerUserID
      * Meta information extracted from the WSDL
-     * - documentation: The eBay user ID of the seller involved in the dispute. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd,
-     * FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be
-     * returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - documentation: The eBay user ID of the seller involved in the Unpaid Item case. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
+     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
+     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -101,8 +105,8 @@ class DisputeType extends AbstractStructBase
     /**
      * The TransactionID
      * Meta information extracted from the WSDL
-     * - documentation: The unique identifier of the order line item (transaction) under dispute. An order line item is created once there is a commitment from a buyer to purchase an item. In the case of <b>GetDispute</b> and <b>GetUserDisputes</b>
-     * responses, this value identifies the order line item involved in the dispute. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
+     * - documentation: The unique identifier of the sales transaction with an Unpaid Item case filed against it. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for
+     * an auction listing.
      * - minOccurs: 0
      * @var string|null
      */
@@ -110,7 +114,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The Item
      * Meta information extracted from the WSDL
-     * - documentation: Container consisting of high-level details about the item involved in the dispute.
+     * - documentation: Container consisting of high-level details about the item involved in the Unpaid Item case.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemType|null
      */
@@ -118,7 +122,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeReason
      * Meta information extracted from the WSDL
-     * - documentation: The top-level reason for the dispute. The value of <b>DisputeReason</b> determines which values of <b>DisputeExplanation</b> are valid. See <b>DisputeExplanationCodeList</b> for details.
+     * - documentation: The reason for the Unpaid Item case. Since <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only retrieve Unpaid Item cases, this value should always be <code>BuyerHasNotPaid</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -126,7 +130,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeExplanation
      * Meta information extracted from the WSDL
-     * - documentation: The detailed explanation for the dispute. Valid values depend on the value of <b>DisputeReason</b>. See <b>DisputeExplanationCodeList</b> for details.
+     * - documentation: This enumeration value provides more details about why the Unpaid Item case was created. See <b>DisputeExplanationCodeList</b> type for explanation of values.
      * - minOccurs: 0
      * @var string|null
      */
@@ -143,7 +147,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeCreatedTime
      * Meta information extracted from the WSDL
-     * - documentation: The date and time the dispute was created, in GMT.
+     * - documentation: The date and time the Unpaid Item case was created, in GMT.
      * - minOccurs: 0
      * @var string|null
      */
@@ -151,7 +155,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeModifiedTime
      * Meta information extracted from the WSDL
-     * - documentation: The date and time the dispute was modified, in GMT.
+     * - documentation: The date and time the Unpaid Item case was last modified, in GMT.
      * - minOccurs: 0
      * @var string|null
      */
@@ -159,25 +163,26 @@ class DisputeType extends AbstractStructBase
     /**
      * The DisputeResolution
      * Meta information extracted from the WSDL
-     * - documentation: The action resulting from the dispute resolution. The action might include a Final Value Fee credit to the seller, a strike to the buyer, a reversal, or an appeal.
+     * - documentation: This container provides more details about the results of an Unpaid Item case once it is resolved. Results could possibly include a Final Value Fee credit to the seller and an Unpaid Item strike to the buyer. This container will only
+     * be returned after the Unpaid Item case is resolved.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DisputeResolutionType[]
      */
-    protected array $DisputeResolution = [];
+    protected ?array $DisputeResolution = null;
     /**
      * The DisputeMessage
      * Meta information extracted from the WSDL
-     * - documentation: A response or message posted to a dispute, either by an application or by a user on the eBay site.
+     * - documentation: This field will contain a response or message related to the Unpaid Item case, posted by either the buyer or the seller.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DisputeMessageType[]
      */
-    protected array $DisputeMessage = [];
+    protected ?array $DisputeMessage = null;
     /**
      * The Escalation
      * Meta information extracted from the WSDL
-     * - documentation: This field is returned as <code>true</code> if the buyer is eligible to appeal a closed Item Not Received dispute.
+     * - documentation: This field is returned as <code>true</code> if the buyer is eligible to appeal a closed Unpaid Item case.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -185,7 +190,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The PurchaseProtection
      * Meta information extracted from the WSDL
-     * - documentation: This field is returned as <code>true</code> if the buyer used PayPal to pay for the item, and is eligible for PayPal's Standard Purchase Protection.
+     * - documentation: This field is no longer applicable, and if it is returned, it can be ignored.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -193,7 +198,7 @@ class DisputeType extends AbstractStructBase
     /**
      * The OrderLineItemID
      * Meta information extracted from the WSDL
-     * - documentation: <b>OrderLineItemID</b> is a unique identifier for an eBay order line item. In the case of <b>GetDispute</b> and <b>GetUserDisputes</b> responses, this value identifies the order line item involved in the dispute. <br>
+     * - documentation: The unique identifier of the order line item with an Unpaid Item case filed against it. <br>
      * - minOccurs: 0
      * @var string|null
      */
@@ -250,7 +255,7 @@ class DisputeType extends AbstractStructBase
      * @param string $orderLineItemID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $disputeID = null, ?string $disputeRecordType = null, ?string $disputeState = null, ?string $disputeStatus = null, ?string $otherPartyRole = null, ?string $otherPartyName = null, ?string $userRole = null, ?string $buyerUserID = null, ?string $sellerUserID = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?string $disputeReason = null, ?string $disputeExplanation = null, ?string $disputeCreditEligibility = null, ?string $disputeCreatedTime = null, ?string $disputeModifiedTime = null, array $disputeResolution = [], array $disputeMessage = [], ?bool $escalation = null, ?bool $purchaseProtection = null, ?string $orderLineItemID = null, $any = null)
+    public function __construct(?string $disputeID = null, ?string $disputeRecordType = null, ?string $disputeState = null, ?string $disputeStatus = null, ?string $otherPartyRole = null, ?string $otherPartyName = null, ?string $userRole = null, ?string $buyerUserID = null, ?string $sellerUserID = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?string $disputeReason = null, ?string $disputeExplanation = null, ?string $disputeCreditEligibility = null, ?string $disputeCreatedTime = null, ?string $disputeModifiedTime = null, ?array $disputeResolution = null, ?array $disputeMessage = null, ?bool $escalation = null, ?bool $purchaseProtection = null, ?string $orderLineItemID = null, $any = null)
     {
         $this
             ->setDisputeID($disputeID)
@@ -668,7 +673,7 @@ class DisputeType extends AbstractStructBase
      * Get DisputeResolution value
      * @return \macropage\ebaysdk\trading\StructType\DisputeResolutionType[]
      */
-    public function getDisputeResolution(): array
+    public function getDisputeResolution(): ?array
     {
         return $this->DisputeResolution;
     }
@@ -678,8 +683,11 @@ class DisputeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDisputeResolutionForArrayConstraintsFromSetDisputeResolution(array $values = []): string
+    public static function validateDisputeResolutionForArrayConstraintsFromSetDisputeResolution(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $disputeTypeDisputeResolutionItem) {
@@ -701,7 +709,7 @@ class DisputeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DisputeResolutionType[] $disputeResolution
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeResolution(array $disputeResolution = []): self
+    public function setDisputeResolution(?array $disputeResolution = null): self
     {
         // validation for constraint: array
         if ('' !== ($disputeResolutionArrayErrorMessage = self::validateDisputeResolutionForArrayConstraintsFromSetDisputeResolution($disputeResolution))) {
@@ -731,7 +739,7 @@ class DisputeType extends AbstractStructBase
      * Get DisputeMessage value
      * @return \macropage\ebaysdk\trading\StructType\DisputeMessageType[]
      */
-    public function getDisputeMessage(): array
+    public function getDisputeMessage(): ?array
     {
         return $this->DisputeMessage;
     }
@@ -741,8 +749,11 @@ class DisputeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDisputeMessageForArrayConstraintsFromSetDisputeMessage(array $values = []): string
+    public static function validateDisputeMessageForArrayConstraintsFromSetDisputeMessage(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $disputeTypeDisputeMessageItem) {
@@ -764,7 +775,7 @@ class DisputeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DisputeMessageType[] $disputeMessage
      * @return \macropage\ebaysdk\trading\StructType\DisputeType
      */
-    public function setDisputeMessage(array $disputeMessage = []): self
+    public function setDisputeMessage(?array $disputeMessage = null): self
     {
         // validation for constraint: array
         if ('' !== ($disputeMessageArrayErrorMessage = self::validateDisputeMessageForArrayConstraintsFromSetDisputeMessage($disputeMessage))) {

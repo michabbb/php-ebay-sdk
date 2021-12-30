@@ -11,9 +11,6 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for SellerPaymentPreferencesType StructType
  * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>SellerPaymentPreferences</b> container, which consists of the seller's payment preferences. Payment preferences specified in a <b>SetUserPreferences</b> call override the settings in My eBay payment preferences.
- * <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control some of the settings under the <b>SellerPaymentPreferences</b> container, and although some of these fields can still be set in
- * <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the settings will not have any affect on any current or future listings for the seller. eBay managed payments is currently available to a select set of sellers. For the current list
- * of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. </span> <br>
  * @subpackage Structs
  */
 class SellerPaymentPreferencesType extends AbstractStructBase
@@ -22,7 +19,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
      * The AlwaysUseThisPaymentAddress
      * Meta information extracted from the WSDL
      * - documentation: Sellers include this field and set it to <code>true</code> if they want buyers to mail payment to the payment address specified in the <b>SellerPaymentPreferences.SellerPaymentAddress</b> field. A payment address only comes into play
-     * if the item's category allows offline payments, and the seller has allowed the buyer to mail a payment. This payment address will only be displayed to winning bidders and buyers.
+     * if the listing's category allows offline payments, and the seller has allowed the buyer to mail a payment. This payment address will only be displayed to winning bidders and buyers.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -30,10 +27,8 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The DisplayPayNowButton
      * Meta information extracted from the WSDL
-     * - documentation: If set, this field determines whether a Pay Now button is displayed for all of the user's listings. The user has the option of using a PayPal only version of the Pay Now button or a Pay Now button for all payment methods. <br><br>
-     * <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the display of the "Buy It Now" button in listings, and although the <b>DisplayPayNowButton</b> value can still be set in <b>SetUserPreferences</b> and
-     * returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. eBay managed payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which
-     * eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page. </span> <br>
+     * - documentation: If set, this field determines whether a Pay Now button is displayed for all of the user's listings. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>DisplayPayNowButton</b> value can still be set in
+     * <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span> <br>
      * - minOccurs: 0
      * @var string|null
      */
@@ -41,10 +36,8 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The PayPalPreferred
      * Meta information extracted from the WSDL
-     * - documentation: Specifies whether a seller wants to let buyers know that PayPal payments are preferred. <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the display of the "PayPal Preferred"
-     * setting in listings, and although the <b>PayPalPreferred</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller.
-     * eBay managed payments is currently available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay
-     * Managed Payments</a> landing page. </span>
+     * - documentation: Specifies whether a seller wants to let buyers know that PayPal payments are preferred. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>PayPalPreferred</b> boolean value can still be set in <b>SetUserPreferences</b> and
+     * returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -52,7 +45,8 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The DefaultPayPalEmailAddress
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the default email address the seller uses for receiving PayPal payments.
+     * - documentation: Specifies the default email address the seller uses for receiving PayPal payments. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>DefaultPayPalEmailAddress</b> value can still be set in <b>SetUserPreferences</b> and
+     * returned in <b>GetUserPreferences</b>, the seller's PayPal email address is no longer required or applicable. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -60,10 +54,8 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The PayPalAlwaysOn
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether PayPal is always accepted for the seller's listings. <br><br> <span class="tablenote"><b>Note:</b> Sellers in the eBay managed payments program cannot control the "PayPal Always On" setting in listings, and although
-     * the <b>PayPalAlwaysOn</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. eBay managed payments is currently
-     * available to a select set of sellers. For the current list of eBay marketplaces in which eBay managed payments has rolled out, see the <a href="https://developer.ebay.com/managed-payments" target="_blank">eBay Managed Payments</a> landing page.
-     * </span>
+     * - documentation: Indicates whether PayPal is always accepted for the seller's listings. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>PayPalAlwaysOn</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in
+     * <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -71,7 +63,8 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The SellerPaymentAddress
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the address the seller uses to receive mailed payments from buyers.
+     * - documentation: This container consists of the seller's mailing address where the buyer will send payment for an order. A seller's payment address only comes into play if the listing's category allows offline payments, and the seller has allowed the
+     * buyer to mail a payment. This payment address will only be displayed to winning bidders and buyers.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
@@ -79,7 +72,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The UPSRateOption
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the type of UPS shipping rates that are available to the seller.
+     * - documentation: This enumeration value indicates the category/level of UPS shipping rates that are available to the seller.
      * - minOccurs: 0
      * @var string|null
      */
@@ -87,7 +80,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The FedExRateOption
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the type of FedEx shipping rates that are available to the seller.
+     * - documentation: This enumeration value indicates the category/level of Federal Express shipping rates that are available to the seller.
      * - minOccurs: 0
      * @var string|null
      */
@@ -95,7 +88,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The USPSRateOption
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates the type of US Postal Service shipping rates that are available to the seller.
+     * - documentation: This enumeration value indicates the category/level of US Postal Service shipping rates that are available to the seller.
      * - minOccurs: 0
      * @var string|null
      */

@@ -23,13 +23,13 @@ class EndItemsResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\EndItemResponseContainerType[]
      */
-    protected array $EndItemResponseContainer = [];
+    protected ?array $EndItemResponseContainer = null;
     /**
      * Constructor method for EndItemsResponseType
      * @uses EndItemsResponseType::setEndItemResponseContainer()
      * @param \macropage\ebaysdk\trading\StructType\EndItemResponseContainerType[] $endItemResponseContainer
      */
-    public function __construct(array $endItemResponseContainer = [])
+    public function __construct(?array $endItemResponseContainer = null)
     {
         $this
             ->setEndItemResponseContainer($endItemResponseContainer);
@@ -38,7 +38,7 @@ class EndItemsResponseType extends AbstractResponseType
      * Get EndItemResponseContainer value
      * @return \macropage\ebaysdk\trading\StructType\EndItemResponseContainerType[]
      */
-    public function getEndItemResponseContainer(): array
+    public function getEndItemResponseContainer(): ?array
     {
         return $this->EndItemResponseContainer;
     }
@@ -48,8 +48,11 @@ class EndItemsResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEndItemResponseContainerForArrayConstraintsFromSetEndItemResponseContainer(array $values = []): string
+    public static function validateEndItemResponseContainerForArrayConstraintsFromSetEndItemResponseContainer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $endItemsResponseTypeEndItemResponseContainerItem) {
@@ -71,7 +74,7 @@ class EndItemsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\EndItemResponseContainerType[] $endItemResponseContainer
      * @return \macropage\ebaysdk\trading\StructType\EndItemsResponseType
      */
-    public function setEndItemResponseContainer(array $endItemResponseContainer = []): self
+    public function setEndItemResponseContainer(?array $endItemResponseContainer = null): self
     {
         // validation for constraint: array
         if ('' !== ($endItemResponseContainerArrayErrorMessage = self::validateEndItemResponseContainerForArrayConstraintsFromSetEndItemResponseContainer($endItemResponseContainer))) {

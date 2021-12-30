@@ -56,7 +56,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    protected array $Errors = [];
+    protected ?array $Errors = null;
     /**
      * The Message
      * Meta information extracted from the WSDL
@@ -194,7 +194,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param string $externalUserData
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $timestamp = null, ?string $ack = null, ?string $correlationID = null, array $errors = [], ?string $message = null, ?string $version = null, ?string $build = null, ?string $notificationEventName = null, ?\macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType $duplicateInvocationDetails = null, ?string $recipientUserID = null, ?string $eIASToken = null, ?string $notificationSignature = null, ?string $hardExpirationWarning = null, ?\macropage\ebaysdk\trading\StructType\BotBlockResponseType $botBlock = null, ?string $externalUserData = null, $any = null)
+    public function __construct(?string $timestamp = null, ?string $ack = null, ?string $correlationID = null, ?array $errors = null, ?string $message = null, ?string $version = null, ?string $build = null, ?string $notificationEventName = null, ?\macropage\ebaysdk\trading\StructType\DuplicateInvocationDetailsType $duplicateInvocationDetails = null, ?string $recipientUserID = null, ?string $eIASToken = null, ?string $notificationSignature = null, ?string $hardExpirationWarning = null, ?\macropage\ebaysdk\trading\StructType\BotBlockResponseType $botBlock = null, ?string $externalUserData = null, $any = null)
     {
         $this
             ->setTimestamp($timestamp)
@@ -290,7 +290,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * Get Errors value
      * @return \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->Errors;
     }
@@ -300,8 +300,11 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorsForArrayConstraintsFromSetErrors(array $values = []): string
+    public static function validateErrorsForArrayConstraintsFromSetErrors(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $abstractResponseTypeErrorsItem) {
@@ -323,7 +326,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @return \macropage\ebaysdk\trading\StructType\AbstractResponseType
      */
-    public function setErrors(array $errors = []): self
+    public function setErrors(?array $errors = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorsArrayErrorMessage = self::validateErrorsForArrayConstraintsFromSetErrors($errors))) {

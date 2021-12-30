@@ -47,7 +47,7 @@ class SellerDiscountsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerDiscountType[]
      */
-    protected array $SellerDiscount = [];
+    protected ?array $SellerDiscount = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -66,7 +66,7 @@ class SellerDiscountsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDiscountType[] $sellerDiscount
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $originalItemPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $originalItemShippingCost = null, ?string $originalShippingService = null, array $sellerDiscount = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $originalItemPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $originalItemShippingCost = null, ?string $originalShippingService = null, ?array $sellerDiscount = null, $any = null)
     {
         $this
             ->setOriginalItemPrice($originalItemPrice)
@@ -140,7 +140,7 @@ class SellerDiscountsType extends AbstractStructBase
      * Get SellerDiscount value
      * @return \macropage\ebaysdk\trading\StructType\SellerDiscountType[]
      */
-    public function getSellerDiscount(): array
+    public function getSellerDiscount(): ?array
     {
         return $this->SellerDiscount;
     }
@@ -150,8 +150,11 @@ class SellerDiscountsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSellerDiscountForArrayConstraintsFromSetSellerDiscount(array $values = []): string
+    public static function validateSellerDiscountForArrayConstraintsFromSetSellerDiscount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sellerDiscountsTypeSellerDiscountItem) {
@@ -173,7 +176,7 @@ class SellerDiscountsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDiscountType[] $sellerDiscount
      * @return \macropage\ebaysdk\trading\StructType\SellerDiscountsType
      */
-    public function setSellerDiscount(array $sellerDiscount = []): self
+    public function setSellerDiscount(?array $sellerDiscount = null): self
     {
         // validation for constraint: array
         if ('' !== ($sellerDiscountArrayErrorMessage = self::validateSellerDiscountForArrayConstraintsFromSetSellerDiscount($sellerDiscount))) {

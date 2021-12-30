@@ -24,8 +24,9 @@ class EBayTaxReferenceValue extends AbstractStructBase
      * The name
      * Meta information extracted from the WSDL
      * - documentation: This attribute value is returned to indicate the VAT tax type, which will vary by country/region. This string value will be one of the following:<br/><ul><li><code>ABN</code>: if this string is returned, the ID in the field is an
-     * eBay Australia tax number Number</li><li><code>IOSS</code>: if this string is returned, the ID in the field is an eBay EU or UK IOSS number</li><li><code>IRD</code>: if this string is returned, the ID in the field is an eBay New Zealand tax
-     * number</li><li><code>OSS</code>: if this string is returned, the ID in the field is an eBay Germany VAT ID</li><li><code>VOEC</code>: if this string is returned, the ID in the field is an eBay Norway tax number</li></ul>
+     * eBay Australia tax number </li><li><code>IOSS</code>: if this string is returned, the ID in the field is an eBay EU or UK IOSS number</li><li><code>IRD</code>: if this string is returned, the ID in the field is an eBay New Zealand tax
+     * number</li><li><code>OSS</code>: if this string is returned, the ID in the field is an eBay Germany VAT ID</li><li><code>VOEC</code>: if this string is returned, the ID in the field is an eBay Norway tax number</li><li><code>VAT_ID</code>: if this
+     * string is returned, the ID in the field is an eBay France VAT ID</li></ul>
      * @var string|null
      */
     protected ?string $name = null;

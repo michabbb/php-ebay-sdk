@@ -30,7 +30,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DetailLevel = [];
+    protected ?array $DetailLevel = null;
     /**
      * The ErrorLanguage
      * Meta information extracted from the WSDL
@@ -109,7 +109,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $OutputSelector = [];
+    protected ?array $OutputSelector = null;
     /**
      * The WarningLevel
      * Meta information extracted from the WSDL
@@ -160,7 +160,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $detailLevel = [], ?string $errorLanguage = null, ?string $messageID = null, ?string $version = null, ?string $endUserIP = null, ?string $errorHandling = null, ?string $invocationID = null, array $outputSelector = [], ?string $warningLevel = null, ?\macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null, $any = null)
+    public function __construct(?array $detailLevel = null, ?string $errorLanguage = null, ?string $messageID = null, ?string $version = null, ?string $endUserIP = null, ?string $errorHandling = null, ?string $invocationID = null, ?array $outputSelector = null, ?string $warningLevel = null, ?\macropage\ebaysdk\trading\StructType\BotBlockRequestType $botBlock = null, $any = null)
     {
         $this
             ->setDetailLevel($detailLevel)
@@ -179,7 +179,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * Get DetailLevel value
      * @return string[]
      */
-    public function getDetailLevel(): array
+    public function getDetailLevel(): ?array
     {
         return $this->DetailLevel;
     }
@@ -189,8 +189,11 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDetailLevelForArrayConstraintsFromSetDetailLevel(array $values = []): string
+    public static function validateDetailLevelForArrayConstraintsFromSetDetailLevel(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $abstractRequestTypeDetailLevelItem) {
@@ -214,7 +217,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string[] $detailLevel
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setDetailLevel(array $detailLevel = []): self
+    public function setDetailLevel(?array $detailLevel = null): self
     {
         // validation for constraint: array
         if ('' !== ($detailLevelArrayErrorMessage = self::validateDetailLevelForArrayConstraintsFromSetDetailLevel($detailLevel))) {
@@ -387,7 +390,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * Get OutputSelector value
      * @return string[]
      */
-    public function getOutputSelector(): array
+    public function getOutputSelector(): ?array
     {
         return $this->OutputSelector;
     }
@@ -397,8 +400,11 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOutputSelectorForArrayConstraintsFromSetOutputSelector(array $values = []): string
+    public static function validateOutputSelectorForArrayConstraintsFromSetOutputSelector(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $abstractRequestTypeOutputSelectorItem) {
@@ -420,7 +426,7 @@ abstract class AbstractRequestType extends AbstractStructBase
      * @param string[] $outputSelector
      * @return \macropage\ebaysdk\trading\StructType\AbstractRequestType
      */
-    public function setOutputSelector(array $outputSelector = []): self
+    public function setOutputSelector(?array $outputSelector = null): self
     {
         // validation for constraint: array
         if ('' !== ($outputSelectorArrayErrorMessage = self::validateOutputSelectorForArrayConstraintsFromSetOutputSelector($outputSelector))) {

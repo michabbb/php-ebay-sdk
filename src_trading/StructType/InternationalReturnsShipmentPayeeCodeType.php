@@ -23,7 +23,7 @@ class InternationalReturnsShipmentPayeeCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $InternationalReturnsShipmentPayee = [];
+    protected ?array $InternationalReturnsShipmentPayee = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class InternationalReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsShipmentPayee
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $internationalReturnsShipmentPayee = [], $any = null)
+    public function __construct(?array $internationalReturnsShipmentPayee = null, $any = null)
     {
         $this
             ->setInternationalReturnsShipmentPayee($internationalReturnsShipmentPayee)
@@ -46,7 +46,7 @@ class InternationalReturnsShipmentPayeeCodeType extends AbstractStructBase
      * Get InternationalReturnsShipmentPayee value
      * @return string[]
      */
-    public function getInternationalReturnsShipmentPayee(): array
+    public function getInternationalReturnsShipmentPayee(): ?array
     {
         return $this->InternationalReturnsShipmentPayee;
     }
@@ -56,8 +56,11 @@ class InternationalReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalReturnsShipmentPayeeForArrayConstraintsFromSetInternationalReturnsShipmentPayee(array $values = []): string
+    public static function validateInternationalReturnsShipmentPayeeForArrayConstraintsFromSetInternationalReturnsShipmentPayee(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $internationalReturnsShipmentPayeeCodeTypeInternationalReturnsShipmentPayeeItem) {
@@ -81,7 +84,7 @@ class InternationalReturnsShipmentPayeeCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsShipmentPayee
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType
      */
-    public function setInternationalReturnsShipmentPayee(array $internationalReturnsShipmentPayee = []): self
+    public function setInternationalReturnsShipmentPayee(?array $internationalReturnsShipmentPayee = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalReturnsShipmentPayeeArrayErrorMessage = self::validateInternationalReturnsShipmentPayeeForArrayConstraintsFromSetInternationalReturnsShipmentPayee($internationalReturnsShipmentPayee))) {

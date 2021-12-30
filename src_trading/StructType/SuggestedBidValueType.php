@@ -25,7 +25,7 @@ class SuggestedBidValueType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType[]
      */
-    protected array $BidValue = [];
+    protected ?array $BidValue = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -38,7 +38,7 @@ class SuggestedBidValueType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType[] $bidValue
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $bidValue = [], $any = null)
+    public function __construct(?array $bidValue = null, $any = null)
     {
         $this
             ->setBidValue($bidValue)
@@ -48,7 +48,7 @@ class SuggestedBidValueType extends AbstractStructBase
      * Get BidValue value
      * @return \macropage\ebaysdk\trading\StructType\AmountType[]
      */
-    public function getBidValue(): array
+    public function getBidValue(): ?array
     {
         return $this->BidValue;
     }
@@ -58,8 +58,11 @@ class SuggestedBidValueType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBidValueForArrayConstraintsFromSetBidValue(array $values = []): string
+    public static function validateBidValueForArrayConstraintsFromSetBidValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $suggestedBidValueTypeBidValueItem) {
@@ -81,7 +84,7 @@ class SuggestedBidValueType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType[] $bidValue
      * @return \macropage\ebaysdk\trading\StructType\SuggestedBidValueType
      */
-    public function setBidValue(array $bidValue = []): self
+    public function setBidValue(?array $bidValue = null): self
     {
         // validation for constraint: array
         if ('' !== ($bidValueArrayErrorMessage = self::validateBidValueForArrayConstraintsFromSetBidValue($bidValue))) {

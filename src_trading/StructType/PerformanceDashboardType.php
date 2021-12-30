@@ -25,7 +25,7 @@ class PerformanceDashboardType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Site = [];
+    protected ?array $Site = null;
     /**
      * The Status
      * Meta information extracted from the WSDL
@@ -58,7 +58,7 @@ class PerformanceDashboardType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SellerDashboardAlertType $alert
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $site = [], ?string $status = null, ?\macropage\ebaysdk\trading\StructType\SellerDashboardAlertType $alert = null, $any = null)
+    public function __construct(?array $site = null, ?string $status = null, ?\macropage\ebaysdk\trading\StructType\SellerDashboardAlertType $alert = null, $any = null)
     {
         $this
             ->setSite($site)
@@ -70,7 +70,7 @@ class PerformanceDashboardType extends AbstractStructBase
      * Get Site value
      * @return string[]
      */
-    public function getSite(): array
+    public function getSite(): ?array
     {
         return $this->Site;
     }
@@ -80,8 +80,11 @@ class PerformanceDashboardType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSiteForArrayConstraintsFromSetSite(array $values = []): string
+    public static function validateSiteForArrayConstraintsFromSetSite(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $performanceDashboardTypeSiteItem) {
@@ -105,7 +108,7 @@ class PerformanceDashboardType extends AbstractStructBase
      * @param string[] $site
      * @return \macropage\ebaysdk\trading\StructType\PerformanceDashboardType
      */
-    public function setSite(array $site = []): self
+    public function setSite(?array $site = null): self
     {
         // validation for constraint: array
         if ('' !== ($siteArrayErrorMessage = self::validateSiteForArrayConstraintsFromSetSite($site))) {

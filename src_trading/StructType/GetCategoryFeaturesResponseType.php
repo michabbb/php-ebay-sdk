@@ -40,7 +40,7 @@ class GetCategoryFeaturesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CategoryFeatureType[]
      */
-    protected array $Category = [];
+    protected ?array $Category = null;
     /**
      * The SiteDefaults
      * Meta information extracted from the WSDL
@@ -70,7 +70,7 @@ class GetCategoryFeaturesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\SiteDefaultsType $siteDefaults
      * @param \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType $featureDefinitions
      */
-    public function __construct(?string $categoryVersion = null, ?string $updateTime = null, array $category = [], ?\macropage\ebaysdk\trading\StructType\SiteDefaultsType $siteDefaults = null, ?\macropage\ebaysdk\trading\StructType\FeatureDefinitionsType $featureDefinitions = null)
+    public function __construct(?string $categoryVersion = null, ?string $updateTime = null, ?array $category = null, ?\macropage\ebaysdk\trading\StructType\SiteDefaultsType $siteDefaults = null, ?\macropage\ebaysdk\trading\StructType\FeatureDefinitionsType $featureDefinitions = null)
     {
         $this
             ->setCategoryVersion($categoryVersion)
@@ -129,7 +129,7 @@ class GetCategoryFeaturesResponseType extends AbstractResponseType
      * Get Category value
      * @return \macropage\ebaysdk\trading\StructType\CategoryFeatureType[]
      */
-    public function getCategory(): array
+    public function getCategory(): ?array
     {
         return $this->Category;
     }
@@ -139,8 +139,11 @@ class GetCategoryFeaturesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCategoryForArrayConstraintsFromSetCategory(array $values = []): string
+    public static function validateCategoryForArrayConstraintsFromSetCategory(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getCategoryFeaturesResponseTypeCategoryItem) {
@@ -162,7 +165,7 @@ class GetCategoryFeaturesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\CategoryFeatureType[] $category
      * @return \macropage\ebaysdk\trading\StructType\GetCategoryFeaturesResponseType
      */
-    public function setCategory(array $category = []): self
+    public function setCategory(?array $category = null): self
     {
         // validation for constraint: array
         if ('' !== ($categoryArrayErrorMessage = self::validateCategoryForArrayConstraintsFromSetCategory($category))) {

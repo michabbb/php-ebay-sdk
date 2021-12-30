@@ -39,7 +39,7 @@ class ReviseItemRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DeletedField = [];
+    protected ?array $DeletedField = null;
     /**
      * The VerifyOnly
      * Meta information extracted from the WSDL
@@ -58,7 +58,7 @@ class ReviseItemRequestType extends AbstractRequestType
      * @param string[] $deletedField
      * @param bool $verifyOnly
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, array $deletedField = [], ?bool $verifyOnly = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?array $deletedField = null, ?bool $verifyOnly = null)
     {
         $this
             ->setItem($item)
@@ -88,7 +88,7 @@ class ReviseItemRequestType extends AbstractRequestType
      * Get DeletedField value
      * @return string[]
      */
-    public function getDeletedField(): array
+    public function getDeletedField(): ?array
     {
         return $this->DeletedField;
     }
@@ -98,8 +98,11 @@ class ReviseItemRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(array $values = []): string
+    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseItemRequestTypeDeletedFieldItem) {
@@ -121,7 +124,7 @@ class ReviseItemRequestType extends AbstractRequestType
      * @param string[] $deletedField
      * @return \macropage\ebaysdk\trading\StructType\ReviseItemRequestType
      */
-    public function setDeletedField(array $deletedField = []): self
+    public function setDeletedField(?array $deletedField = null): self
     {
         // validation for constraint: array
         if ('' !== ($deletedFieldArrayErrorMessage = self::validateDeletedFieldForArrayConstraintsFromSetDeletedField($deletedField))) {

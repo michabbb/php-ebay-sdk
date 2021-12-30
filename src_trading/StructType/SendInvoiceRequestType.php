@@ -10,8 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for SendInvoiceRequestType StructType
  * Meta information extracted from the WSDL
- * - documentation: Enables a seller to send an order invoice to a buyer. Where applicable, updates to shipping, payment methods, and sales tax made in this request are applied to the specified order as a whole and to the individual order line items
- * whose data are stored in individual <b>Transaction</b> objects.
+ * - documentation: This call enables a seller to send an order invoice to a buyer. Optionally, and when applicable, this call can also be used to update the shipping service options available for shipment, to provide payment or checkout instructions to
+ * the buyer, to make a cost adjustment for the order/order line item, or to provide one or more offline payment methods (for orders where offline payment is an option).
  * @subpackage Structs
  */
 class SendInvoiceRequestType extends AbstractRequestType
@@ -19,8 +19,8 @@ class SendInvoiceRequestType extends AbstractRequestType
     /**
      * The ItemID
      * Meta information extracted from the WSDL
-     * - documentation: Unique identifier for an eBay listing. Unless <b>OrderID</b> or <b>OrderLineItemID</b> is provided in the request, the <b>ItemID</b> (or <b>SKU</b>) is required and must be paired with the corresponding <b>TransactionID</b> to
-     * identify a single line item order. For a multiple line item order, <b>OrderID</b> should be used. | Type that represents the unique identifier for an eBay listing.
+     * - documentation: Unique identifier of the eBay listing. Unless <b>OrderID</b> or <b>OrderLineItemID</b> is provided in the request, the <b>ItemID</b> value (or <b>SKU</b> value) is conditionally required and must be paired with the corresponding
+     * <b>TransactionID</b> value to identify an order line item. For a multiple line item order, <b>OrderID</b> should be used. | Type that represents the unique identifier for an eBay listing.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -30,8 +30,8 @@ class SendInvoiceRequestType extends AbstractRequestType
      * The TransactionID
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay sales transaction. This identifier is created once there is a commitment from a buyer to purchase an item. Since an auction listing can only have one sales transaction during the duration of the listing,
-     * the <b>TransactionID</b> value for auction listings is always <code>0</code>. Unless <b>OrderID</b> or <b>OrderLineItemID</b> is provided in the request, the <b>TransactionID</b> is required and must be paired with the corresponding <b>ItemID</b> to
-     * identify a single line item order. For a multiple line item order, <b>OrderID</b> should be used.
+     * the <b>TransactionID</b> value for auction listings is always <code>0</code>. Unless <b>OrderID</b> or <b>OrderLineItemID</b> is provided in the request, the <b>TransactionID</b> value is required and must be paired with the corresponding
+     * <b>ItemID</b> value to identify an order line item. For a multiple line item order, <b>OrderID</b> should be used.
      * - minOccurs: 0
      * @var string|null
      */
@@ -39,27 +39,23 @@ class SendInvoiceRequestType extends AbstractRequestType
     /**
      * The OrderID
      * Meta information extracted from the WSDL
-     * - documentation: A unique identifier that identifies a single line item or multiple line item order. <br><br> Unless the <b>ItemID</b> (or SKU) and corresponding <b>TransactionID</b>, or the <b>OrderLineItemID</b> is provided in the request to
-     * identify a single line item order, the <b>OrderID</b> must be specified. If <b>OrderID</b> is specified, <b>OrderLineItemID</b>, <b>ItemID</b>, <b>TransactionID</b>, and <b>SKU</b> are ignored if present in the same request. <br><br> <span
-     * class="tablenote"><b>Note: </b> In June 2019, eBay introduced a new order ID format, but allowed developers/sellers to decide whether to immediately adopt the new format, or to continue working with the old format. Users who wanted to adopt the new
-     * format, could either use a Trading WSDL Version 1113 (or newer), or they could even use an older Trading WSDL but set the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header value to <code>1113</code> in API calls. <b>Beginning in June 2020, only the
-     * new order ID format will be returned in response payloads for paid orders, regardless of the WSDL version number or compatibility level.</b> <br><br> Note that the unique identifier of a 'non-immediate payment' order will change as it goes from an
-     * unpaid order to a paid order. Due to this scenario, all calls that accept Order ID values as filters in the request payload, including the <b>SendInvoice</b> call, will support the identifiers for both unpaid and paid orders. The new order ID format
-     * is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers
-     * will also be known and used/referenced by the buyer and eBay customer support. <br><br> Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of
-     * <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made payment.
-     * </span> | Type that represents the unique identifier for an eBay order. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values. The new format is a non-parsable string, globally unique
-     * across all eBay marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique order identifiers will also be known and used/referenced by
-     * the buyer and eBay customer support. <br><br> For developers and sellers who are already integrated with the Trading API's order management calls, this change shouldn't impact your integration unless you parse the existing order identifiers (e.g.,
-     * <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from the format (e.g., differentiating between a single line item order versus a multiple line item order). Because we realize that some integrations may have logic that is
-     * dependent upon the old identifier format, eBay is rolling out this Trading API change with version control to support a transition period of approximately 9 months before applications must switch to the new format completely. <br><br> During the
-     * transition period, for developers/sellers using a Trading WSDL older than Version 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether the new or old <b>OrderID</b> format is returned in call
-     * response payloads. To get the new <b>OrderID</b> format, the value of the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and even after, the new and old <b>OrderID</b> formats will
-     * still be supported/accepted in all Trading API call request payloads. After the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading API call response payloads, regardless of the Trading WSDL
-     * version used or specified compatibility level. </span> <br> <span class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an order will change as it goes from unpaid to paid status.
-     * Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in
-     * the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific order(s), either of these order IDs (paid or unpaid status) can be used to
-     * retrieve an order. </span>
+     * - documentation: A unique identifier that identifies a single line item or multiple line item order. <br><br> Unless the <b>ItemID</b> value (or <b>SKU</b> value) and corresponding <b>TransactionID</b> value, or the <b>OrderLineItemID</b> value is
+     * provided in the request to identify a single line item order, the <b>OrderID</b> value must be specified. If <b>OrderID</b> value is specified, <b>OrderLineItemID</b>, <b>ItemID</b>, <b>TransactionID</b>, and <b>SKU</b> fields are ignored if present
+     * in the same request. <br><br> <span class="tablenote"><b>Note: </b> Note that the unique identifier of a 'non-immediate payment' order will change as it goes from an unpaid order to a paid order. Due to this scenario, all Trading API calls that
+     * accept Order ID values as filters in the request payload will support the identifiers for both unpaid and paid orders. <br><br> Sellers can check to see if an order has been paid by looking for a value of <code>Complete</code> in the
+     * <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers
+     * should not fulfill orders until buyer has made payment. </span> | Type that represents the unique identifier for an eBay order. <br><br> <span class="tablenote"><b>Note: </b> As of June 2019, eBay has changed the format of order identifier values.
+     * The new format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique
+     * order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> For developers and sellers who are already integrated with the Trading API's order management calls, this change shouldn't impact your
+     * integration unless you parse the existing order identifiers (e.g., <b>OrderID</b> or <b>OrderLineItemID</b>), or otherwise infer meaning from the format (e.g., differentiating between a single line item order versus a multiple line item order).
+     * Because we realize that some integrations may have logic that is dependent upon the old identifier format, eBay is rolling out this Trading API change with version control to support a transition period of approximately 9 months before applications
+     * must switch to the new format completely. <br><br> During the transition period, for developers/sellers using a Trading WSDL older than Version 1113, they can use the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header in API calls to control whether
+     * the new or old <b>OrderID</b> format is returned in call response payloads. To get the new <b>OrderID</b> format, the value of the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header must be set to <code>1113</code>. During the transition period and
+     * even after, the new and old <b>OrderID</b> formats will still be supported/accepted in all Trading API call request payloads. After the transition period (which will be announced), only the new <b>OrderID</b> format will be returned in all Trading
+     * API call response payloads, regardless of the Trading WSDL version used or specified compatibility level. </span> <br> <span class="tablenote"><b>Note: </b> For sellers integrated with the new order ID format, please note that the identifier for an
+     * order will change as it goes from unpaid to paid status. Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the response of <b>GetOrders</b> or
+     * <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. When using a <b>GetOrders</b> or <b>GetOrderTransactions</b> call to retrieve specific
+     * order(s), either of these order IDs (paid or unpaid status) can be used to retrieve an order. </span>
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -68,31 +64,30 @@ class SendInvoiceRequestType extends AbstractRequestType
     /**
      * The InternationalShippingServiceOptions
      * Meta information extracted from the WSDL
-     * - documentation: If the buyer has an International shipping address, use this container to offer up to four International shipping services (or five if one of them is a Global Shipping Program service). If International shipping services are offered,
-     * (domestic) <b>ShippingServiceOptions</b> should not be included in the request. <br>
+     * - documentation: If the buyer has an international shipping address, use this container to offer up to four international shipping service options (or five if one of them is Global Shipping Program). If one or more international shipping service
+     * options are offered through this container, the (domestic) <b>ShippingServiceOptions</b> container should not be included in the same request. <br>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[]
      */
-    protected array $InternationalShippingServiceOptions = [];
+    protected ?array $InternationalShippingServiceOptions = null;
     /**
      * The ShippingServiceOptions
      * Meta information extracted from the WSDL
-     * - documentation: If the buyer has a domestic shipping address, use this container to offer up to four domestic shipping services. If domestic shipping services are offered, <b>InternationalShippingServiceOptions</b> should not be included in the
-     * request. <br>
+     * - documentation: If the buyer has a domestic shipping address, use this container to offer up to four domestic shipping service options. If one or more domestic shipping service options are offered through this container, the
+     * <b>InternationalShippingServiceOptions</b> container should not be included in the same request. <br>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[]
      */
-    protected array $ShippingServiceOptions = [];
+    protected ?array $ShippingServiceOptions = null;
     /**
      * The SalesTax
      * Meta information extracted from the WSDL
-     * - documentation: This container is used if the seller wishes to apply sales tax to the order. The amount of sales tax applied to the order is dependent on the sales tax rate in the buyer's state and whether sales tax is being applied to the cost of
-     * the order only or the cost of the order plus shipping and handling. <br><br> <span class="tablenote"><b>Note: </b> As of January 1, 2019, buyers in some US states will automatically be charged sales tax for eBay purchases. eBay will collect and remit
-     * this sales tax to the proper taxing authority on the buyer's behalf. So, if the order's buyer is in a state that is subject to 'eBay Collect and Remit Tax', the seller should not send the buyer any sales tax information, since eBay will be handling
-     * the sales tax instead without buyer's assistance. For a list of the US states that will become subject to 'eBay Collect and Remit' (and effective dates), see the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic. </span>
+     * - documentation: This container is used if the seller wishes to apply sales tax to the order if the buyer lives in a state/jurisdiction where sales tax is not already collected automatically by eBay and remitted to the tax authority. The amount of
+     * sales tax applied to the order is dependent on the sales tax rate in the buyer's state and whether sales tax is being applied to the cost of the order only or the cost of the order plus shipping and handling. <br><br> <span class="tablenote"><b>Note:
+     * </b> As of November 4, 2021, eBay now collects and remits sales tax to the tax authorities for all but one US state (Missouri) and five US territories. So, in most cases, this container will not be applicable and should not be used in a request. For
+     * more information, see the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SalesTaxType|null
      */
@@ -116,17 +111,17 @@ class SendInvoiceRequestType extends AbstractRequestType
     /**
      * The PaymentMethods
      * Meta information extracted from the WSDL
-     * - documentation: This optional field allows a US or German seller to add specific payment methods that were not in the original listing. The only valid values for this field are 'PayPal' for a US listing (or 'CreditCard' for sellers opted in to eBay
-     * managed payments), or 'MoneyXferAcceptedInCheckout' (CIP+) for a listing on the Germany site.
+     * - documentation: This field should only be used if the seller needs to add one or more offline payment options for an order that requires/supports offline payment. A seller should not submit any online payment methods here since eBay now controls the
+     * available online payment options that are available to buyers, and not the seller. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PaymentMethods = [];
+    protected ?array $PaymentMethods = null;
     /**
      * The PayPalEmailAddress
      * Meta information extracted from the WSDL
-     * - documentation: If the <b>PaymentMethods</b> field is used and set to <code>PayPal</code>, the seller provides his/her PayPal email address in this field.
+     * - documentation: <b>DO NOT USE</b>. This field is no longer applicable, as eBay now controls the available online payment options that are available to buyers, and not the seller.
      * - minOccurs: 0
      * @var string|null
      */
@@ -160,7 +155,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * The SKU
      * Meta information extracted from the WSDL
      * - documentation: The seller's unique identifier for an item that is being tracked by this SKU. If <b>OrderID</b> or <b>OrderLineItemID</b> are not provided, both <b>SKU</b> (or <b>ItemID</b>) and corresponding <b>TransactionID</b> must be provided to
-     * uniquely identify a single line item order. For a multiple line item order, <b>OrderID</b> must be used. <br> <br> This field can only be used if the <b>Item.InventoryTrackingMethod</b> field (set with the <b>AddFixedPriceItem</b> or
+     * uniquely identify a single line item order. For a multiple line item order, <b>OrderID</b> must be used. <br> <br> This field should only be used if the <b>Item.InventoryTrackingMethod</b> field (set with the <b>AddFixedPriceItem</b> or
      * <b>RelistFixedPriceItem</b> calls) is set to <code>SKU</code>. | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information and rules, see the fields that reference this
      * type.
      * - base: xs:string
@@ -222,7 +217,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param string $orderLineItemID
      * @param \macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount
      */
-    public function __construct(?string $itemID = null, ?string $transactionID = null, ?string $orderID = null, array $internationalShippingServiceOptions = [], array $shippingServiceOptions = [], ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $insuranceOption = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuranceFee = null, array $paymentMethods = [], ?string $payPalEmailAddress = null, ?string $checkoutInstructions = null, ?bool $emailCopyToSeller = null, ?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null, ?string $sKU = null, ?string $orderLineItemID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null)
+    public function __construct(?string $itemID = null, ?string $transactionID = null, ?string $orderID = null, ?array $internationalShippingServiceOptions = null, ?array $shippingServiceOptions = null, ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $insuranceOption = null, ?\macropage\ebaysdk\trading\StructType\AmountType $insuranceFee = null, ?array $paymentMethods = null, ?string $payPalEmailAddress = null, ?string $checkoutInstructions = null, ?bool $emailCopyToSeller = null, ?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null, ?string $sKU = null, ?string $orderLineItemID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $adjustmentAmount = null)
     {
         $this
             ->setItemID($itemID)
@@ -315,7 +310,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * Get InternationalShippingServiceOptions value
      * @return \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[]
      */
-    public function getInternationalShippingServiceOptions(): array
+    public function getInternationalShippingServiceOptions(): ?array
     {
         return $this->InternationalShippingServiceOptions;
     }
@@ -325,8 +320,11 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalShippingServiceOptionsForArrayConstraintsFromSetInternationalShippingServiceOptions(array $values = []): string
+    public static function validateInternationalShippingServiceOptionsForArrayConstraintsFromSetInternationalShippingServiceOptions(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sendInvoiceRequestTypeInternationalShippingServiceOptionsItem) {
@@ -348,7 +346,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[] $internationalShippingServiceOptions
      * @return \macropage\ebaysdk\trading\StructType\SendInvoiceRequestType
      */
-    public function setInternationalShippingServiceOptions(array $internationalShippingServiceOptions = []): self
+    public function setInternationalShippingServiceOptions(?array $internationalShippingServiceOptions = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalShippingServiceOptionsArrayErrorMessage = self::validateInternationalShippingServiceOptionsForArrayConstraintsFromSetInternationalShippingServiceOptions($internationalShippingServiceOptions))) {
@@ -378,7 +376,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * Get ShippingServiceOptions value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[]
      */
-    public function getShippingServiceOptions(): array
+    public function getShippingServiceOptions(): ?array
     {
         return $this->ShippingServiceOptions;
     }
@@ -388,8 +386,11 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions(array $values = []): string
+    public static function validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sendInvoiceRequestTypeShippingServiceOptionsItem) {
@@ -411,7 +412,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[] $shippingServiceOptions
      * @return \macropage\ebaysdk\trading\StructType\SendInvoiceRequestType
      */
-    public function setShippingServiceOptions(array $shippingServiceOptions = []): self
+    public function setShippingServiceOptions(?array $shippingServiceOptions = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServiceOptionsArrayErrorMessage = self::validateShippingServiceOptionsForArrayConstraintsFromSetShippingServiceOptions($shippingServiceOptions))) {
@@ -505,7 +506,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * Get PaymentMethods value
      * @return string[]
      */
-    public function getPaymentMethods(): array
+    public function getPaymentMethods(): ?array
     {
         return $this->PaymentMethods;
     }
@@ -515,8 +516,11 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(array $values = []): string
+    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sendInvoiceRequestTypePaymentMethodsItem) {
@@ -540,7 +544,7 @@ class SendInvoiceRequestType extends AbstractRequestType
      * @param string[] $paymentMethods
      * @return \macropage\ebaysdk\trading\StructType\SendInvoiceRequestType
      */
-    public function setPaymentMethods(array $paymentMethods = []): self
+    public function setPaymentMethods(?array $paymentMethods = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentMethodsArrayErrorMessage = self::validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods($paymentMethods))) {

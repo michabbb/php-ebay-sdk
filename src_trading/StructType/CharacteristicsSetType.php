@@ -47,7 +47,7 @@ class CharacteristicsSetType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharacteristicType[]
      */
-    protected array $Characteristics = [];
+    protected ?array $Characteristics = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -66,7 +66,7 @@ class CharacteristicsSetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicType[] $characteristics
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $name = null, ?int $attributeSetID = null, ?string $attributeSetVersion = null, array $characteristics = [], $any = null)
+    public function __construct(?string $name = null, ?int $attributeSetID = null, ?string $attributeSetVersion = null, ?array $characteristics = null, $any = null)
     {
         $this
             ->setName($name)
@@ -148,7 +148,7 @@ class CharacteristicsSetType extends AbstractStructBase
      * Get Characteristics value
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicType[]
      */
-    public function getCharacteristics(): array
+    public function getCharacteristics(): ?array
     {
         return $this->Characteristics;
     }
@@ -158,8 +158,11 @@ class CharacteristicsSetType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharacteristicsForArrayConstraintsFromSetCharacteristics(array $values = []): string
+    public static function validateCharacteristicsForArrayConstraintsFromSetCharacteristics(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $characteristicsSetTypeCharacteristicsItem) {
@@ -181,7 +184,7 @@ class CharacteristicsSetType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharacteristicType[] $characteristics
      * @return \macropage\ebaysdk\trading\StructType\CharacteristicsSetType
      */
-    public function setCharacteristics(array $characteristics = []): self
+    public function setCharacteristics(?array $characteristics = null): self
     {
         // validation for constraint: array
         if ('' !== ($characteristicsArrayErrorMessage = self::validateCharacteristicsForArrayConstraintsFromSetCharacteristics($characteristics))) {

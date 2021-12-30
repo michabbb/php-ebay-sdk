@@ -78,7 +78,7 @@ class BiddingSummaryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[]
      */
-    protected array $ItemBidDetails = [];
+    protected ?array $ItemBidDetails = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -103,7 +103,7 @@ class BiddingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[] $itemBidDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $summaryDays = null, ?int $totalBids = null, ?int $bidActivityWithSeller = null, ?int $bidsToUniqueSellers = null, ?int $bidsToUniqueCategories = null, ?int $bidRetractions = null, array $itemBidDetails = [], $any = null)
+    public function __construct(?int $summaryDays = null, ?int $totalBids = null, ?int $bidActivityWithSeller = null, ?int $bidsToUniqueSellers = null, ?int $bidsToUniqueCategories = null, ?int $bidRetractions = null, ?array $itemBidDetails = null, $any = null)
     {
         $this
             ->setSummaryDays($summaryDays)
@@ -257,7 +257,7 @@ class BiddingSummaryType extends AbstractStructBase
      * Get ItemBidDetails value
      * @return \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[]
      */
-    public function getItemBidDetails(): array
+    public function getItemBidDetails(): ?array
     {
         return $this->ItemBidDetails;
     }
@@ -267,8 +267,11 @@ class BiddingSummaryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemBidDetailsForArrayConstraintsFromSetItemBidDetails(array $values = []): string
+    public static function validateItemBidDetailsForArrayConstraintsFromSetItemBidDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $biddingSummaryTypeItemBidDetailsItem) {
@@ -290,7 +293,7 @@ class BiddingSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemBidDetailsType[] $itemBidDetails
      * @return \macropage\ebaysdk\trading\StructType\BiddingSummaryType
      */
-    public function setItemBidDetails(array $itemBidDetails = []): self
+    public function setItemBidDetails(?array $itemBidDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemBidDetailsArrayErrorMessage = self::validateItemBidDetailsForArrayConstraintsFromSetItemBidDetails($itemBidDetails))) {

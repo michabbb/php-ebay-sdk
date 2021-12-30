@@ -59,7 +59,7 @@ class PictureDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PictureURL = [];
+    protected ?array $PictureURL = null;
     /**
      * The PictureSource
      * Meta information extracted from the WSDL
@@ -93,7 +93,7 @@ class PictureDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExternalPictureURL = [];
+    protected ?array $ExternalPictureURL = null;
     /**
      * The ExtendedPictureDetails
      * Meta information extracted from the WSDL
@@ -129,7 +129,7 @@ class PictureDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $galleryType = null, ?string $photoDisplay = null, array $pictureURL = [], ?string $pictureSource = null, ?string $galleryStatus = null, ?string $galleryErrorInfo = null, array $externalPictureURL = [], ?\macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails = null, $any = null)
+    public function __construct(?string $galleryType = null, ?string $photoDisplay = null, ?array $pictureURL = null, ?string $pictureSource = null, ?string $galleryStatus = null, ?string $galleryErrorInfo = null, ?array $externalPictureURL = null, ?\macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails = null, $any = null)
     {
         $this
             ->setGalleryType($galleryType)
@@ -198,7 +198,7 @@ class PictureDetailsType extends AbstractStructBase
      * Get PictureURL value
      * @return string[]
      */
-    public function getPictureURL(): array
+    public function getPictureURL(): ?array
     {
         return $this->PictureURL;
     }
@@ -208,8 +208,11 @@ class PictureDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(array $values = []): string
+    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pictureDetailsTypePictureURLItem) {
@@ -231,7 +234,7 @@ class PictureDetailsType extends AbstractStructBase
      * @param string[] $pictureURL
      * @return \macropage\ebaysdk\trading\StructType\PictureDetailsType
      */
-    public function setPictureURL(array $pictureURL = []): self
+    public function setPictureURL(?array $pictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureURLArrayErrorMessage = self::validatePictureURLForArrayConstraintsFromSetPictureURL($pictureURL))) {
@@ -336,7 +339,7 @@ class PictureDetailsType extends AbstractStructBase
      * Get ExternalPictureURL value
      * @return string[]
      */
-    public function getExternalPictureURL(): array
+    public function getExternalPictureURL(): ?array
     {
         return $this->ExternalPictureURL;
     }
@@ -346,8 +349,11 @@ class PictureDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL(array $values = []): string
+    public static function validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pictureDetailsTypeExternalPictureURLItem) {
@@ -369,7 +375,7 @@ class PictureDetailsType extends AbstractStructBase
      * @param string[] $externalPictureURL
      * @return \macropage\ebaysdk\trading\StructType\PictureDetailsType
      */
-    public function setExternalPictureURL(array $externalPictureURL = []): self
+    public function setExternalPictureURL(?array $externalPictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($externalPictureURLArrayErrorMessage = self::validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL($externalPictureURL))) {

@@ -25,13 +25,13 @@ class MembershipDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MembershipDetailType[]
      */
-    protected array $Program = [];
+    protected ?array $Program = null;
     /**
      * Constructor method for MembershipDetailsType
      * @uses MembershipDetailsType::setProgram()
      * @param \macropage\ebaysdk\trading\StructType\MembershipDetailType[] $program
      */
-    public function __construct(array $program = [])
+    public function __construct(?array $program = null)
     {
         $this
             ->setProgram($program);
@@ -40,7 +40,7 @@ class MembershipDetailsType extends AbstractStructBase
      * Get Program value
      * @return \macropage\ebaysdk\trading\StructType\MembershipDetailType[]
      */
-    public function getProgram(): array
+    public function getProgram(): ?array
     {
         return $this->Program;
     }
@@ -50,8 +50,11 @@ class MembershipDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProgramForArrayConstraintsFromSetProgram(array $values = []): string
+    public static function validateProgramForArrayConstraintsFromSetProgram(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $membershipDetailsTypeProgramItem) {
@@ -73,7 +76,7 @@ class MembershipDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MembershipDetailType[] $program
      * @return \macropage\ebaysdk\trading\StructType\MembershipDetailsType
      */
-    public function setProgram(array $program = []): self
+    public function setProgram(?array $program = null): self
     {
         // validation for constraint: array
         if ('' !== ($programArrayErrorMessage = self::validateProgramForArrayConstraintsFromSetProgram($program))) {

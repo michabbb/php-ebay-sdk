@@ -17,7 +17,7 @@ class EndOfAuctionLogoTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'WinningBidderNotice'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the PayPal Winning Bidder Notice logo will be used in the end of auction email to winning bidder.
+     * - documentation: This enumeration value indicates that the Winning Bidder Notice logo will be used in the end of auction email to winning bidder.
      * @return string 'WinningBidderNotice'
      */
     const VALUE_WINNING_BIDDER_NOTICE = 'WinningBidderNotice';
@@ -31,7 +31,8 @@ class EndOfAuctionLogoTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Customized'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that a custom logo will be used in the end of auction email to winning bidder. The location (URL) of this custom logo is specified in the <b>LogoURL</b> field.
+     * - documentation: This enumeration value indicates that a custom logo will be used in the end of auction email to winning bidder. The location (URL) of this custom logo can be given through the <b>LogoURL</b> field of the <b>SetUserPreferences</b>
+     * call. Just like any URL that is provided through eBay API calls, the URL for the custom logo must use 'https' (and not 'http').
      * @return string 'Customized'
      */
     const VALUE_CUSTOMIZED = 'Customized';

@@ -42,13 +42,13 @@ class OrderIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $OrderID = [];
+    protected ?array $OrderID = null;
     /**
      * Constructor method for OrderIDArrayType
      * @uses OrderIDArrayType::setOrderID()
      * @param string[] $orderID
      */
-    public function __construct(array $orderID = [])
+    public function __construct(?array $orderID = null)
     {
         $this
             ->setOrderID($orderID);
@@ -57,7 +57,7 @@ class OrderIDArrayType extends AbstractStructArrayBase
      * Get OrderID value
      * @return string[]
      */
-    public function getOrderID(): array
+    public function getOrderID(): ?array
     {
         return $this->OrderID;
     }
@@ -67,8 +67,11 @@ class OrderIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOrderIDForArrayConstraintsFromSetOrderID(array $values = []): string
+    public static function validateOrderIDForArrayConstraintsFromSetOrderID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $orderIDArrayTypeOrderIDItem) {
@@ -90,7 +93,7 @@ class OrderIDArrayType extends AbstractStructArrayBase
      * @param string[] $orderID
      * @return \macropage\ebaysdk\trading\ArrayType\OrderIDArrayType
      */
-    public function setOrderID(array $orderID = []): self
+    public function setOrderID(?array $orderID = null): self
     {
         // validation for constraint: array
         if ('' !== ($orderIDArrayErrorMessage = self::validateOrderIDForArrayConstraintsFromSetOrderID($orderID))) {

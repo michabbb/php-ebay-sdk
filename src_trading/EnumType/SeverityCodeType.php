@@ -30,7 +30,7 @@ class SeverityCodeType extends AbstractStructEnumBase
      * (such as a missing required element), change the application before you retry the request. <ul> <li>If the problem is due to end-user input data, please alert the end-user to the problem and provide the means for them to correct the data. Once the
      * problem in the application or data is resolved, you can attempt to re-send the request to eBay. </li> <li>If the source of the problem is on eBay's side, An application can retry the request as-is a reasonable number of times (eBay recommends twice).
      * If the error persists, contact Developer Technical Support. Once the problem has been resolved, the request may be resent in its original form. </li> </ul> <br/><br/> See the <a
-     * href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#Basics/Call-UsingLiveData.html#CompatibleApplicationCheck">Compatible Application Check</a> section of the eBay Features Guide for more information.
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#Basics/Call-UsingLiveData.html#CompatibleApplicationCheck">Compatible Application Check</a> section of the eBay Features Guide for more information.
      * @return string 'Error'
      */
     const VALUE_ERROR = 'Error';

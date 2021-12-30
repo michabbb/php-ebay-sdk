@@ -25,7 +25,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    protected array $BidRetractionFeedbackPeriods = [];
+    protected ?array $BidRetractionFeedbackPeriods = null;
     /**
      * The NegativeFeedbackPeriods
      * Meta information extracted from the WSDL
@@ -34,7 +34,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    protected array $NegativeFeedbackPeriods = [];
+    protected ?array $NegativeFeedbackPeriods = null;
     /**
      * The NeutralFeedbackPeriods
      * Meta information extracted from the WSDL
@@ -43,7 +43,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    protected array $NeutralFeedbackPeriods = [];
+    protected ?array $NeutralFeedbackPeriods = null;
     /**
      * The PositiveFeedbackPeriods
      * Meta information extracted from the WSDL
@@ -52,7 +52,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    protected array $PositiveFeedbackPeriods = [];
+    protected ?array $PositiveFeedbackPeriods = null;
     /**
      * The TotalFeedbackPeriods
      * Meta information extracted from the WSDL
@@ -61,7 +61,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    protected array $TotalFeedbackPeriods = [];
+    protected ?array $TotalFeedbackPeriods = null;
     /**
      * The UniqueNegativeFeedbackCount
      * Meta information extracted from the WSDL
@@ -89,7 +89,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\AverageRatingDetailsType[]
      */
-    protected array $AverageRatingDetails = [];
+    protected ?array $AverageRatingDetails = null;
     /**
      * The NeutralCommentCountFromSuspendedUsers
      * Meta information extracted from the WSDL
@@ -137,7 +137,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param int $uniqueNeutralFeedbackCount
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $bidRetractionFeedbackPeriods = [], array $negativeFeedbackPeriods = [], array $neutralFeedbackPeriods = [], array $positiveFeedbackPeriods = [], array $totalFeedbackPeriods = [], ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, array $averageRatingDetails = [], ?int $neutralCommentCountFromSuspendedUsers = null, ?int $uniqueNeutralFeedbackCount = null, $any = null)
+    public function __construct(?array $bidRetractionFeedbackPeriods = null, ?array $negativeFeedbackPeriods = null, ?array $neutralFeedbackPeriods = null, ?array $positiveFeedbackPeriods = null, ?array $totalFeedbackPeriods = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?array $averageRatingDetails = null, ?int $neutralCommentCountFromSuspendedUsers = null, ?int $uniqueNeutralFeedbackCount = null, $any = null)
     {
         $this
             ->setBidRetractionFeedbackPeriods($bidRetractionFeedbackPeriods)
@@ -156,7 +156,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get BidRetractionFeedbackPeriods value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    public function getBidRetractionFeedbackPeriods(): array
+    public function getBidRetractionFeedbackPeriods(): ?array
     {
         return $this->BidRetractionFeedbackPeriods;
     }
@@ -166,8 +166,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBidRetractionFeedbackPeriodsForArrayConstraintsFromSetBidRetractionFeedbackPeriods(array $values = []): string
+    public static function validateBidRetractionFeedbackPeriodsForArrayConstraintsFromSetBidRetractionFeedbackPeriods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypeBidRetractionFeedbackPeriodsItem) {
@@ -189,7 +192,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[] $bidRetractionFeedbackPeriods
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setBidRetractionFeedbackPeriods(array $bidRetractionFeedbackPeriods = []): self
+    public function setBidRetractionFeedbackPeriods(?array $bidRetractionFeedbackPeriods = null): self
     {
         // validation for constraint: array
         if ('' !== ($bidRetractionFeedbackPeriodsArrayErrorMessage = self::validateBidRetractionFeedbackPeriodsForArrayConstraintsFromSetBidRetractionFeedbackPeriods($bidRetractionFeedbackPeriods))) {
@@ -219,7 +222,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get NegativeFeedbackPeriods value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    public function getNegativeFeedbackPeriods(): array
+    public function getNegativeFeedbackPeriods(): ?array
     {
         return $this->NegativeFeedbackPeriods;
     }
@@ -229,8 +232,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNegativeFeedbackPeriodsForArrayConstraintsFromSetNegativeFeedbackPeriods(array $values = []): string
+    public static function validateNegativeFeedbackPeriodsForArrayConstraintsFromSetNegativeFeedbackPeriods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypeNegativeFeedbackPeriodsItem) {
@@ -252,7 +258,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[] $negativeFeedbackPeriods
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setNegativeFeedbackPeriods(array $negativeFeedbackPeriods = []): self
+    public function setNegativeFeedbackPeriods(?array $negativeFeedbackPeriods = null): self
     {
         // validation for constraint: array
         if ('' !== ($negativeFeedbackPeriodsArrayErrorMessage = self::validateNegativeFeedbackPeriodsForArrayConstraintsFromSetNegativeFeedbackPeriods($negativeFeedbackPeriods))) {
@@ -282,7 +288,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get NeutralFeedbackPeriods value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    public function getNeutralFeedbackPeriods(): array
+    public function getNeutralFeedbackPeriods(): ?array
     {
         return $this->NeutralFeedbackPeriods;
     }
@@ -292,8 +298,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNeutralFeedbackPeriodsForArrayConstraintsFromSetNeutralFeedbackPeriods(array $values = []): string
+    public static function validateNeutralFeedbackPeriodsForArrayConstraintsFromSetNeutralFeedbackPeriods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypeNeutralFeedbackPeriodsItem) {
@@ -315,7 +324,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[] $neutralFeedbackPeriods
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setNeutralFeedbackPeriods(array $neutralFeedbackPeriods = []): self
+    public function setNeutralFeedbackPeriods(?array $neutralFeedbackPeriods = null): self
     {
         // validation for constraint: array
         if ('' !== ($neutralFeedbackPeriodsArrayErrorMessage = self::validateNeutralFeedbackPeriodsForArrayConstraintsFromSetNeutralFeedbackPeriods($neutralFeedbackPeriods))) {
@@ -345,7 +354,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get PositiveFeedbackPeriods value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    public function getPositiveFeedbackPeriods(): array
+    public function getPositiveFeedbackPeriods(): ?array
     {
         return $this->PositiveFeedbackPeriods;
     }
@@ -355,8 +364,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePositiveFeedbackPeriodsForArrayConstraintsFromSetPositiveFeedbackPeriods(array $values = []): string
+    public static function validatePositiveFeedbackPeriodsForArrayConstraintsFromSetPositiveFeedbackPeriods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypePositiveFeedbackPeriodsItem) {
@@ -378,7 +390,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[] $positiveFeedbackPeriods
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setPositiveFeedbackPeriods(array $positiveFeedbackPeriods = []): self
+    public function setPositiveFeedbackPeriods(?array $positiveFeedbackPeriods = null): self
     {
         // validation for constraint: array
         if ('' !== ($positiveFeedbackPeriodsArrayErrorMessage = self::validatePositiveFeedbackPeriodsForArrayConstraintsFromSetPositiveFeedbackPeriods($positiveFeedbackPeriods))) {
@@ -408,7 +420,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get TotalFeedbackPeriods value
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[]
      */
-    public function getTotalFeedbackPeriods(): array
+    public function getTotalFeedbackPeriods(): ?array
     {
         return $this->TotalFeedbackPeriods;
     }
@@ -418,8 +430,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTotalFeedbackPeriodsForArrayConstraintsFromSetTotalFeedbackPeriods(array $values = []): string
+    public static function validateTotalFeedbackPeriodsForArrayConstraintsFromSetTotalFeedbackPeriods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypeTotalFeedbackPeriodsItem) {
@@ -441,7 +456,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\FeedbackPeriodType[] $totalFeedbackPeriods
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setTotalFeedbackPeriods(array $totalFeedbackPeriods = []): self
+    public function setTotalFeedbackPeriods(?array $totalFeedbackPeriods = null): self
     {
         // validation for constraint: array
         if ('' !== ($totalFeedbackPeriodsArrayErrorMessage = self::validateTotalFeedbackPeriodsForArrayConstraintsFromSetTotalFeedbackPeriods($totalFeedbackPeriods))) {
@@ -517,7 +532,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * Get AverageRatingDetails value
      * @return \macropage\ebaysdk\shopping\StructType\AverageRatingDetailsType[]
      */
-    public function getAverageRatingDetails(): array
+    public function getAverageRatingDetails(): ?array
     {
         return $this->AverageRatingDetails;
     }
@@ -527,8 +542,11 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails(array $values = []): string
+    public static function validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackHistoryTypeAverageRatingDetailsItem) {
@@ -550,7 +568,7 @@ class FeedbackHistoryType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\AverageRatingDetailsType[] $averageRatingDetails
      * @return \macropage\ebaysdk\shopping\StructType\FeedbackHistoryType
      */
-    public function setAverageRatingDetails(array $averageRatingDetails = []): self
+    public function setAverageRatingDetails(?array $averageRatingDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($averageRatingDetailsArrayErrorMessage = self::validateAverageRatingDetailsForArrayConstraintsFromSetAverageRatingDetails($averageRatingDetails))) {

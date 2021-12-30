@@ -39,7 +39,7 @@ class ThemeGroupType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $ThemeID = [];
+    protected ?array $ThemeID = null;
     /**
      * The ThemeTotal
      * Meta information extracted from the WSDL
@@ -66,7 +66,7 @@ class ThemeGroupType extends AbstractStructBase
      * @param int $themeTotal
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $groupID = null, ?string $groupName = null, array $themeID = [], ?int $themeTotal = null, $any = null)
+    public function __construct(?int $groupID = null, ?string $groupName = null, ?array $themeID = null, ?int $themeTotal = null, $any = null)
     {
         $this
             ->setGroupID($groupID)
@@ -125,7 +125,7 @@ class ThemeGroupType extends AbstractStructBase
      * Get ThemeID value
      * @return int[]
      */
-    public function getThemeID(): array
+    public function getThemeID(): ?array
     {
         return $this->ThemeID;
     }
@@ -135,8 +135,11 @@ class ThemeGroupType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateThemeIDForArrayConstraintsFromSetThemeID(array $values = []): string
+    public static function validateThemeIDForArrayConstraintsFromSetThemeID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $themeGroupTypeThemeIDItem) {
@@ -158,7 +161,7 @@ class ThemeGroupType extends AbstractStructBase
      * @param int[] $themeID
      * @return \macropage\ebaysdk\trading\StructType\ThemeGroupType
      */
-    public function setThemeID(array $themeID = []): self
+    public function setThemeID(?array $themeID = null): self
     {
         // validation for constraint: array
         if ('' !== ($themeIDArrayErrorMessage = self::validateThemeIDForArrayConstraintsFromSetThemeID($themeID))) {

@@ -23,7 +23,7 @@ class DomesticReturnsAcceptedCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DomesticReturnsAccepted = [];
+    protected ?array $DomesticReturnsAccepted = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class DomesticReturnsAcceptedCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsAccepted
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $domesticReturnsAccepted = [], $any = null)
+    public function __construct(?array $domesticReturnsAccepted = null, $any = null)
     {
         $this
             ->setDomesticReturnsAccepted($domesticReturnsAccepted)
@@ -46,7 +46,7 @@ class DomesticReturnsAcceptedCodeType extends AbstractStructBase
      * Get DomesticReturnsAccepted value
      * @return string[]
      */
-    public function getDomesticReturnsAccepted(): array
+    public function getDomesticReturnsAccepted(): ?array
     {
         return $this->DomesticReturnsAccepted;
     }
@@ -56,8 +56,11 @@ class DomesticReturnsAcceptedCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDomesticReturnsAcceptedForArrayConstraintsFromSetDomesticReturnsAccepted(array $values = []): string
+    public static function validateDomesticReturnsAcceptedForArrayConstraintsFromSetDomesticReturnsAccepted(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $domesticReturnsAcceptedCodeTypeDomesticReturnsAcceptedItem) {
@@ -81,7 +84,7 @@ class DomesticReturnsAcceptedCodeType extends AbstractStructBase
      * @param string[] $domesticReturnsAccepted
      * @return \macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType
      */
-    public function setDomesticReturnsAccepted(array $domesticReturnsAccepted = []): self
+    public function setDomesticReturnsAccepted(?array $domesticReturnsAccepted = null): self
     {
         // validation for constraint: array
         if ('' !== ($domesticReturnsAcceptedArrayErrorMessage = self::validateDomesticReturnsAcceptedForArrayConstraintsFromSetDomesticReturnsAccepted($domesticReturnsAccepted))) {

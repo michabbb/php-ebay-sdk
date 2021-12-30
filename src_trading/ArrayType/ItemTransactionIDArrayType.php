@@ -24,13 +24,13 @@ class ItemTransactionIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[]
      */
-    protected array $ItemTransactionID = [];
+    protected ?array $ItemTransactionID = null;
     /**
      * Constructor method for ItemTransactionIDArrayType
      * @uses ItemTransactionIDArrayType::setItemTransactionID()
      * @param \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[] $itemTransactionID
      */
-    public function __construct(array $itemTransactionID = [])
+    public function __construct(?array $itemTransactionID = null)
     {
         $this
             ->setItemTransactionID($itemTransactionID);
@@ -39,7 +39,7 @@ class ItemTransactionIDArrayType extends AbstractStructArrayBase
      * Get ItemTransactionID value
      * @return \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[]
      */
-    public function getItemTransactionID(): array
+    public function getItemTransactionID(): ?array
     {
         return $this->ItemTransactionID;
     }
@@ -49,8 +49,11 @@ class ItemTransactionIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID(array $values = []): string
+    public static function validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemTransactionIDArrayTypeItemTransactionIDItem) {
@@ -72,7 +75,7 @@ class ItemTransactionIDArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\ItemTransactionIDType[] $itemTransactionID
      * @return \macropage\ebaysdk\trading\ArrayType\ItemTransactionIDArrayType
      */
-    public function setItemTransactionID(array $itemTransactionID = []): self
+    public function setItemTransactionID(?array $itemTransactionID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemTransactionIDArrayErrorMessage = self::validateItemTransactionIDForArrayConstraintsFromSetItemTransactionID($itemTransactionID))) {

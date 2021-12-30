@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for AddressType StructType
  * Meta information extracted from the WSDL
- * - documentation: Contains the data for an eBay user's address. This is the base type for a number of user addresses, including seller payment address, buyer shipping address and buyer and seller registration address.
+ * - documentation: Contains the data for an eBay user's address. This is the base type for a number of user addresses, including seller payment address, buyer shipping address, and buyer and seller registration address.
  * @subpackage Structs
  */
 class AddressType extends AbstractStructBase
@@ -156,7 +156,7 @@ class AddressType extends AbstractStructBase
     /**
      * The AddressOwner
      * Meta information extracted from the WSDL
-     * - documentation: The realm to which the address belongs (e.g. eBay vs PayPal).
+     * - documentation: This enumeration value returned here indicates the company that has the address on file. Previously, this value could be <code>eBay</code> or <code>PayPal</code>, but now the value returned here should always be <code>eBay</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -171,8 +171,7 @@ class AddressType extends AbstractStructBase
     /**
      * The ExternalAddressID
      * Meta information extracted from the WSDL
-     * - documentation: This is a unique identifier assigned to the customer address if the address is on file with PayPal. The <b>AddressOwner</b> field will indicate if the address is on file with eBay or PayPal. This field will only be
-     * applicable/returned if it is a PayPal-owned address. The ID changes if a user changes their address. <br>
+     * - documentation: This field is no longer applicable, and should not returned. <br>
      * - minOccurs: 0
      * @var string|null
      */
@@ -266,7 +265,7 @@ class AddressType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressAttributeType[]
      */
-    protected array $AddressAttribute = [];
+    protected ?array $AddressAttribute = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -337,7 +336,7 @@ class AddressType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AddressAttributeType[] $addressAttribute
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $name = null, ?string $street = null, ?string $street1 = null, ?string $street2 = null, ?string $cityName = null, ?string $county = null, ?string $stateOrProvince = null, ?string $country = null, ?string $countryName = null, ?string $phone = null, ?string $phoneCountryCode = null, ?string $phoneCountryPrefix = null, ?string $phoneAreaOrCityCode = null, ?string $phoneLocalNumber = null, ?string $postalCode = null, ?string $addressID = null, ?string $addressOwner = null, ?string $addressStatus = null, ?string $externalAddressID = null, ?string $internationalName = null, ?string $internationalStateAndCity = null, ?string $internationalStreet = null, ?string $companyName = null, ?string $addressRecordType = null, ?string $firstName = null, ?string $lastName = null, ?string $phone2 = null, ?string $addressUsage = null, ?string $referenceID = null, array $addressAttribute = [], $any = null)
+    public function __construct(?string $name = null, ?string $street = null, ?string $street1 = null, ?string $street2 = null, ?string $cityName = null, ?string $county = null, ?string $stateOrProvince = null, ?string $country = null, ?string $countryName = null, ?string $phone = null, ?string $phoneCountryCode = null, ?string $phoneCountryPrefix = null, ?string $phoneAreaOrCityCode = null, ?string $phoneLocalNumber = null, ?string $postalCode = null, ?string $addressID = null, ?string $addressOwner = null, ?string $addressStatus = null, ?string $externalAddressID = null, ?string $internationalName = null, ?string $internationalStateAndCity = null, ?string $internationalStreet = null, ?string $companyName = null, ?string $addressRecordType = null, ?string $firstName = null, ?string $lastName = null, ?string $phone2 = null, ?string $addressUsage = null, ?string $referenceID = null, ?array $addressAttribute = null, $any = null)
     {
         $this
             ->setName($name)
@@ -1061,7 +1060,7 @@ class AddressType extends AbstractStructBase
      * Get AddressAttribute value
      * @return \macropage\ebaysdk\trading\StructType\AddressAttributeType[]
      */
-    public function getAddressAttribute(): array
+    public function getAddressAttribute(): ?array
     {
         return $this->AddressAttribute;
     }
@@ -1071,8 +1070,11 @@ class AddressType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAddressAttributeForArrayConstraintsFromSetAddressAttribute(array $values = []): string
+    public static function validateAddressAttributeForArrayConstraintsFromSetAddressAttribute(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addressTypeAddressAttributeItem) {
@@ -1094,7 +1096,7 @@ class AddressType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AddressAttributeType[] $addressAttribute
      * @return \macropage\ebaysdk\trading\StructType\AddressType
      */
-    public function setAddressAttribute(array $addressAttribute = []): self
+    public function setAddressAttribute(?array $addressAttribute = null): self
     {
         // validation for constraint: array
         if ('' !== ($addressAttributeArrayErrorMessage = self::validateAddressAttributeForArrayConstraintsFromSetAddressAttribute($addressAttribute))) {

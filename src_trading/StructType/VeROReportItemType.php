@@ -59,7 +59,7 @@ class VeROReportItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Region = [];
+    protected ?array $Region = null;
     /**
      * The Country
      * Meta information extracted from the WSDL
@@ -69,7 +69,7 @@ class VeROReportItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Country = [];
+    protected ?array $Country = null;
     /**
      * The Patent
      * Meta information extracted from the WSDL
@@ -113,7 +113,7 @@ class VeROReportItemType extends AbstractStructBase
      * @param string $detailedMessage
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?int $veROReasonCodeID = null, ?string $messageToSeller = null, ?bool $copyEmailToRightsOwner = null, array $region = [], array $country = [], ?string $patent = null, ?string $detailedMessage = null, $any = null)
+    public function __construct(?string $itemID = null, ?int $veROReasonCodeID = null, ?string $messageToSeller = null, ?bool $copyEmailToRightsOwner = null, ?array $region = null, ?array $country = null, ?string $patent = null, ?string $detailedMessage = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -222,7 +222,7 @@ class VeROReportItemType extends AbstractStructBase
      * Get Region value
      * @return string[]
      */
-    public function getRegion(): array
+    public function getRegion(): ?array
     {
         return $this->Region;
     }
@@ -232,8 +232,11 @@ class VeROReportItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRegionForArrayConstraintsFromSetRegion(array $values = []): string
+    public static function validateRegionForArrayConstraintsFromSetRegion(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROReportItemTypeRegionItem) {
@@ -257,7 +260,7 @@ class VeROReportItemType extends AbstractStructBase
      * @param string[] $region
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setRegion(array $region = []): self
+    public function setRegion(?array $region = null): self
     {
         // validation for constraint: array
         if ('' !== ($regionArrayErrorMessage = self::validateRegionForArrayConstraintsFromSetRegion($region))) {
@@ -289,7 +292,7 @@ class VeROReportItemType extends AbstractStructBase
      * Get Country value
      * @return string[]
      */
-    public function getCountry(): array
+    public function getCountry(): ?array
     {
         return $this->Country;
     }
@@ -299,8 +302,11 @@ class VeROReportItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCountryForArrayConstraintsFromSetCountry(array $values = []): string
+    public static function validateCountryForArrayConstraintsFromSetCountry(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROReportItemTypeCountryItem) {
@@ -324,7 +330,7 @@ class VeROReportItemType extends AbstractStructBase
      * @param string[] $country
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
      */
-    public function setCountry(array $country = []): self
+    public function setCountry(?array $country = null): self
     {
         // validation for constraint: array
         if ('' !== ($countryArrayErrorMessage = self::validateCountryForArrayConstraintsFromSetCountry($country))) {

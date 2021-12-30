@@ -23,7 +23,7 @@ class SuggestedCategoryArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SuggestedCategoryType[]
      */
-    protected array $SuggestedCategory = [];
+    protected ?array $SuggestedCategory = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class SuggestedCategoryArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SuggestedCategoryType[] $suggestedCategory
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $suggestedCategory = [], $any = null)
+    public function __construct(?array $suggestedCategory = null, $any = null)
     {
         $this
             ->setSuggestedCategory($suggestedCategory)
@@ -46,7 +46,7 @@ class SuggestedCategoryArrayType extends AbstractStructBase
      * Get SuggestedCategory value
      * @return \macropage\ebaysdk\trading\StructType\SuggestedCategoryType[]
      */
-    public function getSuggestedCategory(): array
+    public function getSuggestedCategory(): ?array
     {
         return $this->SuggestedCategory;
     }
@@ -56,8 +56,11 @@ class SuggestedCategoryArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSuggestedCategoryForArrayConstraintsFromSetSuggestedCategory(array $values = []): string
+    public static function validateSuggestedCategoryForArrayConstraintsFromSetSuggestedCategory(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $suggestedCategoryArrayTypeSuggestedCategoryItem) {
@@ -79,7 +82,7 @@ class SuggestedCategoryArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SuggestedCategoryType[] $suggestedCategory
      * @return \macropage\ebaysdk\trading\StructType\SuggestedCategoryArrayType
      */
-    public function setSuggestedCategory(array $suggestedCategory = []): self
+    public function setSuggestedCategory(?array $suggestedCategory = null): self
     {
         // validation for constraint: array
         if ('' !== ($suggestedCategoryArrayErrorMessage = self::validateSuggestedCategoryForArrayConstraintsFromSetSuggestedCategory($suggestedCategory))) {

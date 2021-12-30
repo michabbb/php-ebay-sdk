@@ -23,7 +23,7 @@ class InternationalReturnsAcceptedCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $InternationalReturnsAccepted = [];
+    protected ?array $InternationalReturnsAccepted = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class InternationalReturnsAcceptedCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsAccepted
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $internationalReturnsAccepted = [], $any = null)
+    public function __construct(?array $internationalReturnsAccepted = null, $any = null)
     {
         $this
             ->setInternationalReturnsAccepted($internationalReturnsAccepted)
@@ -46,7 +46,7 @@ class InternationalReturnsAcceptedCodeType extends AbstractStructBase
      * Get InternationalReturnsAccepted value
      * @return string[]
      */
-    public function getInternationalReturnsAccepted(): array
+    public function getInternationalReturnsAccepted(): ?array
     {
         return $this->InternationalReturnsAccepted;
     }
@@ -56,8 +56,11 @@ class InternationalReturnsAcceptedCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInternationalReturnsAcceptedForArrayConstraintsFromSetInternationalReturnsAccepted(array $values = []): string
+    public static function validateInternationalReturnsAcceptedForArrayConstraintsFromSetInternationalReturnsAccepted(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $internationalReturnsAcceptedCodeTypeInternationalReturnsAcceptedItem) {
@@ -81,7 +84,7 @@ class InternationalReturnsAcceptedCodeType extends AbstractStructBase
      * @param string[] $internationalReturnsAccepted
      * @return \macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType
      */
-    public function setInternationalReturnsAccepted(array $internationalReturnsAccepted = []): self
+    public function setInternationalReturnsAccepted(?array $internationalReturnsAccepted = null): self
     {
         // validation for constraint: array
         if ('' !== ($internationalReturnsAcceptedArrayErrorMessage = self::validateInternationalReturnsAcceptedForArrayConstraintsFromSetInternationalReturnsAccepted($internationalReturnsAccepted))) {

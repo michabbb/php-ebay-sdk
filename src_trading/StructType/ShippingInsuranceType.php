@@ -31,7 +31,7 @@ class ShippingInsuranceType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    protected array $FlatRateInsuranceRangeCost = [];
+    protected ?array $FlatRateInsuranceRangeCost = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class ShippingInsuranceType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[] $flatRateInsuranceRangeCost
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $insuranceOption = null, array $flatRateInsuranceRangeCost = [], $any = null)
+    public function __construct(?string $insuranceOption = null, ?array $flatRateInsuranceRangeCost = null, $any = null)
     {
         $this
             ->setInsuranceOption($insuranceOption)
@@ -83,7 +83,7 @@ class ShippingInsuranceType extends AbstractStructBase
      * Get FlatRateInsuranceRangeCost value
      * @return \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[]
      */
-    public function getFlatRateInsuranceRangeCost(): array
+    public function getFlatRateInsuranceRangeCost(): ?array
     {
         return $this->FlatRateInsuranceRangeCost;
     }
@@ -93,8 +93,11 @@ class ShippingInsuranceType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost(array $values = []): string
+    public static function validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingInsuranceTypeFlatRateInsuranceRangeCostItem) {
@@ -116,7 +119,7 @@ class ShippingInsuranceType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FlatRateInsuranceRangeCostType[] $flatRateInsuranceRangeCost
      * @return \macropage\ebaysdk\trading\StructType\ShippingInsuranceType
      */
-    public function setFlatRateInsuranceRangeCost(array $flatRateInsuranceRangeCost = []): self
+    public function setFlatRateInsuranceRangeCost(?array $flatRateInsuranceRangeCost = null): self
     {
         // validation for constraint: array
         if ('' !== ($flatRateInsuranceRangeCostArrayErrorMessage = self::validateFlatRateInsuranceRangeCostForArrayConstraintsFromSetFlatRateInsuranceRangeCost($flatRateInsuranceRangeCost))) {

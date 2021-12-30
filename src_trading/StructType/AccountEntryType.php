@@ -171,9 +171,7 @@ class AccountEntryType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: This boolean field is returned with each account entry if the <b>IncludeNettedEntries</b> field is included in the request and set to <code>true</code>. The value indicates whether or not the corresponding account entry value (charge
      * or credit) is a part of the 'Total Netted Charge Amount' or 'Total Netted Credit Amount' values returned in the <b>AccountSummary.NettedTransactionSummary</b> container. <br> <br> If this value is <code>true</code>, it indicates that the
-     * corresponding fee was deducted from a seller payout. If the value is <code>false</code>, it indicates that the fee or credit was invoiced to the seller instead. <br> <br> <span class="tablenote"><b>Note: </b> For seller accounts not yet enabled for
-     * eBay managed payments, the returned value will always be <code>false</code>. There may also be some seller accounts enabled for managed payments, but the fee netting mechanism may not yet be available for an account. A seller can check their status
-     * for the fee netting mechanism by checking the value in the <b>FeeNettingStatus</b> field. </span>
+     * corresponding fee was deducted from a seller payout. If the value is <code>false</code>, it indicates that the fee or credit was invoiced to the seller instead.
      * - minOccurs: 0
      * @var bool|null
      */

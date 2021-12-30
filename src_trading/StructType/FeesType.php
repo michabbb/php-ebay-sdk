@@ -24,13 +24,13 @@ class FeesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeeType[]
      */
-    protected array $Fee = [];
+    protected ?array $Fee = null;
     /**
      * Constructor method for FeesType
      * @uses FeesType::setFee()
      * @param \macropage\ebaysdk\trading\StructType\FeeType[] $fee
      */
-    public function __construct(array $fee = [])
+    public function __construct(?array $fee = null)
     {
         $this
             ->setFee($fee);
@@ -39,7 +39,7 @@ class FeesType extends AbstractStructBase
      * Get Fee value
      * @return \macropage\ebaysdk\trading\StructType\FeeType[]
      */
-    public function getFee(): array
+    public function getFee(): ?array
     {
         return $this->Fee;
     }
@@ -49,8 +49,11 @@ class FeesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeeForArrayConstraintsFromSetFee(array $values = []): string
+    public static function validateFeeForArrayConstraintsFromSetFee(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feesTypeFeeItem) {
@@ -72,7 +75,7 @@ class FeesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\FeeType[] $fee
      * @return \macropage\ebaysdk\trading\StructType\FeesType
      */
-    public function setFee(array $fee = []): self
+    public function setFee(?array $fee = null): self
     {
         // validation for constraint: array
         if ('' !== ($feeArrayErrorMessage = self::validateFeeForArrayConstraintsFromSetFee($fee))) {

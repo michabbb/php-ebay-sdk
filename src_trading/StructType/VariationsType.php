@@ -31,7 +31,7 @@ class VariationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationType[]
      */
-    protected array $Variation = [];
+    protected ?array $Variation = null;
     /**
      * The Pictures
      * Meta information extracted from the WSDL
@@ -44,7 +44,7 @@ class VariationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PicturesType[]
      */
-    protected array $Pictures = [];
+    protected ?array $Pictures = null;
     /**
      * The VariationSpecificsSet
      * Meta information extracted from the WSDL
@@ -87,7 +87,7 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $variation = [], array $pictures = [], ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null, ?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null, $any = null)
+    public function __construct(?array $variation = null, ?array $pictures = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecificsSet = null, ?\macropage\ebaysdk\trading\ArrayType\ModifyNameArrayType $modifyNameList = null, $any = null)
     {
         $this
             ->setVariation($variation)
@@ -100,7 +100,7 @@ class VariationsType extends AbstractStructBase
      * Get Variation value
      * @return \macropage\ebaysdk\trading\StructType\VariationType[]
      */
-    public function getVariation(): array
+    public function getVariation(): ?array
     {
         return $this->Variation;
     }
@@ -110,8 +110,11 @@ class VariationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVariationForArrayConstraintsFromSetVariation(array $values = []): string
+    public static function validateVariationForArrayConstraintsFromSetVariation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $variationsTypeVariationItem) {
@@ -133,7 +136,7 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationType[] $variation
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setVariation(array $variation = []): self
+    public function setVariation(?array $variation = null): self
     {
         // validation for constraint: array
         if ('' !== ($variationArrayErrorMessage = self::validateVariationForArrayConstraintsFromSetVariation($variation))) {
@@ -163,7 +166,7 @@ class VariationsType extends AbstractStructBase
      * Get Pictures value
      * @return \macropage\ebaysdk\trading\StructType\PicturesType[]
      */
-    public function getPictures(): array
+    public function getPictures(): ?array
     {
         return $this->Pictures;
     }
@@ -173,8 +176,11 @@ class VariationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePicturesForArrayConstraintsFromSetPictures(array $values = []): string
+    public static function validatePicturesForArrayConstraintsFromSetPictures(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $variationsTypePicturesItem) {
@@ -196,7 +202,7 @@ class VariationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PicturesType[] $pictures
      * @return \macropage\ebaysdk\trading\StructType\VariationsType
      */
-    public function setPictures(array $pictures = []): self
+    public function setPictures(?array $pictures = null): self
     {
         // validation for constraint: array
         if ('' !== ($picturesArrayErrorMessage = self::validatePicturesForArrayConstraintsFromSetPictures($pictures))) {

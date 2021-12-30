@@ -23,13 +23,13 @@ class GetApiAccessRulesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ApiAccessRuleType[]
      */
-    protected array $ApiAccessRule = [];
+    protected ?array $ApiAccessRule = null;
     /**
      * Constructor method for GetApiAccessRulesResponseType
      * @uses GetApiAccessRulesResponseType::setApiAccessRule()
      * @param \macropage\ebaysdk\trading\StructType\ApiAccessRuleType[] $apiAccessRule
      */
-    public function __construct(array $apiAccessRule = [])
+    public function __construct(?array $apiAccessRule = null)
     {
         $this
             ->setApiAccessRule($apiAccessRule);
@@ -38,7 +38,7 @@ class GetApiAccessRulesResponseType extends AbstractResponseType
      * Get ApiAccessRule value
      * @return \macropage\ebaysdk\trading\StructType\ApiAccessRuleType[]
      */
-    public function getApiAccessRule(): array
+    public function getApiAccessRule(): ?array
     {
         return $this->ApiAccessRule;
     }
@@ -48,8 +48,11 @@ class GetApiAccessRulesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateApiAccessRuleForArrayConstraintsFromSetApiAccessRule(array $values = []): string
+    public static function validateApiAccessRuleForArrayConstraintsFromSetApiAccessRule(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getApiAccessRulesResponseTypeApiAccessRuleItem) {
@@ -71,7 +74,7 @@ class GetApiAccessRulesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ApiAccessRuleType[] $apiAccessRule
      * @return \macropage\ebaysdk\trading\StructType\GetApiAccessRulesResponseType
      */
-    public function setApiAccessRule(array $apiAccessRule = []): self
+    public function setApiAccessRule(?array $apiAccessRule = null): self
     {
         // validation for constraint: array
         if ('' !== ($apiAccessRuleArrayErrorMessage = self::validateApiAccessRuleForArrayConstraintsFromSetApiAccessRule($apiAccessRule))) {

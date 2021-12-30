@@ -102,7 +102,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    protected array $Errors = [];
+    protected ?array $Errors = null;
     /**
      * The Message
      * Meta information extracted from the WSDL
@@ -121,7 +121,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DiscountReason = [];
+    protected ?array $DiscountReason = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -152,7 +152,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param string[] $discountReason
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?string $correlationID = null, array $errors = [], ?string $message = null, array $discountReason = [], $any = null)
+    public function __construct(?string $itemID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?string $correlationID = null, ?array $errors = null, ?string $message = null, ?array $discountReason = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -328,7 +328,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * Get Errors value
      * @return \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->Errors;
     }
@@ -338,8 +338,11 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorsForArrayConstraintsFromSetErrors(array $values = []): string
+    public static function validateErrorsForArrayConstraintsFromSetErrors(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addItemResponseContainerTypeErrorsItem) {
@@ -361,7 +364,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @return \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType
      */
-    public function setErrors(array $errors = []): self
+    public function setErrors(?array $errors = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorsArrayErrorMessage = self::validateErrorsForArrayConstraintsFromSetErrors($errors))) {
@@ -414,7 +417,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * Get DiscountReason value
      * @return string[]
      */
-    public function getDiscountReason(): array
+    public function getDiscountReason(): ?array
     {
         return $this->DiscountReason;
     }
@@ -424,8 +427,11 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDiscountReasonForArrayConstraintsFromSetDiscountReason(array $values = []): string
+    public static function validateDiscountReasonForArrayConstraintsFromSetDiscountReason(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addItemResponseContainerTypeDiscountReasonItem) {
@@ -449,7 +455,7 @@ class AddItemResponseContainerType extends AbstractStructBase
      * @param string[] $discountReason
      * @return \macropage\ebaysdk\trading\StructType\AddItemResponseContainerType
      */
-    public function setDiscountReason(array $discountReason = []): self
+    public function setDiscountReason(?array $discountReason = null): self
     {
         // validation for constraint: array
         if ('' !== ($discountReasonArrayErrorMessage = self::validateDiscountReasonForArrayConstraintsFromSetDiscountReason($discountReason))) {

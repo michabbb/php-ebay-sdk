@@ -52,7 +52,7 @@ class NameValueListType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Value = [];
+    protected ?array $Value = null;
     /**
      * The Source
      * Meta information extracted from the WSDL
@@ -78,7 +78,7 @@ class NameValueListType extends AbstractStructBase
      * @param string $source
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $name = null, array $value = [], ?string $source = null, $any = null)
+    public function __construct(?string $name = null, ?array $value = null, ?string $source = null, $any = null)
     {
         $this
             ->setName($name)
@@ -113,7 +113,7 @@ class NameValueListType extends AbstractStructBase
      * Get Value value
      * @return string[]
      */
-    public function getValue(): array
+    public function getValue(): ?array
     {
         return $this->Value;
     }
@@ -123,8 +123,11 @@ class NameValueListType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateValueForArrayConstraintsFromSetValue(array $values = []): string
+    public static function validateValueForArrayConstraintsFromSetValue(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $nameValueListTypeValueItem) {
@@ -146,7 +149,7 @@ class NameValueListType extends AbstractStructBase
      * @param string[] $value
      * @return \macropage\ebaysdk\trading\StructType\NameValueListType
      */
-    public function setValue(array $value = []): self
+    public function setValue(?array $value = null): self
     {
         // validation for constraint: array
         if ('' !== ($valueArrayErrorMessage = self::validateValueForArrayConstraintsFromSetValue($value))) {

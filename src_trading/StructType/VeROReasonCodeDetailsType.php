@@ -23,13 +23,13 @@ class VeROReasonCodeDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VeROSiteDetailType[]
      */
-    protected array $VeROSiteDetail = [];
+    protected ?array $VeROSiteDetail = null;
     /**
      * Constructor method for VeROReasonCodeDetailsType
      * @uses VeROReasonCodeDetailsType::setVeROSiteDetail()
      * @param \macropage\ebaysdk\trading\StructType\VeROSiteDetailType[] $veROSiteDetail
      */
-    public function __construct(array $veROSiteDetail = [])
+    public function __construct(?array $veROSiteDetail = null)
     {
         $this
             ->setVeROSiteDetail($veROSiteDetail);
@@ -38,7 +38,7 @@ class VeROReasonCodeDetailsType extends AbstractStructBase
      * Get VeROSiteDetail value
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType[]
      */
-    public function getVeROSiteDetail(): array
+    public function getVeROSiteDetail(): ?array
     {
         return $this->VeROSiteDetail;
     }
@@ -48,8 +48,11 @@ class VeROReasonCodeDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVeROSiteDetailForArrayConstraintsFromSetVeROSiteDetail(array $values = []): string
+    public static function validateVeROSiteDetailForArrayConstraintsFromSetVeROSiteDetail(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROReasonCodeDetailsTypeVeROSiteDetailItem) {
@@ -71,7 +74,7 @@ class VeROReasonCodeDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VeROSiteDetailType[] $veROSiteDetail
      * @return \macropage\ebaysdk\trading\StructType\VeROReasonCodeDetailsType
      */
-    public function setVeROSiteDetail(array $veROSiteDetail = []): self
+    public function setVeROSiteDetail(?array $veROSiteDetail = null): self
     {
         // validation for constraint: array
         if ('' !== ($veROSiteDetailArrayErrorMessage = self::validateVeROSiteDetailForArrayConstraintsFromSetVeROSiteDetail($veROSiteDetail))) {

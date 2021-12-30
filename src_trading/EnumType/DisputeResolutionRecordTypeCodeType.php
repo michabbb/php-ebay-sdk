@@ -9,9 +9,10 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisputeResolutionRecordTypeCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that lists the actions that eBay may take once a dispute is resolved. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers
- * through the eBay Money Back Guarantee program, are not returned with <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a
- * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Enumerated type that lists the actions that eBay may take once an Unpaid Item case is resolved. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <strong>GetUserDisputes</strong> call of the Trading API now only supports
+ * Unpaid Item cases, and no longer supports Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR or SNAD case through eBay's
+ * Resolution Center, and this call also does not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html"
+ * target="_blank">Case Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Enumerations
  */
 class DisputeResolutionRecordTypeCodeType extends AbstractStructEnumBase
@@ -40,14 +41,14 @@ class DisputeResolutionRecordTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FVFCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the seller received a Final Value Fee credit.
+     * - documentation: This enumeration value indicates that the seller received a Final Value Fee credit for the order line item.
      * @return string 'FVFCredit'
      */
     const VALUE_FVFCREDIT = 'FVFCredit';
     /**
      * Constant for value 'InsertionFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the seller's listing fees were credited.
+     * - documentation: This enumeration value indicates that the seller received a credit for the insertion fee of the listing.
      * @return string 'InsertionFeeCredit'
      */
     const VALUE_INSERTION_FEE_CREDIT = 'InsertionFeeCredit';
@@ -61,28 +62,28 @@ class DisputeResolutionRecordTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'UnsuspendBuyer'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer's account has been reinstated.
+     * - documentation: This enumeration value indicates that the buyer's account has been reinstated by eBay.
      * @return string 'UnsuspendBuyer'
      */
     const VALUE_UNSUSPEND_BUYER = 'UnsuspendBuyer';
     /**
      * Constant for value 'UnrestrictBuyer'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that all restrictions on the buyer's account have ended.
+     * - documentation: This enumeration value indicates that all restrictions on the buyer's account have been ended by eBay.
      * @return string 'UnrestrictBuyer'
      */
     const VALUE_UNRESTRICT_BUYER = 'UnrestrictBuyer';
     /**
      * Constant for value 'ReverseFVFCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the seller's Final Value Fee credit was reversed.
+     * - documentation: This enumeration value indicates that the seller's Final Value Fee credit was reversed by eBay.
      * @return string 'ReverseFVFCredit'
      */
     const VALUE_REVERSE_FVFCREDIT = 'ReverseFVFCredit';
     /**
      * Constant for value 'ReverseInsertionFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the seller's listing fees credit was reversed.
+     * - documentation: This enumeration value indicates that the seller's insertion fee credit was reversed.
      * @return string 'ReverseInsertionFeeCredit'
      */
     const VALUE_REVERSE_INSERTION_FEE_CREDIT = 'ReverseInsertionFeeCredit';

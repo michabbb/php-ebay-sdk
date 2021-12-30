@@ -10,9 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for IntegratedMerchantCreditCardInfoType StructType
  * Meta information extracted from the WSDL
- * - documentation: <span class="tablenote"><b>Note: </b> As of May 1, 2019, eBay no longer support electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must use specify PayPal
- * as an accepted payment method, or opt in to eBay managed payments program (if the program is available to that seller). </span> <br/> This type is used by the <b>IntegratedMerchantCreditCardInfo</b> container that is returned in the <b>GetUser</b>
- * response if the seller has a payment gateway account on one or more eBay marketplaces.
+ * - documentation: This type is no longer applicable as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments, and the <b>SellerInfo.IntegratedMerchantCreditCardInfo</b> container is no longer returned in <b>GetUser</b>
+ * response.
  * @subpackage Structs
  */
 class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
@@ -20,14 +19,12 @@ class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
     /**
      * The SupportedSite
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> As of May 1, 2019, eBay no longer support electronic payments through Integrated Merchant Credit Card accounts. To accept online credit card payments from buyers, a seller must use specify PayPal
-     * as an accepted payment method, or opt in to eBay managed payments program (if the program is available to that seller). </span> <br/> This enumeration value indicates the eBay marketplace on which the seller has a payment gateway account, an account
-     * that allows the seller to accept credit card payments from buyers.
+     * - documentation: The <b>SellerInfo.IntegratedMerchantCreditCardInfo</b> container (and this field) are no longer returned in <b>GetUser</b> response, as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SupportedSite = [];
+    protected ?array $SupportedSite = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -40,7 +37,7 @@ class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
      * @param string[] $supportedSite
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $supportedSite = [], $any = null)
+    public function __construct(?array $supportedSite = null, $any = null)
     {
         $this
             ->setSupportedSite($supportedSite)
@@ -50,7 +47,7 @@ class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
      * Get SupportedSite value
      * @return string[]
      */
-    public function getSupportedSite(): array
+    public function getSupportedSite(): ?array
     {
         return $this->SupportedSite;
     }
@@ -60,8 +57,11 @@ class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSupportedSiteForArrayConstraintsFromSetSupportedSite(array $values = []): string
+    public static function validateSupportedSiteForArrayConstraintsFromSetSupportedSite(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $integratedMerchantCreditCardInfoTypeSupportedSiteItem) {
@@ -85,7 +85,7 @@ class IntegratedMerchantCreditCardInfoType extends AbstractStructBase
      * @param string[] $supportedSite
      * @return \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType
      */
-    public function setSupportedSite(array $supportedSite = []): self
+    public function setSupportedSite(?array $supportedSite = null): self
     {
         // validation for constraint: array
         if ('' !== ($supportedSiteArrayErrorMessage = self::validateSupportedSiteForArrayConstraintsFromSetSupportedSite($supportedSite))) {

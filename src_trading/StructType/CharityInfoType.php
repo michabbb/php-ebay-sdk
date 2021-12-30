@@ -97,7 +97,7 @@ class CharityInfoType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $CharityDomain = [];
+    protected ?array $CharityDomain = null;
     /**
      * The CharityID
      * Meta information extracted from the WSDL
@@ -194,7 +194,7 @@ class CharityInfoType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NonProfitAddressType[]
      */
-    protected array $NonProfitAddress = [];
+    protected ?array $NonProfitAddress = null;
     /**
      * The NonProfitSocialAddress
      * Meta information extracted from the WSDL
@@ -204,7 +204,7 @@ class CharityInfoType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType[]
      */
-    protected array $NonProfitSocialAddress = [];
+    protected ?array $NonProfitSocialAddress = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -268,7 +268,7 @@ class CharityInfoType extends AbstractStructBase
      * @param \DOMDocument|string|null $any
      * @param string $id
      */
-    public function __construct(?string $name = null, ?bool $listingNPEmailNotifPref = null, ?string $listingNPEmail = null, ?string $listingNPContactName = null, ?string $mission = null, ?string $logoURL = null, ?string $status = null, ?string $searchableString = null, ?int $charityRegion = null, array $charityDomain = [], ?string $charityID = null, ?string $logoURLSelling = null, ?bool $displayLogoSelling = null, ?bool $displayNameInCheckout = null, ?string $description = null, ?bool $showMultipleDonationAmountInCheckout = null, ?string $externalID = null, ?int $popularityIndex = null, ?string $eIN = null, ?string $nonProfitSecondName = null, array $nonProfitAddress = [], array $nonProfitSocialAddress = [], $any = null, ?string $id = null)
+    public function __construct(?string $name = null, ?bool $listingNPEmailNotifPref = null, ?string $listingNPEmail = null, ?string $listingNPContactName = null, ?string $mission = null, ?string $logoURL = null, ?string $status = null, ?string $searchableString = null, ?int $charityRegion = null, ?array $charityDomain = null, ?string $charityID = null, ?string $logoURLSelling = null, ?bool $displayLogoSelling = null, ?bool $displayNameInCheckout = null, ?string $description = null, ?bool $showMultipleDonationAmountInCheckout = null, ?string $externalID = null, ?int $popularityIndex = null, ?string $eIN = null, ?string $nonProfitSecondName = null, ?array $nonProfitAddress = null, ?array $nonProfitSocialAddress = null, $any = null, ?string $id = null)
     {
         $this
             ->setName($name)
@@ -510,7 +510,7 @@ class CharityInfoType extends AbstractStructBase
      * Get CharityDomain value
      * @return int[]
      */
-    public function getCharityDomain(): array
+    public function getCharityDomain(): ?array
     {
         return $this->CharityDomain;
     }
@@ -520,8 +520,11 @@ class CharityInfoType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharityDomainForArrayConstraintsFromSetCharityDomain(array $values = []): string
+    public static function validateCharityDomainForArrayConstraintsFromSetCharityDomain(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $charityInfoTypeCharityDomainItem) {
@@ -543,7 +546,7 @@ class CharityInfoType extends AbstractStructBase
      * @param int[] $charityDomain
      * @return \macropage\ebaysdk\trading\StructType\CharityInfoType
      */
-    public function setCharityDomain(array $charityDomain = []): self
+    public function setCharityDomain(?array $charityDomain = null): self
     {
         // validation for constraint: array
         if ('' !== ($charityDomainArrayErrorMessage = self::validateCharityDomainForArrayConstraintsFromSetCharityDomain($charityDomain))) {
@@ -811,7 +814,7 @@ class CharityInfoType extends AbstractStructBase
      * Get NonProfitAddress value
      * @return \macropage\ebaysdk\trading\StructType\NonProfitAddressType[]
      */
-    public function getNonProfitAddress(): array
+    public function getNonProfitAddress(): ?array
     {
         return $this->NonProfitAddress;
     }
@@ -821,8 +824,11 @@ class CharityInfoType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNonProfitAddressForArrayConstraintsFromSetNonProfitAddress(array $values = []): string
+    public static function validateNonProfitAddressForArrayConstraintsFromSetNonProfitAddress(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $charityInfoTypeNonProfitAddressItem) {
@@ -844,7 +850,7 @@ class CharityInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NonProfitAddressType[] $nonProfitAddress
      * @return \macropage\ebaysdk\trading\StructType\CharityInfoType
      */
-    public function setNonProfitAddress(array $nonProfitAddress = []): self
+    public function setNonProfitAddress(?array $nonProfitAddress = null): self
     {
         // validation for constraint: array
         if ('' !== ($nonProfitAddressArrayErrorMessage = self::validateNonProfitAddressForArrayConstraintsFromSetNonProfitAddress($nonProfitAddress))) {
@@ -874,7 +880,7 @@ class CharityInfoType extends AbstractStructBase
      * Get NonProfitSocialAddress value
      * @return \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType[]
      */
-    public function getNonProfitSocialAddress(): array
+    public function getNonProfitSocialAddress(): ?array
     {
         return $this->NonProfitSocialAddress;
     }
@@ -884,8 +890,11 @@ class CharityInfoType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNonProfitSocialAddressForArrayConstraintsFromSetNonProfitSocialAddress(array $values = []): string
+    public static function validateNonProfitSocialAddressForArrayConstraintsFromSetNonProfitSocialAddress(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $charityInfoTypeNonProfitSocialAddressItem) {
@@ -907,7 +916,7 @@ class CharityInfoType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NonProfitSocialAddressType[] $nonProfitSocialAddress
      * @return \macropage\ebaysdk\trading\StructType\CharityInfoType
      */
-    public function setNonProfitSocialAddress(array $nonProfitSocialAddress = []): self
+    public function setNonProfitSocialAddress(?array $nonProfitSocialAddress = null): self
     {
         // validation for constraint: array
         if ('' !== ($nonProfitSocialAddressArrayErrorMessage = self::validateNonProfitSocialAddressForArrayConstraintsFromSetNonProfitSocialAddress($nonProfitSocialAddress))) {

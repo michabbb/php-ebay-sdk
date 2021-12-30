@@ -254,8 +254,7 @@ class UserType extends AbstractStructBase
     /**
      * The PayPalAccountLevel
      * Meta information extracted from the WSDL
-     * - documentation: The user's PayPal account level. Only returned for the user identified in eBayAuthToken. That is, you cannot see someone else's PayPal account level. Use this information to check whether a seller is eligible to list digital
-     * downloadable items. See the eBay Web site online help for current PayPal requirements for listing digital items.
+     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
      * - minOccurs: 0
      * @var string|null
      */
@@ -263,8 +262,7 @@ class UserType extends AbstractStructBase
     /**
      * The PayPalAccountType
      * Meta information extracted from the WSDL
-     * - documentation: The user's PayPal account type. Only returned for the user identified in <b>eBayAuthToken</b>. That is, you cannot see someone else's PayPal account type. Use this information to check whether a seller is likely to be eligible to
-     * list digital downloadable items. See the eBay Web site online help for current PayPal requirements for listing digital items.
+     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
      * - minOccurs: 0
      * @var string|null
      */
@@ -272,8 +270,7 @@ class UserType extends AbstractStructBase
     /**
      * The PayPalAccountStatus
      * Meta information extracted from the WSDL
-     * - documentation: The user's PayPal account status. Only returned for the user identified in <b>eBayAuthToken</b>. That is, you cannot see someone else's PayPal account status. Use this information to check whether a seller is eligible to list digital
-     * downloadable items. See the eBay Web site online help for current PayPal requirements for listing digital items.
+     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
      * - minOccurs: 0
      * @var string|null
      */
@@ -286,7 +283,7 @@ class UserType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $UserSubscription = [];
+    protected ?array $UserSubscription = null;
     /**
      * The SiteVerified
      * Meta information extracted from the WSDL
@@ -303,7 +300,7 @@ class UserType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SkypeID = [];
+    protected ?array $SkypeID = null;
     /**
      * The eBayWikiReadOnly
      * Meta information extracted from the WSDL
@@ -531,7 +528,7 @@ class UserType extends AbstractStructBase
      * @param string $userLastName
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $aboutMePage = null, ?string $eIASToken = null, ?string $email = null, ?int $feedbackScore = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?float $positiveFeedbackPercent = null, ?bool $feedbackPrivate = null, ?string $feedbackRatingStar = null, ?bool $iDVerified = null, ?bool $eBayGoodStanding = null, ?bool $newUser = null, ?\macropage\ebaysdk\trading\StructType\AddressType $registrationAddress = null, ?string $registrationDate = null, ?string $site = null, ?string $status = null, ?string $userID = null, ?bool $userIDChanged = null, ?string $userIDLastChanged = null, ?string $vATStatus = null, ?\macropage\ebaysdk\trading\StructType\BuyerType $buyerInfo = null, ?\macropage\ebaysdk\trading\StructType\SellerType $sellerInfo = null, ?string $businessRole = null, ?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations = null, ?string $payPalAccountLevel = null, ?string $payPalAccountType = null, ?string $payPalAccountStatus = null, array $userSubscription = [], ?bool $siteVerified = null, array $skypeID = [], ?bool $eBayWikiReadOnly = null, ?int $tUVLevel = null, ?string $vATID = null, ?string $sellerPaymentMethod = null, ?\macropage\ebaysdk\trading\StructType\BiddingSummaryType $biddingSummary = null, ?bool $userAnonymized = null, ?int $uniqueNeutralFeedbackCount = null, ?bool $enterpriseSeller = null, ?string $billingEmail = null, ?bool $qualifiesForSelling = null, ?string $staticAlias = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?\macropage\ebaysdk\trading\StructType\MembershipDetailsType $membership = null, ?string $userFirstName = null, ?string $userLastName = null, $any = null)
+    public function __construct(?bool $aboutMePage = null, ?string $eIASToken = null, ?string $email = null, ?int $feedbackScore = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?float $positiveFeedbackPercent = null, ?bool $feedbackPrivate = null, ?string $feedbackRatingStar = null, ?bool $iDVerified = null, ?bool $eBayGoodStanding = null, ?bool $newUser = null, ?\macropage\ebaysdk\trading\StructType\AddressType $registrationAddress = null, ?string $registrationDate = null, ?string $site = null, ?string $status = null, ?string $userID = null, ?bool $userIDChanged = null, ?string $userIDLastChanged = null, ?string $vATStatus = null, ?\macropage\ebaysdk\trading\StructType\BuyerType $buyerInfo = null, ?\macropage\ebaysdk\trading\StructType\SellerType $sellerInfo = null, ?string $businessRole = null, ?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations = null, ?string $payPalAccountLevel = null, ?string $payPalAccountType = null, ?string $payPalAccountStatus = null, ?array $userSubscription = null, ?bool $siteVerified = null, ?array $skypeID = null, ?bool $eBayWikiReadOnly = null, ?int $tUVLevel = null, ?string $vATID = null, ?string $sellerPaymentMethod = null, ?\macropage\ebaysdk\trading\StructType\BiddingSummaryType $biddingSummary = null, ?bool $userAnonymized = null, ?int $uniqueNeutralFeedbackCount = null, ?bool $enterpriseSeller = null, ?string $billingEmail = null, ?bool $qualifiesForSelling = null, ?string $staticAlias = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?\macropage\ebaysdk\trading\StructType\MembershipDetailsType $membership = null, ?string $userFirstName = null, ?string $userLastName = null, $any = null)
     {
         $this
             ->setAboutMePage($aboutMePage)
@@ -1214,7 +1211,7 @@ class UserType extends AbstractStructBase
      * Get UserSubscription value
      * @return string[]
      */
-    public function getUserSubscription(): array
+    public function getUserSubscription(): ?array
     {
         return $this->UserSubscription;
     }
@@ -1224,8 +1221,11 @@ class UserType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUserSubscriptionForArrayConstraintsFromSetUserSubscription(array $values = []): string
+    public static function validateUserSubscriptionForArrayConstraintsFromSetUserSubscription(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $userTypeUserSubscriptionItem) {
@@ -1249,7 +1249,7 @@ class UserType extends AbstractStructBase
      * @param string[] $userSubscription
      * @return \macropage\ebaysdk\trading\StructType\UserType
      */
-    public function setUserSubscription(array $userSubscription = []): self
+    public function setUserSubscription(?array $userSubscription = null): self
     {
         // validation for constraint: array
         if ('' !== ($userSubscriptionArrayErrorMessage = self::validateUserSubscriptionForArrayConstraintsFromSetUserSubscription($userSubscription))) {
@@ -1304,7 +1304,7 @@ class UserType extends AbstractStructBase
      * Get SkypeID value
      * @return string[]
      */
-    public function getSkypeID(): array
+    public function getSkypeID(): ?array
     {
         return $this->SkypeID;
     }
@@ -1314,8 +1314,11 @@ class UserType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSkypeIDForArrayConstraintsFromSetSkypeID(array $values = []): string
+    public static function validateSkypeIDForArrayConstraintsFromSetSkypeID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $userTypeSkypeIDItem) {
@@ -1337,7 +1340,7 @@ class UserType extends AbstractStructBase
      * @param string[] $skypeID
      * @return \macropage\ebaysdk\trading\StructType\UserType
      */
-    public function setSkypeID(array $skypeID = []): self
+    public function setSkypeID(?array $skypeID = null): self
     {
         // validation for constraint: array
         if ('' !== ($skypeIDArrayErrorMessage = self::validateSkypeIDForArrayConstraintsFromSetSkypeID($skypeID))) {

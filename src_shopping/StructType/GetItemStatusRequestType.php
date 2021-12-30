@@ -23,13 +23,13 @@ class GetItemStatusRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ItemID = [];
+    protected ?array $ItemID = null;
     /**
      * Constructor method for GetItemStatusRequestType
      * @uses GetItemStatusRequestType::setItemID()
      * @param string[] $itemID
      */
-    public function __construct(array $itemID = [])
+    public function __construct(?array $itemID = null)
     {
         $this
             ->setItemID($itemID);
@@ -38,7 +38,7 @@ class GetItemStatusRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string[]
      */
-    public function getItemID(): array
+    public function getItemID(): ?array
     {
         return $this->ItemID;
     }
@@ -48,8 +48,11 @@ class GetItemStatusRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemIDForArrayConstraintsFromSetItemID(array $values = []): string
+    public static function validateItemIDForArrayConstraintsFromSetItemID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getItemStatusRequestTypeItemIDItem) {
@@ -71,7 +74,7 @@ class GetItemStatusRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @return \macropage\ebaysdk\shopping\StructType\GetItemStatusRequestType
      */
-    public function setItemID(array $itemID = []): self
+    public function setItemID(?array $itemID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemIDArrayErrorMessage = self::validateItemIDForArrayConstraintsFromSetItemID($itemID))) {

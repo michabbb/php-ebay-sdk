@@ -10,7 +10,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for PaymentDetailsType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>PaymentDetails</b> container, which is used by the seller to specify amounts and due dates for deposits and full payment on motor vehicle listings.
+ * - documentation: Type defining the <b>PaymentDetails</b> container, which is used by the seller to specify the amount of the initial deposit, and the due dates for the deposit and the full payment for a motor vehicle listing. <br/> <br/> <span
+ * class="tablenote"><b>Note:</b> The seller may not use the <b>PaymentDetails</b> container if selling a motor vehicle through a Classified Ad listing. If it is used in a Trading call, it will be dropped and the seller will get a warning that it was
+ * dropped. For a Classified Ad listing, the buyer and seller directly discuss amongst themselves any details on a deposit, or due dates for a deposit and full balance. eBay will not be involved in this process for a Classified Ad listing.</span>
  * @subpackage Structs
  */
 class PaymentDetailsType extends AbstractStructBase
@@ -18,8 +20,10 @@ class PaymentDetailsType extends AbstractStructBase
     /**
      * The HoursToDeposit
      * Meta information extracted from the WSDL
-     * - documentation: This integer value indicates the number of hours that a buyer has (after he/she commits to buy) to make a deposit to the seller as a down payment on a motor vehicle. <b>Valid values:</b> 24, 48 (default), and 72. <br/><br/> The
-     * deposit amount is specified in the <b>DepositAmount</b> field. If not specified, the <b>DepositAmount</b> value defaults to 0.0, in which case, a deposit on the vehicle is not required. <br>
+     * - documentation: This field is used to set the due date (in hours) for the motor vehicle deposit. The deposit amount is specified in the <b>DepositAmount</b> field. The "clock starts" on the deposit due date as soon as the buyer commits to buying the
+     * vehicle by clicking the <b>Buy It Now</b> button, by winning the auction, or by the seller accepting that buyer's Best Offer/counteroffer. The three supported values here are <code>24</code>, <code>48</code> (default), and <code>72</code> hours.
+     * <br/><br/> <span class="tablenote"><b>Note:</b> If the immediate payment requirement is set for the listing (see <b>Item.AutoPay</b> description), and the listing qualifies for immediate payment (e.g. the <b>Buy It Now</b> button is used), the
+     * <b>HoursToDeposit</b> field will not be applicable, since the buyer will be required to pay any deposit amount immediately (and not within 1, 2 or 3 days).</span> <br>
      * - minOccurs: 0
      * @var int|null
      */
@@ -27,9 +31,10 @@ class PaymentDetailsType extends AbstractStructBase
     /**
      * The DaysToFullPayment
      * Meta information extracted from the WSDL
-     * - documentation: This integer value indicates the number of days that a buyer has (after he/she commits to buy) to make full payment to the seller and close the remaining balance on a motor vehicle. <b>Valid values:</b> 3, 7 (default), 10, and 14.
-     * <br/><br/> In order for a buyer to make a full payment on an US or CA motor vehicle, at least one of the following <b>PaymentMethods</b> values must be specified for the listing: <ul> <li>CashInPerson</li> <li>LoanCheck</li> <li>MOCC (money order or
-     * cashier's check)</li> <li><b>PaymentSeeDescription</b> (indicates to prospective buyers that payment instructions are in the item's description</li> <li>PersonalCheck</li> </ul>
+     * - documentation: This field is used to set the due date (in days) for the buyer to pay off the full balance of the motor vehicle. The "clock starts" on the full payment due date as soon as the buyer commits to buying the vehicle by clicking the
+     * <b>Buy It Now</b> button, by winning the auction, or by the seller accepting that buyer's Best Offer/counteroffer. The three supported values here are <code>3</code>, <code>7</code> (default), <code>10</code>, and <code>14</code> days. <br/><br/> The
+     * seller must specify one or more of the following offline payment methods in the listing. The buyer will be expected to use one of these payment method options to pay the full balance of the motor vehicle. <ul> <li>CashOnPickup</li> <li>MOCC (money
+     * order or cashier's check)</li> <li>PersonalCheck</li> </ul>
      * - minOccurs: 0
      * @var int|null
      */
@@ -37,13 +42,14 @@ class PaymentDetailsType extends AbstractStructBase
     /**
      * The DepositAmount
      * Meta information extracted from the WSDL
-     * - documentation: This dollar value indicates the amount of the deposit that a buyer must make on a purchased motor vehicle (eBay Motors US and CA). The deposit amount can be as high as $2,000.00. <br/><br/> If not specified, this value defaults to
-     * '0.0'. If the seller is requiring that the buyer put down a deposit on the vehicle, the seller must include and set the <b>DepositType</b> field to <code>OtherMethod</code> and specify an <b>HoursToDeposit</b> value. If specified, then also specify
-     * <b>HoursToDeposit</b> <br> <br> Deposits can only be paid using PayPal, so if <b>DepositAmount</b> is specified (and not '0.0'), then the listing must offer 'PayPal' as a payment method (in addition to the payment methods offered for the full
-     * payment). Unlike other listings, PayPal is not automatically added to a Motors listing even if the seller has a PayPal preference set in My eBay. The seller also needs to have a linked PayPal account in order to require a deposit.<br> <br> The
-     * deposit amount appears in the shipping, payment details and return policy section of the View Item page.<br> <br> <b>For ReviseItem and related calls</b>: If the listing has no bids, the seller can add or lower a deposit; and they can increase the
-     * deposit if the listing doesn't require Immediate Payment. The seller can also remove the Immediate Payment option (if any). If the listing has bids, the seller can only lower an existing deposit; but not add or increase a deposit. The seller can't
-     * remove Immediate Payment when a listing with a deposit has bids. <br>
+     * - documentation: This dollar value indicates the amount of the initial deposit on the vehicle required from the buyer. <br/><br/> If the immediate payment requirement is set for the listing (see <b>Item.AutoPay</b> description), and the listing
+     * qualifies for immediate payment (e.g. the <b>Buy It Now</b> button is used), the deposit will be required immediately, and the <b>HoursToDeposit</b> field (if set) will not be applicable. If immediate payment is required for a motor vehicle deposit,
+     * the value input into this field cannot exceed '500.0', or an error will occur. <br/><br/> If there is no immediate payment requirement set for the listing the deposit will be required in 24, 48, or 72 hours after commitment to purchase (see the
+     * <b>HoursToDeposit</b> field). If immediate payment is not required for a motor vehicle deposit, the value input into this field cannot exceed '2000.0', or an error will occur. <br/><br/> If this field is not included in an Add/Revise call, its value
+     * defaults to '0.0', which would technically mean that a deposit is not required, even if the <b>DepositType</b> and <b>HoursToDeposit</b> fields were included. <br> <br> Motor vehicle deposit details will be shown to prospective buyers in the listing.
+     * The available payment methods for the deposit will be shown on the checkout page once the buyer clicks the the <b>Buy It Now</b> button. <br> <br> <b>For ReviseItem and related calls</b>: If the listing has no bids, the seller can add or lower a
+     * deposit; and they can increase the deposit if the listing doesn't require immediate payment. The seller can also remove the immediate payment option (if any). If the listing has bids, the seller can only lower an existing deposit; but not add or
+     * increase a deposit. The seller can't remove immediate payment when a listing with a deposit has bids. <br>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -51,8 +57,7 @@ class PaymentDetailsType extends AbstractStructBase
     /**
      * The DepositType
      * Meta information extracted from the WSDL
-     * - documentation: This field applies to eBay Motors (US and CA) vehicles listings. If the seller is requiring that the buyer make a deposit on the vehicle, the <b>DepositType</b> value must be included and set to <code>OtherMethod</code>. Otherwise,
-     * specify <code>None</code> (or don't pass in <b>DepositType</b>).
+     * - documentation: In order for a seller to require a motor vehicle deposit from a buyer, this field must be included and set to <code>OtherMethod</code>. Otherwise, the field will default to <code>None</code> and a deposit will not be required.
      * - minOccurs: 0
      * @var string|null
      */

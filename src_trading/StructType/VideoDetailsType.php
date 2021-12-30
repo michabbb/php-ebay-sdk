@@ -33,7 +33,7 @@ class VideoDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $VideoID = [];
+    protected ?array $VideoID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class VideoDetailsType extends AbstractStructBase
      * @param string[] $videoID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $videoID = [], $any = null)
+    public function __construct(?array $videoID = null, $any = null)
     {
         $this
             ->setVideoID($videoID)
@@ -56,7 +56,7 @@ class VideoDetailsType extends AbstractStructBase
      * Get VideoID value
      * @return string[]
      */
-    public function getVideoID(): array
+    public function getVideoID(): ?array
     {
         return $this->VideoID;
     }
@@ -66,8 +66,11 @@ class VideoDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVideoIDForArrayConstraintsFromSetVideoID(array $values = []): string
+    public static function validateVideoIDForArrayConstraintsFromSetVideoID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $videoDetailsTypeVideoIDItem) {
@@ -89,7 +92,7 @@ class VideoDetailsType extends AbstractStructBase
      * @param string[] $videoID
      * @return \macropage\ebaysdk\trading\StructType\VideoDetailsType
      */
-    public function setVideoID(array $videoID = []): self
+    public function setVideoID(?array $videoID = null): self
     {
         // validation for constraint: array
         if ('' !== ($videoIDArrayErrorMessage = self::validateVideoIDForArrayConstraintsFromSetVideoID($videoID))) {

@@ -36,6 +36,21 @@ class TaxTypeCodeType extends AbstractStructEnumBase
      */
     const VALUE_GST = 'GST';
     /**
+     * Constant for value 'ImportVAT'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that French VAT tax was charged to the buyer against the order line item. <br/><br/> This tax type is only applicable for items sold on the eBay France marketplaces.
+     * @return string 'ImportVAT'
+     */
+    const VALUE_IMPORT_VAT = 'ImportVAT';
+    /**
+     * Constant for value 'VAT'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that European VAT tax was charged to the buyer against the order line item. <br/><br/> This enumeration applies to VAT tax on the UK marketplace, the Norway marketplace, and other EU marketplaces
+     * (except for France).
+     * @return string 'VAT'
+     */
+    const VALUE_VAT = 'VAT';
+    /**
      * Constant for value 'CustomCode'
      * Meta information extracted from the WSDL
      * - documentation: Reserved for internal or future use.
@@ -47,6 +62,8 @@ class TaxTypeCodeType extends AbstractStructEnumBase
      * @uses self::VALUE_SALES_TAX
      * @uses self::VALUE_WASTE_RECYCLING_FEE
      * @uses self::VALUE_GST
+     * @uses self::VALUE_IMPORT_VAT
+     * @uses self::VALUE_VAT
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
@@ -56,6 +73,8 @@ class TaxTypeCodeType extends AbstractStructEnumBase
             self::VALUE_SALES_TAX,
             self::VALUE_WASTE_RECYCLING_FEE,
             self::VALUE_GST,
+            self::VALUE_IMPORT_VAT,
+            self::VALUE_VAT,
             self::VALUE_CUSTOM_CODE,
         ];
     }

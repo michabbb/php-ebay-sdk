@@ -31,7 +31,7 @@ class MyeBaySecondChanceOfferListType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    protected array $SecondChanceOffer = [];
+    protected ?array $SecondChanceOffer = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class MyeBaySecondChanceOfferListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $secondChanceOffer
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $totalAvailable = null, array $secondChanceOffer = [], $any = null)
+    public function __construct(?int $totalAvailable = null, ?array $secondChanceOffer = null, $any = null)
     {
         $this
             ->setTotalAvailable($totalAvailable)
@@ -80,7 +80,7 @@ class MyeBaySecondChanceOfferListType extends AbstractStructBase
      * Get SecondChanceOffer value
      * @return \macropage\ebaysdk\trading\StructType\ItemType[]
      */
-    public function getSecondChanceOffer(): array
+    public function getSecondChanceOffer(): ?array
     {
         return $this->SecondChanceOffer;
     }
@@ -90,8 +90,11 @@ class MyeBaySecondChanceOfferListType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer(array $values = []): string
+    public static function validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myeBaySecondChanceOfferListTypeSecondChanceOfferItem) {
@@ -113,7 +116,7 @@ class MyeBaySecondChanceOfferListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $secondChanceOffer
      * @return \macropage\ebaysdk\trading\StructType\MyeBaySecondChanceOfferListType
      */
-    public function setSecondChanceOffer(array $secondChanceOffer = []): self
+    public function setSecondChanceOffer(?array $secondChanceOffer = null): self
     {
         // validation for constraint: array
         if ('' !== ($secondChanceOfferArrayErrorMessage = self::validateSecondChanceOfferForArrayConstraintsFromSetSecondChanceOffer($secondChanceOffer))) {

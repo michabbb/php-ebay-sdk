@@ -27,9 +27,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Constant for value 'BestOfferEnabled'
      * Meta information extracted from the WSDL
      * - documentation: If this value is specified, the <b>SiteDefaults.BestOfferEnabled</b> and <b>Category.BestOfferEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site supports the
-     * Best Offer feature, and which categories allow the Best Offer feature. <br/><br/> <span class="tablenote"><b>Note: </b> The Best Offer feature can be set for auction listings on the US, Canada, UK, Germany, Australia, France, Italy, and Spain
-     * marketplaces, but keep in mind that Best Offer and Buy It Now cannot be used simultaneously in a listing. Also, once a qualifying bid is made on an auction listing, the Best Offer feature is disabled, and any pending offer or counteroffers are no
-     * longer valid. </span>
+     * Best Offer feature, and which categories allow the Best Offer feature.
      * @return string 'BestOfferEnabled'
      */
     const VALUE_BEST_OFFER_ENABLED = 'BestOfferEnabled';
@@ -51,8 +49,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'UserConsentRequired'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.UserConsentRequired</b> boolean field in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site requires a prospective bidder of an auction item to
-     * read and agree to the terms in eBay's privacy policy before bidding on the item.
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'UserConsentRequired'
      */
     const VALUE_USER_CONSENT_REQUIRED = 'UserConsentRequired';
@@ -83,9 +80,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Constant for value 'BestOfferCounterEnabled'
      * Meta information extracted from the WSDL
      * - documentation: If this value is specified, the <b>SiteDefaults.BestOfferCounterEnabled</b> and <b>Category.BestOfferCounterEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site
-     * supports the Best Offer counter offers, and which categories allow the Best Offer counter offers. <br/><br/> <span class="tablenote"><b>Note: </b> The Best Offer feature can be set for auction listings on the US, Canada, UK, Germany, Australia,
-     * France, Italy, and Spain marketplaces, but keep in mind that Best Offer and Buy It Now cannot be used simultaneously in a listing. Also, once a qualifying bid is made on an auction listing, the Best Offer feature is disabled, and any pending offer or
-     * counteroffers are no longer valid. </span>
+     * supports the Best Offer counter offers, and which categories allow the Best Offer counter offers.
      * @return string 'BestOfferCounterEnabled'
      */
     const VALUE_BEST_OFFER_COUNTER_ENABLED = 'BestOfferCounterEnabled';
@@ -94,8 +89,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: If this value is specified, the <b>SiteDefaults.BestOfferAutoDeclineEnabled</b> and <b>Category.BestOfferAutoDeclineEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay
      * site and individual categories support the Best Offer auto decline feature. With the Best Offer auto decline feature, the seller sets a price threshold, and all Best Offers and counter offers below this price value are automatically declined without
-     * any seller action. <br/><br/> <span class="tablenote"><b>Note: </b> The Best Offer feature can be set for auction listings on the US, Canada, UK, Germany, Australia, France, Italy, and Spain marketplaces, but keep in mind that Best Offer and Buy It
-     * Now cannot be used simultaneously in a listing. Also, once a qualifying bid is made on an auction listing, the Best Offer feature is disabled, and any pending offer or counteroffers are no longer valid. </span>
+     * any seller action.
      * @return string 'BestOfferAutoDeclineEnabled'
      */
     const VALUE_BEST_OFFER_AUTO_DECLINE_ENABLED = 'BestOfferAutoDeclineEnabled';
@@ -118,8 +112,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Constant for value 'ValuePack'
      * Meta information extracted from the WSDL
      * - documentation: If this value is specified, the <b>SiteDefaults.ValuePackEnabled</b> and <b>Category.ValuePackEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site and individual
-     * categories support the Value Pack listing enhancement bundle. The Value Pack bundle includes the Gallery Plus feature, a listing subtitle, and use of a Listing Designer template. <br> <br> <span class="tablenote"><b>Note:</b> As of May 31, 2020,
-     * sellers are no longer able to use Listing Designer templates when they create or revise listings, so use of a Listing Designer template will no longer be a part of this bundle.</span>
+     * categories support the Value Pack listing enhancement bundle. The Value Pack bundle includes the Gallery Plus feature, a listing subtitle, and use of a Listing Designer template.
      * @return string 'ValuePack'
      */
     const VALUE_VALUE_PACK = 'ValuePack';
@@ -303,8 +296,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'SafePaymentRequired'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.SafePaymentRequired</b> and <b>Category.SafePaymentRequired</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site, and
-     * individual categories on that site, require that the seller set at least one accepted payment method in the listing that is certified by eBay to be a "safe payment method".
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'SafePaymentRequired'
      */
     const VALUE_SAFE_PAYMENT_REQUIRED = 'SafePaymentRequired';
@@ -347,9 +339,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaisaPayFullEscrowEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> This value is deprecated since it is only applicable to the eBay India site, and this marketplace is no longer available.</span> If this value is specified, the
-     * <b>SiteDefaults.PaisaPayFullEscrowEnabled</b> and <b>Category.PaisaPayFullEscrowEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site and individual categories on that site support
-     * Paisa Pay Full Escrow as an accepted payment method. This field is only relevant to listings on the eBay India site, which is the only site where Paisa Pay is available.
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'PaisaPayFullEscrowEnabled'
      */
     const VALUE_PAISA_PAY_FULL_ESCROW_ENABLED = 'PaisaPayFullEscrowEnabled';
@@ -396,8 +386,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: If this value is specified, the <b>SiteDefaults.BestOfferAutoAcceptEnabled</b> and <b>Category.BestOfferAutoAcceptEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay
      * site and individual categories support the Best Offer auto accept feature. With the Best Offer auto accept feature, the seller sets a price threshold, and all Best Offers and counter offers at or above this price value are automatically accepted
-     * without any seller action. <br/><br/> <span class="tablenote"><b>Note: </b> The Best Offer feature can be set for auction listings on the US, Canada, UK, Germany, Australia, France, Italy, and Spain marketplaces, but keep in mind that Best Offer and
-     * Buy It Now cannot be used simultaneously in a listing. Also, once a qualifying bid is made on an auction listing, the Best Offer feature is disabled, and any pending offer or counteroffers are no longer valid. </span>
+     * without any seller action.
      * @return string 'BestOfferAutoAcceptEnabled'
      */
     const VALUE_BEST_OFFER_AUTO_ACCEPT_ENABLED = 'BestOfferAutoAcceptEnabled';
@@ -413,25 +402,21 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPalBuyerProtectionEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.PayPalBuyerProtectionEnabled</b> and <b>Category.PayPalBuyerProtectionEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified
-     * eBay site and individual categories are enabled with PayPal Purchase Protection. Of course, an eligible item must be purchased with PayPal to be eligible for PayPal Purchase Protection.
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'PayPalBuyerProtectionEnabled'
      */
     const VALUE_PAY_PAL_BUYER_PROTECTION_ENABLED = 'PayPalBuyerProtectionEnabled';
     /**
      * Constant for value 'BuyerGuaranteeEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.BuyerGuaranteeEnabled</b> and <b>Category.BuyerGuaranteeEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site and
-     * individual categories are enabled with the Australian version of the Buyer Protection program. This enumeration value is only applicable to the eBay Australia site.
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'BuyerGuaranteeEnabled'
      */
     const VALUE_BUYER_GUARANTEE_ENABLED = 'BuyerGuaranteeEnabled';
     /**
      * Constant for value 'INEscrowWorkflowTimeline'
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> This value is deprecated since it is only applicable to the eBay India site, and this marketplace is no longer available.</span> If this value is specified, the
-     * <b>Category.INEscrowWorkflowTimeline</b> fields in the <b>GetCategoryFeatures</b> response will indicate the escrow workflows that will be used for individual categories on the eBay India site. This enumeration value is only applicable to the eBay
-     * India site, and only if Paisa Pay Full Escrow is an accepted payment method.
+     * - documentation: This value is deprecated since it is only applicable to the eBay India site, and this marketplace is no longer available.
      * @return string 'INEscrowWorkflowTimeline'
      */
     const VALUE_INESCROW_WORKFLOW_TIMELINE = 'INEscrowWorkflowTimeline';
@@ -453,8 +438,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPalRequired'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.PayPalRequired</b> and <b>Category.PayPalRequired</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site and individual
-     * categories require PayPal as one of the accepted payment methods in a listing. This value is not applicable in countries where PayPal is not available.
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'PayPalRequired'
      */
     const VALUE_PAY_PAL_REQUIRED = 'PayPalRequired';
@@ -679,40 +663,35 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'SpecialitySubscription'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.SpecialitySubscription</b> boolean field in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site supports Motors National listings for sellers
-     * with a specialty dealer subscription for selling motor vehicles.
+     * - documentation: This value is <b>deprecated</b> and should no longer be used.
      * @return string 'SpecialitySubscription'
      */
     const VALUE_SPECIALITY_SUBSCRIPTION = 'SpecialitySubscription';
     /**
      * Constant for value 'RegularSubscription'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.RegularSubscription</b> boolean field in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site supports Motors National listings for sellers with
-     * a regular dealer subscription for selling motor vehicles.
+     * - documentation: This value is <b>deprecated</b> and should no longer be used.
      * @return string 'RegularSubscription'
      */
     const VALUE_REGULAR_SUBSCRIPTION = 'RegularSubscription';
     /**
      * Constant for value 'PremiumSubscription'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.PremiumSubscription</b> boolean field in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site supports Motors National listings for sellers with
-     * a premium dealer subscription for selling motor vehicles.
+     * - documentation: This value is <b>deprecated</b> and should no longer be used.
      * @return string 'PremiumSubscription'
      */
     const VALUE_PREMIUM_SUBSCRIPTION = 'PremiumSubscription';
     /**
      * Constant for value 'NonSubscription'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.NonSubscription</b> boolean field in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site supports Motors National listings for sellers without a
-     * dealer subscription for selling motor vehicles.
+     * - documentation: This value is <b>deprecated</b> and should no longer be used.
      * @return string 'NonSubscription'
      */
     const VALUE_NON_SUBSCRIPTION = 'NonSubscription';
     /**
      * Constant for value 'IntangibleEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: If this value is specified, the <b>SiteDefaults.IntangibleEnabled</b> and <b>Category.IntangibleEnabled</b> boolean fields in the <b>GetCategoryFeatures</b> response will indicate whether or not the specified eBay site and individual
-     * categories allow sellers to sell intangible items.
+     * - documentation: This value is <b>deprecated</b> and should no longer be used.
      * @return string 'IntangibleEnabled'
      */
     const VALUE_INTANGIBLE_ENABLED = 'IntangibleEnabled';
@@ -905,7 +884,9 @@ class FeatureIDCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ProductCreationEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is no longer applicable. Use the <code>ProductRequiredEnabled</code> enumeration value instead to see if a category supports listings that are associated with an eBay Catalog product.
+     * - documentation: If this value is specified, the <b>Category.ProductCreationEnabled</b> field in the <b>GetCategoryFeatures</b> response will indicate which categories support the use of an eBay catalog product when creating/revising listings. When a
+     * seller associates an eBay catalog product when creating/revising a listing, the listing will automatically be created using the eBay catalog product's image(s), product aspects, description, and title. This field will not be returned if one or more
+     * <b>FeatureID</b> fields are included in the call request and <code>ProductCreationEnabled</code> is not one of the values passed into those <a href="types/FeatureIDCodeType.html">FeatureID</a> fields.
      * @return string 'ProductCreationEnabled'
      */
     const VALUE_PRODUCT_CREATION_ENABLED = 'ProductCreationEnabled';
@@ -1055,7 +1036,7 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This value is used to see if an eBay Product ID (e.g. ePID) can be used in an Add/Revise/Relist API call to identify which motorcycles and/or scooters are compatible with a motor vehicle part or accessory is supported. ePIDs can only
      * be used to identify motorcycles and scooters on the Germany and UK sites. <br/><br/> For more information on using an ePID to identify a compatible motorcycle or scooter through an Add/Revise/Relist API call on the Germany or UK site, see the
-     * documentation for the <a href=" http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container.
+     * documentation for the <a href=" https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container.
      * @return string 'EpidSupported'
      */
     const VALUE_EPID_SUPPORTED = 'EpidSupported';
@@ -1064,16 +1045,14 @@ class FeatureIDCodeType extends AbstractStructEnumBase
      * Meta information extracted from the WSDL
      * - documentation: This value is used to see if a K Type vehicle number in an Add/Revise/Relist API call to identify which cars and/or trucks are compatible with a motor vehicle part or accessory is supported. K type vehicle numbers can only be used to
      * identify cars and trucks on the Germany site. <br/><br/> For more information on using a K Type vehicle number to identify a compatible car or truck through an Add/Revise/Relist API call on the Germany site, see the documentation for the <a href="
-     * http://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container.
+     * https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/AddItem.html#Request.Item.ItemCompatibilityList.Compatibility.NameValueList">Compatibility.NameValueList</a> container.
      * @return string 'KTypeSupported'
      */
     const VALUE_KTYPE_SUPPORTED = 'KTypeSupported';
     /**
      * Constant for value 'ProductRequiredEnabled'
      * Meta information extracted from the WSDL
-     * - documentation: This value is used to see if the site supports Product-Based Shopping Experience listings (listings associated with an eBay catalog product). <br><br> The <b>Category.ProductRequiredEnabled</b> field will only be returned if the
-     * category requires association with an eBay Catalog product. <br><br> <span class="tablenote"><b>Note:</b> Due to the rollback of the Product-Based Shopping Experience mandate for all eBay categories, the value for this field should never get returned
-     * as <code>Enabled</code> for <b>SiteDefaults</b> or for any categories.</span>
+     * - documentation: This value is deprecated and should not be used.
      * @return string 'ProductRequiredEnabled'
      */
     const VALUE_PRODUCT_REQUIRED_ENABLED = 'ProductRequiredEnabled';

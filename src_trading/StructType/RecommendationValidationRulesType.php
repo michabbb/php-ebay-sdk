@@ -115,7 +115,7 @@ class RecommendationValidationRulesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameValueRelationshipType[]
      */
-    protected array $Relationship = [];
+    protected ?array $Relationship = null;
     /**
      * The VariationPicture
      * Meta information extracted from the WSDL
@@ -179,7 +179,7 @@ class RecommendationValidationRulesType extends AbstractStructBase
      * @param string $valueFormat
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $valueType = null, ?int $minValues = null, ?int $maxValues = null, ?string $selectionMode = null, ?string $aspectUsage = null, ?int $maxValueLength = null, ?string $productRequired = null, ?string $usageConstraint = null, ?int $confidence = null, array $relationship = [], ?string $variationPicture = null, ?string $variationSpecifics = null, ?string $valueFormat = null, $any = null)
+    public function __construct(?string $valueType = null, ?int $minValues = null, ?int $maxValues = null, ?string $selectionMode = null, ?string $aspectUsage = null, ?int $maxValueLength = null, ?string $productRequired = null, ?string $usageConstraint = null, ?int $confidence = null, ?array $relationship = null, ?string $variationPicture = null, ?string $variationSpecifics = null, ?string $valueFormat = null, $any = null)
     {
         $this
             ->setValueType($valueType)
@@ -423,7 +423,7 @@ class RecommendationValidationRulesType extends AbstractStructBase
      * Get Relationship value
      * @return \macropage\ebaysdk\trading\StructType\NameValueRelationshipType[]
      */
-    public function getRelationship(): array
+    public function getRelationship(): ?array
     {
         return $this->Relationship;
     }
@@ -433,8 +433,11 @@ class RecommendationValidationRulesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRelationshipForArrayConstraintsFromSetRelationship(array $values = []): string
+    public static function validateRelationshipForArrayConstraintsFromSetRelationship(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $recommendationValidationRulesTypeRelationshipItem) {
@@ -456,7 +459,7 @@ class RecommendationValidationRulesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueRelationshipType[] $relationship
      * @return \macropage\ebaysdk\trading\StructType\RecommendationValidationRulesType
      */
-    public function setRelationship(array $relationship = []): self
+    public function setRelationship(?array $relationship = null): self
     {
         // validation for constraint: array
         if ('' !== ($relationshipArrayErrorMessage = self::validateRelationshipForArrayConstraintsFromSetRelationship($relationship))) {

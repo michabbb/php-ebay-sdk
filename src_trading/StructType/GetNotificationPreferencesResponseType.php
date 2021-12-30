@@ -56,7 +56,7 @@ class GetNotificationPreferencesResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[]
      */
-    protected array $EventProperty = [];
+    protected ?array $EventProperty = null;
     /**
      * Constructor method for GetNotificationPreferencesResponseType
      * @uses GetNotificationPreferencesResponseType::setApplicationDeliveryPreferences()
@@ -70,7 +70,7 @@ class GetNotificationPreferencesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\NotificationUserDataType $userData
      * @param \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[] $eventProperty
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ApplicationDeliveryPreferencesType $applicationDeliveryPreferences = null, ?string $deliveryURLName = null, ?\macropage\ebaysdk\trading\ArrayType\NotificationEnableArrayType $userDeliveryPreferenceArray = null, ?\macropage\ebaysdk\trading\StructType\NotificationUserDataType $userData = null, array $eventProperty = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ApplicationDeliveryPreferencesType $applicationDeliveryPreferences = null, ?string $deliveryURLName = null, ?\macropage\ebaysdk\trading\ArrayType\NotificationEnableArrayType $userDeliveryPreferenceArray = null, ?\macropage\ebaysdk\trading\StructType\NotificationUserDataType $userData = null, ?array $eventProperty = null)
     {
         $this
             ->setApplicationDeliveryPreferences($applicationDeliveryPreferences)
@@ -163,7 +163,7 @@ class GetNotificationPreferencesResponseType extends AbstractResponseType
      * Get EventProperty value
      * @return \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[]
      */
-    public function getEventProperty(): array
+    public function getEventProperty(): ?array
     {
         return $this->EventProperty;
     }
@@ -173,8 +173,11 @@ class GetNotificationPreferencesResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEventPropertyForArrayConstraintsFromSetEventProperty(array $values = []): string
+    public static function validateEventPropertyForArrayConstraintsFromSetEventProperty(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getNotificationPreferencesResponseTypeEventPropertyItem) {
@@ -196,7 +199,7 @@ class GetNotificationPreferencesResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[] $eventProperty
      * @return \macropage\ebaysdk\trading\StructType\GetNotificationPreferencesResponseType
      */
-    public function setEventProperty(array $eventProperty = []): self
+    public function setEventProperty(?array $eventProperty = null): self
     {
         // validation for constraint: array
         if ('' !== ($eventPropertyArrayErrorMessage = self::validateEventPropertyForArrayConstraintsFromSetEventProperty($eventProperty))) {

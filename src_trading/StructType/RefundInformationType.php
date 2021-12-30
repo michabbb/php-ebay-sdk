@@ -28,7 +28,7 @@ class RefundInformationType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundTransactionInfoType[]
      */
-    protected array $Refund = [];
+    protected ?array $Refund = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -41,7 +41,7 @@ class RefundInformationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionInfoType[] $refund
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refund = [], $any = null)
+    public function __construct(?array $refund = null, $any = null)
     {
         $this
             ->setRefund($refund)
@@ -51,7 +51,7 @@ class RefundInformationType extends AbstractStructBase
      * Get Refund value
      * @return \macropage\ebaysdk\trading\StructType\RefundTransactionInfoType[]
      */
-    public function getRefund(): array
+    public function getRefund(): ?array
     {
         return $this->Refund;
     }
@@ -61,8 +61,11 @@ class RefundInformationType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundForArrayConstraintsFromSetRefund(array $values = []): string
+    public static function validateRefundForArrayConstraintsFromSetRefund(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $refundInformationTypeRefundItem) {
@@ -84,7 +87,7 @@ class RefundInformationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundTransactionInfoType[] $refund
      * @return \macropage\ebaysdk\trading\StructType\RefundInformationType
      */
-    public function setRefund(array $refund = []): self
+    public function setRefund(?array $refund = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundArrayErrorMessage = self::validateRefundForArrayConstraintsFromSetRefund($refund))) {

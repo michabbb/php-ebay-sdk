@@ -32,12 +32,12 @@ class PicturesType extends AbstractStructBase
      * consist of up to 12 images hosted by eBay Picture Services (EPS) or self-hosted (hosted outside of eBay) pictures. The eBay Picture Services and self-hosted images can never be combined into the same variation specific picture set. <br><br> At least
      * one picture set is required if the <b>Pictures</b> node is present in the request. You are not required to provide pictures for all values that correspond to the variation specific name. For example, a listing could have pictures depicting the blue
      * and black color variations, but not the pink variations. <br/><br/> <span class="tablenote"><b>Note: </b> All images must comply with the <a
-     * href="http://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-Intro.html">Picture Requirements</a>. </span>
+     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-Intro.html">Picture Requirements</a>. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationSpecificPictureSetType[]
      */
-    protected array $VariationSpecificPictureSet = [];
+    protected ?array $VariationSpecificPictureSet = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -52,7 +52,7 @@ class PicturesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationSpecificPictureSetType[] $variationSpecificPictureSet
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $variationSpecificName = null, array $variationSpecificPictureSet = [], $any = null)
+    public function __construct(?string $variationSpecificName = null, ?array $variationSpecificPictureSet = null, $any = null)
     {
         $this
             ->setVariationSpecificName($variationSpecificName)
@@ -86,7 +86,7 @@ class PicturesType extends AbstractStructBase
      * Get VariationSpecificPictureSet value
      * @return \macropage\ebaysdk\trading\StructType\VariationSpecificPictureSetType[]
      */
-    public function getVariationSpecificPictureSet(): array
+    public function getVariationSpecificPictureSet(): ?array
     {
         return $this->VariationSpecificPictureSet;
     }
@@ -96,8 +96,11 @@ class PicturesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVariationSpecificPictureSetForArrayConstraintsFromSetVariationSpecificPictureSet(array $values = []): string
+    public static function validateVariationSpecificPictureSetForArrayConstraintsFromSetVariationSpecificPictureSet(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $picturesTypeVariationSpecificPictureSetItem) {
@@ -119,7 +122,7 @@ class PicturesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationSpecificPictureSetType[] $variationSpecificPictureSet
      * @return \macropage\ebaysdk\trading\StructType\PicturesType
      */
-    public function setVariationSpecificPictureSet(array $variationSpecificPictureSet = []): self
+    public function setVariationSpecificPictureSet(?array $variationSpecificPictureSet = null): self
     {
         // validation for constraint: array
         if ('' !== ($variationSpecificPictureSetArrayErrorMessage = self::validateVariationSpecificPictureSetForArrayConstraintsFromSetVariationSpecificPictureSet($variationSpecificPictureSet))) {

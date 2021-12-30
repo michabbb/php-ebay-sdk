@@ -23,7 +23,7 @@ class CharityAffiliationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CharityIDType[]
      */
-    protected array $CharityID = [];
+    protected ?array $CharityID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class CharityAffiliationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharityIDType[] $charityID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $charityID = [], $any = null)
+    public function __construct(?array $charityID = null, $any = null)
     {
         $this
             ->setCharityID($charityID)
@@ -46,7 +46,7 @@ class CharityAffiliationsType extends AbstractStructBase
      * Get CharityID value
      * @return \macropage\ebaysdk\trading\StructType\CharityIDType[]
      */
-    public function getCharityID(): array
+    public function getCharityID(): ?array
     {
         return $this->CharityID;
     }
@@ -56,8 +56,11 @@ class CharityAffiliationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCharityIDForArrayConstraintsFromSetCharityID(array $values = []): string
+    public static function validateCharityIDForArrayConstraintsFromSetCharityID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $charityAffiliationsTypeCharityIDItem) {
@@ -79,7 +82,7 @@ class CharityAffiliationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CharityIDType[] $charityID
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType
      */
-    public function setCharityID(array $charityID = []): self
+    public function setCharityID(?array $charityID = null): self
     {
         // validation for constraint: array
         if ('' !== ($charityIDArrayErrorMessage = self::validateCharityIDForArrayConstraintsFromSetCharityID($charityID))) {

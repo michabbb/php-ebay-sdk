@@ -46,7 +46,7 @@ class SearchAttributesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    protected array $ValueList = [];
+    protected ?array $ValueList = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -65,7 +65,7 @@ class SearchAttributesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $attributeID = null, ?string $dateSpecifier = null, ?string $rangeSpecifier = null, array $valueList = [], $any = null)
+    public function __construct(?int $attributeID = null, ?string $dateSpecifier = null, ?string $rangeSpecifier = null, ?array $valueList = null, $any = null)
     {
         $this
             ->setAttributeID($attributeID)
@@ -153,7 +153,7 @@ class SearchAttributesType extends AbstractStructBase
      * Get ValueList value
      * @return \macropage\ebaysdk\trading\StructType\ValType[]
      */
-    public function getValueList(): array
+    public function getValueList(): ?array
     {
         return $this->ValueList;
     }
@@ -163,8 +163,11 @@ class SearchAttributesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateValueListForArrayConstraintsFromSetValueList(array $values = []): string
+    public static function validateValueListForArrayConstraintsFromSetValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $searchAttributesTypeValueListItem) {
@@ -186,7 +189,7 @@ class SearchAttributesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ValType[] $valueList
      * @return \macropage\ebaysdk\trading\StructType\SearchAttributesType
      */
-    public function setValueList(array $valueList = []): self
+    public function setValueList(?array $valueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($valueListArrayErrorMessage = self::validateValueListForArrayConstraintsFromSetValueList($valueList))) {

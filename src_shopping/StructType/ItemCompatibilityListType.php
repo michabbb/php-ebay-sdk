@@ -26,7 +26,7 @@ class ItemCompatibilityListType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType[]
      */
-    protected array $Compatibility = [];
+    protected ?array $Compatibility = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -39,7 +39,7 @@ class ItemCompatibilityListType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType[] $compatibility
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $compatibility = [], $any = null)
+    public function __construct(?array $compatibility = null, $any = null)
     {
         $this
             ->setCompatibility($compatibility)
@@ -49,7 +49,7 @@ class ItemCompatibilityListType extends AbstractStructBase
      * Get Compatibility value
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType[]
      */
-    public function getCompatibility(): array
+    public function getCompatibility(): ?array
     {
         return $this->Compatibility;
     }
@@ -59,8 +59,11 @@ class ItemCompatibilityListType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCompatibilityForArrayConstraintsFromSetCompatibility(array $values = []): string
+    public static function validateCompatibilityForArrayConstraintsFromSetCompatibility(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemCompatibilityListTypeCompatibilityItem) {
@@ -82,7 +85,7 @@ class ItemCompatibilityListType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\ItemCompatibilityType[] $compatibility
      * @return \macropage\ebaysdk\shopping\StructType\ItemCompatibilityListType
      */
-    public function setCompatibility(array $compatibility = []): self
+    public function setCompatibility(?array $compatibility = null): self
     {
         // validation for constraint: array
         if ('' !== ($compatibilityArrayErrorMessage = self::validateCompatibilityForArrayConstraintsFromSetCompatibility($compatibility))) {

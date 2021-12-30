@@ -30,7 +30,7 @@ class AddToItemDescriptionRequestType extends AbstractRequestType
      * The Description
      * Meta information extracted from the WSDL
      * - documentation: This field is used to specify the text that will be appended to the end of the active listing's item description. The text provided in this field must abide by the same rules/restrictions applicable to the original item description
-     * supplied at listing time. For more information on these rules and restrictions, see the <a href="http://developer.ebay.com/Devzone/XML/docs/Reference/ebay/types/ItemType.html#Description">Description field of ItemType</a>.
+     * supplied at listing time. For more information on these rules and restrictions, see the <a href="https://developer.ebay.com/Devzone/XML/docs/Reference/ebay/types/ItemType.html#Description">Description field of ItemType</a>.
      * - minOccurs: 0
      * @var string|null
      */

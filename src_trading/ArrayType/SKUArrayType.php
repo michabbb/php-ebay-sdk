@@ -29,13 +29,13 @@ class SKUArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SKU = [];
+    protected ?array $SKU = null;
     /**
      * Constructor method for SKUArrayType
      * @uses SKUArrayType::setSKU()
      * @param string[] $sKU
      */
-    public function __construct(array $sKU = [])
+    public function __construct(?array $sKU = null)
     {
         $this
             ->setSKU($sKU);
@@ -44,7 +44,7 @@ class SKUArrayType extends AbstractStructArrayBase
      * Get SKU value
      * @return string[]
      */
-    public function getSKU(): array
+    public function getSKU(): ?array
     {
         return $this->SKU;
     }
@@ -54,8 +54,11 @@ class SKUArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSKUForArrayConstraintsFromSetSKU(array $values = []): string
+    public static function validateSKUForArrayConstraintsFromSetSKU(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sKUArrayTypeSKUItem) {
@@ -77,7 +80,7 @@ class SKUArrayType extends AbstractStructArrayBase
      * @param string[] $sKU
      * @return \macropage\ebaysdk\trading\ArrayType\SKUArrayType
      */
-    public function setSKU(array $sKU = []): self
+    public function setSKU(?array $sKU = null): self
     {
         // validation for constraint: array
         if ('' !== ($sKUArrayErrorMessage = self::validateSKUForArrayConstraintsFromSetSKU($sKU))) {

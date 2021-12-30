@@ -39,7 +39,7 @@ class SellereBayPaymentProcessConsentCodeType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UserAgreementInfoType[]
      */
-    protected array $UserAgreementInfo = [];
+    protected ?array $UserAgreementInfo = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -56,7 +56,7 @@ class SellereBayPaymentProcessConsentCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UserAgreementInfoType[] $userAgreementInfo
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $payoutMethodSet = null, ?string $payoutMethod = null, array $userAgreementInfo = [], $any = null)
+    public function __construct(?bool $payoutMethodSet = null, ?string $payoutMethod = null, ?array $userAgreementInfo = null, $any = null)
     {
         $this
             ->setPayoutMethodSet($payoutMethodSet)
@@ -117,7 +117,7 @@ class SellereBayPaymentProcessConsentCodeType extends AbstractStructBase
      * Get UserAgreementInfo value
      * @return \macropage\ebaysdk\trading\StructType\UserAgreementInfoType[]
      */
-    public function getUserAgreementInfo(): array
+    public function getUserAgreementInfo(): ?array
     {
         return $this->UserAgreementInfo;
     }
@@ -127,8 +127,11 @@ class SellereBayPaymentProcessConsentCodeType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUserAgreementInfoForArrayConstraintsFromSetUserAgreementInfo(array $values = []): string
+    public static function validateUserAgreementInfoForArrayConstraintsFromSetUserAgreementInfo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $sellereBayPaymentProcessConsentCodeTypeUserAgreementInfoItem) {
@@ -150,7 +153,7 @@ class SellereBayPaymentProcessConsentCodeType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UserAgreementInfoType[] $userAgreementInfo
      * @return \macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType
      */
-    public function setUserAgreementInfo(array $userAgreementInfo = []): self
+    public function setUserAgreementInfo(?array $userAgreementInfo = null): self
     {
         // validation for constraint: array
         if ('' !== ($userAgreementInfoArrayErrorMessage = self::validateUserAgreementInfoForArrayConstraintsFromSetUserAgreementInfo($userAgreementInfo))) {

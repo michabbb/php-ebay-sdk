@@ -31,7 +31,7 @@ class SiteWideCharacteristicsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludeCategoryID = [];
+    protected ?array $ExcludeCategoryID = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class SiteWideCharacteristicsType extends AbstractStructBase
      * @param string[] $excludeCategoryID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null, array $excludeCategoryID = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\CharacteristicsSetType $characteristicsSet = null, ?array $excludeCategoryID = null, $any = null)
     {
         $this
             ->setCharacteristicsSet($characteristicsSet)
@@ -76,7 +76,7 @@ class SiteWideCharacteristicsType extends AbstractStructBase
      * Get ExcludeCategoryID value
      * @return string[]
      */
-    public function getExcludeCategoryID(): array
+    public function getExcludeCategoryID(): ?array
     {
         return $this->ExcludeCategoryID;
     }
@@ -86,8 +86,11 @@ class SiteWideCharacteristicsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeCategoryIDForArrayConstraintsFromSetExcludeCategoryID(array $values = []): string
+    public static function validateExcludeCategoryIDForArrayConstraintsFromSetExcludeCategoryID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $siteWideCharacteristicsTypeExcludeCategoryIDItem) {
@@ -109,7 +112,7 @@ class SiteWideCharacteristicsType extends AbstractStructBase
      * @param string[] $excludeCategoryID
      * @return \macropage\ebaysdk\trading\StructType\SiteWideCharacteristicsType
      */
-    public function setExcludeCategoryID(array $excludeCategoryID = []): self
+    public function setExcludeCategoryID(?array $excludeCategoryID = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeCategoryIDArrayErrorMessage = self::validateExcludeCategoryIDForArrayConstraintsFromSetExcludeCategoryID($excludeCategoryID))) {

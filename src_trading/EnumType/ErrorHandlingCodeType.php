@@ -11,7 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
  * Meta information extracted from the WSDL
  * - documentation: Preferences that specify how eBay should handle certain requests that contain invalid data or that could partially fail. These preferences give you some control over whether eBay returns warnings or errors in response to invalid data
  * and how eBay handles listing requests when such data is passed in. For example, these preferences are applicable to <b>AddItem</b> and related calls when Item Specifics are specified, and to <b>CompleteSale</b>. See <a
- * href="http://developer.ebay.com/devzone/guides/features-guide/default.html#Basics/Call-ErrorHandling.html">Error Handling</a> for details about these preferences and their effects.
+ * href="https://developer.ebay.com/devzone/guides/features-guide/default.html#Basics/Call-ErrorHandling.html">Error Handling</a> for details about these preferences and their effects.
  * @subpackage Enumerations
  */
 class ErrorHandlingCodeType extends AbstractStructEnumBase

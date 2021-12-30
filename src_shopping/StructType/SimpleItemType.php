@@ -130,7 +130,7 @@ class SimpleItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PaymentMethods = [];
+    protected ?array $PaymentMethods = null;
     /**
      * The GalleryURL
      * Meta information extracted from the WSDL
@@ -149,7 +149,7 @@ class SimpleItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PictureURL = [];
+    protected ?array $PictureURL = null;
     /**
      * The PostalCode
      * Meta information extracted from the WSDL
@@ -163,7 +163,7 @@ class SimpleItemType extends AbstractStructBase
     /**
      * The PrimaryCategoryID
      * Meta information extracted from the WSDL
-     * - documentation: The unique identifier of the eBay listing's primay category. This field is always returned. Some listings are shown in an additional secondary category, and if this is the case, the unique identifier of the secondary category is
+     * - documentation: The unique identifier of the eBay listing's primary category. This field is always returned. Some listings are shown in an additional secondary category, and if this is the case, the unique identifier of the secondary category is
      * shown in the <b>SecondaryCategoryID</b> field.
      * - minOccurs: 0
      * @var string|null
@@ -297,7 +297,7 @@ class SimpleItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShipToLocations = [];
+    protected ?array $ShipToLocations = null;
     /**
      * The Site
      * Meta information extracted from the WSDL
@@ -562,7 +562,7 @@ class SimpleItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PaymentAllowedSite = [];
+    protected ?array $PaymentAllowedSite = null;
     /**
      * The IntegratedMerchantCreditCardEnabled
      * Meta information extracted from the WSDL
@@ -614,11 +614,13 @@ class SimpleItemType extends AbstractStructBase
     /**
      * The ConditionID
      * Meta information extracted from the WSDL
-     * - documentation: A numeric identifier that represents the condition of an item. These numeric IDs can vary by eBay category, but many are the same across categories. For example, <code>1000</code> indicates an item in <em>New</em> condition,
-     * <code>3000</code> indicates an item in <em>Used</em> condition, and <code>5000</code> indicates an item in <em>Good</em> condition. <br/><br/> This field will get returned for most listings since most eBay listing categories require an item
-     * condition, but this field may not get returned for listings in eBay categories that don't require an item condition. A <b>ConditionID</b> value always maps to a text-based description of the condition, and this display text is shown in the
-     * <b>ConditionDisplayName</b> field. <br> <br> <span class="tablenote"><strong>Note:</strong> In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as
-     * 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. </span>
+     * - documentation: <span class="tablenote"><strong>Note:</strong> As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the Cell Phones & Smartphones category (category ID 9355) for the following
+     * marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and
+     * 'Good - Refurbished' (condition ID 2030). </span> A numeric identifier that represents the condition of an item. These numeric IDs can vary by eBay category, but many are the same across categories. For example, <code>1000</code> indicates an item in
+     * <em>New</em> condition, <code>3000</code> indicates an item in <em>Used</em> condition, and <code>5000</code> indicates an item in <em>Good</em> condition. <br/><br/> This field will get returned for most listings since most eBay listing categories
+     * require an item condition, but this field may not get returned for listings in eBay categories that don't require an item condition. A <b>ConditionID</b> value always maps to a text-based description of the condition, and this display text is shown
+     * in the <b>ConditionDisplayName</b> field. <br> <br> <span class="tablenote"><strong>Note:</strong> In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an
+     * item as 'Certified Refurbished', a seller must be pre-qualified by eBay for this feature. </span>
      * - minOccurs: 0
      * @var int|null
      */
@@ -626,11 +628,13 @@ class SimpleItemType extends AbstractStructBase
     /**
      * The ConditionDisplayName
      * Meta information extracted from the WSDL
-     * - documentation: The user-friendly display name for the item condition, such as <em>New</em>, <em>Like New</em> <em>Used</em>, or <em>Good</em>. Display names are localized for the site on which they're listed (not necessarily the site on which
-     * they're viewed). <br> <br> <b>ConditionDisplayName</b> values all map to <b>ConditionID</b> values, but keep in mind that based on the eBay category, some item conditions can have the same <b>ConditionID</b>, but a slightly different
-     * <b>ConditionDisplayName</b>. For example, a <b>ConditionID</b> value of <code>1000</code> typically indicates an item in new condtion, but the text displayed in the <b>ConditionDisplayName</b> can be just <em>New</em>, or some categories will show
-     * <em>Brand New</em>, <em>New with tags</em>, or <em>New with box</em>. <br/><br/> This field will get returned for most listings since most eBay listing categories require an item condition, but this field may not get returned for listings in eBay
-     * categories that don't require an item condition. A <b>ConditionDisplayName</b> value always maps to a text-based description of the condition, and this Condition ID is shown in the <b>ConditionID</b> field. <br> <br> <span
+     * - documentation: <span class="tablenote"><strong>Note:</strong> As of September 1, 2021, condition ID 2500 ('Seller Refurbished') is no longer a valid item condition in the Cell Phones & Smartphones category (category ID 9355) for the following
+     * marketplaces: US, Canada, UK, Germany, and Australia. This refurbished item condition has been replaced by three new refurbished values, which include 'Excellent - Refurbished' (condition ID 2010), 'Very Good - Refurbished' (condition ID 2020), and
+     * 'Good - Refurbished' (condition ID 2030). </span> The user-friendly display name for the item condition, such as <em>New</em>, <em>Like New</em> <em>Used</em>, or <em>Good</em>. Display names are localized for the site on which they're listed (not
+     * necessarily the site on which they're viewed). <br> <br> <b>ConditionDisplayName</b> values all map to <b>ConditionID</b> values, but keep in mind that based on the eBay category, some item conditions can have the same <b>ConditionID</b>, but a
+     * slightly different <b>ConditionDisplayName</b>. For example, a <b>ConditionID</b> value of <code>1000</code> typically indicates an item in new condtion, but the text displayed in the <b>ConditionDisplayName</b> can be just <em>New</em>, or some
+     * categories will show <em>Brand New</em>, <em>New with tags</em>, or <em>New with box</em>. <br/><br/> This field will get returned for most listings since most eBay listing categories require an item condition, but this field may not get returned for
+     * listings in eBay categories that don't require an item condition. A <b>ConditionDisplayName</b> value always maps to a text-based description of the condition, and this Condition ID is shown in the <b>ConditionID</b> field. <br> <br> <span
      * class="tablenote"><strong>Note:</strong> In all eBay marketplaces, Condition ID 2000 now maps to an item condition of 'Certified Refurbished', and not 'Manufacturer Refurbished'. To list an item as 'Certified Refurbished', a seller must be
      * pre-qualified by eBay for this feature. </span>
      * - minOccurs: 0
@@ -680,7 +684,7 @@ class SimpleItemType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExcludeShipToLocation = [];
+    protected ?array $ExcludeShipToLocation = null;
     /**
      * The TopRatedListing
      * Meta information extracted from the WSDL
@@ -843,7 +847,7 @@ class SimpleItemType extends AbstractStructBase
      * and then pick up their order from the nearest 'eBay Collection Point', including over 750 Argos stores in the UK. <br/><br/> The Click and Collect feature is only available on the eBay UK, Australia, and Germany sites. For more information about
      * Click and Collect, see the <a href="http://ebay.co.uk/clickandcollect/">Click and Collect</a> home page on the eBay UK site, the <a href="http://sellercentre.ebay.com.au/click-and-collect">Click and Collect</a> home page on the eBay Australia site,
      * or the <a href="https://pages.ebay.de/einkaufen/click-and-collect.html">Click and Collect</a> home page on the eBay Germany site. <br> <br> Not all categories on the UK, Australia, and Germany sites support Click and Collect listings. To verify if a
-     * specific category on these eBay sites support Click and Collect listings, use the <a href="http://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GetCategoryFeatures.html">GetCategoryFeatures</a> call, passing in one or more <b>CategoryID</b>
+     * specific category on these eBay sites support Click and Collect listings, use the <a href="https://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GetCategoryFeatures.html">GetCategoryFeatures</a> call, passing in one or more <b>CategoryID</b>
      * values and a <b>PickupDropOffEnabled</b> value in the <b>FeatureID</b> field. <br/><br/> Look for a <code>true</code> value in the <b>PickupDropOffEnabled</b> field of the corresponding <b>Category</b> node (match up the <b>CategoryID</b> values if
      * more than one Category IDs were passed in the request).
      * - minOccurs: 0
@@ -1038,7 +1042,7 @@ class SimpleItemType extends AbstractStructBase
      * @param bool $eligibleForPickupDropOff
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $bestOfferEnabled = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $buyItNowPrice = null, ?string $description = null, ?string $itemID = null, ?bool $buyItNowAvailable = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $convertedBuyItNowPrice = null, ?string $endTime = null, ?string $startTime = null, ?string $viewItemURLForNaturalSearch = null, ?string $listingType = null, ?string $location = null, array $paymentMethods = [], ?string $galleryURL = null, array $pictureURL = [], ?string $postalCode = null, ?string $primaryCategoryID = null, ?string $primaryCategoryName = null, ?int $quantity = null, ?\macropage\ebaysdk\shopping\StructType\SimpleUserType $seller = null, ?int $bidCount = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null, ?\macropage\ebaysdk\shopping\StructType\SimpleUserType $highBidder = null, ?string $listingStatus = null, ?int $quantitySold = null, ?bool $reserveMet = null, array $shipToLocations = [], ?string $site = null, ?string $timeLeft = null, ?string $title = null, ?\macropage\ebaysdk\shopping\StructType\ShippingCostSummaryType $shippingCostSummary = null, ?\macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType $itemSpecifics = null, ?int $hitCount = null, ?string $subtitle = null, ?string $primaryCategoryIDPath = null, ?string $secondaryCategoryID = null, ?string $secondaryCategoryName = null, ?string $secondaryCategoryIDPath = null, ?\macropage\ebaysdk\shopping\StructType\CharityType $charity = null, ?bool $germanMotorsSearchable = null, ?bool $getItFast = null, ?bool $gift = null, ?bool $pictureExists = null, ?bool $recentListing = null, ?\macropage\ebaysdk\shopping\StructType\StorefrontType $storefront = null, ?\macropage\ebaysdk\shopping\StructType\DistanceType $distanceFromBuyer = null, ?string $country = null, ?int $watchCount = null, ?HalfItemConditionCodeType $halfItemCondition = null, ?string $sellerComments = null, ?\macropage\ebaysdk\shopping\StructType\ReturnPolicyType $returnPolicy = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $minimumToBid = null, ?\macropage\ebaysdk\shopping\StructType\ProductIDType $productID = null, ?bool $autoPay = null, ?\macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType $businessSellerDetails = null, array $paymentAllowedSite = [], ?bool $integratedMerchantCreditCardEnabled = null, ?\macropage\ebaysdk\shopping\StructType\VariationsType $variations = null, ?int $handlingTime = null, ?int $lotSize = null, ?int $conditionID = null, ?string $conditionDisplayName = null, ?string $quantityAvailableHint = null, ?int $quantityThreshold = null, ?\macropage\ebaysdk\shopping\StructType\DiscountPriceInfoType $discountPriceInfo = null, array $excludeShipToLocation = [], ?bool $topRatedListing = null, ?string $vhrUrl = null, ?bool $vhrAvailable = null, ?\macropage\ebaysdk\shopping\StructType\QuantityInfo $quantityInfo = null, ?\macropage\ebaysdk\shopping\StructType\UnitInfoType $unitInfo = null, ?bool $globalShipping = null, ?string $conditionDescription = null, ?int $itemCompatibilityCount = null, ?\macropage\ebaysdk\shopping\StructType\ItemCompatibilityListType $itemCompatibilityList = null, ?int $quantitySoldByPickupInStore = null, ?string $sKU = null, ?bool $newBestOffer = null, ?bool $eBayNowEligible = null, ?bool $eBayNowAvailable = null, ?bool $ignoreQuantity = null, ?bool $availableForPickupDropOff = null, ?bool $eligibleForPickupDropOff = null, $any = null)
+    public function __construct(?bool $bestOfferEnabled = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $buyItNowPrice = null, ?string $description = null, ?string $itemID = null, ?bool $buyItNowAvailable = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $convertedBuyItNowPrice = null, ?string $endTime = null, ?string $startTime = null, ?string $viewItemURLForNaturalSearch = null, ?string $listingType = null, ?string $location = null, ?array $paymentMethods = null, ?string $galleryURL = null, ?array $pictureURL = null, ?string $postalCode = null, ?string $primaryCategoryID = null, ?string $primaryCategoryName = null, ?int $quantity = null, ?\macropage\ebaysdk\shopping\StructType\SimpleUserType $seller = null, ?int $bidCount = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $convertedCurrentPrice = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $currentPrice = null, ?\macropage\ebaysdk\shopping\StructType\SimpleUserType $highBidder = null, ?string $listingStatus = null, ?int $quantitySold = null, ?bool $reserveMet = null, ?array $shipToLocations = null, ?string $site = null, ?string $timeLeft = null, ?string $title = null, ?\macropage\ebaysdk\shopping\StructType\ShippingCostSummaryType $shippingCostSummary = null, ?\macropage\ebaysdk\shopping\ArrayType\NameValueListArrayType $itemSpecifics = null, ?int $hitCount = null, ?string $subtitle = null, ?string $primaryCategoryIDPath = null, ?string $secondaryCategoryID = null, ?string $secondaryCategoryName = null, ?string $secondaryCategoryIDPath = null, ?\macropage\ebaysdk\shopping\StructType\CharityType $charity = null, ?bool $germanMotorsSearchable = null, ?bool $getItFast = null, ?bool $gift = null, ?bool $pictureExists = null, ?bool $recentListing = null, ?\macropage\ebaysdk\shopping\StructType\StorefrontType $storefront = null, ?\macropage\ebaysdk\shopping\StructType\DistanceType $distanceFromBuyer = null, ?string $country = null, ?int $watchCount = null, ?HalfItemConditionCodeType $halfItemCondition = null, ?string $sellerComments = null, ?\macropage\ebaysdk\shopping\StructType\ReturnPolicyType $returnPolicy = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $minimumToBid = null, ?\macropage\ebaysdk\shopping\StructType\ProductIDType $productID = null, ?bool $autoPay = null, ?\macropage\ebaysdk\shopping\StructType\BusinessSellerDetailsType $businessSellerDetails = null, ?array $paymentAllowedSite = null, ?bool $integratedMerchantCreditCardEnabled = null, ?\macropage\ebaysdk\shopping\StructType\VariationsType $variations = null, ?int $handlingTime = null, ?int $lotSize = null, ?int $conditionID = null, ?string $conditionDisplayName = null, ?string $quantityAvailableHint = null, ?int $quantityThreshold = null, ?\macropage\ebaysdk\shopping\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?array $excludeShipToLocation = null, ?bool $topRatedListing = null, ?string $vhrUrl = null, ?bool $vhrAvailable = null, ?\macropage\ebaysdk\shopping\StructType\QuantityInfo $quantityInfo = null, ?\macropage\ebaysdk\shopping\StructType\UnitInfoType $unitInfo = null, ?bool $globalShipping = null, ?string $conditionDescription = null, ?int $itemCompatibilityCount = null, ?\macropage\ebaysdk\shopping\StructType\ItemCompatibilityListType $itemCompatibilityList = null, ?int $quantitySoldByPickupInStore = null, ?string $sKU = null, ?bool $newBestOffer = null, ?bool $eBayNowEligible = null, ?bool $eBayNowAvailable = null, ?bool $ignoreQuantity = null, ?bool $availableForPickupDropOff = null, ?bool $eligibleForPickupDropOff = null, $any = null)
     {
         $this
             ->setBestOfferEnabled($bestOfferEnabled)
@@ -1378,7 +1382,7 @@ class SimpleItemType extends AbstractStructBase
      * Get PaymentMethods value
      * @return string[]
      */
-    public function getPaymentMethods(): array
+    public function getPaymentMethods(): ?array
     {
         return $this->PaymentMethods;
     }
@@ -1388,8 +1392,11 @@ class SimpleItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(array $values = []): string
+    public static function validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $simpleItemTypePaymentMethodsItem) {
@@ -1413,7 +1420,7 @@ class SimpleItemType extends AbstractStructBase
      * @param string[] $paymentMethods
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType
      */
-    public function setPaymentMethods(array $paymentMethods = []): self
+    public function setPaymentMethods(?array $paymentMethods = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentMethodsArrayErrorMessage = self::validatePaymentMethodsForArrayConstraintsFromSetPaymentMethods($paymentMethods))) {
@@ -1468,7 +1475,7 @@ class SimpleItemType extends AbstractStructBase
      * Get PictureURL value
      * @return string[]
      */
-    public function getPictureURL(): array
+    public function getPictureURL(): ?array
     {
         return $this->PictureURL;
     }
@@ -1478,8 +1485,11 @@ class SimpleItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(array $values = []): string
+    public static function validatePictureURLForArrayConstraintsFromSetPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $simpleItemTypePictureURLItem) {
@@ -1501,7 +1511,7 @@ class SimpleItemType extends AbstractStructBase
      * @param string[] $pictureURL
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType
      */
-    public function setPictureURL(array $pictureURL = []): self
+    public function setPictureURL(?array $pictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureURLArrayErrorMessage = self::validatePictureURLForArrayConstraintsFromSetPictureURL($pictureURL))) {
@@ -1794,7 +1804,7 @@ class SimpleItemType extends AbstractStructBase
      * Get ShipToLocations value
      * @return string[]
      */
-    public function getShipToLocations(): array
+    public function getShipToLocations(): ?array
     {
         return $this->ShipToLocations;
     }
@@ -1804,8 +1814,11 @@ class SimpleItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShipToLocationsForArrayConstraintsFromSetShipToLocations(array $values = []): string
+    public static function validateShipToLocationsForArrayConstraintsFromSetShipToLocations(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $simpleItemTypeShipToLocationsItem) {
@@ -1827,7 +1840,7 @@ class SimpleItemType extends AbstractStructBase
      * @param string[] $shipToLocations
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType
      */
-    public function setShipToLocations(array $shipToLocations = []): self
+    public function setShipToLocations(?array $shipToLocations = null): self
     {
         // validation for constraint: array
         if ('' !== ($shipToLocationsArrayErrorMessage = self::validateShipToLocationsForArrayConstraintsFromSetShipToLocations($shipToLocations))) {
@@ -2467,7 +2480,7 @@ class SimpleItemType extends AbstractStructBase
      * Get PaymentAllowedSite value
      * @return string[]
      */
-    public function getPaymentAllowedSite(): array
+    public function getPaymentAllowedSite(): ?array
     {
         return $this->PaymentAllowedSite;
     }
@@ -2477,8 +2490,11 @@ class SimpleItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePaymentAllowedSiteForArrayConstraintsFromSetPaymentAllowedSite(array $values = []): string
+    public static function validatePaymentAllowedSiteForArrayConstraintsFromSetPaymentAllowedSite(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $simpleItemTypePaymentAllowedSiteItem) {
@@ -2502,7 +2518,7 @@ class SimpleItemType extends AbstractStructBase
      * @param string[] $paymentAllowedSite
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType
      */
-    public function setPaymentAllowedSite(array $paymentAllowedSite = []): self
+    public function setPaymentAllowedSite(?array $paymentAllowedSite = null): self
     {
         // validation for constraint: array
         if ('' !== ($paymentAllowedSiteArrayErrorMessage = self::validatePaymentAllowedSiteForArrayConstraintsFromSetPaymentAllowedSite($paymentAllowedSite))) {
@@ -2736,7 +2752,7 @@ class SimpleItemType extends AbstractStructBase
      * Get ExcludeShipToLocation value
      * @return string[]
      */
-    public function getExcludeShipToLocation(): array
+    public function getExcludeShipToLocation(): ?array
     {
         return $this->ExcludeShipToLocation;
     }
@@ -2746,8 +2762,11 @@ class SimpleItemType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(array $values = []): string
+    public static function validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $simpleItemTypeExcludeShipToLocationItem) {
@@ -2769,7 +2788,7 @@ class SimpleItemType extends AbstractStructBase
      * @param string[] $excludeShipToLocation
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType
      */
-    public function setExcludeShipToLocation(array $excludeShipToLocation = []): self
+    public function setExcludeShipToLocation(?array $excludeShipToLocation = null): self
     {
         // validation for constraint: array
         if ('' !== ($excludeShipToLocationArrayErrorMessage = self::validateExcludeShipToLocationForArrayConstraintsFromSetExcludeShipToLocation($excludeShipToLocation))) {

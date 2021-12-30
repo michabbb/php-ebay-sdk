@@ -23,7 +23,7 @@ class MyMessagesSummaryType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[]
      */
-    protected array $FolderSummary = [];
+    protected ?array $FolderSummary = null;
     /**
      * The NewAlertCount
      * Meta information extracted from the WSDL
@@ -109,7 +109,7 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param int $newHighPriorityCount
      * @param int $totalHighPriorityCount
      */
-    public function __construct(array $folderSummary = [], ?int $newAlertCount = null, ?int $newMessageCount = null, ?int $unresolvedAlertCount = null, ?int $flaggedMessageCount = null, ?int $totalAlertCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null)
+    public function __construct(?array $folderSummary = null, ?int $newAlertCount = null, ?int $newMessageCount = null, ?int $unresolvedAlertCount = null, ?int $flaggedMessageCount = null, ?int $totalAlertCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null)
     {
         $this
             ->setFolderSummary($folderSummary)
@@ -126,7 +126,7 @@ class MyMessagesSummaryType extends AbstractStructBase
      * Get FolderSummary value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[]
      */
-    public function getFolderSummary(): array
+    public function getFolderSummary(): ?array
     {
         return $this->FolderSummary;
     }
@@ -136,8 +136,11 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFolderSummaryForArrayConstraintsFromSetFolderSummary(array $values = []): string
+    public static function validateFolderSummaryForArrayConstraintsFromSetFolderSummary(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesSummaryTypeFolderSummaryItem) {
@@ -159,7 +162,7 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[] $folderSummary
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
      */
-    public function setFolderSummary(array $folderSummary = []): self
+    public function setFolderSummary(?array $folderSummary = null): self
     {
         // validation for constraint: array
         if ('' !== ($folderSummaryArrayErrorMessage = self::validateFolderSummaryForArrayConstraintsFromSetFolderSummary($folderSummary))) {

@@ -20,7 +20,7 @@ class GetSingleItemRequestType extends AbstractRequestType
      * The ItemID
      * Meta information extracted from the WSDL
      * - documentation: The item ID that uniquely identifies the item listing for which to retrieve the data.<br> <br> You can determine an item's ID by calling <b>findItemsAdvanced</b>( <a
-     * href="http://www.developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) or from the eBay Web site.
+     * href="https://developer.ebay.com/DevZone/finding/CallRef/index.html" >Finding API</a>) or from the eBay Web site.
      * - minOccurs: 0
      * @var string|null
      */

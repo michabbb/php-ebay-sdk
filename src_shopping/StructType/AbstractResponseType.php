@@ -19,7 +19,7 @@ abstract class AbstractResponseType extends AbstractStructBase
     /**
      * The Timestamp
      * Meta information extracted from the WSDL
-     * - documentation: This value represents the date and time when eBay processed the request. The time zone of this value is <a href="http://developer.ebay.com/DevZone/shopping/docs/CallRef/types/simpleTypes.html#dateTime">GMT</a> and the format is the
+     * - documentation: This value represents the date and time when eBay processed the request. The time zone of this value is <a href="https://developer.ebay.com/DevZone/shopping/docs/CallRef/types/simpleTypes.html#dateTime">GMT</a> and the format is the
      * ISO 8601 date and time format (YYYY-MM-DDTHH:MM:SS.SSSZ). See the "dateTime" type for information about this time format and converting to and from the GMT time zone.
      * - minOccurs: 0
      * @var string|null
@@ -43,7 +43,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\ErrorType[]
      */
-    protected array $Errors = [];
+    protected ?array $Errors = null;
     /**
      * The Build
      * Meta information extracted from the WSDL
@@ -94,7 +94,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param string $correlationID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $timestamp = null, ?string $ack = null, array $errors = [], ?string $build = null, ?string $version = null, ?string $correlationID = null, $any = null)
+    public function __construct(?string $timestamp = null, ?string $ack = null, ?array $errors = null, ?string $build = null, ?string $version = null, ?string $correlationID = null, $any = null)
     {
         $this
             ->setTimestamp($timestamp)
@@ -158,7 +158,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * Get Errors value
      * @return \macropage\ebaysdk\shopping\StructType\ErrorType[]
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->Errors;
     }
@@ -168,8 +168,11 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorsForArrayConstraintsFromSetErrors(array $values = []): string
+    public static function validateErrorsForArrayConstraintsFromSetErrors(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $abstractResponseTypeErrorsItem) {
@@ -191,7 +194,7 @@ abstract class AbstractResponseType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\ErrorType[] $errors
      * @return \macropage\ebaysdk\shopping\StructType\AbstractResponseType
      */
-    public function setErrors(array $errors = []): self
+    public function setErrors(?array $errors = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorsArrayErrorMessage = self::validateErrorsForArrayConstraintsFromSetErrors($errors))) {

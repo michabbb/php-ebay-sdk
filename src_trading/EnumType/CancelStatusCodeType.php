@@ -66,8 +66,7 @@ class CancelStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'CancelClosedUnknownRefund'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the order cancellation request has been closed, and it is unknown whether or not a refund was issued to the buyer. This value will generally be returned when the payment method used to pay for the order was
-     * something other than PayPal.
+     * - documentation: This value indicates that the order cancellation request has been closed, and it is unknown whether or not a refund was issued to the buyer.
      * @return string 'CancelClosedUnknownRefund'
      */
     const VALUE_CANCEL_CLOSED_UNKNOWN_REFUND = 'CancelClosedUnknownRefund';

@@ -23,13 +23,13 @@ class GetItemStatusResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\SimpleItemType[]
      */
-    protected array $Item = [];
+    protected ?array $Item = null;
     /**
      * Constructor method for GetItemStatusResponseType
      * @uses GetItemStatusResponseType::setItem()
      * @param \macropage\ebaysdk\shopping\StructType\SimpleItemType[] $item
      */
-    public function __construct(array $item = [])
+    public function __construct(?array $item = null)
     {
         $this
             ->setItem($item);
@@ -38,7 +38,7 @@ class GetItemStatusResponseType extends AbstractResponseType
      * Get Item value
      * @return \macropage\ebaysdk\shopping\StructType\SimpleItemType[]
      */
-    public function getItem(): array
+    public function getItem(): ?array
     {
         return $this->Item;
     }
@@ -48,8 +48,11 @@ class GetItemStatusResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemForArrayConstraintsFromSetItem(array $values = []): string
+    public static function validateItemForArrayConstraintsFromSetItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getItemStatusResponseTypeItemItem) {
@@ -71,7 +74,7 @@ class GetItemStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\shopping\StructType\SimpleItemType[] $item
      * @return \macropage\ebaysdk\shopping\StructType\GetItemStatusResponseType
      */
-    public function setItem(array $item = []): self
+    public function setItem(?array $item = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemArrayErrorMessage = self::validateItemForArrayConstraintsFromSetItem($item))) {

@@ -33,7 +33,7 @@ class VeROSiteDetailType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[]
      */
-    protected array $ReasonCodeDetail = [];
+    protected ?array $ReasonCodeDetail = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -48,7 +48,7 @@ class VeROSiteDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[] $reasonCodeDetail
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $site = null, array $reasonCodeDetail = [], $any = null)
+    public function __construct(?string $site = null, ?array $reasonCodeDetail = null, $any = null)
     {
         $this
             ->setSite($site)
@@ -85,7 +85,7 @@ class VeROSiteDetailType extends AbstractStructBase
      * Get ReasonCodeDetail value
      * @return \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[]
      */
-    public function getReasonCodeDetail(): array
+    public function getReasonCodeDetail(): ?array
     {
         return $this->ReasonCodeDetail;
     }
@@ -95,8 +95,11 @@ class VeROSiteDetailType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReasonCodeDetailForArrayConstraintsFromSetReasonCodeDetail(array $values = []): string
+    public static function validateReasonCodeDetailForArrayConstraintsFromSetReasonCodeDetail(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROSiteDetailTypeReasonCodeDetailItem) {
@@ -118,7 +121,7 @@ class VeROSiteDetailType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReasonCodeDetailType[] $reasonCodeDetail
      * @return \macropage\ebaysdk\trading\StructType\VeROSiteDetailType
      */
-    public function setReasonCodeDetail(array $reasonCodeDetail = []): self
+    public function setReasonCodeDetail(?array $reasonCodeDetail = null): self
     {
         // validation for constraint: array
         if ('' !== ($reasonCodeDetailArrayErrorMessage = self::validateReasonCodeDetailForArrayConstraintsFromSetReasonCodeDetail($reasonCodeDetail))) {

@@ -24,7 +24,7 @@ class BuyerPackageEnclosuresType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosureType[]
      */
-    protected array $BuyerPackageEnclosure = [];
+    protected ?array $BuyerPackageEnclosure = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -37,7 +37,7 @@ class BuyerPackageEnclosuresType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosureType[] $buyerPackageEnclosure
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $buyerPackageEnclosure = [], $any = null)
+    public function __construct(?array $buyerPackageEnclosure = null, $any = null)
     {
         $this
             ->setBuyerPackageEnclosure($buyerPackageEnclosure)
@@ -47,7 +47,7 @@ class BuyerPackageEnclosuresType extends AbstractStructBase
      * Get BuyerPackageEnclosure value
      * @return \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosureType[]
      */
-    public function getBuyerPackageEnclosure(): array
+    public function getBuyerPackageEnclosure(): ?array
     {
         return $this->BuyerPackageEnclosure;
     }
@@ -57,8 +57,11 @@ class BuyerPackageEnclosuresType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBuyerPackageEnclosureForArrayConstraintsFromSetBuyerPackageEnclosure(array $values = []): string
+    public static function validateBuyerPackageEnclosureForArrayConstraintsFromSetBuyerPackageEnclosure(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $buyerPackageEnclosuresTypeBuyerPackageEnclosureItem) {
@@ -80,7 +83,7 @@ class BuyerPackageEnclosuresType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosureType[] $buyerPackageEnclosure
      * @return \macropage\ebaysdk\trading\StructType\BuyerPackageEnclosuresType
      */
-    public function setBuyerPackageEnclosure(array $buyerPackageEnclosure = []): self
+    public function setBuyerPackageEnclosure(?array $buyerPackageEnclosure = null): self
     {
         // validation for constraint: array
         if ('' !== ($buyerPackageEnclosureArrayErrorMessage = self::validateBuyerPackageEnclosureForArrayConstraintsFromSetBuyerPackageEnclosure($buyerPackageEnclosure))) {

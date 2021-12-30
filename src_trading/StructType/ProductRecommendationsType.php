@@ -23,13 +23,13 @@ class ProductRecommendationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductInfoType[]
      */
-    protected array $Product = [];
+    protected ?array $Product = null;
     /**
      * Constructor method for ProductRecommendationsType
      * @uses ProductRecommendationsType::setProduct()
      * @param \macropage\ebaysdk\trading\StructType\ProductInfoType[] $product
      */
-    public function __construct(array $product = [])
+    public function __construct(?array $product = null)
     {
         $this
             ->setProduct($product);
@@ -38,7 +38,7 @@ class ProductRecommendationsType extends AbstractStructBase
      * Get Product value
      * @return \macropage\ebaysdk\trading\StructType\ProductInfoType[]
      */
-    public function getProduct(): array
+    public function getProduct(): ?array
     {
         return $this->Product;
     }
@@ -48,8 +48,11 @@ class ProductRecommendationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductForArrayConstraintsFromSetProduct(array $values = []): string
+    public static function validateProductForArrayConstraintsFromSetProduct(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productRecommendationsTypeProductItem) {
@@ -71,7 +74,7 @@ class ProductRecommendationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductInfoType[] $product
      * @return \macropage\ebaysdk\trading\StructType\ProductRecommendationsType
      */
-    public function setProduct(array $product = []): self
+    public function setProduct(?array $product = null): self
     {
         // validation for constraint: array
         if ('' !== ($productArrayErrorMessage = self::validateProductForArrayConstraintsFromSetProduct($product))) {

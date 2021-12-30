@@ -10,10 +10,12 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for DisputeResolutionType StructType
  * Meta information extracted from the WSDL
- * - documentation: Contains all information about a dispute resolution. A dispute can have a resolution even if the seller does not receive payment. The resolution can have various results, including a Final Value Fee credit to the seller or a strike
- * to the buyer. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money Back Guarantee program, are not returned with <b>GetUserDisputes</b>.
- * The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used
- * to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Type used by the <strong>DisputeResolution</strong> container of <strong>GetUserDisputes</strong>, which provides details about the resolution of an Unpaid Item case. An Unpaid Item case can have a resolution even if the seller does
+ * not receive payment. A separate <strong>DisputeResolution</strong> container is returned for each different outcome. For example, if the resolution including the seller getting a Final Value Fee credit and the buyer getting an Unpaid Item strike, a
+ * separate <strong>DisputeResolution</strong> container is returned for each of these outcomes. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <strong>GetUserDisputes</strong> call of the Trading API now only supports Unpaid Item cases,
+ * and no longer supports Item not Received (INR) or Significantly not as Described (SNAD) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR or SNAD case through eBay's Resolution Center,
+ * and this call also does not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case
+ * Management calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Structs
  */
 class DisputeResolutionType extends AbstractStructBase
@@ -29,7 +31,7 @@ class DisputeResolutionType extends AbstractStructBase
     /**
      * The DisputeResolutionReason
      * Meta information extracted from the WSDL
-     * - documentation: The reason for the resolution. The DisputeResolutionReason results in the action described by the DisputeResolutionRecordType.
+     * - documentation: The reason for the resolution.
      * - minOccurs: 0
      * @var string|null
      */
@@ -37,7 +39,7 @@ class DisputeResolutionType extends AbstractStructBase
     /**
      * The ResolutionTime
      * Meta information extracted from the WSDL
-     * - documentation: The date and time the dispute was resolved, in GMT.
+     * - documentation: The date and time of the outcome that resulted from the resolution of the Unpaid Item case, in GMT.
      * - minOccurs: 0
      * @var string|null
      */

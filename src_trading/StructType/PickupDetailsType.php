@@ -29,7 +29,7 @@ class PickupDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PickupOptionsType[]
      */
-    protected array $PickupOptions = [];
+    protected ?array $PickupOptions = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -42,7 +42,7 @@ class PickupDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PickupOptionsType[] $pickupOptions
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $pickupOptions = [], $any = null)
+    public function __construct(?array $pickupOptions = null, $any = null)
     {
         $this
             ->setPickupOptions($pickupOptions)
@@ -52,7 +52,7 @@ class PickupDetailsType extends AbstractStructBase
      * Get PickupOptions value
      * @return \macropage\ebaysdk\trading\StructType\PickupOptionsType[]
      */
-    public function getPickupOptions(): array
+    public function getPickupOptions(): ?array
     {
         return $this->PickupOptions;
     }
@@ -62,8 +62,11 @@ class PickupDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePickupOptionsForArrayConstraintsFromSetPickupOptions(array $values = []): string
+    public static function validatePickupOptionsForArrayConstraintsFromSetPickupOptions(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pickupDetailsTypePickupOptionsItem) {
@@ -85,7 +88,7 @@ class PickupDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PickupOptionsType[] $pickupOptions
      * @return \macropage\ebaysdk\trading\StructType\PickupDetailsType
      */
-    public function setPickupOptions(array $pickupOptions = []): self
+    public function setPickupOptions(?array $pickupOptions = null): self
     {
         // validation for constraint: array
         if ('' !== ($pickupOptionsArrayErrorMessage = self::validatePickupOptionsForArrayConstraintsFromSetPickupOptions($pickupOptions))) {

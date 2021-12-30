@@ -9,10 +9,11 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisputeCreditEligibilityCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Indicates whether the seller is eligible for a Final Value Fee credit if the dispute is resolved by the buyer and seller, or if eBay customer support makes a decision on the dispute in the seller's favor. Note that even if the item
- * is eligible for a Final Value Fee credit, the credit is not guaranteed in any way. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by buyers through the eBay Money
- * Back Guarantee program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a> method of the <a
- * href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Enumerated type used to indicate whether or not the seller is eligible for a Final Value Fee credit if an Unpaid Item case is resolved between the buyer or seller, or if eBay customer support makes a decision on the case in the
+ * seller's favor. Note that even if the item is eligible for a Final Value Fee credit, the credit is not guaranteed in any way. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only
+ * retrieve Unpaid Item cases. They are no longer used to retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and
+ * these calls do not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management
+ * calls</a> of the <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Enumerations
  */
 class DisputeCreditEligibilityCodeType extends AbstractStructEnumBase
@@ -20,14 +21,14 @@ class DisputeCreditEligibilityCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'InEligible'
      * Meta information extracted from the WSDL
-     * - documentation: The seller is not currently eligible for a Final Value Fee credit.
+     * - documentation: This value indicates that the seller is not currently eligible for a Final Value Fee credit towards the order line item under dispute.
      * @return string 'InEligible'
      */
     const VALUE_IN_ELIGIBLE = 'InEligible';
     /**
      * Constant for value 'Eligible'
      * Meta information extracted from the WSDL
-     * - documentation: The seller is eligible for a Final Value Fee credit.
+     * - documentation: This value indicates that the seller is currently eligible for a Final Value Fee credit towards the order line item under dispute.
      * @return string 'Eligible'
      */
     const VALUE_ELIGIBLE = 'Eligible';

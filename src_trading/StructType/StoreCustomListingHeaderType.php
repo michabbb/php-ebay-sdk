@@ -47,7 +47,7 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[]
      */
-    protected array $LinkToInclude = [];
+    protected ?array $LinkToInclude = null;
     /**
      * The AddToFavoriteStores
      * Meta information extracted from the WSDL
@@ -86,7 +86,7 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param bool $signUpForStoreNewsletter
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $displayType = null, ?bool $logo = null, ?bool $searchBox = null, array $linkToInclude = [], ?bool $addToFavoriteStores = null, ?bool $signUpForStoreNewsletter = null, $any = null)
+    public function __construct(?string $displayType = null, ?bool $logo = null, ?bool $searchBox = null, ?array $linkToInclude = null, ?bool $addToFavoriteStores = null, ?bool $signUpForStoreNewsletter = null, $any = null)
     {
         $this
             ->setDisplayType($displayType)
@@ -173,7 +173,7 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * Get LinkToInclude value
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[]
      */
-    public function getLinkToInclude(): array
+    public function getLinkToInclude(): ?array
     {
         return $this->LinkToInclude;
     }
@@ -183,8 +183,11 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateLinkToIncludeForArrayConstraintsFromSetLinkToInclude(array $values = []): string
+    public static function validateLinkToIncludeForArrayConstraintsFromSetLinkToInclude(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeCustomListingHeaderTypeLinkToIncludeItem) {
@@ -206,7 +209,7 @@ class StoreCustomListingHeaderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderLinkType[] $linkToInclude
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomListingHeaderType
      */
-    public function setLinkToInclude(array $linkToInclude = []): self
+    public function setLinkToInclude(?array $linkToInclude = null): self
     {
         // validation for constraint: array
         if ('' !== ($linkToIncludeArrayErrorMessage = self::validateLinkToIncludeForArrayConstraintsFromSetLinkToInclude($linkToInclude))) {

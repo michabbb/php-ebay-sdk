@@ -39,7 +39,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $RecommendationEngine = [];
+    protected ?array $RecommendationEngine = null;
     /**
      * The Query
      * Meta information extracted from the WSDL
@@ -64,7 +64,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $DeletedField = [];
+    protected ?array $DeletedField = null;
     /**
      * The ExcludeRelationships
      * Meta information extracted from the WSDL
@@ -107,7 +107,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * @param bool $includeConfidence
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $listingFlow = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, array $recommendationEngine = [], ?string $query = null, ?string $correlationID = null, array $deletedField = [], ?bool $excludeRelationships = null, ?bool $includeConfidence = null, $any = null)
+    public function __construct(?string $listingFlow = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?array $recommendationEngine = null, ?string $query = null, ?string $correlationID = null, ?array $deletedField = null, ?bool $excludeRelationships = null, ?bool $includeConfidence = null, $any = null)
     {
         $this
             ->setListingFlow($listingFlow)
@@ -169,7 +169,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * Get RecommendationEngine value
      * @return string[]
      */
-    public function getRecommendationEngine(): array
+    public function getRecommendationEngine(): ?array
     {
         return $this->RecommendationEngine;
     }
@@ -179,8 +179,11 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRecommendationEngineForArrayConstraintsFromSetRecommendationEngine(array $values = []): string
+    public static function validateRecommendationEngineForArrayConstraintsFromSetRecommendationEngine(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getRecommendationsRequestContainerTypeRecommendationEngineItem) {
@@ -204,7 +207,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * @param string[] $recommendationEngine
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsRequestContainerType
      */
-    public function setRecommendationEngine(array $recommendationEngine = []): self
+    public function setRecommendationEngine(?array $recommendationEngine = null): self
     {
         // validation for constraint: array
         if ('' !== ($recommendationEngineArrayErrorMessage = self::validateRecommendationEngineForArrayConstraintsFromSetRecommendationEngine($recommendationEngine))) {
@@ -282,7 +285,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * Get DeletedField value
      * @return string[]
      */
-    public function getDeletedField(): array
+    public function getDeletedField(): ?array
     {
         return $this->DeletedField;
     }
@@ -292,8 +295,11 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(array $values = []): string
+    public static function validateDeletedFieldForArrayConstraintsFromSetDeletedField(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getRecommendationsRequestContainerTypeDeletedFieldItem) {
@@ -315,7 +321,7 @@ class GetRecommendationsRequestContainerType extends AbstractStructBase
      * @param string[] $deletedField
      * @return \macropage\ebaysdk\trading\StructType\GetRecommendationsRequestContainerType
      */
-    public function setDeletedField(array $deletedField = []): self
+    public function setDeletedField(?array $deletedField = null): self
     {
         // validation for constraint: array
         if ('' !== ($deletedFieldArrayErrorMessage = self::validateDeletedFieldForArrayConstraintsFromSetDeletedField($deletedField))) {

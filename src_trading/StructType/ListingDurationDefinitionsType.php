@@ -24,7 +24,7 @@ class ListingDurationDefinitionsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ListingDurationDefinitionType[]
      */
-    protected array $ListingDuration = [];
+    protected ?array $ListingDuration = null;
     /**
      * The Version
      * Meta information extracted from the WSDL
@@ -39,7 +39,7 @@ class ListingDurationDefinitionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingDurationDefinitionType[] $listingDuration
      * @param int $version
      */
-    public function __construct(array $listingDuration = [], ?int $version = null)
+    public function __construct(?array $listingDuration = null, ?int $version = null)
     {
         $this
             ->setListingDuration($listingDuration)
@@ -49,7 +49,7 @@ class ListingDurationDefinitionsType extends AbstractStructBase
      * Get ListingDuration value
      * @return \macropage\ebaysdk\trading\StructType\ListingDurationDefinitionType[]
      */
-    public function getListingDuration(): array
+    public function getListingDuration(): ?array
     {
         return $this->ListingDuration;
     }
@@ -59,8 +59,11 @@ class ListingDurationDefinitionsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateListingDurationForArrayConstraintsFromSetListingDuration(array $values = []): string
+    public static function validateListingDurationForArrayConstraintsFromSetListingDuration(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $listingDurationDefinitionsTypeListingDurationItem) {
@@ -82,7 +85,7 @@ class ListingDurationDefinitionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ListingDurationDefinitionType[] $listingDuration
      * @return \macropage\ebaysdk\trading\StructType\ListingDurationDefinitionsType
      */
-    public function setListingDuration(array $listingDuration = []): self
+    public function setListingDuration(?array $listingDuration = null): self
     {
         // validation for constraint: array
         if ('' !== ($listingDurationArrayErrorMessage = self::validateListingDurationForArrayConstraintsFromSetListingDuration($listingDuration))) {

@@ -232,7 +232,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    protected array $MessageMedia = [];
+    protected ?array $MessageMedia = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -295,7 +295,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $sendToName = null, ?string $subject = null, ?string $messageID = null, ?string $externalMessageID = null, ?string $contentType = null, ?string $text = null, ?bool $flagged = null, ?bool $read = null, ?string $creationDate = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, ?string $content = null, ?string $messageType = null, ?string $listingStatus = null, ?string $questionType = null, ?bool $replied = null, ?bool $highPriority = null, ?string $itemEndTime = null, ?string $itemTitle = null, array $messageMedia = [], $any = null)
+    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $sendToName = null, ?string $subject = null, ?string $messageID = null, ?string $externalMessageID = null, ?string $contentType = null, ?string $text = null, ?bool $flagged = null, ?bool $read = null, ?string $creationDate = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, ?string $content = null, ?string $messageType = null, ?string $listingStatus = null, ?string $questionType = null, ?bool $replied = null, ?bool $highPriority = null, ?string $itemEndTime = null, ?string $itemTitle = null, ?array $messageMedia = null, $any = null)
     {
         $this
             ->setSender($sender)
@@ -902,7 +902,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * Get MessageMedia value
      * @return \macropage\ebaysdk\trading\StructType\MessageMediaType[]
      */
-    public function getMessageMedia(): array
+    public function getMessageMedia(): ?array
     {
         return $this->MessageMedia;
     }
@@ -912,8 +912,11 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(array $values = []): string
+    public static function validateMessageMediaForArrayConstraintsFromSetMessageMedia(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesMessageTypeMessageMediaItem) {
@@ -935,7 +938,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
      */
-    public function setMessageMedia(array $messageMedia = []): self
+    public function setMessageMedia(?array $messageMedia = null): self
     {
         // validation for constraint: array
         if ('' !== ($messageMediaArrayErrorMessage = self::validateMessageMediaForArrayConstraintsFromSetMessageMedia($messageMedia))) {

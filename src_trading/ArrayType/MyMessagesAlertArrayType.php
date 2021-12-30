@@ -23,13 +23,13 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[]
      */
-    protected array $Alert = [];
+    protected ?array $Alert = null;
     /**
      * Constructor method for MyMessagesAlertArrayType
      * @uses MyMessagesAlertArrayType::setAlert()
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[] $alert
      */
-    public function __construct(array $alert = [])
+    public function __construct(?array $alert = null)
     {
         $this
             ->setAlert($alert);
@@ -38,7 +38,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * Get Alert value
      * @return \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[]
      */
-    public function getAlert(): array
+    public function getAlert(): ?array
     {
         return $this->Alert;
     }
@@ -48,8 +48,11 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAlertForArrayConstraintsFromSetAlert(array $values = []): string
+    public static function validateAlertForArrayConstraintsFromSetAlert(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myMessagesAlertArrayTypeAlertItem) {
@@ -71,7 +74,7 @@ class MyMessagesAlertArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesAlertType[] $alert
      * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
      */
-    public function setAlert(array $alert = []): self
+    public function setAlert(?array $alert = null): self
     {
         // validation for constraint: array
         if ('' !== ($alertArrayErrorMessage = self::validateAlertForArrayConstraintsFromSetAlert($alert))) {

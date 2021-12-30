@@ -31,7 +31,7 @@ class NotificationUserDataType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SummaryEventScheduleType[]
      */
-    protected array $SummarySchedule = [];
+    protected ?array $SummarySchedule = null;
     /**
      * The ExternalUserData
      * Meta information extracted from the WSDL
@@ -57,7 +57,7 @@ class NotificationUserDataType extends AbstractStructBase
      * @param string $externalUserData
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\SMSSubscriptionType $sMSSubscription = null, array $summarySchedule = [], ?string $externalUserData = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SMSSubscriptionType $sMSSubscription = null, ?array $summarySchedule = null, ?string $externalUserData = null, $any = null)
     {
         $this
             ->setSMSSubscription($sMSSubscription)
@@ -88,7 +88,7 @@ class NotificationUserDataType extends AbstractStructBase
      * Get SummarySchedule value
      * @return \macropage\ebaysdk\trading\StructType\SummaryEventScheduleType[]
      */
-    public function getSummarySchedule(): array
+    public function getSummarySchedule(): ?array
     {
         return $this->SummarySchedule;
     }
@@ -98,8 +98,11 @@ class NotificationUserDataType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSummaryScheduleForArrayConstraintsFromSetSummarySchedule(array $values = []): string
+    public static function validateSummaryScheduleForArrayConstraintsFromSetSummarySchedule(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $notificationUserDataTypeSummaryScheduleItem) {
@@ -121,7 +124,7 @@ class NotificationUserDataType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SummaryEventScheduleType[] $summarySchedule
      * @return \macropage\ebaysdk\trading\StructType\NotificationUserDataType
      */
-    public function setSummarySchedule(array $summarySchedule = []): self
+    public function setSummarySchedule(?array $summarySchedule = null): self
     {
         // validation for constraint: array
         if ('' !== ($summaryScheduleArrayErrorMessage = self::validateSummaryScheduleForArrayConstraintsFromSetSummarySchedule($summarySchedule))) {

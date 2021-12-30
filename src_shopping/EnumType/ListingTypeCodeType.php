@@ -103,7 +103,7 @@ class ListingTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'CustomCode'
      * Meta information extracted from the WSDL
-     * - documentation: Placeholder value. See <a href="http://developer.ebay.com/DevZone/shopping/docs/CallRef/types/simpleTypes.html#token">token</a>.
+     * - documentation: Placeholder value. See <a href="https://developer.ebay.com/DevZone/shopping/docs/CallRef/types/simpleTypes.html#token">token</a>.
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';

@@ -28,13 +28,13 @@ class TaxTableType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\shopping\StructType\TaxJurisdictionType[]
      */
-    protected array $TaxJurisdiction = [];
+    protected ?array $TaxJurisdiction = null;
     /**
      * Constructor method for TaxTableType
      * @uses TaxTableType::setTaxJurisdiction()
      * @param \macropage\ebaysdk\shopping\StructType\TaxJurisdictionType[] $taxJurisdiction
      */
-    public function __construct(array $taxJurisdiction = [])
+    public function __construct(?array $taxJurisdiction = null)
     {
         $this
             ->setTaxJurisdiction($taxJurisdiction);
@@ -43,7 +43,7 @@ class TaxTableType extends AbstractStructBase
      * Get TaxJurisdiction value
      * @return \macropage\ebaysdk\shopping\StructType\TaxJurisdictionType[]
      */
-    public function getTaxJurisdiction(): array
+    public function getTaxJurisdiction(): ?array
     {
         return $this->TaxJurisdiction;
     }
@@ -53,8 +53,11 @@ class TaxTableType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction(array $values = []): string
+    public static function validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $taxTableTypeTaxJurisdictionItem) {
@@ -76,7 +79,7 @@ class TaxTableType extends AbstractStructBase
      * @param \macropage\ebaysdk\shopping\StructType\TaxJurisdictionType[] $taxJurisdiction
      * @return \macropage\ebaysdk\shopping\StructType\TaxTableType
      */
-    public function setTaxJurisdiction(array $taxJurisdiction = []): self
+    public function setTaxJurisdiction(?array $taxJurisdiction = null): self
     {
         // validation for constraint: array
         if ('' !== ($taxJurisdictionArrayErrorMessage = self::validateTaxJurisdictionForArrayConstraintsFromSetTaxJurisdiction($taxJurisdiction))) {

@@ -64,7 +64,7 @@ class ErrorType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ErrorParameterType[]
      */
-    protected array $ErrorParameters = [];
+    protected ?array $ErrorParameters = null;
     /**
      * The ErrorClassification
      * Meta information extracted from the WSDL
@@ -97,7 +97,7 @@ class ErrorType extends AbstractStructBase
      * @param string $errorClassification
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $shortMessage = null, ?string $longMessage = null, ?string $errorCode = null, ?bool $userDisplayHint = null, ?string $severityCode = null, array $errorParameters = [], ?string $errorClassification = null, $any = null)
+    public function __construct(?string $shortMessage = null, ?string $longMessage = null, ?string $errorCode = null, ?bool $userDisplayHint = null, ?string $severityCode = null, ?array $errorParameters = null, ?string $errorClassification = null, $any = null)
     {
         $this
             ->setShortMessage($shortMessage)
@@ -231,7 +231,7 @@ class ErrorType extends AbstractStructBase
      * Get ErrorParameters value
      * @return \macropage\ebaysdk\trading\StructType\ErrorParameterType[]
      */
-    public function getErrorParameters(): array
+    public function getErrorParameters(): ?array
     {
         return $this->ErrorParameters;
     }
@@ -241,8 +241,11 @@ class ErrorType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorParametersForArrayConstraintsFromSetErrorParameters(array $values = []): string
+    public static function validateErrorParametersForArrayConstraintsFromSetErrorParameters(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $errorTypeErrorParametersItem) {
@@ -264,7 +267,7 @@ class ErrorType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorParameterType[] $errorParameters
      * @return \macropage\ebaysdk\trading\StructType\ErrorType
      */
-    public function setErrorParameters(array $errorParameters = []): self
+    public function setErrorParameters(?array $errorParameters = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorParametersArrayErrorMessage = self::validateErrorParametersForArrayConstraintsFromSetErrorParameters($errorParameters))) {

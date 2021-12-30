@@ -70,7 +70,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExternalPictureURL = [];
+    protected ?array $ExternalPictureURL = null;
     /**
      * The PictureWatermark
      * Meta information extracted from the WSDL
@@ -79,7 +79,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $PictureWatermark = [];
+    protected ?array $PictureWatermark = null;
     /**
      * The ExtensionInDays
      * Meta information extracted from the WSDL
@@ -109,7 +109,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param string[] $pictureWatermark
      * @param int $extensionInDays
      */
-    public function __construct(?string $pictureName = null, ?int $pictureSystemVersion = null, ?string $pictureSet = null, ?\macropage\ebaysdk\trading\StructType\Base64BinaryType $pictureData = null, ?string $pictureUploadPolicy = null, array $externalPictureURL = [], array $pictureWatermark = [], ?int $extensionInDays = null)
+    public function __construct(?string $pictureName = null, ?int $pictureSystemVersion = null, ?string $pictureSet = null, ?\macropage\ebaysdk\trading\StructType\Base64BinaryType $pictureData = null, ?string $pictureUploadPolicy = null, ?array $externalPictureURL = null, ?array $pictureWatermark = null, ?int $extensionInDays = null)
     {
         $this
             ->setPictureName($pictureName)
@@ -242,7 +242,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * Get ExternalPictureURL value
      * @return string[]
      */
-    public function getExternalPictureURL(): array
+    public function getExternalPictureURL(): ?array
     {
         return $this->ExternalPictureURL;
     }
@@ -252,8 +252,11 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL(array $values = []): string
+    public static function validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $uploadSiteHostedPicturesRequestTypeExternalPictureURLItem) {
@@ -275,7 +278,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param string[] $externalPictureURL
      * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesRequestType
      */
-    public function setExternalPictureURL(array $externalPictureURL = []): self
+    public function setExternalPictureURL(?array $externalPictureURL = null): self
     {
         // validation for constraint: array
         if ('' !== ($externalPictureURLArrayErrorMessage = self::validateExternalPictureURLForArrayConstraintsFromSetExternalPictureURL($externalPictureURL))) {
@@ -305,7 +308,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * Get PictureWatermark value
      * @return string[]
      */
-    public function getPictureWatermark(): array
+    public function getPictureWatermark(): ?array
     {
         return $this->PictureWatermark;
     }
@@ -315,8 +318,11 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureWatermarkForArrayConstraintsFromSetPictureWatermark(array $values = []): string
+    public static function validatePictureWatermarkForArrayConstraintsFromSetPictureWatermark(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $uploadSiteHostedPicturesRequestTypePictureWatermarkItem) {
@@ -340,7 +346,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param string[] $pictureWatermark
      * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesRequestType
      */
-    public function setPictureWatermark(array $pictureWatermark = []): self
+    public function setPictureWatermark(?array $pictureWatermark = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureWatermarkArrayErrorMessage = self::validatePictureWatermarkForArrayConstraintsFromSetPictureWatermark($pictureWatermark))) {

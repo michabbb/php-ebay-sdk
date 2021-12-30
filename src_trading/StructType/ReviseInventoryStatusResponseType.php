@@ -25,7 +25,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    protected array $InventoryStatus = [];
+    protected ?array $InventoryStatus = null;
     /**
      * The Fees
      * Meta information extracted from the WSDL
@@ -38,7 +38,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InventoryFeesType[]
      */
-    protected array $Fees = [];
+    protected ?array $Fees = null;
     /**
      * Constructor method for ReviseInventoryStatusResponseType
      * @uses ReviseInventoryStatusResponseType::setInventoryStatus()
@@ -46,7 +46,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
      * @param \macropage\ebaysdk\trading\StructType\InventoryFeesType[] $fees
      */
-    public function __construct(array $inventoryStatus = [], array $fees = [])
+    public function __construct(?array $inventoryStatus = null, ?array $fees = null)
     {
         $this
             ->setInventoryStatus($inventoryStatus)
@@ -56,7 +56,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * Get InventoryStatus value
      * @return \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    public function getInventoryStatus(): array
+    public function getInventoryStatus(): ?array
     {
         return $this->InventoryStatus;
     }
@@ -66,8 +66,11 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInventoryStatusForArrayConstraintsFromSetInventoryStatus(array $values = []): string
+    public static function validateInventoryStatusForArrayConstraintsFromSetInventoryStatus(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseInventoryStatusResponseTypeInventoryStatusItem) {
@@ -89,7 +92,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusResponseType
      */
-    public function setInventoryStatus(array $inventoryStatus = []): self
+    public function setInventoryStatus(?array $inventoryStatus = null): self
     {
         // validation for constraint: array
         if ('' !== ($inventoryStatusArrayErrorMessage = self::validateInventoryStatusForArrayConstraintsFromSetInventoryStatus($inventoryStatus))) {
@@ -119,7 +122,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * Get Fees value
      * @return \macropage\ebaysdk\trading\StructType\InventoryFeesType[]
      */
-    public function getFees(): array
+    public function getFees(): ?array
     {
         return $this->Fees;
     }
@@ -129,8 +132,11 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeesForArrayConstraintsFromSetFees(array $values = []): string
+    public static function validateFeesForArrayConstraintsFromSetFees(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseInventoryStatusResponseTypeFeesItem) {
@@ -152,7 +158,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\InventoryFeesType[] $fees
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusResponseType
      */
-    public function setFees(array $fees = []): self
+    public function setFees(?array $fees = null): self
     {
         // validation for constraint: array
         if ('' !== ($feesArrayErrorMessage = self::validateFeesForArrayConstraintsFromSetFees($fees))) {

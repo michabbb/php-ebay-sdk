@@ -23,13 +23,13 @@ class SupportedSellerProfilesType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SupportedSellerProfileType[]
      */
-    protected array $SupportedSellerProfile = [];
+    protected ?array $SupportedSellerProfile = null;
     /**
      * Constructor method for SupportedSellerProfilesType
      * @uses SupportedSellerProfilesType::setSupportedSellerProfile()
      * @param \macropage\ebaysdk\trading\StructType\SupportedSellerProfileType[] $supportedSellerProfile
      */
-    public function __construct(array $supportedSellerProfile = [])
+    public function __construct(?array $supportedSellerProfile = null)
     {
         $this
             ->setSupportedSellerProfile($supportedSellerProfile);
@@ -38,7 +38,7 @@ class SupportedSellerProfilesType extends AbstractStructBase
      * Get SupportedSellerProfile value
      * @return \macropage\ebaysdk\trading\StructType\SupportedSellerProfileType[]
      */
-    public function getSupportedSellerProfile(): array
+    public function getSupportedSellerProfile(): ?array
     {
         return $this->SupportedSellerProfile;
     }
@@ -48,8 +48,11 @@ class SupportedSellerProfilesType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSupportedSellerProfileForArrayConstraintsFromSetSupportedSellerProfile(array $values = []): string
+    public static function validateSupportedSellerProfileForArrayConstraintsFromSetSupportedSellerProfile(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $supportedSellerProfilesTypeSupportedSellerProfileItem) {
@@ -71,7 +74,7 @@ class SupportedSellerProfilesType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\SupportedSellerProfileType[] $supportedSellerProfile
      * @return \macropage\ebaysdk\trading\StructType\SupportedSellerProfilesType
      */
-    public function setSupportedSellerProfile(array $supportedSellerProfile = []): self
+    public function setSupportedSellerProfile(?array $supportedSellerProfile = null): self
     {
         // validation for constraint: array
         if ('' !== ($supportedSellerProfileArrayErrorMessage = self::validateSupportedSellerProfileForArrayConstraintsFromSetSupportedSellerProfile($supportedSellerProfile))) {

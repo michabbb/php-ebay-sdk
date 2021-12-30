@@ -123,7 +123,7 @@ class ShippingServiceOptionType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShipsTo = [];
+    protected ?array $ShipsTo = null;
     /**
      * The EstimatedDeliveryMinTime
      * Meta information extracted from the WSDL
@@ -201,7 +201,7 @@ class ShippingServiceOptionType extends AbstractStructBase
      * @param string $shippingServiceCutOffTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\shopping\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingServiceName = null, ?string $logisticPlanType = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingSurcharge = null, array $shipsTo = [], ?string $estimatedDeliveryMinTime = null, ?string $estimatedDeliveryMaxTime = null, ?bool $fastAndFree = null, ?string $shippingServiceCutOffTime = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\shopping\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingServiceName = null, ?string $logisticPlanType = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?\macropage\ebaysdk\shopping\StructType\AmountType $shippingSurcharge = null, ?array $shipsTo = null, ?string $estimatedDeliveryMinTime = null, ?string $estimatedDeliveryMaxTime = null, ?bool $fastAndFree = null, ?string $shippingServiceCutOffTime = null, $any = null)
     {
         $this
             ->setShippingInsuranceCost($shippingInsuranceCost)
@@ -439,7 +439,7 @@ class ShippingServiceOptionType extends AbstractStructBase
      * Get ShipsTo value
      * @return string[]
      */
-    public function getShipsTo(): array
+    public function getShipsTo(): ?array
     {
         return $this->ShipsTo;
     }
@@ -449,8 +449,11 @@ class ShippingServiceOptionType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShipsToForArrayConstraintsFromSetShipsTo(array $values = []): string
+    public static function validateShipsToForArrayConstraintsFromSetShipsTo(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceOptionTypeShipsToItem) {
@@ -472,7 +475,7 @@ class ShippingServiceOptionType extends AbstractStructBase
      * @param string[] $shipsTo
      * @return \macropage\ebaysdk\shopping\StructType\ShippingServiceOptionType
      */
-    public function setShipsTo(array $shipsTo = []): self
+    public function setShipsTo(?array $shipsTo = null): self
     {
         // validation for constraint: array
         if ('' !== ($shipsToArrayErrorMessage = self::validateShipsToForArrayConstraintsFromSetShipsTo($shipsTo))) {

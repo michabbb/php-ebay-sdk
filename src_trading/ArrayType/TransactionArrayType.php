@@ -24,13 +24,13 @@ class TransactionArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TransactionType[]
      */
-    protected array $Transaction = [];
+    protected ?array $Transaction = null;
     /**
      * Constructor method for TransactionArrayType
      * @uses TransactionArrayType::setTransaction()
      * @param \macropage\ebaysdk\trading\StructType\TransactionType[] $transaction
      */
-    public function __construct(array $transaction = [])
+    public function __construct(?array $transaction = null)
     {
         $this
             ->setTransaction($transaction);
@@ -39,7 +39,7 @@ class TransactionArrayType extends AbstractStructArrayBase
      * Get Transaction value
      * @return \macropage\ebaysdk\trading\StructType\TransactionType[]
      */
-    public function getTransaction(): array
+    public function getTransaction(): ?array
     {
         return $this->Transaction;
     }
@@ -49,8 +49,11 @@ class TransactionArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateTransactionForArrayConstraintsFromSetTransaction(array $values = []): string
+    public static function validateTransactionForArrayConstraintsFromSetTransaction(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $transactionArrayTypeTransactionItem) {
@@ -72,7 +75,7 @@ class TransactionArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionType[] $transaction
      * @return \macropage\ebaysdk\trading\ArrayType\TransactionArrayType
      */
-    public function setTransaction(array $transaction = []): self
+    public function setTransaction(?array $transaction = null): self
     {
         // validation for constraint: array
         if ('' !== ($transactionArrayErrorMessage = self::validateTransactionForArrayConstraintsFromSetTransaction($transaction))) {

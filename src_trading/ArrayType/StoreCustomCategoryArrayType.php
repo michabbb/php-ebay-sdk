@@ -23,13 +23,13 @@ class StoreCustomCategoryArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    protected array $CustomCategory = [];
+    protected ?array $CustomCategory = null;
     /**
      * Constructor method for StoreCustomCategoryArrayType
      * @uses StoreCustomCategoryArrayType::setCustomCategory()
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $customCategory
      */
-    public function __construct(array $customCategory = [])
+    public function __construct(?array $customCategory = null)
     {
         $this
             ->setCustomCategory($customCategory);
@@ -38,7 +38,7 @@ class StoreCustomCategoryArrayType extends AbstractStructArrayBase
      * Get CustomCategory value
      * @return \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
      */
-    public function getCustomCategory(): array
+    public function getCustomCategory(): ?array
     {
         return $this->CustomCategory;
     }
@@ -48,8 +48,11 @@ class StoreCustomCategoryArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCustomCategoryForArrayConstraintsFromSetCustomCategory(array $values = []): string
+    public static function validateCustomCategoryForArrayConstraintsFromSetCustomCategory(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $storeCustomCategoryArrayTypeCustomCategoryItem) {
@@ -71,7 +74,7 @@ class StoreCustomCategoryArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[] $customCategory
      * @return \macropage\ebaysdk\trading\ArrayType\StoreCustomCategoryArrayType
      */
-    public function setCustomCategory(array $customCategory = []): self
+    public function setCustomCategory(?array $customCategory = null): self
     {
         // validation for constraint: array
         if ('' !== ($customCategoryArrayErrorMessage = self::validateCustomCategoryForArrayConstraintsFromSetCustomCategory($customCategory))) {

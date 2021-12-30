@@ -9,9 +9,10 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisputeStateCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Enumerated type that defines the possible states of an order dispute between buyer and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> 'Item Not Received' or 'Significantly Not As Described' cases, initiated by
- * buyers through the eBay Money Back Guarantee program, are not returned with <b>GetDispute</b> or <b>GetUserDisputes</b>. The <a href="https://developer.ebay.com/Devzone/post-order/post-order_v2_casemanagement-caseId__get.html#overview">getCase</a>
- * method of the <a href="https://developer.ebay.com/Devzone/post-order/concepts/UsageGuide.html">Post-Order API</a> is used to retrieve Money Back Guarantee cases programmatically. </span>
+ * - documentation: Enumerated type that defines the possible states of an Unpaid Item case between buyer and seller. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <b>GetDispute</b> and <b>GetUserDisputes</b> calls now only retrieve
+ * Unpaid Item cases. They are no longer used to retrieve Item not Received (INR) disputes created through PayPal, since this is no longer an option for eBay buyers. eBay buyers must create an INR case through eBay's Resolution Center, and these calls
+ * do not support eBay Money Back Guarantee cases. <br><br> To respond to an eBay Money Back Guarantee case, the seller should use the <a href="https://developer.ebay.com/Devzone/post-order/index.html" target="_blank">Case Management calls</a> of the
+ * <b>Post-Order API</b> or manage/respond to cases manually through the eBay Resolution Center. </span>
  * @subpackage Enumerations
  */
 class DisputeStateCodeType extends AbstractStructEnumBase
@@ -26,7 +27,7 @@ class DisputeStateCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Closed'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the dispute is closed. In some cases, a closed case can be reversed with the <b>SellerReverseDispute</b> call.
+     * - documentation: This enumeration value indicates that the Unpaid Item case is closed. In some cases, a closed case can be reversed with the <b>SellerReverseDispute</b> call.
      * @return string 'Closed'
      */
     const VALUE_CLOSED = 'Closed';
@@ -76,7 +77,7 @@ class DisputeStateCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PendingResolve'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the dispute is pending resolution. A dispute cannot be closed by the buyer or seller when it is in this state.
+     * - documentation: This enumeration value indicates that the Unpaid Item case is pending resolution. A dispute cannot be closed by the buyer or seller when it is in this state.
      * @return string 'PendingResolve'
      */
     const VALUE_PENDING_RESOLVE = 'PendingResolve';
@@ -97,125 +98,120 @@ class DisputeStateCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'NotReceivedNoSellerResponse'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer filed an Item Not Received dispute through PayPal account, and the seller has not yet responded. A seller may respond to a case in this state by using the <b>AddDisputeResponse</b> call
-     * and setting the <b>DisputeActivity</b> value to <code>SellerOffersRefund</code>, <code>SellerShippedItem</code>, or <code>SellerComment</code>.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'NotReceivedNoSellerResponse'
      */
     const VALUE_NOT_RECEIVED_NO_SELLER_RESPONSE = 'NotReceivedNoSellerResponse';
     /**
      * Constant for value 'NotAsDescribedNoSellerResponse'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer filed an Item Not As Described dispute through PayPal account, and the seller has not yet responded. A seller may respond to a case in this state by using the <b>AddDisputeResponse</b>
-     * call and setting the <b>DisputeActivity</b> value to <code>SellerOffersRefund</code> or <code>SellerComment</code>.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any SNAD disputes.
      * @return string 'NotAsDescribedNoSellerResponse'
      */
     const VALUE_NOT_AS_DESCRIBED_NO_SELLER_RESPONSE = 'NotAsDescribedNoSellerResponse';
     /**
      * Constant for value 'NotReceivedMutualCommunication'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer filed an Item Not Received dispute through PayPal account, and the buyer and seller have communicated about the issue. A seller may respond to a case in this state by using the
-     * <b>AddDisputeResponse</b> call and setting the <b>DisputeActivity</b> value to <code>SellerOffersRefund</code>, <code>SellerShippedItem</code>, or <code>SellerComment</code>.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'NotReceivedMutualCommunication'
      */
     const VALUE_NOT_RECEIVED_MUTUAL_COMMUNICATION = 'NotReceivedMutualCommunication';
     /**
      * Constant for value 'NotAsDescribedMutualCommunication'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer filed an Item Not As Described dispute through PayPal account, and the buyer and seller have communicated about the issue. A seller may respond to a case in this state by using the
-     * <b>AddDisputeResponse</b> call and setting the <b>DisputeActivity</b> value to <code>SellerOffersRefund</code>.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'NotAsDescribedMutualCommunication'
      */
     const VALUE_NOT_AS_DESCRIBED_MUTUAL_COMMUNICATION = 'NotAsDescribedMutualCommunication';
     /**
      * Constant for value 'MutualAgreementOrBuyerReturningItem'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the seller filed an Unpaid Item dispute, and the seller says mutual agreement has been reached and is waiting for the buyer to confirm, or the buyer is returning the item to the seller.
+     * - documentation: This enumeration value indicates that the seller filed an Unpaid Item case, and the seller says mutual agreement has been reached and is waiting for the buyer to confirm, or the buyer is returning the item to the seller.
      * @return string 'MutualAgreementOrBuyerReturningItem'
      */
     const VALUE_MUTUAL_AGREEMENT_OR_BUYER_RETURNING_ITEM = 'MutualAgreementOrBuyerReturningItem';
     /**
      * Constant for value 'ClaimOpened'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the claim was assigned to an adjuster.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimOpened'
      */
     const VALUE_CLAIM_OPENED = 'ClaimOpened';
     /**
      * Constant for value 'NoDocumentation'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer was contacted by eBay and asked to submit paperwork to support the claim.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'NoDocumentation'
      */
     const VALUE_NO_DOCUMENTATION = 'NoDocumentation';
     /**
      * Constant for value 'ClaimClosed'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the claim was closed due to buyer not responding to verification, or was missing paperwork.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimClosed'
      */
     const VALUE_CLAIM_CLOSED = 'ClaimClosed';
     /**
      * Constant for value 'ClaimDenied'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer's claim was denied.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimDenied'
      */
     const VALUE_CLAIM_DENIED = 'ClaimDenied';
     /**
      * Constant for value 'ClaimPending'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that paperwork was received from the buyer and the claim is being investigated.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimPending'
      */
     const VALUE_CLAIM_PENDING = 'ClaimPending';
     /**
      * Constant for value 'ClaimPaymentPending'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer's claim was approved for reimbursement and was sent to accounts payable for payment.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimPaymentPending'
      */
     const VALUE_CLAIM_PAYMENT_PENDING = 'ClaimPaymentPending';
     /**
      * Constant for value 'ClaimPaid'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the buyer was reimbursed for the claim.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimPaid'
      */
     const VALUE_CLAIM_PAID = 'ClaimPaid';
     /**
      * Constant for value 'ClaimResolved'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the issue has been resolved due to the seller sending the item or refunding the buyer.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimResolved'
      */
     const VALUE_CLAIM_RESOLVED = 'ClaimResolved';
     /**
      * Constant for value 'ClaimSubmitted'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the claim was submitted via Web.
+     * - documentation: This enumeration value is no longer applicable since the <b>GetDispute</b> and <b>GetUserDisputes</b> calls will not return any INR disputes.
      * @return string 'ClaimSubmitted'
      */
     const VALUE_CLAIM_SUBMITTED = 'ClaimSubmitted';
     /**
      * Constant for value 'UnpaidItemOpen'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the Unpaid Item dispute is open.
+     * - documentation: This enumeration value indicates that the Unpaid Item case is open.
      * @return string 'UnpaidItemOpen'
      */
     const VALUE_UNPAID_ITEM_OPEN = 'UnpaidItemOpen';
     /**
      * Constant for value 'UPIAssistanceDisabledByeBay'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the Unpaid Item dispute filed by the Unpaid Item Assistance mechanism was disabled by eBay (for example, eBay detected that payment was initiated and the seller needs to manually handle this
-     * dispute).
+     * - documentation: This enumeration value indicates that the Unpaid Item case filed by the Unpaid Item Assistance mechanism was disabled by eBay (for example, eBay detected that payment was initiated and the seller needs to manually handle this case).
      * @return string 'UPIAssistanceDisabledByeBay'
      */
     const VALUE_UPIASSISTANCE_DISABLED_BYE_BAY = 'UPIAssistanceDisabledByeBay';
     /**
      * Constant for value 'UPIAssistanceDisabledBySeller'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the Unpaid Item dispute filed by the Unpaid Item Assistance mechanism was disabled by the seller (e.g. the buyer and seller have communicated about payment and the seller wishes to extend the
-     * time for payment and not let the automatic process close the dispute automatically).
+     * - documentation: This enumeration value indicates that the Unpaid Item case filed by the Unpaid Item Assistance mechanism was disabled by the seller (e.g. the buyer and seller have communicated about payment and the seller wishes to extend the time
+     * for payment and not let the automatic process close the case automatically).
      * @return string 'UPIAssistanceDisabledBySeller'
      */
     const VALUE_UPIASSISTANCE_DISABLED_BY_SELLER = 'UPIAssistanceDisabledBySeller';

@@ -130,10 +130,8 @@ class SellingStatusType extends AbstractStructBase
      * <br/><br/> The FVF is calculated using a percentage. This percentage is based on whether the seller has a Store subscription or not. If a seller does have a Store subscription, the FVF is calculated based on the level of that plan. For complete
      * information about selling fees and eBay Store subscription plans, see the <a href="http://www.feectr.ebay.com/feecenter/home">Fee Center Home Page</a>. <br/><br/> The Final Value Fee for each order line item is returned by
      * <b>GetSellerTransactions</b>, <b>GetItemTransactions</b>, <b>GetOrders</b>, and <b>GetOrderTransactions</b>, regardless of the checkout status. <br><br> If a seller requests a Final Value Fee credit, the value of <b>Transaction.FinalValueFee</b> will
-     * not change if a credit is issued. The credit only appears in the seller's account data. <br> <br> <span class="tablenote"><b>Note:</b> The calculation of the Final Value Fee is changing for managed payments sellers, so the value returned in this
-     * field should only be considered as an estimated value. The <b>getTransactions</b> method of the <b>Finances API</b> can be used to get accurate Final Value Fee values. <br><br> See the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees for managed payments sellers</a> help page for more information about how Final Value Fees are changing for managed payments sellers.
-     * </span>
+     * not change if a credit is issued. The credit only appears in the seller's account data. <br> <br> See the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees</a> help page for more
+     * information about how Final Value Fees are calculated.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */

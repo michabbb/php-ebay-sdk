@@ -33,7 +33,7 @@ class RecommendationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[]
      */
-    protected array $ProductIdentifiers = [];
+    protected ?array $ProductIdentifiers = null;
     /**
      * The NameRecommendation
      * Meta information extracted from the WSDL
@@ -43,7 +43,7 @@ class RecommendationsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    protected array $NameRecommendation = [];
+    protected ?array $NameRecommendation = null;
     /**
      * The Updated
      * Meta information extracted from the WSDL
@@ -72,7 +72,7 @@ class RecommendationsType extends AbstractStructBase
      * @param bool $updated
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $categoryID = null, array $productIdentifiers = [], array $nameRecommendation = [], ?bool $updated = null, $any = null)
+    public function __construct(?string $categoryID = null, ?array $productIdentifiers = null, ?array $nameRecommendation = null, ?bool $updated = null, $any = null)
     {
         $this
             ->setCategoryID($categoryID)
@@ -108,7 +108,7 @@ class RecommendationsType extends AbstractStructBase
      * Get ProductIdentifiers value
      * @return \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[]
      */
-    public function getProductIdentifiers(): array
+    public function getProductIdentifiers(): ?array
     {
         return $this->ProductIdentifiers;
     }
@@ -118,8 +118,11 @@ class RecommendationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateProductIdentifiersForArrayConstraintsFromSetProductIdentifiers(array $values = []): string
+    public static function validateProductIdentifiersForArrayConstraintsFromSetProductIdentifiers(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $recommendationsTypeProductIdentifiersItem) {
@@ -141,7 +144,7 @@ class RecommendationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ProductIdentifiersType[] $productIdentifiers
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setProductIdentifiers(array $productIdentifiers = []): self
+    public function setProductIdentifiers(?array $productIdentifiers = null): self
     {
         // validation for constraint: array
         if ('' !== ($productIdentifiersArrayErrorMessage = self::validateProductIdentifiersForArrayConstraintsFromSetProductIdentifiers($productIdentifiers))) {
@@ -171,7 +174,7 @@ class RecommendationsType extends AbstractStructBase
      * Get NameRecommendation value
      * @return \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    public function getNameRecommendation(): array
+    public function getNameRecommendation(): ?array
     {
         return $this->NameRecommendation;
     }
@@ -181,8 +184,11 @@ class RecommendationsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameRecommendationForArrayConstraintsFromSetNameRecommendation(array $values = []): string
+    public static function validateNameRecommendationForArrayConstraintsFromSetNameRecommendation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $recommendationsTypeNameRecommendationItem) {
@@ -204,7 +210,7 @@ class RecommendationsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType[] $nameRecommendation
      * @return \macropage\ebaysdk\trading\StructType\RecommendationsType
      */
-    public function setNameRecommendation(array $nameRecommendation = []): self
+    public function setNameRecommendation(?array $nameRecommendation = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameRecommendationArrayErrorMessage = self::validateNameRecommendationForArrayConstraintsFromSetNameRecommendation($nameRecommendation))) {

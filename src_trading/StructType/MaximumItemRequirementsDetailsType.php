@@ -24,7 +24,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $MaximumItemCount = [];
+    protected ?array $MaximumItemCount = null;
     /**
      * The MinimumFeedbackScore
      * Meta information extracted from the WSDL
@@ -34,7 +34,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var int[]
      */
-    protected array $MinimumFeedbackScore = [];
+    protected ?array $MinimumFeedbackScore = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -49,7 +49,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @param int[] $minimumFeedbackScore
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $maximumItemCount = [], array $minimumFeedbackScore = [], $any = null)
+    public function __construct(?array $maximumItemCount = null, ?array $minimumFeedbackScore = null, $any = null)
     {
         $this
             ->setMaximumItemCount($maximumItemCount)
@@ -60,7 +60,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * Get MaximumItemCount value
      * @return int[]
      */
-    public function getMaximumItemCount(): array
+    public function getMaximumItemCount(): ?array
     {
         return $this->MaximumItemCount;
     }
@@ -70,8 +70,11 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMaximumItemCountForArrayConstraintsFromSetMaximumItemCount(array $values = []): string
+    public static function validateMaximumItemCountForArrayConstraintsFromSetMaximumItemCount(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $maximumItemRequirementsDetailsTypeMaximumItemCountItem) {
@@ -93,7 +96,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @param int[] $maximumItemCount
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function setMaximumItemCount(array $maximumItemCount = []): self
+    public function setMaximumItemCount(?array $maximumItemCount = null): self
     {
         // validation for constraint: array
         if ('' !== ($maximumItemCountArrayErrorMessage = self::validateMaximumItemCountForArrayConstraintsFromSetMaximumItemCount($maximumItemCount))) {
@@ -123,7 +126,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * Get MinimumFeedbackScore value
      * @return int[]
      */
-    public function getMinimumFeedbackScore(): array
+    public function getMinimumFeedbackScore(): ?array
     {
         return $this->MinimumFeedbackScore;
     }
@@ -133,8 +136,11 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateMinimumFeedbackScoreForArrayConstraintsFromSetMinimumFeedbackScore(array $values = []): string
+    public static function validateMinimumFeedbackScoreForArrayConstraintsFromSetMinimumFeedbackScore(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $maximumItemRequirementsDetailsTypeMinimumFeedbackScoreItem) {
@@ -156,7 +162,7 @@ class MaximumItemRequirementsDetailsType extends AbstractStructBase
      * @param int[] $minimumFeedbackScore
      * @return \macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType
      */
-    public function setMinimumFeedbackScore(array $minimumFeedbackScore = []): self
+    public function setMinimumFeedbackScore(?array $minimumFeedbackScore = null): self
     {
         // validation for constraint: array
         if ('' !== ($minimumFeedbackScoreArrayErrorMessage = self::validateMinimumFeedbackScoreForArrayConstraintsFromSetMinimumFeedbackScore($minimumFeedbackScore))) {

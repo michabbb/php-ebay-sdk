@@ -32,7 +32,7 @@ class FlatShippingDiscountType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DiscountProfileType[]
      */
-    protected array $DiscountProfile = [];
+    protected ?array $DiscountProfile = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -47,7 +47,7 @@ class FlatShippingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DiscountProfileType[] $discountProfile
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $discountName = null, array $discountProfile = [], $any = null)
+    public function __construct(?string $discountName = null, ?array $discountProfile = null, $any = null)
     {
         $this
             ->setDiscountName($discountName)
@@ -84,7 +84,7 @@ class FlatShippingDiscountType extends AbstractStructBase
      * Get DiscountProfile value
      * @return \macropage\ebaysdk\trading\StructType\DiscountProfileType[]
      */
-    public function getDiscountProfile(): array
+    public function getDiscountProfile(): ?array
     {
         return $this->DiscountProfile;
     }
@@ -94,8 +94,11 @@ class FlatShippingDiscountType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDiscountProfileForArrayConstraintsFromSetDiscountProfile(array $values = []): string
+    public static function validateDiscountProfileForArrayConstraintsFromSetDiscountProfile(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $flatShippingDiscountTypeDiscountProfileItem) {
@@ -117,7 +120,7 @@ class FlatShippingDiscountType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\DiscountProfileType[] $discountProfile
      * @return \macropage\ebaysdk\trading\StructType\FlatShippingDiscountType
      */
-    public function setDiscountProfile(array $discountProfile = []): self
+    public function setDiscountProfile(?array $discountProfile = null): self
     {
         // validation for constraint: array
         if ('' !== ($discountProfileArrayErrorMessage = self::validateDiscountProfileForArrayConstraintsFromSetDiscountProfile($discountProfile))) {

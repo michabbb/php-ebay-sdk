@@ -33,7 +33,7 @@ class ValType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $SuggestedValueLiteral = [];
+    protected ?array $SuggestedValueLiteral = null;
     /**
      * The ValueID
      * Meta information extracted from the WSDL
@@ -58,7 +58,7 @@ class ValType extends AbstractStructBase
      * @param int $valueID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $valueLiteral = null, array $suggestedValueLiteral = [], ?int $valueID = null, $any = null)
+    public function __construct(?string $valueLiteral = null, ?array $suggestedValueLiteral = null, ?int $valueID = null, $any = null)
     {
         $this
             ->setValueLiteral($valueLiteral)
@@ -93,7 +93,7 @@ class ValType extends AbstractStructBase
      * Get SuggestedValueLiteral value
      * @return string[]
      */
-    public function getSuggestedValueLiteral(): array
+    public function getSuggestedValueLiteral(): ?array
     {
         return $this->SuggestedValueLiteral;
     }
@@ -103,8 +103,11 @@ class ValType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateSuggestedValueLiteralForArrayConstraintsFromSetSuggestedValueLiteral(array $values = []): string
+    public static function validateSuggestedValueLiteralForArrayConstraintsFromSetSuggestedValueLiteral(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $valTypeSuggestedValueLiteralItem) {
@@ -126,7 +129,7 @@ class ValType extends AbstractStructBase
      * @param string[] $suggestedValueLiteral
      * @return \macropage\ebaysdk\trading\StructType\ValType
      */
-    public function setSuggestedValueLiteral(array $suggestedValueLiteral = []): self
+    public function setSuggestedValueLiteral(?array $suggestedValueLiteral = null): self
     {
         // validation for constraint: array
         if ('' !== ($suggestedValueLiteralArrayErrorMessage = self::validateSuggestedValueLiteralForArrayConstraintsFromSetSuggestedValueLiteral($suggestedValueLiteral))) {

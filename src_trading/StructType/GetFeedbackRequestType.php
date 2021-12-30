@@ -65,7 +65,7 @@ class GetFeedbackRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $CommentType = [];
+    protected ?array $CommentType = null;
     /**
      * The FeedbackType
      * Meta information extracted from the WSDL
@@ -115,7 +115,7 @@ class GetFeedbackRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @param string $orderLineItemID
      */
-    public function __construct(?string $userID = null, ?string $feedbackID = null, ?string $itemID = null, ?string $transactionID = null, array $commentType = [], ?string $feedbackType = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $orderLineItemID = null)
+    public function __construct(?string $userID = null, ?string $feedbackID = null, ?string $itemID = null, ?string $transactionID = null, ?array $commentType = null, ?string $feedbackType = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $orderLineItemID = null)
     {
         $this
             ->setUserID($userID)
@@ -223,7 +223,7 @@ class GetFeedbackRequestType extends AbstractRequestType
      * Get CommentType value
      * @return string[]
      */
-    public function getCommentType(): array
+    public function getCommentType(): ?array
     {
         return $this->CommentType;
     }
@@ -233,8 +233,11 @@ class GetFeedbackRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCommentTypeForArrayConstraintsFromSetCommentType(array $values = []): string
+    public static function validateCommentTypeForArrayConstraintsFromSetCommentType(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $getFeedbackRequestTypeCommentTypeItem) {
@@ -258,7 +261,7 @@ class GetFeedbackRequestType extends AbstractRequestType
      * @param string[] $commentType
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackRequestType
      */
-    public function setCommentType(array $commentType = []): self
+    public function setCommentType(?array $commentType = null): self
     {
         // validation for constraint: array
         if ('' !== ($commentTypeArrayErrorMessage = self::validateCommentTypeForArrayConstraintsFromSetCommentType($commentType))) {

@@ -40,7 +40,7 @@ class TaxIdentifierType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxIdentifierAttributeType[]
      */
-    protected array $Attribute = [];
+    protected ?array $Attribute = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -57,7 +57,7 @@ class TaxIdentifierType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierAttributeType[] $attribute
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $type = null, ?string $iD = null, array $attribute = [], $any = null)
+    public function __construct(?string $type = null, ?string $iD = null, ?array $attribute = null, $any = null)
     {
         $this
             ->setType($type)
@@ -118,7 +118,7 @@ class TaxIdentifierType extends AbstractStructBase
      * Get Attribute value
      * @return \macropage\ebaysdk\trading\StructType\TaxIdentifierAttributeType[]
      */
-    public function getAttribute(): array
+    public function getAttribute(): ?array
     {
         return $this->Attribute;
     }
@@ -128,8 +128,11 @@ class TaxIdentifierType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateAttributeForArrayConstraintsFromSetAttribute(array $values = []): string
+    public static function validateAttributeForArrayConstraintsFromSetAttribute(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $taxIdentifierTypeAttributeItem) {
@@ -151,7 +154,7 @@ class TaxIdentifierType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierAttributeType[] $attribute
      * @return \macropage\ebaysdk\trading\StructType\TaxIdentifierType
      */
-    public function setAttribute(array $attribute = []): self
+    public function setAttribute(?array $attribute = null): self
     {
         // validation for constraint: array
         if ('' !== ($attributeArrayErrorMessage = self::validateAttributeForArrayConstraintsFromSetAttribute($attribute))) {

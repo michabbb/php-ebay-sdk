@@ -53,7 +53,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $Copyright = [];
+    protected ?array $Copyright = null;
     /**
      * The ProductReferenceID
      * Meta information extracted from the WSDL
@@ -192,7 +192,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    protected array $NameValueList = [];
+    protected ?array $NameValueList = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -235,7 +235,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $includeStockPhotoURL = null, ?bool $useStockPhotoURLAsGallery = null, ?string $stockPhotoURL = null, array $copyright = [], ?string $productReferenceID = null, ?string $detailsURL = null, ?string $productDetailsURL = null, ?bool $returnSearchResultOnDuplicates = null, ?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNType $brandMPN = null, ?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails = null, ?bool $useFirstProduct = null, ?bool $includeeBayProductDetails = null, array $nameValueList = [], $any = null)
+    public function __construct(?bool $includeStockPhotoURL = null, ?bool $useStockPhotoURLAsGallery = null, ?string $stockPhotoURL = null, ?array $copyright = null, ?string $productReferenceID = null, ?string $detailsURL = null, ?string $productDetailsURL = null, ?bool $returnSearchResultOnDuplicates = null, ?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNType $brandMPN = null, ?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails = null, ?bool $useFirstProduct = null, ?bool $includeeBayProductDetails = null, ?array $nameValueList = null, $any = null)
     {
         $this
             ->setIncludeStockPhotoURL($includeStockPhotoURL)
@@ -329,7 +329,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * Get Copyright value
      * @return string[]
      */
-    public function getCopyright(): array
+    public function getCopyright(): ?array
     {
         return $this->Copyright;
     }
@@ -339,8 +339,11 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateCopyrightForArrayConstraintsFromSetCopyright(array $values = []): string
+    public static function validateCopyrightForArrayConstraintsFromSetCopyright(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productListingDetailsTypeCopyrightItem) {
@@ -362,7 +365,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param string[] $copyright
      * @return \macropage\ebaysdk\trading\StructType\ProductListingDetailsType
      */
-    public function setCopyright(array $copyright = []): self
+    public function setCopyright(?array $copyright = null): self
     {
         // validation for constraint: array
         if ('' !== ($copyrightArrayErrorMessage = self::validateCopyrightForArrayConstraintsFromSetCopyright($copyright))) {
@@ -637,7 +640,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * Get NameValueList value
      * @return \macropage\ebaysdk\trading\StructType\NameValueListType[]
      */
-    public function getNameValueList(): array
+    public function getNameValueList(): ?array
     {
         return $this->NameValueList;
     }
@@ -647,8 +650,11 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(array $values = []): string
+    public static function validateNameValueListForArrayConstraintsFromSetNameValueList(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productListingDetailsTypeNameValueListItem) {
@@ -670,7 +676,7 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @return \macropage\ebaysdk\trading\StructType\ProductListingDetailsType
      */
-    public function setNameValueList(array $nameValueList = []): self
+    public function setNameValueList(?array $nameValueList = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameValueListArrayErrorMessage = self::validateNameValueListForArrayConstraintsFromSetNameValueList($nameValueList))) {

@@ -23,7 +23,7 @@ class OrderArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OrderType[]
      */
-    protected array $Order = [];
+    protected ?array $Order = null;
     /**
      * The Errors
      * Meta information extracted from the WSDL
@@ -33,7 +33,7 @@ class OrderArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    protected array $Errors = [];
+    protected ?array $Errors = null;
     /**
      * Constructor method for OrderArrayType
      * @uses OrderArrayType::setOrder()
@@ -41,7 +41,7 @@ class OrderArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\OrderType[] $order
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      */
-    public function __construct(array $order = [], array $errors = [])
+    public function __construct(?array $order = null, ?array $errors = null)
     {
         $this
             ->setOrder($order)
@@ -51,7 +51,7 @@ class OrderArrayType extends AbstractStructBase
      * Get Order value
      * @return \macropage\ebaysdk\trading\StructType\OrderType[]
      */
-    public function getOrder(): array
+    public function getOrder(): ?array
     {
         return $this->Order;
     }
@@ -61,8 +61,11 @@ class OrderArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateOrderForArrayConstraintsFromSetOrder(array $values = []): string
+    public static function validateOrderForArrayConstraintsFromSetOrder(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $orderArrayTypeOrderItem) {
@@ -84,7 +87,7 @@ class OrderArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\OrderType[] $order
      * @return \macropage\ebaysdk\trading\StructType\OrderArrayType
      */
-    public function setOrder(array $order = []): self
+    public function setOrder(?array $order = null): self
     {
         // validation for constraint: array
         if ('' !== ($orderArrayErrorMessage = self::validateOrderForArrayConstraintsFromSetOrder($order))) {
@@ -114,7 +117,7 @@ class OrderArrayType extends AbstractStructBase
      * Get Errors value
      * @return \macropage\ebaysdk\trading\StructType\ErrorType[]
      */
-    public function getErrors(): array
+    public function getErrors(): ?array
     {
         return $this->Errors;
     }
@@ -124,8 +127,11 @@ class OrderArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateErrorsForArrayConstraintsFromSetErrors(array $values = []): string
+    public static function validateErrorsForArrayConstraintsFromSetErrors(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $orderArrayTypeErrorsItem) {
@@ -147,7 +153,7 @@ class OrderArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ErrorType[] $errors
      * @return \macropage\ebaysdk\trading\StructType\OrderArrayType
      */
-    public function setErrors(array $errors = []): self
+    public function setErrors(?array $errors = null): self
     {
         // validation for constraint: array
         if ('' !== ($errorsArrayErrorMessage = self::validateErrorsForArrayConstraintsFromSetErrors($errors))) {

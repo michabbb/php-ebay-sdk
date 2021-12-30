@@ -23,7 +23,7 @@ class UnitOfMeasurementDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UnitOfMeasurementType[]
      */
-    protected array $UnitOfMeasurement = [];
+    protected ?array $UnitOfMeasurement = null;
     /**
      * The DetailVersion
      * Meta information extracted from the WSDL
@@ -56,7 +56,7 @@ class UnitOfMeasurementDetailsType extends AbstractStructBase
      * @param string $updateTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $unitOfMeasurement = [], ?string $detailVersion = null, ?string $updateTime = null, $any = null)
+    public function __construct(?array $unitOfMeasurement = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setUnitOfMeasurement($unitOfMeasurement)
@@ -68,7 +68,7 @@ class UnitOfMeasurementDetailsType extends AbstractStructBase
      * Get UnitOfMeasurement value
      * @return \macropage\ebaysdk\trading\StructType\UnitOfMeasurementType[]
      */
-    public function getUnitOfMeasurement(): array
+    public function getUnitOfMeasurement(): ?array
     {
         return $this->UnitOfMeasurement;
     }
@@ -78,8 +78,11 @@ class UnitOfMeasurementDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateUnitOfMeasurementForArrayConstraintsFromSetUnitOfMeasurement(array $values = []): string
+    public static function validateUnitOfMeasurementForArrayConstraintsFromSetUnitOfMeasurement(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $unitOfMeasurementDetailsTypeUnitOfMeasurementItem) {
@@ -101,7 +104,7 @@ class UnitOfMeasurementDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UnitOfMeasurementType[] $unitOfMeasurement
      * @return \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType
      */
-    public function setUnitOfMeasurement(array $unitOfMeasurement = []): self
+    public function setUnitOfMeasurement(?array $unitOfMeasurement = null): self
     {
         // validation for constraint: array
         if ('' !== ($unitOfMeasurementArrayErrorMessage = self::validateUnitOfMeasurementForArrayConstraintsFromSetUnitOfMeasurement($unitOfMeasurement))) {

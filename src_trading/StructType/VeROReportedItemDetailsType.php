@@ -23,13 +23,13 @@ class VeROReportedItemDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VeROReportedItemType[]
      */
-    protected array $ReportedItem = [];
+    protected ?array $ReportedItem = null;
     /**
      * Constructor method for VeROReportedItemDetailsType
      * @uses VeROReportedItemDetailsType::setReportedItem()
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemType[] $reportedItem
      */
-    public function __construct(array $reportedItem = [])
+    public function __construct(?array $reportedItem = null)
     {
         $this
             ->setReportedItem($reportedItem);
@@ -38,7 +38,7 @@ class VeROReportedItemDetailsType extends AbstractStructBase
      * Get ReportedItem value
      * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemType[]
      */
-    public function getReportedItem(): array
+    public function getReportedItem(): ?array
     {
         return $this->ReportedItem;
     }
@@ -48,8 +48,11 @@ class VeROReportedItemDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateReportedItemForArrayConstraintsFromSetReportedItem(array $values = []): string
+    public static function validateReportedItemForArrayConstraintsFromSetReportedItem(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $veROReportedItemDetailsTypeReportedItemItem) {
@@ -71,7 +74,7 @@ class VeROReportedItemDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VeROReportedItemType[] $reportedItem
      * @return \macropage\ebaysdk\trading\StructType\VeROReportedItemDetailsType
      */
-    public function setReportedItem(array $reportedItem = []): self
+    public function setReportedItem(?array $reportedItem = null): self
     {
         // validation for constraint: array
         if ('' !== ($reportedItemArrayErrorMessage = self::validateReportedItemForArrayConstraintsFromSetReportedItem($reportedItem))) {

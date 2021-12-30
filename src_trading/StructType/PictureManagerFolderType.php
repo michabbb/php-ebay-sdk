@@ -39,7 +39,7 @@ class PictureManagerFolderType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[]
      */
-    protected array $Picture = [];
+    protected ?array $Picture = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -56,7 +56,7 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[] $picture
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $folderID = null, ?string $name = null, array $picture = [], $any = null)
+    public function __construct(?int $folderID = null, ?string $name = null, ?array $picture = null, $any = null)
     {
         $this
             ->setFolderID($folderID)
@@ -114,7 +114,7 @@ class PictureManagerFolderType extends AbstractStructBase
      * Get Picture value
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[]
      */
-    public function getPicture(): array
+    public function getPicture(): ?array
     {
         return $this->Picture;
     }
@@ -124,8 +124,11 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validatePictureForArrayConstraintsFromSetPicture(array $values = []): string
+    public static function validatePictureForArrayConstraintsFromSetPicture(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pictureManagerFolderTypePictureItem) {
@@ -147,7 +150,7 @@ class PictureManagerFolderType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerPictureType[] $picture
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType
      */
-    public function setPicture(array $picture = []): self
+    public function setPicture(?array $picture = null): self
     {
         // validation for constraint: array
         if ('' !== ($pictureArrayErrorMessage = self::validatePictureForArrayConstraintsFromSetPicture($picture))) {

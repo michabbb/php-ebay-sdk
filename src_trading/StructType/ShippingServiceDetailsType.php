@@ -99,7 +99,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ServiceType = [];
+    protected ?array $ServiceType = null;
     /**
      * The ShippingPackage
      * Meta information extracted from the WSDL
@@ -108,7 +108,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShippingPackage = [];
+    protected ?array $ShippingPackage = null;
     /**
      * The DimensionsRequired
      * Meta information extracted from the WSDL
@@ -143,7 +143,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ShippingCarrier = [];
+    protected ?array $ShippingCarrier = null;
     /**
      * The CODService
      * Meta information extracted from the WSDL
@@ -161,7 +161,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AnnouncementMessageType[]
      */
-    protected array $DeprecationDetails = [];
+    protected ?array $DeprecationDetails = null;
     /**
      * The MappedToShippingServiceID
      * Meta information extracted from the WSDL
@@ -186,7 +186,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServicePackageDetailsType[]
      */
-    protected array $ShippingServicePackageDetails = [];
+    protected ?array $ShippingServicePackageDetails = null;
     /**
      * The WeightRequired
      * Meta information extracted from the WSDL
@@ -278,7 +278,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param string $shippingCategory
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $description = null, ?bool $expeditedService = null, ?bool $internationalService = null, ?string $shippingService = null, ?int $shippingServiceID = null, ?int $shippingTimeMax = null, ?int $shippingTimeMin = null, ?string $shippingServiceCode = null, array $serviceType = [], array $shippingPackage = [], ?bool $dimensionsRequired = null, ?bool $validForSellingFlow = null, ?bool $surchargeApplicable = null, array $shippingCarrier = [], ?bool $cODService = null, array $deprecationDetails = [], ?int $mappedToShippingServiceID = null, ?string $costGroupFlat = null, array $shippingServicePackageDetails = [], ?bool $weightRequired = null, ?string $detailVersion = null, ?string $updateTime = null, ?string $shippingCategory = null, $any = null)
+    public function __construct(?string $description = null, ?bool $expeditedService = null, ?bool $internationalService = null, ?string $shippingService = null, ?int $shippingServiceID = null, ?int $shippingTimeMax = null, ?int $shippingTimeMin = null, ?string $shippingServiceCode = null, ?array $serviceType = null, ?array $shippingPackage = null, ?bool $dimensionsRequired = null, ?bool $validForSellingFlow = null, ?bool $surchargeApplicable = null, ?array $shippingCarrier = null, ?bool $cODService = null, ?array $deprecationDetails = null, ?int $mappedToShippingServiceID = null, ?string $costGroupFlat = null, ?array $shippingServicePackageDetails = null, ?bool $weightRequired = null, ?string $detailVersion = null, ?string $updateTime = null, ?string $shippingCategory = null, $any = null)
     {
         $this
             ->setDescription($description)
@@ -497,7 +497,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * Get ServiceType value
      * @return string[]
      */
-    public function getServiceType(): array
+    public function getServiceType(): ?array
     {
         return $this->ServiceType;
     }
@@ -507,8 +507,11 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateServiceTypeForArrayConstraintsFromSetServiceType(array $values = []): string
+    public static function validateServiceTypeForArrayConstraintsFromSetServiceType(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceDetailsTypeServiceTypeItem) {
@@ -532,7 +535,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param string[] $serviceType
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
      */
-    public function setServiceType(array $serviceType = []): self
+    public function setServiceType(?array $serviceType = null): self
     {
         // validation for constraint: array
         if ('' !== ($serviceTypeArrayErrorMessage = self::validateServiceTypeForArrayConstraintsFromSetServiceType($serviceType))) {
@@ -564,7 +567,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * Get ShippingPackage value
      * @return string[]
      */
-    public function getShippingPackage(): array
+    public function getShippingPackage(): ?array
     {
         return $this->ShippingPackage;
     }
@@ -574,8 +577,11 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingPackageForArrayConstraintsFromSetShippingPackage(array $values = []): string
+    public static function validateShippingPackageForArrayConstraintsFromSetShippingPackage(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceDetailsTypeShippingPackageItem) {
@@ -599,7 +605,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param string[] $shippingPackage
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
      */
-    public function setShippingPackage(array $shippingPackage = []): self
+    public function setShippingPackage(?array $shippingPackage = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingPackageArrayErrorMessage = self::validateShippingPackageForArrayConstraintsFromSetShippingPackage($shippingPackage))) {
@@ -700,7 +706,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * Get ShippingCarrier value
      * @return string[]
      */
-    public function getShippingCarrier(): array
+    public function getShippingCarrier(): ?array
     {
         return $this->ShippingCarrier;
     }
@@ -710,8 +716,11 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingCarrierForArrayConstraintsFromSetShippingCarrier(array $values = []): string
+    public static function validateShippingCarrierForArrayConstraintsFromSetShippingCarrier(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceDetailsTypeShippingCarrierItem) {
@@ -735,7 +744,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param string[] $shippingCarrier
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
      */
-    public function setShippingCarrier(array $shippingCarrier = []): self
+    public function setShippingCarrier(?array $shippingCarrier = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingCarrierArrayErrorMessage = self::validateShippingCarrierForArrayConstraintsFromSetShippingCarrier($shippingCarrier))) {
@@ -790,7 +799,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * Get DeprecationDetails value
      * @return \macropage\ebaysdk\trading\StructType\AnnouncementMessageType[]
      */
-    public function getDeprecationDetails(): array
+    public function getDeprecationDetails(): ?array
     {
         return $this->DeprecationDetails;
     }
@@ -800,8 +809,11 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateDeprecationDetailsForArrayConstraintsFromSetDeprecationDetails(array $values = []): string
+    public static function validateDeprecationDetailsForArrayConstraintsFromSetDeprecationDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceDetailsTypeDeprecationDetailsItem) {
@@ -823,7 +835,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AnnouncementMessageType[] $deprecationDetails
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
      */
-    public function setDeprecationDetails(array $deprecationDetails = []): self
+    public function setDeprecationDetails(?array $deprecationDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($deprecationDetailsArrayErrorMessage = self::validateDeprecationDetailsForArrayConstraintsFromSetDeprecationDetails($deprecationDetails))) {
@@ -899,7 +911,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * Get ShippingServicePackageDetails value
      * @return \macropage\ebaysdk\trading\StructType\ShippingServicePackageDetailsType[]
      */
-    public function getShippingServicePackageDetails(): array
+    public function getShippingServicePackageDetails(): ?array
     {
         return $this->ShippingServicePackageDetails;
     }
@@ -909,8 +921,11 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateShippingServicePackageDetailsForArrayConstraintsFromSetShippingServicePackageDetails(array $values = []): string
+    public static function validateShippingServicePackageDetailsForArrayConstraintsFromSetShippingServicePackageDetails(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $shippingServiceDetailsTypeShippingServicePackageDetailsItem) {
@@ -932,7 +947,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ShippingServicePackageDetailsType[] $shippingServicePackageDetails
      * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
      */
-    public function setShippingServicePackageDetails(array $shippingServicePackageDetails = []): self
+    public function setShippingServicePackageDetails(?array $shippingServicePackageDetails = null): self
     {
         // validation for constraint: array
         if ('' !== ($shippingServicePackageDetailsArrayErrorMessage = self::validateShippingServicePackageDetailsForArrayConstraintsFromSetShippingServicePackageDetails($shippingServicePackageDetails))) {

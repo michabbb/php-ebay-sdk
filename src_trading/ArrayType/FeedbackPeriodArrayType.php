@@ -24,13 +24,13 @@ class FeedbackPeriodArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeedbackPeriodType[]
      */
-    protected array $FeedbackPeriod = [];
+    protected ?array $FeedbackPeriod = null;
     /**
      * Constructor method for FeedbackPeriodArrayType
      * @uses FeedbackPeriodArrayType::setFeedbackPeriod()
      * @param \macropage\ebaysdk\trading\StructType\FeedbackPeriodType[] $feedbackPeriod
      */
-    public function __construct(array $feedbackPeriod = [])
+    public function __construct(?array $feedbackPeriod = null)
     {
         $this
             ->setFeedbackPeriod($feedbackPeriod);
@@ -39,7 +39,7 @@ class FeedbackPeriodArrayType extends AbstractStructArrayBase
      * Get FeedbackPeriod value
      * @return \macropage\ebaysdk\trading\StructType\FeedbackPeriodType[]
      */
-    public function getFeedbackPeriod(): array
+    public function getFeedbackPeriod(): ?array
     {
         return $this->FeedbackPeriod;
     }
@@ -49,8 +49,11 @@ class FeedbackPeriodArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFeedbackPeriodForArrayConstraintsFromSetFeedbackPeriod(array $values = []): string
+    public static function validateFeedbackPeriodForArrayConstraintsFromSetFeedbackPeriod(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $feedbackPeriodArrayTypeFeedbackPeriodItem) {
@@ -72,7 +75,7 @@ class FeedbackPeriodArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\FeedbackPeriodType[] $feedbackPeriod
      * @return \macropage\ebaysdk\trading\ArrayType\FeedbackPeriodArrayType
      */
-    public function setFeedbackPeriod(array $feedbackPeriod = []): self
+    public function setFeedbackPeriod(?array $feedbackPeriod = null): self
     {
         // validation for constraint: array
         if ('' !== ($feedbackPeriodArrayErrorMessage = self::validateFeedbackPeriodForArrayConstraintsFromSetFeedbackPeriod($feedbackPeriod))) {

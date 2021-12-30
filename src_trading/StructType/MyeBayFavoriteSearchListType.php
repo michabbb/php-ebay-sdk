@@ -31,7 +31,7 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[]
      */
-    protected array $FavoriteSearch = [];
+    protected ?array $FavoriteSearch = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -46,7 +46,7 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[] $favoriteSearch
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $totalAvailable = null, array $favoriteSearch = [], $any = null)
+    public function __construct(?int $totalAvailable = null, ?array $favoriteSearch = null, $any = null)
     {
         $this
             ->setTotalAvailable($totalAvailable)
@@ -80,7 +80,7 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * Get FavoriteSearch value
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[]
      */
-    public function getFavoriteSearch(): array
+    public function getFavoriteSearch(): ?array
     {
         return $this->FavoriteSearch;
     }
@@ -90,8 +90,11 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFavoriteSearchForArrayConstraintsFromSetFavoriteSearch(array $values = []): string
+    public static function validateFavoriteSearchForArrayConstraintsFromSetFavoriteSearch(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $myeBayFavoriteSearchListTypeFavoriteSearchItem) {
@@ -113,7 +116,7 @@ class MyeBayFavoriteSearchListType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType[] $favoriteSearch
      * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType
      */
-    public function setFavoriteSearch(array $favoriteSearch = []): self
+    public function setFavoriteSearch(?array $favoriteSearch = null): self
     {
         // validation for constraint: array
         if ('' !== ($favoriteSearchArrayErrorMessage = self::validateFavoriteSearchForArrayConstraintsFromSetFavoriteSearch($favoriteSearch))) {

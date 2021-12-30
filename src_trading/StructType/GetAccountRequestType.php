@@ -26,8 +26,7 @@ class GetAccountRequestType extends AbstractRequestType
     /**
      * The InvoiceDate
      * Meta information extracted from the WSDL
-     * - documentation: This field is used to retrieve all account entries from a specific invoice, which is identified through this <b>InvoiceDate</b> field with the timestamp of the account invoice. This field is only applicable if the
-     * <b>AccountHistorySelection</b> value is set to 'SpecifiedInvoice'; otherwise, this field will be ignored.
+     * - documentation: Since <code>SpecifiedInvoice</code> is no longer supported, this field is no longer applicable and should not be used. If this field is included, it will be ignored.
      * - minOccurs: 0
      * @var string|null
      */
@@ -91,11 +90,8 @@ class GetAccountRequestType extends AbstractRequestType
     /**
      * The IncludeNettedEntries
      * Meta information extracted from the WSDL
-     * - documentation: An eBay managed payments seller includes this field and sets it to <code>true</code> to retrieve the total net amount of all charges/fees that have been deducted from seller payouts instead of being invoiced to the seller. The total
-     * net amount of any seller credits related to these fees is also shown. These fees and credit amounts will be shown in the <b>AccountSummary.NettedTransactionSummary</b> container in the response. <br> <br> The seller's account has to be enabled for
-     * managed payments and the fee netting mechanism must be enabled for the managed payments account in order to retrieve the fee netted amounts. A seller can check their status for the fee netting mechanism by checking the value in the
-     * <b>FeeNettingStatus</b> field. <br> <br> <span class="tablenote"><b>Note: </b> For a limited number of managed payments sellers, final value fees and payment processing fees will start getting deducted from seller payouts as early as mid-June 2020,
-     * but for many other managed payments sellers, these fees won't start getting deducted from seller payouts until mid-July 2020. </span>
+     * - documentation: Include this field and set it to <code>true</code> to retrieve the total net amount of all charges/fees that have been deducted from seller payouts instead of being invoiced to the seller. The total net amount of any seller credits
+     * related to these fees is also shown. These fees and credit amounts will be shown in the <b>AccountSummary.NettedTransactionSummary</b> container in the response.
      * - minOccurs: 0
      * @var bool|null
      */

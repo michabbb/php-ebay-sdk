@@ -34,7 +34,7 @@ class ProductIdentifiersType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    protected array $NameRecommendation = [];
+    protected ?array $NameRecommendation = null;
     /**
      * Constructor method for ProductIdentifiersType
      * @uses ProductIdentifiersType::setValidationRules()
@@ -42,7 +42,7 @@ class ProductIdentifiersType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\GroupValidationRulesType $validationRules
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType[] $nameRecommendation
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\GroupValidationRulesType $validationRules = null, array $nameRecommendation = [])
+    public function __construct(?\macropage\ebaysdk\trading\StructType\GroupValidationRulesType $validationRules = null, ?array $nameRecommendation = null)
     {
         $this
             ->setValidationRules($validationRules)
@@ -71,7 +71,7 @@ class ProductIdentifiersType extends AbstractStructBase
      * Get NameRecommendation value
      * @return \macropage\ebaysdk\trading\StructType\NameRecommendationType[]
      */
-    public function getNameRecommendation(): array
+    public function getNameRecommendation(): ?array
     {
         return $this->NameRecommendation;
     }
@@ -81,8 +81,11 @@ class ProductIdentifiersType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateNameRecommendationForArrayConstraintsFromSetNameRecommendation(array $values = []): string
+    public static function validateNameRecommendationForArrayConstraintsFromSetNameRecommendation(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $productIdentifiersTypeNameRecommendationItem) {
@@ -104,7 +107,7 @@ class ProductIdentifiersType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NameRecommendationType[] $nameRecommendation
      * @return \macropage\ebaysdk\trading\StructType\ProductIdentifiersType
      */
-    public function setNameRecommendation(array $nameRecommendation = []): self
+    public function setNameRecommendation(?array $nameRecommendation = null): self
     {
         // validation for constraint: array
         if ('' !== ($nameRecommendationArrayErrorMessage = self::validateNameRecommendationForArrayConstraintsFromSetNameRecommendation($nameRecommendation))) {

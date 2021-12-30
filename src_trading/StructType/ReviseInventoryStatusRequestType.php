@@ -27,13 +27,13 @@ class ReviseInventoryStatusRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    protected array $InventoryStatus = [];
+    protected ?array $InventoryStatus = null;
     /**
      * Constructor method for ReviseInventoryStatusRequestType
      * @uses ReviseInventoryStatusRequestType::setInventoryStatus()
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
      */
-    public function __construct(array $inventoryStatus = [])
+    public function __construct(?array $inventoryStatus = null)
     {
         $this
             ->setInventoryStatus($inventoryStatus);
@@ -42,7 +42,7 @@ class ReviseInventoryStatusRequestType extends AbstractRequestType
      * Get InventoryStatus value
      * @return \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
      */
-    public function getInventoryStatus(): array
+    public function getInventoryStatus(): ?array
     {
         return $this->InventoryStatus;
     }
@@ -52,8 +52,11 @@ class ReviseInventoryStatusRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateInventoryStatusForArrayConstraintsFromSetInventoryStatus(array $values = []): string
+    public static function validateInventoryStatusForArrayConstraintsFromSetInventoryStatus(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $reviseInventoryStatusRequestTypeInventoryStatusItem) {
@@ -75,7 +78,7 @@ class ReviseInventoryStatusRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\InventoryStatusType[] $inventoryStatus
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType
      */
-    public function setInventoryStatus(array $inventoryStatus = []): self
+    public function setInventoryStatus(?array $inventoryStatus = null): self
     {
         // validation for constraint: array
         if ('' !== ($inventoryStatusArrayErrorMessage = self::validateInventoryStatusForArrayConstraintsFromSetInventoryStatus($inventoryStatus))) {

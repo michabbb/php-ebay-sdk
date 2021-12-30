@@ -10,11 +10,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for ConditionType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>ConditionValues.Condition</b> container that is returned at the category level in the <b>GetCategoryFeatures</b> response if 'ConditionValues' is specified as a <b>FeatureID</b> value, or if no <b>FeatureID</b>
- * values are specified. A <b>ConditionValues.Condition</b> container is returned for each supported item condition value for each eBay category returned in the response. <br> <br> <span class="tablenote"><strong>Note:</strong> Starting in mid-September
- * 2020, the 'Manufacturer Refurbished' item condition (Condition ID 2000) will no longer be supported on the US and Australian marketplaces. Active listings on these two marketplaces will automatically be updated by eBay to the 'Seller Refurbished'
- * item condition (Condition ID 2500). Once this change happens, if a seller attempts to create a new listing or revise an existing listing with the Inventory or Trading APIs using the 'Manufacturer Refurbished' item condition, the listing or revision
- * will be blocked. </span>
+ * - documentation: Type defining the <b>ConditionValues.Condition</b> and <b>SpecialFeatures.Condition</b> containers that are returned at the site default level and category level in the <b>GetCategoryFeatures</b> response if 'ConditionValues' is
+ * specified as a <b>FeatureID</b> value, or if no <b>FeatureID</b> values are specified. A <b>ConditionValues.Condition</b> container is returned for each supported item condition value for each eBay category returned in the response, and a
+ * <b>SpecialFeatures.Condition</b> container is returned for item condition values that a seller must be pre-qualified to use, such as the refurbished conditions.
  * @subpackage Structs
  */
 class ConditionType extends AbstractStructBase
@@ -22,7 +20,7 @@ class ConditionType extends AbstractStructBase
     /**
      * The ID
      * Meta information extracted from the WSDL
-     * - documentation: The numeric ID of a condition (e.g., 1000). Use the ID in AddItem and related calls.
+     * - documentation: The numeric identifier of the item condition (e.g., 1000). The numeric identifier is used in the <b>Item.ConditionID</b> field in Add/Revise/Relist calls to set the condition of an item.
      * - minOccurs: 0
      * @var int|null
      */

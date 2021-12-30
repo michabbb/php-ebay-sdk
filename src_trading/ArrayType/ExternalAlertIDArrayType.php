@@ -23,13 +23,13 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ExternalAlertID = [];
+    protected ?array $ExternalAlertID = null;
     /**
      * Constructor method for ExternalAlertIDArrayType
      * @uses ExternalAlertIDArrayType::setExternalAlertID()
      * @param string[] $externalAlertID
      */
-    public function __construct(array $externalAlertID = [])
+    public function __construct(?array $externalAlertID = null)
     {
         $this
             ->setExternalAlertID($externalAlertID);
@@ -38,7 +38,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * Get ExternalAlertID value
      * @return string[]
      */
-    public function getExternalAlertID(): array
+    public function getExternalAlertID(): ?array
     {
         return $this->ExternalAlertID;
     }
@@ -48,8 +48,11 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateExternalAlertIDForArrayConstraintsFromSetExternalAlertID(array $values = []): string
+    public static function validateExternalAlertIDForArrayConstraintsFromSetExternalAlertID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $externalAlertIDArrayTypeExternalAlertIDItem) {
@@ -71,7 +74,7 @@ class ExternalAlertIDArrayType extends AbstractStructArrayBase
      * @param string[] $externalAlertID
      * @return \macropage\ebaysdk\trading\ArrayType\ExternalAlertIDArrayType
      */
-    public function setExternalAlertID(array $externalAlertID = []): self
+    public function setExternalAlertID(?array $externalAlertID = null): self
     {
         // validation for constraint: array
         if ('' !== ($externalAlertIDArrayErrorMessage = self::validateExternalAlertIDForArrayConstraintsFromSetExternalAlertID($externalAlertID))) {

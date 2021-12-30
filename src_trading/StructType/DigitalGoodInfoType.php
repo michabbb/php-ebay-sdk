@@ -19,8 +19,8 @@ class DigitalGoodInfoType extends AbstractStructBase
      * The DigitalDelivery
      * Meta information extracted from the WSDL
      * - documentation: This field must be included in the request and set to <code>true</code> if the seller plans to list a digital gift card in a category that supports digital gift cards. <br><br> To verify if a specific category on a specific eBay site
-     * supports digital gift card listings, use the <a href="http://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GetCategoryFeatures.html">GetCategoryFeatures</a> call, passing in a <b>CategoryID</b> value and a <b>DigitalGoodDeliveryEnabled</b> value
-     * in the <b>FeatureID</b> field. Look for a <code>true</code> value in the <b>DigitalGoodDeliveryEnabled</b> field of the corresponding <b>Category</b> node (match up the <b>CategoryID</b> values if more than one Category IDs were passed in the
+     * supports digital gift card listings, use the <a href="https://developer.ebay.com/DevZone/XML/docs/Reference/eBay/GetCategoryFeatures.html">GetCategoryFeatures</a> call, passing in a <b>CategoryID</b> value and a <b>DigitalGoodDeliveryEnabled</b>
+     * value in the <b>FeatureID</b> field. Look for a <code>true</code> value in the <b>DigitalGoodDeliveryEnabled</b> field of the corresponding <b>Category</b> node (match up the <b>CategoryID</b> values if more than one Category IDs were passed in the
      * request).
      * - maxOccurs: 1
      * - minOccurs: 0

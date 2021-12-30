@@ -48,7 +48,7 @@ class SetNotificationPreferencesRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[]
      */
-    protected array $EventProperty = [];
+    protected ?array $EventProperty = null;
     /**
      * The DeliveryURLName
      * Meta information extracted from the WSDL
@@ -71,7 +71,7 @@ class SetNotificationPreferencesRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[] $eventProperty
      * @param string $deliveryURLName
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ApplicationDeliveryPreferencesType $applicationDeliveryPreferences = null, ?\macropage\ebaysdk\trading\ArrayType\NotificationEnableArrayType $userDeliveryPreferenceArray = null, ?\macropage\ebaysdk\trading\StructType\NotificationUserDataType $userData = null, array $eventProperty = [], ?string $deliveryURLName = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ApplicationDeliveryPreferencesType $applicationDeliveryPreferences = null, ?\macropage\ebaysdk\trading\ArrayType\NotificationEnableArrayType $userDeliveryPreferenceArray = null, ?\macropage\ebaysdk\trading\StructType\NotificationUserDataType $userData = null, ?array $eventProperty = null, ?string $deliveryURLName = null)
     {
         $this
             ->setApplicationDeliveryPreferences($applicationDeliveryPreferences)
@@ -141,7 +141,7 @@ class SetNotificationPreferencesRequestType extends AbstractRequestType
      * Get EventProperty value
      * @return \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[]
      */
-    public function getEventProperty(): array
+    public function getEventProperty(): ?array
     {
         return $this->EventProperty;
     }
@@ -151,8 +151,11 @@ class SetNotificationPreferencesRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateEventPropertyForArrayConstraintsFromSetEventProperty(array $values = []): string
+    public static function validateEventPropertyForArrayConstraintsFromSetEventProperty(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $setNotificationPreferencesRequestTypeEventPropertyItem) {
@@ -174,7 +177,7 @@ class SetNotificationPreferencesRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\NotificationEventPropertyType[] $eventProperty
      * @return \macropage\ebaysdk\trading\StructType\SetNotificationPreferencesRequestType
      */
-    public function setEventProperty(array $eventProperty = []): self
+    public function setEventProperty(?array $eventProperty = null): self
     {
         // validation for constraint: array
         if ('' !== ($eventPropertyArrayErrorMessage = self::validateEventPropertyForArrayConstraintsFromSetEventProperty($eventProperty))) {

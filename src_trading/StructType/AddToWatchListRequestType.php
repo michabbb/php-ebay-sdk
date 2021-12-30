@@ -27,7 +27,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var string[]
      */
-    protected array $ItemID = [];
+    protected ?array $ItemID = null;
     /**
      * The VariationKey
      * Meta information extracted from the WSDL
@@ -38,7 +38,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationKeyType[]
      */
-    protected array $VariationKey = [];
+    protected ?array $VariationKey = null;
     /**
      * Constructor method for AddToWatchListRequestType
      * @uses AddToWatchListRequestType::setItemID()
@@ -46,7 +46,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @param \macropage\ebaysdk\trading\StructType\VariationKeyType[] $variationKey
      */
-    public function __construct(array $itemID = [], array $variationKey = [])
+    public function __construct(?array $itemID = null, ?array $variationKey = null)
     {
         $this
             ->setItemID($itemID)
@@ -56,7 +56,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * Get ItemID value
      * @return string[]
      */
-    public function getItemID(): array
+    public function getItemID(): ?array
     {
         return $this->ItemID;
     }
@@ -66,8 +66,11 @@ class AddToWatchListRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemIDForArrayConstraintsFromSetItemID(array $values = []): string
+    public static function validateItemIDForArrayConstraintsFromSetItemID(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addToWatchListRequestTypeItemIDItem) {
@@ -89,7 +92,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * @param string[] $itemID
      * @return \macropage\ebaysdk\trading\StructType\AddToWatchListRequestType
      */
-    public function setItemID(array $itemID = []): self
+    public function setItemID(?array $itemID = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemIDArrayErrorMessage = self::validateItemIDForArrayConstraintsFromSetItemID($itemID))) {
@@ -119,7 +122,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * Get VariationKey value
      * @return \macropage\ebaysdk\trading\StructType\VariationKeyType[]
      */
-    public function getVariationKey(): array
+    public function getVariationKey(): ?array
     {
         return $this->VariationKey;
     }
@@ -129,8 +132,11 @@ class AddToWatchListRequestType extends AbstractRequestType
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateVariationKeyForArrayConstraintsFromSetVariationKey(array $values = []): string
+    public static function validateVariationKeyForArrayConstraintsFromSetVariationKey(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $addToWatchListRequestTypeVariationKeyItem) {
@@ -152,7 +158,7 @@ class AddToWatchListRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\VariationKeyType[] $variationKey
      * @return \macropage\ebaysdk\trading\StructType\AddToWatchListRequestType
      */
-    public function setVariationKey(array $variationKey = []): self
+    public function setVariationKey(?array $variationKey = null): self
     {
         // validation for constraint: array
         if ('' !== ($variationKeyArrayErrorMessage = self::validateVariationKeyForArrayConstraintsFromSetVariationKey($variationKey))) {

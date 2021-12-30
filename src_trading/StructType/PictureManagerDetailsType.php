@@ -69,7 +69,7 @@ class PictureManagerDetailsType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[]
      */
-    protected array $Folder = [];
+    protected ?array $Folder = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -94,7 +94,7 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[] $folder
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $subscriptionLevel = null, ?int $storageUsed = null, ?int $totalStorageAvailable = null, ?bool $keepOriginal = null, ?bool $watermarkEPS = null, ?bool $watermarkUserID = null, array $folder = [], $any = null)
+    public function __construct(?string $subscriptionLevel = null, ?int $storageUsed = null, ?int $totalStorageAvailable = null, ?bool $keepOriginal = null, ?bool $watermarkEPS = null, ?bool $watermarkUserID = null, ?array $folder = null, $any = null)
     {
         $this
             ->setSubscriptionLevel($subscriptionLevel)
@@ -251,7 +251,7 @@ class PictureManagerDetailsType extends AbstractStructBase
      * Get Folder value
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[]
      */
-    public function getFolder(): array
+    public function getFolder(): ?array
     {
         return $this->Folder;
     }
@@ -261,8 +261,11 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateFolderForArrayConstraintsFromSetFolder(array $values = []): string
+    public static function validateFolderForArrayConstraintsFromSetFolder(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $pictureManagerDetailsTypeFolderItem) {
@@ -284,7 +287,7 @@ class PictureManagerDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\PictureManagerFolderType[] $folder
      * @return \macropage\ebaysdk\trading\StructType\PictureManagerDetailsType
      */
-    public function setFolder(array $folder = []): self
+    public function setFolder(?array $folder = null): self
     {
         // validation for constraint: array
         if ('' !== ($folderArrayErrorMessage = self::validateFolderForArrayConstraintsFromSetFolder($folder))) {

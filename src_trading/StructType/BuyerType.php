@@ -38,7 +38,7 @@ class BuyerType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxIdentifierType[]
      */
-    protected array $BuyerTaxIdentifier = [];
+    protected ?array $BuyerTaxIdentifier = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -53,7 +53,7 @@ class BuyerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierType[] $buyerTaxIdentifier
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, array $buyerTaxIdentifier = [], $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?array $buyerTaxIdentifier = null, $any = null)
     {
         $this
             ->setShippingAddress($shippingAddress)
@@ -83,7 +83,7 @@ class BuyerType extends AbstractStructBase
      * Get BuyerTaxIdentifier value
      * @return \macropage\ebaysdk\trading\StructType\TaxIdentifierType[]
      */
-    public function getBuyerTaxIdentifier(): array
+    public function getBuyerTaxIdentifier(): ?array
     {
         return $this->BuyerTaxIdentifier;
     }
@@ -93,8 +93,11 @@ class BuyerType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBuyerTaxIdentifierForArrayConstraintsFromSetBuyerTaxIdentifier(array $values = []): string
+    public static function validateBuyerTaxIdentifierForArrayConstraintsFromSetBuyerTaxIdentifier(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $buyerTypeBuyerTaxIdentifierItem) {
@@ -116,7 +119,7 @@ class BuyerType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TaxIdentifierType[] $buyerTaxIdentifier
      * @return \macropage\ebaysdk\trading\StructType\BuyerType
      */
-    public function setBuyerTaxIdentifier(array $buyerTaxIdentifier = []): self
+    public function setBuyerTaxIdentifier(?array $buyerTaxIdentifier = null): self
     {
         // validation for constraint: array
         if ('' !== ($buyerTaxIdentifierArrayErrorMessage = self::validateBuyerTaxIdentifierForArrayConstraintsFromSetBuyerTaxIdentifier($buyerTaxIdentifier))) {

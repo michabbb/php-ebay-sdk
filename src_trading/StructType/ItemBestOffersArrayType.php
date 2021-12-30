@@ -23,7 +23,7 @@ class ItemBestOffersArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemBestOffersType[]
      */
-    protected array $ItemBestOffers = [];
+    protected ?array $ItemBestOffers = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class ItemBestOffersArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemBestOffersType[] $itemBestOffers
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $itemBestOffers = [], $any = null)
+    public function __construct(?array $itemBestOffers = null, $any = null)
     {
         $this
             ->setItemBestOffers($itemBestOffers)
@@ -46,7 +46,7 @@ class ItemBestOffersArrayType extends AbstractStructBase
      * Get ItemBestOffers value
      * @return \macropage\ebaysdk\trading\StructType\ItemBestOffersType[]
      */
-    public function getItemBestOffers(): array
+    public function getItemBestOffers(): ?array
     {
         return $this->ItemBestOffers;
     }
@@ -56,8 +56,11 @@ class ItemBestOffersArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateItemBestOffersForArrayConstraintsFromSetItemBestOffers(array $values = []): string
+    public static function validateItemBestOffersForArrayConstraintsFromSetItemBestOffers(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $itemBestOffersArrayTypeItemBestOffersItem) {
@@ -79,7 +82,7 @@ class ItemBestOffersArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ItemBestOffersType[] $itemBestOffers
      * @return \macropage\ebaysdk\trading\StructType\ItemBestOffersArrayType
      */
-    public function setItemBestOffers(array $itemBestOffers = []): self
+    public function setItemBestOffers(?array $itemBestOffers = null): self
     {
         // validation for constraint: array
         if ('' !== ($itemBestOffersArrayErrorMessage = self::validateItemBestOffersForArrayConstraintsFromSetItemBestOffers($itemBestOffers))) {

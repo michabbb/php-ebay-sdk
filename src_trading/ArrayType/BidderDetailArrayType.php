@@ -23,13 +23,13 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BidderDetailType[]
      */
-    protected array $BidderDetail = [];
+    protected ?array $BidderDetail = null;
     /**
      * Constructor method for BidderDetailArrayType
      * @uses BidderDetailArrayType::setBidderDetail()
      * @param \macropage\ebaysdk\trading\StructType\BidderDetailType[] $bidderDetail
      */
-    public function __construct(array $bidderDetail = [])
+    public function __construct(?array $bidderDetail = null)
     {
         $this
             ->setBidderDetail($bidderDetail);
@@ -38,7 +38,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * Get BidderDetail value
      * @return \macropage\ebaysdk\trading\StructType\BidderDetailType[]
      */
-    public function getBidderDetail(): array
+    public function getBidderDetail(): ?array
     {
         return $this->BidderDetail;
     }
@@ -48,8 +48,11 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateBidderDetailForArrayConstraintsFromSetBidderDetail(array $values = []): string
+    public static function validateBidderDetailForArrayConstraintsFromSetBidderDetail(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $bidderDetailArrayTypeBidderDetailItem) {
@@ -71,7 +74,7 @@ class BidderDetailArrayType extends AbstractStructArrayBase
      * @param \macropage\ebaysdk\trading\StructType\BidderDetailType[] $bidderDetail
      * @return \macropage\ebaysdk\trading\ArrayType\BidderDetailArrayType
      */
-    public function setBidderDetail(array $bidderDetail = []): self
+    public function setBidderDetail(?array $bidderDetail = null): self
     {
         // validation for constraint: array
         if ('' !== ($bidderDetailArrayErrorMessage = self::validateBidderDetailForArrayConstraintsFromSetBidderDetail($bidderDetail))) {

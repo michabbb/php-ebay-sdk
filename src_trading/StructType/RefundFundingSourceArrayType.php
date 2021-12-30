@@ -23,7 +23,7 @@ class RefundFundingSourceArrayType extends AbstractStructBase
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundFundingSourceType[]
      */
-    protected array $RefundFundingSource = [];
+    protected ?array $RefundFundingSource = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -36,7 +36,7 @@ class RefundFundingSourceArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundFundingSourceType[] $refundFundingSource
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(array $refundFundingSource = [], $any = null)
+    public function __construct(?array $refundFundingSource = null, $any = null)
     {
         $this
             ->setRefundFundingSource($refundFundingSource)
@@ -46,7 +46,7 @@ class RefundFundingSourceArrayType extends AbstractStructBase
      * Get RefundFundingSource value
      * @return \macropage\ebaysdk\trading\StructType\RefundFundingSourceType[]
      */
-    public function getRefundFundingSource(): array
+    public function getRefundFundingSource(): ?array
     {
         return $this->RefundFundingSource;
     }
@@ -56,8 +56,11 @@ class RefundFundingSourceArrayType extends AbstractStructBase
      * @param array $values
      * @return string A non-empty message if the values does not match the validation rules
      */
-    public static function validateRefundFundingSourceForArrayConstraintsFromSetRefundFundingSource(array $values = []): string
+    public static function validateRefundFundingSourceForArrayConstraintsFromSetRefundFundingSource(?array $values = []): string
     {
+        if (!is_array($values)) {
+            return '';
+        }
         $message = '';
         $invalidValues = [];
         foreach ($values as $refundFundingSourceArrayTypeRefundFundingSourceItem) {
@@ -79,7 +82,7 @@ class RefundFundingSourceArrayType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\RefundFundingSourceType[] $refundFundingSource
      * @return \macropage\ebaysdk\trading\StructType\RefundFundingSourceArrayType
      */
-    public function setRefundFundingSource(array $refundFundingSource = []): self
+    public function setRefundFundingSource(?array $refundFundingSource = null): self
     {
         // validation for constraint: array
         if ('' !== ($refundFundingSourceArrayErrorMessage = self::validateRefundFundingSourceForArrayConstraintsFromSetRefundFundingSource($refundFundingSource))) {
