@@ -65,10 +65,13 @@ class shopping extends base {
 		return $this->call($name, $arguments);
 	}
 
-	public function setCredentials(string $appid): void
+    public function setCredentials(string $appid,?string $accessToken=NULL): void
     {
-		$this->appid = $appid;
-	}
+	$this->appid = $appid;
+        if ($accessToken) {
+            $this->Service->setHttpHeader('X-EBAY-API-IAF-TOKEN', $accessToken);
+        }
+    }
 
 	public function setApiEndpoint(string $api_endpoint): void
     {
