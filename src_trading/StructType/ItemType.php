@@ -167,9 +167,9 @@ class ItemType extends AbstractStructBase
      * Features Guide. <br><br> This field is conditionally required for all listings. The exception is when the seller specifies a product identifier, such as a GTIN or ePID, through the <b>ProductListingDetails</b> container and a product match is found
      * in the eBay product catalog. If a matching product is found in the eBay product catalog, the item description will be created automatically (as long as the <b>ProductListingDetails.IncludeeBayProductDetails</b> value is <code>true</code>). <br>
      * - minOccurs: 0
-     * @var string|null
+     * @var string|null|SoapVar
      */
-    protected ?string $Description = null;
+    protected $Description = null;
     /**
      * The DescriptionReviseMode
      * Meta information extracted from the WSDL
@@ -2259,8 +2259,13 @@ class ItemType extends AbstractStructBase
         if (!is_null($description) && !is_string($description)) {
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($description, true), gettype($description)), __LINE__);
         }
-        $this->Description = $description;
-        
+        /**
+         * Dear Developer,
+         * Your immediate attention and action is required.
+         * As of August 14, 2023, DOCTYPE declarations must be used within the CDATA section of your XML requests payload during listing updates.
+         * DOCTYPE will not be otherwise allowed in XML request payloads in Trading API. Please follow this practice when using the Item.Description field in Add/Revise/Relist Trading API calls.
+         */
+        $this->Description = new \SoapVar('<ns1:Description><![CDATA['.$description.']]></ns1:Description>', XSD_ANYXML);
         return $this;
     }
     /**
