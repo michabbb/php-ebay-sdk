@@ -2265,7 +2265,9 @@ class ItemType extends AbstractStructBase
          * As of August 14, 2023, DOCTYPE declarations must be used within the CDATA section of your XML requests payload during listing updates.
          * DOCTYPE will not be otherwise allowed in XML request payloads in Trading API. Please follow this practice when using the Item.Description field in Add/Revise/Relist Trading API calls.
          */
-        $this->Description = new \SoapVar('<ns1:Description><![CDATA['.$description.']]></ns1:Description>', XSD_ANYXML);
+        if (!empty($description)) {
+            $this->Description = new \SoapVar('<ns1:Description><![CDATA[' . $description . ']]></ns1:Description>', XSD_ANYXML);
+        }
         return $this;
     }
     /**
