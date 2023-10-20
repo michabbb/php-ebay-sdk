@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection UnknownInspectionInspection */
+
 /** @noinspection ClassConstantCanBeUsedInspection */
 
 namespace macropage\ebaysdk\base;
@@ -7,10 +8,6 @@ use DateTime;
 use DateTimeZone;
 use DOMDocument;
 use Exception;
-use JetBrains\PhpStorm\ArrayShape;
-use macropage\ebaysdk\finding\ServiceType\Service as FindingService;
-use macropage\ebaysdk\trading\ServiceType\Service as TradingService;
-use macropage\ebaysdk\shopping\ServiceType\Service as ShoppingService;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use SoapFault;
@@ -134,19 +131,20 @@ class base
                             $args[0]->setVersion($this->version);
                         }
 
-                        $this->Service->setLocation($this->api_endpoint . '?callname=' . $method . '&siteid=' . $this->siteId . '&appid=' . $this->appid . '&version=' . $this->version . '&routing=new');
+                        $this->setSOAPLocation($this->api_endpoint . '?callname=' . $method . '&siteid=' . $this->siteId . '&appid=' . $this->appid . '&version=' . $this->version . '&routing=new');
                         $result = call_user_func_array(
                             [
                                 $this->Service,
                                 $method
                             ], $args);
+
                         $this->log($method);
 
                         if (!$result && count($this->Service->getLastError())) {
                             $Errors = $this->Service->getLastError();
                             if (is_array($Errors)) {
                                 $Error = reset($Errors);
-                                if (is_object($Error) && $Error instanceof SoapFault) {
+                                if ($Error instanceof SoapFault) {
                                     throw $Error;
                                 }
                                 throw new RuntimeException('unknown error type: ' . get_class($Error));
@@ -162,6 +160,26 @@ class base
                 throw new RuntimeException('unknow method ' . $method);
             default:
                 throw new RuntimeException('unknown Service: ' . $this->Service);
+        }
+    }
+
+    public function setRetry(int $retry): void
+    {
+        if (method_exists($this->Service->getSoapClient(), 'setRetry')) {
+            /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+            $this->Service->getSoapClient()->setRetry($retry);
+        }
+    }
+
+    /**
+     * @param int $retry_delay // in seconds
+     * @return void
+     */
+    public function setRetryDelay(int $retry_delay): void
+    {
+        if (method_exists($this->Service->getSoapClient(), 'setRetryDelay')) {
+            /** @noinspection PhpPossiblePolymorphicInvocationInspection */
+            $this->Service->getSoapClient()->setRetryDelay($retry_delay * 1000);
         }
     }
 
@@ -196,13 +214,13 @@ class base
      *
      * @param string      $url  API endpoint.
      * @param string      $name The name of the operation.
-     * @param string|null $headers_request
+     * @param mixed       $headers_request
      * @param string      $request_xml
-     * @param string|null $headers_response
+     * @param mixed       $headers_response
      * @param string|null $reponse_xml
      * @param mixed       $last_error
      */
-    private function logRequest(string $url, string $name, ?string $headers_request, string $request_xml, ?string $headers_response, ?string $reponse_xml, $last_error): void
+    private function logRequest(string $url, string $name, $headers_request, string $request_xml, $headers_response, ?string $reponse_xml, $last_error): void
     {
         if ($this->logger) {
             $faulstring        = '';
@@ -249,6 +267,7 @@ class base
      *  date.timezone = "Europe/Berlin"
      *
      * otherwise, LOCAL = UTC = EBAY-Time
+     * @throws Exception
      */
     public function GmtTimeToLocalTime($datetime): string
     {

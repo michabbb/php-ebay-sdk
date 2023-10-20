@@ -10,7 +10,7 @@ use macropage\ebaysdk\trading\ServiceType\Service as EbayTradingService;
 use macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType;
 use macropage\ebaysdk\trading\StructType\UserIdPasswordType;
 use SoapFault;
-use WsdlToPhp\PackageBase\AbstractSoapClientBase as AbstractSoapClientBaseAlias;
+use WsdlToPhp\PackageBase\SoapClientInterface;
 
 /**
  * Class tradingservice
@@ -165,26 +165,41 @@ class trading extends base {
 		'sandbox' => 'https://api.sandbox.ebay.com/wsapi'
 	];
 
-	public function __construct(array $wsdlOptions = [],$api_endpoint='live') {
+    /**
+     * @throws SoapFault
+     */
+    public function __construct(array $wsdlOptions = [], $api_endpoint='live') {
+
+        $streamContext = stream_context_create([
+                                  'ssl' => [
+                                      'verify_peer'       => false,
+                                      'verify_host'       => false,
+                                      'allow_self_signed' => true,
+                                  ],
+                                  /*'filters' => [
+                                      'dechunk' => [],
+                                  ],
+                                  'http' => array(
+                                      'protocol_version' => 1.0,
+                                  ),*/
+                              ]);
+
 		$SoapServicoptions = [
-			AbstractSoapClientBaseAlias::WSDL_URL                => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'trading.wsdl',
-			AbstractSoapClientBaseAlias::WSDL_CLASSMAP           => ClassMapTradingService::get(),
-			AbstractSoapClientBaseAlias::WSDL_TRACE              => true,
-			AbstractSoapClientBaseAlias::WSDL_CACHE_WSDL         => WSDL_CACHE_BOTH,
-			AbstractSoapClientBaseAlias::WSDL_CONNECTION_TIMEOUT => 180,
-			AbstractSoapClientBaseAlias::WSDL_COMPRESSION        => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
-			AbstractSoapClientBaseAlias::WSDL_STREAM_CONTEXT     => stream_context_create([
-																							  'ssl' => [
-																								  'verify_peer'       => false,
-																								  'verify_host'       => false,
-																								  'allow_self_signed' => true,
-																							  ]
-																						  ])
-		];
+            SoapClientInterface::WSDL_URL                => __DIR__ . DIRECTORY_SEPARATOR . 'wsdl' . DIRECTORY_SEPARATOR . 'trading.wsdl',
+            SoapClientInterface::WSDL_CLASSMAP           => ClassMapTradingService::get(),
+            SoapClientInterface::WSDL_TRACE              => true,
+            SoapClientInterface::WSDL_CACHE_WSDL         => WSDL_CACHE_BOTH,
+            SoapClientInterface::WSDL_CONNECTION_TIMEOUT => 180,
+            SoapClientInterface::WSDL_COMPRESSION        => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,
+            SoapClientInterface::WSDL_STREAM_CONTEXT     => $streamContext
+        ];
 
 		$wsdlOptions = $this->overrideSoapWsdlOptions($SoapServicoptions,$wsdlOptions);
 
 		$this->Service = new EbayTradingService($wsdlOptions);
+
+        $this->Service->setSoapClient((new CustomSoapClient($SoapServicoptions[SoapClientInterface::WSDL_URL], $wsdlOptions)));
+
 		if (array_key_exists($api_endpoint,$this->api_endpoints)) {
 			$this->api_endpoint = $this->api_endpoints[$api_endpoint];
 		} else {
