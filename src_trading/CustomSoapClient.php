@@ -6,14 +6,13 @@ use Closure;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
-use Psr\Http\Message\RequestInterface;
-use SoapClient;
-use SoapFault;
-use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\RequestInterface;
+use SoapClient;
+use SoapFault;
 
 class CustomSoapClient extends SoapClient
 {
@@ -56,7 +55,7 @@ class CustomSoapClient extends SoapClient
     private function parseOptions(array $options): array
     {
         $wsdlOptions        = [];
-        $defaultWsdlOptions = AbstractSoapClientBase::getDefaultWsdlOptions();
+        $defaultWsdlOptions = SoapClientBase::getDefaultWsdlOptions();
         foreach ($defaultWsdlOptions as $optionName => $optionValue) {
             if (array_key_exists($optionName, $options) && !is_null($options[$optionName])) {
                 $wsdlOptions[str_replace(self::OPTION_PREFIX, '', $optionName)] = $options[$optionName];
