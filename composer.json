@@ -8,7 +8,7 @@
         "wsdltophp/packagebase": "~2.0",
         "psr/log": "1.*",
         "ext-dom": "*",
-        "guzzlehttp/guzzle": "^7.8"
+        "guzzlehttp/guzzle": "^7.3 || ^7.8"
     },
     "autoload": {
         "classmap": [
