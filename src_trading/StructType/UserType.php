@@ -19,7 +19,8 @@ class UserType extends AbstractStructBase
     /**
      * The AboutMePage
      * Meta information extracted from the WSDL
-     * - documentation: If <code>true</code>, indicates that the user has set up an About Me page.
+     * - documentation: <br> A value of <code>true</code> indicates that the user has set up an About Me page. <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on
+     * January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -56,8 +57,8 @@ class UserType extends AbstractStructBase
      * from the buyer is returned. For <b>GetMyeBaySelling</b>, the feedback score of the seller is returned. <br> <br> <b>GetMyeBayBuying</b> and <b>GetMyeBaySelling</b> also return feedback information (<b>FeedbackScore</b> and <b>FeedbackRatingStar</b>)
      * in <b>BidList.ItemArray.Item.SellingStatus.HighBidder</b>. <b>GetMyeBayBuying</b> returns feedback information on the high bidder of each item the buyer is bidding on. <b>GetMyeBaySelling</b> returns feedback information on the high bidder of each
      * item the seller is selling.<br> <br> Since a bidder's user info is anonymous, the real feedback score will be returned only to that bidder, and to the seller of an item that the user is bidding on. For all other users, the value -99 is returned.
-     * <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a
-     * Trading WSDL older than Version 1019, the accurate Feedback Score for the user is returned to the buyer or seller, but a dummy value of <code>0</code> will be returned to all third parties.
+     * <br><br> <b>For GetOrders and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than
+     * Version 1019, the accurate Feedback Score for the user is returned to the buyer or seller, but a dummy value of <code>0</code> will be returned to all third parties.
      * - minOccurs: 0
      * @var int|null
      */
@@ -85,9 +86,9 @@ class UserType extends AbstractStructBase
      * The PositiveFeedbackPercent
      * Meta information extracted from the WSDL
      * - documentation: Percent of total feedback that is positive. For example, if the member has 50 feedbacks, where 49 are positive and 1 is neutral or negative, the positive feedback percent could be 98.0. The value uses a max precision of 4 and a scale
-     * of 1. If the user has feedback, this value can be returned regardless of whether the member has chosen to make their feedback private. Not returned if the user has no feedback. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions
-     * only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the accurate Positive Feedback Percentage
-     * value for the user is returned to the buyer or seller, but a dummy value of <code>0.0</code> will be returned to all third parties.
+     * of 1. If the user has feedback, this value can be returned regardless of whether the member has chosen to make their feedback private. Not returned if the user has no feedback. <br><br> <b>For GetOrders and GetItemTransactions only:</b> If using
+     * Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the accurate Positive Feedback Percentage value for the user
+     * is returned to the buyer or seller, but a dummy value of <code>0.0</code> will be returned to all third parties.
      * - minOccurs: 0
      * @var float|null
      */
@@ -104,9 +105,8 @@ class UserType extends AbstractStructBase
     /**
      * The FeedbackRatingStar
      * Meta information extracted from the WSDL
-     * - documentation: Visual indicator of user's feedback score. See <b>FeedbackRatingStarCodeType</b> for specific values. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above,
-     * this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the accurate Feedback Rating Star value for the user is returned to the buyer or seller, but a
-     * dummy value of <code>None</code> will be returned to all third parties.
+     * - documentation: <br> A visual indicator of an eBay user's Feedback score. A different colored star is used for each range of Feedback scores. See <b>FeedbackRatingStarCodeType</b> for specific values. <br> <span class="tablenote"><b>Note: </b> This
+     * field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -114,7 +114,8 @@ class UserType extends AbstractStructBase
     /**
      * The IDVerified
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether the user has been verified. For more information about the ID Verify program, see: <a href="http://pages.ebay.com/help/policies/identity-idverify.html">Protecting your account</a>
+     * - documentation: <br> Indicates whether the user has been verified. For more information about the ID Verify program, see: <a href="https://pages.ebay.com/help/policies/identity-idverify.html">Protecting your account</a> <br> <span
+     * class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -122,7 +123,8 @@ class UserType extends AbstractStructBase
     /**
      * The eBayGoodStanding
      * Meta information extracted from the WSDL
-     * - documentation: If <code>true</code>, indicates that the user is in good standing with eBay.
+     * - documentation: <br> This boolean field is returned as <code>true</code> if the eBay user is in good standing with eBay. <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -130,8 +132,8 @@ class UserType extends AbstractStructBase
     /**
      * The NewUser
      * Meta information extracted from the WSDL
-     * - documentation: If <code>true</code>, identifies a new user who has been a registered eBay user for 30 days or less. This is always <code>false</code> after the user has been registered for more than 30 days. Does not indicate an ID change (see
-     * <b>UserIdChanged</b>).
+     * - documentation: This boolean is returned as <code>true</code> if the eBay user has been registered on eBay for 30 days or less. <br> <span class="tablenote"><b>Note: </b> The <b>Buyer.NewUser</b> field will stop being returned in
+     * <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -139,10 +141,11 @@ class UserType extends AbstractStructBase
     /**
      * The RegistrationAddress
      * Meta information extracted from the WSDL
-     * - documentation: This container consists of the Registration address for the eBay user making the call.<br> <br> <b>GetUser:</b> eBay returns complete <b>RegistrationAddress</b> details (including Phone), as applicable to the registration site for
-     * the eBay user making the call. <br><br> <b>GetItem and GetSellerTransactions:</b> <b>RegistrationAddress</b> for another user (except for Phone) is only returned if you have an order relationship with that user AND that user is registered on
-     * DE/AT/CH, regardless of your registration site and the site to which you send the request. For example, the seller can see the buyer's registration address if the buyer is registered on DE/AT/CH, or the buyer can see the seller's registration address
-     * if the seller is registered on DE/AT/CH. (The buyer and seller won't see their own registration addresses in <b>GetItem</b>.)
+     * - documentation: <br> This container consists of the Registration address for the eBay user.<br> <br> <b>GetUser:</b> eBay returns complete <b>RegistrationAddress</b> details (including Phone), as applicable to the registration site for the eBay user
+     * making the call. <br><br> <b>GetItem and GetSellerTransactions:</b> <b>RegistrationAddress</b> for another user (except for Phone) is only returned if you have an order relationship with that user AND that user is registered on DE/AT/CH, regardless
+     * of your registration site and the site to which you send the request. For example, the seller can see the buyer's registration address if the buyer is registered on DE/AT/CH, or the buyer can see the seller's registration address if the seller is
+     * registered on DE/AT/CH. (The buyer and seller won't see their own registration addresses in <b>GetItem</b>.) <br> <span class="tablenote"><b>Note: </b> This container and its child fields will stop being returned in <b>GetSellerTransactions</b> on
+     * January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
@@ -181,9 +184,9 @@ class UserType extends AbstractStructBase
      * indicating the order of that user's first bid. For example, if the user was the third bidder, <b>UserID</b> = <code>Bidder 3</code>. Note that in this Philippines site format, the anonymous bidder ID stays the same for a given auction, but is
      * different for different auctions. For example, a bidder who is the third and then the seventh bidder in an auction will be listed for both bids as "Bidder 3". However, if that same bidder is the first bidder on a different auction, the bidder will be
      * listed for that auction as "Bidder 1", not "Bidder 3". <br><br> For <b>GetMyeBayBuying</b> only, when bidding on items listed on the UK and AU sites: <b>UserID</b> is replaced with the string "High Bidder". <br><br> For <b>PlaceOffer</b>, see also
-     * <b>SellingStatus.HighBidder</b>. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders,
-     * OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API
-     * call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * <b>SellingStatus.HighBidder</b>. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user. <br><br>For GetAllBidders, some bidder information is anonymous, to
+     * protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or
+     * outside watchers will be returned as anonymized userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -202,8 +205,8 @@ class UserType extends AbstractStructBase
     /**
      * The UserIDLastChanged
      * Meta information extracted from the WSDL
-     * - documentation: Date and time the user's data was last changed (in GMT). <br><br> Since a bidder's user info is anonymous, this tag will be returned only to that bidder, and to the seller of an item that the user is bidding on. <br> <br> <span
-     * class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong> call, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
+     * - documentation: <br> Date and time when the user last changed their eBay user ID (in GMT). <br> <span class="tablenote"><b>Note: </b> The <b>Buyer.UserIDLastChanged</b> field will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -228,8 +231,8 @@ class UserType extends AbstractStructBase
     /**
      * The SellerInfo
      * Meta information extracted from the WSDL
-     * - documentation: Contains information about a seller, including listing settings, listing preferences, seller rankings, and seller type. <br><br> This field is replaced by the <b>SellerBusinessType</b> field if the user is a business seller with a
-     * site ID of 77 (Germany), ID of 3 (UK), ID of 205 (Ireland) or ID of 0 (US Motors). <br><br> See <b>SellerType</b> or <b>SellerBusinessCodeType</b> for the child elements.
+     * - documentation: <br> Contains information about a seller, including listing settings, listing preferences, seller rankings, and seller type. <br> <span class="tablenote"><b>Note: </b> This container will stop being returned in
+     * <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerType|null
      */
@@ -244,38 +247,6 @@ class UserType extends AbstractStructBase
      */
     protected ?string $BusinessRole = null;
     /**
-     * The CharityAffiliations
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CharityAffiliationsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType $CharityAffiliations = null;
-    /**
-     * The PayPalAccountLevel
-     * Meta information extracted from the WSDL
-     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PayPalAccountLevel = null;
-    /**
-     * The PayPalAccountType
-     * Meta information extracted from the WSDL
-     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PayPalAccountType = null;
-    /**
-     * The PayPalAccountStatus
-     * Meta information extracted from the WSDL
-     * - documentation: This field is currently still returned, but is no longer relevant since having a PayPal account linked to your eBay account is no longer required.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PayPalAccountStatus = null;
-    /**
      * The UserSubscription
      * Meta information extracted from the WSDL
      * - documentation: Specifies the subscription level for a user.
@@ -284,23 +255,6 @@ class UserType extends AbstractStructBase
      * @var string[]
      */
     protected ?array $UserSubscription = null;
-    /**
-     * The SiteVerified
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $SiteVerified = null;
-    /**
-     * The SkypeID
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var string[]
-     */
-    protected ?array $SkypeID = null;
     /**
      * The eBayWikiReadOnly
      * Meta information extracted from the WSDL
@@ -326,14 +280,6 @@ class UserType extends AbstractStructBase
      * @var string|null
      */
     protected ?string $VATID = null;
-    /**
-     * The SellerPaymentMethod
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $SellerPaymentMethod = null;
     /**
      * The BiddingSummary
      * Meta information extracted from the WSDL
@@ -369,14 +315,6 @@ class UserType extends AbstractStructBase
      */
     protected ?bool $EnterpriseSeller = null;
     /**
-     * The BillingEmail
-     * Meta information extracted from the WSDL
-     * - documentation: When a user has their billing option set to <code>email</code>, they can include this element in a <b>GetUser</b> request to retrieve their own email bills.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $BillingEmail = null;
-    /**
      * The QualifiesForSelling
      * Meta information extracted from the WSDL
      * - documentation: This flag indicates whether or not the user is eligible to sell items on eBay. This field is only returned if the <b>IncludeFeatureEligibility</b> flag is included in the call request and set to <code>true</code>.
@@ -384,14 +322,6 @@ class UserType extends AbstractStructBase
      * @var bool|null
      */
     protected ?bool $QualifiesForSelling = null;
-    /**
-     * The StaticAlias
-     * Meta information extracted from the WSDL
-     * - documentation: Contains the static email address of an eBay member, used within the "reply to" email address when the eBay member sends a message. (Each eBay member is assigned a static alias. The alias is used within a static email address.)
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $StaticAlias = null;
     /**
      * The ShippingAddress
      * Meta information extracted from the WSDL
@@ -415,7 +345,8 @@ class UserType extends AbstractStructBase
     /**
      * The UserFirstName
      * Meta information extracted from the WSDL
-     * - documentation: The first name of the buyer who purchased the order.
+     * - documentation: <br> The first name of the buyer or seller involved in the order. <br> <span class="tablenote"><b>Note: </b> The <b>Seller.UserFirstName</b> field will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -423,7 +354,8 @@ class UserType extends AbstractStructBase
     /**
      * The UserLastName
      * Meta information extracted from the WSDL
-     * - documentation: The last name of the buyer who purchased the order.
+     * - documentation: <br> The last name of the buyer or seller involved in the order. <br> <span class="tablenote"><b>Note: </b> The <b>Seller.UserLastName</b> field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b>
+     * on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -458,24 +390,15 @@ class UserType extends AbstractStructBase
      * @uses UserType::setBuyerInfo()
      * @uses UserType::setSellerInfo()
      * @uses UserType::setBusinessRole()
-     * @uses UserType::setCharityAffiliations()
-     * @uses UserType::setPayPalAccountLevel()
-     * @uses UserType::setPayPalAccountType()
-     * @uses UserType::setPayPalAccountStatus()
      * @uses UserType::setUserSubscription()
-     * @uses UserType::setSiteVerified()
-     * @uses UserType::setSkypeID()
      * @uses UserType::setEBayWikiReadOnly()
      * @uses UserType::setTUVLevel()
      * @uses UserType::setVATID()
-     * @uses UserType::setSellerPaymentMethod()
      * @uses UserType::setBiddingSummary()
      * @uses UserType::setUserAnonymized()
      * @uses UserType::setUniqueNeutralFeedbackCount()
      * @uses UserType::setEnterpriseSeller()
-     * @uses UserType::setBillingEmail()
      * @uses UserType::setQualifiesForSelling()
-     * @uses UserType::setStaticAlias()
      * @uses UserType::setShippingAddress()
      * @uses UserType::setMembership()
      * @uses UserType::setUserFirstName()
@@ -504,31 +427,22 @@ class UserType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\BuyerType $buyerInfo
      * @param \macropage\ebaysdk\trading\StructType\SellerType $sellerInfo
      * @param string $businessRole
-     * @param \macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations
-     * @param string $payPalAccountLevel
-     * @param string $payPalAccountType
-     * @param string $payPalAccountStatus
      * @param string[] $userSubscription
-     * @param bool $siteVerified
-     * @param string[] $skypeID
      * @param bool $eBayWikiReadOnly
      * @param int $tUVLevel
      * @param string $vATID
-     * @param string $sellerPaymentMethod
      * @param \macropage\ebaysdk\trading\StructType\BiddingSummaryType $biddingSummary
      * @param bool $userAnonymized
      * @param int $uniqueNeutralFeedbackCount
      * @param bool $enterpriseSeller
-     * @param string $billingEmail
      * @param bool $qualifiesForSelling
-     * @param string $staticAlias
      * @param \macropage\ebaysdk\trading\StructType\AddressType $shippingAddress
      * @param \macropage\ebaysdk\trading\StructType\MembershipDetailsType $membership
      * @param string $userFirstName
      * @param string $userLastName
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $aboutMePage = null, ?string $eIASToken = null, ?string $email = null, ?int $feedbackScore = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?float $positiveFeedbackPercent = null, ?bool $feedbackPrivate = null, ?string $feedbackRatingStar = null, ?bool $iDVerified = null, ?bool $eBayGoodStanding = null, ?bool $newUser = null, ?\macropage\ebaysdk\trading\StructType\AddressType $registrationAddress = null, ?string $registrationDate = null, ?string $site = null, ?string $status = null, ?string $userID = null, ?bool $userIDChanged = null, ?string $userIDLastChanged = null, ?string $vATStatus = null, ?\macropage\ebaysdk\trading\StructType\BuyerType $buyerInfo = null, ?\macropage\ebaysdk\trading\StructType\SellerType $sellerInfo = null, ?string $businessRole = null, ?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations = null, ?string $payPalAccountLevel = null, ?string $payPalAccountType = null, ?string $payPalAccountStatus = null, ?array $userSubscription = null, ?bool $siteVerified = null, ?array $skypeID = null, ?bool $eBayWikiReadOnly = null, ?int $tUVLevel = null, ?string $vATID = null, ?string $sellerPaymentMethod = null, ?\macropage\ebaysdk\trading\StructType\BiddingSummaryType $biddingSummary = null, ?bool $userAnonymized = null, ?int $uniqueNeutralFeedbackCount = null, ?bool $enterpriseSeller = null, ?string $billingEmail = null, ?bool $qualifiesForSelling = null, ?string $staticAlias = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?\macropage\ebaysdk\trading\StructType\MembershipDetailsType $membership = null, ?string $userFirstName = null, ?string $userLastName = null, $any = null)
+    public function __construct(?bool $aboutMePage = null, ?string $eIASToken = null, ?string $email = null, ?int $feedbackScore = null, ?int $uniqueNegativeFeedbackCount = null, ?int $uniquePositiveFeedbackCount = null, ?float $positiveFeedbackPercent = null, ?bool $feedbackPrivate = null, ?string $feedbackRatingStar = null, ?bool $iDVerified = null, ?bool $eBayGoodStanding = null, ?bool $newUser = null, ?\macropage\ebaysdk\trading\StructType\AddressType $registrationAddress = null, ?string $registrationDate = null, ?string $site = null, ?string $status = null, ?string $userID = null, ?bool $userIDChanged = null, ?string $userIDLastChanged = null, ?string $vATStatus = null, ?\macropage\ebaysdk\trading\StructType\BuyerType $buyerInfo = null, ?\macropage\ebaysdk\trading\StructType\SellerType $sellerInfo = null, ?string $businessRole = null, ?array $userSubscription = null, ?bool $eBayWikiReadOnly = null, ?int $tUVLevel = null, ?string $vATID = null, ?\macropage\ebaysdk\trading\StructType\BiddingSummaryType $biddingSummary = null, ?bool $userAnonymized = null, ?int $uniqueNeutralFeedbackCount = null, ?bool $enterpriseSeller = null, ?bool $qualifiesForSelling = null, ?\macropage\ebaysdk\trading\StructType\AddressType $shippingAddress = null, ?\macropage\ebaysdk\trading\StructType\MembershipDetailsType $membership = null, ?string $userFirstName = null, ?string $userLastName = null, $any = null)
     {
         $this
             ->setAboutMePage($aboutMePage)
@@ -554,24 +468,15 @@ class UserType extends AbstractStructBase
             ->setBuyerInfo($buyerInfo)
             ->setSellerInfo($sellerInfo)
             ->setBusinessRole($businessRole)
-            ->setCharityAffiliations($charityAffiliations)
-            ->setPayPalAccountLevel($payPalAccountLevel)
-            ->setPayPalAccountType($payPalAccountType)
-            ->setPayPalAccountStatus($payPalAccountStatus)
             ->setUserSubscription($userSubscription)
-            ->setSiteVerified($siteVerified)
-            ->setSkypeID($skypeID)
             ->setEBayWikiReadOnly($eBayWikiReadOnly)
             ->setTUVLevel($tUVLevel)
             ->setVATID($vATID)
-            ->setSellerPaymentMethod($sellerPaymentMethod)
             ->setBiddingSummary($biddingSummary)
             ->setUserAnonymized($userAnonymized)
             ->setUniqueNeutralFeedbackCount($uniqueNeutralFeedbackCount)
             ->setEnterpriseSeller($enterpriseSeller)
-            ->setBillingEmail($billingEmail)
             ->setQualifiesForSelling($qualifiesForSelling)
-            ->setStaticAlias($staticAlias)
             ->setShippingAddress($shippingAddress)
             ->setMembership($membership)
             ->setUserFirstName($userFirstName)
@@ -1111,103 +1016,6 @@ class UserType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get CharityAffiliations value
-     * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationsType|null
-     */
-    public function getCharityAffiliations(): ?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType
-    {
-        return $this->CharityAffiliations;
-    }
-    /**
-     * Set CharityAffiliations value
-     * @param \macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setCharityAffiliations(?\macropage\ebaysdk\trading\StructType\CharityAffiliationsType $charityAffiliations = null): self
-    {
-        $this->CharityAffiliations = $charityAffiliations;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalAccountLevel value
-     * @return string|null
-     */
-    public function getPayPalAccountLevel(): ?string
-    {
-        return $this->PayPalAccountLevel;
-    }
-    /**
-     * Set PayPalAccountLevel value
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountLevelCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountLevelCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $payPalAccountLevel
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setPayPalAccountLevel(?string $payPalAccountLevel = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PayPalAccountLevelCodeType::valueIsValid($payPalAccountLevel)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PayPalAccountLevelCodeType', is_array($payPalAccountLevel) ? implode(', ', $payPalAccountLevel) : var_export($payPalAccountLevel, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PayPalAccountLevelCodeType::getValidValues())), __LINE__);
-        }
-        $this->PayPalAccountLevel = $payPalAccountLevel;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalAccountType value
-     * @return string|null
-     */
-    public function getPayPalAccountType(): ?string
-    {
-        return $this->PayPalAccountType;
-    }
-    /**
-     * Set PayPalAccountType value
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountTypeCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountTypeCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $payPalAccountType
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setPayPalAccountType(?string $payPalAccountType = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PayPalAccountTypeCodeType::valueIsValid($payPalAccountType)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PayPalAccountTypeCodeType', is_array($payPalAccountType) ? implode(', ', $payPalAccountType) : var_export($payPalAccountType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PayPalAccountTypeCodeType::getValidValues())), __LINE__);
-        }
-        $this->PayPalAccountType = $payPalAccountType;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalAccountStatus value
-     * @return string|null
-     */
-    public function getPayPalAccountStatus(): ?string
-    {
-        return $this->PayPalAccountStatus;
-    }
-    /**
-     * Set PayPalAccountStatus value
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountStatusCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PayPalAccountStatusCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $payPalAccountStatus
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setPayPalAccountStatus(?string $payPalAccountStatus = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PayPalAccountStatusCodeType::valueIsValid($payPalAccountStatus)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PayPalAccountStatusCodeType', is_array($payPalAccountStatus) ? implode(', ', $payPalAccountStatus) : var_export($payPalAccountStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PayPalAccountStatusCodeType::getValidValues())), __LINE__);
-        }
-        $this->PayPalAccountStatus = $payPalAccountStatus;
-        
-        return $this;
-    }
-    /**
      * Get UserSubscription value
      * @return string[]
      */
@@ -1278,95 +1086,6 @@ class UserType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get SiteVerified value
-     * @return bool|null
-     */
-    public function getSiteVerified(): ?bool
-    {
-        return $this->SiteVerified;
-    }
-    /**
-     * Set SiteVerified value
-     * @param bool $siteVerified
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setSiteVerified(?bool $siteVerified = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($siteVerified) && !is_bool($siteVerified)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($siteVerified, true), gettype($siteVerified)), __LINE__);
-        }
-        $this->SiteVerified = $siteVerified;
-        
-        return $this;
-    }
-    /**
-     * Get SkypeID value
-     * @return string[]
-     */
-    public function getSkypeID(): ?array
-    {
-        return $this->SkypeID;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setSkypeID method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setSkypeID method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validateSkypeIDForArrayConstraintsFromSetSkypeID(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $userTypeSkypeIDItem) {
-            // validation for constraint: itemType
-            if (!is_string($userTypeSkypeIDItem)) {
-                $invalidValues[] = is_object($userTypeSkypeIDItem) ? get_class($userTypeSkypeIDItem) : sprintf('%s(%s)', gettype($userTypeSkypeIDItem), var_export($userTypeSkypeIDItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('The SkypeID property can only contain items of type string, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set SkypeID value
-     * @throws InvalidArgumentException
-     * @param string[] $skypeID
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setSkypeID(?array $skypeID = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($skypeIDArrayErrorMessage = self::validateSkypeIDForArrayConstraintsFromSetSkypeID($skypeID))) {
-            throw new InvalidArgumentException($skypeIDArrayErrorMessage, __LINE__);
-        }
-        $this->SkypeID = $skypeID;
-        
-        return $this;
-    }
-    /**
-     * Add item to SkypeID value
-     * @throws InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function addToSkypeID(string $item): self
-    {
-        // validation for constraint: itemType
-        if (!is_string($item)) {
-            throw new InvalidArgumentException(sprintf('The SkypeID property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
-        }
-        $this->SkypeID[] = $item;
-        
-        return $this;
-    }
-    /**
      * Get eBayWikiReadOnly value
      * @return bool|null
      */
@@ -1432,32 +1151,6 @@ class UserType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($vATID, true), gettype($vATID)), __LINE__);
         }
         $this->VATID = $vATID;
-        
-        return $this;
-    }
-    /**
-     * Get SellerPaymentMethod value
-     * @return string|null
-     */
-    public function getSellerPaymentMethod(): ?string
-    {
-        return $this->SellerPaymentMethod;
-    }
-    /**
-     * Set SellerPaymentMethod value
-     * @uses \macropage\ebaysdk\trading\EnumType\SellerPaymentMethodCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\SellerPaymentMethodCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $sellerPaymentMethod
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setSellerPaymentMethod(?string $sellerPaymentMethod = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\SellerPaymentMethodCodeType::valueIsValid($sellerPaymentMethod)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellerPaymentMethodCodeType', is_array($sellerPaymentMethod) ? implode(', ', $sellerPaymentMethod) : var_export($sellerPaymentMethod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellerPaymentMethodCodeType::getValidValues())), __LINE__);
-        }
-        $this->SellerPaymentMethod = $sellerPaymentMethod;
         
         return $this;
     }
@@ -1550,29 +1243,6 @@ class UserType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get BillingEmail value
-     * @return string|null
-     */
-    public function getBillingEmail(): ?string
-    {
-        return $this->BillingEmail;
-    }
-    /**
-     * Set BillingEmail value
-     * @param string $billingEmail
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setBillingEmail(?string $billingEmail = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($billingEmail) && !is_string($billingEmail)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($billingEmail, true), gettype($billingEmail)), __LINE__);
-        }
-        $this->BillingEmail = $billingEmail;
-        
-        return $this;
-    }
-    /**
      * Get QualifiesForSelling value
      * @return bool|null
      */
@@ -1592,29 +1262,6 @@ class UserType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($qualifiesForSelling, true), gettype($qualifiesForSelling)), __LINE__);
         }
         $this->QualifiesForSelling = $qualifiesForSelling;
-        
-        return $this;
-    }
-    /**
-     * Get StaticAlias value
-     * @return string|null
-     */
-    public function getStaticAlias(): ?string
-    {
-        return $this->StaticAlias;
-    }
-    /**
-     * Set StaticAlias value
-     * @param string $staticAlias
-     * @return \macropage\ebaysdk\trading\StructType\UserType
-     */
-    public function setStaticAlias(?string $staticAlias = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($staticAlias) && !is_string($staticAlias)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($staticAlias, true), gettype($staticAlias)), __LINE__);
-        }
-        $this->StaticAlias = $staticAlias;
         
         return $this;
     }
@@ -1705,7 +1352,7 @@ class UserType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -18,7 +18,8 @@ class FulfillmentType extends AbstractStructBase
     /**
      * The FulfillmentBy
      * Meta information extracted from the WSDL
-     * - documentation: The value returned in this field indicates the party that is handling fulfillment of the order line item.
+     * - documentation: The value returned in this field indicates the party that is handling fulfillment of the order line item. <br> <br> For eBay Vault scenarios, for the <strong>GetOrders</strong> <strong>GetItemTransactions</strong>, and
+     * <strong>GetSellerTransactions</strong> calls, this value is returned as <code>EBAY</code> for either of the following fulfillment options:<ul><li>Vault to Vault</li><li>Vault to Buyer</li></ul>
      * - minOccurs: 0
      * @var string|null
      */
@@ -26,7 +27,8 @@ class FulfillmentType extends AbstractStructBase
     /**
      * The FulfillmentRefId
      * Meta information extracted from the WSDL
-     * - documentation: The value in this field identifies the warehouse where the order line item is located.
+     * - documentation: The value in this field identifies the warehouse where the order line item is located. <br> <br> For eBay Vault scenarios: <strong>GetOrders</strong> and <strong>GetSellerTransactions</strong> calls, if <b>FulfillmentBy</b> is
+     * returned as <code>EBAY</code>, <strong>FulfillmentRefId</strong> is not returned.
      * - minOccurs: 0
      * @var string|null
      */

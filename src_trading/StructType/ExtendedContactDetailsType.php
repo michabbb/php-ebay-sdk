@@ -32,14 +32,6 @@ class ExtendedContactDetailsType extends AbstractStructBase
      */
     protected ?bool $ClassifiedAdContactByEmailEnabled = null;
     /**
-     * The PayPerLeadPhoneNumber
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PayPerLeadPhoneNumber = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -48,19 +40,16 @@ class ExtendedContactDetailsType extends AbstractStructBase
      * Constructor method for ExtendedContactDetailsType
      * @uses ExtendedContactDetailsType::setContactHoursDetails()
      * @uses ExtendedContactDetailsType::setClassifiedAdContactByEmailEnabled()
-     * @uses ExtendedContactDetailsType::setPayPerLeadPhoneNumber()
      * @uses ExtendedContactDetailsType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\ContactHoursDetailsType $contactHoursDetails
      * @param bool $classifiedAdContactByEmailEnabled
-     * @param string $payPerLeadPhoneNumber
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ContactHoursDetailsType $contactHoursDetails = null, ?bool $classifiedAdContactByEmailEnabled = null, ?string $payPerLeadPhoneNumber = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ContactHoursDetailsType $contactHoursDetails = null, ?bool $classifiedAdContactByEmailEnabled = null, $any = null)
     {
         $this
             ->setContactHoursDetails($contactHoursDetails)
             ->setClassifiedAdContactByEmailEnabled($classifiedAdContactByEmailEnabled)
-            ->setPayPerLeadPhoneNumber($payPerLeadPhoneNumber)
             ->setAny($any);
     }
     /**
@@ -106,32 +95,9 @@ class ExtendedContactDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PayPerLeadPhoneNumber value
-     * @return string|null
-     */
-    public function getPayPerLeadPhoneNumber(): ?string
-    {
-        return $this->PayPerLeadPhoneNumber;
-    }
-    /**
-     * Set PayPerLeadPhoneNumber value
-     * @param string $payPerLeadPhoneNumber
-     * @return \macropage\ebaysdk\trading\StructType\ExtendedContactDetailsType
-     */
-    public function setPayPerLeadPhoneNumber(?string $payPerLeadPhoneNumber = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($payPerLeadPhoneNumber) && !is_string($payPerLeadPhoneNumber)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($payPerLeadPhoneNumber, true), gettype($payPerLeadPhoneNumber)), __LINE__);
-        }
-        $this->PayPerLeadPhoneNumber = $payPerLeadPhoneNumber;
-        
-        return $this;
-    }
-    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -56,7 +56,7 @@ class VATDetailsType extends AbstractStructBase
      * The VATSite
      * Meta information extracted from the WSDL
      * - documentation: This string value is the Site ID value of the eBay Marketplace where the VAT is applicable and where the seller is registered as a Business Seller. <br/><br/> The eBay sites that support VAT (and their corresponding Site IDs) can be
-     * found in the <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/IntlDiffs-B2BFields.html" target="_blank">Business Feature Field Differences</a> topic.
+     * found in the <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/taxes-vat.html" target="_blank">Value-added tax (VAT)</a> topic.
      * - minOccurs: 0
      * @var string|null
      */
@@ -218,7 +218,7 @@ class VATDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

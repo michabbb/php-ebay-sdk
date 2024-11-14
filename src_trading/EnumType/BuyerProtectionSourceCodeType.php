@@ -9,8 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for BuyerProtectionSourceCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: This enumeration type indicates the applicable buyer protection program that the item is eligible to be covered under. <br/><br/> <span class="tablenote"><strong>Note:</strong> eBay now fully manages the payment/checkout process for
- * all orders, so the <code>eBay</code> value should always be returned in the <b>BuyerProtectionSource</b> field. </span>
+ * - documentation: This enumeration type indicates the applicable buyer protection program that the item is eligible to be covered under.
  * @subpackage Enumerations
  */
 class BuyerProtectionSourceCodeType extends AbstractStructEnumBase

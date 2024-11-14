@@ -150,7 +150,7 @@ class ItemCompatibilityListType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

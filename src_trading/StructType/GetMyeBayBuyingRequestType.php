@@ -85,14 +85,6 @@ class GetMyeBayBuyingRequestType extends AbstractRequestType
      */
     protected ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $SecondChanceOffer = null;
     /**
-     * The BidAssistantList
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\BidAssistantListType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\BidAssistantListType $BidAssistantList = null;
-    /**
      * The DeletedFromWonList
      * Meta information extracted from the WSDL
      * - documentation: Include this container and set the <b>DeletedFromWonList.Include</b> field to <code>true</code> to return the list of auction items on which the eBay user has bid on and won, but has deleted from their My eBay page. <br><br> The user
@@ -147,7 +139,6 @@ class GetMyeBayBuyingRequestType extends AbstractRequestType
      * @uses GetMyeBayBuyingRequestType::setFavoriteSearches()
      * @uses GetMyeBayBuyingRequestType::setFavoriteSellers()
      * @uses GetMyeBayBuyingRequestType::setSecondChanceOffer()
-     * @uses GetMyeBayBuyingRequestType::setBidAssistantList()
      * @uses GetMyeBayBuyingRequestType::setDeletedFromWonList()
      * @uses GetMyeBayBuyingRequestType::setDeletedFromLostList()
      * @uses GetMyeBayBuyingRequestType::setBuyingSummary()
@@ -161,14 +152,13 @@ class GetMyeBayBuyingRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSearches
      * @param \macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSellers
      * @param \macropage\ebaysdk\trading\StructType\MyeBaySelectionType $secondChanceOffer
-     * @param \macropage\ebaysdk\trading\StructType\BidAssistantListType $bidAssistantList
      * @param \macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromWonList
      * @param \macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromLostList
      * @param \macropage\ebaysdk\trading\StructType\ItemListCustomizationType $buyingSummary
      * @param \macropage\ebaysdk\trading\StructType\MyeBaySelectionType $userDefinedLists
      * @param bool $hideVariations
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $watchList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $bidList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $wonList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSellers = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $secondChanceOffer = null, ?\macropage\ebaysdk\trading\StructType\BidAssistantListType $bidAssistantList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromLostList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $userDefinedLists = null, ?bool $hideVariations = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $watchList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $bidList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $wonList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $favoriteSellers = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $secondChanceOffer = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $deletedFromLostList = null, ?\macropage\ebaysdk\trading\StructType\ItemListCustomizationType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $userDefinedLists = null, ?bool $hideVariations = null)
     {
         $this
             ->setWatchList($watchList)
@@ -179,7 +169,6 @@ class GetMyeBayBuyingRequestType extends AbstractRequestType
             ->setFavoriteSearches($favoriteSearches)
             ->setFavoriteSellers($favoriteSellers)
             ->setSecondChanceOffer($secondChanceOffer)
-            ->setBidAssistantList($bidAssistantList)
             ->setDeletedFromWonList($deletedFromWonList)
             ->setDeletedFromLostList($deletedFromLostList)
             ->setBuyingSummary($buyingSummary)
@@ -335,25 +324,6 @@ class GetMyeBayBuyingRequestType extends AbstractRequestType
     public function setSecondChanceOffer(?\macropage\ebaysdk\trading\StructType\MyeBaySelectionType $secondChanceOffer = null): self
     {
         $this->SecondChanceOffer = $secondChanceOffer;
-        
-        return $this;
-    }
-    /**
-     * Get BidAssistantList value
-     * @return \macropage\ebaysdk\trading\StructType\BidAssistantListType|null
-     */
-    public function getBidAssistantList(): ?\macropage\ebaysdk\trading\StructType\BidAssistantListType
-    {
-        return $this->BidAssistantList;
-    }
-    /**
-     * Set BidAssistantList value
-     * @param \macropage\ebaysdk\trading\StructType\BidAssistantListType $bidAssistantList
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingRequestType
-     */
-    public function setBidAssistantList(?\macropage\ebaysdk\trading\StructType\BidAssistantListType $bidAssistantList = null): self
-    {
-        $this->BidAssistantList = $bidAssistantList;
         
         return $this;
     }

@@ -26,7 +26,7 @@ class RemoveFromWatchListResponseType extends AbstractResponseType
     /**
      * The WatchListMaximum
      * Meta information extracted from the WSDL
-     * - documentation: The maximum number of items allowed in the user's Watch List. Currently this value is 300, and is the same for all sites and all users.
+     * - documentation: This integer value indicates the maximum number of items allowed in a user's Watch List. The maximum number of items that can be added to a Watch List is 400, but this can vary by eBay marketplace.
      * - minOccurs: 0
      * @var int|null
      */

@@ -32,14 +32,6 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
      */
     protected ?string $FolderName = null;
     /**
-     * The NewAlertCount
-     * Meta information extracted from the WSDL
-     * - documentation: This field has been deprecated, starting with the 685 release. Alerts are now synonymous with Flagged messages, and are added to the Summary.FlaggedMessageCount value.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $NewAlertCount = null;
-    /**
      * The NewMessageCount
      * Meta information extracted from the WSDL
      * - documentation: The number of new messages in a given folder. Always returned for detail level ReturnSummary.
@@ -47,14 +39,6 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
      * @var int|null
      */
     protected ?int $NewMessageCount = null;
-    /**
-     * The TotalAlertCount
-     * Meta information extracted from the WSDL
-     * - documentation: This field has been deprecated, starting with the 685 release. Alerts are now synonymous with Flagged messages, and are added to the Summary.FlaggedMessageCount value.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $TotalAlertCount = null;
     /**
      * The TotalMessageCount
      * Meta information extracted from the WSDL
@@ -88,31 +72,25 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
      * Constructor method for MyMessagesFolderSummaryType
      * @uses MyMessagesFolderSummaryType::setFolderID()
      * @uses MyMessagesFolderSummaryType::setFolderName()
-     * @uses MyMessagesFolderSummaryType::setNewAlertCount()
      * @uses MyMessagesFolderSummaryType::setNewMessageCount()
-     * @uses MyMessagesFolderSummaryType::setTotalAlertCount()
      * @uses MyMessagesFolderSummaryType::setTotalMessageCount()
      * @uses MyMessagesFolderSummaryType::setNewHighPriorityCount()
      * @uses MyMessagesFolderSummaryType::setTotalHighPriorityCount()
      * @uses MyMessagesFolderSummaryType::setAny()
      * @param int $folderID
      * @param string $folderName
-     * @param int $newAlertCount
      * @param int $newMessageCount
-     * @param int $totalAlertCount
      * @param int $totalMessageCount
      * @param int $newHighPriorityCount
      * @param int $totalHighPriorityCount
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $folderID = null, ?string $folderName = null, ?int $newAlertCount = null, ?int $newMessageCount = null, ?int $totalAlertCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null, $any = null)
+    public function __construct(?int $folderID = null, ?string $folderName = null, ?int $newMessageCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null, $any = null)
     {
         $this
             ->setFolderID($folderID)
             ->setFolderName($folderName)
-            ->setNewAlertCount($newAlertCount)
             ->setNewMessageCount($newMessageCount)
-            ->setTotalAlertCount($totalAlertCount)
             ->setTotalMessageCount($totalMessageCount)
             ->setNewHighPriorityCount($newHighPriorityCount)
             ->setTotalHighPriorityCount($totalHighPriorityCount)
@@ -165,29 +143,6 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get NewAlertCount value
-     * @return int|null
-     */
-    public function getNewAlertCount(): ?int
-    {
-        return $this->NewAlertCount;
-    }
-    /**
-     * Set NewAlertCount value
-     * @param int $newAlertCount
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType
-     */
-    public function setNewAlertCount(?int $newAlertCount = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($newAlertCount) && !(is_int($newAlertCount) || ctype_digit($newAlertCount))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newAlertCount, true), gettype($newAlertCount)), __LINE__);
-        }
-        $this->NewAlertCount = $newAlertCount;
-        
-        return $this;
-    }
-    /**
      * Get NewMessageCount value
      * @return int|null
      */
@@ -207,29 +162,6 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newMessageCount, true), gettype($newMessageCount)), __LINE__);
         }
         $this->NewMessageCount = $newMessageCount;
-        
-        return $this;
-    }
-    /**
-     * Get TotalAlertCount value
-     * @return int|null
-     */
-    public function getTotalAlertCount(): ?int
-    {
-        return $this->TotalAlertCount;
-    }
-    /**
-     * Set TotalAlertCount value
-     * @param int $totalAlertCount
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType
-     */
-    public function setTotalAlertCount(?int $totalAlertCount = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($totalAlertCount) && !(is_int($totalAlertCount) || ctype_digit($totalAlertCount))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalAlertCount, true), gettype($totalAlertCount)), __LINE__);
-        }
-        $this->TotalAlertCount = $totalAlertCount;
         
         return $this;
     }
@@ -305,7 +237,7 @@ class MyMessagesFolderSummaryType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

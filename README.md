@@ -56,10 +56,10 @@ run with: `ebayTradingwsdl2php --force`
 to get an idea, how it´s working, take look into `test.php`.
 
 
-|API|Version|
-|----|--|
-|Trading|1235|
-|Shopping|1199|
-|Finding|1.13.0|
+|API| Version |
+|----|---------|
+|Trading| 1379     |
+|Shopping| 1199    |
+|Finding| 1.13.0  |
 
 

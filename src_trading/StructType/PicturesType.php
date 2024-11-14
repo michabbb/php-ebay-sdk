@@ -31,8 +31,8 @@ class PicturesType extends AbstractStructBase
      * this case, one picture set could contain pictures of the blue shirts (e.g., front view, back view, and close-up of a trim detail), and another picture set could contain pictures of the black shirts. <br><br> A variation specific picture set can
      * consist of up to 12 images hosted by eBay Picture Services (EPS) or self-hosted (hosted outside of eBay) pictures. The eBay Picture Services and self-hosted images can never be combined into the same variation specific picture set. <br><br> At least
      * one picture set is required if the <b>Pictures</b> node is present in the request. You are not required to provide pictures for all values that correspond to the variation specific name. For example, a listing could have pictures depicting the blue
-     * and black color variations, but not the pink variations. <br/><br/> <span class="tablenote"><b>Note: </b> All images must comply with the <a
-     * href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Pictures-Intro.html">Picture Requirements</a>. </span>
+     * and black color variations, but not the pink variations. <br/><br/> <span class="tablenote"><b>Note: </b> All images must comply with the <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/pictures.html">Picture
+     * Requirements</a>. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationSpecificPictureSetType[]
@@ -151,7 +151,7 @@ class PicturesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

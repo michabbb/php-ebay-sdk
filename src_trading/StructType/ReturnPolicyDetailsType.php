@@ -66,41 +66,6 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      */
     protected ?bool $Description = null;
     /**
-     * The WarrantyOffered
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable, as sellers are no longer allowed to offer any type of warranty through a listings's return policy.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[]
-     */
-    protected ?array $WarrantyOffered = null;
-    /**
-     * The WarrantyType
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable, as sellers are no longer allowed to offer any type of warranty through a listings's return policy.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[]
-     */
-    protected ?array $WarrantyType = null;
-    /**
-     * The WarrantyDuration
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable, as sellers are no longer allowed to offer any type of warranty through a listings's return policy.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[]
-     */
-    protected ?array $WarrantyDuration = null;
-    /**
-     * The EAN
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable, as sellers are no longer allowed to specify a European Article Number (EAN) through a listings's return policy.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $EAN = null;
-    /**
      * The ShippingCostPaidBy
      * Meta information extracted from the WSDL
      * - documentation: This container consists of the enumeration values that can be passed into the <b>ReturnPolicy.ShippingCostPaidByOption</b> or <b>ReturnPolicy.InternationalShippingCostPaidByOption</b> field when using an Add/Revise/Relist API call.
@@ -146,10 +111,6 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @uses ReturnPolicyDetailsType::setReturnsWithin()
      * @uses ReturnPolicyDetailsType::setReturnsAccepted()
      * @uses ReturnPolicyDetailsType::setDescription()
-     * @uses ReturnPolicyDetailsType::setWarrantyOffered()
-     * @uses ReturnPolicyDetailsType::setWarrantyType()
-     * @uses ReturnPolicyDetailsType::setWarrantyDuration()
-     * @uses ReturnPolicyDetailsType::setEAN()
      * @uses ReturnPolicyDetailsType::setShippingCostPaidBy()
      * @uses ReturnPolicyDetailsType::setRestockingFeeValue()
      * @uses ReturnPolicyDetailsType::setDetailVersion()
@@ -159,27 +120,19 @@ class ReturnPolicyDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ReturnsWithinDetailsType[] $returnsWithin
      * @param \macropage\ebaysdk\trading\StructType\ReturnsAcceptedDetailsType[] $returnsAccepted
      * @param bool $description
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[] $warrantyOffered
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[] $warrantyType
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[] $warrantyDuration
-     * @param bool $eAN
      * @param \macropage\ebaysdk\trading\StructType\ShippingCostPaidByDetailsType[] $shippingCostPaidBy
      * @param \macropage\ebaysdk\trading\StructType\RestockingFeeValueDetailsType[] $restockingFeeValue
      * @param string $detailVersion
      * @param string $updateTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?array $refund = null, ?array $returnsWithin = null, ?array $returnsAccepted = null, ?bool $description = null, ?array $warrantyOffered = null, ?array $warrantyType = null, ?array $warrantyDuration = null, ?bool $eAN = null, ?array $shippingCostPaidBy = null, ?array $restockingFeeValue = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
+    public function __construct(?array $refund = null, ?array $returnsWithin = null, ?array $returnsAccepted = null, ?bool $description = null, ?array $shippingCostPaidBy = null, ?array $restockingFeeValue = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setRefund($refund)
             ->setReturnsWithin($returnsWithin)
             ->setReturnsAccepted($returnsAccepted)
             ->setDescription($description)
-            ->setWarrantyOffered($warrantyOffered)
-            ->setWarrantyType($warrantyType)
-            ->setWarrantyDuration($warrantyDuration)
-            ->setEAN($eAN)
             ->setShippingCostPaidBy($shippingCostPaidBy)
             ->setRestockingFeeValue($restockingFeeValue)
             ->setDetailVersion($detailVersion)
@@ -408,227 +361,6 @@ class ReturnPolicyDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get WarrantyOffered value
-     * @return \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[]
-     */
-    public function getWarrantyOffered(): ?array
-    {
-        return $this->WarrantyOffered;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setWarrantyOffered method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setWarrantyOffered method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validateWarrantyOfferedForArrayConstraintsFromSetWarrantyOffered(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $returnPolicyDetailsTypeWarrantyOfferedItem) {
-            // validation for constraint: itemType
-            if (!$returnPolicyDetailsTypeWarrantyOfferedItem instanceof \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType) {
-                $invalidValues[] = is_object($returnPolicyDetailsTypeWarrantyOfferedItem) ? get_class($returnPolicyDetailsTypeWarrantyOfferedItem) : sprintf('%s(%s)', gettype($returnPolicyDetailsTypeWarrantyOfferedItem), var_export($returnPolicyDetailsTypeWarrantyOfferedItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('The WarrantyOffered property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set WarrantyOffered value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType[] $warrantyOffered
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function setWarrantyOffered(?array $warrantyOffered = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($warrantyOfferedArrayErrorMessage = self::validateWarrantyOfferedForArrayConstraintsFromSetWarrantyOffered($warrantyOffered))) {
-            throw new InvalidArgumentException($warrantyOfferedArrayErrorMessage, __LINE__);
-        }
-        $this->WarrantyOffered = $warrantyOffered;
-        
-        return $this;
-    }
-    /**
-     * Add item to WarrantyOffered value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType $item
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function addToWarrantyOffered(\macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType $item): self
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType) {
-            throw new InvalidArgumentException(sprintf('The WarrantyOffered property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyOfferedDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
-        }
-        $this->WarrantyOffered[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyType value
-     * @return \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[]
-     */
-    public function getWarrantyType(): ?array
-    {
-        return $this->WarrantyType;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setWarrantyType method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setWarrantyType method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validateWarrantyTypeForArrayConstraintsFromSetWarrantyType(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $returnPolicyDetailsTypeWarrantyTypeItem) {
-            // validation for constraint: itemType
-            if (!$returnPolicyDetailsTypeWarrantyTypeItem instanceof \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType) {
-                $invalidValues[] = is_object($returnPolicyDetailsTypeWarrantyTypeItem) ? get_class($returnPolicyDetailsTypeWarrantyTypeItem) : sprintf('%s(%s)', gettype($returnPolicyDetailsTypeWarrantyTypeItem), var_export($returnPolicyDetailsTypeWarrantyTypeItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('The WarrantyType property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set WarrantyType value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType[] $warrantyType
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function setWarrantyType(?array $warrantyType = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($warrantyTypeArrayErrorMessage = self::validateWarrantyTypeForArrayConstraintsFromSetWarrantyType($warrantyType))) {
-            throw new InvalidArgumentException($warrantyTypeArrayErrorMessage, __LINE__);
-        }
-        $this->WarrantyType = $warrantyType;
-        
-        return $this;
-    }
-    /**
-     * Add item to WarrantyType value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType $item
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function addToWarrantyType(\macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType $item): self
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType) {
-            throw new InvalidArgumentException(sprintf('The WarrantyType property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyTypeDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
-        }
-        $this->WarrantyType[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyDuration value
-     * @return \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[]
-     */
-    public function getWarrantyDuration(): ?array
-    {
-        return $this->WarrantyDuration;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setWarrantyDuration method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setWarrantyDuration method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validateWarrantyDurationForArrayConstraintsFromSetWarrantyDuration(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $returnPolicyDetailsTypeWarrantyDurationItem) {
-            // validation for constraint: itemType
-            if (!$returnPolicyDetailsTypeWarrantyDurationItem instanceof \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType) {
-                $invalidValues[] = is_object($returnPolicyDetailsTypeWarrantyDurationItem) ? get_class($returnPolicyDetailsTypeWarrantyDurationItem) : sprintf('%s(%s)', gettype($returnPolicyDetailsTypeWarrantyDurationItem), var_export($returnPolicyDetailsTypeWarrantyDurationItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('The WarrantyDuration property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set WarrantyDuration value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType[] $warrantyDuration
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function setWarrantyDuration(?array $warrantyDuration = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($warrantyDurationArrayErrorMessage = self::validateWarrantyDurationForArrayConstraintsFromSetWarrantyDuration($warrantyDuration))) {
-            throw new InvalidArgumentException($warrantyDurationArrayErrorMessage, __LINE__);
-        }
-        $this->WarrantyDuration = $warrantyDuration;
-        
-        return $this;
-    }
-    /**
-     * Add item to WarrantyDuration value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType $item
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function addToWarrantyDuration(\macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType $item): self
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType) {
-            throw new InvalidArgumentException(sprintf('The WarrantyDuration property can only contain items of type \macropage\ebaysdk\trading\StructType\WarrantyDurationDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
-        }
-        $this->WarrantyDuration[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get EAN value
-     * @return bool|null
-     */
-    public function getEAN(): ?bool
-    {
-        return $this->EAN;
-    }
-    /**
-     * Set EAN value
-     * @param bool $eAN
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-     */
-    public function setEAN(?bool $eAN = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($eAN) && !is_bool($eAN)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eAN, true), gettype($eAN)), __LINE__);
-        }
-        $this->EAN = $eAN;
-        
-        return $this;
-    }
-    /**
      * Get ShippingCostPaidBy value
      * @return \macropage\ebaysdk\trading\StructType\ShippingCostPaidByDetailsType[]
      */
@@ -809,7 +541,7 @@ class ReturnPolicyDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

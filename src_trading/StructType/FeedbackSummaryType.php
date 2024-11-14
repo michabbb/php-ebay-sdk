@@ -92,8 +92,7 @@ class FeedbackSummaryType extends AbstractStructBase
      * The SellerRatingSummaryArray
      * Meta information extracted from the WSDL
      * - documentation: Container for information about detailed seller ratings (DSRs) that buyers have left for a seller. Sellers have access to the number of ratings they've received, as well as to the averages of DSRs they've received in each DSR area
-     * (i.e., to the average of ratings in the item-description area, etc.). The DSR feature is available on the United Kingdom site and on the following other sites: AU (site ID 15), BEFR (site ID 23), BENL (site ID 123), FR (site ID 71), IE (site ID 205),
-     * IN (site ID 203), IT (site ID 101), and PL (site ID 212). The DSR feature is available on the other API-enabled country sites, including the US site (site ID 0).
+     * (i.e., to the average of ratings in the item-description area, etc.). The DSR feature is available everywhere on API-enabled country sites, including the US site (site ID 0).
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\SellerRatingSummaryArrayType|null
      */
@@ -412,7 +411,7 @@ class FeedbackSummaryType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -30,13 +30,6 @@ class GetUserPreferencesRequestType extends AbstractRequestType
      */
     protected ?bool $ShowCombinedPaymentPreferences = null;
     /**
-     * The ShowCrossPromotionPreferences
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * @var bool|null
-     */
-    protected ?bool $ShowCrossPromotionPreferences = null;
-    /**
      * The ShowSellerPaymentPreferences
      * Meta information extracted from the WSDL
      * - documentation: If included and set to <code>true</code>, the seller's payment preferences are returned in the response.
@@ -59,14 +52,6 @@ class GetUserPreferencesRequestType extends AbstractRequestType
      * @var bool|null
      */
     protected ?bool $ShowSellerFavoriteItemPreferences = null;
-    /**
-     * The ShowProStoresPreferences
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $ShowProStoresPreferences = null;
     /**
      * The ShowEmailShipmentTrackingNumberPreference
      * Meta information extracted from the WSDL
@@ -96,9 +81,9 @@ class GetUserPreferencesRequestType extends AbstractRequestType
     /**
      * The ShowUnpaidItemAssistancePreference
      * Meta information extracted from the WSDL
-     * - documentation: If included and set to <code>true</code>, the seller's Unpaid Item Assistant preferences are returned in the response. The Unpaid Item Assistant automatically opens an Unpaid Item dispute on the behalf of the seller. <br><br> <span
-     * class="tablenote"><strong>Note:</strong> To return the list of buyers excluded from the Unpaid Item Assistant mechanism, the <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be included and set to <code>true</code> in the request.
-     * Excluded buyers can be viewed in the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field. </span>
+     * - documentation: If included and set to <code>true</code>, the seller's Unpaid Item preferences are returned in the response. The Unpaid Item preferences can be used to automatically cancel an unpaid order and relist the item on the behalf of the
+     * seller. <br><br> <span class="tablenote"><strong>Note:</strong> To return the list of buyers excluded from the Unpaid Item preferences, the <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be included and set to <code>true</code> in the
+     * request. Excluded buyers can be viewed in the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -114,9 +99,9 @@ class GetUserPreferencesRequestType extends AbstractRequestType
     /**
      * The ShowUnpaidItemAssistanceExclusionList
      * Meta information extracted from the WSDL
-     * - documentation: If included and set to <code>true</code>, the list of eBay user IDs on the Unpaid Item Assistant Excluded User list is returned through the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field in the response. <br/><br/> For
-     * excluded users, an Unpaid Item dispute is not automatically filed through the UPI Assistance mechanism. The Excluded User list is managed through the <b>SetUserPreferences</b> call. <br><br> <span class="tablenote"><strong>Note:</strong> To return
-     * the list of buyers excluded from the Unpaid Item Assistant mechanism, the <b>ShowUnpaidItemAssistancePreference</b> field must also be included and set to <b>true</b> in the request. </span>
+     * - documentation: If included and set to <code>true</code>, the list of eBay user IDs on the Unpaid Item preferences Excluded User list is returned through the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field in the response. <br/><br/> For
+     * excluded users, an Unpaid Item is not automatically cancelled. The Excluded User list is managed through the <b>SetUserPreferences</b> call. <br><br> <span class="tablenote"><strong>Note:</strong> To return the list of buyers excluded from the Unpaid
+     * Item preferences, the <b>ShowUnpaidItemAssistancePreference</b> field must also be included and set to <b>true</b> in the request. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -212,11 +197,9 @@ class GetUserPreferencesRequestType extends AbstractRequestType
      * Constructor method for GetUserPreferencesRequestType
      * @uses GetUserPreferencesRequestType::setShowBidderNoticePreferences()
      * @uses GetUserPreferencesRequestType::setShowCombinedPaymentPreferences()
-     * @uses GetUserPreferencesRequestType::setShowCrossPromotionPreferences()
      * @uses GetUserPreferencesRequestType::setShowSellerPaymentPreferences()
      * @uses GetUserPreferencesRequestType::setShowEndOfAuctionEmailPreferences()
      * @uses GetUserPreferencesRequestType::setShowSellerFavoriteItemPreferences()
-     * @uses GetUserPreferencesRequestType::setShowProStoresPreferences()
      * @uses GetUserPreferencesRequestType::setShowEmailShipmentTrackingNumberPreference()
      * @uses GetUserPreferencesRequestType::setShowRequiredShipPhoneNumberPreference()
      * @uses GetUserPreferencesRequestType::setShowSellerExcludeShipToLocationPreference()
@@ -234,11 +217,9 @@ class GetUserPreferencesRequestType extends AbstractRequestType
      * @uses GetUserPreferencesRequestType::setShoweBayPLUSPreference()
      * @param bool $showBidderNoticePreferences
      * @param bool $showCombinedPaymentPreferences
-     * @param bool $showCrossPromotionPreferences
      * @param bool $showSellerPaymentPreferences
      * @param bool $showEndOfAuctionEmailPreferences
      * @param bool $showSellerFavoriteItemPreferences
-     * @param bool $showProStoresPreferences
      * @param bool $showEmailShipmentTrackingNumberPreference
      * @param bool $showRequiredShipPhoneNumberPreference
      * @param bool $showSellerExcludeShipToLocationPreference
@@ -255,16 +236,14 @@ class GetUserPreferencesRequestType extends AbstractRequestType
      * @param bool $showOutOfStockControlPreference
      * @param bool $showeBayPLUSPreference
      */
-    public function __construct(?bool $showBidderNoticePreferences = null, ?bool $showCombinedPaymentPreferences = null, ?bool $showCrossPromotionPreferences = null, ?bool $showSellerPaymentPreferences = null, ?bool $showEndOfAuctionEmailPreferences = null, ?bool $showSellerFavoriteItemPreferences = null, ?bool $showProStoresPreferences = null, ?bool $showEmailShipmentTrackingNumberPreference = null, ?bool $showRequiredShipPhoneNumberPreference = null, ?bool $showSellerExcludeShipToLocationPreference = null, ?bool $showUnpaidItemAssistancePreference = null, ?bool $showPurchaseReminderEmailPreferences = null, ?bool $showUnpaidItemAssistanceExclusionList = null, ?bool $showSellerProfilePreferences = null, ?bool $showSellerReturnPreferences = null, ?bool $showGlobalShippingProgramPreference = null, ?bool $showDispatchCutoffTimePreferences = null, ?bool $showGlobalShippingProgramListingPreference = null, ?bool $showOverrideGSPServiceWithIntlServicePreference = null, ?bool $showPickupDropoffPreferences = null, ?bool $showOutOfStockControlPreference = null, ?bool $showeBayPLUSPreference = null)
+    public function __construct(?bool $showBidderNoticePreferences = null, ?bool $showCombinedPaymentPreferences = null, ?bool $showSellerPaymentPreferences = null, ?bool $showEndOfAuctionEmailPreferences = null, ?bool $showSellerFavoriteItemPreferences = null, ?bool $showEmailShipmentTrackingNumberPreference = null, ?bool $showRequiredShipPhoneNumberPreference = null, ?bool $showSellerExcludeShipToLocationPreference = null, ?bool $showUnpaidItemAssistancePreference = null, ?bool $showPurchaseReminderEmailPreferences = null, ?bool $showUnpaidItemAssistanceExclusionList = null, ?bool $showSellerProfilePreferences = null, ?bool $showSellerReturnPreferences = null, ?bool $showGlobalShippingProgramPreference = null, ?bool $showDispatchCutoffTimePreferences = null, ?bool $showGlobalShippingProgramListingPreference = null, ?bool $showOverrideGSPServiceWithIntlServicePreference = null, ?bool $showPickupDropoffPreferences = null, ?bool $showOutOfStockControlPreference = null, ?bool $showeBayPLUSPreference = null)
     {
         $this
             ->setShowBidderNoticePreferences($showBidderNoticePreferences)
             ->setShowCombinedPaymentPreferences($showCombinedPaymentPreferences)
-            ->setShowCrossPromotionPreferences($showCrossPromotionPreferences)
             ->setShowSellerPaymentPreferences($showSellerPaymentPreferences)
             ->setShowEndOfAuctionEmailPreferences($showEndOfAuctionEmailPreferences)
             ->setShowSellerFavoriteItemPreferences($showSellerFavoriteItemPreferences)
-            ->setShowProStoresPreferences($showProStoresPreferences)
             ->setShowEmailShipmentTrackingNumberPreference($showEmailShipmentTrackingNumberPreference)
             ->setShowRequiredShipPhoneNumberPreference($showRequiredShipPhoneNumberPreference)
             ->setShowSellerExcludeShipToLocationPreference($showSellerExcludeShipToLocationPreference)
@@ -324,29 +303,6 @@ class GetUserPreferencesRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($showCombinedPaymentPreferences, true), gettype($showCombinedPaymentPreferences)), __LINE__);
         }
         $this->ShowCombinedPaymentPreferences = $showCombinedPaymentPreferences;
-        
-        return $this;
-    }
-    /**
-     * Get ShowCrossPromotionPreferences value
-     * @return bool|null
-     */
-    public function getShowCrossPromotionPreferences(): ?bool
-    {
-        return $this->ShowCrossPromotionPreferences;
-    }
-    /**
-     * Set ShowCrossPromotionPreferences value
-     * @param bool $showCrossPromotionPreferences
-     * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesRequestType
-     */
-    public function setShowCrossPromotionPreferences(?bool $showCrossPromotionPreferences = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($showCrossPromotionPreferences) && !is_bool($showCrossPromotionPreferences)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($showCrossPromotionPreferences, true), gettype($showCrossPromotionPreferences)), __LINE__);
-        }
-        $this->ShowCrossPromotionPreferences = $showCrossPromotionPreferences;
         
         return $this;
     }
@@ -416,29 +372,6 @@ class GetUserPreferencesRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($showSellerFavoriteItemPreferences, true), gettype($showSellerFavoriteItemPreferences)), __LINE__);
         }
         $this->ShowSellerFavoriteItemPreferences = $showSellerFavoriteItemPreferences;
-        
-        return $this;
-    }
-    /**
-     * Get ShowProStoresPreferences value
-     * @return bool|null
-     */
-    public function getShowProStoresPreferences(): ?bool
-    {
-        return $this->ShowProStoresPreferences;
-    }
-    /**
-     * Set ShowProStoresPreferences value
-     * @param bool $showProStoresPreferences
-     * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesRequestType
-     */
-    public function setShowProStoresPreferences(?bool $showProStoresPreferences = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($showProStoresPreferences) && !is_bool($showProStoresPreferences)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($showProStoresPreferences, true), gettype($showProStoresPreferences)), __LINE__);
-        }
-        $this->ShowProStoresPreferences = $showProStoresPreferences;
         
         return $this;
     }

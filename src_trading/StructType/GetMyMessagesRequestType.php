@@ -16,14 +16,6 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class GetMyMessagesRequestType extends AbstractRequestType
 {
     /**
-     * The AlertIDs
-     * Meta information extracted from the WSDL
-     * - documentation: This container is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $AlertIDs = null;
-    /**
      * The MessageIDs
      * Meta information extracted from the WSDL
      * - documentation: This container can be used to retrieve one or more specific messages identified with their unique <b>MessageID</b> values. Up to 10 <b>MessageID</b> values can be specified with one call.
@@ -82,7 +74,6 @@ class GetMyMessagesRequestType extends AbstractRequestType
     protected ?bool $IncludeHighPriorityMessageOnly = null;
     /**
      * Constructor method for GetMyMessagesRequestType
-     * @uses GetMyMessagesRequestType::setAlertIDs()
      * @uses GetMyMessagesRequestType::setMessageIDs()
      * @uses GetMyMessagesRequestType::setFolderID()
      * @uses GetMyMessagesRequestType::setStartTime()
@@ -90,7 +81,6 @@ class GetMyMessagesRequestType extends AbstractRequestType
      * @uses GetMyMessagesRequestType::setExternalMessageIDs()
      * @uses GetMyMessagesRequestType::setPagination()
      * @uses GetMyMessagesRequestType::setIncludeHighPriorityMessageOnly()
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs
      * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs
      * @param int $folderID
      * @param string $startTime
@@ -99,10 +89,9 @@ class GetMyMessagesRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\PaginationType $pagination
      * @param bool $includeHighPriorityMessageOnly
      */
-    public function __construct(?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs = null, ?int $folderID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesExternalMessageIDArrayType $externalMessageIDs = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?bool $includeHighPriorityMessageOnly = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs = null, ?int $folderID = null, ?string $startTime = null, ?string $endTime = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesExternalMessageIDArrayType $externalMessageIDs = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?bool $includeHighPriorityMessageOnly = null)
     {
         $this
-            ->setAlertIDs($alertIDs)
             ->setMessageIDs($messageIDs)
             ->setFolderID($folderID)
             ->setStartTime($startTime)
@@ -110,25 +99,6 @@ class GetMyMessagesRequestType extends AbstractRequestType
             ->setExternalMessageIDs($externalMessageIDs)
             ->setPagination($pagination)
             ->setIncludeHighPriorityMessageOnly($includeHighPriorityMessageOnly);
-    }
-    /**
-     * Get AlertIDs value
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType|null
-     */
-    public function getAlertIDs(): ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
-    {
-        return $this->AlertIDs;
-    }
-    /**
-     * Set AlertIDs value
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs
-     * @return \macropage\ebaysdk\trading\StructType\GetMyMessagesRequestType
-     */
-    public function setAlertIDs(?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs = null): self
-    {
-        $this->AlertIDs = $alertIDs;
-        
-        return $this;
     }
     /**
      * Get MessageIDs value

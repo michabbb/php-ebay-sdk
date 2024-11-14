@@ -33,8 +33,8 @@ class ReviseItemRequestType extends AbstractRequestType
      * - documentation: Specifies the name of a field to delete from a listing. The request can contain zero, one, or many instances of <b>DeletedField</b> (one for each field to be deleted). See the relevant field descriptions to determine when to use
      * <b>DeletedField</b> (and potential consequences). <br><br> You cannot delete required fields from a listing. <br><br> Some fields are optional when you first list an item (e.g., <b>SecondaryCategory</b>), but once they are set they cannot be deleted
      * when you revise an item. Some optional fields cannot be deleted if the item has bids and/or ends within 12 hours. Some optional fields cannot be deleted if other fields depend on them. <br><br> Use values that match the case of the schema element
-     * names (<b>Item.PictureDetails.GalleryURL</b>) or make the initial letter of each field name lowercase (<b>item.pictureDetails.galleryURL</b>). However, do not change the case of letters in the middle of a field name. For example,
-     * <b>item.picturedetails.galleryUrl</b> is not allowed. <br><br> To delete a listing enhancement like <b>BoldTitle</b>, specify the value you are deleting in square brackets ("[ ]"); for example, <b>Item.ListingEnhancement[BoldTitle]</b>.
+     * names (<b>Item.PictureDetails.PictureURL</b>) or make the initial letter of each field name lowercase (<b>item.pictureDetails.pictureURL</b>). However, do not change the case of letters in the middle of a field name. For example,
+     * <b>item.picturedetails.pictureURL</b> is not allowed. <br><br> To delete a listing enhancement like <b>BoldTitle</b>, specify the value you are deleting in square brackets ("[ ]"); for example, <b>Item.ListingEnhancement[BoldTitle]</b>.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]

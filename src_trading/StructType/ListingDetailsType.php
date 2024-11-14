@@ -20,7 +20,7 @@ class ListingDetailsType extends AbstractStructBase
      * The Adult
      * Meta information extracted from the WSDL
      * - documentation: If <code>true</code>, the item is listed in a Mature category. Users must accept the Mature Category agreement on the eBay site to retrieve items listed in Mature categories. (Users do not need to sign this agreement to be able to
-     * list items in Mature Categories.)
+     * list items in Mature Categories.) <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -28,7 +28,8 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The BindingAuction
      * Meta information extracted from the WSDL
-     * - documentation: Applicable for Real Estate auctions only. If <code>true</code>, buyers and sellers are expected to follow through on the sale. If false, bids for the Real Estate auction are only expressions of interest.
+     * - documentation: Applicable for Real Estate auctions only. If <code>true</code>, buyers and sellers are expected to follow through on the sale. If false, bids for the Real Estate auction are only expressions of interest. <br> <span
+     * class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -36,8 +37,8 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The CheckoutEnabled
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether or not the seller's Checkout Enabled preference is turned on (at account level or at listing level). This preference is managed through Payment Preferences in My eBay. If this preference is enabled, a Pay Now button
-     * will appear in checkout flow pages and in the email notifications that are sent to buyers. This preferance is enabled by default if PayPal is one of the payment methods.
+     * - documentation: Indicates whether or not the seller's Checkout Enabled preference is turned on. <br> <span class="tablenote"><b>Note:</b> A 'Checkout Enabled' setting is no longer available to sellers, and this field is always returned as
+     * <code>true</code>. </span> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -45,7 +46,9 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The ConvertedBuyItNowPrice
      * Meta information extracted from the WSDL
-     * - documentation: Converted value of the <b>BuyItNowPrice</b> in the currency of the site that returned this response. For active items, refresh this value every 24 hours to pick up the current conversion rates.
+     * - documentation: <br> Converted value of the <b>BuyItNowPrice</b> in the currency of the site that returned this response. For active items, refresh this value every 24 hours to pick up the current conversion rates. <br> <span
+     * class="tablenote"><b>Note: </b> The <b>ListingDetails.ConvertedBuyItNowPrice</b> field will stop being returned in <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>, and <b>GetMyeBaySelling</b> (SoldList and DeletedFromSoldList) on January 31,
+     * 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -53,8 +56,9 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The ConvertedStartPrice
      * Meta information extracted from the WSDL
-     * - documentation: Converted value of the <b>StartPrice</b> in the currency of the site that returned this response. For active items, refresh this value every 24 hours to pick up the current conversion rates.<br> <br> In multi-variation listings, this
-     * value matches the lowest-priced variation that is still available for sale.
+     * - documentation: <br> Converted value of the <b>StartPrice</b> in the currency of the site that returned this response. For active items, refresh this value every 24 hours to pick up the current conversion rates.<br> <br> In multi-variation listings,
+     * this value matches the lowest-priced variation that is still available for sale. <br> <span class="tablenote"><b>Note: </b> The <b>ListingDetails.ConvertedStartPrice</b> field will stop being returned in <b>GetItemTransactions</b>,
+     * <b>GetSellerTransactions</b>, and <b>GetMyeBaySelling</b> (SoldList and DeletedFromSoldList) on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -62,8 +66,9 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The ConvertedReservePrice
      * Meta information extracted from the WSDL
-     * - documentation: Converted value of the <b>ReservePrice</b> in the currency of the site that returned this response. Only returned for listings with a reserve price when the requesting user is the listing's seller. For active items, refresh this
-     * value every 24 hours to pick up the current conversion rates. Not applicable to Fixed Price listings.
+     * - documentation: <br> Converted value of the <b>ReservePrice</b> in the currency of the site that returned this response. Only returned for listings with a reserve price when the requesting user is the listing's seller. For active items, refresh this
+     * value every 24 hours to pick up the current conversion rates. Not applicable to fixed-price listings. <br> <span class="tablenote"><b>Note: </b> The <b>ListingDetails.ConvertedReservePrice</b> field will stop being returned in
+     * <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>, and <b>GetMyeBaySelling</b> (SoldList and DeletedFromSoldList) on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -71,7 +76,8 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The HasReservePrice
      * Meta information extracted from the WSDL
-     * - documentation: If <code>true</code>, the seller specified a value in <b>ReservePrice</b>.
+     * - documentation: If <code>true</code>, the seller specified a value in <b>ReservePrice</b>. <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31,
+     * 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -80,7 +86,8 @@ class ListingDetailsType extends AbstractStructBase
      * The RelistedItemID
      * Meta information extracted from the WSDL
      * - documentation: Indicates the new item ID for a re-listed item. When an item is re-listed, the item ID for the new item is added to the old listing, so buyers can navigate to the new listing. This value only appears when the old listing is
-     * retrieved. The <b>RelistedItemID</b> of the original item will reflect the last relist. | Type that represents the unique identifier for an eBay listing.
+     * retrieved. The <b>RelistedItemID</b> of the original item will reflect the last relist. <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024.
+     * </span> | Type that represents the unique identifier for an eBay listing.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -116,7 +123,8 @@ class ListingDetailsType extends AbstractStructBase
      * The ViewItemURL
      * Meta information extracted from the WSDL
      * - documentation: The URL of the Web page where a user can view the listing. On the US site, this is called the View Item page. If you enabled affiliate tracking in a search-related call (for example, if you used the <b>AffiliateTrackingDetails</b>
-     * container in an applicable call), <b>ViewItemURL</b> contains a string that includes affiliate tracking information (see the <a href= "https://www.ebaypartnernetwork.com" target="_blank">eBay Partner Network</a>).
+     * container in an applicable call), <b>ViewItemURL</b> contains a string that includes affiliate tracking information (see the <a href= "https://www.ebaypartnernetwork.com" target="_blank">eBay Partner Network</a>). <br> <span
+     * class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -132,7 +140,8 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * The HasPublicMessages
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether the item has any publicly displayed messages. Use <b>GetMemberMessages</b> to retrieve public messages for the item if this flag indicates that there are any.
+     * - documentation: Indicates whether the item has any publicly displayed messages. Use <b>GetMemberMessages</b> to retrieve public messages for the item if this flag indicates that there are any. <br> <span class="tablenote"><b>Note: </b> The
+     * <b>HasPublicMessages</b> field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b>, on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -147,34 +156,17 @@ class ListingDetailsType extends AbstractStructBase
      */
     protected ?bool $BuyItNowAvailable = null;
     /**
-     * The SellerBusinessType
-     * Meta information extracted from the WSDL
-     * - documentation: Type of seller account. This value is not returned for most sites. This value is not returned for the German site (site ID 77) or US eBay Motors site (site ID 0).
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $SellerBusinessType = null;
-    /**
      * The MinimumBestOfferPrice
      * Meta information extracted from the WSDL
      * - documentation: Specifies the minimum acceptable Best Offer price. If a buyer submits a Best Offer that is below this value, the offer is automatically declined. This applies only to items listed in categories that support the Best Offer
      * auto-decline feature. <br/><br/> In order for this setting to have an effect, Best Offer must be enabled for the listing, and this value will only be exposed to the seller who listed the item. <br/><br/> <b>For Revise and Relist calls:</b> If a
      * seller wanted to disable the Best Offer auto-accept and/or Best Offer auto-reject feature when revising or relisting an item, the full path to one or both of these two corresponding fields would be provided in a <b>DeletedField</b> tag, like the
-     * following: <br/> <pre><code> <DeletedField>Item.ListingDetails.MinimumBestOfferPrice</DeletedField> </code></pre> <br> <span class="tablenote"><b>Note:</b> The Best Offer feature is now available for auction listings on the following sites: US,
-     * Canada, UK, Germany, Australia, France, Italy, and Spain. However, sellers must choose between offering Best Offer or Buy It Now on an auction listing, as both features cannot be enabled on the same auction listing. As of January 2019, the value set
-     * in this field for an auction listing can be more than the auction start price. </span>
+     * following: <br/> <pre><code> <DeletedField>Item.ListingDetails.MinimumBestOfferPrice</DeletedField> </code></pre> <br> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\AmountType $MinimumBestOfferPrice = null;
-    /**
-     * The MinimumBestOfferMessage
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $MinimumBestOfferMessage = null;
     /**
      * The LocalListingDistance
      * Meta information extracted from the WSDL
@@ -187,34 +179,16 @@ class ListingDetailsType extends AbstractStructBase
      */
     protected ?string $LocalListingDistance = null;
     /**
-     * The TCROriginalItemID
-     * Meta information extracted from the WSDL
-     * - documentation: Indicates the item ID of the original item listing from which a Transaction Confirmation Request (TCR) was created. This value is only returned when the data for a TCR is retrieved. | Type that represents the unique identifier for an
-     * eBay listing.
-     * - base: xs:string
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $TCROriginalItemID = null;
-    /**
      * The ViewItemURLForNaturalSearch
      * Meta information extracted from the WSDL
      * - documentation: This URL takes you to the same View Item page as ViewItemURL, but this URL is optimized to support natural search. That is, this URL is designed to make items on eBay easier to find via popular Internet search engines. The URL
      * includes the item title along with other optimizations. To note, "?" (question mark) optimizes to "_W0QQ", "&" (ampersand) optimizes to "QQ", and "=" (equals sign) optimizes to "Z". <br><br> If you are an eBay affiliate, use this URL to promote your
      * affiliate information. <br><br> <span class="tablenote"><b>Note:</b> This URL may include additional query parameters that don't appear in <b>ViewItemURL</b> and vice versa. You should not modify the query syntax. For example, eBay won't recognize
-     * the URL if you change QQ to ?. </span>
+     * the URL if you change QQ to ?. </span> <span class="tablenote"><b>Note: </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
     protected ?string $ViewItemURLForNaturalSearch = null;
-    /**
-     * The PayPerLeadEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $PayPerLeadEnabled = null;
     /**
      * The BestOfferAutoAcceptPrice
      * Meta information extracted from the WSDL
@@ -257,13 +231,9 @@ class ListingDetailsType extends AbstractStructBase
      * @uses ListingDetailsType::setHasUnansweredQuestions()
      * @uses ListingDetailsType::setHasPublicMessages()
      * @uses ListingDetailsType::setBuyItNowAvailable()
-     * @uses ListingDetailsType::setSellerBusinessType()
      * @uses ListingDetailsType::setMinimumBestOfferPrice()
-     * @uses ListingDetailsType::setMinimumBestOfferMessage()
      * @uses ListingDetailsType::setLocalListingDistance()
-     * @uses ListingDetailsType::setTCROriginalItemID()
      * @uses ListingDetailsType::setViewItemURLForNaturalSearch()
-     * @uses ListingDetailsType::setPayPerLeadEnabled()
      * @uses ListingDetailsType::setBestOfferAutoAcceptPrice()
      * @uses ListingDetailsType::setEndingReason()
      * @uses ListingDetailsType::setAny()
@@ -282,18 +252,14 @@ class ListingDetailsType extends AbstractStructBase
      * @param bool $hasUnansweredQuestions
      * @param bool $hasPublicMessages
      * @param bool $buyItNowAvailable
-     * @param string $sellerBusinessType
      * @param \macropage\ebaysdk\trading\StructType\AmountType $minimumBestOfferPrice
-     * @param string $minimumBestOfferMessage
      * @param string $localListingDistance
-     * @param string $tCROriginalItemID
      * @param string $viewItemURLForNaturalSearch
-     * @param bool $payPerLeadEnabled
      * @param \macropage\ebaysdk\trading\StructType\AmountType $bestOfferAutoAcceptPrice
      * @param string $endingReason
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $adult = null, ?bool $bindingAuction = null, ?bool $checkoutEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedBuyItNowPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedStartPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedReservePrice = null, ?bool $hasReservePrice = null, ?string $relistedItemID = null, ?string $secondChanceOriginalItemID = null, ?string $startTime = null, ?string $endTime = null, ?string $viewItemURL = null, ?bool $hasUnansweredQuestions = null, ?bool $hasPublicMessages = null, ?bool $buyItNowAvailable = null, ?string $sellerBusinessType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minimumBestOfferPrice = null, ?string $minimumBestOfferMessage = null, ?string $localListingDistance = null, ?string $tCROriginalItemID = null, ?string $viewItemURLForNaturalSearch = null, ?bool $payPerLeadEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $bestOfferAutoAcceptPrice = null, ?string $endingReason = null, $any = null)
+    public function __construct(?bool $adult = null, ?bool $bindingAuction = null, ?bool $checkoutEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedBuyItNowPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedStartPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedReservePrice = null, ?bool $hasReservePrice = null, ?string $relistedItemID = null, ?string $secondChanceOriginalItemID = null, ?string $startTime = null, ?string $endTime = null, ?string $viewItemURL = null, ?bool $hasUnansweredQuestions = null, ?bool $hasPublicMessages = null, ?bool $buyItNowAvailable = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minimumBestOfferPrice = null, ?string $localListingDistance = null, ?string $viewItemURLForNaturalSearch = null, ?\macropage\ebaysdk\trading\StructType\AmountType $bestOfferAutoAcceptPrice = null, ?string $endingReason = null, $any = null)
     {
         $this
             ->setAdult($adult)
@@ -311,13 +277,9 @@ class ListingDetailsType extends AbstractStructBase
             ->setHasUnansweredQuestions($hasUnansweredQuestions)
             ->setHasPublicMessages($hasPublicMessages)
             ->setBuyItNowAvailable($buyItNowAvailable)
-            ->setSellerBusinessType($sellerBusinessType)
             ->setMinimumBestOfferPrice($minimumBestOfferPrice)
-            ->setMinimumBestOfferMessage($minimumBestOfferMessage)
             ->setLocalListingDistance($localListingDistance)
-            ->setTCROriginalItemID($tCROriginalItemID)
             ->setViewItemURLForNaturalSearch($viewItemURLForNaturalSearch)
-            ->setPayPerLeadEnabled($payPerLeadEnabled)
             ->setBestOfferAutoAcceptPrice($bestOfferAutoAcceptPrice)
             ->setEndingReason($endingReason)
             ->setAny($any);
@@ -656,32 +618,6 @@ class ListingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get SellerBusinessType value
-     * @return string|null
-     */
-    public function getSellerBusinessType(): ?string
-    {
-        return $this->SellerBusinessType;
-    }
-    /**
-     * Set SellerBusinessType value
-     * @uses \macropage\ebaysdk\trading\EnumType\SellerBusinessCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\SellerBusinessCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $sellerBusinessType
-     * @return \macropage\ebaysdk\trading\StructType\ListingDetailsType
-     */
-    public function setSellerBusinessType(?string $sellerBusinessType = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\SellerBusinessCodeType::valueIsValid($sellerBusinessType)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellerBusinessCodeType', is_array($sellerBusinessType) ? implode(', ', $sellerBusinessType) : var_export($sellerBusinessType, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellerBusinessCodeType::getValidValues())), __LINE__);
-        }
-        $this->SellerBusinessType = $sellerBusinessType;
-        
-        return $this;
-    }
-    /**
      * Get MinimumBestOfferPrice value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -697,29 +633,6 @@ class ListingDetailsType extends AbstractStructBase
     public function setMinimumBestOfferPrice(?\macropage\ebaysdk\trading\StructType\AmountType $minimumBestOfferPrice = null): self
     {
         $this->MinimumBestOfferPrice = $minimumBestOfferPrice;
-        
-        return $this;
-    }
-    /**
-     * Get MinimumBestOfferMessage value
-     * @return string|null
-     */
-    public function getMinimumBestOfferMessage(): ?string
-    {
-        return $this->MinimumBestOfferMessage;
-    }
-    /**
-     * Set MinimumBestOfferMessage value
-     * @param string $minimumBestOfferMessage
-     * @return \macropage\ebaysdk\trading\StructType\ListingDetailsType
-     */
-    public function setMinimumBestOfferMessage(?string $minimumBestOfferMessage = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($minimumBestOfferMessage) && !is_string($minimumBestOfferMessage)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($minimumBestOfferMessage, true), gettype($minimumBestOfferMessage)), __LINE__);
-        }
-        $this->MinimumBestOfferMessage = $minimumBestOfferMessage;
         
         return $this;
     }
@@ -747,29 +660,6 @@ class ListingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get TCROriginalItemID value
-     * @return string|null
-     */
-    public function getTCROriginalItemID(): ?string
-    {
-        return $this->TCROriginalItemID;
-    }
-    /**
-     * Set TCROriginalItemID value
-     * @param string $tCROriginalItemID
-     * @return \macropage\ebaysdk\trading\StructType\ListingDetailsType
-     */
-    public function setTCROriginalItemID(?string $tCROriginalItemID = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($tCROriginalItemID) && !is_string($tCROriginalItemID)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($tCROriginalItemID, true), gettype($tCROriginalItemID)), __LINE__);
-        }
-        $this->TCROriginalItemID = $tCROriginalItemID;
-        
-        return $this;
-    }
-    /**
      * Get ViewItemURLForNaturalSearch value
      * @return string|null
      */
@@ -789,29 +679,6 @@ class ListingDetailsType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($viewItemURLForNaturalSearch, true), gettype($viewItemURLForNaturalSearch)), __LINE__);
         }
         $this->ViewItemURLForNaturalSearch = $viewItemURLForNaturalSearch;
-        
-        return $this;
-    }
-    /**
-     * Get PayPerLeadEnabled value
-     * @return bool|null
-     */
-    public function getPayPerLeadEnabled(): ?bool
-    {
-        return $this->PayPerLeadEnabled;
-    }
-    /**
-     * Set PayPerLeadEnabled value
-     * @param bool $payPerLeadEnabled
-     * @return \macropage\ebaysdk\trading\StructType\ListingDetailsType
-     */
-    public function setPayPerLeadEnabled(?bool $payPerLeadEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($payPerLeadEnabled) && !is_bool($payPerLeadEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPerLeadEnabled, true), gettype($payPerLeadEnabled)), __LINE__);
-        }
-        $this->PayPerLeadEnabled = $payPerLeadEnabled;
         
         return $this;
     }
@@ -863,7 +730,7 @@ class ListingDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

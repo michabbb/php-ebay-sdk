@@ -378,30 +378,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\PaisaPayFullEscrowEnabledDefinitionType $PaisaPayFullEscrowEnabled = null;
     /**
-     * The ISBNIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType $ISBNIdentifierEnabled = null;
-    /**
-     * The UPCIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType $UPCIdentifierEnabled = null;
-    /**
-     * The EANIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType $EANIdentifierEnabled = null;
-    /**
      * The BrandMPNIdentifierEnabled
      * Meta information extracted from the WSDL
      * - documentation: This field is returned as an empty element (a boolean value is not returned) if one or more eBay marketplaces support the use of Brand and MPN (Manufacturer Part Number) to identify a product. This field will not be returned if one
@@ -459,14 +435,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeAustraliaEnabledDefinitionType $CrossBorderTradeAustraliaEnabled = null;
     /**
-     * The PayPalBuyerProtectionEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated. eBay now manages the complete payment and checkout process, so PayPal Purchase Protection no longer applies to eBay orders.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType $PayPalBuyerProtectionEnabled = null;
-    /**
      * The BuyerGuaranteeEnabled
      * Meta information extracted from the WSDL
      * - documentation: This field is deprecated.
@@ -498,14 +466,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @var \macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType $INEscrowWorkflowTimeline = null;
-    /**
-     * The PayPalRequired
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated. eBay now controls the electronic payment methods avaialable to buyers, and the seller does not specify any electronic payment methods.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType $PayPalRequired = null;
     /**
      * The eBayMotorsProAdFormatEnabled
      * Meta information extracted from the WSDL
@@ -1052,9 +1012,7 @@ class FeatureDefinitionsType extends AbstractStructBase
     /**
      * The ProductCreationEnabled
      * Meta information extracted from the WSDL
-     * - documentation: This field is returned as an empty element (a boolean value is not returned) if one or more eBay marketplaces support the creation of listings through the specification of Global Trade Identification Numbers (GTINs) like UPC, ISBN,
-     * EAN, or Brand/MPN combination. If a GTIN is matched to a product in eBay product catalog, a listing will automatically be created using the eBay catalog product's images, product aspects, description, and title. This field will not be returned if one
-     * or more <b>FeatureID</b> fields are included in the call request and <code>ProductCreationEnabled</code> is not one of the values passed into those <a href="types/FeatureIDCodeType.html">FeatureID</a> fields.
+     * - documentation: This field is no longer applicable.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ProductCreationEnabledDefinitionType|null
      */
@@ -1110,14 +1068,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @var \macropage\ebaysdk\trading\StructType\MaxGranularFitmentCountDefinitionType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\MaxGranularFitmentCountDefinitionType $MaxGranularFitmentCount = null;
-    /**
-     * The PaymentOptionsGroup
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType $PaymentOptionsGroup = null;
     /**
      * The ShippingProfileCategoryGroup
      * Meta information extracted from the WSDL
@@ -1381,21 +1331,16 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @uses FeatureDefinitionsType::setClassifiedAdPayPerLeadEnabled()
      * @uses FeatureDefinitionsType::setItemSpecificsEnabled()
      * @uses FeatureDefinitionsType::setPaisaPayFullEscrowEnabled()
-     * @uses FeatureDefinitionsType::setISBNIdentifierEnabled()
-     * @uses FeatureDefinitionsType::setUPCIdentifierEnabled()
-     * @uses FeatureDefinitionsType::setEANIdentifierEnabled()
      * @uses FeatureDefinitionsType::setBrandMPNIdentifierEnabled()
      * @uses FeatureDefinitionsType::setBestOfferAutoAcceptEnabled()
      * @uses FeatureDefinitionsType::setClassifiedAdAutoAcceptEnabled()
      * @uses FeatureDefinitionsType::setCrossBorderTradeNorthAmericaEnabled()
      * @uses FeatureDefinitionsType::setCrossBorderTradeGBEnabled()
      * @uses FeatureDefinitionsType::setCrossBorderTradeAustraliaEnabled()
-     * @uses FeatureDefinitionsType::setPayPalBuyerProtectionEnabled()
      * @uses FeatureDefinitionsType::setBuyerGuaranteeEnabled()
      * @uses FeatureDefinitionsType::setCombinedFixedPriceTreatmentEnabled()
      * @uses FeatureDefinitionsType::setGalleryFeaturedDurations()
      * @uses FeatureDefinitionsType::setINEscrowWorkflowTimeline()
-     * @uses FeatureDefinitionsType::setPayPalRequired()
      * @uses FeatureDefinitionsType::setEBayMotorsProAdFormatEnabled()
      * @uses FeatureDefinitionsType::setEBayMotorsProContactByPhoneEnabled()
      * @uses FeatureDefinitionsType::setEBayMotorsProPhoneCount()
@@ -1461,7 +1406,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @uses FeatureDefinitionsType::setUPCEnabled()
      * @uses FeatureDefinitionsType::setCompatibleVehicleType()
      * @uses FeatureDefinitionsType::setMaxGranularFitmentCount()
-     * @uses FeatureDefinitionsType::setPaymentOptionsGroup()
      * @uses FeatureDefinitionsType::setShippingProfileCategoryGroup()
      * @uses FeatureDefinitionsType::setPaymentProfileCategoryGroup()
      * @uses FeatureDefinitionsType::setReturnPolicyProfileCategoryGroup()
@@ -1526,21 +1470,16 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ClassifiedAdPayPerLeadEnabledDefinitionType $classifiedAdPayPerLeadEnabled
      * @param \macropage\ebaysdk\trading\StructType\ItemSpecificsEnabledDefinitionType $itemSpecificsEnabled
      * @param \macropage\ebaysdk\trading\StructType\PaisaPayFullEscrowEnabledDefinitionType $paisaPayFullEscrowEnabled
-     * @param \macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType $iSBNIdentifierEnabled
-     * @param \macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType $uPCIdentifierEnabled
-     * @param \macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType $eANIdentifierEnabled
      * @param \macropage\ebaysdk\trading\StructType\BrandMPNIdentifierEnabledDefinitionType $brandMPNIdentifierEnabled
      * @param \macropage\ebaysdk\trading\StructType\BestOfferAutoAcceptEnabledDefinitionType $bestOfferAutoAcceptEnabled
      * @param \macropage\ebaysdk\trading\StructType\ClassifiedAdAutoAcceptEnabledDefinitionType $classifiedAdAutoAcceptEnabled
      * @param \macropage\ebaysdk\trading\StructType\CrossBorderTradeNorthAmericaEnabledDefinitionType $crossBorderTradeNorthAmericaEnabled
      * @param \macropage\ebaysdk\trading\StructType\CrossBorderTradeGBEnabledDefinitionType $crossBorderTradeGBEnabled
      * @param \macropage\ebaysdk\trading\StructType\CrossBorderTradeAustraliaEnabledDefinitionType $crossBorderTradeAustraliaEnabled
-     * @param \macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType $payPalBuyerProtectionEnabled
      * @param \macropage\ebaysdk\trading\StructType\BuyerGuaranteeEnabledDefinitionType $buyerGuaranteeEnabled
      * @param \macropage\ebaysdk\trading\StructType\CombinedFixedPriceTreatmentEnabledDefinitionType $combinedFixedPriceTreatmentEnabled
      * @param \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationDefinitionType $galleryFeaturedDurations
      * @param \macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType $iNEscrowWorkflowTimeline
-     * @param \macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType $payPalRequired
      * @param \macropage\ebaysdk\trading\StructType\EBayMotorsProAdFormatEnabledDefinitionType $eBayMotorsProAdFormatEnabled
      * @param \macropage\ebaysdk\trading\StructType\EBayMotorsProContactByPhoneEnabledDefinitionType $eBayMotorsProContactByPhoneEnabled
      * @param \macropage\ebaysdk\trading\StructType\EBayMotorsProPhoneCountDefinitionType $eBayMotorsProPhoneCount
@@ -1606,7 +1545,6 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\UPCEnabledDefinitionType $uPCEnabled
      * @param \macropage\ebaysdk\trading\StructType\CompatibleVehicleTypeDefinitionType $compatibleVehicleType
      * @param \macropage\ebaysdk\trading\StructType\MaxGranularFitmentCountDefinitionType $maxGranularFitmentCount
-     * @param \macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType $paymentOptionsGroup
      * @param \macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $shippingProfileCategoryGroup
      * @param \macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $paymentProfileCategoryGroup
      * @param \macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $returnPolicyProfileCategoryGroup
@@ -1632,7 +1570,7 @@ class FeatureDefinitionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues
      * @param \macropage\ebaysdk\trading\StructType\ReturnPolicyDescriptionEnabledDefinitionType $returnPolicyDescriptionEnabled
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\ListingDurationDefinitionsType $listingDurations = null, ?\macropage\ebaysdk\trading\StructType\ShippingTermRequiredDefinitionType $shippingTermsRequired = null, ?\macropage\ebaysdk\trading\StructType\BestOfferEnabledDefinitionType $bestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\DutchBINEnabledDefinitionType $dutchBINEnabled = null, ?\macropage\ebaysdk\trading\StructType\UserConsentRequiredDefinitionType $userConsentRequired = null, ?\macropage\ebaysdk\trading\StructType\HomePageFeaturedEnabledDefinitionType $homePageFeaturedEnabled = null, ?\macropage\ebaysdk\trading\StructType\ProPackEnabledDefinitionType $proPackEnabled = null, ?\macropage\ebaysdk\trading\StructType\BasicUpgradePackEnabledDefinitionType $basicUpgradePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ValuePackEnabledDefinitionType $valuePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ProPackPlusEnabledDefinitionType $proPackPlusEnabled = null, ?\macropage\ebaysdk\trading\StructType\AdFormatEnabledDefinitionType $adFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferCounterEnabledDefinitionType $bestOfferCounterEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferAutoDeclineEnabledDefinitionType $bestOfferAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketSpecialitySubscriptionDefinitionType $localMarketSpecialitySubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketRegularSubscriptionDefinitionType $localMarketRegularSubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPremiumSubscriptionDefinitionType $localMarketPremiumSubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketNonSubscriptionDefinitionType $localMarketNonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ExpressEnabledDefinitionType $expressEnabled = null, ?\macropage\ebaysdk\trading\StructType\ExpressPicturesRequiredDefinitionType $expressPicturesRequired = null, ?\macropage\ebaysdk\trading\StructType\ExpressConditionRequiredDefinitionType $expressConditionRequired = null, ?\macropage\ebaysdk\trading\StructType\MinimumReservePriceDefinitionType $minimumReservePrice = null, ?\macropage\ebaysdk\trading\StructType\TCREnabledDefinitionType $transactionConfirmationRequestEnabled = null, ?\macropage\ebaysdk\trading\StructType\SellerContactDetailsEnabledDefinitionType $sellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreInventoryEnabledDefinitionType $storeInventoryEnabled = null, ?\macropage\ebaysdk\trading\StructType\SkypeMeTransactionalEnabledDefinitionType $skypeMeTransactionalEnabled = null, ?\macropage\ebaysdk\trading\StructType\SkypeMeNonTransactionalEnabledDefinitionType $skypeMeNonTransactionalEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesRegularDefinitionType $localListingDistancesRegular = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesSpecialtyDefinitionType $localListingDistancesSpecialty = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesNonSubscriptionDefinitionType $localListingDistancesNonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPaymentMethodEnabledDefinitionType $classifiedAdPaymentMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdShippingMethodEnabledDefinitionType $classifiedAdShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdBestOfferEnabledDefinitionType $classifiedAdBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdCounterOfferEnabledDefinitionType $classifiedAdCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdAutoDeclineEnabledDefinitionType $classifiedAdAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByPhoneEnabledDefinitionType $classifiedAdContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByEmailEnabledDefintionType $classifiedAdContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\SafePaymentRequiredDefinitionType $safePaymentRequired = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPayPerLeadEnabledDefinitionType $classifiedAdPayPerLeadEnabled = null, ?\macropage\ebaysdk\trading\StructType\ItemSpecificsEnabledDefinitionType $itemSpecificsEnabled = null, ?\macropage\ebaysdk\trading\StructType\PaisaPayFullEscrowEnabledDefinitionType $paisaPayFullEscrowEnabled = null, ?\macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType $iSBNIdentifierEnabled = null, ?\macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType $uPCIdentifierEnabled = null, ?\macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType $eANIdentifierEnabled = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNIdentifierEnabledDefinitionType $brandMPNIdentifierEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferAutoAcceptEnabledDefinitionType $bestOfferAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdAutoAcceptEnabledDefinitionType $classifiedAdAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeNorthAmericaEnabledDefinitionType $crossBorderTradeNorthAmericaEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeGBEnabledDefinitionType $crossBorderTradeGBEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeAustraliaEnabledDefinitionType $crossBorderTradeAustraliaEnabled = null, ?\macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType $payPalBuyerProtectionEnabled = null, ?\macropage\ebaysdk\trading\StructType\BuyerGuaranteeEnabledDefinitionType $buyerGuaranteeEnabled = null, ?\macropage\ebaysdk\trading\StructType\CombinedFixedPriceTreatmentEnabledDefinitionType $combinedFixedPriceTreatmentEnabled = null, ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationDefinitionType $galleryFeaturedDurations = null, ?\macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType $iNEscrowWorkflowTimeline = null, ?\macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType $payPalRequired = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAdFormatEnabledDefinitionType $eBayMotorsProAdFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByPhoneEnabledDefinitionType $eBayMotorsProContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProPhoneCountDefinitionType $eBayMotorsProPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByAddressEnabledDefinitionType $eBayMotorsProContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProStreetCountDefinitionType $eBayMotorsProStreetCount = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProCompanyNameEnabledDefinitionType $eBayMotorsProCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByEmailEnabledDefinitionType $eBayMotorsProContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProBestOfferEnabledDefinitionType $eBayMotorsProBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAutoAcceptEnabledDefinitionType $eBayMotorsProAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAutoDeclineEnabledDefinitionType $eBayMotorsProAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProPaymentMethodCheckOutEnabledDefinitionType $eBayMotorsProPaymentMethodCheckOutEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProShippingMethodEnabledDefinitionType $eBayMotorsProShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProCounterOfferEnabledDefinitionType $eBayMotorsProCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProSellerContactDetailsEnabledDefinitionType $eBayMotorsProSellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAdFormatEnabledDefinitionType $localMarketAdFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByPhoneEnabledDefinitionType $localMarketContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPhoneCountDefinitionType $localMarketPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByAddressEnabledDefinitionType $localMarketContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketStreetCountDefinitionType $localMarketStreetCount = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketCompanyNameEnabledDefinitionType $localMarketCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByEmailEnabledDefinitionType $localMarketContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketBestOfferEnabledDefinitionType $localMarketBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAutoAcceptEnabledDefinitionType $localMarketAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAutoDeclineEnabledDefinitionType $localMarketAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPaymentMethodCheckOutEnabledDefinitionType $localMarketPaymentMethodCheckOutEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketShippingMethodEnabledDefinitionType $localMarketShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketCounterOfferEnabledDefinitionType $localMarketCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketSellerContactDetailsEnabledDefinitionType $localMarketSellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPhoneCountDefinitionType $classifiedAdPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByAddressEnabledDefinitionType $classifiedAdContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdStreetCountDefinitionType $classifiedAdStreetCount = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdCompanyNameEnabledDefinitionType $classifiedAdCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\SpecialitySubscriptionDefinitionType $specialitySubscription = null, ?\macropage\ebaysdk\trading\StructType\RegularSubscriptionDefinitionType $regularSubscription = null, ?\macropage\ebaysdk\trading\StructType\PremiumSubscriptionDefinitionType $premiumSubscription = null, ?\macropage\ebaysdk\trading\StructType\NonSubscriptionDefinitionType $nonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyEnabledDefinitionType $returnPolicyEnabled = null, ?\macropage\ebaysdk\trading\StructType\HandlingTimeEnabledDefinitionType $handlingTimeEnabled = null, ?\macropage\ebaysdk\trading\StructType\PayPalRequiredForStoreOwnerDefinitionType $payPalRequiredForStoreOwner = null, ?\macropage\ebaysdk\trading\StructType\ReviseQuantityAllowedDefinitionType $reviseQuantityAllowed = null, ?\macropage\ebaysdk\trading\StructType\RevisePriceAllowedDefinitionType $revisePriceAllowed = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsEnabledDefinitionType $storeOwnerExtendedListingDurationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsDefinitionType $storeOwnerExtendedListingDurations = null, ?\macropage\ebaysdk\trading\StructType\PaymentMethodDefinitionType $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\Group1MaxFlatShippingCostDefinitionType $group1MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\Group2MaxFlatShippingCostDefinitionType $group2MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\Group3MaxFlatShippingCostDefinitionType $group3MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\MaxFlatShippingCostCBTExemptDefinitionType $maxFlatShippingCostCBTExempt = null, ?\macropage\ebaysdk\trading\StructType\MaxFlatShippingCostDefinitionType $maxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\VariationsEnabledDefinitionType $variationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\AttributeConversionEnabledFeatureDefinitionType $attributeConversionEnabled = null, ?\macropage\ebaysdk\trading\StructType\FreeGalleryPlusEnabledDefinitionType $freeGalleryPlusEnabled = null, ?\macropage\ebaysdk\trading\StructType\FreePicturePackEnabledDefinitionType $freePicturePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ItemCompatibilityEnabledDefinitionType $itemCompatibilityEnabled = null, ?\macropage\ebaysdk\trading\StructType\MaxItemCompatibilityDefinitionType $maxItemCompatibility = null, ?\macropage\ebaysdk\trading\StructType\MinItemCompatibilityDefinitionType $minItemCompatibility = null, ?\macropage\ebaysdk\trading\StructType\ConditionEnabledDefinitionType $conditionEnabled = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesDefinitionType $conditionValues = null, ?\macropage\ebaysdk\trading\StructType\ValueCategoryDefinitionType $valueCategory = null, ?\macropage\ebaysdk\trading\StructType\ProductCreationEnabledDefinitionType $productCreationEnabled = null, ?\macropage\ebaysdk\trading\StructType\EANEnabledDefinitionType $eANEnabled = null, ?\macropage\ebaysdk\trading\StructType\ISBNEnabledDefinitionType $iSBNEnabled = null, ?\macropage\ebaysdk\trading\StructType\UPCEnabledDefinitionType $uPCEnabled = null, ?\macropage\ebaysdk\trading\StructType\CompatibleVehicleTypeDefinitionType $compatibleVehicleType = null, ?\macropage\ebaysdk\trading\StructType\MaxGranularFitmentCountDefinitionType $maxGranularFitmentCount = null, ?\macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType $paymentOptionsGroup = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $shippingProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $paymentProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $returnPolicyProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\VINSupportedDefinitionType $vINSupported = null, ?\macropage\ebaysdk\trading\StructType\VRMSupportedDefinitionType $vRMSupported = null, ?\macropage\ebaysdk\trading\StructType\SellerProvidedTitleSupportedDefinitionType $sellerProvidedTitleSupported = null, ?\macropage\ebaysdk\trading\StructType\DepositSupportedDefinitionType $depositSupported = null, ?\macropage\ebaysdk\trading\StructType\GlobalShippingEnabledDefinitionType $globalShippingEnabled = null, ?\macropage\ebaysdk\trading\StructType\AdditionalCompatibilityEnabledDefinitionType $additionalCompatibilityEnabled = null, $any = null, ?\macropage\ebaysdk\trading\StructType\PickupDropOffEnabledDefinitionType $pickupDropOffEnabled = null, ?\macropage\ebaysdk\trading\StructType\DigitalGoodDeliveryEnabledDefinitionType $digitalGoodDeliveryEnabled = null, ?\macropage\ebaysdk\trading\StructType\EpidSupportedDefinitionType $epidSupported = null, ?\macropage\ebaysdk\trading\StructType\KTypeSupportedDefinitionType $kTypeSupported = null, ?\macropage\ebaysdk\trading\StructType\ProductRequiredEnabledDefinitionType $productRequiredEnabled = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedDefinitionType $domesticReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedDefinitionType $internationalReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationDefinitionType $domesticReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationDefinitionType $internationalReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeDefinitionType $domesticReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeDefinitionType $internationalReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDescriptionEnabledDefinitionType $returnPolicyDescriptionEnabled = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\ListingDurationDefinitionsType $listingDurations = null, ?\macropage\ebaysdk\trading\StructType\ShippingTermRequiredDefinitionType $shippingTermsRequired = null, ?\macropage\ebaysdk\trading\StructType\BestOfferEnabledDefinitionType $bestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\DutchBINEnabledDefinitionType $dutchBINEnabled = null, ?\macropage\ebaysdk\trading\StructType\UserConsentRequiredDefinitionType $userConsentRequired = null, ?\macropage\ebaysdk\trading\StructType\HomePageFeaturedEnabledDefinitionType $homePageFeaturedEnabled = null, ?\macropage\ebaysdk\trading\StructType\ProPackEnabledDefinitionType $proPackEnabled = null, ?\macropage\ebaysdk\trading\StructType\BasicUpgradePackEnabledDefinitionType $basicUpgradePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ValuePackEnabledDefinitionType $valuePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ProPackPlusEnabledDefinitionType $proPackPlusEnabled = null, ?\macropage\ebaysdk\trading\StructType\AdFormatEnabledDefinitionType $adFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferCounterEnabledDefinitionType $bestOfferCounterEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferAutoDeclineEnabledDefinitionType $bestOfferAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketSpecialitySubscriptionDefinitionType $localMarketSpecialitySubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketRegularSubscriptionDefinitionType $localMarketRegularSubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPremiumSubscriptionDefinitionType $localMarketPremiumSubscription = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketNonSubscriptionDefinitionType $localMarketNonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ExpressEnabledDefinitionType $expressEnabled = null, ?\macropage\ebaysdk\trading\StructType\ExpressPicturesRequiredDefinitionType $expressPicturesRequired = null, ?\macropage\ebaysdk\trading\StructType\ExpressConditionRequiredDefinitionType $expressConditionRequired = null, ?\macropage\ebaysdk\trading\StructType\MinimumReservePriceDefinitionType $minimumReservePrice = null, ?\macropage\ebaysdk\trading\StructType\TCREnabledDefinitionType $transactionConfirmationRequestEnabled = null, ?\macropage\ebaysdk\trading\StructType\SellerContactDetailsEnabledDefinitionType $sellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreInventoryEnabledDefinitionType $storeInventoryEnabled = null, ?\macropage\ebaysdk\trading\StructType\SkypeMeTransactionalEnabledDefinitionType $skypeMeTransactionalEnabled = null, ?\macropage\ebaysdk\trading\StructType\SkypeMeNonTransactionalEnabledDefinitionType $skypeMeNonTransactionalEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesRegularDefinitionType $localListingDistancesRegular = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesSpecialtyDefinitionType $localListingDistancesSpecialty = null, ?\macropage\ebaysdk\trading\StructType\LocalListingDistancesNonSubscriptionDefinitionType $localListingDistancesNonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPaymentMethodEnabledDefinitionType $classifiedAdPaymentMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdShippingMethodEnabledDefinitionType $classifiedAdShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdBestOfferEnabledDefinitionType $classifiedAdBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdCounterOfferEnabledDefinitionType $classifiedAdCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdAutoDeclineEnabledDefinitionType $classifiedAdAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByPhoneEnabledDefinitionType $classifiedAdContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByEmailEnabledDefintionType $classifiedAdContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\SafePaymentRequiredDefinitionType $safePaymentRequired = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPayPerLeadEnabledDefinitionType $classifiedAdPayPerLeadEnabled = null, ?\macropage\ebaysdk\trading\StructType\ItemSpecificsEnabledDefinitionType $itemSpecificsEnabled = null, ?\macropage\ebaysdk\trading\StructType\PaisaPayFullEscrowEnabledDefinitionType $paisaPayFullEscrowEnabled = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNIdentifierEnabledDefinitionType $brandMPNIdentifierEnabled = null, ?\macropage\ebaysdk\trading\StructType\BestOfferAutoAcceptEnabledDefinitionType $bestOfferAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdAutoAcceptEnabledDefinitionType $classifiedAdAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeNorthAmericaEnabledDefinitionType $crossBorderTradeNorthAmericaEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeGBEnabledDefinitionType $crossBorderTradeGBEnabled = null, ?\macropage\ebaysdk\trading\StructType\CrossBorderTradeAustraliaEnabledDefinitionType $crossBorderTradeAustraliaEnabled = null, ?\macropage\ebaysdk\trading\StructType\BuyerGuaranteeEnabledDefinitionType $buyerGuaranteeEnabled = null, ?\macropage\ebaysdk\trading\StructType\CombinedFixedPriceTreatmentEnabledDefinitionType $combinedFixedPriceTreatmentEnabled = null, ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationDefinitionType $galleryFeaturedDurations = null, ?\macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType $iNEscrowWorkflowTimeline = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAdFormatEnabledDefinitionType $eBayMotorsProAdFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByPhoneEnabledDefinitionType $eBayMotorsProContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProPhoneCountDefinitionType $eBayMotorsProPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByAddressEnabledDefinitionType $eBayMotorsProContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProStreetCountDefinitionType $eBayMotorsProStreetCount = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProCompanyNameEnabledDefinitionType $eBayMotorsProCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProContactByEmailEnabledDefinitionType $eBayMotorsProContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProBestOfferEnabledDefinitionType $eBayMotorsProBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAutoAcceptEnabledDefinitionType $eBayMotorsProAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProAutoDeclineEnabledDefinitionType $eBayMotorsProAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProPaymentMethodCheckOutEnabledDefinitionType $eBayMotorsProPaymentMethodCheckOutEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProShippingMethodEnabledDefinitionType $eBayMotorsProShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProCounterOfferEnabledDefinitionType $eBayMotorsProCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayMotorsProSellerContactDetailsEnabledDefinitionType $eBayMotorsProSellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAdFormatEnabledDefinitionType $localMarketAdFormatEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByPhoneEnabledDefinitionType $localMarketContactByPhoneEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPhoneCountDefinitionType $localMarketPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByAddressEnabledDefinitionType $localMarketContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketStreetCountDefinitionType $localMarketStreetCount = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketCompanyNameEnabledDefinitionType $localMarketCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketContactByEmailEnabledDefinitionType $localMarketContactByEmailEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketBestOfferEnabledDefinitionType $localMarketBestOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAutoAcceptEnabledDefinitionType $localMarketAutoAcceptEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketAutoDeclineEnabledDefinitionType $localMarketAutoDeclineEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketPaymentMethodCheckOutEnabledDefinitionType $localMarketPaymentMethodCheckOutEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketShippingMethodEnabledDefinitionType $localMarketShippingMethodEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketCounterOfferEnabledDefinitionType $localMarketCounterOfferEnabled = null, ?\macropage\ebaysdk\trading\StructType\LocalMarketSellerContactDetailsEnabledDefinitionType $localMarketSellerContactDetailsEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdPhoneCountDefinitionType $classifiedAdPhoneCount = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdContactByAddressEnabledDefinitionType $classifiedAdContactByAddressEnabled = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdStreetCountDefinitionType $classifiedAdStreetCount = null, ?\macropage\ebaysdk\trading\StructType\ClassifiedAdCompanyNameEnabledDefinitionType $classifiedAdCompanyNameEnabled = null, ?\macropage\ebaysdk\trading\StructType\SpecialitySubscriptionDefinitionType $specialitySubscription = null, ?\macropage\ebaysdk\trading\StructType\RegularSubscriptionDefinitionType $regularSubscription = null, ?\macropage\ebaysdk\trading\StructType\PremiumSubscriptionDefinitionType $premiumSubscription = null, ?\macropage\ebaysdk\trading\StructType\NonSubscriptionDefinitionType $nonSubscription = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyEnabledDefinitionType $returnPolicyEnabled = null, ?\macropage\ebaysdk\trading\StructType\HandlingTimeEnabledDefinitionType $handlingTimeEnabled = null, ?\macropage\ebaysdk\trading\StructType\PayPalRequiredForStoreOwnerDefinitionType $payPalRequiredForStoreOwner = null, ?\macropage\ebaysdk\trading\StructType\ReviseQuantityAllowedDefinitionType $reviseQuantityAllowed = null, ?\macropage\ebaysdk\trading\StructType\RevisePriceAllowedDefinitionType $revisePriceAllowed = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsEnabledDefinitionType $storeOwnerExtendedListingDurationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsDefinitionType $storeOwnerExtendedListingDurations = null, ?\macropage\ebaysdk\trading\StructType\PaymentMethodDefinitionType $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\Group1MaxFlatShippingCostDefinitionType $group1MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\Group2MaxFlatShippingCostDefinitionType $group2MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\Group3MaxFlatShippingCostDefinitionType $group3MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\MaxFlatShippingCostCBTExemptDefinitionType $maxFlatShippingCostCBTExempt = null, ?\macropage\ebaysdk\trading\StructType\MaxFlatShippingCostDefinitionType $maxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\VariationsEnabledDefinitionType $variationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\AttributeConversionEnabledFeatureDefinitionType $attributeConversionEnabled = null, ?\macropage\ebaysdk\trading\StructType\FreeGalleryPlusEnabledDefinitionType $freeGalleryPlusEnabled = null, ?\macropage\ebaysdk\trading\StructType\FreePicturePackEnabledDefinitionType $freePicturePackEnabled = null, ?\macropage\ebaysdk\trading\StructType\ItemCompatibilityEnabledDefinitionType $itemCompatibilityEnabled = null, ?\macropage\ebaysdk\trading\StructType\MaxItemCompatibilityDefinitionType $maxItemCompatibility = null, ?\macropage\ebaysdk\trading\StructType\MinItemCompatibilityDefinitionType $minItemCompatibility = null, ?\macropage\ebaysdk\trading\StructType\ConditionEnabledDefinitionType $conditionEnabled = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesDefinitionType $conditionValues = null, ?\macropage\ebaysdk\trading\StructType\ValueCategoryDefinitionType $valueCategory = null, ?\macropage\ebaysdk\trading\StructType\ProductCreationEnabledDefinitionType $productCreationEnabled = null, ?\macropage\ebaysdk\trading\StructType\EANEnabledDefinitionType $eANEnabled = null, ?\macropage\ebaysdk\trading\StructType\ISBNEnabledDefinitionType $iSBNEnabled = null, ?\macropage\ebaysdk\trading\StructType\UPCEnabledDefinitionType $uPCEnabled = null, ?\macropage\ebaysdk\trading\StructType\CompatibleVehicleTypeDefinitionType $compatibleVehicleType = null, ?\macropage\ebaysdk\trading\StructType\MaxGranularFitmentCountDefinitionType $maxGranularFitmentCount = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $shippingProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $paymentProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType $returnPolicyProfileCategoryGroup = null, ?\macropage\ebaysdk\trading\StructType\VINSupportedDefinitionType $vINSupported = null, ?\macropage\ebaysdk\trading\StructType\VRMSupportedDefinitionType $vRMSupported = null, ?\macropage\ebaysdk\trading\StructType\SellerProvidedTitleSupportedDefinitionType $sellerProvidedTitleSupported = null, ?\macropage\ebaysdk\trading\StructType\DepositSupportedDefinitionType $depositSupported = null, ?\macropage\ebaysdk\trading\StructType\GlobalShippingEnabledDefinitionType $globalShippingEnabled = null, ?\macropage\ebaysdk\trading\StructType\AdditionalCompatibilityEnabledDefinitionType $additionalCompatibilityEnabled = null, $any = null, ?\macropage\ebaysdk\trading\StructType\PickupDropOffEnabledDefinitionType $pickupDropOffEnabled = null, ?\macropage\ebaysdk\trading\StructType\DigitalGoodDeliveryEnabledDefinitionType $digitalGoodDeliveryEnabled = null, ?\macropage\ebaysdk\trading\StructType\EpidSupportedDefinitionType $epidSupported = null, ?\macropage\ebaysdk\trading\StructType\KTypeSupportedDefinitionType $kTypeSupported = null, ?\macropage\ebaysdk\trading\StructType\ProductRequiredEnabledDefinitionType $productRequiredEnabled = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedDefinitionType $domesticReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedDefinitionType $internationalReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationDefinitionType $domesticReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationDefinitionType $internationalReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeDefinitionType $domesticReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeDefinitionType $internationalReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDescriptionEnabledDefinitionType $returnPolicyDescriptionEnabled = null)
     {
         $this
             ->setListingDurations($listingDurations)
@@ -1675,21 +1613,16 @@ class FeatureDefinitionsType extends AbstractStructBase
             ->setClassifiedAdPayPerLeadEnabled($classifiedAdPayPerLeadEnabled)
             ->setItemSpecificsEnabled($itemSpecificsEnabled)
             ->setPaisaPayFullEscrowEnabled($paisaPayFullEscrowEnabled)
-            ->setISBNIdentifierEnabled($iSBNIdentifierEnabled)
-            ->setUPCIdentifierEnabled($uPCIdentifierEnabled)
-            ->setEANIdentifierEnabled($eANIdentifierEnabled)
             ->setBrandMPNIdentifierEnabled($brandMPNIdentifierEnabled)
             ->setBestOfferAutoAcceptEnabled($bestOfferAutoAcceptEnabled)
             ->setClassifiedAdAutoAcceptEnabled($classifiedAdAutoAcceptEnabled)
             ->setCrossBorderTradeNorthAmericaEnabled($crossBorderTradeNorthAmericaEnabled)
             ->setCrossBorderTradeGBEnabled($crossBorderTradeGBEnabled)
             ->setCrossBorderTradeAustraliaEnabled($crossBorderTradeAustraliaEnabled)
-            ->setPayPalBuyerProtectionEnabled($payPalBuyerProtectionEnabled)
             ->setBuyerGuaranteeEnabled($buyerGuaranteeEnabled)
             ->setCombinedFixedPriceTreatmentEnabled($combinedFixedPriceTreatmentEnabled)
             ->setGalleryFeaturedDurations($galleryFeaturedDurations)
             ->setINEscrowWorkflowTimeline($iNEscrowWorkflowTimeline)
-            ->setPayPalRequired($payPalRequired)
             ->setEBayMotorsProAdFormatEnabled($eBayMotorsProAdFormatEnabled)
             ->setEBayMotorsProContactByPhoneEnabled($eBayMotorsProContactByPhoneEnabled)
             ->setEBayMotorsProPhoneCount($eBayMotorsProPhoneCount)
@@ -1755,7 +1688,6 @@ class FeatureDefinitionsType extends AbstractStructBase
             ->setUPCEnabled($uPCEnabled)
             ->setCompatibleVehicleType($compatibleVehicleType)
             ->setMaxGranularFitmentCount($maxGranularFitmentCount)
-            ->setPaymentOptionsGroup($paymentOptionsGroup)
             ->setShippingProfileCategoryGroup($shippingProfileCategoryGroup)
             ->setPaymentProfileCategoryGroup($paymentProfileCategoryGroup)
             ->setReturnPolicyProfileCategoryGroup($returnPolicyProfileCategoryGroup)
@@ -2542,63 +2474,6 @@ class FeatureDefinitionsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get ISBNIdentifierEnabled value
-     * @return \macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType|null
-     */
-    public function getISBNIdentifierEnabled(): ?\macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType
-    {
-        return $this->ISBNIdentifierEnabled;
-    }
-    /**
-     * Set ISBNIdentifierEnabled value
-     * @param \macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType $iSBNIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setISBNIdentifierEnabled(?\macropage\ebaysdk\trading\StructType\ISBNIdentifierEnabledDefinitionType $iSBNIdentifierEnabled = null): self
-    {
-        $this->ISBNIdentifierEnabled = $iSBNIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get UPCIdentifierEnabled value
-     * @return \macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType|null
-     */
-    public function getUPCIdentifierEnabled(): ?\macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType
-    {
-        return $this->UPCIdentifierEnabled;
-    }
-    /**
-     * Set UPCIdentifierEnabled value
-     * @param \macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType $uPCIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setUPCIdentifierEnabled(?\macropage\ebaysdk\trading\StructType\UPCIdentifierEnabledDefinitionType $uPCIdentifierEnabled = null): self
-    {
-        $this->UPCIdentifierEnabled = $uPCIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get EANIdentifierEnabled value
-     * @return \macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType|null
-     */
-    public function getEANIdentifierEnabled(): ?\macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType
-    {
-        return $this->EANIdentifierEnabled;
-    }
-    /**
-     * Set EANIdentifierEnabled value
-     * @param \macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType $eANIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setEANIdentifierEnabled(?\macropage\ebaysdk\trading\StructType\EANIdentifierEnabledDefinitionType $eANIdentifierEnabled = null): self
-    {
-        $this->EANIdentifierEnabled = $eANIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
      * Get BrandMPNIdentifierEnabled value
      * @return \macropage\ebaysdk\trading\StructType\BrandMPNIdentifierEnabledDefinitionType|null
      */
@@ -2713,25 +2588,6 @@ class FeatureDefinitionsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PayPalBuyerProtectionEnabled value
-     * @return \macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType|null
-     */
-    public function getPayPalBuyerProtectionEnabled(): ?\macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType
-    {
-        return $this->PayPalBuyerProtectionEnabled;
-    }
-    /**
-     * Set PayPalBuyerProtectionEnabled value
-     * @param \macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType $payPalBuyerProtectionEnabled
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setPayPalBuyerProtectionEnabled(?\macropage\ebaysdk\trading\StructType\PayPalBuyerProtectionEnabledDefinitionType $payPalBuyerProtectionEnabled = null): self
-    {
-        $this->PayPalBuyerProtectionEnabled = $payPalBuyerProtectionEnabled;
-        
-        return $this;
-    }
-    /**
      * Get BuyerGuaranteeEnabled value
      * @return \macropage\ebaysdk\trading\StructType\BuyerGuaranteeEnabledDefinitionType|null
      */
@@ -2804,25 +2660,6 @@ class FeatureDefinitionsType extends AbstractStructBase
     public function setINEscrowWorkflowTimeline(?\macropage\ebaysdk\trading\StructType\INEscrowWorkflowTimelineDefinitionType $iNEscrowWorkflowTimeline = null): self
     {
         $this->INEscrowWorkflowTimeline = $iNEscrowWorkflowTimeline;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalRequired value
-     * @return \macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType|null
-     */
-    public function getPayPalRequired(): ?\macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType
-    {
-        return $this->PayPalRequired;
-    }
-    /**
-     * Set PayPalRequired value
-     * @param \macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType $payPalRequired
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setPayPalRequired(?\macropage\ebaysdk\trading\StructType\PayPalRequiredDefinitionType $payPalRequired = null): self
-    {
-        $this->PayPalRequired = $payPalRequired;
         
         return $this;
     }
@@ -4062,25 +3899,6 @@ class FeatureDefinitionsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PaymentOptionsGroup value
-     * @return \macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType|null
-     */
-    public function getPaymentOptionsGroup(): ?\macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType
-    {
-        return $this->PaymentOptionsGroup;
-    }
-    /**
-     * Set PaymentOptionsGroup value
-     * @param \macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType $paymentOptionsGroup
-     * @return \macropage\ebaysdk\trading\StructType\FeatureDefinitionsType
-     */
-    public function setPaymentOptionsGroup(?\macropage\ebaysdk\trading\StructType\PaymentOptionsGroupEnabledDefinitionType $paymentOptionsGroup = null): self
-    {
-        $this->PaymentOptionsGroup = $paymentOptionsGroup;
-        
-        return $this;
-    }
-    /**
      * Get ShippingProfileCategoryGroup value
      * @return \macropage\ebaysdk\trading\StructType\ProfileCategoryGroupDefinitionType|null
      */
@@ -4254,7 +4072,7 @@ class FeatureDefinitionsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

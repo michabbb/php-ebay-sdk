@@ -4,81 +4,27 @@ declare(strict_types=1);
 
 namespace macropage\ebaysdk\trading\ServiceType;
 
-use macropage\ebaysdk\trading\SoapClientBase;
 use SoapFault;
+use WsdlToPhp\PackageBase\AbstractSoapClientBase;
 
 /**
  * This class stands for all operations
  * @subpackage Services
  */
-class Service extends SoapClientBase
+class Service extends AbstractSoapClientBase
 {
     /**
      * Sets the RequesterCredentials SoapHeader param
-     * @uses SoapClientBase::setSoapHeader()
+     * @uses AbstractSoapClientBase::setSoapHeader()
      * @param \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType $requesterCredentials
      * @param string $namespace
      * @param bool $mustUnderstand
-     * @param string $actor
+     * @param string|null $actor
      * @return \macropage\ebaysdk\trading\ServiceType\Service
      */
     public function setSoapHeaderRequesterCredentials(\macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType $requesterCredentials, string $namespace = 'urn:ebay:apis:eBLBaseComponents', bool $mustUnderstand = false, ?string $actor = null): self
     {
         return $this->setSoapHeader($namespace, 'RequesterCredentials', $requesterCredentials, $mustUnderstand, $actor);
-    }
-    /**
-     * Method to call the operation originally named AddDispute
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\AddDisputeRequestType $addDisputeRequest
-     * @return \macropage\ebaysdk\trading\StructType\AddDisputeResponseType|bool
-     */
-    public function AddDispute(\macropage\ebaysdk\trading\StructType\AddDisputeRequestType $addDisputeRequest)
-    {
-        try {
-            $this->setResult($resultAddDispute = $this->getSoapClient()->__soapCall('AddDispute', [
-                $addDisputeRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultAddDispute;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named AddDisputeResponse
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\AddDisputeResponseRequestType $addDisputeResponseRequest
-     * @return \macropage\ebaysdk\trading\StructType\AddDisputeResponseResponseType|bool
-     */
-    public function AddDisputeResponse(\macropage\ebaysdk\trading\StructType\AddDisputeResponseRequestType $addDisputeResponseRequest)
-    {
-        try {
-            $this->setResult($resultAddDisputeResponse = $this->getSoapClient()->__soapCall('AddDisputeResponse', [
-                $addDisputeResponseRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultAddDisputeResponse;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
     }
     /**
      * Method to call the operation originally named AddFixedPriceItem
@@ -87,9 +33,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddFixedPriceItemRequestType $addFixedPriceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\AddFixedPriceItemResponseType|bool
      */
@@ -114,9 +60,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddItemRequestType $addItemRequest
      * @return \macropage\ebaysdk\trading\StructType\AddItemResponseType|bool
      */
@@ -141,9 +87,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddItemsRequestType $addItemsRequest
      * @return \macropage\ebaysdk\trading\StructType\AddItemsResponseType|bool
      */
@@ -168,9 +114,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddMemberMessageAAQToPartnerRequestType $addMemberMessageAAQToPartnerRequest
      * @return \macropage\ebaysdk\trading\StructType\AddMemberMessageAAQToPartnerResponseType|bool
      */
@@ -195,9 +141,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddMemberMessageRTQRequestType $addMemberMessageRTQRequest
      * @return \macropage\ebaysdk\trading\StructType\AddMemberMessageRTQResponseType|bool
      */
@@ -222,9 +168,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderRequestType $addMemberMessagesAAQToBidderRequest
      * @return \macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseType|bool
      */
@@ -249,9 +195,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddOrderRequestType $addOrderRequest
      * @return \macropage\ebaysdk\trading\StructType\AddOrderResponseType|bool
      */
@@ -276,9 +222,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddSecondChanceItemRequestType $addSecondChanceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\AddSecondChanceItemResponseType|bool
      */
@@ -303,9 +249,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddToItemDescriptionRequestType $addToItemDescriptionRequest
      * @return \macropage\ebaysdk\trading\StructType\AddToItemDescriptionResponseType|bool
      */
@@ -330,9 +276,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\AddToWatchListRequestType $addToWatchListRequest
      * @return \macropage\ebaysdk\trading\StructType\AddToWatchListResponseType|bool
      */
@@ -351,42 +297,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named AddTransactionConfirmationItem
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\AddTransactionConfirmationItemRequestType $addTransactionConfirmationItemRequest
-     * @return \macropage\ebaysdk\trading\StructType\AddTransactionConfirmationItemResponseType|bool
-     */
-    public function AddTransactionConfirmationItem(\macropage\ebaysdk\trading\StructType\AddTransactionConfirmationItemRequestType $addTransactionConfirmationItemRequest)
-    {
-        try {
-            $this->setResult($resultAddTransactionConfirmationItem = $this->getSoapClient()->__soapCall('AddTransactionConfirmationItem', [
-                $addTransactionConfirmationItemRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultAddTransactionConfirmationItem;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named CompleteSale
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\CompleteSaleRequestType $completeSaleRequest
      * @return \macropage\ebaysdk\trading\StructType\CompleteSaleResponseType|bool
      */
@@ -411,9 +330,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ConfirmIdentityRequestType $confirmIdentityRequest
      * @return \macropage\ebaysdk\trading\StructType\ConfirmIdentityResponseType|bool
      */
@@ -438,9 +357,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\DeleteMyMessagesRequestType $deleteMyMessagesRequest
      * @return \macropage\ebaysdk\trading\StructType\DeleteMyMessagesResponseType|bool
      */
@@ -459,42 +378,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named DisableUnpaidItemAssistance
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\DisableUnpaidItemAssistanceRequestType $disableUnpaidItemAssistanceRequest
-     * @return \macropage\ebaysdk\trading\StructType\DisableUnpaidItemAssistanceResponseType|bool
-     */
-    public function DisableUnpaidItemAssistance(\macropage\ebaysdk\trading\StructType\DisableUnpaidItemAssistanceRequestType $disableUnpaidItemAssistanceRequest)
-    {
-        try {
-            $this->setResult($resultDisableUnpaidItemAssistance = $this->getSoapClient()->__soapCall('DisableUnpaidItemAssistance', [
-                $disableUnpaidItemAssistanceRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultDisableUnpaidItemAssistance;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named EndFixedPriceItem
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\EndFixedPriceItemRequestType $endFixedPriceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\EndFixedPriceItemResponseType|bool
      */
@@ -519,9 +411,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\EndItemRequestType $endItemRequest
      * @return \macropage\ebaysdk\trading\StructType\EndItemResponseType|bool
      */
@@ -546,9 +438,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\EndItemsRequestType $endItemsRequest
      * @return \macropage\ebaysdk\trading\StructType\EndItemsResponseType|bool
      */
@@ -573,9 +465,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesRequestType $extendSiteHostedPicturesRequest
      * @return \macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesResponseType|bool
      */
@@ -600,9 +492,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\FetchTokenRequestType $fetchTokenRequest
      * @return \macropage\ebaysdk\trading\StructType\FetchTokenResponseType|bool
      */
@@ -627,9 +519,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetAccountRequestType $getAccountRequest
      * @return \macropage\ebaysdk\trading\StructType\GetAccountResponseType|bool
      */
@@ -654,9 +546,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsRequestType $getAdFormatLeadsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetAdFormatLeadsResponseType|bool
      */
@@ -681,9 +573,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetAllBiddersRequestType $getAllBiddersRequest
      * @return \macropage\ebaysdk\trading\StructType\GetAllBiddersResponseType|bool
      */
@@ -702,42 +594,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetApiAccessRules
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetApiAccessRulesRequestType $getApiAccessRulesRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetApiAccessRulesResponseType|bool
-     */
-    public function GetApiAccessRules(\macropage\ebaysdk\trading\StructType\GetApiAccessRulesRequestType $getApiAccessRulesRequest)
-    {
-        try {
-            $this->setResult($resultGetApiAccessRules = $this->getSoapClient()->__soapCall('GetApiAccessRules', [
-                $getApiAccessRulesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetApiAccessRules;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetBestOffers
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetBestOffersRequestType $getBestOffersRequest
      * @return \macropage\ebaysdk\trading\StructType\GetBestOffersResponseType|bool
      */
@@ -762,9 +627,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetBidderListRequestType $getBidderListRequest
      * @return \macropage\ebaysdk\trading\StructType\GetBidderListResponseType|bool
      */
@@ -789,9 +654,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetCategoriesRequestType $getCategoriesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetCategoriesResponseType|bool
      */
@@ -816,9 +681,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetCategoryFeaturesRequestType $getCategoryFeaturesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetCategoryFeaturesResponseType|bool
      */
@@ -843,9 +708,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetCategoryMappingsRequestType $getCategoryMappingsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetCategoryMappingsResponseType|bool
      */
@@ -864,42 +729,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetCategorySpecifics
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetCategorySpecificsRequestType $getCategorySpecificsRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetCategorySpecificsResponseType|bool
-     */
-    public function GetCategorySpecifics(\macropage\ebaysdk\trading\StructType\GetCategorySpecificsRequestType $getCategorySpecificsRequest)
-    {
-        try {
-            $this->setResult($resultGetCategorySpecifics = $this->getSoapClient()->__soapCall('GetCategorySpecifics', [
-                $getCategorySpecificsRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetCategorySpecifics;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetChallengeToken
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetChallengeTokenRequestType $getChallengeTokenRequest
      * @return \macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType|bool
      */
@@ -918,96 +756,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetCharities
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetCharitiesRequestType $getCharitiesRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetCharitiesResponseType|bool
-     */
-    public function GetCharities(\macropage\ebaysdk\trading\StructType\GetCharitiesRequestType $getCharitiesRequest)
-    {
-        try {
-            $this->setResult($resultGetCharities = $this->getSoapClient()->__soapCall('GetCharities', [
-                $getCharitiesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetCharities;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named GetClientAlertsAuthToken
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenRequestType $getClientAlertsAuthTokenRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenResponseType|bool
-     */
-    public function GetClientAlertsAuthToken(\macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenRequestType $getClientAlertsAuthTokenRequest)
-    {
-        try {
-            $this->setResult($resultGetClientAlertsAuthToken = $this->getSoapClient()->__soapCall('GetClientAlertsAuthToken', [
-                $getClientAlertsAuthTokenRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetClientAlertsAuthToken;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named GetContextualKeywords
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetContextualKeywordsRequestType $getContextualKeywordsRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetContextualKeywordsResponseType|bool
-     */
-    public function GetContextualKeywords(\macropage\ebaysdk\trading\StructType\GetContextualKeywordsRequestType $getContextualKeywordsRequest)
-    {
-        try {
-            $this->setResult($resultGetContextualKeywords = $this->getSoapClient()->__soapCall('GetContextualKeywords', [
-                $getContextualKeywordsRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetContextualKeywords;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetDescriptionTemplates
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesRequestType $getDescriptionTemplatesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType|bool
      */
@@ -1026,42 +783,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetDispute
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetDisputeRequestType $getDisputeRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetDisputeResponseType|bool
-     */
-    public function GetDispute(\macropage\ebaysdk\trading\StructType\GetDisputeRequestType $getDisputeRequest)
-    {
-        try {
-            $this->setResult($resultGetDispute = $this->getSoapClient()->__soapCall('GetDispute', [
-                $getDisputeRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetDispute;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetFeedback
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetFeedbackRequestType $getFeedbackRequest
      * @return \macropage\ebaysdk\trading\StructType\GetFeedbackResponseType|bool
      */
@@ -1086,9 +816,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetItemRequestType $getItemRequest
      * @return \macropage\ebaysdk\trading\StructType\GetItemResponseType|bool
      */
@@ -1113,9 +843,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetItemShippingRequestType $getItemShippingRequest
      * @return \macropage\ebaysdk\trading\StructType\GetItemShippingResponseType|bool
      */
@@ -1140,9 +870,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetItemTransactionsRequestType $getItemTransactionsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetItemTransactionsResponseType|bool
      */
@@ -1167,9 +897,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetItemsAwaitingFeedbackRequestType $getItemsAwaitingFeedbackRequest
      * @return \macropage\ebaysdk\trading\StructType\GetItemsAwaitingFeedbackResponseType|bool
      */
@@ -1194,9 +924,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetMemberMessagesRequestType $getMemberMessagesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType|bool
      */
@@ -1221,9 +951,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetMessagePreferencesRequestType $getMessagePreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetMessagePreferencesResponseType|bool
      */
@@ -1248,9 +978,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetMyMessagesRequestType $getMyMessagesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetMyMessagesResponseType|bool
      */
@@ -1275,9 +1005,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingRequestType $getMyeBayBuyingRequest
      * @return \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType|bool
      */
@@ -1296,42 +1026,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetMyeBayReminders
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetMyeBayRemindersRequestType $getMyeBayRemindersRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBayRemindersResponseType|bool
-     */
-    public function GetMyeBayReminders(\macropage\ebaysdk\trading\StructType\GetMyeBayRemindersRequestType $getMyeBayRemindersRequest)
-    {
-        try {
-            $this->setResult($resultGetMyeBayReminders = $this->getSoapClient()->__soapCall('GetMyeBayReminders', [
-                $getMyeBayRemindersRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetMyeBayReminders;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetMyeBaySelling
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetMyeBaySellingRequestType $getMyeBaySellingRequest
      * @return \macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType|bool
      */
@@ -1356,9 +1059,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetNotificationPreferencesRequestType $getNotificationPreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetNotificationPreferencesResponseType|bool
      */
@@ -1383,9 +1086,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetNotificationsUsageRequestType $getNotificationsUsageRequest
      * @return \macropage\ebaysdk\trading\StructType\GetNotificationsUsageResponseType|bool
      */
@@ -1404,42 +1107,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetOrderTransactions
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType $getOrderTransactionsRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetOrderTransactionsResponseType|bool
-     */
-    public function GetOrderTransactions(\macropage\ebaysdk\trading\StructType\GetOrderTransactionsRequestType $getOrderTransactionsRequest)
-    {
-        try {
-            $this->setResult($resultGetOrderTransactions = $this->getSoapClient()->__soapCall('GetOrderTransactions', [
-                $getOrderTransactionsRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetOrderTransactions;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetOrders
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetOrdersRequestType $getOrdersRequest
      * @return \macropage\ebaysdk\trading\StructType\GetOrdersResponseType|bool
      */
@@ -1458,42 +1134,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetSellerDashboard
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetSellerDashboardRequestType $getSellerDashboardRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerDashboardResponseType|bool
-     */
-    public function GetSellerDashboard(\macropage\ebaysdk\trading\StructType\GetSellerDashboardRequestType $getSellerDashboardRequest)
-    {
-        try {
-            $this->setResult($resultGetSellerDashboard = $this->getSoapClient()->__soapCall('GetSellerDashboard', [
-                $getSellerDashboardRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetSellerDashboard;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetSellerEvents
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetSellerEventsRequestType $getSellerEventsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetSellerEventsResponseType|bool
      */
@@ -1518,9 +1167,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetSellerListRequestType $getSellerListRequest
      * @return \macropage\ebaysdk\trading\StructType\GetSellerListResponseType|bool
      */
@@ -1545,9 +1194,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetSellerTransactionsRequestType $getSellerTransactionsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetSellerTransactionsResponseType|bool
      */
@@ -1572,9 +1221,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetSessionIDRequestType $getSessionIDRequest
      * @return \macropage\ebaysdk\trading\StructType\GetSessionIDResponseType|bool
      */
@@ -1599,9 +1248,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesRequestType $getShippingDiscountProfilesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType|bool
      */
@@ -1626,9 +1275,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetStoreRequestType $getStoreRequest
      * @return \macropage\ebaysdk\trading\StructType\GetStoreResponseType|bool
      */
@@ -1653,9 +1302,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetStoreCategoryUpdateStatusRequestType $getStoreCategoryUpdateStatusRequest
      * @return \macropage\ebaysdk\trading\StructType\GetStoreCategoryUpdateStatusResponseType|bool
      */
@@ -1674,123 +1323,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetStoreCustomPage
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetStoreCustomPageRequestType $getStoreCustomPageRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetStoreCustomPageResponseType|bool
-     */
-    public function GetStoreCustomPage(\macropage\ebaysdk\trading\StructType\GetStoreCustomPageRequestType $getStoreCustomPageRequest)
-    {
-        try {
-            $this->setResult($resultGetStoreCustomPage = $this->getSoapClient()->__soapCall('GetStoreCustomPage', [
-                $getStoreCustomPageRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetStoreCustomPage;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named GetStoreOptions
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetStoreOptionsRequestType $getStoreOptionsRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetStoreOptionsResponseType|bool
-     */
-    public function GetStoreOptions(\macropage\ebaysdk\trading\StructType\GetStoreOptionsRequestType $getStoreOptionsRequest)
-    {
-        try {
-            $this->setResult($resultGetStoreOptions = $this->getSoapClient()->__soapCall('GetStoreOptions', [
-                $getStoreOptionsRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetStoreOptions;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named GetStorePreferences
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetStorePreferencesRequestType $getStorePreferencesRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetStorePreferencesResponseType|bool
-     */
-    public function GetStorePreferences(\macropage\ebaysdk\trading\StructType\GetStorePreferencesRequestType $getStorePreferencesRequest)
-    {
-        try {
-            $this->setResult($resultGetStorePreferences = $this->getSoapClient()->__soapCall('GetStorePreferences', [
-                $getStorePreferencesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetStorePreferences;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named GetSuggestedCategories
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesRequestType $getSuggestedCategoriesRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesResponseType|bool
-     */
-    public function GetSuggestedCategories(\macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesRequestType $getSuggestedCategoriesRequest)
-    {
-        try {
-            $this->setResult($resultGetSuggestedCategories = $this->getSoapClient()->__soapCall('GetSuggestedCategories', [
-                $getSuggestedCategoriesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetSuggestedCategories;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetTaxTable
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetTaxTableRequestType $getTaxTableRequest
      * @return \macropage\ebaysdk\trading\StructType\GetTaxTableResponseType|bool
      */
@@ -1815,9 +1356,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetTokenStatusRequestType $getTokenStatusRequest
      * @return \macropage\ebaysdk\trading\StructType\GetTokenStatusResponseType|bool
      */
@@ -1842,9 +1383,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetUserRequestType $getUserRequest
      * @return \macropage\ebaysdk\trading\StructType\GetUserResponseType|bool
      */
@@ -1869,9 +1410,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetUserContactDetailsRequestType $getUserContactDetailsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetUserContactDetailsResponseType|bool
      */
@@ -1890,42 +1431,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named GetUserDisputes
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\GetUserDisputesRequestType $getUserDisputesRequest
-     * @return \macropage\ebaysdk\trading\StructType\GetUserDisputesResponseType|bool
-     */
-    public function GetUserDisputes(\macropage\ebaysdk\trading\StructType\GetUserDisputesRequestType $getUserDisputesRequest)
-    {
-        try {
-            $this->setResult($resultGetUserDisputes = $this->getSoapClient()->__soapCall('GetUserDisputes', [
-                $getUserDisputesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultGetUserDisputes;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named GetUserPreferences
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetUserPreferencesRequestType $getUserPreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType|bool
      */
@@ -1950,9 +1464,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsRequestType $getVeROReasonCodeDetailsRequest
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsResponseType|bool
      */
@@ -1977,9 +1491,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GetVeROReportStatusRequestType $getVeROReportStatusRequest
      * @return \macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType|bool
      */
@@ -2004,9 +1518,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GeteBayDetailsRequestType $geteBayDetailsRequest
      * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType|bool
      */
@@ -2031,9 +1545,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\GeteBayOfficialTimeRequestType $geteBayOfficialTimeRequest
      * @return \macropage\ebaysdk\trading\StructType\GeteBayOfficialTimeResponseType|bool
      */
@@ -2058,9 +1572,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\LeaveFeedbackRequestType $leaveFeedbackRequest
      * @return \macropage\ebaysdk\trading\StructType\LeaveFeedbackResponseType|bool
      */
@@ -2085,9 +1599,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\PlaceOfferRequestType $placeOfferRequest
      * @return \macropage\ebaysdk\trading\StructType\PlaceOfferResponseType|bool
      */
@@ -2112,9 +1626,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RelistFixedPriceItemRequestType $relistFixedPriceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\RelistFixedPriceItemResponseType|bool
      */
@@ -2139,9 +1653,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RelistItemRequestType $relistItemRequest
      * @return \macropage\ebaysdk\trading\StructType\RelistItemResponseType|bool
      */
@@ -2166,9 +1680,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RemoveFromWatchListRequestType $removeFromWatchListRequest
      * @return \macropage\ebaysdk\trading\StructType\RemoveFromWatchListResponseType|bool
      */
@@ -2193,9 +1707,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RespondToBestOfferRequestType $respondToBestOfferRequest
      * @return \macropage\ebaysdk\trading\StructType\RespondToBestOfferResponseType|bool
      */
@@ -2220,9 +1734,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RespondToFeedbackRequestType $respondToFeedbackRequest
      * @return \macropage\ebaysdk\trading\StructType\RespondToFeedbackResponseType|bool
      */
@@ -2247,9 +1761,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ReviseFixedPriceItemRequestType $reviseFixedPriceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\ReviseFixedPriceItemResponseType|bool
      */
@@ -2274,9 +1788,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusRequestType $reviseInventoryStatusRequest
      * @return \macropage\ebaysdk\trading\StructType\ReviseInventoryStatusResponseType|bool
      */
@@ -2301,9 +1815,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ReviseItemRequestType $reviseItemRequest
      * @return \macropage\ebaysdk\trading\StructType\ReviseItemResponseType|bool
      */
@@ -2328,9 +1842,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ReviseMyMessagesRequestType $reviseMyMessagesRequest
      * @return \macropage\ebaysdk\trading\StructType\ReviseMyMessagesResponseType|bool
      */
@@ -2355,9 +1869,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersRequestType $reviseMyMessagesFoldersRequest
      * @return \macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersResponseType|bool
      */
@@ -2382,9 +1896,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\RevokeTokenRequestType $revokeTokenRequest
      * @return \macropage\ebaysdk\trading\StructType\RevokeTokenResponseType|bool
      */
@@ -2403,42 +1917,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named SellerReverseDispute
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\SellerReverseDisputeRequestType $sellerReverseDisputeRequest
-     * @return \macropage\ebaysdk\trading\StructType\SellerReverseDisputeResponseType|bool
-     */
-    public function SellerReverseDispute(\macropage\ebaysdk\trading\StructType\SellerReverseDisputeRequestType $sellerReverseDisputeRequest)
-    {
-        try {
-            $this->setResult($resultSellerReverseDispute = $this->getSoapClient()->__soapCall('SellerReverseDispute', [
-                $sellerReverseDisputeRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultSellerReverseDispute;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named SendInvoice
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SendInvoiceRequestType $sendInvoiceRequest
      * @return \macropage\ebaysdk\trading\StructType\SendInvoiceResponseType|bool
      */
@@ -2463,9 +1950,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetMessagePreferencesRequestType $setMessagePreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetMessagePreferencesResponseType|bool
      */
@@ -2490,9 +1977,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetNotificationPreferencesRequestType $setNotificationPreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetNotificationPreferencesResponseType|bool
      */
@@ -2517,9 +2004,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesRequestType $setShippingDiscountProfilesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesResponseType|bool
      */
@@ -2538,42 +2025,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named SetStore
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\SetStoreRequestType $setStoreRequest
-     * @return \macropage\ebaysdk\trading\StructType\SetStoreResponseType|bool
-     */
-    public function SetStore(\macropage\ebaysdk\trading\StructType\SetStoreRequestType $setStoreRequest)
-    {
-        try {
-            $this->setResult($resultSetStore = $this->getSoapClient()->__soapCall('SetStore', [
-                $setStoreRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultSetStore;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named SetStoreCategories
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetStoreCategoriesRequestType $setStoreCategoriesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetStoreCategoriesResponseType|bool
      */
@@ -2592,69 +2052,15 @@ class Service extends SoapClientBase
         }
     }
     /**
-     * Method to call the operation originally named SetStoreCustomPage
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\SetStoreCustomPageRequestType $setStoreCustomPageRequest
-     * @return \macropage\ebaysdk\trading\StructType\SetStoreCustomPageResponseType|bool
-     */
-    public function SetStoreCustomPage(\macropage\ebaysdk\trading\StructType\SetStoreCustomPageRequestType $setStoreCustomPageRequest)
-    {
-        try {
-            $this->setResult($resultSetStoreCustomPage = $this->getSoapClient()->__soapCall('SetStoreCustomPage', [
-                $setStoreCustomPageRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultSetStoreCustomPage;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
-     * Method to call the operation originally named SetStorePreferences
-     * Meta information extracted from the WSDL
-     * - SOAPHeaderNames: RequesterCredentials
-     * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
-     * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
-     * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
-     * @param \macropage\ebaysdk\trading\StructType\SetStorePreferencesRequestType $setStorePreferencesRequest
-     * @return \macropage\ebaysdk\trading\StructType\SetStorePreferencesResponseType|bool
-     */
-    public function SetStorePreferences(\macropage\ebaysdk\trading\StructType\SetStorePreferencesRequestType $setStorePreferencesRequest)
-    {
-        try {
-            $this->setResult($resultSetStorePreferences = $this->getSoapClient()->__soapCall('SetStorePreferences', [
-                $setStorePreferencesRequest,
-            ], [], [], $this->outputHeaders));
-        
-            return $resultSetStorePreferences;
-        } catch (SoapFault $soapFault) {
-            $this->saveLastError(__METHOD__, $soapFault);
-        
-            return false;
-        }
-    }
-    /**
      * Method to call the operation originally named SetTaxTable
      * Meta information extracted from the WSDL
      * - SOAPHeaderNames: RequesterCredentials
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetTaxTableRequestType $setTaxTableRequest
      * @return \macropage\ebaysdk\trading\StructType\SetTaxTableResponseType|bool
      */
@@ -2679,9 +2085,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetUserNotesRequestType $setUserNotesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetUserNotesResponseType|bool
      */
@@ -2706,9 +2112,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\SetUserPreferencesRequestType $setUserPreferencesRequest
      * @return \macropage\ebaysdk\trading\StructType\SetUserPreferencesResponseType|bool
      */
@@ -2733,9 +2139,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesRequestType $uploadSiteHostedPicturesRequest
      * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType|bool
      */
@@ -2760,9 +2166,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ValidateChallengeInputRequestType $validateChallengeInputRequest
      * @return \macropage\ebaysdk\trading\StructType\ValidateChallengeInputResponseType|bool
      */
@@ -2787,9 +2193,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationRequestType $validateTestUserRegistrationRequest
      * @return \macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationResponseType|bool
      */
@@ -2814,9 +2220,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\VeROReportItemsRequestType $veROReportItemsRequest
      * @return \macropage\ebaysdk\trading\StructType\VeROReportItemsResponseType|bool
      */
@@ -2841,9 +2247,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemRequestType $verifyAddFixedPriceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType|bool
      */
@@ -2868,9 +2274,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\VerifyAddItemRequestType $verifyAddItemRequest
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddItemResponseType|bool
      */
@@ -2895,9 +2301,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemRequestType $verifyAddSecondChanceItemRequest
      * @return \macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType|bool
      */
@@ -2922,9 +2328,9 @@ class Service extends SoapClientBase
      * - SOAPHeaderNamespaces: urn:ebay:apis:eBLBaseComponents
      * - SOAPHeaderTypes: \macropage\ebaysdk\trading\StructType\CustomSecurityHeaderType
      * - SOAPHeaders: required
-     * @uses SoapClientBase::getSoapClient()
-     * @uses SoapClientBase::setResult()
-     * @uses SoapClientBase::saveLastError()
+     * @uses AbstractSoapClientBase::getSoapClient()
+     * @uses AbstractSoapClientBase::setResult()
+     * @uses AbstractSoapClientBase::saveLastError()
      * @param \macropage\ebaysdk\trading\StructType\VerifyRelistItemRequestType $verifyRelistItemRequest
      * @return \macropage\ebaysdk\trading\StructType\VerifyRelistItemResponseType|bool
      */
@@ -2944,8 +2350,8 @@ class Service extends SoapClientBase
     }
     /**
      * Returns the result
-     * @see SoapClientBase::getResult()
-     * @return \macropage\ebaysdk\trading\StructType\AddDisputeResponseResponseType|\macropage\ebaysdk\trading\StructType\AddDisputeResponseType|\macropage\ebaysdk\trading\StructType\AddFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\AddItemResponseType|\macropage\ebaysdk\trading\StructType\AddItemsResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessageAAQToPartnerResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessageRTQResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseType|\macropage\ebaysdk\trading\StructType\AddOrderResponseType|\macropage\ebaysdk\trading\StructType\AddSecondChanceItemResponseType|\macropage\ebaysdk\trading\StructType\AddToItemDescriptionResponseType|\macropage\ebaysdk\trading\StructType\AddToWatchListResponseType|\macropage\ebaysdk\trading\StructType\AddTransactionConfirmationItemResponseType|\macropage\ebaysdk\trading\StructType\CompleteSaleResponseType|\macropage\ebaysdk\trading\StructType\ConfirmIdentityResponseType|\macropage\ebaysdk\trading\StructType\DeleteMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\DisableUnpaidItemAssistanceResponseType|\macropage\ebaysdk\trading\StructType\EndFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\EndItemResponseType|\macropage\ebaysdk\trading\StructType\EndItemsResponseType|\macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesResponseType|\macropage\ebaysdk\trading\StructType\FetchTokenResponseType|\macropage\ebaysdk\trading\StructType\GetAccountResponseType|\macropage\ebaysdk\trading\StructType\GetAdFormatLeadsResponseType|\macropage\ebaysdk\trading\StructType\GetAllBiddersResponseType|\macropage\ebaysdk\trading\StructType\GetApiAccessRulesResponseType|\macropage\ebaysdk\trading\StructType\GetBestOffersResponseType|\macropage\ebaysdk\trading\StructType\GetBidderListResponseType|\macropage\ebaysdk\trading\StructType\GetCategoriesResponseType|\macropage\ebaysdk\trading\StructType\GetCategoryFeaturesResponseType|\macropage\ebaysdk\trading\StructType\GetCategoryMappingsResponseType|\macropage\ebaysdk\trading\StructType\GetCategorySpecificsResponseType|\macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType|\macropage\ebaysdk\trading\StructType\GetCharitiesResponseType|\macropage\ebaysdk\trading\StructType\GetClientAlertsAuthTokenResponseType|\macropage\ebaysdk\trading\StructType\GetContextualKeywordsResponseType|\macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType|\macropage\ebaysdk\trading\StructType\GetDisputeResponseType|\macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType|\macropage\ebaysdk\trading\StructType\GeteBayOfficialTimeResponseType|\macropage\ebaysdk\trading\StructType\GetFeedbackResponseType|\macropage\ebaysdk\trading\StructType\GetItemResponseType|\macropage\ebaysdk\trading\StructType\GetItemsAwaitingFeedbackResponseType|\macropage\ebaysdk\trading\StructType\GetItemShippingResponseType|\macropage\ebaysdk\trading\StructType\GetItemTransactionsResponseType|\macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType|\macropage\ebaysdk\trading\StructType\GetMessagePreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType|\macropage\ebaysdk\trading\StructType\GetMyeBayRemindersResponseType|\macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType|\macropage\ebaysdk\trading\StructType\GetMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\GetNotificationPreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetNotificationsUsageResponseType|\macropage\ebaysdk\trading\StructType\GetOrdersResponseType|\macropage\ebaysdk\trading\StructType\GetOrderTransactionsResponseType|\macropage\ebaysdk\trading\StructType\GetSellerDashboardResponseType|\macropage\ebaysdk\trading\StructType\GetSellerEventsResponseType|\macropage\ebaysdk\trading\StructType\GetSellerListResponseType|\macropage\ebaysdk\trading\StructType\GetSellerTransactionsResponseType|\macropage\ebaysdk\trading\StructType\GetSessionIDResponseType|\macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType|\macropage\ebaysdk\trading\StructType\GetStoreCategoryUpdateStatusResponseType|\macropage\ebaysdk\trading\StructType\GetStoreCustomPageResponseType|\macropage\ebaysdk\trading\StructType\GetStoreOptionsResponseType|\macropage\ebaysdk\trading\StructType\GetStorePreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetStoreResponseType|\macropage\ebaysdk\trading\StructType\GetSuggestedCategoriesResponseType|\macropage\ebaysdk\trading\StructType\GetTaxTableResponseType|\macropage\ebaysdk\trading\StructType\GetTokenStatusResponseType|\macropage\ebaysdk\trading\StructType\GetUserContactDetailsResponseType|\macropage\ebaysdk\trading\StructType\GetUserDisputesResponseType|\macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetUserResponseType|\macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsResponseType|\macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType|\macropage\ebaysdk\trading\StructType\LeaveFeedbackResponseType|\macropage\ebaysdk\trading\StructType\PlaceOfferResponseType|\macropage\ebaysdk\trading\StructType\RelistFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\RelistItemResponseType|\macropage\ebaysdk\trading\StructType\RemoveFromWatchListResponseType|\macropage\ebaysdk\trading\StructType\RespondToBestOfferResponseType|\macropage\ebaysdk\trading\StructType\RespondToFeedbackResponseType|\macropage\ebaysdk\trading\StructType\ReviseFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\ReviseInventoryStatusResponseType|\macropage\ebaysdk\trading\StructType\ReviseItemResponseType|\macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersResponseType|\macropage\ebaysdk\trading\StructType\ReviseMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\RevokeTokenResponseType|\macropage\ebaysdk\trading\StructType\SellerReverseDisputeResponseType|\macropage\ebaysdk\trading\StructType\SendInvoiceResponseType|\macropage\ebaysdk\trading\StructType\SetMessagePreferencesResponseType|\macropage\ebaysdk\trading\StructType\SetNotificationPreferencesResponseType|\macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesResponseType|\macropage\ebaysdk\trading\StructType\SetStoreCategoriesResponseType|\macropage\ebaysdk\trading\StructType\SetStoreCustomPageResponseType|\macropage\ebaysdk\trading\StructType\SetStorePreferencesResponseType|\macropage\ebaysdk\trading\StructType\SetStoreResponseType|\macropage\ebaysdk\trading\StructType\SetTaxTableResponseType|\macropage\ebaysdk\trading\StructType\SetUserNotesResponseType|\macropage\ebaysdk\trading\StructType\SetUserPreferencesResponseType|\macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType|\macropage\ebaysdk\trading\StructType\ValidateChallengeInputResponseType|\macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyRelistItemResponseType|\macropage\ebaysdk\trading\StructType\VeROReportItemsResponseType
+     * @see AbstractSoapClientBase::getResult()
+     * @return \macropage\ebaysdk\trading\StructType\AddFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\AddItemResponseType|\macropage\ebaysdk\trading\StructType\AddItemsResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessageAAQToPartnerResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessageRTQResponseType|\macropage\ebaysdk\trading\StructType\AddMemberMessagesAAQToBidderResponseType|\macropage\ebaysdk\trading\StructType\AddOrderResponseType|\macropage\ebaysdk\trading\StructType\AddSecondChanceItemResponseType|\macropage\ebaysdk\trading\StructType\AddToItemDescriptionResponseType|\macropage\ebaysdk\trading\StructType\AddToWatchListResponseType|\macropage\ebaysdk\trading\StructType\CompleteSaleResponseType|\macropage\ebaysdk\trading\StructType\ConfirmIdentityResponseType|\macropage\ebaysdk\trading\StructType\DeleteMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\EndFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\EndItemResponseType|\macropage\ebaysdk\trading\StructType\EndItemsResponseType|\macropage\ebaysdk\trading\StructType\ExtendSiteHostedPicturesResponseType|\macropage\ebaysdk\trading\StructType\FetchTokenResponseType|\macropage\ebaysdk\trading\StructType\GetAccountResponseType|\macropage\ebaysdk\trading\StructType\GetAdFormatLeadsResponseType|\macropage\ebaysdk\trading\StructType\GetAllBiddersResponseType|\macropage\ebaysdk\trading\StructType\GetBestOffersResponseType|\macropage\ebaysdk\trading\StructType\GetBidderListResponseType|\macropage\ebaysdk\trading\StructType\GetCategoriesResponseType|\macropage\ebaysdk\trading\StructType\GetCategoryFeaturesResponseType|\macropage\ebaysdk\trading\StructType\GetCategoryMappingsResponseType|\macropage\ebaysdk\trading\StructType\GetChallengeTokenResponseType|\macropage\ebaysdk\trading\StructType\GetDescriptionTemplatesResponseType|\macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType|\macropage\ebaysdk\trading\StructType\GeteBayOfficialTimeResponseType|\macropage\ebaysdk\trading\StructType\GetFeedbackResponseType|\macropage\ebaysdk\trading\StructType\GetItemResponseType|\macropage\ebaysdk\trading\StructType\GetItemsAwaitingFeedbackResponseType|\macropage\ebaysdk\trading\StructType\GetItemShippingResponseType|\macropage\ebaysdk\trading\StructType\GetItemTransactionsResponseType|\macropage\ebaysdk\trading\StructType\GetMemberMessagesResponseType|\macropage\ebaysdk\trading\StructType\GetMessagePreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType|\macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType|\macropage\ebaysdk\trading\StructType\GetMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\GetNotificationPreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetNotificationsUsageResponseType|\macropage\ebaysdk\trading\StructType\GetOrdersResponseType|\macropage\ebaysdk\trading\StructType\GetSellerEventsResponseType|\macropage\ebaysdk\trading\StructType\GetSellerListResponseType|\macropage\ebaysdk\trading\StructType\GetSellerTransactionsResponseType|\macropage\ebaysdk\trading\StructType\GetSessionIDResponseType|\macropage\ebaysdk\trading\StructType\GetShippingDiscountProfilesResponseType|\macropage\ebaysdk\trading\StructType\GetStoreCategoryUpdateStatusResponseType|\macropage\ebaysdk\trading\StructType\GetStoreResponseType|\macropage\ebaysdk\trading\StructType\GetTaxTableResponseType|\macropage\ebaysdk\trading\StructType\GetTokenStatusResponseType|\macropage\ebaysdk\trading\StructType\GetUserContactDetailsResponseType|\macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType|\macropage\ebaysdk\trading\StructType\GetUserResponseType|\macropage\ebaysdk\trading\StructType\GetVeROReasonCodeDetailsResponseType|\macropage\ebaysdk\trading\StructType\GetVeROReportStatusResponseType|\macropage\ebaysdk\trading\StructType\LeaveFeedbackResponseType|\macropage\ebaysdk\trading\StructType\PlaceOfferResponseType|\macropage\ebaysdk\trading\StructType\RelistFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\RelistItemResponseType|\macropage\ebaysdk\trading\StructType\RemoveFromWatchListResponseType|\macropage\ebaysdk\trading\StructType\RespondToBestOfferResponseType|\macropage\ebaysdk\trading\StructType\RespondToFeedbackResponseType|\macropage\ebaysdk\trading\StructType\ReviseFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\ReviseInventoryStatusResponseType|\macropage\ebaysdk\trading\StructType\ReviseItemResponseType|\macropage\ebaysdk\trading\StructType\ReviseMyMessagesFoldersResponseType|\macropage\ebaysdk\trading\StructType\ReviseMyMessagesResponseType|\macropage\ebaysdk\trading\StructType\RevokeTokenResponseType|\macropage\ebaysdk\trading\StructType\SendInvoiceResponseType|\macropage\ebaysdk\trading\StructType\SetMessagePreferencesResponseType|\macropage\ebaysdk\trading\StructType\SetNotificationPreferencesResponseType|\macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesResponseType|\macropage\ebaysdk\trading\StructType\SetStoreCategoriesResponseType|\macropage\ebaysdk\trading\StructType\SetTaxTableResponseType|\macropage\ebaysdk\trading\StructType\SetUserNotesResponseType|\macropage\ebaysdk\trading\StructType\SetUserPreferencesResponseType|\macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesResponseType|\macropage\ebaysdk\trading\StructType\ValidateChallengeInputResponseType|\macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddFixedPriceItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyAddSecondChanceItemResponseType|\macropage\ebaysdk\trading\StructType\VerifyRelistItemResponseType|\macropage\ebaysdk\trading\StructType\VeROReportItemsResponseType
      */
     public function getResult()
     {

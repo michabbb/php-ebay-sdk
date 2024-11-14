@@ -73,19 +73,13 @@ class GetItemTransactionsResponseType extends AbstractResponseType
      * The TransactionArray
      * Meta information extracted from the WSDL
      * - documentation: List of <b>Transaction</b> objects representing the order line items resulting from the listing. Each <b>Transaction</b> object contains the data for one purchase (of one or more items in the same listing). The
-     * <b>Transaction.Item</b> field is not returned because the <b>Item</b> object is returned at the root level of the response. See the reference guide for more information about the fields that are returned.
+     * <b>Transaction.Item</b> field is not returned because the <b>Item</b> object is returned at the root level of the response. See the reference guide for more information about the fields that are returned. <span
+     * class="tablenote"><strong>Note:</strong> The <b>GetItemTransactions</b> call does not support <a href ="https://www.ebay.com/sellercenter/ebay-for-business/multi-user-account-access" target="_blank" >Multi-user account access</a>. Transactions are
+     * only returned for the user that makes the call. You cannot use <b>GetItemTransactions</b> to return transactions for another user. The call succeeds but returns an empty <code>&lt;TransactionArray/&gt;</code>. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\TransactionArrayType|null
      */
     protected ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $TransactionArray = null;
-    /**
-     * The PayPalPreferred
-     * Meta information extracted from the WSDL
-     * - documentation: This field may still be returned for orders currently, but it can be ignored since eBay now manages all online payment methods available to buyers.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $PayPalPreferred = null;
     /**
      * Constructor method for GetItemTransactionsResponseType
      * @uses GetItemTransactionsResponseType::setPaginationResult()
@@ -95,7 +89,6 @@ class GetItemTransactionsResponseType extends AbstractResponseType
      * @uses GetItemTransactionsResponseType::setReturnedTransactionCountActual()
      * @uses GetItemTransactionsResponseType::setItem()
      * @uses GetItemTransactionsResponseType::setTransactionArray()
-     * @uses GetItemTransactionsResponseType::setPayPalPreferred()
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @param bool $hasMoreTransactions
      * @param int $transactionsPerPage
@@ -103,9 +96,8 @@ class GetItemTransactionsResponseType extends AbstractResponseType
      * @param int $returnedTransactionCountActual
      * @param \macropage\ebaysdk\trading\StructType\ItemType $item
      * @param \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray
-     * @param bool $payPalPreferred
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreTransactions = null, ?int $transactionsPerPage = null, ?int $pageNumber = null, ?int $returnedTransactionCountActual = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, ?bool $payPalPreferred = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreTransactions = null, ?int $transactionsPerPage = null, ?int $pageNumber = null, ?int $returnedTransactionCountActual = null, ?\macropage\ebaysdk\trading\StructType\ItemType $item = null, ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -114,8 +106,7 @@ class GetItemTransactionsResponseType extends AbstractResponseType
             ->setPageNumber($pageNumber)
             ->setReturnedTransactionCountActual($returnedTransactionCountActual)
             ->setItem($item)
-            ->setTransactionArray($transactionArray)
-            ->setPayPalPreferred($payPalPreferred);
+            ->setTransactionArray($transactionArray);
     }
     /**
      * Get PaginationResult value
@@ -263,29 +254,6 @@ class GetItemTransactionsResponseType extends AbstractResponseType
     public function setTransactionArray(?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null): self
     {
         $this->TransactionArray = $transactionArray;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalPreferred value
-     * @return bool|null
-     */
-    public function getPayPalPreferred(): ?bool
-    {
-        return $this->PayPalPreferred;
-    }
-    /**
-     * Set PayPalPreferred value
-     * @param bool $payPalPreferred
-     * @return \macropage\ebaysdk\trading\StructType\GetItemTransactionsResponseType
-     */
-    public function setPayPalPreferred(?bool $payPalPreferred = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($payPalPreferred) && !is_bool($payPalPreferred)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalPreferred, true), gettype($payPalPreferred)), __LINE__);
-        }
-        $this->PayPalPreferred = $payPalPreferred;
         
         return $this;
     }

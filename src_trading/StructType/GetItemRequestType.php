@@ -35,21 +35,13 @@ class GetItemRequestType extends AbstractRequestType
      */
     protected ?bool $IncludeWatchCount = null;
     /**
-     * The IncludeCrossPromotion
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $IncludeCrossPromotion = null;
-    /**
      * The IncludeItemSpecifics
      * Meta information extracted from the WSDL
      * - documentation: If this field is included and set to <code>true</code>, the call response includes the <b>ItemSpecifics</b> container if Item Specifics are defined for the listing.<br> <br> An Item Specific is any aspect that helps define/classify
-     * the item. Many eBay categories mandate including specific Item Specifics, so it is always a good idea to make a call to <b>GetCategorySpecifics</b> to see what Item Specifics are required and which ones are recommended.<br> <br> Including this field
-     * and setting it to <code>true</code> will also return the <strong>UnitInfo</strong> container if applicable. The <strong>UnitInfo</strong> container will provide information about the weight, volume or other quantity measurement of a listed item. The
-     * European Union requires listings for certain types of products to include the price per unit so buyers can accurately compare prices. eBay uses the <strong>UnitType</strong> and <strong>UnitQuantity</strong> values and the item's listed price to
-     * calculate and display the per-unit price on eBay EU sites.
+     * the item. Many eBay categories mandate including specific Item Specifics, so it is always a good idea to make a call to the <a href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getItemAspectsForCategory"
+     * target="_blank">getItemAspectsForCategory</a> method of the Taxonomy API to see what Item Specifics are required and which ones are recommended.<br> <br> Including this field and setting it to <code>true</code> will also return the
+     * <strong>UnitInfo</strong> container if applicable. The <strong>UnitInfo</strong> container will provide information about the weight, volume or other quantity measurement of a listed item. The European Union requires listings for certain types of
+     * products to include the price per unit so buyers can accurately compare prices. eBay uses the <strong>UnitType</strong> and <strong>UnitQuantity</strong> values and the item's listed price to calculate and display the per-unit price on eBay EU sites.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -106,7 +98,8 @@ class GetItemRequestType extends AbstractRequestType
      * - documentation: A unique identifier for an order line item. An order line item is created when a buyer commits to purchasing an item. <br><br> Since you can change active multiple-quantity fixed-price listings even after one of the items has been
      * purchased, the <b>TransactionID</b> is associated with a snapshot of the item data at the time of the purchase. <br><br> After one item in a multi-quantity listing has been sold, sellers can not change the values in the Title, Primary Category,
      * Secondary Category, Listing Duration, and Listing Type fields. However, all other fields are editable. <br><br> Specifying a <b>TransactionID</b> in the <b>GetItem</b> request allows you to retrieve a snapshot of the listing as it was when the order
-     * line item was created. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
+     * line item was created. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in
+     * July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -127,7 +120,6 @@ class GetItemRequestType extends AbstractRequestType
      * Constructor method for GetItemRequestType
      * @uses GetItemRequestType::setItemID()
      * @uses GetItemRequestType::setIncludeWatchCount()
-     * @uses GetItemRequestType::setIncludeCrossPromotion()
      * @uses GetItemRequestType::setIncludeItemSpecifics()
      * @uses GetItemRequestType::setIncludeTaxTable()
      * @uses GetItemRequestType::setSKU()
@@ -137,7 +129,6 @@ class GetItemRequestType extends AbstractRequestType
      * @uses GetItemRequestType::setIncludeItemCompatibilityList()
      * @param string $itemID
      * @param bool $includeWatchCount
-     * @param bool $includeCrossPromotion
      * @param bool $includeItemSpecifics
      * @param bool $includeTaxTable
      * @param string $sKU
@@ -146,12 +137,11 @@ class GetItemRequestType extends AbstractRequestType
      * @param string $transactionID
      * @param bool $includeItemCompatibilityList
      */
-    public function __construct(?string $itemID = null, ?bool $includeWatchCount = null, ?bool $includeCrossPromotion = null, ?bool $includeItemSpecifics = null, ?bool $includeTaxTable = null, ?string $sKU = null, ?string $variationSKU = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?string $transactionID = null, ?bool $includeItemCompatibilityList = null)
+    public function __construct(?string $itemID = null, ?bool $includeWatchCount = null, ?bool $includeItemSpecifics = null, ?bool $includeTaxTable = null, ?string $sKU = null, ?string $variationSKU = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?string $transactionID = null, ?bool $includeItemCompatibilityList = null)
     {
         $this
             ->setItemID($itemID)
             ->setIncludeWatchCount($includeWatchCount)
-            ->setIncludeCrossPromotion($includeCrossPromotion)
             ->setIncludeItemSpecifics($includeItemSpecifics)
             ->setIncludeTaxTable($includeTaxTable)
             ->setSKU($sKU)
@@ -203,29 +193,6 @@ class GetItemRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeWatchCount, true), gettype($includeWatchCount)), __LINE__);
         }
         $this->IncludeWatchCount = $includeWatchCount;
-        
-        return $this;
-    }
-    /**
-     * Get IncludeCrossPromotion value
-     * @return bool|null
-     */
-    public function getIncludeCrossPromotion(): ?bool
-    {
-        return $this->IncludeCrossPromotion;
-    }
-    /**
-     * Set IncludeCrossPromotion value
-     * @param bool $includeCrossPromotion
-     * @return \macropage\ebaysdk\trading\StructType\GetItemRequestType
-     */
-    public function setIncludeCrossPromotion(?bool $includeCrossPromotion = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($includeCrossPromotion) && !is_bool($includeCrossPromotion)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeCrossPromotion, true), gettype($includeCrossPromotion)), __LINE__);
-        }
-        $this->IncludeCrossPromotion = $includeCrossPromotion;
         
         return $this;
     }

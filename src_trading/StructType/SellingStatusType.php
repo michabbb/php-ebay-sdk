@@ -116,9 +116,9 @@ class SellingStatusType extends AbstractStructBase
     /**
      * The ListingStatus
      * Meta information extracted from the WSDL
-     * - documentation: Specifies an active or ended listing's status in eBay's processing workflow. <b></b> <ul> <li>If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., total price and buyer/high bidder) and the final
-     * value fee. This processing can take several minutes.</li> <li>If you retrieve a sold item and no details about the buyer/high bidder are returned or no final value fee is available, use this listing status information to determine whether eBay has
-     * finished processing the listing.</li> </ul>
+     * - documentation: Specifies an active or ended listing's status in eBay's processing workflow. <b></b> <ul> <li>If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., total price and buyer/high bidder) and the
+     * transaction fees. This processing can take several minutes.</li> <li>If you retrieve a sold item and no details about the buyer/high bidder are returned or no transaction fees are available, use this listing status information to determine whether
+     * eBay has finished processing the listing.</li> </ul>
      * - minOccurs: 0
      * @var string|null
      */
@@ -129,9 +129,9 @@ class SellingStatusType extends AbstractStructBase
      * - documentation: A seller is changed a Final Value Fee (FVF) when the item is sold, ends with a winning bid, or is purchased. This fee applies whether or not the sale is completed with the buyer and is generated before the buyer makes a payment.
      * <br/><br/> The FVF is calculated using a percentage. This percentage is based on whether the seller has a Store subscription or not. If a seller does have a Store subscription, the FVF is calculated based on the level of that plan. For complete
      * information about selling fees and eBay Store subscription plans, see the <a href="http://www.feectr.ebay.com/feecenter/home">Fee Center Home Page</a>. <br/><br/> The Final Value Fee for each order line item is returned by
-     * <b>GetSellerTransactions</b>, <b>GetItemTransactions</b>, <b>GetOrders</b>, and <b>GetOrderTransactions</b>, regardless of the checkout status. <br><br> If a seller requests a Final Value Fee credit, the value of <b>Transaction.FinalValueFee</b> will
-     * not change if a credit is issued. The credit only appears in the seller's account data. <br> <br> See the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees</a> help page for more
-     * information about how Final Value Fees are calculated.
+     * <b>GetSellerTransactions</b>, <b>GetItemTransactions</b>, and <b>GetOrders</b>, regardless of the checkout status. <br><br> If a seller requests a Final Value Fee credit, the value of <b>Transaction.FinalValueFee</b> will not change if a credit is
+     * issued. The credit only appears in the seller's account data. <br> <br> See the <a href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822" target="_blank">Selling fees</a> help page for more information about how Final
+     * Value Fees are calculated.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -185,6 +185,16 @@ class SellingStatusType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\SuggestedBidValueType $SuggestedBidValues = null;
     /**
+     * The ListingOnHold
+     * Meta information extracted from the WSDL
+     * - documentation: Indicates if a listing is on hold due to an eBay policy violation. <br><br> If a listing is put on hold, users are unable to view the listing details, the listing is hidden from search, and all attempted purchases, offers, and bids
+     * for the listing are blocked. eBay, however, gives sellers the opportunity to address violations and get listings fully reinstated. A listing will be ended if a seller does not address a violation, or if the violation can not be rectified. <br><br> If
+     * a listing is fixable, the seller should be able to view the listing details and this boolean will be returned as <code>true</code>. <br><br> Once a listing is fixed, this boolean will no longer be returned.
+     * - minOccurs: 0
+     * @var bool|null
+     */
+    protected ?bool $ListingOnHold = null;
+    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -209,6 +219,7 @@ class SellingStatusType extends AbstractStructBase
      * @uses SellingStatusType::setSoldAsBin()
      * @uses SellingStatusType::setQuantitySoldByPickupInStore()
      * @uses SellingStatusType::setSuggestedBidValues()
+     * @uses SellingStatusType::setListingOnHold()
      * @uses SellingStatusType::setAny()
      * @param int $bidCount
      * @param \macropage\ebaysdk\trading\StructType\AmountType $bidIncrement
@@ -228,9 +239,10 @@ class SellingStatusType extends AbstractStructBase
      * @param bool $soldAsBin
      * @param int $quantitySoldByPickupInStore
      * @param \macropage\ebaysdk\trading\StructType\SuggestedBidValueType $suggestedBidValues
+     * @param bool $listingOnHold
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $bidCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $bidIncrement = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedCurrentPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentPrice = null, ?\macropage\ebaysdk\trading\StructType\UserType $highBidder = null, ?int $leadCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minimumToBid = null, ?int $quantitySold = null, ?bool $reserveMet = null, ?bool $secondChanceEligible = null, ?int $bidderCount = null, ?string $listingStatus = null, ?\macropage\ebaysdk\trading\StructType\AmountType $finalValueFee = null, ?\macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType $promotionalSaleDetails = null, ?bool $adminEnded = null, ?bool $soldAsBin = null, ?int $quantitySoldByPickupInStore = null, ?\macropage\ebaysdk\trading\StructType\SuggestedBidValueType $suggestedBidValues = null, $any = null)
+    public function __construct(?int $bidCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $bidIncrement = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedCurrentPrice = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentPrice = null, ?\macropage\ebaysdk\trading\StructType\UserType $highBidder = null, ?int $leadCount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $minimumToBid = null, ?int $quantitySold = null, ?bool $reserveMet = null, ?bool $secondChanceEligible = null, ?int $bidderCount = null, ?string $listingStatus = null, ?\macropage\ebaysdk\trading\StructType\AmountType $finalValueFee = null, ?\macropage\ebaysdk\trading\StructType\PromotionalSaleDetailsType $promotionalSaleDetails = null, ?bool $adminEnded = null, ?bool $soldAsBin = null, ?int $quantitySoldByPickupInStore = null, ?\macropage\ebaysdk\trading\StructType\SuggestedBidValueType $suggestedBidValues = null, ?bool $listingOnHold = null, $any = null)
     {
         $this
             ->setBidCount($bidCount)
@@ -251,6 +263,7 @@ class SellingStatusType extends AbstractStructBase
             ->setSoldAsBin($soldAsBin)
             ->setQuantitySoldByPickupInStore($quantitySoldByPickupInStore)
             ->setSuggestedBidValues($suggestedBidValues)
+            ->setListingOnHold($listingOnHold)
             ->setAny($any);
     }
     /**
@@ -639,9 +652,32 @@ class SellingStatusType extends AbstractStructBase
         return $this;
     }
     /**
+     * Get ListingOnHold value
+     * @return bool|null
+     */
+    public function getListingOnHold(): ?bool
+    {
+        return $this->ListingOnHold;
+    }
+    /**
+     * Set ListingOnHold value
+     * @param bool $listingOnHold
+     * @return \macropage\ebaysdk\trading\StructType\SellingStatusType
+     */
+    public function setListingOnHold(?bool $listingOnHold = null): self
+    {
+        // validation for constraint: boolean
+        if (!is_null($listingOnHold) && !is_bool($listingOnHold)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($listingOnHold, true), gettype($listingOnHold)), __LINE__);
+        }
+        $this->ListingOnHold = $listingOnHold;
+        
+        return $this;
+    }
+    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -19,8 +19,17 @@ class BuyerType extends AbstractStructBase
     /**
      * The ShippingAddress
      * Meta information extracted from the WSDL
-     * - documentation: This container shows the buyer's shipping address. <br> <br> <span class="tablenote"><b>Note:</b> For an Authenticity Guarantee program order returned in <b>GetItemTransactions</b> or <b>GetSellerTransactions</b>, this is the address
-     * of the authenticator's warehouse. The authenticator is responsible for delivery to the buyer's shipping address. </span>
+     * - documentation: This container shows the buyer's shipping address. <br> <br> <p><span class="tablenote"><b>Note:</b> For an Authenticity Guarantee program order returned in <b>GetItemTransactions</b> or <b>GetSellerTransactions</b>, this is the
+     * address of the authenticator's warehouse. The authenticator is responsible for delivery to the buyer's shipping address. </span></p> <p><span class="tablenote"> <strong>Note:</strong> For In-Store Pickup and Click and Collect orders, this is the
+     * address of the merchant's store where the buyer will pick up the order. This is only applicable for <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> calls. </span></p> <p><span class="tablenote"><b>Note:</b> For eBay Vault scenarios:
+     * <strong>GetItemTransactions</strong> calls, and <strong>GetSellerTransactions</strong> calls (Seller View only), mock address details are returned for: <br><br>-<em> Vault to vault orders: Buyer and Seller View</em><br><br>-<em> Ship to vault
+     * orders</em>: Mock addresses are returned for the Buyer View (only); the address returned for the Seller View will be the authenticator&amp;apos;s address.<br><br>-<em> Vault in-hand submission orders</em>: the address returned for the Buyer View will
+     * be the authenticator's address (<b>GetItemTransactions</b> only).<br> <br> The following address details are returned for mock addresses: <pre> &lt;ShippingAddress&gt; <br/> <code> &nbsp;&lt;Name&gt;eBay Vault&lt;/Name&gt;</code> <br/> <code>
+     * &nbsp;&lt;AddressID&gt;Invalid Request&lt;/AddressID&gt;</code> <br/> <code> &nbsp;&lt;AddressOwner&gt;eBay&lt;/AddressOwner&gt;</code> <br/> <code> &nbsp;&lt;AddressUsage&gt;Invalid&lt;/AddressUsage&gt;</code> <br/> <code>
+     * &nbsp;&lt;CityName&gt;Invalid Request&lt;/CityName&gt;</code> <br/> <code> &nbsp;&lt;Country&gt;US&lt;/Country&gt;</code> <br/> <code> &nbsp;&lt;CountryName&gt;Invalid Request&lt;/CountryName&gt;</code> <br/> <code>
+     * &nbsp;&lt;ExternalAddressID&gt;Invalid Request&lt;/ExternalAddressID&gt;</code> <br/> <code> &nbsp;&lt;Phone&gt;Invalid Request&lt;/Phone&gt;</code> <br/> <code> &nbsp;&lt;PostalCode&gt;Invalid Request&lt;/PostalCode&gt;</code> <br/> <code>
+     * &nbsp;&lt;StateOrProvince&gt;Invalid Request&lt;/StateOrProvince&gt;</code> <br/> <code> &nbsp;&lt;Street1&gt;Invalid Request&lt;/Street1&gt;</code> <br/> <code> &nbsp;&lt;Street2&gt;&lt;/Street2&gt;</code> <br/> &lt;/ShippingAddress&gt; </pre> <br/>
+     * </span></p>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AddressType|null
      */
@@ -148,7 +157,7 @@ class BuyerType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

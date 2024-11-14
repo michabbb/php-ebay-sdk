@@ -23,8 +23,7 @@ class TaxesType extends AbstractStructBase
      * <code>OSS</code>, or <code>ABN</code>. This field will be returned if VAT tax is applicable for the order. See the <a href="types/eBayTaxReferenceValue.html">eBayTaxReferenceValue</a> type page for more information on the VAT tax type strings that
      * may appear for the <b>name</b> attribute. <br> <br> <span class="tablenote"><b>Note: </b> For all VAT ID/VATIN values to be returned (except for France), developers will need to use a Trading WSDL with a version number of 1211 (or newer). For French
      * VAT ID/VATIN values to be returned, developers will need to use a Trading WSDL with a version number of 1225 (or newer). Otherwise, the VAT information will be returned in the <b>Order.ShippingAddress.Street2</b> field. Developers will also have the
-     * option of using older version, but setting the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> header value to 1211 or 1225 or higher. <br> <br> On January 31, 2022, the <b>Order.ShippingAddress.Street2</b> will stop being used to return VAT information
-     * regardless of WSDL version or compatibility level. </span> <br>
+     * option of using older version, but setting the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> header value to 1211 or 1225 or higher. </span> <br>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\EBayTaxReferenceValue|null
      */
@@ -178,7 +177,7 @@ class TaxesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

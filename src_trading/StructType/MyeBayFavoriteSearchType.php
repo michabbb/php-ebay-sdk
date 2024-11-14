@@ -163,14 +163,6 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      */
     protected ?array $SearchFlag = null;
     /**
-     * The PaymentMethod
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable, as filtering by a payment method in an advanced item search is no longer supported/applicable.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PaymentMethod = null;
-    /**
      * The PreferredLocation
      * Meta information extracted from the WSDL
      * - documentation: The PreferredLocation value of a My eBay Favorite Search. The PreferredLocation specifies the criteria for filtering search results by site, where site is determined by the site ID in the request.
@@ -270,7 +262,6 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @uses MyeBayFavoriteSearchType::setBidCountMax()
      * @uses MyeBayFavoriteSearchType::setBidCountMin()
      * @uses MyeBayFavoriteSearchType::setSearchFlag()
-     * @uses MyeBayFavoriteSearchType::setPaymentMethod()
      * @uses MyeBayFavoriteSearchType::setPreferredLocation()
      * @uses MyeBayFavoriteSearchType::setSellerID()
      * @uses MyeBayFavoriteSearchType::setSellerIDExclude()
@@ -298,7 +289,6 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param int $bidCountMax
      * @param int $bidCountMin
      * @param string[] $searchFlag
-     * @param string $paymentMethod
      * @param string $preferredLocation
      * @param string[] $sellerID
      * @param string[] $sellerIDExclude
@@ -310,7 +300,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
      * @param string $quantityOperator
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $searchName = null, ?string $searchQuery = null, ?string $queryKeywords = null, ?string $categoryID = null, ?string $itemSort = null, ?string $sortOrder = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $maxDistance = null, ?string $postalCode = null, ?string $itemType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMax = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMin = null, ?string $currency = null, ?int $bidCountMax = null, ?int $bidCountMin = null, ?array $searchFlag = null, ?string $paymentMethod = null, ?string $preferredLocation = null, ?array $sellerID = null, ?array $sellerIDExclude = null, ?string $itemsAvailableTo = null, ?string $itemsLocatedIn = null, ?string $sellerBusinessType = null, ?string $condition = null, ?int $quantity = null, ?string $quantityOperator = null, $any = null)
+    public function __construct(?string $searchName = null, ?string $searchQuery = null, ?string $queryKeywords = null, ?string $categoryID = null, ?string $itemSort = null, ?string $sortOrder = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $maxDistance = null, ?string $postalCode = null, ?string $itemType = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMax = null, ?\macropage\ebaysdk\trading\StructType\AmountType $priceMin = null, ?string $currency = null, ?int $bidCountMax = null, ?int $bidCountMin = null, ?array $searchFlag = null, ?string $preferredLocation = null, ?array $sellerID = null, ?array $sellerIDExclude = null, ?string $itemsAvailableTo = null, ?string $itemsLocatedIn = null, ?string $sellerBusinessType = null, ?string $condition = null, ?int $quantity = null, ?string $quantityOperator = null, $any = null)
     {
         $this
             ->setSearchName($searchName)
@@ -330,7 +320,6 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
             ->setBidCountMax($bidCountMax)
             ->setBidCountMin($bidCountMin)
             ->setSearchFlag($searchFlag)
-            ->setPaymentMethod($paymentMethod)
             ->setPreferredLocation($preferredLocation)
             ->setSellerID($sellerID)
             ->setSellerIDExclude($sellerIDExclude)
@@ -785,32 +774,6 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PaymentMethod value
-     * @return string|null
-     */
-    public function getPaymentMethod(): ?string
-    {
-        return $this->PaymentMethod;
-    }
-    /**
-     * Set PaymentMethod value
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentMethodSearchCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentMethodSearchCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $paymentMethod
-     * @return \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchType
-     */
-    public function setPaymentMethod(?string $paymentMethod = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PaymentMethodSearchCodeType::valueIsValid($paymentMethod)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentMethodSearchCodeType', is_array($paymentMethod) ? implode(', ', $paymentMethod) : var_export($paymentMethod, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentMethodSearchCodeType::getValidValues())), __LINE__);
-        }
-        $this->PaymentMethod = $paymentMethod;
-        
-        return $this;
-    }
-    /**
      * Get PreferredLocation value
      * @return string|null
      */
@@ -1124,7 +1087,7 @@ class MyeBayFavoriteSearchType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

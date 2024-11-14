@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
  * This class stands for FeenettingStatusCodeType EnumType
  * Meta information extracted from the WSDL
  * - documentation: This enumerated type contains values that indicate the current status of the seller's account for the fee netting mechanism. With fee netting, some selling fees like final value fee and payment processing fee will be deducted from
- * seller payouts insted of eBay invoicing the seller for the fees.
+ * seller payouts instead of eBay invoicing the seller for the fees.
  * @subpackage Enumerations
  */
 class FeenettingStatusCodeType extends AbstractStructEnumBase

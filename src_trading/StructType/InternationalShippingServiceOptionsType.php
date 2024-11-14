@@ -68,21 +68,13 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: An international location or region to where the item seller will ship the item. <br/><br/> Use <b>GeteBayDetails</b> with <b>DetailName</b> set to <b>ShippingLocationDetails</b> to determine which locations are valid per site. In
      * the <b>GeteBayDetails</b> response, look for the ShippingLoca<b>tionDetails.ShippingLocation</b> fields. <br/><br/> For the <b>AddItem</b> family of calls, this field is required if any international shipping service is specified. <br><br> <b>For
-     * GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, <b>ShipToLocation</b> fields will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a
-     * Trading WSDL older than Version 1019, <b>ShipToLocation</b> fields are only returned to the buyer or seller, and a string value of <code>Unavailable</code> will be returned to all third parties.
+     * GetOrders and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, <b>ShipToLocation</b> fields will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than
+     * Version 1019, <b>ShipToLocation</b> fields are only returned to the buyer or seller, and a string value of <code>Unavailable</code> will be returned to all third parties.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
     protected ?array $ShipToLocation = null;
-    /**
-     * The ShippingInsuranceCost
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingInsuranceCost = null;
     /**
      * The ImportCharge
      * Meta information extracted from the WSDL
@@ -113,7 +105,6 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * @uses InternationalShippingServiceOptionsType::setShippingServiceAdditionalCost()
      * @uses InternationalShippingServiceOptionsType::setShippingServicePriority()
      * @uses InternationalShippingServiceOptionsType::setShipToLocation()
-     * @uses InternationalShippingServiceOptionsType::setShippingInsuranceCost()
      * @uses InternationalShippingServiceOptionsType::setImportCharge()
      * @uses InternationalShippingServiceOptionsType::setShippingServiceCutOffTime()
      * @uses InternationalShippingServiceOptionsType::setAny()
@@ -122,12 +113,11 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost
      * @param int $shippingServicePriority
      * @param string[] $shipToLocation
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost
      * @param \macropage\ebaysdk\trading\StructType\AmountType $importCharge
      * @param string $shippingServiceCutOffTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?array $shipToLocation = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?string $shippingServiceCutOffTime = null, $any = null)
+    public function __construct(?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?array $shipToLocation = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?string $shippingServiceCutOffTime = null, $any = null)
     {
         $this
             ->setShippingService($shippingService)
@@ -135,7 +125,6 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
             ->setShippingServiceAdditionalCost($shippingServiceAdditionalCost)
             ->setShippingServicePriority($shippingServicePriority)
             ->setShipToLocation($shipToLocation)
-            ->setShippingInsuranceCost($shippingInsuranceCost)
             ->setImportCharge($importCharge)
             ->setShippingServiceCutOffTime($shippingServiceCutOffTime)
             ->setAny($any);
@@ -291,25 +280,6 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get ShippingInsuranceCost value
-     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    public function getShippingInsuranceCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
-    {
-        return $this->ShippingInsuranceCost;
-    }
-    /**
-     * Set ShippingInsuranceCost value
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost
-     * @return \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType
-     */
-    public function setShippingInsuranceCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null): self
-    {
-        $this->ShippingInsuranceCost = $shippingInsuranceCost;
-        
-        return $this;
-    }
-    /**
      * Get ImportCharge value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -354,7 +324,7 @@ class InternationalShippingServiceOptionsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

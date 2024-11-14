@@ -79,6 +79,14 @@ class VeROReportItemType extends AbstractStructBase
      */
     protected ?string $Patent = null;
     /**
+     * The Brand
+     * Meta information extracted from the WSDL
+     * - documentation: The brand name of the item being reported for VeRO violation.
+     * - minOccurs: 0
+     * @var string|null
+     */
+    protected ?string $Brand = null;
+    /**
      * The DetailedMessage
      * Meta information extracted from the WSDL
      * - documentation: Explanatory text from the VeRO Program member. This field is conditionally required when the <b>VeROReasonCodeID</b> is <code>Others</code>. Note that there is a 1000-character restriction on this text field when the items are being
@@ -101,6 +109,7 @@ class VeROReportItemType extends AbstractStructBase
      * @uses VeROReportItemType::setRegion()
      * @uses VeROReportItemType::setCountry()
      * @uses VeROReportItemType::setPatent()
+     * @uses VeROReportItemType::setBrand()
      * @uses VeROReportItemType::setDetailedMessage()
      * @uses VeROReportItemType::setAny()
      * @param string $itemID
@@ -110,10 +119,11 @@ class VeROReportItemType extends AbstractStructBase
      * @param string[] $region
      * @param string[] $country
      * @param string $patent
+     * @param string $brand
      * @param string $detailedMessage
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?int $veROReasonCodeID = null, ?string $messageToSeller = null, ?bool $copyEmailToRightsOwner = null, ?array $region = null, ?array $country = null, ?string $patent = null, ?string $detailedMessage = null, $any = null)
+    public function __construct(?string $itemID = null, ?int $veROReasonCodeID = null, ?string $messageToSeller = null, ?bool $copyEmailToRightsOwner = null, ?array $region = null, ?array $country = null, ?string $patent = null, ?string $brand = null, ?string $detailedMessage = null, $any = null)
     {
         $this
             ->setItemID($itemID)
@@ -123,6 +133,7 @@ class VeROReportItemType extends AbstractStructBase
             ->setRegion($region)
             ->setCountry($country)
             ->setPatent($patent)
+            ->setBrand($brand)
             ->setDetailedMessage($detailedMessage)
             ->setAny($any);
     }
@@ -382,6 +393,29 @@ class VeROReportItemType extends AbstractStructBase
         return $this;
     }
     /**
+     * Get Brand value
+     * @return string|null
+     */
+    public function getBrand(): ?string
+    {
+        return $this->Brand;
+    }
+    /**
+     * Set Brand value
+     * @param string $brand
+     * @return \macropage\ebaysdk\trading\StructType\VeROReportItemType
+     */
+    public function setBrand(?string $brand = null): self
+    {
+        // validation for constraint: string
+        if (!is_null($brand) && !is_string($brand)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($brand, true), gettype($brand)), __LINE__);
+        }
+        $this->Brand = $brand;
+        
+        return $this;
+    }
+    /**
      * Get DetailedMessage value
      * @return string|null
      */
@@ -407,7 +441,7 @@ class VeROReportItemType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

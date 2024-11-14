@@ -16,17 +16,10 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class SellerType extends AbstractStructBase
 {
     /**
-     * The PaisaPayStatus
-     * Meta information extracted from the WSDL
-     * - documentation: PaisaPay is no longer a supported payment method, so this field is no longer applicable.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $PaisaPayStatus = null;
-    /**
      * The AllowPaymentEdit
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether the user as a seller by default allows buyers to edit the total cost of an item (while in checkout). (Sellers enable this property in their My eBay user preferences on the eBay site.)
+     * - documentation: <br> Indicates whether the seller allows buyers to edit the total cost of an item during checkout. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in
+     * <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $AllowPaymentEdit = null;
@@ -41,23 +34,24 @@ class SellerType extends AbstractStructBase
     /**
      * The CheckoutEnabled
      * Meta information extracted from the WSDL
-     * - documentation: This flag indicates whether or not the seller's Checkout Enabled preference is turned on (at account level or at listing level). This preference is managed through Payment Preferences in My eBay. If this preference is enabled, a Pay
-     * Now button will appear in checkout flow pages and in the email notifications that are sent to buyers.
+     * - documentation: <br> This flag indicates whether or not the seller's Checkout Enabled preference is turned on. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in
+     * <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $CheckoutEnabled = null;
     /**
      * The CIPBankAccountStored
      * Meta information extracted from the WSDL
-     * - documentation: If true, this flag indicates that the seller has stored bank account information on file with eBay. A seller must have stored bank account information on file with eBay in order to use 'CashOnPickup' as a payment method (known as
-     * 'Pay upon Pickup' on the site). This field is applicable to all eBay sites that support 'CashOnPickup' as a payment method.
+     * - documentation: <br> This boolean field indicates whether or not the seller has stored bank account information on file with eBay. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being
+     * returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $CIPBankAccountStored = null;
     /**
      * The GoodStanding
      * Meta information extracted from the WSDL
-     * - documentation: If true, indicates that the user is in good standing with eBay. (One of the requirements for listing a new item with immediate payment.)
+     * - documentation: <br> This boolean field indicates whether or not the seller is in good standing with eBay. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in
+     * <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $GoodStanding = null;
@@ -72,7 +66,8 @@ class SellerType extends AbstractStructBase
     /**
      * The QualifiesForB2BVAT
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether the user is subject to VAT. Users who have registered with eBay as VAT-exempt are not subject to VAT.
+     * - documentation: <br> Indicates whether the user is subject to VAT. Users who have registered with eBay as VAT-exempt are not subject to VAT. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop
+     * being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $QualifiesForB2BVAT = null;
@@ -87,9 +82,8 @@ class SellerType extends AbstractStructBase
     /**
      * The SellerLevel
      * Meta information extracted from the WSDL
-     * - documentation: The user's eBay PowerSeller tier. Possible values are enumerated in the SellerLevelCodeType code list. SellerInfo.SellerLevel is no longer returned in the GetUser, GetBidderList, GetSellerList, GetItem, and GetItemTransactions
-     * responses for the US, DE/AT/CH, and UK/IE sites, for version 629 and later. If you are using a version older than 629, SellerInfo.SellerLevel will still be returned. Developers should note that SellerInfo.SellerLevel could potentially be removed from
-     * other sites as well.
+     * - documentation: <br> This enumeration value indicates the user's eBay PowerSeller tier. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -113,14 +107,16 @@ class SellerType extends AbstractStructBase
     /**
      * The StoreOwner
      * Meta information extracted from the WSDL
-     * - documentation: Boolean value indicates whether or not the seller is an eBay Store owner.
+     * - documentation: <br> Boolean value indicates whether or not the seller is an eBay Store owner. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * @var bool|null
      */
     protected ?bool $StoreOwner = null;
     /**
      * The StoreURL
      * Meta information extracted from the WSDL
-     * - documentation: The URL for the seller's eBay Store. This field is only returned if the seller is a store owner (look for a value of <code>true</code> in the <b>SellerInfo.StoreOwner</b> field).
+     * - documentation: <br> The URL for the seller's eBay Store. This field is only returned if the seller is a store owner (look for a value of <code>true</code> in the <b>SellerInfo.StoreOwner</b> field). <br> <span class="tablenote"><b>Note: </b> The
+     * <b>SellerInfo</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -158,14 +154,6 @@ class SellerType extends AbstractStructBase
      */
     protected ?string $PaymentMethod = null;
     /**
-     * The ProStoresPreference
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $ProStoresPreference = null;
-    /**
      * The CharityRegistered
      * Meta information extracted from the WSDL
      * - documentation: Indicates whether or not the seller is a registered charity seller. If <b>CharityRegistered</b> is <code>false</code>, the user must register their nonprofit organization with the PayPal Giving Fund to list eBay for Charity items.
@@ -176,19 +164,12 @@ class SellerType extends AbstractStructBase
     /**
      * The SafePaymentExempt
      * Meta information extracted from the WSDL
-     * - documentation: If this field is <code>true</code>, the user is exempt from the requirement to offer at least one safe payment method when listing items.
+     * - documentation: <br> If this field is <code>true</code>, the user is exempt from the requirement to offer at least one safe payment method when listing items. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child
+     * fields will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
     protected ?bool $SafePaymentExempt = null;
-    /**
-     * The PaisaPayEscrowEMIStatus
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated since eBay India is no longer a functioning marketplace.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $PaisaPayEscrowEMIStatus = null;
     /**
      * The CharityAffiliationDetails
      * Meta information extracted from the WSDL
@@ -207,14 +188,6 @@ class SellerType extends AbstractStructBase
      */
     protected ?float $TransactionPercent = null;
     /**
-     * The IntegratedMerchantCreditCardInfo
-     * Meta information extracted from the WSDL
-     * - documentation: The container is no longer returned in <b>GetUser</b> response, as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType $IntegratedMerchantCreditCardInfo = null;
-    /**
      * The FeatureEligibility
      * Meta information extracted from the WSDL
      * - documentation: Contains eligibility details about seller- or platform-based features. This is returned only if the <b>IncludeFeatureEligibility</b> field is included and set to <code>true</code> in the request.
@@ -225,15 +198,14 @@ class SellerType extends AbstractStructBase
     /**
      * The TopRatedSeller
      * Meta information extracted from the WSDL
-     * - documentation: This boolean field indicates if the seller is certified as a <em>Top Rated Seller</em>. Only Top Rated Sellers can qualify for Top Rated Plus listings, which receive the Top Rated Plus seal, and will help those listings stand out.
-     * Top Rated Plus listings also receive a 20 percent discount on the Final Value Fee. <br/><br/> This field is only returned for the following sites: US (EBAY-US), Motors (EBAY-MOTOR), AT (EBAY-AT), CH (EBAY-CH), DE (EBAY-DE), IE (EBAY-IE), UK
-     * (EBAY-GB), and AU (EBAY-AU). The Top Rated Seller and Top Rated Plus listing requirements will differ by site. Below are some links to Help pages that discusss these requirements: <ul> <li>eBay US: <a
-     * href="http://pages.ebay.com/help/sell/top-rated.html">Becoming a Top Rated Seller and qualifying for Top Rated Plus</a></li> <li>eBay US Motors: <a href="http://pages.ebay.com/help/sell/top-rated.html#becoming">Becoming a Top Rated Seller in Motors
-     * vehicles categories</a></li> <li>eBay UK/IE: <a href="http://pages.ebay.co.uk/help/sell/top-rated.html">eBay Top-rated Seller status and the eBay Premium Service</a></li> <li>eBay DE/AT/CH: <a
-     * href="http://pages.ebay.de/help/sell/top-rated/2.html">Anforderungen fur den Verkaufer mit Top-Bewertung</a></li> <li>eBay AU: <a href="http://pages.ebay.com.au/help/sell/top-rated.html">Becoming a Top Rated Seller and qualifying for eBay Premium
-     * Service</a></li> </ul> Top Rated Sellers, registered in the US, can qualify for Top Rated Seller programs in other countries as long as they meet the selling requirements in those countries. However, even if US sellers qualify for programs in other
-     * countries, they will not receive the Final Value Fee discount on sales in those countries. For more information, see the <a href="http://pages.ebay.com/help/sell/top-rated.html#qualifying">Qualifying for Top Rated Seller status on other eBay
-     * sites</a> help topic.
+     * - documentation: This boolean field indicates if the seller is certified as a <em>Top Rated Seller</em>. Only Top Rated Sellers can qualify for Top Rated Plus listings, which receive the Top Rated Plus seal and other benefits. <br/> This field is
+     * only returned for the following sites: US, Germany, Austria, Switzerland, UK, Ireland, and Australia. The Top Rated Seller and Top Rated Plus listing requirements will differ by site. Below are some links to Help pages that discuss these
+     * requirements: <ul> <li>eBay US: <a href="https://www.ebay.com/help/policies/selling-policies/seller-standards-policy?id=4347&#section3">Requirements to become Top Rated</a></li> <li>eBay UK/IE: <a
+     * href="https://www.ebay.co.uk/help/policies/selling-policies/seller-standards-policy?id=4347&#section3">Requirements to become Top Rated and the eBay Premium Service</a></li> <li>eBay DE/AT/CH: <a
+     * href="https://pages.ebay.de/help/sell/top-rated/2.html">Anforderungen fur den Verkaufer mit Top-Bewertung</a></li> <li>eBay AU: <a href="https://www.ebay.com.au/help/policies/selling-policies/seller-standards-policy?id=4347&#section3">Requirements to
+     * become Top Rated</a></li> </ul> Top Rated Sellers, registered in the US, can qualify for Top Rated Seller programs in other countries as long as they meet the selling requirements in those countries. However, even if US sellers qualify for programs
+     * in other countries, they will not receive the Final Value Fee discount on sales in those countries. <br> <span class="tablenote"><b>Note: </b> The <b>SellerInfo</b> container and its child fields will stop being returned in <b>GetItemTransactions</b>
+     * and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -272,29 +244,12 @@ class SellerType extends AbstractStructBase
      */
     protected ?bool $InternationalRateTable = null;
     /**
-     * The SellereBayPaymentProcessStatus
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer used.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $SellereBayPaymentProcessStatus = null;
-    /**
-     * The SellereBayPaymentProcessConsent
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer used.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType $SellereBayPaymentProcessConsent = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
     protected $any = null;
     /**
      * Constructor method for SellerType
-     * @uses SellerType::setPaisaPayStatus()
      * @uses SellerType::setAllowPaymentEdit()
      * @uses SellerType::setBillingCurrency()
      * @uses SellerType::setCheckoutEnabled()
@@ -312,23 +267,17 @@ class SellerType extends AbstractStructBase
      * @uses SellerType::setRegisteredBusinessSeller()
      * @uses SellerType::setStoreSite()
      * @uses SellerType::setPaymentMethod()
-     * @uses SellerType::setProStoresPreference()
      * @uses SellerType::setCharityRegistered()
      * @uses SellerType::setSafePaymentExempt()
-     * @uses SellerType::setPaisaPayEscrowEMIStatus()
      * @uses SellerType::setCharityAffiliationDetails()
      * @uses SellerType::setTransactionPercent()
-     * @uses SellerType::setIntegratedMerchantCreditCardInfo()
      * @uses SellerType::setFeatureEligibility()
      * @uses SellerType::setTopRatedSeller()
      * @uses SellerType::setTopRatedSellerDetails()
      * @uses SellerType::setRecoupmentPolicyConsent()
      * @uses SellerType::setDomesticRateTable()
      * @uses SellerType::setInternationalRateTable()
-     * @uses SellerType::setSellereBayPaymentProcessStatus()
-     * @uses SellerType::setSellereBayPaymentProcessConsent()
      * @uses SellerType::setAny()
-     * @param int $paisaPayStatus
      * @param bool $allowPaymentEdit
      * @param string $billingCurrency
      * @param bool $checkoutEnabled
@@ -346,27 +295,21 @@ class SellerType extends AbstractStructBase
      * @param bool $registeredBusinessSeller
      * @param string $storeSite
      * @param string $paymentMethod
-     * @param \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference
      * @param bool $charityRegistered
      * @param bool $safePaymentExempt
-     * @param int $paisaPayEscrowEMIStatus
      * @param \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailsType $charityAffiliationDetails
      * @param float $transactionPercent
-     * @param \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType $integratedMerchantCreditCardInfo
      * @param \macropage\ebaysdk\trading\StructType\FeatureEligibilityType $featureEligibility
      * @param bool $topRatedSeller
      * @param \macropage\ebaysdk\trading\StructType\TopRatedSellerDetailsType $topRatedSellerDetails
      * @param \macropage\ebaysdk\trading\StructType\RecoupmentPolicyConsentType $recoupmentPolicyConsent
      * @param bool $domesticRateTable
      * @param bool $internationalRateTable
-     * @param string $sellereBayPaymentProcessStatus
-     * @param \macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType $sellereBayPaymentProcessConsent
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $paisaPayStatus = null, ?bool $allowPaymentEdit = null, ?string $billingCurrency = null, ?bool $checkoutEnabled = null, ?bool $cIPBankAccountStored = null, ?bool $goodStanding = null, ?string $merchandizingPref = null, ?bool $qualifiesForB2BVAT = null, ?string $sellerGuaranteeLevel = null, ?string $sellerLevel = null, ?\macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null, ?\macropage\ebaysdk\trading\StructType\SchedulingInfoType $schedulingInfo = null, ?bool $storeOwner = null, ?string $storeURL = null, ?string $sellerBusinessType = null, ?bool $registeredBusinessSeller = null, ?string $storeSite = null, ?string $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null, ?bool $charityRegistered = null, ?bool $safePaymentExempt = null, ?int $paisaPayEscrowEMIStatus = null, ?\macropage\ebaysdk\trading\StructType\CharityAffiliationDetailsType $charityAffiliationDetails = null, ?float $transactionPercent = null, ?\macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType $integratedMerchantCreditCardInfo = null, ?\macropage\ebaysdk\trading\StructType\FeatureEligibilityType $featureEligibility = null, ?bool $topRatedSeller = null, ?\macropage\ebaysdk\trading\StructType\TopRatedSellerDetailsType $topRatedSellerDetails = null, ?\macropage\ebaysdk\trading\StructType\RecoupmentPolicyConsentType $recoupmentPolicyConsent = null, ?bool $domesticRateTable = null, ?bool $internationalRateTable = null, ?string $sellereBayPaymentProcessStatus = null, ?\macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType $sellereBayPaymentProcessConsent = null, $any = null)
+    public function __construct(?bool $allowPaymentEdit = null, ?string $billingCurrency = null, ?bool $checkoutEnabled = null, ?bool $cIPBankAccountStored = null, ?bool $goodStanding = null, ?string $merchandizingPref = null, ?bool $qualifiesForB2BVAT = null, ?string $sellerGuaranteeLevel = null, ?string $sellerLevel = null, ?\macropage\ebaysdk\trading\StructType\AddressType $sellerPaymentAddress = null, ?\macropage\ebaysdk\trading\StructType\SchedulingInfoType $schedulingInfo = null, ?bool $storeOwner = null, ?string $storeURL = null, ?string $sellerBusinessType = null, ?bool $registeredBusinessSeller = null, ?string $storeSite = null, ?string $paymentMethod = null, ?bool $charityRegistered = null, ?bool $safePaymentExempt = null, ?\macropage\ebaysdk\trading\StructType\CharityAffiliationDetailsType $charityAffiliationDetails = null, ?float $transactionPercent = null, ?\macropage\ebaysdk\trading\StructType\FeatureEligibilityType $featureEligibility = null, ?bool $topRatedSeller = null, ?\macropage\ebaysdk\trading\StructType\TopRatedSellerDetailsType $topRatedSellerDetails = null, ?\macropage\ebaysdk\trading\StructType\RecoupmentPolicyConsentType $recoupmentPolicyConsent = null, ?bool $domesticRateTable = null, ?bool $internationalRateTable = null, $any = null)
     {
         $this
-            ->setPaisaPayStatus($paisaPayStatus)
             ->setAllowPaymentEdit($allowPaymentEdit)
             ->setBillingCurrency($billingCurrency)
             ->setCheckoutEnabled($checkoutEnabled)
@@ -384,45 +327,17 @@ class SellerType extends AbstractStructBase
             ->setRegisteredBusinessSeller($registeredBusinessSeller)
             ->setStoreSite($storeSite)
             ->setPaymentMethod($paymentMethod)
-            ->setProStoresPreference($proStoresPreference)
             ->setCharityRegistered($charityRegistered)
             ->setSafePaymentExempt($safePaymentExempt)
-            ->setPaisaPayEscrowEMIStatus($paisaPayEscrowEMIStatus)
             ->setCharityAffiliationDetails($charityAffiliationDetails)
             ->setTransactionPercent($transactionPercent)
-            ->setIntegratedMerchantCreditCardInfo($integratedMerchantCreditCardInfo)
             ->setFeatureEligibility($featureEligibility)
             ->setTopRatedSeller($topRatedSeller)
             ->setTopRatedSellerDetails($topRatedSellerDetails)
             ->setRecoupmentPolicyConsent($recoupmentPolicyConsent)
             ->setDomesticRateTable($domesticRateTable)
             ->setInternationalRateTable($internationalRateTable)
-            ->setSellereBayPaymentProcessStatus($sellereBayPaymentProcessStatus)
-            ->setSellereBayPaymentProcessConsent($sellereBayPaymentProcessConsent)
             ->setAny($any);
-    }
-    /**
-     * Get PaisaPayStatus value
-     * @return int|null
-     */
-    public function getPaisaPayStatus(): ?int
-    {
-        return $this->PaisaPayStatus;
-    }
-    /**
-     * Set PaisaPayStatus value
-     * @param int $paisaPayStatus
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setPaisaPayStatus(?int $paisaPayStatus = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($paisaPayStatus) && !(is_int($paisaPayStatus) || ctype_digit($paisaPayStatus))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($paisaPayStatus, true), gettype($paisaPayStatus)), __LINE__);
-        }
-        $this->PaisaPayStatus = $paisaPayStatus;
-        
-        return $this;
     }
     /**
      * Get AllowPaymentEdit value
@@ -829,25 +744,6 @@ class SellerType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get ProStoresPreference value
-     * @return \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType|null
-     */
-    public function getProStoresPreference(): ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType
-    {
-        return $this->ProStoresPreference;
-    }
-    /**
-     * Set ProStoresPreference value
-     * @param \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setProStoresPreference(?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null): self
-    {
-        $this->ProStoresPreference = $proStoresPreference;
-        
-        return $this;
-    }
-    /**
      * Get CharityRegistered value
      * @return bool|null
      */
@@ -894,29 +790,6 @@ class SellerType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PaisaPayEscrowEMIStatus value
-     * @return int|null
-     */
-    public function getPaisaPayEscrowEMIStatus(): ?int
-    {
-        return $this->PaisaPayEscrowEMIStatus;
-    }
-    /**
-     * Set PaisaPayEscrowEMIStatus value
-     * @param int $paisaPayEscrowEMIStatus
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setPaisaPayEscrowEMIStatus(?int $paisaPayEscrowEMIStatus = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($paisaPayEscrowEMIStatus) && !(is_int($paisaPayEscrowEMIStatus) || ctype_digit($paisaPayEscrowEMIStatus))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($paisaPayEscrowEMIStatus, true), gettype($paisaPayEscrowEMIStatus)), __LINE__);
-        }
-        $this->PaisaPayEscrowEMIStatus = $paisaPayEscrowEMIStatus;
-        
-        return $this;
-    }
-    /**
      * Get CharityAffiliationDetails value
      * @return \macropage\ebaysdk\trading\StructType\CharityAffiliationDetailsType|null
      */
@@ -955,25 +828,6 @@ class SellerType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a float value, %s given', var_export($transactionPercent, true), gettype($transactionPercent)), __LINE__);
         }
         $this->TransactionPercent = $transactionPercent;
-        
-        return $this;
-    }
-    /**
-     * Get IntegratedMerchantCreditCardInfo value
-     * @return \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType|null
-     */
-    public function getIntegratedMerchantCreditCardInfo(): ?\macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType
-    {
-        return $this->IntegratedMerchantCreditCardInfo;
-    }
-    /**
-     * Set IntegratedMerchantCreditCardInfo value
-     * @param \macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType $integratedMerchantCreditCardInfo
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setIntegratedMerchantCreditCardInfo(?\macropage\ebaysdk\trading\StructType\IntegratedMerchantCreditCardInfoType $integratedMerchantCreditCardInfo = null): self
-    {
-        $this->IntegratedMerchantCreditCardInfo = $integratedMerchantCreditCardInfo;
         
         return $this;
     }
@@ -1104,54 +958,9 @@ class SellerType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get SellereBayPaymentProcessStatus value
-     * @return string|null
-     */
-    public function getSellereBayPaymentProcessStatus(): ?string
-    {
-        return $this->SellereBayPaymentProcessStatus;
-    }
-    /**
-     * Set SellereBayPaymentProcessStatus value
-     * @uses \macropage\ebaysdk\trading\EnumType\SellereBayPaymentProcessStatusCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\SellereBayPaymentProcessStatusCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $sellereBayPaymentProcessStatus
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setSellereBayPaymentProcessStatus(?string $sellereBayPaymentProcessStatus = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\SellereBayPaymentProcessStatusCodeType::valueIsValid($sellereBayPaymentProcessStatus)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\SellereBayPaymentProcessStatusCodeType', is_array($sellereBayPaymentProcessStatus) ? implode(', ', $sellereBayPaymentProcessStatus) : var_export($sellereBayPaymentProcessStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\SellereBayPaymentProcessStatusCodeType::getValidValues())), __LINE__);
-        }
-        $this->SellereBayPaymentProcessStatus = $sellereBayPaymentProcessStatus;
-        
-        return $this;
-    }
-    /**
-     * Get SellereBayPaymentProcessConsent value
-     * @return \macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType|null
-     */
-    public function getSellereBayPaymentProcessConsent(): ?\macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType
-    {
-        return $this->SellereBayPaymentProcessConsent;
-    }
-    /**
-     * Set SellereBayPaymentProcessConsent value
-     * @param \macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType $sellereBayPaymentProcessConsent
-     * @return \macropage\ebaysdk\trading\StructType\SellerType
-     */
-    public function setSellereBayPaymentProcessConsent(?\macropage\ebaysdk\trading\StructType\SellereBayPaymentProcessConsentCodeType $sellereBayPaymentProcessConsent = null): self
-    {
-        $this->SellereBayPaymentProcessConsent = $sellereBayPaymentProcessConsent;
-        
-        return $this;
-    }
-    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

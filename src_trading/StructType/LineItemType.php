@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for LineItemType StructType
  * Meta information extracted from the WSDL
- * - documentation: This type provides information about one order line item in a Global Shipping package. The package can contain multiple units of a given order line item.
+ * - documentation: This type provides information about one order line item in a package. The package can contain multiple units of a given order line item.
  * @subpackage Structs
  */
 class LineItemType extends AbstractStructBase
@@ -29,7 +29,8 @@ class LineItemType extends AbstractStructBase
      * The TransactionID
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay order line item (transaction). The <b>TransactionID</b> should match the <b>ItemID</b> specified in each <b>ItemTransactionID</b> node included in the request. Optionally, an <b>OrderLineItemID</b> value
-     * can substitute for the <b>ItemID</b>/<b>TransactionID</b> pair. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
+     * can substitute for the <b>ItemID</b>/<b>TransactionID</b> pair. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span
+     * class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 1
      * @var string
      */
@@ -37,8 +38,8 @@ class LineItemType extends AbstractStructBase
     /**
      * The Quantity
      * Meta information extracted from the WSDL
-     * - documentation: The number of units of the order line item in this package; this is required for customs. The seller must ensure that this matches the quantity of the order line item enclosed in the package. <br/><br/> This value must be a positive
-     * integer, and it can't be greater than the quantity of this item specified in the original transaction.
+     * - documentation: The number of units of the order line item in this package; this is required for customs. The seller must ensure that this matches the quantity of the order line item enclosed in the package.<br/><br/>This value must be a positive
+     * integer, and it can't be greater than the quantity of this item specified in the original transaction. This field is a required field in <b>CompleteSale</b> if the order type is a Global Shipping Program (GSP) order.
      * - minOccurs: 0
      * @var int|null
      */
@@ -208,7 +209,7 @@ class LineItemType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

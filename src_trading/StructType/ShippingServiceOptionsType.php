@@ -17,24 +17,18 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class ShippingServiceOptionsType extends AbstractStructBase
 {
     /**
-     * The ShippingInsuranceCost
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\AmountType $ShippingInsuranceCost = null;
-    /**
      * The ShippingService
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates a specific domestic shipping service option being offered by the seller to ship an item to a buyer who is located within the same country as the item. This field is required to identify each domestic
      * shipping service option that is specified with a <b>ShippingServiceOptions</b> container. <br><br> For a list of valid <b>ShippingService</b> values, call <b>GeteBayDetails</b> with <b>DetailName</b> set to <code>ShippingServiceDetails</code>. The
-     * <b>ShippingServiceDetails.ValidForSellingFlow</b> flag must also be present. Otherwise, that particular shipping service option is no longer valid and cannot be offered to buyers through a listing. <br><br> To view the full list of domestic shipping
+     * <b>ShippingServiceDetails.ValidForSellingFlow</b> flag must also be present. Otherwise, that particular shipping service option is no longer valid and cannot be offered to buyers through a listing.<br><br> To view the full list of domestic shipping
      * service options in the response, look for the <b>ShippingServiceDetails.ShippingService</b> fields. Domestic shipping service options will not have a <b>InternationalService</b> = <code>true</code> field, as this indicates that the
-     * <b>ShippingService</b> value is an International shipping service option.<br> <br> <span class="tablenote"><strong>Note:</strong> The eBay standard envelope (eSE) is a domestic envelope service with tracking through eBay. This service applies to
-     * specific sub-categories of Trading Cards categories, and to Coins & Paper Money, Postcards, and Stamps. To use this service, send envelopes using the USPS mail and set the <b>ShippingService</b> field to <code>US_eBayStandardEnvelope</code>. See <a
-     * href="https://pages.ebay.com/seller-center/shipping/ebay-standard-envelope.html#lower-cost-way">eBay standard envelope</a> for details and restrictions. For the REST equivalent, see <a href="
-     * https://edp.qa.ebay.com/api-docs/sell/static/seller-accounts/using-the-ebay-standard-envelope-service.html" target=/"_blank/">Using eBay standard envelope (eSE) service</a>. </span>
+     * <b>ShippingService</b> value is an International shipping service option.<br><br> <span class="tablenote"><strong>Note:</strong> The eBay standard envelope (eSE) is a domestic envelope service with tracking through eBay. This service applies to
+     * specific sub-categories of <b>Trading Cards</b>, and to coins & paper money, postcards, stamps, patches, and similar <a href="https://www.ebay.com/sellercenter/shipping/choosing-a-carrier-and-service/ebay-standard-envelope#eligible-categories"
+     * target="_blank">eligible categories</a>, and is only available on the US marketplace. See <a href="https://pages.ebay.com/seller-center/shipping/ebay-standard-envelope.html#lower-cost-way" target="_blank">eBay standard envelope</a> for details,
+     * restrictions, and an <a href="https://ir.ebaystatic.com/pictures/sc/Shipping/ebay_standard_envelope_template.pdf" target="_blank">envelope size template</a>. To use this service, send envelopes using the USPS mail and set the <b>ShippingService</b>
+     * field to <code>US_eBayStandardEnvelope</code>. <br><br> For the REST equivalent, see <a href="https://developer.ebay.com/api-docs/sell/static/seller-accounts/using-the-ebay-standard-envelope-service.html" target=/"_blank/">Using the eBay standard
+     * envelope (eSE) service</a>. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -108,8 +102,10 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: This boolean field indicates whether or not the corresponding domestic shipping service option is free to the buyer. In an Add/Revise/Relist call, free shipping can only be offered for the first specified shipping service (so, the
      * corresponding <b>ShippingServicePriority</b> value should be <code>1</code> or included first in the call request). If 'free shipping' is for any other shipping service, this field is ignored. <br/><br/> For 'Get' calls, including <b>GetItem</b>,
-     * this field is only returned if <code>1</code>. <br/><br/> <span class="tablenote"><strong>Note:</strong> If a seller is specifying a shipping service option as 'free shipping', in addition to this <b>FreeShipping</b> boolean field, the seller will
-     * also need to include the corresponding <b>ShippingServiceCost</b> field and set its value to <code>0.0</code>, as eBay will not do this automatically. </span>
+     * this field is only returned if <code>1</code>. <br/> <span class="tablenote"><strong>Note:</strong> If a seller is specifying a shipping service option as 'free shipping', in addition to this <b>FreeShipping</b> boolean field, the seller will also
+     * need to include the corresponding <b>ShippingServiceCost</b> field and set its value to <code>0.0</code>, as eBay will not do this automatically. </span> <span class="tablenote"><strong>Note:</strong> If the condition is certified refurbished
+     * (<b>ConditionID</b> set to <code>2000</code>, 'Certified - Refurbished'), you must offer a free shipping option. Set <b>FreeShipping</b> as <code>true</code> (or <code>1</code>) along with the <b>ShippingServiceCost</b> as <code>0.0</code> for the
+     * first domestic shipping service. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -127,8 +123,9 @@ class ShippingServiceOptionsType extends AbstractStructBase
     /**
      * The ImportCharge
      * Meta information extracted from the WSDL
-     * - documentation: The total cost of customs and taxes for the international leg of an order shipped using the Global Shipping Program. This amount is calculated and supplied for each item by the international shipping provider when a buyer views the
-     * item properties.
+     * - documentation: For orders using eBay International Shipping, when using the <b>GetOrders</b> call, the <b>OrderArray.Order.ShippingServiceSelected.ImportCharge</b> field contains only customs charges.<br /><br />For the Global Shipping Program,
+     * which is only supported in the UK, this field contains the total cost of customs and taxes for the international leg of an order shipped using the Global Shipping Program. This amount is calculated and supplied for each item by the international
+     * shipping provider when a buyer views the item properties.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -166,7 +163,6 @@ class ShippingServiceOptionsType extends AbstractStructBase
     protected $any = null;
     /**
      * Constructor method for ShippingServiceOptionsType
-     * @uses ShippingServiceOptionsType::setShippingInsuranceCost()
      * @uses ShippingServiceOptionsType::setShippingService()
      * @uses ShippingServiceOptionsType::setShippingServiceCost()
      * @uses ShippingServiceOptionsType::setShippingServiceAdditionalCost()
@@ -181,7 +177,6 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @uses ShippingServiceOptionsType::setShippingServiceCutOffTime()
      * @uses ShippingServiceOptionsType::setLogisticPlanType()
      * @uses ShippingServiceOptionsType::setAny()
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost
      * @param string $shippingService
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost
      * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost
@@ -197,10 +192,9 @@ class ShippingServiceOptionsType extends AbstractStructBase
      * @param string $logisticPlanType
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null, ?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?bool $freeShipping = null, ?bool $localPickup = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?array $shippingPackageInfo = null, ?string $shippingServiceCutOffTime = null, ?string $logisticPlanType = null, $any = null)
+    public function __construct(?string $shippingService = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $shippingServiceAdditionalCost = null, ?int $shippingServicePriority = null, ?bool $expeditedService = null, ?int $shippingTimeMin = null, ?int $shippingTimeMax = null, ?bool $freeShipping = null, ?bool $localPickup = null, ?\macropage\ebaysdk\trading\StructType\AmountType $importCharge = null, ?array $shippingPackageInfo = null, ?string $shippingServiceCutOffTime = null, ?string $logisticPlanType = null, $any = null)
     {
         $this
-            ->setShippingInsuranceCost($shippingInsuranceCost)
             ->setShippingService($shippingService)
             ->setShippingServiceCost($shippingServiceCost)
             ->setShippingServiceAdditionalCost($shippingServiceAdditionalCost)
@@ -215,25 +209,6 @@ class ShippingServiceOptionsType extends AbstractStructBase
             ->setShippingServiceCutOffTime($shippingServiceCutOffTime)
             ->setLogisticPlanType($logisticPlanType)
             ->setAny($any);
-    }
-    /**
-     * Get ShippingInsuranceCost value
-     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    public function getShippingInsuranceCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
-    {
-        return $this->ShippingInsuranceCost;
-    }
-    /**
-     * Set ShippingInsuranceCost value
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost
-     * @return \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType
-     */
-    public function setShippingInsuranceCost(?\macropage\ebaysdk\trading\StructType\AmountType $shippingInsuranceCost = null): self
-    {
-        $this->ShippingInsuranceCost = $shippingInsuranceCost;
-        
-        return $this;
     }
     /**
      * Get ShippingService value
@@ -568,7 +543,7 @@ class ShippingServiceOptionsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

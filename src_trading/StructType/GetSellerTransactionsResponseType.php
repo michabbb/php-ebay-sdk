@@ -86,14 +86,6 @@ class GetSellerTransactionsResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $TransactionArray = null;
     /**
-     * The PayPalPreferred
-     * Meta information extracted from the WSDL
-     * - documentation: This field may still be returned for orders currently, but it can be ignored since eBay now manages all online payment methods available to buyers.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $PayPalPreferred = null;
-    /**
      * Constructor method for GetSellerTransactionsResponseType
      * @uses GetSellerTransactionsResponseType::setPaginationResult()
      * @uses GetSellerTransactionsResponseType::setHasMoreTransactions()
@@ -102,7 +94,6 @@ class GetSellerTransactionsResponseType extends AbstractResponseType
      * @uses GetSellerTransactionsResponseType::setReturnedTransactionCountActual()
      * @uses GetSellerTransactionsResponseType::setSeller()
      * @uses GetSellerTransactionsResponseType::setTransactionArray()
-     * @uses GetSellerTransactionsResponseType::setPayPalPreferred()
      * @param \macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult
      * @param bool $hasMoreTransactions
      * @param int $transactionsPerPage
@@ -110,9 +101,8 @@ class GetSellerTransactionsResponseType extends AbstractResponseType
      * @param int $returnedTransactionCountActual
      * @param \macropage\ebaysdk\trading\StructType\UserType $seller
      * @param \macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray
-     * @param bool $payPalPreferred
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreTransactions = null, ?int $transactionsPerPage = null, ?int $pageNumber = null, ?int $returnedTransactionCountActual = null, ?\macropage\ebaysdk\trading\StructType\UserType $seller = null, ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null, ?bool $payPalPreferred = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\PaginationResultType $paginationResult = null, ?bool $hasMoreTransactions = null, ?int $transactionsPerPage = null, ?int $pageNumber = null, ?int $returnedTransactionCountActual = null, ?\macropage\ebaysdk\trading\StructType\UserType $seller = null, ?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null)
     {
         $this
             ->setPaginationResult($paginationResult)
@@ -121,8 +111,7 @@ class GetSellerTransactionsResponseType extends AbstractResponseType
             ->setPageNumber($pageNumber)
             ->setReturnedTransactionCountActual($returnedTransactionCountActual)
             ->setSeller($seller)
-            ->setTransactionArray($transactionArray)
-            ->setPayPalPreferred($payPalPreferred);
+            ->setTransactionArray($transactionArray);
     }
     /**
      * Get PaginationResult value
@@ -270,29 +259,6 @@ class GetSellerTransactionsResponseType extends AbstractResponseType
     public function setTransactionArray(?\macropage\ebaysdk\trading\ArrayType\TransactionArrayType $transactionArray = null): self
     {
         $this->TransactionArray = $transactionArray;
-        
-        return $this;
-    }
-    /**
-     * Get PayPalPreferred value
-     * @return bool|null
-     */
-    public function getPayPalPreferred(): ?bool
-    {
-        return $this->PayPalPreferred;
-    }
-    /**
-     * Set PayPalPreferred value
-     * @param bool $payPalPreferred
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerTransactionsResponseType
-     */
-    public function setPayPalPreferred(?bool $payPalPreferred = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($payPalPreferred) && !is_bool($payPalPreferred)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalPreferred, true), gettype($payPalPreferred)), __LINE__);
-        }
-        $this->PayPalPreferred = $payPalPreferred;
         
         return $this;
     }

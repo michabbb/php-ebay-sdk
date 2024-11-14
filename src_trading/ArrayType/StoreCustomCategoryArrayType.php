@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructArrayBase;
 /**
  * This class stands for StoreCustomCategoryArrayType ArrayType
  * Meta information extracted from the WSDL
- * - documentation: Set of custom categories for the Store.
+ * - documentation: This type holds an array of custom categories set up by a seller for their eBay Store.
  * @subpackage Arrays
  */
 class StoreCustomCategoryArrayType extends AbstractStructArrayBase
@@ -18,7 +18,7 @@ class StoreCustomCategoryArrayType extends AbstractStructArrayBase
     /**
      * The CustomCategory
      * Meta information extracted from the WSDL
-     * - documentation: A custom category for your eBay Store.
+     * - documentation: This container is used to express details about a customized eBay Store category.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]

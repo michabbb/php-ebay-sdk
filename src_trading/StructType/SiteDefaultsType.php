@@ -332,39 +332,6 @@ class SiteDefaultsType extends AbstractStructBase
      */
     protected ?string $ItemSpecificsEnabled = null;
     /**
-     * The PaisaPayFullEscrowEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> eBay India is no longer a functioning eBay marketplace, so the <code>PaisaPayEscrow</code> payment method is no longer applicable since this payment method was only supported on the eBay India
-     * site. </span>
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $PaisaPayFullEscrowEnabled = null;
-    /**
-     * The ISBNIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $ISBNIdentifierEnabled = null;
-    /**
-     * The UPCIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $UPCIdentifierEnabled = null;
-    /**
-     * The EANIdentifierEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $EANIdentifierEnabled = null;
-    /**
      * The BrandMPNIdentifierEnabled
      * Meta information extracted from the WSDL
      * - documentation: Indicates whether the category is enabled for the <b>BrandMPN</b> field for a specific item. If <code>true</code>, sellers can add <b>BrandMPN</b> for that item.
@@ -413,14 +380,6 @@ class SiteDefaultsType extends AbstractStructBase
      */
     protected ?bool $CrossBorderTradeAustraliaEnabled = null;
     /**
-     * The PayPalBuyerProtectionEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated. eBay now manages the complete payment and checkout process, so PayPal Purchase Protection no longer applies to eBay orders.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $PayPalBuyerProtectionEnabled = null;
-    /**
      * The BuyerGuaranteeEnabled
      * Meta information extracted from the WSDL
      * - documentation: For the Australia site, if the <b>BuyerGuaranteeEnabled</b> is returned, then the default site setting is that categories allow buyer protection.
@@ -428,14 +387,6 @@ class SiteDefaultsType extends AbstractStructBase
      * @var bool|null
      */
     protected ?bool $BuyerGuaranteeEnabled = null;
-    /**
-     * The INEscrowWorkflowTimeline
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> eBay India is no longer a functioning eBay marketplace, so this feature is no longer applicable since it was only supported on the eBay India site. </span>
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $INEscrowWorkflowTimeline = null;
     /**
      * The CombinedFixedPriceTreatmentEnabled
      * Meta information extracted from the WSDL
@@ -455,7 +406,7 @@ class SiteDefaultsType extends AbstractStructBase
     /**
      * The PayPalRequired
      * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated. eBay now controls the electronic payment methods avaialable to buyers, and the seller does not specify any electronic payment methods.
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -953,9 +904,8 @@ class SiteDefaultsType extends AbstractStructBase
      * The SpecialFeatures
      * Meta information extracted from the WSDL
      * - documentation: This container shows the site default special item condition values, such as <b>Certified - Refurbished</b> condition (condition ID 2000), <b>Excellent - Refurbished</b> condition (condition ID 2010), <b>Very Good - Refurbished</b>
-     * condition (condition ID 2020), and <b>Good - Refurbished</b> condition (condition ID 2030). A seller must be pre-qualified by eBay to list items with the any of these refurbished item conditions. The <b>Excellent - Refurbished</b>, <b>Very Good -
-     * Refurbished</b> and <b>Good - Refurbished</b> conditions are currently only applicable for the <strong>Cell Phones & Smartphones</strong> category (category ID 9355). <br/><br/> All other item conditions supported by a category will be returned in
-     * the <b>ConditionValues</b> container instead. Individual leaf categories define their own default set of item condition values and always override this list.
+     * condition (condition ID 2020), and <b>Good - Refurbished</b> condition (condition ID 2030). A seller must be pre-qualified by eBay to list items with the any of these refurbished item conditions. <br/><br/> All other item conditions supported by a
+     * category will be returned in the <b>ConditionValues</b> container instead. Individual leaf categories define their own default set of item condition values and always override this list.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ConditionValuesType|null
      */
@@ -975,7 +925,7 @@ class SiteDefaultsType extends AbstractStructBase
     /**
      * The ProductCreationEnabled
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the default site setting for whether most categories support creating/revising listings based off an eBay catalog product.
+     * - documentation: This field is no longer applicable.
      * - minOccurs: 0
      * @var string|null
      */
@@ -1026,14 +976,6 @@ class SiteDefaultsType extends AbstractStructBase
      * @var string|null
      */
     protected ?string $CompatibleVehicleType = null;
-    /**
-     * The PaymentOptionsGroup
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PaymentOptionsGroup = null;
     /**
      * The ShippingProfileCategoryGroup
      * Meta information extracted from the WSDL
@@ -1284,19 +1226,13 @@ class SiteDefaultsType extends AbstractStructBase
      * @uses SiteDefaultsType::setSafePaymentRequired()
      * @uses SiteDefaultsType::setClassifiedAdPayPerLeadEnabled()
      * @uses SiteDefaultsType::setItemSpecificsEnabled()
-     * @uses SiteDefaultsType::setPaisaPayFullEscrowEnabled()
-     * @uses SiteDefaultsType::setISBNIdentifierEnabled()
-     * @uses SiteDefaultsType::setUPCIdentifierEnabled()
-     * @uses SiteDefaultsType::setEANIdentifierEnabled()
      * @uses SiteDefaultsType::setBrandMPNIdentifierEnabled()
      * @uses SiteDefaultsType::setClassifiedAdAutoAcceptEnabled()
      * @uses SiteDefaultsType::setBestOfferAutoAcceptEnabled()
      * @uses SiteDefaultsType::setCrossBorderTradeNorthAmericaEnabled()
      * @uses SiteDefaultsType::setCrossBorderTradeGBEnabled()
      * @uses SiteDefaultsType::setCrossBorderTradeAustraliaEnabled()
-     * @uses SiteDefaultsType::setPayPalBuyerProtectionEnabled()
      * @uses SiteDefaultsType::setBuyerGuaranteeEnabled()
-     * @uses SiteDefaultsType::setINEscrowWorkflowTimeline()
      * @uses SiteDefaultsType::setCombinedFixedPriceTreatmentEnabled()
      * @uses SiteDefaultsType::setGalleryFeaturedDurations()
      * @uses SiteDefaultsType::setPayPalRequired()
@@ -1366,7 +1302,6 @@ class SiteDefaultsType extends AbstractStructBase
      * @uses SiteDefaultsType::setUPCEnabled()
      * @uses SiteDefaultsType::setMaxGranularFitmentCount()
      * @uses SiteDefaultsType::setCompatibleVehicleType()
-     * @uses SiteDefaultsType::setPaymentOptionsGroup()
      * @uses SiteDefaultsType::setShippingProfileCategoryGroup()
      * @uses SiteDefaultsType::setPaymentProfileCategoryGroup()
      * @uses SiteDefaultsType::setReturnPolicyProfileCategoryGroup()
@@ -1430,19 +1365,13 @@ class SiteDefaultsType extends AbstractStructBase
      * @param bool $safePaymentRequired
      * @param bool $classifiedAdPayPerLeadEnabled
      * @param string $itemSpecificsEnabled
-     * @param bool $paisaPayFullEscrowEnabled
-     * @param bool $iSBNIdentifierEnabled
-     * @param bool $uPCIdentifierEnabled
-     * @param bool $eANIdentifierEnabled
      * @param bool $brandMPNIdentifierEnabled
      * @param bool $classifiedAdAutoAcceptEnabled
      * @param bool $bestOfferAutoAcceptEnabled
      * @param bool $crossBorderTradeNorthAmericaEnabled
      * @param bool $crossBorderTradeGBEnabled
      * @param bool $crossBorderTradeAustraliaEnabled
-     * @param bool $payPalBuyerProtectionEnabled
      * @param bool $buyerGuaranteeEnabled
-     * @param string $iNEscrowWorkflowTimeline
      * @param bool $combinedFixedPriceTreatmentEnabled
      * @param \macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations
      * @param bool $payPalRequired
@@ -1512,7 +1441,6 @@ class SiteDefaultsType extends AbstractStructBase
      * @param string $uPCEnabled
      * @param int $maxGranularFitmentCount
      * @param string $compatibleVehicleType
-     * @param string $paymentOptionsGroup
      * @param string $shippingProfileCategoryGroup
      * @param string $paymentProfileCategoryGroup
      * @param string $returnPolicyProfileCategoryGroup
@@ -1538,7 +1466,7 @@ class SiteDefaultsType extends AbstractStructBase
      * @param bool $returnPolicyDescriptionEnabled
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?array $listingDuration = null, ?bool $shippingTermsRequired = null, ?bool $bestOfferEnabled = null, ?bool $dutchBINEnabled = null, ?bool $userConsentRequired = null, ?bool $homePageFeaturedEnabled = null, ?bool $proPackEnabled = null, ?bool $basicUpgradePackEnabled = null, ?bool $valuePackEnabled = null, ?bool $proPackPlusEnabled = null, ?string $adFormatEnabled = null, ?bool $bestOfferCounterEnabled = null, ?bool $bestOfferAutoDeclineEnabled = null, ?bool $localMarketSpecialitySubscription = null, ?bool $localMarketRegularSubscription = null, ?bool $localMarketPremiumSubscription = null, ?bool $localMarketNonSubscription = null, ?bool $expressEnabled = null, ?bool $expressPicturesRequired = null, ?bool $expressConditionRequired = null, ?float $minimumReservePrice = null, ?bool $sellerContactDetailsEnabled = null, ?bool $transactionConfirmationRequestEnabled = null, ?bool $storeInventoryEnabled = null, ?bool $skypeMeTransactionalEnabled = null, ?bool $skypeMeNonTransactionalEnabled = null, ?string $localListingDistancesRegular = null, ?string $localListingDistancesSpecialty = null, ?string $localListingDistancesNonSubscription = null, ?string $classifiedAdPaymentMethodEnabled = null, ?bool $classifiedAdShippingMethodEnabled = null, ?string $classifiedAdBestOfferEnabled = null, ?bool $classifiedAdCounterOfferEnabled = null, ?bool $classifiedAdAutoDeclineEnabled = null, ?bool $classifiedAdContactByPhoneEnabled = null, ?bool $classifiedAdContactByEmailEnabled = null, ?bool $safePaymentRequired = null, ?bool $classifiedAdPayPerLeadEnabled = null, ?string $itemSpecificsEnabled = null, ?bool $paisaPayFullEscrowEnabled = null, ?bool $iSBNIdentifierEnabled = null, ?bool $uPCIdentifierEnabled = null, ?bool $eANIdentifierEnabled = null, ?bool $brandMPNIdentifierEnabled = null, ?bool $classifiedAdAutoAcceptEnabled = null, ?bool $bestOfferAutoAcceptEnabled = null, ?bool $crossBorderTradeNorthAmericaEnabled = null, ?bool $crossBorderTradeGBEnabled = null, ?bool $crossBorderTradeAustraliaEnabled = null, ?bool $payPalBuyerProtectionEnabled = null, ?bool $buyerGuaranteeEnabled = null, ?string $iNEscrowWorkflowTimeline = null, ?bool $combinedFixedPriceTreatmentEnabled = null, ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null, ?bool $payPalRequired = null, ?string $eBayMotorsProAdFormatEnabled = null, ?bool $eBayMotorsProContactByPhoneEnabled = null, ?int $eBayMotorsProPhoneCount = null, ?bool $eBayMotorsProContactByAddressEnabled = null, ?int $eBayMotorsProStreetCount = null, ?bool $eBayMotorsProCompanyNameEnabled = null, ?bool $eBayMotorsProContactByEmailEnabled = null, ?string $eBayMotorsProBestOfferEnabled = null, ?bool $eBayMotorsProAutoAcceptEnabled = null, ?bool $eBayMotorsProAutoDeclineEnabled = null, ?string $eBayMotorsProPaymentMethodCheckOutEnabled = null, ?bool $eBayMotorsProShippingMethodEnabled = null, ?bool $eBayMotorsProCounterOfferEnabled = null, ?bool $eBayMotorsProSellerContactDetailsEnabled = null, ?string $localMarketAdFormatEnabled = null, ?bool $localMarketContactByPhoneEnabled = null, ?int $localMarketPhoneCount = null, ?bool $localMarketContactByAddressEnabled = null, ?int $localMarketStreetCount = null, ?bool $localMarketCompanyNameEnabled = null, ?bool $localMarketContactByEmailEnabled = null, ?string $localMarketBestOfferEnabled = null, ?bool $localMarketAutoAcceptEnabled = null, ?bool $localMarketAutoDeclineEnabled = null, ?string $localMarketPaymentMethodCheckOutEnabled = null, ?bool $localMarketShippingMethodEnabled = null, ?bool $localMarketCounterOfferEnabled = null, ?bool $localMarketSellerContactDetailsEnabled = null, ?int $classifiedAdPhoneCount = null, ?bool $classifiedAdContactByAddressEnabled = null, ?int $classifiedAdStreetCount = null, ?bool $classifiedAdCompanyNameEnabled = null, ?string $specialitySubscription = null, ?string $regularSubscription = null, ?string $premiumSubscription = null, ?string $nonSubscription = null, ?bool $payPalRequiredForStoreOwner = null, ?bool $reviseQuantityAllowed = null, ?bool $revisePriceAllowed = null, ?bool $storeOwnerExtendedListingDurationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null, ?bool $returnPolicyEnabled = null, ?bool $handlingTimeEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null, ?bool $maxFlatShippingCostCBTExempt = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null, ?array $paymentMethod = null, ?bool $variationsEnabled = null, ?string $attributeConversionEnabled = null, ?bool $freeGalleryPlusEnabled = null, ?bool $freePicturePackEnabled = null, ?string $itemCompatibilityEnabled = null, ?int $minItemCompatibility = null, ?int $maxItemCompatibility = null, ?string $conditionEnabled = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures = null, ?bool $valueCategory = null, ?string $productCreationEnabled = null, ?string $eANEnabled = null, ?string $iSBNEnabled = null, ?string $uPCEnabled = null, ?int $maxGranularFitmentCount = null, ?string $compatibleVehicleType = null, ?string $paymentOptionsGroup = null, ?string $shippingProfileCategoryGroup = null, ?string $paymentProfileCategoryGroup = null, ?string $returnPolicyProfileCategoryGroup = null, ?bool $vINSupported = null, ?bool $vRMSupported = null, ?bool $sellerProvidedTitleSupported = null, ?bool $depositSupported = null, ?bool $globalShippingEnabled = null, ?bool $additionalCompatibilityEnabled = null, ?bool $pickupDropOffEnabled = null, ?bool $digitalGoodDeliveryEnabled = null, ?bool $epidSupported = null, ?bool $kTypeSupported = null, ?string $productRequiredEnabled = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, ?bool $returnPolicyDescriptionEnabled = null, $any = null)
+    public function __construct(?array $listingDuration = null, ?bool $shippingTermsRequired = null, ?bool $bestOfferEnabled = null, ?bool $dutchBINEnabled = null, ?bool $userConsentRequired = null, ?bool $homePageFeaturedEnabled = null, ?bool $proPackEnabled = null, ?bool $basicUpgradePackEnabled = null, ?bool $valuePackEnabled = null, ?bool $proPackPlusEnabled = null, ?string $adFormatEnabled = null, ?bool $bestOfferCounterEnabled = null, ?bool $bestOfferAutoDeclineEnabled = null, ?bool $localMarketSpecialitySubscription = null, ?bool $localMarketRegularSubscription = null, ?bool $localMarketPremiumSubscription = null, ?bool $localMarketNonSubscription = null, ?bool $expressEnabled = null, ?bool $expressPicturesRequired = null, ?bool $expressConditionRequired = null, ?float $minimumReservePrice = null, ?bool $sellerContactDetailsEnabled = null, ?bool $transactionConfirmationRequestEnabled = null, ?bool $storeInventoryEnabled = null, ?bool $skypeMeTransactionalEnabled = null, ?bool $skypeMeNonTransactionalEnabled = null, ?string $localListingDistancesRegular = null, ?string $localListingDistancesSpecialty = null, ?string $localListingDistancesNonSubscription = null, ?string $classifiedAdPaymentMethodEnabled = null, ?bool $classifiedAdShippingMethodEnabled = null, ?string $classifiedAdBestOfferEnabled = null, ?bool $classifiedAdCounterOfferEnabled = null, ?bool $classifiedAdAutoDeclineEnabled = null, ?bool $classifiedAdContactByPhoneEnabled = null, ?bool $classifiedAdContactByEmailEnabled = null, ?bool $safePaymentRequired = null, ?bool $classifiedAdPayPerLeadEnabled = null, ?string $itemSpecificsEnabled = null, ?bool $brandMPNIdentifierEnabled = null, ?bool $classifiedAdAutoAcceptEnabled = null, ?bool $bestOfferAutoAcceptEnabled = null, ?bool $crossBorderTradeNorthAmericaEnabled = null, ?bool $crossBorderTradeGBEnabled = null, ?bool $crossBorderTradeAustraliaEnabled = null, ?bool $buyerGuaranteeEnabled = null, ?bool $combinedFixedPriceTreatmentEnabled = null, ?\macropage\ebaysdk\trading\StructType\ListingEnhancementDurationReferenceType $galleryFeaturedDurations = null, ?bool $payPalRequired = null, ?string $eBayMotorsProAdFormatEnabled = null, ?bool $eBayMotorsProContactByPhoneEnabled = null, ?int $eBayMotorsProPhoneCount = null, ?bool $eBayMotorsProContactByAddressEnabled = null, ?int $eBayMotorsProStreetCount = null, ?bool $eBayMotorsProCompanyNameEnabled = null, ?bool $eBayMotorsProContactByEmailEnabled = null, ?string $eBayMotorsProBestOfferEnabled = null, ?bool $eBayMotorsProAutoAcceptEnabled = null, ?bool $eBayMotorsProAutoDeclineEnabled = null, ?string $eBayMotorsProPaymentMethodCheckOutEnabled = null, ?bool $eBayMotorsProShippingMethodEnabled = null, ?bool $eBayMotorsProCounterOfferEnabled = null, ?bool $eBayMotorsProSellerContactDetailsEnabled = null, ?string $localMarketAdFormatEnabled = null, ?bool $localMarketContactByPhoneEnabled = null, ?int $localMarketPhoneCount = null, ?bool $localMarketContactByAddressEnabled = null, ?int $localMarketStreetCount = null, ?bool $localMarketCompanyNameEnabled = null, ?bool $localMarketContactByEmailEnabled = null, ?string $localMarketBestOfferEnabled = null, ?bool $localMarketAutoAcceptEnabled = null, ?bool $localMarketAutoDeclineEnabled = null, ?string $localMarketPaymentMethodCheckOutEnabled = null, ?bool $localMarketShippingMethodEnabled = null, ?bool $localMarketCounterOfferEnabled = null, ?bool $localMarketSellerContactDetailsEnabled = null, ?int $classifiedAdPhoneCount = null, ?bool $classifiedAdContactByAddressEnabled = null, ?int $classifiedAdStreetCount = null, ?bool $classifiedAdCompanyNameEnabled = null, ?string $specialitySubscription = null, ?string $regularSubscription = null, ?string $premiumSubscription = null, ?string $nonSubscription = null, ?bool $payPalRequiredForStoreOwner = null, ?bool $reviseQuantityAllowed = null, ?bool $revisePriceAllowed = null, ?bool $storeOwnerExtendedListingDurationsEnabled = null, ?\macropage\ebaysdk\trading\StructType\StoreOwnerExtendedListingDurationsType $storeOwnerExtendedListingDurations = null, ?bool $returnPolicyEnabled = null, ?bool $handlingTimeEnabled = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxFlatShippingCost = null, ?bool $maxFlatShippingCostCBTExempt = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group1MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group2MaxFlatShippingCost = null, ?\macropage\ebaysdk\trading\StructType\AmountType $group3MaxFlatShippingCost = null, ?array $paymentMethod = null, ?bool $variationsEnabled = null, ?string $attributeConversionEnabled = null, ?bool $freeGalleryPlusEnabled = null, ?bool $freePicturePackEnabled = null, ?string $itemCompatibilityEnabled = null, ?int $minItemCompatibility = null, ?int $maxItemCompatibility = null, ?string $conditionEnabled = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $conditionValues = null, ?\macropage\ebaysdk\trading\StructType\ConditionValuesType $specialFeatures = null, ?bool $valueCategory = null, ?string $productCreationEnabled = null, ?string $eANEnabled = null, ?string $iSBNEnabled = null, ?string $uPCEnabled = null, ?int $maxGranularFitmentCount = null, ?string $compatibleVehicleType = null, ?string $shippingProfileCategoryGroup = null, ?string $paymentProfileCategoryGroup = null, ?string $returnPolicyProfileCategoryGroup = null, ?bool $vINSupported = null, ?bool $vRMSupported = null, ?bool $sellerProvidedTitleSupported = null, ?bool $depositSupported = null, ?bool $globalShippingEnabled = null, ?bool $additionalCompatibilityEnabled = null, ?bool $pickupDropOffEnabled = null, ?bool $digitalGoodDeliveryEnabled = null, ?bool $epidSupported = null, ?bool $kTypeSupported = null, ?string $productRequiredEnabled = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsAcceptedCodeType $domesticReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsAcceptedCodeType $internationalReturnsAcceptedValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsDurationCodeType $domesticReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsDurationCodeType $internationalReturnsDurationValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticReturnsShipmentPayeeCodeType $domesticReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalReturnsShipmentPayeeCodeType $internationalReturnsShipmentPayeeValues = null, ?\macropage\ebaysdk\trading\StructType\DomesticRefundMethodCodeType $domesticRefundMethodValues = null, ?\macropage\ebaysdk\trading\StructType\InternationalRefundMethodCodeType $internationalRefundMethodValues = null, ?bool $returnPolicyDescriptionEnabled = null, $any = null)
     {
         $this
             ->setListingDuration($listingDuration)
@@ -1580,19 +1508,13 @@ class SiteDefaultsType extends AbstractStructBase
             ->setSafePaymentRequired($safePaymentRequired)
             ->setClassifiedAdPayPerLeadEnabled($classifiedAdPayPerLeadEnabled)
             ->setItemSpecificsEnabled($itemSpecificsEnabled)
-            ->setPaisaPayFullEscrowEnabled($paisaPayFullEscrowEnabled)
-            ->setISBNIdentifierEnabled($iSBNIdentifierEnabled)
-            ->setUPCIdentifierEnabled($uPCIdentifierEnabled)
-            ->setEANIdentifierEnabled($eANIdentifierEnabled)
             ->setBrandMPNIdentifierEnabled($brandMPNIdentifierEnabled)
             ->setClassifiedAdAutoAcceptEnabled($classifiedAdAutoAcceptEnabled)
             ->setBestOfferAutoAcceptEnabled($bestOfferAutoAcceptEnabled)
             ->setCrossBorderTradeNorthAmericaEnabled($crossBorderTradeNorthAmericaEnabled)
             ->setCrossBorderTradeGBEnabled($crossBorderTradeGBEnabled)
             ->setCrossBorderTradeAustraliaEnabled($crossBorderTradeAustraliaEnabled)
-            ->setPayPalBuyerProtectionEnabled($payPalBuyerProtectionEnabled)
             ->setBuyerGuaranteeEnabled($buyerGuaranteeEnabled)
-            ->setINEscrowWorkflowTimeline($iNEscrowWorkflowTimeline)
             ->setCombinedFixedPriceTreatmentEnabled($combinedFixedPriceTreatmentEnabled)
             ->setGalleryFeaturedDurations($galleryFeaturedDurations)
             ->setPayPalRequired($payPalRequired)
@@ -1662,7 +1584,6 @@ class SiteDefaultsType extends AbstractStructBase
             ->setUPCEnabled($uPCEnabled)
             ->setMaxGranularFitmentCount($maxGranularFitmentCount)
             ->setCompatibleVehicleType($compatibleVehicleType)
-            ->setPaymentOptionsGroup($paymentOptionsGroup)
             ->setShippingProfileCategoryGroup($shippingProfileCategoryGroup)
             ->setPaymentProfileCategoryGroup($paymentProfileCategoryGroup)
             ->setReturnPolicyProfileCategoryGroup($returnPolicyProfileCategoryGroup)
@@ -2641,98 +2562,6 @@ class SiteDefaultsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PaisaPayFullEscrowEnabled value
-     * @return bool|null
-     */
-    public function getPaisaPayFullEscrowEnabled(): ?bool
-    {
-        return $this->PaisaPayFullEscrowEnabled;
-    }
-    /**
-     * Set PaisaPayFullEscrowEnabled value
-     * @param bool $paisaPayFullEscrowEnabled
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setPaisaPayFullEscrowEnabled(?bool $paisaPayFullEscrowEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($paisaPayFullEscrowEnabled) && !is_bool($paisaPayFullEscrowEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($paisaPayFullEscrowEnabled, true), gettype($paisaPayFullEscrowEnabled)), __LINE__);
-        }
-        $this->PaisaPayFullEscrowEnabled = $paisaPayFullEscrowEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get ISBNIdentifierEnabled value
-     * @return bool|null
-     */
-    public function getISBNIdentifierEnabled(): ?bool
-    {
-        return $this->ISBNIdentifierEnabled;
-    }
-    /**
-     * Set ISBNIdentifierEnabled value
-     * @param bool $iSBNIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setISBNIdentifierEnabled(?bool $iSBNIdentifierEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($iSBNIdentifierEnabled) && !is_bool($iSBNIdentifierEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($iSBNIdentifierEnabled, true), gettype($iSBNIdentifierEnabled)), __LINE__);
-        }
-        $this->ISBNIdentifierEnabled = $iSBNIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get UPCIdentifierEnabled value
-     * @return bool|null
-     */
-    public function getUPCIdentifierEnabled(): ?bool
-    {
-        return $this->UPCIdentifierEnabled;
-    }
-    /**
-     * Set UPCIdentifierEnabled value
-     * @param bool $uPCIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setUPCIdentifierEnabled(?bool $uPCIdentifierEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($uPCIdentifierEnabled) && !is_bool($uPCIdentifierEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($uPCIdentifierEnabled, true), gettype($uPCIdentifierEnabled)), __LINE__);
-        }
-        $this->UPCIdentifierEnabled = $uPCIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get EANIdentifierEnabled value
-     * @return bool|null
-     */
-    public function getEANIdentifierEnabled(): ?bool
-    {
-        return $this->EANIdentifierEnabled;
-    }
-    /**
-     * Set EANIdentifierEnabled value
-     * @param bool $eANIdentifierEnabled
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setEANIdentifierEnabled(?bool $eANIdentifierEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($eANIdentifierEnabled) && !is_bool($eANIdentifierEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($eANIdentifierEnabled, true), gettype($eANIdentifierEnabled)), __LINE__);
-        }
-        $this->EANIdentifierEnabled = $eANIdentifierEnabled;
-        
-        return $this;
-    }
-    /**
      * Get BrandMPNIdentifierEnabled value
      * @return bool|null
      */
@@ -2871,29 +2700,6 @@ class SiteDefaultsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PayPalBuyerProtectionEnabled value
-     * @return bool|null
-     */
-    public function getPayPalBuyerProtectionEnabled(): ?bool
-    {
-        return $this->PayPalBuyerProtectionEnabled;
-    }
-    /**
-     * Set PayPalBuyerProtectionEnabled value
-     * @param bool $payPalBuyerProtectionEnabled
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setPayPalBuyerProtectionEnabled(?bool $payPalBuyerProtectionEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($payPalBuyerProtectionEnabled) && !is_bool($payPalBuyerProtectionEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($payPalBuyerProtectionEnabled, true), gettype($payPalBuyerProtectionEnabled)), __LINE__);
-        }
-        $this->PayPalBuyerProtectionEnabled = $payPalBuyerProtectionEnabled;
-        
-        return $this;
-    }
-    /**
      * Get BuyerGuaranteeEnabled value
      * @return bool|null
      */
@@ -2913,32 +2719,6 @@ class SiteDefaultsType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($buyerGuaranteeEnabled, true), gettype($buyerGuaranteeEnabled)), __LINE__);
         }
         $this->BuyerGuaranteeEnabled = $buyerGuaranteeEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get INEscrowWorkflowTimeline value
-     * @return string|null
-     */
-    public function getINEscrowWorkflowTimeline(): ?string
-    {
-        return $this->INEscrowWorkflowTimeline;
-    }
-    /**
-     * Set INEscrowWorkflowTimeline value
-     * @uses \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $iNEscrowWorkflowTimeline
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setINEscrowWorkflowTimeline(?string $iNEscrowWorkflowTimeline = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::valueIsValid($iNEscrowWorkflowTimeline)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType', is_array($iNEscrowWorkflowTimeline) ? implode(', ', $iNEscrowWorkflowTimeline) : var_export($iNEscrowWorkflowTimeline, true), implode(', ', \macropage\ebaysdk\trading\EnumType\INEscrowWorkflowTimelineCodeType::getValidValues())), __LINE__);
-        }
-        $this->INEscrowWorkflowTimeline = $iNEscrowWorkflowTimeline;
         
         return $this;
     }
@@ -4596,32 +4376,6 @@ class SiteDefaultsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PaymentOptionsGroup value
-     * @return string|null
-     */
-    public function getPaymentOptionsGroup(): ?string
-    {
-        return $this->PaymentOptionsGroup;
-    }
-    /**
-     * Set PaymentOptionsGroup value
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $paymentOptionsGroup
-     * @return \macropage\ebaysdk\trading\StructType\SiteDefaultsType
-     */
-    public function setPaymentOptionsGroup(?string $paymentOptionsGroup = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::valueIsValid($paymentOptionsGroup)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType', is_array($paymentOptionsGroup) ? implode(', ', $paymentOptionsGroup) : var_export($paymentOptionsGroup, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentOptionsGroupEnabledCodeType::getValidValues())), __LINE__);
-        }
-        $this->PaymentOptionsGroup = $paymentOptionsGroup;
-        
-        return $this;
-    }
-    /**
      * Get ShippingProfileCategoryGroup value
      * @return string|null
      */
@@ -5133,7 +4887,7 @@ class SiteDefaultsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

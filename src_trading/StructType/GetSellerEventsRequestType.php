@@ -17,18 +17,6 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class GetSellerEventsRequestType extends AbstractRequestType
 {
     /**
-     * The UserID
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><strong>Note:</strong> This field should no longer be used, and will be ignored if it is included in a <b>GetSellerEvents</b> request. There are plans to remove this field from the public WSDL. The only eBay
-     * user ID that can be used is the one associated with the authentication token. </span> | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
-     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
-     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
-     * - base: xs:string
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $UserID = null;
-    /**
      * The StartTimeFrom
      * Meta information extracted from the WSDL
      * - documentation: Describes the earliest (oldest) time to use in a time range filter based on item start time. Must be specified if <b>StartTimeTo</b> is specified. <br/><br/> Either the <b>StartTimeFrom</b>, <b>EndTimeFrom</b>, or <b>ModTimeFrom</b>
@@ -129,7 +117,6 @@ class GetSellerEventsRequestType extends AbstractRequestType
     protected ?bool $HideVariations = null;
     /**
      * Constructor method for GetSellerEventsRequestType
-     * @uses GetSellerEventsRequestType::setUserID()
      * @uses GetSellerEventsRequestType::setStartTimeFrom()
      * @uses GetSellerEventsRequestType::setStartTimeTo()
      * @uses GetSellerEventsRequestType::setEndTimeFrom()
@@ -140,7 +127,6 @@ class GetSellerEventsRequestType extends AbstractRequestType
      * @uses GetSellerEventsRequestType::setIncludeWatchCount()
      * @uses GetSellerEventsRequestType::setIncludeVariationSpecifics()
      * @uses GetSellerEventsRequestType::setHideVariations()
-     * @param string $userID
      * @param string $startTimeFrom
      * @param string $startTimeTo
      * @param string $endTimeFrom
@@ -152,10 +138,9 @@ class GetSellerEventsRequestType extends AbstractRequestType
      * @param bool $includeVariationSpecifics
      * @param bool $hideVariations
      */
-    public function __construct(?string $userID = null, ?string $startTimeFrom = null, ?string $startTimeTo = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?string $modTimeFrom = null, ?string $modTimeTo = null, ?bool $newItemFilter = null, ?bool $includeWatchCount = null, ?bool $includeVariationSpecifics = null, ?bool $hideVariations = null)
+    public function __construct(?string $startTimeFrom = null, ?string $startTimeTo = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?string $modTimeFrom = null, ?string $modTimeTo = null, ?bool $newItemFilter = null, ?bool $includeWatchCount = null, ?bool $includeVariationSpecifics = null, ?bool $hideVariations = null)
     {
         $this
-            ->setUserID($userID)
             ->setStartTimeFrom($startTimeFrom)
             ->setStartTimeTo($startTimeTo)
             ->setEndTimeFrom($endTimeFrom)
@@ -166,29 +151,6 @@ class GetSellerEventsRequestType extends AbstractRequestType
             ->setIncludeWatchCount($includeWatchCount)
             ->setIncludeVariationSpecifics($includeVariationSpecifics)
             ->setHideVariations($hideVariations);
-    }
-    /**
-     * Get UserID value
-     * @return string|null
-     */
-    public function getUserID(): ?string
-    {
-        return $this->UserID;
-    }
-    /**
-     * Set UserID value
-     * @param string $userID
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerEventsRequestType
-     */
-    public function setUserID(?string $userID = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($userID) && !is_string($userID)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
-        }
-        $this->UserID = $userID;
-        
-        return $this;
     }
     /**
      * Get StartTimeFrom value

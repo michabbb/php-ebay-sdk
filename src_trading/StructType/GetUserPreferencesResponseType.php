@@ -34,14 +34,6 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $CombinedPaymentPreferences = null;
     /**
-     * The CrossPromotionPreferences
-     * Meta information extracted from the WSDL
-     * - documentation: This container is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $CrossPromotionPreferences = null;
-    /**
      * The SellerPaymentPreferences
      * Meta information extracted from the WSDL
      * - documentation: Container consisting of the seller's payment preferences. This container is returned when <b>ShowSellerPaymentPreferences</b> is included and set to <code>true</code> in the request.
@@ -86,18 +78,10 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      */
     protected ?bool $RequiredShipPhoneNumberPreference = null;
     /**
-     * The ProStoresPreference
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $ProStoresPreference = null;
-    /**
      * The UnpaidItemAssistancePreferences
      * Meta information extracted from the WSDL
-     * - documentation: Container consisting of a seller's Unpaid Item Assistant preferences. The Unpaid Item Assistant automatically opens an Unpaid Item dispute on the behalf of the seller. This container is returned if
-     * <b>ShowUnpaidItemAssistancePreference</b> is included and set to <code>true</code> in the request. <br><br> <span class="tablenote"><b>Note:</b> To return the list of buyers excluded from the Unpaid Item Assistant mechanism, the
+     * - documentation: Container consisting of a seller's Unpaid Item preferences. The Unpaid Item preferences can be used to automatically cancel an unpaid order and relist the item on the behalf of the seller. This container is returned if
+     * <b>ShowUnpaidItemAssistancePreference</b> is included and set to <code>true</code> in the request. <br><br> <span class="tablenote"><b>Note:</b> To return the list of buyers excluded from the Unpaid Item preferences, the
      * <b>ShowUnpaidItemAssistanceExclusionList</b> field must also be included and set to <code>true</code> in the request. Excluded buyers can be viewed in the <b>UnpaidItemAssistancePreferences.ExcludedUser</b> field. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType|null
@@ -123,14 +107,6 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @var \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $PurchaseReminderEmailPreferences = null;
-    /**
-     * The SellerThirdPartyCheckoutDisabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated along with third-party checkout.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $SellerThirdPartyCheckoutDisabled = null;
     /**
      * The SellerProfilePreferences
      * Meta information extracted from the WSDL
@@ -225,17 +201,14 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * Constructor method for GetUserPreferencesResponseType
      * @uses GetUserPreferencesResponseType::setBidderNoticePreferences()
      * @uses GetUserPreferencesResponseType::setCombinedPaymentPreferences()
-     * @uses GetUserPreferencesResponseType::setCrossPromotionPreferences()
      * @uses GetUserPreferencesResponseType::setSellerPaymentPreferences()
      * @uses GetUserPreferencesResponseType::setSellerFavoriteItemPreferences()
      * @uses GetUserPreferencesResponseType::setEndOfAuctionEmailPreferences()
      * @uses GetUserPreferencesResponseType::setEmailShipmentTrackingNumberPreference()
      * @uses GetUserPreferencesResponseType::setRequiredShipPhoneNumberPreference()
-     * @uses GetUserPreferencesResponseType::setProStoresPreference()
      * @uses GetUserPreferencesResponseType::setUnpaidItemAssistancePreferences()
      * @uses GetUserPreferencesResponseType::setSellerExcludeShipToLocationPreferences()
      * @uses GetUserPreferencesResponseType::setPurchaseReminderEmailPreferences()
-     * @uses GetUserPreferencesResponseType::setSellerThirdPartyCheckoutDisabled()
      * @uses GetUserPreferencesResponseType::setSellerProfilePreferences()
      * @uses GetUserPreferencesResponseType::setSellerReturnPreferences()
      * @uses GetUserPreferencesResponseType::setOfferGlobalShippingProgramPreference()
@@ -247,17 +220,14 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @uses GetUserPreferencesResponseType::setEBayPLUSPreference()
      * @param \macropage\ebaysdk\trading\StructType\BidderNoticePreferencesType $bidderNoticePreferences
      * @param \macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences
-     * @param \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences
      * @param \macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType $sellerPaymentPreferences
      * @param \macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType $sellerFavoriteItemPreferences
      * @param \macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences
      * @param bool $emailShipmentTrackingNumberPreference
      * @param bool $requiredShipPhoneNumberPreference
-     * @param \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference
      * @param \macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType $unpaidItemAssistancePreferences
      * @param \macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences
      * @param \macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences
-     * @param bool $sellerThirdPartyCheckoutDisabled
      * @param \macropage\ebaysdk\trading\StructType\SellerProfilePreferencesType $sellerProfilePreferences
      * @param \macropage\ebaysdk\trading\StructType\SellerReturnPreferencesType $sellerReturnPreferences
      * @param bool $offerGlobalShippingProgramPreference
@@ -268,22 +238,19 @@ class GetUserPreferencesResponseType extends AbstractResponseType
      * @param bool $outOfStockControlPreference
      * @param \macropage\ebaysdk\trading\StructType\EBayPLUSPreferenceType[] $eBayPLUSPreference
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\BidderNoticePreferencesType $bidderNoticePreferences = null, ?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType $sellerPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType $sellerFavoriteItemPreferences = null, ?\macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences = null, ?bool $emailShipmentTrackingNumberPreference = null, ?bool $requiredShipPhoneNumberPreference = null, ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType $unpaidItemAssistancePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences = null, ?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences = null, ?bool $sellerThirdPartyCheckoutDisabled = null, ?\macropage\ebaysdk\trading\StructType\SellerProfilePreferencesType $sellerProfilePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerReturnPreferencesType $sellerReturnPreferences = null, ?bool $offerGlobalShippingProgramPreference = null, ?\macropage\ebaysdk\trading\StructType\DispatchCutoffTimePreferencesType $dispatchCutoffTimePreference = null, ?bool $globalShippingProgramListingPreference = null, ?bool $overrideGSPServiceWithIntlServicePreference = null, ?bool $pickupDropoffSellerPreference = null, ?bool $outOfStockControlPreference = null, ?array $eBayPLUSPreference = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\BidderNoticePreferencesType $bidderNoticePreferences = null, ?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerPaymentPreferencesType $sellerPaymentPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerFavoriteItemPreferencesType $sellerFavoriteItemPreferences = null, ?\macropage\ebaysdk\trading\StructType\EndOfAuctionEmailPreferencesType $endOfAuctionEmailPreferences = null, ?bool $emailShipmentTrackingNumberPreference = null, ?bool $requiredShipPhoneNumberPreference = null, ?\macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType $unpaidItemAssistancePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerExcludeShipToLocationPreferencesType $sellerExcludeShipToLocationPreferences = null, ?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerProfilePreferencesType $sellerProfilePreferences = null, ?\macropage\ebaysdk\trading\StructType\SellerReturnPreferencesType $sellerReturnPreferences = null, ?bool $offerGlobalShippingProgramPreference = null, ?\macropage\ebaysdk\trading\StructType\DispatchCutoffTimePreferencesType $dispatchCutoffTimePreference = null, ?bool $globalShippingProgramListingPreference = null, ?bool $overrideGSPServiceWithIntlServicePreference = null, ?bool $pickupDropoffSellerPreference = null, ?bool $outOfStockControlPreference = null, ?array $eBayPLUSPreference = null)
     {
         $this
             ->setBidderNoticePreferences($bidderNoticePreferences)
             ->setCombinedPaymentPreferences($combinedPaymentPreferences)
-            ->setCrossPromotionPreferences($crossPromotionPreferences)
             ->setSellerPaymentPreferences($sellerPaymentPreferences)
             ->setSellerFavoriteItemPreferences($sellerFavoriteItemPreferences)
             ->setEndOfAuctionEmailPreferences($endOfAuctionEmailPreferences)
             ->setEmailShipmentTrackingNumberPreference($emailShipmentTrackingNumberPreference)
             ->setRequiredShipPhoneNumberPreference($requiredShipPhoneNumberPreference)
-            ->setProStoresPreference($proStoresPreference)
             ->setUnpaidItemAssistancePreferences($unpaidItemAssistancePreferences)
             ->setSellerExcludeShipToLocationPreferences($sellerExcludeShipToLocationPreferences)
             ->setPurchaseReminderEmailPreferences($purchaseReminderEmailPreferences)
-            ->setSellerThirdPartyCheckoutDisabled($sellerThirdPartyCheckoutDisabled)
             ->setSellerProfilePreferences($sellerProfilePreferences)
             ->setSellerReturnPreferences($sellerReturnPreferences)
             ->setOfferGlobalShippingProgramPreference($offerGlobalShippingProgramPreference)
@@ -329,25 +296,6 @@ class GetUserPreferencesResponseType extends AbstractResponseType
     public function setCombinedPaymentPreferences(?\macropage\ebaysdk\trading\StructType\CombinedPaymentPreferencesType $combinedPaymentPreferences = null): self
     {
         $this->CombinedPaymentPreferences = $combinedPaymentPreferences;
-        
-        return $this;
-    }
-    /**
-     * Get CrossPromotionPreferences value
-     * @return \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType|null
-     */
-    public function getCrossPromotionPreferences(): ?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType
-    {
-        return $this->CrossPromotionPreferences;
-    }
-    /**
-     * Set CrossPromotionPreferences value
-     * @param \macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences
-     * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType
-     */
-    public function setCrossPromotionPreferences(?\macropage\ebaysdk\trading\StructType\CrossPromotionPreferencesType $crossPromotionPreferences = null): self
-    {
-        $this->CrossPromotionPreferences = $crossPromotionPreferences;
         
         return $this;
     }
@@ -455,25 +403,6 @@ class GetUserPreferencesResponseType extends AbstractResponseType
         return $this;
     }
     /**
-     * Get ProStoresPreference value
-     * @return \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType|null
-     */
-    public function getProStoresPreference(): ?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType
-    {
-        return $this->ProStoresPreference;
-    }
-    /**
-     * Set ProStoresPreference value
-     * @param \macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference
-     * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType
-     */
-    public function setProStoresPreference(?\macropage\ebaysdk\trading\StructType\ProStoresCheckoutPreferenceType $proStoresPreference = null): self
-    {
-        $this->ProStoresPreference = $proStoresPreference;
-        
-        return $this;
-    }
-    /**
      * Get UnpaidItemAssistancePreferences value
      * @return \macropage\ebaysdk\trading\StructType\UnpaidItemAssistancePreferencesType|null
      */
@@ -527,29 +456,6 @@ class GetUserPreferencesResponseType extends AbstractResponseType
     public function setPurchaseReminderEmailPreferences(?\macropage\ebaysdk\trading\StructType\PurchaseReminderEmailPreferencesType $purchaseReminderEmailPreferences = null): self
     {
         $this->PurchaseReminderEmailPreferences = $purchaseReminderEmailPreferences;
-        
-        return $this;
-    }
-    /**
-     * Get SellerThirdPartyCheckoutDisabled value
-     * @return bool|null
-     */
-    public function getSellerThirdPartyCheckoutDisabled(): ?bool
-    {
-        return $this->SellerThirdPartyCheckoutDisabled;
-    }
-    /**
-     * Set SellerThirdPartyCheckoutDisabled value
-     * @param bool $sellerThirdPartyCheckoutDisabled
-     * @return \macropage\ebaysdk\trading\StructType\GetUserPreferencesResponseType
-     */
-    public function setSellerThirdPartyCheckoutDisabled(?bool $sellerThirdPartyCheckoutDisabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($sellerThirdPartyCheckoutDisabled) && !is_bool($sellerThirdPartyCheckoutDisabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($sellerThirdPartyCheckoutDisabled, true), gettype($sellerThirdPartyCheckoutDisabled)), __LINE__);
-        }
-        $this->SellerThirdPartyCheckoutDisabled = $sellerThirdPartyCheckoutDisabled;
         
         return $this;
     }

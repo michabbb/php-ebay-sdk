@@ -12,7 +12,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * Meta information extracted from the WSDL
  * - documentation: Type defining the <b>ListingStartPriceDetails</b> container returned in <b>GeteBayDetails</b>. The <b>ListingStartPriceDetails</b> container lists the minimum start price for auction listings, the minimum sale price for fixed-price
  * listings, and the minimum percentage value that a Buy It Now price for an auction listing must be above the minimum start price for that same listing. <br><br> The <b>ListingStartPriceDetails</b> container is returned if
- * <b>ListingStartPriceDetails</b> is included as a <b>DetailName</b> filter in the request, or if no lt;b>DetailName</b> filters are used in the request.
+ * <b>ListingStartPriceDetails</b> is included as a <b>DetailName</b> filter in the request, or if no <b>DetailName</b> filters are used in the request.
  * @subpackage Structs
  */
 class ListingStartPriceDetailsType extends AbstractStructBase
@@ -240,7 +240,7 @@ class ListingStartPriceDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

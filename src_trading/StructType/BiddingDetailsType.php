@@ -57,14 +57,6 @@ class BiddingDetailsType extends AbstractStructBase
      */
     protected ?bool $Winning = null;
     /**
-     * The BidAssistant
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $BidAssistant = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -76,17 +68,15 @@ class BiddingDetailsType extends AbstractStructBase
      * @uses BiddingDetailsType::setQuantityBid()
      * @uses BiddingDetailsType::setQuantityWon()
      * @uses BiddingDetailsType::setWinning()
-     * @uses BiddingDetailsType::setBidAssistant()
      * @uses BiddingDetailsType::setAny()
      * @param \macropage\ebaysdk\trading\StructType\AmountType $convertedMaxBid
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxBid
      * @param int $quantityBid
      * @param int $quantityWon
      * @param bool $winning
-     * @param bool $bidAssistant
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $convertedMaxBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxBid = null, ?int $quantityBid = null, ?int $quantityWon = null, ?bool $winning = null, ?bool $bidAssistant = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\AmountType $convertedMaxBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxBid = null, ?int $quantityBid = null, ?int $quantityWon = null, ?bool $winning = null, $any = null)
     {
         $this
             ->setConvertedMaxBid($convertedMaxBid)
@@ -94,7 +84,6 @@ class BiddingDetailsType extends AbstractStructBase
             ->setQuantityBid($quantityBid)
             ->setQuantityWon($quantityWon)
             ->setWinning($winning)
-            ->setBidAssistant($bidAssistant)
             ->setAny($any);
     }
     /**
@@ -205,32 +194,9 @@ class BiddingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get BidAssistant value
-     * @return bool|null
-     */
-    public function getBidAssistant(): ?bool
-    {
-        return $this->BidAssistant;
-    }
-    /**
-     * Set BidAssistant value
-     * @param bool $bidAssistant
-     * @return \macropage\ebaysdk\trading\StructType\BiddingDetailsType
-     */
-    public function setBidAssistant(?bool $bidAssistant = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($bidAssistant) && !is_bool($bidAssistant)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($bidAssistant, true), gettype($bidAssistant)), __LINE__);
-        }
-        $this->BidAssistant = $bidAssistant;
-        
-        return $this;
-    }
-    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

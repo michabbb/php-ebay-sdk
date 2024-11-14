@@ -39,8 +39,8 @@ class EndFixedPriceItemRequestType extends AbstractRequestType
      * Meta information extracted from the WSDL
      * - documentation: The seller-defined SKU (stock keeping unit) value of the item in the listing being ended. The <b>SKU</b> field can only be used to end a listing if that listing was created or relisted with an <b>AddFixedPriceItem</b> or
      * <b>RelistFixedPriceItem</b> call, and the <b>Item.InventoryTrackingMethod</b> was included in the call and set to <code>SKU</code>. <br><br> In the <b>EndFixedPriceItem</b> request, either <b>ItemID</b> or <b>SKU</b> is required. If both are passed
-     * in and they don't refer to the same listing, eBay ignores <b>SKU</b> and considers only the lt;b>ItemID</b>. | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information
-     * and rules, see the fields that reference this type.
+     * in and they don't refer to the same listing, eBay ignores <b>SKU</b> and considers only the <b>ItemID</b>. | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information and
+     * rules, see the fields that reference this type.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null

@@ -35,7 +35,9 @@ class GetOrdersResponseType extends AbstractResponseType
     /**
      * The OrderArray
      * Meta information extracted from the WSDL
-     * - documentation: The set of orders that match the order IDs or filter criteria specified.
+     * - documentation: The set of orders that match the order IDs or filter criteria specified. <span class="tablenote"><strong>Note:</strong> The <b>GetOrders</b> call does not support <a href
+     * ="https://www.ebay.com/sellercenter/ebay-for-business/multi-user-account-access" target="_blank" >Multi-user account access</a>. Transactions are only returned for the user that makes the call. You cannot use <b>GetOrders</b> to return transactions
+     * for another user. The call succeeds but returns an empty <code>&lt;OrderArray/&gt;</code>. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\OrderArrayType|null
      */

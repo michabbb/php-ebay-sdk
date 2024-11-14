@@ -67,14 +67,6 @@ class MyMessagesMessageType extends AbstractStructBase
      */
     protected ?string $ExternalMessageID = null;
     /**
-     * The ContentType
-     * Meta information extracted from the WSDL
-     * - documentation: Content type of the body text. The three acceptable values are "TEXT", "HTML", and "XML" (Note: This is case sensitive).
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $ContentType = null;
-    /**
      * The Text
      * Meta information extracted from the WSDL
      * - documentation: Contains the message content, and can contain a threaded message. This field can contain plain text or HTML, depending on the format of the original message. The API does not check the email-format preferences in My Messages on the
@@ -99,14 +91,6 @@ class MyMessagesMessageType extends AbstractStructBase
      * @var bool|null
      */
     protected ?bool $Read = null;
-    /**
-     * The CreationDate
-     * Meta information extracted from the WSDL
-     * - documentation: Date and time that a message was created by the sender.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $CreationDate = null;
     /**
      * The ReceiveDate
      * Meta information extracted from the WSDL
@@ -141,14 +125,6 @@ class MyMessagesMessageType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $ResponseDetails = null;
     /**
-     * The ForwardDetails
-     * Meta information extracted from the WSDL
-     * - documentation: Details relating to the forwarding of a message. Only returned if the message is forwarded.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $ForwardDetails = null;
-    /**
      * The Folder
      * Meta information extracted from the WSDL
      * - documentation: Details relating to a My Messages folder.
@@ -176,8 +152,8 @@ class MyMessagesMessageType extends AbstractStructBase
     /**
      * The ListingStatus
      * Meta information extracted from the WSDL
-     * - documentation: Specifies an active or ended listing's status in eBay's processing workflow. If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., total price and buyer/high bidder) and the final value fee. This
-     * processing can take several minutes. If you retrieve a sold item and no details about the buyer/high bidder are returned or no final value fee is available, use this listing status information to determine whether eBay has finished processing the
+     * - documentation: Specifies an active or ended listing's status in eBay's processing workflow. If a listing ends with a sale (or sales), eBay needs to update the sale details (e.g., total price and buyer/high bidder) and the transaction fees. This
+     * processing can take several minutes. If you retrieve a sold item and no details about the buyer/high bidder are returned or no transaction fees are available, use this listing status information to determine whether eBay has finished processing the
      * listing. <br><br> <span class="tablenote"><b>Note:</b> For GetMyMessages, the listing status reflects the status of the listing at the time the question was created. The listing status for this call must not match the listing status returned by other
      * calls (such as GetItemTransactions). This is returned only if Messages.Message.MessageType is AskSellerQuestion. This tag is no longer returned in the Sandbox environment. </span>
      * - minOccurs: 0
@@ -246,16 +222,13 @@ class MyMessagesMessageType extends AbstractStructBase
      * @uses MyMessagesMessageType::setSubject()
      * @uses MyMessagesMessageType::setMessageID()
      * @uses MyMessagesMessageType::setExternalMessageID()
-     * @uses MyMessagesMessageType::setContentType()
      * @uses MyMessagesMessageType::setText()
      * @uses MyMessagesMessageType::setFlagged()
      * @uses MyMessagesMessageType::setRead()
-     * @uses MyMessagesMessageType::setCreationDate()
      * @uses MyMessagesMessageType::setReceiveDate()
      * @uses MyMessagesMessageType::setExpirationDate()
      * @uses MyMessagesMessageType::setItemID()
      * @uses MyMessagesMessageType::setResponseDetails()
-     * @uses MyMessagesMessageType::setForwardDetails()
      * @uses MyMessagesMessageType::setFolder()
      * @uses MyMessagesMessageType::setContent()
      * @uses MyMessagesMessageType::setMessageType()
@@ -273,16 +246,13 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param string $subject
      * @param string $messageID
      * @param string $externalMessageID
-     * @param string $contentType
      * @param string $text
      * @param bool $flagged
      * @param bool $read
-     * @param string $creationDate
      * @param string $receiveDate
      * @param string $expirationDate
      * @param string $itemID
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails
-     * @param \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder
      * @param string $content
      * @param string $messageType
@@ -295,7 +265,7 @@ class MyMessagesMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $sendToName = null, ?string $subject = null, ?string $messageID = null, ?string $externalMessageID = null, ?string $contentType = null, ?string $text = null, ?bool $flagged = null, ?bool $read = null, ?string $creationDate = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, ?string $content = null, ?string $messageType = null, ?string $listingStatus = null, ?string $questionType = null, ?bool $replied = null, ?bool $highPriority = null, ?string $itemEndTime = null, ?string $itemTitle = null, ?array $messageMedia = null, $any = null)
+    public function __construct(?string $sender = null, ?string $recipientUserID = null, ?string $sendToName = null, ?string $subject = null, ?string $messageID = null, ?string $externalMessageID = null, ?string $text = null, ?bool $flagged = null, ?bool $read = null, ?string $receiveDate = null, ?string $expirationDate = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null, ?\macropage\ebaysdk\trading\StructType\MyMessagesFolderType $folder = null, ?string $content = null, ?string $messageType = null, ?string $listingStatus = null, ?string $questionType = null, ?bool $replied = null, ?bool $highPriority = null, ?string $itemEndTime = null, ?string $itemTitle = null, ?array $messageMedia = null, $any = null)
     {
         $this
             ->setSender($sender)
@@ -304,16 +274,13 @@ class MyMessagesMessageType extends AbstractStructBase
             ->setSubject($subject)
             ->setMessageID($messageID)
             ->setExternalMessageID($externalMessageID)
-            ->setContentType($contentType)
             ->setText($text)
             ->setFlagged($flagged)
             ->setRead($read)
-            ->setCreationDate($creationDate)
             ->setReceiveDate($receiveDate)
             ->setExpirationDate($expirationDate)
             ->setItemID($itemID)
             ->setResponseDetails($responseDetails)
-            ->setForwardDetails($forwardDetails)
             ->setFolder($folder)
             ->setContent($content)
             ->setMessageType($messageType)
@@ -465,29 +432,6 @@ class MyMessagesMessageType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get ContentType value
-     * @return string|null
-     */
-    public function getContentType(): ?string
-    {
-        return $this->ContentType;
-    }
-    /**
-     * Set ContentType value
-     * @param string $contentType
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
-     */
-    public function setContentType(?string $contentType = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($contentType) && !is_string($contentType)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($contentType, true), gettype($contentType)), __LINE__);
-        }
-        $this->ContentType = $contentType;
-        
-        return $this;
-    }
-    /**
      * Get Text value
      * @return string|null
      */
@@ -553,29 +497,6 @@ class MyMessagesMessageType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($read, true), gettype($read)), __LINE__);
         }
         $this->Read = $read;
-        
-        return $this;
-    }
-    /**
-     * Get CreationDate value
-     * @return string|null
-     */
-    public function getCreationDate(): ?string
-    {
-        return $this->CreationDate;
-    }
-    /**
-     * Set CreationDate value
-     * @param string $creationDate
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
-     */
-    public function setCreationDate(?string $creationDate = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($creationDate) && !is_string($creationDate)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($creationDate, true), gettype($creationDate)), __LINE__);
-        }
-        $this->CreationDate = $creationDate;
         
         return $this;
     }
@@ -664,25 +585,6 @@ class MyMessagesMessageType extends AbstractStructBase
     public function setResponseDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType $responseDetails = null): self
     {
         $this->ResponseDetails = $responseDetails;
-        
-        return $this;
-    }
-    /**
-     * Get ForwardDetails value
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType|null
-     */
-    public function getForwardDetails(): ?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType
-    {
-        return $this->ForwardDetails;
-    }
-    /**
-     * Set ForwardDetails value
-     * @param \macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesMessageType
-     */
-    public function setForwardDetails(?\macropage\ebaysdk\trading\StructType\MyMessagesForwardDetailsType $forwardDetails = null): self
-    {
-        $this->ForwardDetails = $forwardDetails;
         
         return $this;
     }
@@ -967,7 +869,7 @@ class MyMessagesMessageType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

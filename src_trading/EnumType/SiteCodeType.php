@@ -201,6 +201,21 @@ class SiteCodeType extends AbstractStructEnumBase
      */
     const VALUE_RUSSIA = 'Russia';
     /**
+     * Constant for value 'Czechia'
+     * Meta information extracted from the WSDL
+     * - documentation: Czechia, site ID 197, abbreviation CZ, currency CZK. This site cannot be set in the <b>X-EBAY-API-SITEID header</b>, nor in the <b>Site</b> field of a request payload. This enumeration value will only be returned in output fields if
+     * applicable.
+     * @return string 'Czechia'
+     */
+    const VALUE_CZECHIA = 'Czechia';
+    /**
+     * Constant for value 'Cyprus'
+     * Meta information extracted from the WSDL
+     * - documentation: Cyprus, abbreviation CY, currency CYP. This site cannot be set in the <b>X-EBAY-API-SITEID header</b>, nor in the <b>Site</b> field of a request payload. This enumeration value will only be returned in output fields if applicable.
+     * @return string 'Cyprus'
+     */
+    const VALUE_CYPRUS = 'Cyprus';
+    /**
      * Return allowed values
      * @uses self::VALUE_US
      * @uses self::VALUE_CANADA
@@ -229,6 +244,8 @@ class SiteCodeType extends AbstractStructEnumBase
      * @uses self::VALUE_CUSTOM_CODE
      * @uses self::VALUE_CANADA_FRENCH
      * @uses self::VALUE_RUSSIA
+     * @uses self::VALUE_CZECHIA
+     * @uses self::VALUE_CYPRUS
      * @return string[]
      */
     public static function getValidValues(): array
@@ -261,6 +278,8 @@ class SiteCodeType extends AbstractStructEnumBase
             self::VALUE_CUSTOM_CODE,
             self::VALUE_CANADA_FRENCH,
             self::VALUE_RUSSIA,
+            self::VALUE_CZECHIA,
+            self::VALUE_CYPRUS,
         ];
     }
 }

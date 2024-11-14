@@ -45,14 +45,6 @@ class EndItemRequestContainerType extends AbstractStructBase
      */
     protected ?string $MessageID = null;
     /**
-     * The SellerInventoryID
-     * Meta information extracted from the WSDL
-     * - documentation: This field was previously only used to identify and end Half.com listings, and since the Half.com site has been shut down, this element is no longer applicable.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $SellerInventoryID = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -62,21 +54,18 @@ class EndItemRequestContainerType extends AbstractStructBase
      * @uses EndItemRequestContainerType::setItemID()
      * @uses EndItemRequestContainerType::setEndingReason()
      * @uses EndItemRequestContainerType::setMessageID()
-     * @uses EndItemRequestContainerType::setSellerInventoryID()
      * @uses EndItemRequestContainerType::setAny()
      * @param string $itemID
      * @param string $endingReason
      * @param string $messageID
-     * @param string $sellerInventoryID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $itemID = null, ?string $endingReason = null, ?string $messageID = null, ?string $sellerInventoryID = null, $any = null)
+    public function __construct(?string $itemID = null, ?string $endingReason = null, ?string $messageID = null, $any = null)
     {
         $this
             ->setItemID($itemID)
             ->setEndingReason($endingReason)
             ->setMessageID($messageID)
-            ->setSellerInventoryID($sellerInventoryID)
             ->setAny($any);
     }
     /**
@@ -152,32 +141,9 @@ class EndItemRequestContainerType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get SellerInventoryID value
-     * @return string|null
-     */
-    public function getSellerInventoryID(): ?string
-    {
-        return $this->SellerInventoryID;
-    }
-    /**
-     * Set SellerInventoryID value
-     * @param string $sellerInventoryID
-     * @return \macropage\ebaysdk\trading\StructType\EndItemRequestContainerType
-     */
-    public function setSellerInventoryID(?string $sellerInventoryID = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($sellerInventoryID) && !is_string($sellerInventoryID)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerInventoryID, true), gettype($sellerInventoryID)), __LINE__);
-        }
-        $this->SellerInventoryID = $sellerInventoryID;
-        
-        return $this;
-    }
-    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

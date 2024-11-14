@@ -36,10 +36,13 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * The GlobalShipping
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether eBay's Global Shipping Program is offered for the listing. If the value of <strong>GlobalShipping</strong> is <code>True</code>, international shipping through the Global Shipping Program is available for the
-     * listing, and eBay automatically sets one of the available shipping service options to <code>International Priority Shipping</code>. If the value of <strong>GlobalShipping</strong> is <code>false</code>, the seller is responsible for specifying one or
-     * more international shipping service options if the seller is willing to ship internationally. <br/><br/> When calling <strong>RelistFixedPriceItem</strong>, <strong>RelistItem</strong>, <strong>ReviseFixedPriceItem</strong> or
-     * <strong>ReviseItem</strong>, you can omit this field if its value doesn't need to change. <br/><br/> Before using this field for a listing, ensure that the seller and the item being listed are eligible for the Global Shipping Program.
+     * - documentation: <span class="tablenote"><strong>Note:</strong> The <b>Global Shipping Program</b> (GSP) is only available on the UK marketplace. On the US marketplace, the <b>Global Shipping Program</b> was replaced by the intermediated
+     * international shipping program called <b>eBay International Shipping</b>. <br><br> <b>eBay International Shipping</b> is an account level setting, and no field will need to be set in a add/revise call to enable this setting. As long as the US
+     * seller's account is opted in to <b>eBay International Shipping</b>, this shipping option will be automatically enabled for all listings where international shipping is available. Even if the US seller is opted into <b>eBay International Shipping</b>,
+     * that same seller can still also specify individual international shipping service options through the ShippingDetails.InternationalShippingServiceOption container. </span> In an Add/Revise/Relist call, this boolean field can be included and set to
+     * <code>True</code> if the seller would like to use eBay's Global Shipping Program for orders that are shipped internationally. <br/><br/> In 'Get' calls, if this field is returned as <code>True</code>, it indicates that international shipping through
+     * the Global Shipping Program is available for the listing. If this field is returned as <code>False</code>, the seller is responsible for shipping the item internationally using one of the specified international shipping service options set for the
+     * listing. <br/><br/> When calling <strong>RelistFixedPriceItem</strong>, <strong>RelistItem</strong>, <strong>ReviseFixedPriceItem</strong> or <strong>ReviseItem</strong>, you can omit this field if its value doesn't need to change. <br/><br/>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -48,9 +51,9 @@ class ShippingDetailsType extends AbstractStructBase
      * The CalculatedShippingRate
      * Meta information extracted from the WSDL
      * - documentation: Details pertinent to one or more items for which calculated shipping has been offered by the seller, such as package dimension and weight and packaging/handling costs. If your call specifies a large-dimension item listed with UPS,
-     * see <a href= "https://ebaydts.com/eBayKBDetails?KBid=1159" >Dimensional Weight limit on UPS shipping services results in failure of shipping calculator</a>. <br><br> <span class="tablenote"><strong>Note:</strong> The
-     * <strong>CalculatedShippingRate</strong> container should only be used to specify values for the <strong>InternationalPackagingHandlingCosts</strong>, <strong>OriginatingPostalCode</strong>, and/or <strong>PackagingHandlingCosts</strong> fields. The
-     * rest of the fields in the <strong>CalculatedShippingRate</strong> container are used to specify package dimensions and package weight, and these values should now be specified in the <strong>ShippingPackageDetails</strong> container instead. </span>
+     * see <a href= "https://developer.ebay.com/support/kb-article?KBid=1159" >Dimensional Weight limit on UPS shipping services results in failure of shipping calculator</a>. <br><br> <span class="tablenote"><strong>Note:</strong> The
+     * <strong>CalculatedShippingRate</strong> container should only be used to specify values for the <strong>InternationalPackagingHandlingCosts</strong> and/or <strong>PackagingHandlingCosts</strong> fields. The rest of the fields in the
+     * <strong>CalculatedShippingRate</strong> container are used to specify package dimensions and package weight, and these values should now be specified in the <strong>ShippingPackageDetails</strong> container instead. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\CalculatedShippingRateType|null
      */
@@ -58,20 +61,12 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * The ChangePaymentInstructions
      * Meta information extracted from the WSDL
-     * - documentation: Whether the seller specified payment and shipping instructions during checkout (for example, to update the details of an order). Valid for flat and calculated shipping.
+     * - documentation: Indicates whether the seller specified payment and shipping instructions during checkout. <br> <span class="tablenote"><b>Note: </b> This field is deprecated and will stop being returned in <b>GetItemTransactions</b> and
+     * <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
     protected ?bool $ChangePaymentInstructions = null;
-    /**
-     * The InsuranceWanted
-     * Meta information extracted from the WSDL
-     * - documentation: Whether or not the buyer selected to pay for insurance as an option offered by the seller. This only has a value after the buyer has gone through checkout and selected the insurance preference. <br><br> Valid only on the following
-     * sites: FR and IT
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $InsuranceWanted = null;
     /**
      * The PaymentEdited
      * Meta information extracted from the WSDL
@@ -81,23 +76,15 @@ class ShippingDetailsType extends AbstractStructBase
      */
     protected ?bool $PaymentEdited = null;
     /**
-     * The PaymentInstructions
-     * Meta information extracted from the WSDL
-     * - documentation: This free-form string field gives sellers the ability to add detailed payment instructions to their listings. <br>
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PaymentInstructions = null;
-    /**
      * The SalesTax
      * Meta information extracted from the WSDL
      * - documentation: This container shows sales tax information for an item in a specific tax jurisdiction. The concept of 'sales tax' is only applicable to eBay US and Canada (English and French) sites. <br><br> This container can be used in an
      * Add/Revise/Relist/Verify call to set sales tax settings for a specific tax jurisdiction, but it is actually a better practice if a user sets up sales tax rates through the Sales Tax Table tool in My eBay (or by using the <b>SetTaxTable</b> call). A
      * seller's Sales Tax Table is applied to the listing by including the <b>UseTaxTable</b> field in the request and setting its value to <code>true</code>. The <b>GetTaxTable</b> call can be used to retrieve the current sales tax rates for different tax
      * jurisdictions. <br><br> This container is only returned in order management 'Get' calls if sales tax is applicable to the order line item. For eBay Collect and Remit states, the sales tax information is displayed in the <b>Transaction.Taxes</b>
-     * container instead. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, buyers in all US states except for Missouri (and several US territories), will automatically be charged sales tax for purchases, and the seller does not set this
-     * rate. eBay will collect and remit this sales tax to the proper taxing authority on the buyer's behalf. For more US state-level information on sales tax, see the <a
-     * href="https://www.ebay.com/help/selling/fees-credits-invoices/taxes-import-charges?id=4121#section4">eBay sales tax collection</a> help topic. </span>
+     * container instead. <br><br> <span class="tablenote"><b>Note: </b> Buyers in all 50 US states and DC are automatically charged sales tax for eBay purchases, and eBay collects and remits this sales tax to the proper taxing authority on the buyer's
+     * behalf. Because of this, if a sales tax percentage rate is applied to a listing by a seller in one of these states, this field will be ignored during the checkout process. <br><br> Currently, sales tax percentage rates can only be specified by
+     * sellers in Canada and 5 US territories, including American Samoa (AS), Guam (GU), Northern Mariana Islands (MP), Palau (PW), and Virgin Islands (VI). </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SalesTaxType|null
      */
@@ -130,13 +117,13 @@ class ShippingDetailsType extends AbstractStructBase
      * &lt;ShippingServiceOptions&gt;...&lt;/ShippingServiceOptions&gt;<br> &lt;InternationalShippingServiceOption&gt;...&lt;/InternationalShippingServiceOption&gt;<br> &lt;InternationalShippingServiceOption&gt;...&lt;/InternationalShippingServiceOption&gt;
      * </code> <br><br> If you specify <b>ShippingDetails</b> when you revise or relist an item but you omit <b>ShippingServiceOptions</b>, eBay will drop the domestic shipping services from the listing. This may also have unintended side effects, as other
      * fields that depend on this data may be dropped as well. <br/><br/> To retain the shipping services and dependent fields when you modify other shipping details, it may be simplest to specify all <b>ShippingDetails</b> that you still want to include in
-     * the listing. <br><br> A seller can offer up to four domestic shipping services and up to five international shipping services. However, if the seller is opted in to the Global Shipping Program, only four other international shipping services may be
-     * offered (regardless of whether or not Global Shipping is offered for the listing). All specified domestic and international shipping services must be the same shipping type (for example, Flat versus Calculated). <br/><br/> <span
-     * class="tablenote"><b>Note: </b> If the seller has set the shipping cost model to 'Flat' or 'Calculated' (<b>ShippingDetails.ShippingType</b> field), at least one actual shipping service option must be specified through a <b>ShippingServiceOptions</b>
-     * container. In the past, eBay allowed users to set the shipping cost model to 'Flat' or 'Calculated', and then just pass in one <b>ShippingServiceOptions</b> container with the <b>ShippingServiceOptions.ShipppingService</b> value set to a 'Local
-     * Pickup' option. Now, sellers must pass in at least one actual domestic shipping service option in addition to any 'Local Pickup' option, or the listing will be blocked with the following error: <em>17510 - You must specify at least one domestic
-     * shipping service, other than or in addition to Local Pickup.</em> </span> <br> For <b>GetItemShipping</b>, results are filtered: if any service is not available in the buyer's region, it is removed. If no services remain after this filtering, a
-     * warning is returned.
+     * the listing. <br><br> A seller can offer up to four domestic shipping services and up to five international shipping services. However, if the seller is opted in to the Global Shipping Program or eBay International Shipping, only four other
+     * international shipping services may be offered (regardless of whether or not Global Shipping shipment or eBay International Shipping is offered for the listing). All specified domestic and international shipping services must be the same shipping
+     * type (for example, Flat versus Calculated). <br/><br/> <span class="tablenote"><b>Note: </b> If the seller has set the shipping cost model to 'Flat' or 'Calculated' (<b>ShippingDetails.ShippingType</b> field), at least one actual shipping service
+     * option must be specified through a <b>ShippingServiceOptions</b> container. In the past, eBay allowed users to set the shipping cost model to 'Flat' or 'Calculated', and then just pass in one <b>ShippingServiceOptions</b> container with the
+     * <b>ShippingServiceOptions.ShipppingService</b> value set to a 'Local Pickup' option. Now, sellers must pass in at least one actual domestic shipping service option in addition to any 'Local Pickup' option, or the listing will be blocked with the
+     * following error: <em>17510 - You must specify at least one domestic shipping service, other than or in addition to Local Pickup.</em> </span> <br> For <b>GetItemShipping</b>, results are filtered: if any service is not available in the buyer's
+     * region, it is removed. If no services remain after this filtering, a warning is returned.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ShippingServiceOptionsType[]
@@ -148,10 +135,11 @@ class ShippingDetailsType extends AbstractStructBase
      * - documentation: Shipping costs and options related to an international shipping service. If used, at least one domestic shipping service must also be provided in <b>ShippingServiceOptions</b>. <br><br> If you specify multiple
      * <b>InternationalShippingServiceOption</b> nodes, the repeating nodes must be contiguous. That is, you cannot insert other nodes between <b>InternationalShippingServiceOption</b> nodes. <br><br> All specified domestic and international shipping
      * services must be the same shipping type (for example, Flat versus Calculated). <br><br> A seller can offer up to four domestic shipping services and up to five international shipping services. However, if the seller is opted in to the Global Shipping
-     * Program, only four other international shipping services may be offered (regardless of whether or not Global Shipping is offered for the listing). <br><br> If you specify <b>ShippingDetails</b> when you revise or relist an item but you omit
-     * <b>InternationalShippingServiceOption</b>, eBay will drop the international shipping services (except the Global Shipping Program) from the listing. This may also have unintended side effects, as other fields that depend on this data may be dropped
-     * as well. To retain the shipping services and dependent fields when you modify other shipping details, it may be simplest to specify all <b>ShippingDetails</b> that you still want to include in the listing. <br><br> For <b>GetItemShipping</b>, results
-     * are filtered: if any service is not available in the buyer's region, it is removed. If no services remain after this filtering, a warning is returned.
+     * Program or eBay International Shipping, only four other international shipping services may be offered (regardless of whether or not Global Shipping or eBay International Shipping is offered for the listing). <br><br> If you specify
+     * <b>ShippingDetails</b> when you revise or relist an item but you omit <b>InternationalShippingServiceOption</b>, eBay will drop the international shipping services (except the Global Shipping Program or eBay International Shipping) from the listing.
+     * This may also have unintended side effects, as other fields that depend on this data may be dropped as well. To retain the shipping services and dependent fields when you modify other shipping details, it may be simplest to specify all
+     * <b>ShippingDetails</b> that you still want to include in the listing. <br><br> For <b>GetItemShipping</b>, results are filtered: if any service is not available in the buyer's region, it is removed. If no services remain after this filtering, a
+     * warning is returned.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InternationalShippingServiceOptionsType[]
@@ -172,11 +160,10 @@ class ShippingDetailsType extends AbstractStructBase
      * The SellingManagerSalesRecordNumber
      * Meta information extracted from the WSDL
      * - documentation: The sale record ID. Applicable to Selling Manager users. When an item is sold, Selling Manager generates a sale record. A sale record contains buyer information, shipping, and other information. A sale record is displayed in the Sold
-     * view in Selling Manager. Each sale record has a sale record ID. <br/><br/> In the following calls, the value for the sale record ID is in the <b>SellingManagerSalesRecordNumber</b> field: <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>,
-     * <b>GetOrders</b>, <b>GetOrderTransactions</b>. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer
-     * returned at all to third parties. If using a Trading WSDL older than Version 1019, the real record number is only returned to the buyer or seller, and a dummy value of <code>0</code> will be returned to all third parties. <br/><br/> The sale record
-     * ID can be for a single or a multiple line item order. <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and <strong>GetOrderTransactions</strong> calls, this field is only
-     * returned to the seller of the order; this field is not returned for the buyer or third party. </span>
+     * view in Selling Manager. Each sale record has a sale record ID. <br/><br/> In the following calls, the value for the sale record ID is in the <b>SellingManagerSalesRecordNumber</b> field: <b>GetItemTransactions</b>, <b>GetSellerTransactions</b>, and
+     * <b>GetOrders</b>. <br><br> <b>For GetOrders and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading
+     * WSDL older than Version 1019, the real record number is only returned to the buyer or seller, and a dummy value of <code>0</code> will be returned to all third parties. <br/><br/> The sale record ID can be for a single or a multiple line item order.
+     * <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong> and <strong>GetOrders</strong>calls, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
      * @var int|null
      */
@@ -184,7 +171,7 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * The ThirdPartyCheckout
      * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
+     * - documentation: <br> <span class="tablenote"><b>Note: </b> This field is deprecated and will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -202,7 +189,7 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * The GetItFast
      * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
+     * - documentation: <br> <span class="tablenote"><b>Note: </b> This field is deprecated and will stop being returned in order management calls on January 31, 2024. </span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -308,36 +295,35 @@ class ShippingDetailsType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $PromotionalShippingDiscountDetails = null;
     /**
-     * The CODCost
-     * Meta information extracted from the WSDL
-     * - documentation: This dollar value indicates the money due from the buyer upon delivery of the item. <br><br> This field should only be specified in the request if 'COD' (cash-on-delivery) is a valid payment method for the site and listing category,
-     * and it is included as a <b>PaymentMethods</b> value in the same request. <br><br> This field is only returned if set for the listing. <br><br> To see if 'COD' is a supported payment method for a site and category, call <b>GetCategoryFeatures</b>,
-     * specifying the listing category ID, and including the <b>FeatureID</b> field set to <b>PaymentMethods</b>. Look for a value of 'CashOnPickup' in one of the <b>Category.PaymentMethod</b> fields in the response. For some eBay sites, the 'COD' enum may
-     * also get returned.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\AmountType $CODCost = null;
-    /**
      * The ExcludeShipToLocation
      * Meta information extracted from the WSDL
-     * - documentation: Use this field to specify an international country or region, or a special domestic location, such as 'PO Box' (in US) or 'Packstation' (in DE), to where you will not ship the associated item. Repeat this element in the call request
-     * for each location that you want to exclude as a shipping destination for your item. <br><br> Set <b>ShipToRegistrationCountry</b> to <code>true</code> to have your <b>ExcludeShipToLocation</b> settings applied to your listing. The locations you have
-     * excluded display in the Shipping and Handling section of your item listing. <br><br> If a buyer's primary ship-to location is a location that you have listed as an excluded ship-to location (or if the buyer does not have a primary ship-to location),
-     * they will receive an error message if they attempt to buy or place a bid on your item. <br><br> The exclude ship-to location values are eBay regions and countries. To see the valid exclude ship-to locations for a specified site, call
-     * <b>GeteBayDetails</b> with <b>DetailName</b> set to <b>ExcludeShippingLocationDetails</b>, and then look for the <b>ExcludeShippingLocationDetails.Location</b> fields in the response. Repeat <b>GeteBayDetails</b> for each site on which you list.
-     * <br><br> This field works in conjunction with <b>Item.ShipToLocation</b>s to create a set of international countries and regions to where you will, and will not, ship. You can list a region in the <b>ShipToLocations</b> field, then exclude specific
-     * countries within that region with this field (for example, you can specify Africa in <b>ShipToLocations</b>, yet exclude Chad with a <b>ExcludeShipToLocation</b> setting). In addition, if your <b>ShipToLocations</b> is <code>Worldwide</code>, you can
-     * use this field to specify both regions and countries that you want to exclude from your shipping destinations. <br><br> You can specify a default set of locations to where you will not ship in My eBay. If you create an Exclude Ship-To List, it is, by
-     * default, in effect when you list items. However, if you specify any value in this field on input, it nullifies the default settings in your Exclude Ship-To List. (If you use <b>ExcludeShipToLocation</b> when you list an item, you will need to list
-     * all the locations to where you will not ship the associated item, regardless of the default settings in your Exclude Ship-To List.) <br><br> Specify <code>none</code> in this field to override the default Exclude Ship-To List you might have set up in
-     * My eBay and indicate that you do not want to exclude any shipping locations from the respective item listing. <br><br> <span class="tablenote"><strong>Note:</strong> To enable your default Exclude Ship-To List, you must enable Exclude Shipping
-     * Locations and Buyer Requirements in your My eBay Site Preferences. For details, see the KnowledgeBase Article <a href= "https://ebaydts.com/eBayKBDetails?KBid=1495" >HowTo: ExcludeShipToLocation</a>. </span>
+     * - documentation: Use this field in an Add/Revise/Relist call to specify an international country or region, or a special domestic location, such as 'PO Box' (in US) or 'Packstation' (in DE), to where you will not ship the associated item. Repeat this
+     * element in the call request for each location that you want to exclude as a shipping destination for your item. <br><br> The exclude ship-to location values are eBay regions and countries. To see the valid exclude ship-to locations for a specified
+     * site, call <b>GeteBayDetails</b> with <b>DetailName</b> set to <b>ExcludeShippingLocationDetails</b>, and then look for the <b>ExcludeShippingLocationDetails.Location</b> fields in the response. Repeat <b>GeteBayDetails</b> for each site on which you
+     * list. <br><br> This field works in conjunction with <b>Item.ShipToLocation</b>s to create a set of international countries and regions to where you will, and will not, ship. You can list a region in the <b>ShipToLocations</b> field, then exclude
+     * specific countries within that region with this field (for example, you can specify Africa in <b>ShipToLocations</b>, yet exclude Chad with a <b>ExcludeShipToLocation</b> setting). In addition, if your <b>ShipToLocations</b> is
+     * <code>Worldwide</code>, you can use this field to specify both regions and countries that you want to exclude from your shipping destinations. <br> <br> <span class="tablenote"><b>Note: </b> The <b>ShipToLocations</b> and
+     * <b>ShippingDetails.ExcludeShipToLocation</b> containers are not applicable for motor vehicle listings on the US, CA, or UK marketplaces. If these containers are sent in the request, they are ignored and a warning is returned. </span> <span
+     * class="tablenote"><b>Note: </b> Any shipping exclusions specified by this field can be overridden by the eBay International Shipping exclusions toggle located under <b>Shipping Preferences</b> in <b>My eBay</b>. For more information on eBay
+     * International Shipping, see <a href="https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348">eBay International Shipping program</a>. </span> <br> You can specify a default set of
+     * locations to where you will not ship in My eBay. If you create an Exclude Ship-To List, it is, by default, in effect when you list items. However, if you specify any value in this field on input, it nullifies the default settings in your Exclude
+     * Ship-To List. (If you use <b>ExcludeShipToLocation</b> when you list an item, you will need to list all the locations to where you will not ship the associated item, regardless of the default settings in your Exclude Ship-To List.) <br><br> Specify
+     * <code>none</code> in this field to override the default Exclude Ship-To List you might have set up in My eBay and indicate that you do not want to exclude any shipping locations from the respective item listing. <br> <span class="tablenote"><b>Note:
+     * </b> This field will stop being returned in <b>GetItemTransactions</b> and <b>GetSellerTransactions</b> responses on January 31, 2024. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
     protected ?array $ExcludeShipToLocation = null;
+    /**
+     * The eBayEstimatedLabelCost
+     * Meta information extracted from the WSDL
+     * - documentation: This dollar value indicates the cost to buy the shipping label from eBay. Presently, this field is only returned for orders that will go through eBay shipping and its value will be <code>0.0</code>. With eBay shipping, a free
+     * shipping label by eBay is downloadable by the seller via the eBay website.
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\StructType\AmountType|null
+     */
+    protected ?\macropage\ebaysdk\trading\StructType\AmountType $eBayEstimatedLabelCost = null;
     /**
      * The SellerExcludeShipToLocationsPreference
      * Meta information extracted from the WSDL
@@ -401,9 +387,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @uses ShippingDetailsType::setGlobalShipping()
      * @uses ShippingDetailsType::setCalculatedShippingRate()
      * @uses ShippingDetailsType::setChangePaymentInstructions()
-     * @uses ShippingDetailsType::setInsuranceWanted()
      * @uses ShippingDetailsType::setPaymentEdited()
-     * @uses ShippingDetailsType::setPaymentInstructions()
      * @uses ShippingDetailsType::setSalesTax()
      * @uses ShippingDetailsType::setShippingRateErrorMessage()
      * @uses ShippingDetailsType::setShippingRateType()
@@ -425,8 +409,8 @@ class ShippingDetailsType extends AbstractStructBase
      * @uses ShippingDetailsType::setInternationalCalculatedShippingDiscount()
      * @uses ShippingDetailsType::setInternationalPromotionalShippingDiscount()
      * @uses ShippingDetailsType::setPromotionalShippingDiscountDetails()
-     * @uses ShippingDetailsType::setCODCost()
      * @uses ShippingDetailsType::setExcludeShipToLocation()
+     * @uses ShippingDetailsType::setEBayEstimatedLabelCost()
      * @uses ShippingDetailsType::setSellerExcludeShipToLocationsPreference()
      * @uses ShippingDetailsType::setShipmentTrackingDetails()
      * @uses ShippingDetailsType::setRateTableDetails()
@@ -436,9 +420,7 @@ class ShippingDetailsType extends AbstractStructBase
      * @param bool $globalShipping
      * @param \macropage\ebaysdk\trading\StructType\CalculatedShippingRateType $calculatedShippingRate
      * @param bool $changePaymentInstructions
-     * @param bool $insuranceWanted
      * @param bool $paymentEdited
-     * @param string $paymentInstructions
      * @param \macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax
      * @param string $shippingRateErrorMessage
      * @param string $shippingRateType
@@ -460,14 +442,14 @@ class ShippingDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $internationalCalculatedShippingDiscount
      * @param bool $internationalPromotionalShippingDiscount
      * @param \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $cODCost
      * @param string[] $excludeShipToLocation
+     * @param \macropage\ebaysdk\trading\StructType\AmountType $eBayEstimatedLabelCost
      * @param bool $sellerExcludeShipToLocationsPreference
      * @param \macropage\ebaysdk\trading\StructType\ShipmentTrackingDetailsType[] $shipmentTrackingDetails
      * @param \macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $allowPaymentEdit = null, ?bool $applyShippingDiscount = null, ?bool $globalShipping = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingRateType $calculatedShippingRate = null, ?bool $changePaymentInstructions = null, ?bool $insuranceWanted = null, ?bool $paymentEdited = null, ?string $paymentInstructions = null, ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, ?string $shippingRateType = null, ?array $shippingServiceOptions = null, ?array $internationalShippingServiceOption = null, ?string $shippingType = null, ?int $sellingManagerSalesRecordNumber = null, ?bool $thirdPartyCheckout = null, ?\macropage\ebaysdk\trading\StructType\TaxTableType $taxTable = null, ?bool $getItFast = null, ?string $shippingServiceUsed = null, ?\macropage\ebaysdk\trading\StructType\AmountType $defaultShippingCost = null, ?string $shippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?bool $promotionalShippingDiscount = null, ?string $internationalShippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $internationalFlatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $internationalCalculatedShippingDiscount = null, ?bool $internationalPromotionalShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null, ?array $excludeShipToLocation = null, ?bool $sellerExcludeShipToLocationsPreference = null, ?array $shipmentTrackingDetails = null, ?\macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails = null, $any = null)
+    public function __construct(?bool $allowPaymentEdit = null, ?bool $applyShippingDiscount = null, ?bool $globalShipping = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingRateType $calculatedShippingRate = null, ?bool $changePaymentInstructions = null, ?bool $paymentEdited = null, ?\macropage\ebaysdk\trading\StructType\SalesTaxType $salesTax = null, ?string $shippingRateErrorMessage = null, ?string $shippingRateType = null, ?array $shippingServiceOptions = null, ?array $internationalShippingServiceOption = null, ?string $shippingType = null, ?int $sellingManagerSalesRecordNumber = null, ?bool $thirdPartyCheckout = null, ?\macropage\ebaysdk\trading\StructType\TaxTableType $taxTable = null, ?bool $getItFast = null, ?string $shippingServiceUsed = null, ?\macropage\ebaysdk\trading\StructType\AmountType $defaultShippingCost = null, ?string $shippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?bool $promotionalShippingDiscount = null, ?string $internationalShippingDiscountProfileID = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $internationalFlatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $internationalCalculatedShippingDiscount = null, ?bool $internationalPromotionalShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?array $excludeShipToLocation = null, ?\macropage\ebaysdk\trading\StructType\AmountType $eBayEstimatedLabelCost = null, ?bool $sellerExcludeShipToLocationsPreference = null, ?array $shipmentTrackingDetails = null, ?\macropage\ebaysdk\trading\StructType\RateTableDetailsType $rateTableDetails = null, $any = null)
     {
         $this
             ->setAllowPaymentEdit($allowPaymentEdit)
@@ -475,9 +457,7 @@ class ShippingDetailsType extends AbstractStructBase
             ->setGlobalShipping($globalShipping)
             ->setCalculatedShippingRate($calculatedShippingRate)
             ->setChangePaymentInstructions($changePaymentInstructions)
-            ->setInsuranceWanted($insuranceWanted)
             ->setPaymentEdited($paymentEdited)
-            ->setPaymentInstructions($paymentInstructions)
             ->setSalesTax($salesTax)
             ->setShippingRateErrorMessage($shippingRateErrorMessage)
             ->setShippingRateType($shippingRateType)
@@ -499,8 +479,8 @@ class ShippingDetailsType extends AbstractStructBase
             ->setInternationalCalculatedShippingDiscount($internationalCalculatedShippingDiscount)
             ->setInternationalPromotionalShippingDiscount($internationalPromotionalShippingDiscount)
             ->setPromotionalShippingDiscountDetails($promotionalShippingDiscountDetails)
-            ->setCODCost($cODCost)
             ->setExcludeShipToLocation($excludeShipToLocation)
+            ->setEBayEstimatedLabelCost($eBayEstimatedLabelCost)
             ->setSellerExcludeShipToLocationsPreference($sellerExcludeShipToLocationsPreference)
             ->setShipmentTrackingDetails($shipmentTrackingDetails)
             ->setRateTableDetails($rateTableDetails)
@@ -618,29 +598,6 @@ class ShippingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get InsuranceWanted value
-     * @return bool|null
-     */
-    public function getInsuranceWanted(): ?bool
-    {
-        return $this->InsuranceWanted;
-    }
-    /**
-     * Set InsuranceWanted value
-     * @param bool $insuranceWanted
-     * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
-     */
-    public function setInsuranceWanted(?bool $insuranceWanted = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($insuranceWanted) && !is_bool($insuranceWanted)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($insuranceWanted, true), gettype($insuranceWanted)), __LINE__);
-        }
-        $this->InsuranceWanted = $insuranceWanted;
-        
-        return $this;
-    }
-    /**
      * Get PaymentEdited value
      * @return bool|null
      */
@@ -660,29 +617,6 @@ class ShippingDetailsType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($paymentEdited, true), gettype($paymentEdited)), __LINE__);
         }
         $this->PaymentEdited = $paymentEdited;
-        
-        return $this;
-    }
-    /**
-     * Get PaymentInstructions value
-     * @return string|null
-     */
-    public function getPaymentInstructions(): ?string
-    {
-        return $this->PaymentInstructions;
-    }
-    /**
-     * Set PaymentInstructions value
-     * @param string $paymentInstructions
-     * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
-     */
-    public function setPaymentInstructions(?string $paymentInstructions = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($paymentInstructions) && !is_string($paymentInstructions)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($paymentInstructions, true), gettype($paymentInstructions)), __LINE__);
-        }
-        $this->PaymentInstructions = $paymentInstructions;
         
         return $this;
     }
@@ -1230,25 +1164,6 @@ class ShippingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get CODCost value
-     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
-     */
-    public function getCODCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
-    {
-        return $this->CODCost;
-    }
-    /**
-     * Set CODCost value
-     * @param \macropage\ebaysdk\trading\StructType\AmountType $cODCost
-     * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
-     */
-    public function setCODCost(?\macropage\ebaysdk\trading\StructType\AmountType $cODCost = null): self
-    {
-        $this->CODCost = $cODCost;
-        
-        return $this;
-    }
-    /**
      * Get ExcludeShipToLocation value
      * @return string[]
      */
@@ -1311,6 +1226,25 @@ class ShippingDetailsType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('The ExcludeShipToLocation property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ExcludeShipToLocation[] = $item;
+        
+        return $this;
+    }
+    /**
+     * Get eBayEstimatedLabelCost value
+     * @return \macropage\ebaysdk\trading\StructType\AmountType|null
+     */
+    public function getEBayEstimatedLabelCost(): ?\macropage\ebaysdk\trading\StructType\AmountType
+    {
+        return $this->eBayEstimatedLabelCost;
+    }
+    /**
+     * Set eBayEstimatedLabelCost value
+     * @param \macropage\ebaysdk\trading\StructType\AmountType $eBayEstimatedLabelCost
+     * @return \macropage\ebaysdk\trading\StructType\ShippingDetailsType
+     */
+    public function setEBayEstimatedLabelCost(?\macropage\ebaysdk\trading\StructType\AmountType $eBayEstimatedLabelCost = null): self
+    {
+        $this->eBayEstimatedLabelCost = $eBayEstimatedLabelCost;
         
         return $this;
     }
@@ -1425,7 +1359,7 @@ class ShippingDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

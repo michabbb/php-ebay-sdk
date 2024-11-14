@@ -21,9 +21,9 @@ class FeedbackDetailType extends AbstractStructBase
      * The CommentingUser
      * Meta information extracted from the WSDL
      * - documentation: The eBay User ID of the user who left the Feedback entry. <br/><br/> <span class="tablenote"><b>Note: </b> This field is returned, but masked to users who are not either the buyer or seller of the order line item. </span> | This is a
-     * string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some
-     * bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but
-     * information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes
+     * this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized
+     * userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -137,7 +137,8 @@ class FeedbackDetailType extends AbstractStructBase
      * The TransactionID
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay order line item for which the Feedback entry was left. This field is not returned if the Feedback entry was left for an auction listing, since all auction listings have a <b>TransactionID</b> value of 0.
-     * <br/><br/> <span class="tablenote"><b>Note: </b> For Feedback entries that were submitted less than five years ago, this field is returned to users who are not the buyer or seller of the order line item, but a dummy value such as '111111111' will be
+     * <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions before this time.
+     * </span> <span class="tablenote"><b>Note: </b> For Feedback entries that were submitted less than five years ago, this field is returned to users who are not the buyer or seller of the order line item, but a dummy value such as '111111111' will be
      * displayed. For Feedback entries that were submitted more than five years ago, this field will not be returned at all to users who do not have a relationship (as a buyer or seller) to the Feedback entry. </span>
      * - minOccurs: 0
      * @var string|null
@@ -738,7 +739,7 @@ class FeedbackDetailType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

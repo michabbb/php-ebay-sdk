@@ -8,13 +8,12 @@ use InvalidArgumentException;
 use WsdlToPhp\PackageBase\AbstractStructBase;
 
 /**
- * This class stands for eBayPLUSPreferenceType StructType
+ * This class stands for EBayPLUSPreferenceType StructType
  * Meta information extracted from the WSDL
  * - documentation: Contains information about a country where a specified seller is eligible to offer eBay Plus on listings, as well as the seller's opt-in status and listing preference for that country. <br/><br/> eBay Plus is a premium account option
  * for buyers, which provides benefits such as fast free domestic shipping and free returns on selected items. Top Rated eBay sellers must opt in to eBay Plus to be able offer the program on qualifying listings. Sellers must commit to next-day delivery
  * of those items. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Currently, eBay Plus is available only to buyers in Germany and Australia. In Australia, the seller has no control/responsibility over setting the eBay Plus feature for a
- * listing. Instead, eBay will evaluate/determine whether a listing is eligible for eBay Plus. </span> For more details about eBay Plus, see <a href="../../../../guides/features-guide/default.html#development/Feature-eBayPlus.html">Offering eBay
- * Plus</a>.
+ * listing. Instead, eBay will evaluate/determine whether a listing is eligible for eBay Plus. </span> For more details about eBay Plus, see <a href="/api-docs/user-guides/static/trading-user-guide/ebay-plus.html">eBay Plus</a>.
  * @subpackage Structs
  */
 class EBayPLUSPreferenceType extends AbstractStructBase
@@ -51,7 +50,7 @@ class EBayPLUSPreferenceType extends AbstractStructBase
      */
     protected $any = null;
     /**
-     * Constructor method for eBayPLUSPreferenceType
+     * Constructor method for EBayPLUSPreferenceType
      * @uses EBayPLUSPreferenceType::setCountry()
      * @uses EBayPLUSPreferenceType::setOptInStatus()
      * @uses EBayPLUSPreferenceType::setListingPreference()
@@ -144,7 +143,7 @@ class EBayPLUSPreferenceType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

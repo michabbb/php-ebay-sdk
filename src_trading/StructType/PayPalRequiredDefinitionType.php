@@ -10,8 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for PayPalRequiredDefinitionType StructType
  * Meta information extracted from the WSDL
- * - documentation: Defines the PayPal Required feature. If the field is present, the corresponding feature applies to the category. The field is returned as an empty element (i.e., a boolean value is not returned). <br><br> <span
- * class="tablenote"><b>Note: </b> Although the <b>PayPalRequired</b> field is still being returned for now, sellers never need to set the available electronic payments, and PayPal will never be required on any eBay marketplace. </span>
+ * - documentation: This type is deprecated.
  * @subpackage Structs
  */
 class PayPalRequiredDefinitionType extends AbstractStructBase
@@ -34,7 +33,7 @@ class PayPalRequiredDefinitionType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

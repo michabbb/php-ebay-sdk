@@ -21,7 +21,8 @@ class ItemArrayType extends AbstractStructArrayBase
      * - documentation: Contains the data properties that define one item listing. <b>GetSellerEvents</b> and <b>GetSellerList</b> only return items if any are available for the seller within the time window specified in the request.<br> <br> Some optional
      * fields are only returned if the seller defined them for the item. Some fields are only returned under particular conditions specified in the individual field descriptions. For example, a buyer's contact information might only be returned if the
      * member who is making the request (as identified in the <b>eBayAuthToken</b>) has an order relationship with that buyer. <br> <br> For calls that support detail levels, the set of fields returned is also controlled by the value of <b>DetailLevel</b>
-     * in the request. For some calls, other parameters in the request can also control the data returned for each item. For example, <b>GranularityLevel</b> controls the fields to return for each item in the <b>GetSellerList</b> response.
+     * in the request. For some calls, other parameters in the request can also control the data returned for each item. For example, <b>GranularityLevel</b> controls the fields to return for each item in the <b>GetSellerList</b> response. <br> <span
+     * class="tablenote"><b>Note:</b> When making a <b>GetSellerList</b> call, items that are on-hold due to an eBay policy violation will not be returned in the response. </span>
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ItemType[]

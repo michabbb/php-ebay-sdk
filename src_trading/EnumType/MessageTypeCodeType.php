@@ -22,42 +22,43 @@ class MessageTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ResponseToASQQuestion'
      * Meta information extracted from the WSDL
-     * - documentation: Member to Member message initiated as a response to an Ask A Question message.
+     * - documentation: Member to Member message initiated as a response to an Ask A Question message. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ResponseToASQQuestion'
      */
     const VALUE_RESPONSE_TO_ASQQUESTION = 'ResponseToASQQuestion';
     /**
      * Constant for value 'ContactEbayMember'
      * Meta information extracted from the WSDL
-     * - documentation: Member to Member message initiated by any eBay member to another eBay member.
+     * - documentation: Member to Member message initiated by any eBay member to another eBay member. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ContactEbayMember'
      */
     const VALUE_CONTACT_EBAY_MEMBER = 'ContactEbayMember';
     /**
      * Constant for value 'ContactTransactionPartner'
      * Meta information extracted from the WSDL
-     * - documentation: Member message between order partners within 90 days after creation of the order.
+     * - documentation: Member message between order partners within 90 days after creation of the order. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ContactTransactionPartner'
      */
     const VALUE_CONTACT_TRANSACTION_PARTNER = 'ContactTransactionPartner';
     /**
      * Constant for value 'ResponseToContacteBayMember'
      * Meta information extracted from the WSDL
-     * - documentation: Member to Member message initiated as a response to a Contact eBay Member message.
+     * - documentation: Member to Member message initiated as a response to a Contact eBay Member message. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ResponseToContacteBayMember'
      */
     const VALUE_RESPONSE_TO_CONTACTE_BAY_MEMBER = 'ResponseToContacteBayMember';
     /**
      * Constant for value 'ContacteBayMemberViaCommunityLink'
      * Meta information extracted from the WSDL
-     * - documentation: Member to Member message initiated by any eBay member to another eBay member who has posted on a community forum within the past 7 days.
+     * - documentation: Member to Member message initiated by any eBay member to another eBay member who has posted on a community forum within the past 7 days. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b>
+     * field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ContacteBayMemberViaCommunityLink'
      */
     const VALUE_CONTACTE_BAY_MEMBER_VIA_COMMUNITY_LINK = 'ContacteBayMemberViaCommunityLink';
     /**
      * Constant for value 'CustomCode'
      * Meta information extracted from the WSDL
-     * - documentation: Reserved for future or internal use.
+     * - documentation: Reserved for future or internal use. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'CustomCode'
      */
     const VALUE_CUSTOM_CODE = 'CustomCode';
@@ -71,28 +72,32 @@ class MessageTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ContactMyBidder'
      * Meta information extracted from the WSDL
-     * - documentation: Member to Member message initiated by sellers to their bidders during an active listing.
+     * - documentation: Member to Member message initiated by sellers to their bidders during an active listing. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request.
+     * </span>
      * @return string 'ContactMyBidder'
      */
     const VALUE_CONTACT_MY_BIDDER = 'ContactMyBidder';
     /**
      * Constant for value 'ContacteBayMemberViaAnonymousEmail'
      * Meta information extracted from the WSDL
-     * - documentation: Member message initiated after eBay receives an email sent by an eBay member's email client to another eBay member.
+     * - documentation: Member message initiated after eBay receives an email sent by an eBay member's email client to another eBay member. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a
+     * <b>GetMemberMessages</b> request. </span>
      * @return string 'ContacteBayMemberViaAnonymousEmail'
      */
     const VALUE_CONTACTE_BAY_MEMBER_VIA_ANONYMOUS_EMAIL = 'ContacteBayMemberViaAnonymousEmail';
     /**
      * Constant for value 'ClassifiedsContactSeller'
      * Meta information extracted from the WSDL
-     * - documentation: Indicates that an inquiry has been sent to the seller regarding the corresponding classified ad listing.
+     * - documentation: Indicates that an inquiry has been sent to the seller regarding the corresponding classified ad listing. <span class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a
+     * <b>GetMemberMessages</b> request. </span>
      * @return string 'ClassifiedsContactSeller'
      */
     const VALUE_CLASSIFIEDS_CONTACT_SELLER = 'ClassifiedsContactSeller';
     /**
      * Constant for value 'ClassifiedsBestOffer'
      * Meta information extracted from the WSDL
-     * - documentation: Indicates that a Best Offer has been made on the seller's corresponding classified ad listing. This message type is only applicable to Classified categories that allow the Best Offer feature, such as motor vehicles.
+     * - documentation: Indicates that a Best Offer has been made on the seller's corresponding classified ad listing. This message type is only applicable to Classified categories that allow the Best Offer feature, such as motor vehicles. <span
+     * class="tablenote"><b>Note:</b> This value is not supported in the <b>MailMessageType</b> field of a <b>GetMemberMessages</b> request. </span>
      * @return string 'ClassifiedsBestOffer'
      */
     const VALUE_CLASSIFIEDS_BEST_OFFER = 'ClassifiedsBestOffer';

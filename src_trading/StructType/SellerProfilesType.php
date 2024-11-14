@@ -19,8 +19,10 @@ class SellerProfilesType extends AbstractStructBase
      * The SellerShippingProfile
      * Meta information extracted from the WSDL
      * - documentation: The <b>SellerShippingProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a specific shipping business policy. Shipping business policies contain detailed
-     * information on domestic and international shipping, including shipping service options and costs, handling time, shipping discount inormation, and excluded ship-to locations. Multiple shipping business policies can be created and saved at the account
-     * level by sellers. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API call is the seller of the listing.
+     * information on domestic and international shipping, including shipping service options and costs, handling time, shipping discount information, and excluded ship-to locations. Multiple shipping business policies can be created and saved at the
+     * account level by sellers. <br/> <span class="tablenote"><b>Note: </b> Any shipping inclusions specified through this container can be overridden by the eBay International Shipping exclusions toggle located under <b>Shipping Preferences</b> in <b>My
+     * eBay</b>. For more information on eBay International Shipping, see <a href="https://www.ebay.com/help/selling/shipping-items/setting-shipping-options/ebay-international-shipping-program?id=5348">eBay International Shipping program</a>. </span> This
+     * container is only returned in 'Get' calls if Business Policies are set for the listing, and the person making the API call is the seller of the listing.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerShippingProfileType|null
      */
@@ -30,8 +32,10 @@ class SellerProfilesType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: The <b>SellerReturnProfile</b> container is used in an Add/Revise/Relist/Verify Trading API call to reference and use the settings/values of a return business policy. Return business policies contain detailed information on the
      * seller's return policy for domestic and international buyers (if the seller ships internationally), including whether or not the seller accepts returns from domestic and international buyers, how many days the buyer has to return the item for a
-     * refund, and who pays the return shipping costs. Multiple return policy business policies can be created and saved at the account level by sellers. <br/><br/> This container is only returned in 'Get' calls if Business Policies are set for the listing
-     * and the person making the API call is the seller of the listing.
+     * refund, and who pays the return shipping costs. Multiple return policy business policies can be created and saved at the account level by sellers. <br> <span class="tablenote"><b>Note: </b> As a part of Digital Services Act (DSA) requirements, as of
+     * April 3, 2023, buyers in the EU must be allowed to return an item within 14 days or more, unless the item is exempt. Where applicable, sellers should update their return policies to reflect this requirement of accepting returns from EU buyers. This
+     * update can be made through the <b>ReturnPolicy</b> container or through a return business policy that is referenced through the <b>SellerProfiles.SellerReturnProfile</b> container.</span> <br/><br/> This container is only returned in 'Get' calls if
+     * Business Policies are set for the listing and the person making the API call is the seller of the listing.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellerReturnProfileType|null
      */
@@ -132,7 +136,7 @@ class SellerProfilesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

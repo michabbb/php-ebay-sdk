@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for StoreCustomCategoryType StructType
  * Meta information extracted from the WSDL
- * - documentation: Configuration of a store custom category.
+ * - documentation: This type is used to express details about a customized eBay Store category.
  * @subpackage Structs
  */
 class StoreCustomCategoryType extends AbstractStructBase
@@ -18,14 +18,15 @@ class StoreCustomCategoryType extends AbstractStructBase
     /**
      * The CategoryID
      * Meta information extracted from the WSDL
-     * - documentation: Custom category ID. For SetStoreCategories, required only if Action is set to Rename, Move or Delete.
+     * - documentation: Unique identifier of an eBay Store's custom category. eBay auto-generates this identifier when a seller establishes a custom store category. This category ID should not be confused with an eBay category ID. <br> <br> This field is
+     * conditionally required for <b>SetStoreCategories</b>, if the <b>Action</b> value is set to <code>Rename</code>, <code>Move</code> or <code>Delete</code>.
      * @var int|null
      */
     protected ?int $CategoryID = null;
     /**
      * The Name
      * Meta information extracted from the WSDL
-     * - documentation: Name of the custom category.
+     * - documentation: The seller-specified name of the custom category. <br> This field is conditionally required for <b>SetStoreCategories</b>, if the <b>Action</b> value is set to <code>Add</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -33,7 +34,7 @@ class StoreCustomCategoryType extends AbstractStructBase
     /**
      * The Order
      * Meta information extracted from the WSDL
-     * - documentation: Order in which the custom category appears in the list of store categories.
+     * - documentation: The order in which the custom store category appears in the list of store categories when the eBay store is visited.
      * - minOccurs: 0
      * @var int|null
      */
@@ -41,7 +42,7 @@ class StoreCustomCategoryType extends AbstractStructBase
     /**
      * The ChildCategory
      * Meta information extracted from the WSDL
-     * - documentation: Contains the properties of a custom subcategory for an eBay Store. eBay Stores support three category levels.
+     * - documentation: This container is used if the seller wants to add child categories to a top-level eBay store category. eBay Stores support three category levels.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\StoreCustomCategoryType[]
@@ -212,7 +213,7 @@ class StoreCustomCategoryType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

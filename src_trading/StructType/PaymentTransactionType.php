@@ -16,18 +16,10 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class PaymentTransactionType extends AbstractStructBase
 {
     /**
-     * The PaymentStatus
-     * Meta information extracted from the WSDL
-     * - documentation: The current status of a buyer payment that is allocated to a specified payee.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $PaymentStatus = null;
-    /**
      * The Payer
      * Meta information extracted from the WSDL
-     * - documentation: This field indicates the eBay user or eBay partner who submitted the payment. <br><br> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be
-     * returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct payer is returned to the buyer or seller, but the identity of the payer will be masked to all third parties.
+     * - documentation: This field indicates the eBay user or eBay partner who submitted the payment. <br><br> <b>For GetOrders and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or
+     * seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct payer is returned to the buyer or seller, but the identity of the payer will be masked to all third parties.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\UserIdentityType|null
      */
@@ -59,9 +51,9 @@ class PaymentTransactionType extends AbstractStructBase
     /**
      * The ReferenceID
      * Meta information extracted from the WSDL
-     * - documentation: A unique transaction ID for the payment. <br/><br/> This field is not returned if the <strong>Payee</strong> field's <strong>type</strong> attribute is <code>eBayPartner</code>. <br><br> <b>For GetOrders, GetOrderTransactions, and
-     * GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct payment
-     * identifier is returned to the buyer or seller, but the payment identifier will be masked to all third parties.
+     * - documentation: A unique transaction ID for the payment. <br/><br/> This field is not returned if the <strong>Payee</strong> field's <strong>type</strong> attribute is <code>eBayPartner</code>. <br><br> <b>For GetOrders and GetItemTransactions
+     * only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct payment identifier is
+     * returned to the buyer or seller, but the payment identifier will be masked to all third parties.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TransactionReferenceType|null
      */
@@ -77,8 +69,8 @@ class PaymentTransactionType extends AbstractStructBase
     /**
      * The PaymentReferenceID
      * Meta information extracted from the WSDL
-     * - documentation: The payment transaction ID. <br/><br/> <b>For GetOrders, GetOrderTransactions, and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer
-     * returned at all to third parties. If using a Trading WSDL older than Version 1019, the correct payment identifier is returned to the buyer or seller, but the payment identifier will be masked to all third parties.
+     * - documentation: The payment transaction ID. <br/><br/> <b>For GetOrders and GetItemTransactions only:</b> If using Trading WSDL Version 1019 or above, this field will only be returned to the buyer or seller, and no longer returned at all to third
+     * parties. If using a Trading WSDL older than Version 1019, the correct payment identifier is returned to the buyer or seller, but the payment identifier will be masked to all third parties.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TransactionReferenceType[]
@@ -91,7 +83,6 @@ class PaymentTransactionType extends AbstractStructBase
     protected $any = null;
     /**
      * Constructor method for PaymentTransactionType
-     * @uses PaymentTransactionType::setPaymentStatus()
      * @uses PaymentTransactionType::setPayer()
      * @uses PaymentTransactionType::setPayee()
      * @uses PaymentTransactionType::setPaymentTime()
@@ -100,7 +91,6 @@ class PaymentTransactionType extends AbstractStructBase
      * @uses PaymentTransactionType::setFeeOrCreditAmount()
      * @uses PaymentTransactionType::setPaymentReferenceID()
      * @uses PaymentTransactionType::setAny()
-     * @param string $paymentStatus
      * @param \macropage\ebaysdk\trading\StructType\UserIdentityType $payer
      * @param \macropage\ebaysdk\trading\StructType\UserIdentityType $payee
      * @param string $paymentTime
@@ -110,10 +100,9 @@ class PaymentTransactionType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\TransactionReferenceType[] $paymentReferenceID
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $paymentStatus = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payer = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payee = null, ?string $paymentTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $paymentAmount = null, ?\macropage\ebaysdk\trading\StructType\TransactionReferenceType $referenceID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, ?array $paymentReferenceID = null, $any = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\UserIdentityType $payer = null, ?\macropage\ebaysdk\trading\StructType\UserIdentityType $payee = null, ?string $paymentTime = null, ?\macropage\ebaysdk\trading\StructType\AmountType $paymentAmount = null, ?\macropage\ebaysdk\trading\StructType\TransactionReferenceType $referenceID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $feeOrCreditAmount = null, ?array $paymentReferenceID = null, $any = null)
     {
         $this
-            ->setPaymentStatus($paymentStatus)
             ->setPayer($payer)
             ->setPayee($payee)
             ->setPaymentTime($paymentTime)
@@ -122,32 +111,6 @@ class PaymentTransactionType extends AbstractStructBase
             ->setFeeOrCreditAmount($feeOrCreditAmount)
             ->setPaymentReferenceID($paymentReferenceID)
             ->setAny($any);
-    }
-    /**
-     * Get PaymentStatus value
-     * @return string|null
-     */
-    public function getPaymentStatus(): ?string
-    {
-        return $this->PaymentStatus;
-    }
-    /**
-     * Set PaymentStatus value
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $paymentStatus
-     * @return \macropage\ebaysdk\trading\StructType\PaymentTransactionType
-     */
-    public function setPaymentStatus(?string $paymentStatus = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::valueIsValid($paymentStatus)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType', is_array($paymentStatus) ? implode(', ', $paymentStatus) : var_export($paymentStatus, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PaymentTransactionStatusCodeType::getValidValues())), __LINE__);
-        }
-        $this->PaymentStatus = $paymentStatus;
-        
-        return $this;
     }
     /**
      * Get Payer value
@@ -336,7 +299,7 @@ class PaymentTransactionType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

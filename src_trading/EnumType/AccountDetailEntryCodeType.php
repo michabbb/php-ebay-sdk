@@ -189,8 +189,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'CreditInsertion'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit issued by eBay to the seller. If a listed item does not sell or results in an Unpaid Item case/dispute, the seller can relist the item with no
-     * additional charge.
+     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit issued by eBay to the seller.
      * @return string 'CreditInsertion'
      */
     const VALUE_CREDIT_INSERTION = 'CreditInsertion';
@@ -572,8 +571,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'FVFCreditReversal'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a reversal of a Final Value Fee credit, resulting in the fee again being charged to the seller. The Final Value Fee can be credited as a result of an Unpaid Item Dispute, but
-     * if the buyer ultimately pays for the line item, the Final Value Fee will apply once again.
+     * - documentation: This enumeration value indicates that the account entry is a reversal of a Final Value Fee credit, resulting in the fee again being charged to the seller.
      * @return string 'FVFCreditReversal'
      */
     const VALUE_FVFCREDIT_REVERSAL = 'FVFCreditReversal';
@@ -1002,8 +1000,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'CreditInsertionFixedPrice'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit for a fixed-price listing. If a listed item does not sell or results in an Unpaid Item case/dispute, the seller can relist the item with no additional
-     * charge.
+     * - documentation: This enumeration value indicates that the account entry is an insertion fee credit for a fixed-price listing.
      * @return string 'CreditInsertionFixedPrice'
      */
     const VALUE_CREDIT_INSERTION_FIXED_PRICE = 'CreditInsertionFixedPrice';
@@ -1433,21 +1430,21 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PaypalOnFile'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PaypalOnFile'
      */
     const VALUE_PAYPAL_ON_FILE = 'PaypalOnFile';
     /**
      * Constant for value 'PaypalOnFileByCSR'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PaypalOnFileByCSR'
      */
     const VALUE_PAYPAL_ON_FILE_BY_CSR = 'PaypalOnFileByCSR';
     /**
      * Constant for value 'PaypalOffFile'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value is no longer applicable as having a PayPal linked to your eBay account is no longer required.
+     * - documentation: This enumeration value is no longer applicable.
      * @return string 'PaypalOffFile'
      */
     const VALUE_PAYPAL_OFF_FILE = 'PaypalOffFile';
@@ -2171,7 +2168,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'SnadOutlierFinalValueFeeCredit'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the invoice credit is for a Final Value Fee (for item cost) that was charged to the seller's account after a buyer created a 'significantly not as described' (SNAD) case against the seller, but the
-     * seller won the dispute.
+     * seller won the case.
      * @return string 'SnadOutlierFinalValueFeeCredit'
      */
     const VALUE_SNAD_OUTLIER_FINAL_VALUE_FEE_CREDIT = 'SnadOutlierFinalValueFeeCredit';
@@ -2179,7 +2176,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'SnadOutlierFinalValueFeeOnShippingCredit'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates the invoice credit is for a Final Value Fee (for shipping cost) that was charged to the seller's account after a buyer created a 'significantly not as described' (SNAD) case against the seller, but
-     * the seller won the dispute.
+     * the seller won the case.
      * @return string 'SnadOutlierFinalValueFeeOnShippingCredit'
      */
     const VALUE_SNAD_OUTLIER_FINAL_VALUE_FEE_ON_SHIPPING_CREDIT = 'SnadOutlierFinalValueFeeOnShippingCredit';
@@ -2314,57 +2311,42 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'USInternetSalesTax'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Collect and Remit' sales tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable if the buyer is based in the
-     * US, and their state of residence mandates the collection of sales tax. See the corresponding <b>OrderId</b> value to determine which eBay order this sales tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very
-     * large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'USInternetSalesTax'
      */
     const VALUE_USINTERNET_SALES_TAX = 'USInternetSalesTax';
     /**
      * Constant for value 'USInternetSalesTaxCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has deposited the 'Collect and Remit' sales tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's PayPal account. This enumeration value is only
-     * applicable if the buyer is based in the US, and their state of residence mandates the collection of sales tax. This sales tax will actually get pulled from the seller's PayPal account shortly after the buyer's funds clear, and the seller should then
-     * see a <b>USInternetSalesTax</b> account entry with a matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the
-     * checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'USInternetSalesTaxCredit'
      */
     const VALUE_USINTERNET_SALES_TAX_CREDIT = 'USInternetSalesTaxCredit';
     /**
      * Constant for value 'NewZealandGST'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable to New Zealand sellers for orders
-     * that are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go
-     * through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'NewZealandGST'
      */
     const VALUE_NEW_ZEALAND_GST = 'NewZealandGST';
     /**
      * Constant for value 'NewZealandGSTCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has deposited the 'Goods and Services' tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's account. This enumeration value is only applicable to
-     * New Zealand sellers for orders that are subject to 'Goods and Services' tax. This tax will actually get pulled from the seller's account shortly after the order funds clear, and the seller should then see a <b>NewZealandGST</b> account entry with a
-     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon
-     * become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'NewZealandGSTCredit'
      */
     const VALUE_NEW_ZEALAND_GSTCREDIT = 'NewZealandGSTCredit';
     /**
      * Constant for value 'AustraliaGST'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has pulled out the 'Goods and Services' tax amount that was originally deposited to the seller's PayPal account. This enumeration value is only applicable to Australian sellers for orders
-     * that are subject to 'Goods and Services' tax. See the corresponding <b>OrderId</b> value to determine which eBay order this tax pertains to. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go
-     * through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'AustraliaGST'
      */
     const VALUE_AUSTRALIA_GST = 'AustraliaGST';
     /**
      * Constant for value 'AustraliaGSTCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that PayPal has deposited the 'Goods and Services' tax amount (for the order identified by the corresponding <b>OrderId</b> field) to the seller's account. This enumeration value is only applicable to
-     * Australian sellers for orders that are subject to 'Goods and Services' tax. This tax will actually get pulled from the seller's account shortly after the order funds clear, and the seller should then see a <b>AustraliaGST</b> account entry with a
-     * matching amount. <br><br> <span class="tablenote"><b>Note: </b> As of November 2021, a very large majority of orders go through the eBay payments process, and PayPal is no longer involved in the checkout/payment flow. This enumeration value will soon
-     * become deprecated, but this value may still be relevant for older orders. </span>
+     * - documentation: This enumeration value is deprecated.
      * @return string 'AustraliaGSTCredit'
      */
     const VALUE_AUSTRALIA_GSTCREDIT = 'AustraliaGSTCredit';
@@ -2430,7 +2412,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'FinalValueFee'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that the account entry is a final value fee, which is a fee that is calculated as a percentage of the total amount of the order, including the purchase price and any shipping and handling charges.
-     * This fee is always deducted directly from the seller payout associated with the order. <br><br> For more information about how final value fees are handled, see the <a
+     * This fee is always deducted directly from the seller payout associated with the order. <br><br> For more information about how transaction fees are handled, see the <a
      * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees</a> help page. </span>
      * @return string 'FinalValueFee'
      */
@@ -2464,7 +2446,7 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * Constant for value 'FinalValueFeeFixedFeePerOrder'
      * Meta information extracted from the WSDL
      * - documentation: This enumeration value indicates that the account entry is a payment processing fee, which is a fixed fee that is charged for all orders. This fixed fee may vary by country, but it is currently $0.30 in the US. This fee is always
-     * deducted directly from the seller payout associated with the order. <br><br> <span class="tablenote"><b>Note: </b> For more information about how final value fees are handled, see the <a
+     * deducted directly from the seller payout associated with the order. <br><br> <span class="tablenote"><b>Note: </b> For more information about how transaction fees are handled, see the <a
      * href="https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822#section2" target="_blank">Selling fees</a> help page. </span>
      * @return string 'FinalValueFeeFixedFeePerOrder'
      */
@@ -2508,33 +2490,331 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      */
     const VALUE_AD_FEE_EXPRESS_CREDIT = 'AdFeeExpressCredit';
     /**
-     * Constant for value 'DepositProcessingVariableFee'
+     * Constant for value 'DepositProcessingFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a Deposit Processing Variable fee.
-     * @return string 'DepositProcessingVariableFee'
+     * - documentation: This enumeration value indicates that the account entry is a Motor Vehicles Deposit processing fee. eBay charges the seller a 2.8 percent processing fee (against the required deposit amount) when they sell their vehicle through a
+     * listing that required that the buyer make an initial deposit for the vehicle.
+     * @return string 'DepositProcessingFee'
      */
-    const VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE = 'DepositProcessingVariableFee';
+    const VALUE_DEPOSIT_PROCESSING_FEE = 'DepositProcessingFee';
     /**
-     * Constant for value 'DepositProcessingVariableFeeCredit'
+     * Constant for value 'DepositProcessingFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit applied against a Deposit Processing Variable fee.
-     * @return string 'DepositProcessingVariableFeeCredit'
+     * - documentation: This enumeration value indicates that the account entry is a credit applied against a Motor Vehicles Deposit processing fee.
+     * @return string 'DepositProcessingFeeCredit'
      */
-    const VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT = 'DepositProcessingVariableFeeCredit';
+    const VALUE_DEPOSIT_PROCESSING_FEE_CREDIT = 'DepositProcessingFeeCredit';
     /**
      * Constant for value 'DepositProcessingFixedFee'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a Deposit Processing Fixed fee.
+     * - documentation: This enumeration value is deprecated. All Motor Vehicles Deposit processing fees are indicated with the <code>DepositProcessingFee</code> value.
      * @return string 'DepositProcessingFixedFee'
      */
     const VALUE_DEPOSIT_PROCESSING_FIXED_FEE = 'DepositProcessingFixedFee';
     /**
      * Constant for value 'DepositProcessingFixedFeeCredit'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that the account entry is a credit applied against a Deposit Processing Fixed fee.
+     * - documentation: This enumeration value is deprecated. All credits against Motor Vehicles Deposit processing fees are indicated with the <code>DepositProcessingFeeCredit</code> value.
      * @return string 'DepositProcessingFixedFeeCredit'
      */
     const VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT = 'DepositProcessingFixedFeeCredit';
+    /**
+     * Constant for value 'FedExReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a FedEx return shipping label.
+     * @return string 'FedExReturnLabelFee'
+     */
+    const VALUE_FED_EX_RETURN_LABEL_FEE = 'FedExReturnLabelFee';
+    /**
+     * Constant for value 'FedExReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a FedEx return shipping label.
+     * @return string 'FedExReturnLabelFeeCredit'
+     */
+    const VALUE_FED_EX_RETURN_LABEL_FEE_CREDIT = 'FedExReturnLabelFeeCredit';
+    /**
+     * Constant for value 'AUPostReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for an Australia Post return shipping label.
+     * @return string 'AUPostReturnLabelFee'
+     */
+    const VALUE_AUPOST_RETURN_LABEL_FEE = 'AUPostReturnLabelFee';
+    /**
+     * Constant for value 'AUPostReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for an Australia Post return shipping label.
+     * @return string 'AUPostReturnLabelFeeCredit'
+     */
+    const VALUE_AUPOST_RETURN_LABEL_FEE_CREDIT = 'AUPostReturnLabelFeeCredit';
+    /**
+     * Constant for value 'UpsCaLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a UPS Canada shipping label.
+     * @return string 'UpsCaLabelFee'
+     */
+    const VALUE_UPS_CA_LABEL_FEE = 'UpsCaLabelFee';
+    /**
+     * Constant for value 'UpsCaLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a UPS Canada shipping label.
+     * @return string 'UpsCaLabelFeeCredit'
+     */
+    const VALUE_UPS_CA_LABEL_FEE_CREDIT = 'UpsCaLabelFeeCredit';
+    /**
+     * Constant for value 'FedExCaLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a FedEx Canada shipping label.
+     * @return string 'FedExCaLabelFee'
+     */
+    const VALUE_FED_EX_CA_LABEL_FEE = 'FedExCaLabelFee';
+    /**
+     * Constant for value 'FedExCaLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a FedEx Canada shipping label.
+     * @return string 'FedExCaLabelFeeCredit'
+     */
+    const VALUE_FED_EX_CA_LABEL_FEE_CREDIT = 'FedExCaLabelFeeCredit';
+    /**
+     * Constant for value 'HubbedReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a Hubbed return shipping label.
+     * @return string 'HubbedReturnLabelFee'
+     */
+    const VALUE_HUBBED_RETURN_LABEL_FEE = 'HubbedReturnLabelFee';
+    /**
+     * Constant for value 'HubbedReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a Hubbed return shipping label.
+     * @return string 'HubbedReturnLabelFeeCredit'
+     */
+    const VALUE_HUBBED_RETURN_LABEL_FEE_CREDIT = 'HubbedReturnLabelFeeCredit';
+    /**
+     * Constant for value 'RoyalMailReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a Royal Mail return shipping label.
+     * @return string 'RoyalMailReturnLabelFee'
+     */
+    const VALUE_ROYAL_MAIL_RETURN_LABEL_FEE = 'RoyalMailReturnLabelFee';
+    /**
+     * Constant for value 'RoyalMailReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a Royal Mail return shipping label.
+     * @return string 'RoyalMailReturnLabelFeeCredit'
+     */
+    const VALUE_ROYAL_MAIL_RETURN_LABEL_FEE_CREDIT = 'RoyalMailReturnLabelFeeCredit';
+    /**
+     * Constant for value 'ParcelForcePostReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a Parcel Force Post return shipping label.
+     * @return string 'ParcelForcePostReturnLabelFee'
+     */
+    const VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE = 'ParcelForcePostReturnLabelFee';
+    /**
+     * Constant for value 'ParcelForcePostReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller received a credit against a fee for a Parcel Force Post return shipping label.
+     * @return string 'ParcelForcePostReturnLabelFeeCredit'
+     */
+    const VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE_CREDIT = 'ParcelForcePostReturnLabelFeeCredit';
+    /**
+     * Constant for value 'OffsiteAdsFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for offsite ad clicks for a Promoted Listing Advanced campaign.
+     * @return string 'OffsiteAdsFee'
+     */
+    const VALUE_OFFSITE_ADS_FEE = 'OffsiteAdsFee';
+    /**
+     * Constant for value 'OffsiteAdsFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for offsite ad clicks for a Promoted Listing Advanced campaign.
+     * @return string 'OffsiteAdsFeeCredit'
+     */
+    const VALUE_OFFSITE_ADS_FEE_CREDIT = 'OffsiteAdsFeeCredit';
+    /**
+     * Constant for value 'PromotedDisplayFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for Promoted Display.
+     * @return string 'PromotedDisplayFee'
+     */
+    const VALUE_PROMOTED_DISPLAY_FEE = 'PromotedDisplayFee';
+    /**
+     * Constant for value 'PromotedDisplayFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for Promoted Display.
+     * @return string 'PromotedDisplayFeeCredit'
+     */
+    const VALUE_PROMOTED_DISPLAY_FEE_CREDIT = 'PromotedDisplayFeeCredit';
+    /**
+     * Constant for value 'USWHTFederal'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that US Federal tax was witheld and deducted from the seller's payout funds.
+     * @return string 'USWHTFederal'
+     */
+    const VALUE_USWHTFEDERAL = 'USWHTFederal';
+    /**
+     * Constant for value 'USWHTFederalCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against US Federal tax that was witheld and deducted from the seller's payout funds.
+     * @return string 'USWHTFederalCredit'
+     */
+    const VALUE_USWHTFEDERAL_CREDIT = 'USWHTFederalCredit';
+    /**
+     * Constant for value 'USWHTState'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that US State tax was witheld and deducted from the seller's payout funds.
+     * @return string 'USWHTState'
+     */
+    const VALUE_USWHTSTATE = 'USWHTState';
+    /**
+     * Constant for value 'USWHTStateCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against US State tax that was witheld and deducted from the seller's payout funds.
+     * @return string 'USWHTStateCredit'
+     */
+    const VALUE_USWHTSTATE_CREDIT = 'USWHTStateCredit';
+    /**
+     * Constant for value 'EPRFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged an Eco Participation fee.
+     * @return string 'EPRFee'
+     */
+    const VALUE_EPRFEE = 'EPRFee';
+    /**
+     * Constant for value 'EPRFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against an Eco Participation fee.
+     * @return string 'EPRFeeCredit'
+     */
+    const VALUE_EPRFEE_CREDIT = 'EPRFeeCredit';
+    /**
+     * Constant for value 'CAPostReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a Canadian Post return shipping label.
+     * @return string 'CAPostReturnLabelFee'
+     */
+    const VALUE_CAPOST_RETURN_LABEL_FEE = 'CAPostReturnLabelFee';
+    /**
+     * Constant for value 'CAPostReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for a Canadian Post return shipping label.
+     * @return string 'CAPostReturnLabelFeeCredit'
+     */
+    const VALUE_CAPOST_RETURN_LABEL_FEE_CREDIT = 'CAPostReturnLabelFeeCredit';
+    /**
+     * Constant for value 'HermesReturnLabelFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a Hermes return shipping label.
+     * @return string 'HermesReturnLabelFee'
+     */
+    const VALUE_HERMES_RETURN_LABEL_FEE = 'HermesReturnLabelFee';
+    /**
+     * Constant for value 'HermesReturnLabelFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for a Hermes return shipping label.
+     * @return string 'HermesReturnLabelFeeCredit'
+     */
+    const VALUE_HERMES_RETURN_LABEL_FEE_CREDIT = 'HermesReturnLabelFeeCredit';
+    /**
+     * Constant for value 'BankPayoutFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for a payout to their bank account. <br> <span class="tablenote"><b>Note:</b> This fee is for future use, and will initially only apply to sellers based in mainland
+     * China if they choose to receive payout funds through a bank account instead of through their Payoneer account. </span>
+     * @return string 'BankPayoutFee'
+     */
+    const VALUE_BANK_PAYOUT_FEE = 'BankPayoutFee';
+    /**
+     * Constant for value 'BankPayoutFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for a payout to their bank account.
+     * @return string 'BankPayoutFeeCredit'
+     */
+    const VALUE_BANK_PAYOUT_FEE_CREDIT = 'BankPayoutFeeCredit';
+    /**
+     * Constant for value 'CharityDonation'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller donated a portion of their sale proceeds to a charitable organization.
+     * @return string 'CharityDonation'
+     */
+    const VALUE_CHARITY_DONATION = 'CharityDonation';
+    /**
+     * Constant for value 'CharityDonationCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a donation to a charitable organization.
+     * @return string 'CharityDonationCredit'
+     */
+    const VALUE_CHARITY_DONATION_CREDIT = 'CharityDonationCredit';
+    /**
+     * Constant for value 'ExpressPayoutFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the fee charged by eBay when a seller requests a payout through a debit card.
+     * @return string 'ExpressPayoutFee'
+     */
+    const VALUE_EXPRESS_PAYOUT_FEE = 'ExpressPayoutFee';
+    /**
+     * Constant for value 'ExpressPayoutFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the fee charged to the seller for a direct payout failed and the fee will be credited back to the seller's debit card.
+     * @return string 'ExpressPayoutFeeCredit'
+     */
+    const VALUE_EXPRESS_PAYOUT_FEE_CREDIT = 'ExpressPayoutFeeCredit';
+    /**
+     * Constant for value 'HermesReturnLblSellerPaidShpFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the seller was charged a fee for a Hermes return shipping label and any applicable tax. Return shipping labels are subject to tax, which is payable by the seller.
+     * @return string 'HermesReturnLblSellerPaidShpFee'
+     */
+    const VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE = 'HermesReturnLblSellerPaidShpFee';
+    /**
+     * Constant for value 'HermesReturnLblSellerPaidShpFeeCr'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for a Hermes return shipping label.
+     * @return string 'HermesReturnLblSellerPaidShpFeeCr'
+     */
+    const VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE_CR = 'HermesReturnLblSellerPaidShpFeeCr';
+    /**
+     * Constant for value 'DHLReturnLblShippingFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates the seller was charged a fee for a DHL return shipping label and any applicable tax. Return shipping labels are subject to tax, which is payable by the seller.
+     * @return string 'DHLReturnLblShippingFee'
+     */
+    const VALUE_DHLRETURN_LBL_SHIPPING_FEE = 'DHLReturnLblShippingFee';
+    /**
+     * Constant for value 'DHLReturnLblShippingFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee for a DHL return shipping label.
+     * @return string 'DHLReturnLblShippingFeeCredit'
+     */
+    const VALUE_DHLRETURN_LBL_SHIPPING_FEE_CREDIT = 'DHLReturnLblShippingFeeCredit';
+    /**
+     * Constant for value 'RegulatoryOperatingFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that a fee is charged by eBay to cover the costs associated with complying with regulatory requirements in specific marketplaces. <br> <span class="tablenote"><b>Note:</b> Currently, this fee is only
+     * applicable in the following marketplaces: United Kingdom, Italy, France, Spain, Austria, Belgium (Dutch), Belgium (French), Poland, Ireland, and Switzerland. </span>
+     * @return string 'RegulatoryOperatingFee'
+     */
+    const VALUE_REGULATORY_OPERATING_FEE = 'RegulatoryOperatingFee';
+    /**
+     * Constant for value 'RegulatoryOperatingFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that a credit against a fee to cover the costs associated with complying with regulatory requirements in specific marketplaces was issued. <br> <span class="tablenote"><b>Note:</b> Currently, this fee
+     * is only applicable in the following marketplaces: United Kingdom, Italy, France, Spain, Austria, Belgium (Dutch), Belgium (French), Poland, Ireland, and Switzerland. </span>
+     * @return string 'RegulatoryOperatingFeeCredit'
+     */
+    const VALUE_REGULATORY_OPERATING_FEE_CREDIT = 'RegulatoryOperatingFeeCredit';
+    /**
+     * Constant for value 'DHLPaymentProcessingFee'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was charged a fee for DHL processing. <br> <span class="tablenote"><b>Note:</b> Currently, this fee is only applicable in the German marketplace. </span>
+     * @return string 'DHLPaymentProcessingFee'
+     */
+    const VALUE_DHLPAYMENT_PROCESSING_FEE = 'DHLPaymentProcessingFee';
+    /**
+     * Constant for value 'DHLPaymentProcessingFeeCredit'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller was issued a credit against a fee charged a fee for DHL processing. <span class="tablenote"><b>Note:</b> Currently, this fee is only applicable in the German marketplace. </span>
+     * @return string 'DHLPaymentProcessingFeeCredit'
+     */
+    const VALUE_DHLPAYMENT_PROCESSING_FEE_CREDIT = 'DHLPaymentProcessingFeeCredit';
     /**
      * Return allowed values
      * @uses self::VALUE_UNKNOWN
@@ -2883,10 +3163,52 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
      * @uses self::VALUE_FINAL_VALUE_FEE_BELOW_STANDARD_CREDIT
      * @uses self::VALUE_AD_FEE_EXPRESS
      * @uses self::VALUE_AD_FEE_EXPRESS_CREDIT
-     * @uses self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE
-     * @uses self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT
+     * @uses self::VALUE_DEPOSIT_PROCESSING_FEE
+     * @uses self::VALUE_DEPOSIT_PROCESSING_FEE_CREDIT
      * @uses self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE
      * @uses self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT
+     * @uses self::VALUE_FED_EX_RETURN_LABEL_FEE
+     * @uses self::VALUE_FED_EX_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_AUPOST_RETURN_LABEL_FEE
+     * @uses self::VALUE_AUPOST_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_UPS_CA_LABEL_FEE
+     * @uses self::VALUE_UPS_CA_LABEL_FEE_CREDIT
+     * @uses self::VALUE_FED_EX_CA_LABEL_FEE
+     * @uses self::VALUE_FED_EX_CA_LABEL_FEE_CREDIT
+     * @uses self::VALUE_HUBBED_RETURN_LABEL_FEE
+     * @uses self::VALUE_HUBBED_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_ROYAL_MAIL_RETURN_LABEL_FEE
+     * @uses self::VALUE_ROYAL_MAIL_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE
+     * @uses self::VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_OFFSITE_ADS_FEE
+     * @uses self::VALUE_OFFSITE_ADS_FEE_CREDIT
+     * @uses self::VALUE_PROMOTED_DISPLAY_FEE
+     * @uses self::VALUE_PROMOTED_DISPLAY_FEE_CREDIT
+     * @uses self::VALUE_USWHTFEDERAL
+     * @uses self::VALUE_USWHTFEDERAL_CREDIT
+     * @uses self::VALUE_USWHTSTATE
+     * @uses self::VALUE_USWHTSTATE_CREDIT
+     * @uses self::VALUE_EPRFEE
+     * @uses self::VALUE_EPRFEE_CREDIT
+     * @uses self::VALUE_CAPOST_RETURN_LABEL_FEE
+     * @uses self::VALUE_CAPOST_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_HERMES_RETURN_LABEL_FEE
+     * @uses self::VALUE_HERMES_RETURN_LABEL_FEE_CREDIT
+     * @uses self::VALUE_BANK_PAYOUT_FEE
+     * @uses self::VALUE_BANK_PAYOUT_FEE_CREDIT
+     * @uses self::VALUE_CHARITY_DONATION
+     * @uses self::VALUE_CHARITY_DONATION_CREDIT
+     * @uses self::VALUE_EXPRESS_PAYOUT_FEE
+     * @uses self::VALUE_EXPRESS_PAYOUT_FEE_CREDIT
+     * @uses self::VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE
+     * @uses self::VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE_CR
+     * @uses self::VALUE_DHLRETURN_LBL_SHIPPING_FEE
+     * @uses self::VALUE_DHLRETURN_LBL_SHIPPING_FEE_CREDIT
+     * @uses self::VALUE_REGULATORY_OPERATING_FEE
+     * @uses self::VALUE_REGULATORY_OPERATING_FEE_CREDIT
+     * @uses self::VALUE_DHLPAYMENT_PROCESSING_FEE
+     * @uses self::VALUE_DHLPAYMENT_PROCESSING_FEE_CREDIT
      * @return string[]
      */
     public static function getValidValues(): array
@@ -3238,10 +3560,52 @@ class AccountDetailEntryCodeType extends AbstractStructEnumBase
             self::VALUE_FINAL_VALUE_FEE_BELOW_STANDARD_CREDIT,
             self::VALUE_AD_FEE_EXPRESS,
             self::VALUE_AD_FEE_EXPRESS_CREDIT,
-            self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE,
-            self::VALUE_DEPOSIT_PROCESSING_VARIABLE_FEE_CREDIT,
+            self::VALUE_DEPOSIT_PROCESSING_FEE,
+            self::VALUE_DEPOSIT_PROCESSING_FEE_CREDIT,
             self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE,
             self::VALUE_DEPOSIT_PROCESSING_FIXED_FEE_CREDIT,
+            self::VALUE_FED_EX_RETURN_LABEL_FEE,
+            self::VALUE_FED_EX_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_AUPOST_RETURN_LABEL_FEE,
+            self::VALUE_AUPOST_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_UPS_CA_LABEL_FEE,
+            self::VALUE_UPS_CA_LABEL_FEE_CREDIT,
+            self::VALUE_FED_EX_CA_LABEL_FEE,
+            self::VALUE_FED_EX_CA_LABEL_FEE_CREDIT,
+            self::VALUE_HUBBED_RETURN_LABEL_FEE,
+            self::VALUE_HUBBED_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_ROYAL_MAIL_RETURN_LABEL_FEE,
+            self::VALUE_ROYAL_MAIL_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE,
+            self::VALUE_PARCEL_FORCE_POST_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_OFFSITE_ADS_FEE,
+            self::VALUE_OFFSITE_ADS_FEE_CREDIT,
+            self::VALUE_PROMOTED_DISPLAY_FEE,
+            self::VALUE_PROMOTED_DISPLAY_FEE_CREDIT,
+            self::VALUE_USWHTFEDERAL,
+            self::VALUE_USWHTFEDERAL_CREDIT,
+            self::VALUE_USWHTSTATE,
+            self::VALUE_USWHTSTATE_CREDIT,
+            self::VALUE_EPRFEE,
+            self::VALUE_EPRFEE_CREDIT,
+            self::VALUE_CAPOST_RETURN_LABEL_FEE,
+            self::VALUE_CAPOST_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_HERMES_RETURN_LABEL_FEE,
+            self::VALUE_HERMES_RETURN_LABEL_FEE_CREDIT,
+            self::VALUE_BANK_PAYOUT_FEE,
+            self::VALUE_BANK_PAYOUT_FEE_CREDIT,
+            self::VALUE_CHARITY_DONATION,
+            self::VALUE_CHARITY_DONATION_CREDIT,
+            self::VALUE_EXPRESS_PAYOUT_FEE,
+            self::VALUE_EXPRESS_PAYOUT_FEE_CREDIT,
+            self::VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE,
+            self::VALUE_HERMES_RETURN_LBL_SELLER_PAID_SHP_FEE_CR,
+            self::VALUE_DHLRETURN_LBL_SHIPPING_FEE,
+            self::VALUE_DHLRETURN_LBL_SHIPPING_FEE_CREDIT,
+            self::VALUE_REGULATORY_OPERATING_FEE,
+            self::VALUE_REGULATORY_OPERATING_FEE_CREDIT,
+            self::VALUE_DHLPAYMENT_PROCESSING_FEE,
+            self::VALUE_DHLPAYMENT_PROCESSING_FEE_CREDIT,
         ];
     }
 }

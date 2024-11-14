@@ -25,14 +25,6 @@ class MyMessagesSummaryType extends AbstractStructBase
      */
     protected ?array $FolderSummary = null;
     /**
-     * The NewAlertCount
-     * Meta information extracted from the WSDL
-     * - documentation: This field has been deprecated.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $NewAlertCount = null;
-    /**
      * The NewMessageCount
      * Meta information extracted from the WSDL
      * - documentation: The number of new messages that a given user has. Always returned for detail level ReturnSummary.
@@ -41,14 +33,6 @@ class MyMessagesSummaryType extends AbstractStructBase
      */
     protected ?int $NewMessageCount = null;
     /**
-     * The UnresolvedAlertCount
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $UnresolvedAlertCount = null;
-    /**
      * The FlaggedMessageCount
      * Meta information extracted from the WSDL
      * - documentation: The number of messages that have been flagged. Always returned for detail level ReturnSummary.
@@ -56,14 +40,6 @@ class MyMessagesSummaryType extends AbstractStructBase
      * @var int|null
      */
     protected ?int $FlaggedMessageCount = null;
-    /**
-     * The TotalAlertCount
-     * Meta information extracted from the WSDL
-     * - documentation: This field has been deprecated.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $TotalAlertCount = null;
     /**
      * The TotalMessageCount
      * Meta information extracted from the WSDL
@@ -91,33 +67,24 @@ class MyMessagesSummaryType extends AbstractStructBase
     /**
      * Constructor method for MyMessagesSummaryType
      * @uses MyMessagesSummaryType::setFolderSummary()
-     * @uses MyMessagesSummaryType::setNewAlertCount()
      * @uses MyMessagesSummaryType::setNewMessageCount()
-     * @uses MyMessagesSummaryType::setUnresolvedAlertCount()
      * @uses MyMessagesSummaryType::setFlaggedMessageCount()
-     * @uses MyMessagesSummaryType::setTotalAlertCount()
      * @uses MyMessagesSummaryType::setTotalMessageCount()
      * @uses MyMessagesSummaryType::setNewHighPriorityCount()
      * @uses MyMessagesSummaryType::setTotalHighPriorityCount()
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesFolderSummaryType[] $folderSummary
-     * @param int $newAlertCount
      * @param int $newMessageCount
-     * @param int $unresolvedAlertCount
      * @param int $flaggedMessageCount
-     * @param int $totalAlertCount
      * @param int $totalMessageCount
      * @param int $newHighPriorityCount
      * @param int $totalHighPriorityCount
      */
-    public function __construct(?array $folderSummary = null, ?int $newAlertCount = null, ?int $newMessageCount = null, ?int $unresolvedAlertCount = null, ?int $flaggedMessageCount = null, ?int $totalAlertCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null)
+    public function __construct(?array $folderSummary = null, ?int $newMessageCount = null, ?int $flaggedMessageCount = null, ?int $totalMessageCount = null, ?int $newHighPriorityCount = null, ?int $totalHighPriorityCount = null)
     {
         $this
             ->setFolderSummary($folderSummary)
-            ->setNewAlertCount($newAlertCount)
             ->setNewMessageCount($newMessageCount)
-            ->setUnresolvedAlertCount($unresolvedAlertCount)
             ->setFlaggedMessageCount($flaggedMessageCount)
-            ->setTotalAlertCount($totalAlertCount)
             ->setTotalMessageCount($totalMessageCount)
             ->setNewHighPriorityCount($newHighPriorityCount)
             ->setTotalHighPriorityCount($totalHighPriorityCount);
@@ -189,29 +156,6 @@ class MyMessagesSummaryType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get NewAlertCount value
-     * @return int|null
-     */
-    public function getNewAlertCount(): ?int
-    {
-        return $this->NewAlertCount;
-    }
-    /**
-     * Set NewAlertCount value
-     * @param int $newAlertCount
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
-     */
-    public function setNewAlertCount(?int $newAlertCount = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($newAlertCount) && !(is_int($newAlertCount) || ctype_digit($newAlertCount))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($newAlertCount, true), gettype($newAlertCount)), __LINE__);
-        }
-        $this->NewAlertCount = $newAlertCount;
-        
-        return $this;
-    }
-    /**
      * Get NewMessageCount value
      * @return int|null
      */
@@ -235,29 +179,6 @@ class MyMessagesSummaryType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get UnresolvedAlertCount value
-     * @return int|null
-     */
-    public function getUnresolvedAlertCount(): ?int
-    {
-        return $this->UnresolvedAlertCount;
-    }
-    /**
-     * Set UnresolvedAlertCount value
-     * @param int $unresolvedAlertCount
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
-     */
-    public function setUnresolvedAlertCount(?int $unresolvedAlertCount = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($unresolvedAlertCount) && !(is_int($unresolvedAlertCount) || ctype_digit($unresolvedAlertCount))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($unresolvedAlertCount, true), gettype($unresolvedAlertCount)), __LINE__);
-        }
-        $this->UnresolvedAlertCount = $unresolvedAlertCount;
-        
-        return $this;
-    }
-    /**
      * Get FlaggedMessageCount value
      * @return int|null
      */
@@ -277,29 +198,6 @@ class MyMessagesSummaryType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($flaggedMessageCount, true), gettype($flaggedMessageCount)), __LINE__);
         }
         $this->FlaggedMessageCount = $flaggedMessageCount;
-        
-        return $this;
-    }
-    /**
-     * Get TotalAlertCount value
-     * @return int|null
-     */
-    public function getTotalAlertCount(): ?int
-    {
-        return $this->TotalAlertCount;
-    }
-    /**
-     * Set TotalAlertCount value
-     * @param int $totalAlertCount
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType
-     */
-    public function setTotalAlertCount(?int $totalAlertCount = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($totalAlertCount) && !(is_int($totalAlertCount) || ctype_digit($totalAlertCount))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($totalAlertCount, true), gettype($totalAlertCount)), __LINE__);
-        }
-        $this->TotalAlertCount = $totalAlertCount;
         
         return $this;
     }

@@ -45,7 +45,8 @@ class SetUserNotesRequestType extends AbstractRequestType
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for the order line item to which the My eBay note will be attached. Notes can only be added to order line items that are currently being tracked in My eBay. Buyers can view user notes made on order line items in the
      * <b>PrivateNotes</b> field of the <b>WonList</b> container in <b>GetMyeBayBuying</b>, and sellers can view user notes made on order line items in the <b>PrivateNotes</b> field of the <b>SoldList</b> and <b>DeletedFromSoldList</b> containers in
-     * <b>GetMyeBaySellinging</b>. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
+     * <b>GetMyeBaySellinging</b>. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning
+     * in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions before this time.
      * - minOccurs: 0
      * @var string|null
      */

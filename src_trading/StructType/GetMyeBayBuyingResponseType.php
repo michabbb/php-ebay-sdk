@@ -99,14 +99,6 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      */
     protected ?array $SecondChanceOffer = null;
     /**
-     * The BidAssistantList
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\BidGroupArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $BidAssistantList = null;
-    /**
      * The DeletedFromWonList
      * Meta information extracted from the WSDL
      * - documentation: This container consists of the auction items on which the eBay user has won but deleted from their My eBay page. This container will be returned if the eBay user has won one or more auction items but have deleted these items from My
@@ -147,7 +139,6 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @uses GetMyeBayBuyingResponseType::setFavoriteSearches()
      * @uses GetMyeBayBuyingResponseType::setFavoriteSellers()
      * @uses GetMyeBayBuyingResponseType::setSecondChanceOffer()
-     * @uses GetMyeBayBuyingResponseType::setBidAssistantList()
      * @uses GetMyeBayBuyingResponseType::setDeletedFromWonList()
      * @uses GetMyeBayBuyingResponseType::setDeletedFromLostList()
      * @uses GetMyeBayBuyingResponseType::setUserDefinedList()
@@ -160,12 +151,11 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches
      * @param \macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers
      * @param \macropage\ebaysdk\trading\StructType\ItemType[] $secondChanceOffer
-     * @param \macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList
      * @param \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromWonList
      * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList
      * @param \macropage\ebaysdk\trading\StructType\UserDefinedListType[] $userDefinedList
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\BuyingSummaryType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $watchList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $wonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, ?array $secondChanceOffer = null, ?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList = null, ?array $userDefinedList = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\BuyingSummaryType $buyingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $watchList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bestOfferList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $wonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $lostList = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSearchListType $favoriteSearches = null, ?\macropage\ebaysdk\trading\StructType\MyeBayFavoriteSellerListType $favoriteSellers = null, ?array $secondChanceOffer = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromWonList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromLostList = null, ?array $userDefinedList = null)
     {
         $this
             ->setBuyingSummary($buyingSummary)
@@ -177,7 +167,6 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
             ->setFavoriteSearches($favoriteSearches)
             ->setFavoriteSellers($favoriteSellers)
             ->setSecondChanceOffer($secondChanceOffer)
-            ->setBidAssistantList($bidAssistantList)
             ->setDeletedFromWonList($deletedFromWonList)
             ->setDeletedFromLostList($deletedFromLostList)
             ->setUserDefinedList($userDefinedList);
@@ -397,25 +386,6 @@ class GetMyeBayBuyingResponseType extends AbstractResponseType
             throw new InvalidArgumentException(sprintf('The SecondChanceOffer property can only contain items of type \macropage\ebaysdk\trading\StructType\ItemType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->SecondChanceOffer[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get BidAssistantList value
-     * @return \macropage\ebaysdk\trading\ArrayType\BidGroupArrayType|null
-     */
-    public function getBidAssistantList(): ?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType
-    {
-        return $this->BidAssistantList;
-    }
-    /**
-     * Set BidAssistantList value
-     * @param \macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBayBuyingResponseType
-     */
-    public function setBidAssistantList(?\macropage\ebaysdk\trading\ArrayType\BidGroupArrayType $bidAssistantList = null): self
-    {
-        $this->BidAssistantList = $bidAssistantList;
         
         return $this;
     }

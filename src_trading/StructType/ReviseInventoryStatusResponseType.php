@@ -19,8 +19,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * The InventoryStatus
      * Meta information extracted from the WSDL
      * - documentation: One <b>InventoryStatus</b> container is returned for each item or item variation that was revised. Whether updating the price and/or quantity of a single-variation listing or a specific variation within a multiple-variation listing,
-     * the limit of items or item variations that can be modified with one call is four. <br> <br> Note that all four elements of this container are returned even if these fields would not supplied in the call request. The <b>SKU</b> field is returned as an
-     * empty tag if it is not defined for a single-variation listing.
+     * the limit of items or item variations that can be modified with one call is four. <br> <br> Note that the <b>SKU</b> field is returned as an empty tag if it is not defined for a single-variation listing.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\InventoryStatusType[]
@@ -30,7 +29,7 @@ class ReviseInventoryStatusResponseType extends AbstractResponseType
      * The Fees
      * Meta information extracted from the WSDL
      * - documentation: A <b>Fees</b> container is returned for each fixed-price listing that was modified with the <b>ReviseInventoryStatus</b> call. This container consists of the estimated listing fees for the revised listing, and the listing is
-     * identified in the <b>ItemID</b> field. Each type of fee is returned even if it is not appplicable (has a value of <code>0.0</code>. The Final Value Fee (FVF) is not in this container, as this value cannot be determined until a sale is made. Note that
+     * identified in the <b>ItemID</b> field. Each type of fee is returned even if it is not applicable (has a value of <code>0.0</code>. The transaction fees are not in this container, as these values cannot be determined until a sale is made. Note that
      * these fees are at the listing level, so if multiple variations within a multiple-variation listing were modified, the fees in this container would be cumulative totals, and would not single out the fees associated with each modified item variation.
      * <br> <br> Please note that since fees are returned at the listing level, it is possible that the response will include one <b>Fees</b> container and four <b>InventoryStatus</b> containers if you made revisions to four different item variations within
      * the same multiple-variation listing.

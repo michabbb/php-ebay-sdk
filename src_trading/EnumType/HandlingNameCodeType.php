@@ -9,7 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for HandlingNameCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: How packaging/handling cost is to be determined for <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Listing-AnItem.html#CombinedInvoice">Combined Invoice</a> orders.
+ * - documentation: How packaging/handling cost is to be determined for <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/manage-fulfill-combine-invoices.html">Combined Invoice</a> orders.
  * @subpackage Enumerations
  */
 class HandlingNameCodeType extends AbstractStructEnumBase

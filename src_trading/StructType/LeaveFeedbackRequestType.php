@@ -50,7 +50,8 @@ class LeaveFeedbackRequestType extends AbstractRequestType
      * - documentation: Unique identifier for an eBay order line item. If there are multiple order line items between the two order partners that still require Feedback, the <b>TransactionID</b> is required along with the corresponding <b>ItemID</b> and
      * <b>TargetUser</b> to isolate the targeted order line item. If an <b>OrderLineItemID</b> is included in the response to identify a specific order line item, none of the preceding fields (<b>ItemID</b>, <b>TransactionID</b>, <b>TargetUser</b>) are
      * needed. Feedback cannot be left for order line items with creation dates more than 60 days in the past. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an
-     * auction listing.
+     * auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions
+     * before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -58,9 +59,9 @@ class LeaveFeedbackRequestType extends AbstractRequestType
     /**
      * The TargetUser
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the recipient user about whom the Feedback is being left. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
-     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
-     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
+     * - documentation: Specifies the recipient user about whom the Feedback is being left. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user. <br><br>For
+     * GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will
+     * be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -88,9 +89,7 @@ class LeaveFeedbackRequestType extends AbstractRequestType
      * The ItemArrivedWithinEDDType
      * Meta information extracted from the WSDL
      * - documentation: This field or the <b>ItemDeliveredWithinEDD</b> field should be included if it is the buyer leaving feedback for the seller. This field will inform eBay about whether or not the buyer received the order line item within the estimated
-     * delivery date, which is established once a buyer purchases or commits to buy an item. <br> <br> <span class="tablenote"><b>Note:</b> A new "Late shipment rate" metric became a new component of Seller Standards beginning in February 2016. On-time
-     * shipping means that the seller shipped the item before the "handling time" expired and/or the item was received by the buyer within the estimated delivery date window, which is established once the buyer pays for the order line item. Previously, a
-     * seller's account could be dinged just for getting a low rating for the "shippping time" Detailed Seller Rating. </span>
+     * delivery date, which is established once a buyer purchases or commits to buy an item.
      * - minOccurs: 0
      * @var string|null
      */
@@ -100,9 +99,7 @@ class LeaveFeedbackRequestType extends AbstractRequestType
      * Meta information extracted from the WSDL
      * - documentation: This field or the <b>ItemArrivedWithinEDDType</b> field should be included if it is the buyer leaving feedback for the seller. This field will inform eBay about whether or not the buyer received the order line item within the
      * estimated delivery date window, which is established once a buyer purchases or commits to buy an item. The value of this field is set to <code>true</code> if the item did arrive within the estimated delivery date, or <code>false</code> if the item
-     * arrived past the estimated delivery date. <br> <br> <span class="tablenote"><b>Note:</b> A new "Late shipment rate" metric became a new component of Seller Standards beginning in February 2016. On-time shipping means that the seller shipped the item
-     * before the "handling time" expired and/or the item was received by the buyer within the estimated delivery date window, which is established once the buyer pays for the order line item. Previously, a seller's account could be dinged just for getting
-     * a low rating for the "shippping time" Detailed Seller Rating. </span>
+     * arrived past the estimated delivery date.
      * - minOccurs: 0
      * @var bool|null
      */

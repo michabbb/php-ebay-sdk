@@ -88,11 +88,8 @@ class ListingTypeCodeType extends AbstractStructEnumBase
      * duration for all eBay marketplaces with the following exceptions: <ul> <li>The following eBay Motors US categories are exempt from this change: <em>Cars & Trucks</em> (6001), <em>Motorcycles</em> (6024), <em>Other Vehicles & Trailers</em> (6038),
      * <em>Boats</em> (26429), <em>Powersports</em> (66466).</li> <li>All child categories under <em>Cars, Motorcycles & Vehicles</em> (9800) categories on the eBay UK and eBay Italy sites are also exempt from this change. </li> </ul> <br> With the 'GTC'
      * listing duration, the listing will remain active as long as the listing shows that inventory is available for purchase (available quantity is '1' or more). For sellers listing motor vehicles on the eBay US Motors, eBay UK, or eBay Italy sites, it is
-     * recommended that the seller uses the <b>GetCategoryFeatures</b> call to retrieve the supported listing durations for their particular marketplace and category. <br> <br> <span class="tablenote"><b>Note: </b> As of July 1, 2019, the Good 'Til
-     * Cancelled renewal schedule has been modified from every 30 days to once per calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the
-     * following month only has 30 days, the renewal will happen on the 30th in the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
-     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
-     * change. </span>
+     * recommended that the seller uses the <b>GetCategoryFeatures</b> call to retrieve the supported listing durations for their particular marketplace and category. <br> <br> <span class="tablenote"><b>Note: </b> As long as a fixed-price listing has
+     * inventory available, or if the out-of-stock control feature is being used, GTC listings are automatically renewed each month according to the calendar day. </span>
      * @return string 'FixedPriceItem'
      */
     const VALUE_FIXED_PRICE_ITEM = 'FixedPriceItem';

@@ -10,9 +10,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for CustomPoliciesType StructType
  * Meta information extracted from the WSDL
- * - documentation: <span class="tablenote"><b>Note:</b> Support for extended producer responsibility regulations and custom policies will become active mid-December 2021. Additional resources such as the custom policies resource (for the <b>Account
- * API</b>), the <b>getExtendedProducerResponsibilityPolicies</b> method (for the <b>Sell Metadata API</b>), and the <a href="https://www.ebay.com/help/selling/custom-policies/custom-policies?id=5311" target="_blank">Custom Policies</a> help page will
- * also become active.</span> This type is used by the <strong>CustomPolicies</strong> container, which specifies custom policy IDs. A custom policy ID refers to the relevant policy created for compliance and other purposes.
+ * - documentation: This type is used by the <strong>CustomPolicies</strong> container, which specifies custom policy IDs. A custom policy ID refers to the relevant policy created for product compliance and other purposes. For more information, see the
+ * <b>Custom Policies</b> page for your site (for example, <a href="https://www.ebay.fr/help/selling/custom-policies/custom-policies?id=5311" target="_blank">https://www.ebay.fr/help/selling/custom-policies/custom-policies?id=5311</a>). To create and
+ * manage custom policies, use the <a href="https://developer.ebay.com/api-docs/sell/account/resources/methods#h2-custom_policy" target="_blank">custom_policy</a> resource of the <b>Account API</b>.
  * @subpackage Structs
  */
 class CustomPoliciesType extends AbstractStructBase
@@ -20,23 +20,46 @@ class CustomPoliciesType extends AbstractStructBase
     /**
      * The TakeBackPolicyID
      * Meta information extracted from the WSDL
-     * - documentation: This field is used if the seller wants to apply a take-back policy to the listing. The seller will specify the identifier of the take-back policy in this field. The law in some countries may require sellers to take back a used
-     * product when the buyer buys a new product. Use this field to specify one take-back policy ID for the listing. To create and manage your takeback policies, see the <a href="../../../../../../api-docs/sell/account/overview.html" target="_blank">Account
-     * API</a>.
+     * - documentation: This field is used if the seller wants to apply a <i>global</i> take-back policy to the listing. The law in some countries may require sellers to take back a used product when the buyer buys a new product.<br /><br />Use this field
+     * to specify one <i>global</i> take-back policy ID for the listing. <span class="tablenote"><strong>Note: </strong> For countries that support country-specific policies, use <b>RegionalTakeBackPolicies</b> to apply them to a listing. </span>
      * - minOccurs: 0
      * @var int|null
      */
     protected ?int $TakeBackPolicyID = null;
     /**
+     * The RegionalTakeBackPolicies
+     * Meta information extracted from the WSDL
+     * - documentation: The list of unique identifiers indicating the seller-created country-specific take-back policies that will be used for a listing. The law in some countries may require sellers to take back a used product when the buyer buys a new
+     * product.<br /><br /> Each listing may include one (1) country-specific take-back policy for <i>each</i> of the following countries:<ul><li>United Kingdom [GB]</li><li>Germany [DE]</li><li>France [FR]</li><li>Italy [IT]</li><li>Spain [ES]</li></ul>
+     * <span class="tablenote"><strong>Note: </strong> Take-back policies that apply to <i>all</i> countries to which a seller ships are specified using <b>TakeBackPolicyID</b>. </span>
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType|null
+     */
+    protected ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $RegionalTakeBackPolicies = null;
+    /**
      * The ProductCompliancePolicyID
      * Meta information extracted from the WSDL
-     * - documentation: This field is used if the seller wants to apply one or more product compliance policies to the listing. A separate <b>ProductCompliancePolicyID</b> field is required for each policy to be applied, and the seller specifies the
-     * identifier of each policy in this field. To create and manage custom policies, see the <a href="../../../../../../api-docs/sell/account/overview.html" target="_blank">Account API</a>.
+     * - documentation: This field is used if the seller wants to apply one or more seller-created <i>global</i> product compliance policies that will be used in a listing. A separate <b>ProductCompliancePolicyID</b> field is required for each policy to be
+     * applied, and the seller specifies the identifier of each policy in this field.<br /> Product compliance policies provide buyers with important information and disclosures about products. For example, if you sell batteries and specific disclosures are
+     * required to be shared with all potential buyers, your global product compliance policy could contain the required disclosures.<br /><br />A maximum of six (6) global product compliance policies may be applied to each listing. <span
+     * class="tablenote"><strong>Note: </strong> For countries that support country-specific policies, use <b>RegionalProductCompliancePolicies</b> to apply them to a listing. </span>
      * - maxOccurs: 5
      * - minOccurs: 0
      * @var int[]
      */
     protected ?array $ProductCompliancePolicyID = null;
+    /**
+     * The RegionalProductCompliancePolicies
+     * Meta information extracted from the WSDL
+     * - documentation: The set of compliance policies for indicating the seller-created country-specific product compliance policies that that will be used for a listing.<br /><br /> Product compliance policies provide buyers with important information and
+     * disclosures about products. For example, if you sell batteries in a country requiring disclosures that apply <i>only</i> to that country, a country-specific product compliance policy could contain this information.<br /><br /> Each listing may
+     * include up to six (6) product compliance policies for <i>each</i> of the following countries:<ul><li>United Kingdom [GB]</li><li>Germany [DE]</li><li>France [FR]</li><li>Italy [IT]</li><li>Spain [ES]</li></ul> For example, if a seller offers products
+     * in the UK, Germany, and Italy, each of which requires custom product compliance information, up to 18 policies (in other words, 6 policies x 3 countries) may be included for each listing. <span class="tablenote"><strong>Note: </strong> Product
+     * compliance policies that apply to <i>all</i> countries to which a seller ships are specified using <b>ProductCompliancePolicyID</b>. </span>
+     * - minOccurs: 0
+     * @var \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType|null
+     */
+    protected ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $RegionalProductCompliancePolicies = null;
     /**
      * The any
      * @var \DOMDocument|string|null
@@ -45,17 +68,23 @@ class CustomPoliciesType extends AbstractStructBase
     /**
      * Constructor method for CustomPoliciesType
      * @uses CustomPoliciesType::setTakeBackPolicyID()
+     * @uses CustomPoliciesType::setRegionalTakeBackPolicies()
      * @uses CustomPoliciesType::setProductCompliancePolicyID()
+     * @uses CustomPoliciesType::setRegionalProductCompliancePolicies()
      * @uses CustomPoliciesType::setAny()
      * @param int $takeBackPolicyID
+     * @param \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalTakeBackPolicies
      * @param int[] $productCompliancePolicyID
+     * @param \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalProductCompliancePolicies
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $takeBackPolicyID = null, ?array $productCompliancePolicyID = null, $any = null)
+    public function __construct(?int $takeBackPolicyID = null, ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalTakeBackPolicies = null, ?array $productCompliancePolicyID = null, ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalProductCompliancePolicies = null, $any = null)
     {
         $this
             ->setTakeBackPolicyID($takeBackPolicyID)
+            ->setRegionalTakeBackPolicies($regionalTakeBackPolicies)
             ->setProductCompliancePolicyID($productCompliancePolicyID)
+            ->setRegionalProductCompliancePolicies($regionalProductCompliancePolicies)
             ->setAny($any);
     }
     /**
@@ -78,6 +107,25 @@ class CustomPoliciesType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($takeBackPolicyID, true), gettype($takeBackPolicyID)), __LINE__);
         }
         $this->TakeBackPolicyID = $takeBackPolicyID;
+        
+        return $this;
+    }
+    /**
+     * Get RegionalTakeBackPolicies value
+     * @return \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType|null
+     */
+    public function getRegionalTakeBackPolicies(): ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType
+    {
+        return $this->RegionalTakeBackPolicies;
+    }
+    /**
+     * Set RegionalTakeBackPolicies value
+     * @param \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalTakeBackPolicies
+     * @return \macropage\ebaysdk\trading\StructType\CustomPoliciesType
+     */
+    public function setRegionalTakeBackPolicies(?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalTakeBackPolicies = null): self
+    {
+        $this->RegionalTakeBackPolicies = $regionalTakeBackPolicies;
         
         return $this;
     }
@@ -156,9 +204,28 @@ class CustomPoliciesType extends AbstractStructBase
         return $this;
     }
     /**
+     * Get RegionalProductCompliancePolicies value
+     * @return \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType|null
+     */
+    public function getRegionalProductCompliancePolicies(): ?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType
+    {
+        return $this->RegionalProductCompliancePolicies;
+    }
+    /**
+     * Set RegionalProductCompliancePolicies value
+     * @param \macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalProductCompliancePolicies
+     * @return \macropage\ebaysdk\trading\StructType\CustomPoliciesType
+     */
+    public function setRegionalProductCompliancePolicies(?\macropage\ebaysdk\trading\ArrayType\CountryPoliciesArrayType $regionalProductCompliancePolicies = null): self
+    {
+        $this->RegionalProductCompliancePolicies = $regionalProductCompliancePolicies;
+        
+        return $this;
+    }
+    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

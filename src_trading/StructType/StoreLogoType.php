@@ -16,25 +16,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class StoreLogoType extends AbstractStructBase
 {
     /**
-     * The LogoID
-     * Meta information extracted from the WSDL
-     * - documentation: Store logo ID (use GetStoreOptions to get the list of valid logo IDs).
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $LogoID = null;
-    /**
-     * The Name
-     * Meta information extracted from the WSDL
-     * - documentation: Store logo name. Provides a user-friendly name for the logo.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $Name = null;
-    /**
      * The URL
      * Meta information extracted from the WSDL
-     * - documentation: URL of the logo. Must have a .gif or .jpg extention. Specified when you are using a customized logo.
+     * - documentation: The URL of the seller's store logo.
      * - minOccurs: 0
      * @var string|null
      */
@@ -46,68 +30,16 @@ class StoreLogoType extends AbstractStructBase
     protected $any = null;
     /**
      * Constructor method for StoreLogoType
-     * @uses StoreLogoType::setLogoID()
-     * @uses StoreLogoType::setName()
      * @uses StoreLogoType::setURL()
      * @uses StoreLogoType::setAny()
-     * @param int $logoID
-     * @param string $name
      * @param string $uRL
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?int $logoID = null, ?string $name = null, ?string $uRL = null, $any = null)
+    public function __construct(?string $uRL = null, $any = null)
     {
         $this
-            ->setLogoID($logoID)
-            ->setName($name)
             ->setURL($uRL)
             ->setAny($any);
-    }
-    /**
-     * Get LogoID value
-     * @return int|null
-     */
-    public function getLogoID(): ?int
-    {
-        return $this->LogoID;
-    }
-    /**
-     * Set LogoID value
-     * @param int $logoID
-     * @return \macropage\ebaysdk\trading\StructType\StoreLogoType
-     */
-    public function setLogoID(?int $logoID = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($logoID) && !(is_int($logoID) || ctype_digit($logoID))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($logoID, true), gettype($logoID)), __LINE__);
-        }
-        $this->LogoID = $logoID;
-        
-        return $this;
-    }
-    /**
-     * Get Name value
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->Name;
-    }
-    /**
-     * Set Name value
-     * @param string $name
-     * @return \macropage\ebaysdk\trading\StructType\StoreLogoType
-     */
-    public function setName(?string $name = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($name) && !is_string($name)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($name, true), gettype($name)), __LINE__);
-        }
-        $this->Name = $name;
-        
-        return $this;
     }
     /**
      * Get URL value
@@ -135,7 +67,7 @@ class StoreLogoType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

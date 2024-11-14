@@ -27,7 +27,7 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The Border
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> The Picture Border feature is no longer available on any eBay Marketplace sites, so this value should not be used in Add/Revise/Relist calls, and will not be returned in 'Get' calls. </span> <br>
+     * - documentation: <span class="tablenote"><b>Note:</b> The Picture Border feature is no longer available on any eBay marketplace site, so this value should not be used in Add/Revise/Relist calls, and will not be returned in 'Get' calls. </span> <br>
      * Defines the availability of the Picture Border feature for the site.
      * - minOccurs: 0
      * @var string|null
@@ -36,8 +36,8 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The Highlight
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> The Highlight feature is no longer available on any eBay Marketplace sites, so this value should not be used in Add/Revise/Relist calls, and will not be returned in 'Get' calls. </span> <br>
-     * Defines the availability of the Highlight feature for the site.
+     * - documentation: <span class="tablenote"><b>Note:</b> The Highlight feature is no longer available on any eBay marketplace, so this value should not be used in Add/Revise/Relist calls, and will not be returned in 'Get' calls. </span> <br> Defines the
+     * availability of the Highlight feature for the site.
      * - minOccurs: 0
      * @var string|null
      */
@@ -45,7 +45,7 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The GiftIcon
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> The Gift Icon feature is no longer available on any eBay Marketplace sites. </span> <br> Defines the availability of the Gift Icon feature for the site.
+     * - documentation: <span class="tablenote"><b>Note:</b> The Gift Icon feature is no longer available on any eBay marketplace. </span> <br> Defines the availability of the Gift Icon feature for the site.
      * - minOccurs: 0
      * @var string|null
      */
@@ -53,8 +53,8 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The HomePageFeatured
      * Meta information extracted from the WSDL
-     * - documentation: The enumeration value returned in this field indicates whether or not the Home Page Featured feature is enabled for the eBay site. If this feature is available for an eBay site, the seller can pass in <code>HomePageFeatured</code> as
-     * an enumeration value in the <b>ListingEnhancement</b> field of an Add/Revise/Relist call.
+     * - documentation: <span class="tablenote"><b>Note:</b> Home Page Featured is no longer available on any eBay marketplace. </span> <br> The enumeration value returned in this field indicates whether or not the Home Page Featured feature is enabled for
+     * the eBay site. If this feature is available for an eBay site, the seller can pass in <code>HomePageFeatured</code> as an enumeration value in the <b>ListingEnhancement</b> field of an Add/Revise/Relist call.
      * - minOccurs: 0
      * @var string|null
      */
@@ -62,7 +62,8 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The FeaturedFirst
      * Meta information extracted from the WSDL
-     * - documentation: The enumeration value returned in this field indicates whether or not the Featured First feature is enabled for the eBay site. As of October 2017, this listing feature is only available to Top-Rated Sellers on the Germany site.
+     * - documentation: <span class="tablenote"><b>Note:</b> Featured First is no longer available on any eBay marketplace. </span> <br> The enumeration value returned in this field indicates whether or not the Featured First feature is enabled for the eBay
+     * site. As of October 2017, this listing feature is only available to Top-Rated Sellers on the Germany site.
      * - minOccurs: 0
      * @var string|null
      */
@@ -70,7 +71,8 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The FeaturedPlus
      * Meta information extracted from the WSDL
-     * - documentation: The enumeration value returned in this field indicates whether or not the Featured Plus feature is enabled for the eBay site.
+     * - documentation: <span class="tablenote"><b>Note:</b> Featured Plus is no longer available on any eBay marketplace. </span> <br> The enumeration value returned in this field indicates whether or not the Featured Plus feature is enabled for the eBay
+     * site.
      * - minOccurs: 0
      * @var string|null
      */
@@ -78,7 +80,7 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * The ProPack
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> The Pro Pack Bundle feature is no longer available on any eBay Marketplace sites. </span> <br> Defines the availability of the Pro Pack Bundle for the site.
+     * - documentation: <span class="tablenote"><b>Note:</b> The Pro Pack Bundle feature is no longer available on any eBay marketplace. </span> <br> Defines the availability of the Pro Pack Bundle for the site.
      * - minOccurs: 0
      * @var string|null
      */
@@ -401,7 +403,7 @@ class ListingFeatureDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -11,8 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * This class stands for PaymentsInformationType StructType
  * Meta information extracted from the WSDL
  * - documentation: This type defines the <strong>MonetaryDetails</strong> container, which consists of detailed information about one or more exchanges of funds that occur between the buyer, seller, eBay, and eBay partners during the lifecycle of an
- * order, as well as detailed information about a merchant's refund (or store credit) to a buyer who has returned an In-Store Pickup item. <br/><br/> <span class="tablenote"> <strong>Note:</strong> At this time, the In-Store Pickup feature is generally
- * only available to large retail merchants, and can only be applied to multi-quantity, fixed-price listings. </span>
+ * order, as well as detailed information about a seller's refund (or store credit) to a buyer who has returned an item.
  * @subpackage Structs
  */
 class PaymentsInformationType extends AbstractStructBase
@@ -28,10 +27,9 @@ class PaymentsInformationType extends AbstractStructBase
     /**
      * The Refunds
      * Meta information extracted from the WSDL
-     * - documentation: This container consists of an array of one or more <strong>Refund</strong> containers, and each <strong>Refund</strong> container consists of detailed information about a merchant's refund (or store credit) to a buyer who has
-     * returned an In-Store Pickup item. <br/><br/> This container is only returned if the buyer has returned an In-Store Pickup item to the merchant at a physical store, and the merchant has notified eBay through the <strong>ORDER.RETURNED</strong>
-     * notification of the Inbound Notifications API. <br/><br/> <span class="tablenote"> <strong>Note:</strong> At this time, the In-Store Pickup feature is generally only available to large retail merchants, and can only be applied to multi-quantity,
-     * fixed-price listings. </span>
+     * - documentation: This container consists of an array of one or more <strong>Refund</strong> containers, and each <strong>Refund</strong> container consists of detailed information about a seller's refund (or store credit) to a buyer who has returned
+     * an item. <br/><br/> This container is also returned if the buyer has returned an In-Store Pickup item to the merchant at a physical store, and the merchant has notified eBay through the <strong>ORDER.RETURNED</strong> notification of the Inbound
+     * Notifications API. <br/><br/> <span class="tablenote"> <strong>Note:</strong> At this time, the In-Store Pickup feature is generally only available to large retail merchants, and can only be applied to multi-quantity, fixed-price listings. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\RefundInformationType|null
      */
@@ -98,7 +96,7 @@ class PaymentsInformationType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

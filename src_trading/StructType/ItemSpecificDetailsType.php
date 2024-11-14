@@ -30,8 +30,9 @@ class ItemSpecificDetailsType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: This value is the maximum number of corresponding name values that can be used per Item Specific when creating, revising, or relisting an item on the specified site. An example of an Item Specific that might have multiple values is
      * 'Features'. A product can have multiple features, hence multiple features can be passed in through multiple <b>ItemSpecifics.NameValueList.Value</b> fields. <br><br> Once you know the site threshold, it can also be helpful to know specific Item
-     * Specifics in a listing category that can have more than value, such as 'Features'. To retrieve this information, you can call <b>GetCategorySpecifics</b> for a category and check the <b>NameRecommendation.ValidationRules.MaxValues</b> field for each
-     * Item Specific in the response.
+     * Specifics in a category that can have more than one value, such as 'Features'. Multiple values can only be specified for an Item Specific if the corresponding <a
+     * href="/api-docs/commerce/taxonomy/resources/category_tree/methods/getItemAspectsForCategory#response.aspects.aspectConstraint.itemToAspectCardinality" target="_blank">itemToAspectCardinality</a> field of the <b>getItemAspectsForCategory</b> method
+     * shows a value of <code>MULTI</code>.
      * - minOccurs: 0
      * @var int|null
      */
@@ -242,7 +243,7 @@ class ItemSpecificDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

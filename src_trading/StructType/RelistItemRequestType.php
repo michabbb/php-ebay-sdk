@@ -30,11 +30,11 @@ class RelistItemRequestType extends AbstractRequestType
     /**
      * The DeletedField
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the name of the field to delete from a listing. See <a href="https://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Listings-RelistingItems.html">Relisting Items</a> for rules on deleting values
-     * when relisting items. Also see the relevant field descriptions to determine when to use <b>DeletedField</b> (and potential consequences). The request can contain zero, one, or many instances of <b>DeletedField</b> (one for each field to be deleted).
+     * - documentation: Specifies the name of the field to delete from a listing. See <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/relist-item.html" target="_blank">Relist Items</a> for rules on deleting values when
+     * relisting items. Also see the relevant field descriptions to determine when to use <b>DeletedField</b> (and potential consequences). The request can contain zero, one, or many instances of <b>DeletedField</b> (one for each field to be deleted).
      * <br><br> Case-sensitivity must be taken into account when using a <b>DeletedField</b> tag to delete a field. The value passed into a <b>DeletedField</b> tag must either match the case of the schema element names in the full field path
-     * (Item.PictureDetails.GalleryURL), or the initial letter of each schema element name in the full field path must be lowercase (item.pictureDetails.galleryURL). Do not change the case of letters in the middle of a field name. For example,
-     * item.picturedetails.galleryUrl is not allowed.<br><br> To delete a listing enhancement like 'BoldTitle', specify the value you are deleting; for example, Item.ListingEnhancement[BoldTitle].
+     * (Item.PictureDetails.PictureURL), or the initial letter of each schema element name in the full field path must be lowercase (item.pictureDetails.pictureURL). Do not change the case of letters in the middle of a field name. For example,
+     * item.picturedetails.pictureURL is not allowed.<br><br> To delete a listing enhancement like 'BoldTitle', specify the value you are deleting; for example, Item.ListingEnhancement[BoldTitle].
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]

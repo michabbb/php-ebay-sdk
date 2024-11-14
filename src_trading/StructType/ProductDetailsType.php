@@ -20,7 +20,7 @@ class ProductDetailsType extends AbstractStructBase
     /**
      * The ProductIdentifierUnavailableText
      * Meta information extracted from the WSDL
-     * - documentation: This field contains the actual text that should be passed into the relevant product identifier fields (e.g. <b>ProductListingDetails.UPC</b> in an <b>AddItem<.b> call) when creating a listing. Some eBay categories require one or more
+     * - documentation: This field contains the actual text that should be passed into the relevant product identifier fields (e.g. <b>ProductListingDetails.UPC</b> in an <b>AddItem</b> call) when creating a listing. Some eBay categories require one or more
      * Global Trade Item Numbers (GTINs), so either the actual GTIN or this substitute text must be passed into the relevant fields.
      * - minOccurs: 0
      * @var string|null
@@ -70,7 +70,7 @@ class ProductDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

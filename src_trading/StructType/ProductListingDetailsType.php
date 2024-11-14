@@ -94,13 +94,13 @@ class ProductListingDetailsType extends AbstractStructBase
      * The ISBN
      * Meta information extracted from the WSDL
      * - documentation: This field is used if the seller wants to, or is required to identify a product using an ISBN (International Standard Book Number) value. An ISBN is a unique identifer for books. Both 10 and 13-character ISBNs are supported. When
-     * specifying a 13-character ISBN, the value must begin with either '978' or '979'. The seller can use the <b>GetCategoryFeatures</b> or <b>GetCategorySpecifics</b> calls to see if an ISBN is supported/required for a category. <br/><br/> If the
-     * <b>IncludeeBayProductDetails</b> field is omitted or included and set to <code>true</code>, eBay will use the ISBN value passed into this field to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product
-     * details of the catalog product, including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers
-     * will get picked up automatically by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if the category/product requires an ISBN value, this
-     * value should be passed into the <b>Variation.VariationProductListingDetails.ISBN</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects an ISBN value, but one doesn't exist for
-     * the product, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the
-     * <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
+     * specifying a 13-character ISBN, the value must begin with either '978' or '979'. The seller can use the <b>GetCategoryFeatures</b> call to see if an ISBN is supported/required for a category. <br/><br/> If the <b>IncludeeBayProductDetails</b> field
+     * is omitted or included and set to <code>true</code>, eBay will use the ISBN value passed into this field to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product details of the catalog product,
+     * including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers will get picked up automatically
+     * by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if the category/product requires an ISBN value, this value should be passed into the
+     * <b>Variation.VariationProductListingDetails.ISBN</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects an ISBN value, but one doesn't exist for the product, the seller must pass
+     * in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response,
+     * <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -109,14 +109,14 @@ class ProductListingDetailsType extends AbstractStructBase
      * The UPC
      * Meta information extracted from the WSDL
      * - documentation: This field is used if the seller wants to, or is required to identify a product using a UPC (Universal Product Code) value. A UPC is a commonly used identifer for many different products. The seller can use the
-     * <b>GetCategoryFeatures</b> or <b>GetCategorySpecifics</b> calls to see if a UPC is supported/required for a category. <br/><br/> <span class="tablenote"><b>Note: </b> The <b>UPC</b> (and UPC values) are typically only applicable to US products listed
-     * on US eBay marketplace. If a European seller is selling a European-based product (with an EAN value) on the US site, instead of using the <b>EAN</b> field, the seller will use the <b>UPC</b> field to pass in the EAN value. </span> <br/> If the
-     * <b>IncludeeBayProductDetails</b> field is omitted or included and set to <code>true</code>, eBay will use the UPC value passed into this field to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product
-     * details of the catalog product, including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers
-     * will get picked up automatically by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if the category/product requires a UPC value, this value
-     * should be passed into the <b>Variation.VariationProductListingDetails.UPC</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects a UPC value, but one doesn't exist for the
-     * product, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b>
-     * response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
+     * <b>GetCategoryFeatures</b> call to see if a UPC is supported/required for a category. <br/><br/> <span class="tablenote"><b>Note: </b> The <b>UPC</b> (and UPC values) are typically only applicable to US products listed on US eBay marketplace. If a
+     * European seller is selling a European-based product (with an EAN value) on the US site, instead of using the <b>EAN</b> field, the seller will use the <b>UPC</b> field to pass in the EAN value. </span> <br/> If the <b>IncludeeBayProductDetails</b>
+     * field is omitted or included and set to <code>true</code>, eBay will use the UPC value passed into this field to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product details of the catalog product,
+     * including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers will get picked up automatically
+     * by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if the category/product requires a UPC value, this value should be passed into the
+     * <b>Variation.VariationProductListingDetails.UPC</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects a UPC value, but one doesn't exist for the product, the seller must pass in
+     * the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response,
+     * <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -125,14 +125,14 @@ class ProductListingDetailsType extends AbstractStructBase
      * The EAN
      * Meta information extracted from the WSDL
      * - documentation: This field is used if the seller wants to, or is required to identify a product using an EAN (European Article Number) value. An EAN is a unique 8 or 13-digit identifier that many industries (such as book publishers) use to identify
-     * products. The seller can use the <b>GetCategoryFeatures</b> or <b>GetCategorySpecifics</b> calls to see if an EAN is supported/required for a category. <br/><br/> <span class="tablenote"><b>Note: </b> The <b>EAN</b> (and EAN values) are typically
-     * only applicable to European products listed on European eBay marketplaces. If a US seller is selling a US-based product (with a UPC value) on a European site (such as eBay UK), instead of using the <b>UPC</b> field, the seller will use the <b>EAN</b>
-     * field to pass in the UPC value. </span> <br/> If the <b>IncludeeBayProductDetails</b> field is omitted or included and set to <code>true</code>, eBay will use the EAN value passed into this field to try and find a matching eBay catalog product. If a
-     * match is found, the listing will pick up the product details of the catalog product, including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field,
-     * this field is not needed, as all product identifiers will get picked up automatically by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if
-     * the category/product requires an EAN value, this value should be passed into the <b>Variation.VariationProductListingDetails.EAN</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that
-     * expects an EAN value, but one doesn't exist for the product, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the
-     * <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
+     * products. The seller can use the <b>GetCategoryFeatures</b> call to see if an EAN is supported/required for a category. <br/><br/> <span class="tablenote"><b>Note: </b> The <b>EAN</b> (and EAN values) are typically only applicable to European
+     * products listed on European eBay marketplaces. If a US seller is selling a US-based product (with a UPC value) on a European site (such as eBay UK), instead of using the <b>UPC</b> field, the seller will use the <b>EAN</b> field to pass in the UPC
+     * value. </span> <br/> If the <b>IncludeeBayProductDetails</b> field is omitted or included and set to <code>true</code>, eBay will use the EAN value passed into this field to try and find a matching eBay catalog product. If a match is found, the
+     * listing will pick up the product details of the catalog product, including the product title, product description, item specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not
+     * needed, as all product identifiers will get picked up automatically by the listing if a matching catalog product is found. <br/><br/> This field is only applicable for single-variation listings. For multiple-variation listings, if the
+     * category/product requires an EAN value, this value should be passed into the <b>Variation.VariationProductListingDetails.EAN</b> field instead. <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that expects
+     * an EAN value, but one doesn't exist for the product, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b>
+     * container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -140,29 +140,20 @@ class ProductListingDetailsType extends AbstractStructBase
     /**
      * The BrandMPN
      * Meta information extracted from the WSDL
-     * - documentation: This container is used if the seller wants to, or is required to identify a product using an Brand/Manufacturer Part Number (MPN) pair. The seller can use the <b>GetCategoryFeatures</b> or <b>GetCategorySpecifics</b> calls to see if
-     * a Brand/MPN pair is supported/required for a category. Both the <b>Brand</b> and <b>MPN</b> fields are required if the category/product requires an MPN value. <br/><br/> If the <b>IncludeeBayProductDetails</b> field is omitted or included and set to
-     * <code>true</code>, eBay will use the Brand/MPN pair to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product details of the catalog product, including the product title, product description, item
-     * specifics, and stock photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers associated with the catalog product will get picked up automatically by the listing if a
-     * matching catalog product is found. <br/><br/> This container is only applicable for single-variation listings. For multiple-variation listings, if the category requires Brand/MPN pairs, the product brand (shared by all variations in this listing) is
-     * passed in through the item-level item specifics (<b>Item.ItemSpecifics.NameValueList</b>), and the MPN value for each variation in the listing is passed in through the variation-level item specifics
-     * (<b>Variation.VariationSpecifics.NameValueList</b>). <br/><br/> <span class="tablenote"><b>Note: </b> If the listing is being posted to a category that requires or recommends a Brand and MPN value, the Brand and MPN values for the product should
-     * always be passed in through separate <b>ItemSpecifics.NameValueList</b> containers since the Brand and MPN values passed in through the <b>ProductListingDetails.BrandMPN</b> will not get picked up by the generated/revised listing unless the the
-     * Brand/MPN pair is successfully matched to an eBay catalog product. If an MPN doesn't exist for a product, or the seller does not have it available, the seller must pass in the text that can be found in the
-     * <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a
-     * <b>DetailName</b> value in the call request. </span> <br>
+     * - documentation: This container is used if the seller wants to, or is required to identify a product using an Brand/Manufacturer Part Number (MPN) pair. The seller can use the <b>GetCategoryFeatures</b> call to see if a Brand/MPN pair is
+     * supported/required for a category. Both the <b>Brand</b> and <b>MPN</b> fields are required if the category/product requires an MPN value. <br/><br/> If the <b>IncludeeBayProductDetails</b> field is omitted or included and set to <code>true</code>,
+     * eBay will use the Brand/MPN pair to try and find a matching eBay catalog product. If a match is found, the listing will pick up the product details of the catalog product, including the product title, product description, item specifics, and stock
+     * photo. If the seller is passing in an ePID through the <b>ProductReferenceID</b> field, this field is not needed, as all product identifiers associated with the catalog product will get picked up automatically by the listing if a matching catalog
+     * product is found. <br/><br/> This container is only applicable for single-variation listings. For multiple-variation listings, if the category requires Brand/MPN pairs, the product brand (shared by all variations in this listing) is passed in through
+     * the item-level item specifics (<b>Item.ItemSpecifics.NameValueList</b>), and the MPN value for each variation in the listing is passed in through the variation-level item specifics (<b>Variation.VariationSpecifics.NameValueList</b>). <br/><br/> <span
+     * class="tablenote"><b>Note: </b> If the listing is being posted to a category that requires or recommends a Brand and MPN value, the Brand and MPN values for the product should always be passed in through separate <b>ItemSpecifics.NameValueList</b>
+     * containers since the Brand and MPN values passed in through the <b>ProductListingDetails.BrandMPN</b> will not get picked up by the generated/revised listing unless the the Brand/MPN pair is successfully matched to an eBay catalog product. If an MPN
+     * doesn't exist for a product, or the seller does not have it available, the seller must pass in the text that can be found in the <b>ProductDetails.ProductIdentifierUnavailableText</b> field of the <b>GeteBayDetails</b> response. To get the
+     * <b>ProductDetails</b> container to return in the <b>GeteBayDetails</b> response, <code>ProductDetails</code> should be included as a <b>DetailName</b> value in the call request. </span> <br>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\BrandMPNType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\BrandMPNType $BrandMPN = null;
-    /**
-     * The TicketListingDetails
-     * Meta information extracted from the WSDL
-     * - documentation: This container is only applicable when a seller is creating/revising an event tickets listing.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\TicketListingDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType $TicketListingDetails = null;
     /**
      * The UseFirstProduct
      * Meta information extracted from the WSDL
@@ -212,7 +203,6 @@ class ProductListingDetailsType extends AbstractStructBase
      * @uses ProductListingDetailsType::setUPC()
      * @uses ProductListingDetailsType::setEAN()
      * @uses ProductListingDetailsType::setBrandMPN()
-     * @uses ProductListingDetailsType::setTicketListingDetails()
      * @uses ProductListingDetailsType::setUseFirstProduct()
      * @uses ProductListingDetailsType::setIncludeeBayProductDetails()
      * @uses ProductListingDetailsType::setNameValueList()
@@ -229,13 +219,12 @@ class ProductListingDetailsType extends AbstractStructBase
      * @param string $uPC
      * @param string $eAN
      * @param \macropage\ebaysdk\trading\StructType\BrandMPNType $brandMPN
-     * @param \macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails
      * @param bool $useFirstProduct
      * @param bool $includeeBayProductDetails
      * @param \macropage\ebaysdk\trading\StructType\NameValueListType[] $nameValueList
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $includeStockPhotoURL = null, ?bool $useStockPhotoURLAsGallery = null, ?string $stockPhotoURL = null, ?array $copyright = null, ?string $productReferenceID = null, ?string $detailsURL = null, ?string $productDetailsURL = null, ?bool $returnSearchResultOnDuplicates = null, ?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNType $brandMPN = null, ?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails = null, ?bool $useFirstProduct = null, ?bool $includeeBayProductDetails = null, ?array $nameValueList = null, $any = null)
+    public function __construct(?bool $includeStockPhotoURL = null, ?bool $useStockPhotoURLAsGallery = null, ?string $stockPhotoURL = null, ?array $copyright = null, ?string $productReferenceID = null, ?string $detailsURL = null, ?string $productDetailsURL = null, ?bool $returnSearchResultOnDuplicates = null, ?string $iSBN = null, ?string $uPC = null, ?string $eAN = null, ?\macropage\ebaysdk\trading\StructType\BrandMPNType $brandMPN = null, ?bool $useFirstProduct = null, ?bool $includeeBayProductDetails = null, ?array $nameValueList = null, $any = null)
     {
         $this
             ->setIncludeStockPhotoURL($includeStockPhotoURL)
@@ -250,7 +239,6 @@ class ProductListingDetailsType extends AbstractStructBase
             ->setUPC($uPC)
             ->setEAN($eAN)
             ->setBrandMPN($brandMPN)
-            ->setTicketListingDetails($ticketListingDetails)
             ->setUseFirstProduct($useFirstProduct)
             ->setIncludeeBayProductDetails($includeeBayProductDetails)
             ->setNameValueList($nameValueList)
@@ -572,25 +560,6 @@ class ProductListingDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get TicketListingDetails value
-     * @return \macropage\ebaysdk\trading\StructType\TicketListingDetailsType|null
-     */
-    public function getTicketListingDetails(): ?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType
-    {
-        return $this->TicketListingDetails;
-    }
-    /**
-     * Set TicketListingDetails value
-     * @param \macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails
-     * @return \macropage\ebaysdk\trading\StructType\ProductListingDetailsType
-     */
-    public function setTicketListingDetails(?\macropage\ebaysdk\trading\StructType\TicketListingDetailsType $ticketListingDetails = null): self
-    {
-        $this->TicketListingDetails = $ticketListingDetails;
-        
-        return $this;
-    }
-    /**
      * Get UseFirstProduct value
      * @return bool|null
      */
@@ -705,7 +674,7 @@ class ProductListingDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

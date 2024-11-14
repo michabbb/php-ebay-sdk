@@ -33,22 +33,6 @@ class ValidateTestUserRegistrationRequestType extends AbstractRequestType
      */
     protected ?string $RegistrationDate = null;
     /**
-     * The SubscribeSA
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable since the Seller Assistant feature is no longer available.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $SubscribeSA = null;
-    /**
-     * The SubscribeSAPro
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable since the Seller Assistant Pro feature is no longer available.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $SubscribeSAPro = null;
-    /**
      * The SubscribeSM
      * Meta information extracted from the WSDL
      * - documentation: Indicates if a user subscribes to Selling Manager. You cannot request to subscribe a user to both Selling Manager and Selling Manager Pro. You cannot request to unsubscribe a user.
@@ -68,24 +52,18 @@ class ValidateTestUserRegistrationRequestType extends AbstractRequestType
      * Constructor method for ValidateTestUserRegistrationRequestType
      * @uses ValidateTestUserRegistrationRequestType::setFeedbackScore()
      * @uses ValidateTestUserRegistrationRequestType::setRegistrationDate()
-     * @uses ValidateTestUserRegistrationRequestType::setSubscribeSA()
-     * @uses ValidateTestUserRegistrationRequestType::setSubscribeSAPro()
      * @uses ValidateTestUserRegistrationRequestType::setSubscribeSM()
      * @uses ValidateTestUserRegistrationRequestType::setSubscribeSMPro()
      * @param int $feedbackScore
      * @param string $registrationDate
-     * @param bool $subscribeSA
-     * @param bool $subscribeSAPro
      * @param bool $subscribeSM
      * @param bool $subscribeSMPro
      */
-    public function __construct(?int $feedbackScore = null, ?string $registrationDate = null, ?bool $subscribeSA = null, ?bool $subscribeSAPro = null, ?bool $subscribeSM = null, ?bool $subscribeSMPro = null)
+    public function __construct(?int $feedbackScore = null, ?string $registrationDate = null, ?bool $subscribeSM = null, ?bool $subscribeSMPro = null)
     {
         $this
             ->setFeedbackScore($feedbackScore)
             ->setRegistrationDate($registrationDate)
-            ->setSubscribeSA($subscribeSA)
-            ->setSubscribeSAPro($subscribeSAPro)
             ->setSubscribeSM($subscribeSM)
             ->setSubscribeSMPro($subscribeSMPro);
     }
@@ -132,52 +110,6 @@ class ValidateTestUserRegistrationRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($registrationDate, true), gettype($registrationDate)), __LINE__);
         }
         $this->RegistrationDate = $registrationDate;
-        
-        return $this;
-    }
-    /**
-     * Get SubscribeSA value
-     * @return bool|null
-     */
-    public function getSubscribeSA(): ?bool
-    {
-        return $this->SubscribeSA;
-    }
-    /**
-     * Set SubscribeSA value
-     * @param bool $subscribeSA
-     * @return \macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationRequestType
-     */
-    public function setSubscribeSA(?bool $subscribeSA = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($subscribeSA) && !is_bool($subscribeSA)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($subscribeSA, true), gettype($subscribeSA)), __LINE__);
-        }
-        $this->SubscribeSA = $subscribeSA;
-        
-        return $this;
-    }
-    /**
-     * Get SubscribeSAPro value
-     * @return bool|null
-     */
-    public function getSubscribeSAPro(): ?bool
-    {
-        return $this->SubscribeSAPro;
-    }
-    /**
-     * Set SubscribeSAPro value
-     * @param bool $subscribeSAPro
-     * @return \macropage\ebaysdk\trading\StructType\ValidateTestUserRegistrationRequestType
-     */
-    public function setSubscribeSAPro(?bool $subscribeSAPro = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($subscribeSAPro) && !is_bool($subscribeSAPro)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($subscribeSAPro, true), gettype($subscribeSAPro)), __LINE__);
-        }
-        $this->SubscribeSAPro = $subscribeSAPro;
         
         return $this;
     }

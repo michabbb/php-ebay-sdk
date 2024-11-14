@@ -38,7 +38,7 @@ class GetNotificationsUsageResponseType extends AbstractResponseType
     /**
      * The NotificationDetailsArray
      * Meta information extracted from the WSDL
-     * - documentation: List of notification objects representing the notifications sent to an application for the given time period. It will only be returned if ItemID was specified in the input request.
+     * - documentation: List of notification objects representing the notifications sent to an application for the given time period.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\NotificationDetailsArrayType|null
      */

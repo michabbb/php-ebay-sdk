@@ -139,15 +139,6 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      */
     protected ?array $ItemSpecificDetails = null;
     /**
-     * The UnitOfMeasurementDetails
-     * Meta information extracted from the WSDL
-     * - documentation: Units of measurement are no longer returned in GeteBayDetails, so this container is no longer applicable.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[]
-     */
-    protected ?array $UnitOfMeasurementDetails = null;
-    /**
      * The RegionOfOriginDetails
      * Meta information extracted from the WSDL
      * - documentation: Lists the worldwide regions and individual countries that can be set as shipping locations from the specified eBay site. <br/><br/> <span class="tablenote"><b>Note: </b> This container is only returned if <b>RegionOfOriginDetails</b>
@@ -189,14 +180,6 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $ReturnPolicyDetails = null;
     /**
-     * The InternationalReturnPolicyDetails
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> This container has been deprecated. The <b>GetCategoryFeatures</b> call must be used instead to retrieve category-level, international return policy metadata. </span>
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $InternationalReturnPolicyDetails = null;
-    /**
      * The ListingStartPriceDetails
      * Meta information extracted from the WSDL
      * - documentation: Lists the minimum starting prices for the supported types of eBay listings. <br/><br/> <span class="tablenote"><b>Note: </b> This container is only returned if <b>ListingStartPriceDetails</b> is included as a <b>DetailName</b> filter
@@ -231,9 +214,8 @@ class GeteBayDetailsResponseType extends AbstractResponseType
     /**
      * The VariationDetails
      * Meta information extracted from the WSDL
-     * - documentation: Site-level validation rules for multi-variation listings (for example, the maximum number of variations per listing). Use <b>GetCategoryFeatures</b> to determine which categories on a site support variations. Use
-     * <b>GetCategorySpecifics</b> for rules related to recommended or required variation specifics. <br/><br/> <span class="tablenote"><b>Note: </b> This container is only returned if <b>VariationDetails</b> is included as a <b>DetailName</b> filter in the
-     * request, or if no <b>DetailName</b> filters are used in the request. </span>
+     * - documentation: Site-level validation rules for multiple-variation listings (for example, the maximum number of variations per listing). Use <b>GetCategoryFeatures</b> to determine which categories on a site support variations. <br/><br/> <span
+     * class="tablenote"><b>Note: </b> This container is only returned if <b>VariationDetails</b> is included as a <b>DetailName</b> filter in the request, or if no <b>DetailName</b> filters are used in the request. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationDetailsType|null
      */
@@ -305,12 +287,10 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @uses GeteBayDetailsResponseType::setURLDetails()
      * @uses GeteBayDetailsResponseType::setTimeZoneDetails()
      * @uses GeteBayDetailsResponseType::setItemSpecificDetails()
-     * @uses GeteBayDetailsResponseType::setUnitOfMeasurementDetails()
      * @uses GeteBayDetailsResponseType::setRegionOfOriginDetails()
      * @uses GeteBayDetailsResponseType::setShippingPackageDetails()
      * @uses GeteBayDetailsResponseType::setShippingCarrierDetails()
      * @uses GeteBayDetailsResponseType::setReturnPolicyDetails()
-     * @uses GeteBayDetailsResponseType::setInternationalReturnPolicyDetails()
      * @uses GeteBayDetailsResponseType::setListingStartPriceDetails()
      * @uses GeteBayDetailsResponseType::setBuyerRequirementDetails()
      * @uses GeteBayDetailsResponseType::setListingFeatureDetails()
@@ -332,12 +312,10 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\URLDetailsType[] $uRLDetails
      * @param \macropage\ebaysdk\trading\StructType\TimeZoneDetailsType[] $timeZoneDetails
      * @param \macropage\ebaysdk\trading\StructType\ItemSpecificDetailsType[] $itemSpecificDetails
-     * @param \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[] $unitOfMeasurementDetails
      * @param \macropage\ebaysdk\trading\StructType\RegionOfOriginDetailsType[] $regionOfOriginDetails
      * @param \macropage\ebaysdk\trading\StructType\ShippingPackageDetailsType[] $shippingPackageDetails
      * @param \macropage\ebaysdk\trading\StructType\ShippingCarrierDetailsType[] $shippingCarrierDetails
      * @param \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails
-     * @param \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails
      * @param \macropage\ebaysdk\trading\StructType\ListingStartPriceDetailsType[] $listingStartPriceDetails
      * @param \macropage\ebaysdk\trading\StructType\SiteBuyerRequirementDetailsType[] $buyerRequirementDetails
      * @param \macropage\ebaysdk\trading\StructType\ListingFeatureDetailsType[] $listingFeatureDetails
@@ -348,7 +326,7 @@ class GeteBayDetailsResponseType extends AbstractResponseType
      * @param \macropage\ebaysdk\trading\StructType\ShippingCategoryDetailsType[] $shippingCategoryDetails
      * @param \macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails
      */
-    public function __construct(?array $countryDetails = null, ?array $currencyDetails = null, ?array $dispatchTimeMaxDetails = null, ?array $paymentOptionDetails = null, ?array $regionDetails = null, ?array $shippingLocationDetails = null, ?array $shippingServiceDetails = null, ?array $siteDetails = null, ?array $taxJurisdiction = null, ?array $uRLDetails = null, ?array $timeZoneDetails = null, ?array $itemSpecificDetails = null, ?array $unitOfMeasurementDetails = null, ?array $regionOfOriginDetails = null, ?array $shippingPackageDetails = null, ?array $shippingCarrierDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails = null, ?array $listingStartPriceDetails = null, ?array $buyerRequirementDetails = null, ?array $listingFeatureDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationDetailsType $variationDetails = null, ?array $excludeShippingLocationDetails = null, ?string $updateTime = null, ?array $recoupmentPolicyDetails = null, ?array $shippingCategoryDetails = null, ?\macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails = null)
+    public function __construct(?array $countryDetails = null, ?array $currencyDetails = null, ?array $dispatchTimeMaxDetails = null, ?array $paymentOptionDetails = null, ?array $regionDetails = null, ?array $shippingLocationDetails = null, ?array $shippingServiceDetails = null, ?array $siteDetails = null, ?array $taxJurisdiction = null, ?array $uRLDetails = null, ?array $timeZoneDetails = null, ?array $itemSpecificDetails = null, ?array $regionOfOriginDetails = null, ?array $shippingPackageDetails = null, ?array $shippingCarrierDetails = null, ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails = null, ?array $listingStartPriceDetails = null, ?array $buyerRequirementDetails = null, ?array $listingFeatureDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationDetailsType $variationDetails = null, ?array $excludeShippingLocationDetails = null, ?string $updateTime = null, ?array $recoupmentPolicyDetails = null, ?array $shippingCategoryDetails = null, ?\macropage\ebaysdk\trading\StructType\ProductDetailsType $productDetails = null)
     {
         $this
             ->setCountryDetails($countryDetails)
@@ -363,12 +341,10 @@ class GeteBayDetailsResponseType extends AbstractResponseType
             ->setURLDetails($uRLDetails)
             ->setTimeZoneDetails($timeZoneDetails)
             ->setItemSpecificDetails($itemSpecificDetails)
-            ->setUnitOfMeasurementDetails($unitOfMeasurementDetails)
             ->setRegionOfOriginDetails($regionOfOriginDetails)
             ->setShippingPackageDetails($shippingPackageDetails)
             ->setShippingCarrierDetails($shippingCarrierDetails)
             ->setReturnPolicyDetails($returnPolicyDetails)
-            ->setInternationalReturnPolicyDetails($internationalReturnPolicyDetails)
             ->setListingStartPriceDetails($listingStartPriceDetails)
             ->setBuyerRequirementDetails($buyerRequirementDetails)
             ->setListingFeatureDetails($listingFeatureDetails)
@@ -1172,72 +1148,6 @@ class GeteBayDetailsResponseType extends AbstractResponseType
         return $this;
     }
     /**
-     * Get UnitOfMeasurementDetails value
-     * @return \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[]
-     */
-    public function getUnitOfMeasurementDetails(): ?array
-    {
-        return $this->UnitOfMeasurementDetails;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setUnitOfMeasurementDetails method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setUnitOfMeasurementDetails method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validateUnitOfMeasurementDetailsForArrayConstraintsFromSetUnitOfMeasurementDetails(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem) {
-            // validation for constraint: itemType
-            if (!$geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem instanceof \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType) {
-                $invalidValues[] = is_object($geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem) ? get_class($geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem) : sprintf('%s(%s)', gettype($geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem), var_export($geteBayDetailsResponseTypeUnitOfMeasurementDetailsItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('The UnitOfMeasurementDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType, %s given', is_object($invalidValues) ? get_class($invalidValues) : (is_array($invalidValues) ? implode(', ', $invalidValues) : gettype($invalidValues)));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set UnitOfMeasurementDetails value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType[] $unitOfMeasurementDetails
-     * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
-     */
-    public function setUnitOfMeasurementDetails(?array $unitOfMeasurementDetails = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($unitOfMeasurementDetailsArrayErrorMessage = self::validateUnitOfMeasurementDetailsForArrayConstraintsFromSetUnitOfMeasurementDetails($unitOfMeasurementDetails))) {
-            throw new InvalidArgumentException($unitOfMeasurementDetailsArrayErrorMessage, __LINE__);
-        }
-        $this->UnitOfMeasurementDetails = $unitOfMeasurementDetails;
-        
-        return $this;
-    }
-    /**
-     * Add item to UnitOfMeasurementDetails value
-     * @throws InvalidArgumentException
-     * @param \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType $item
-     * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
-     */
-    public function addToUnitOfMeasurementDetails(\macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType $item): self
-    {
-        // validation for constraint: itemType
-        if (!$item instanceof \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType) {
-            throw new InvalidArgumentException(sprintf('The UnitOfMeasurementDetails property can only contain items of type \macropage\ebaysdk\trading\StructType\UnitOfMeasurementDetailsType, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
-        }
-        $this->UnitOfMeasurementDetails[] = $item;
-        
-        return $this;
-    }
-    /**
      * Get RegionOfOriginDetails value
      * @return \macropage\ebaysdk\trading\StructType\RegionOfOriginDetailsType[]
      */
@@ -1451,25 +1361,6 @@ class GeteBayDetailsResponseType extends AbstractResponseType
     public function setReturnPolicyDetails(?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $returnPolicyDetails = null): self
     {
         $this->ReturnPolicyDetails = $returnPolicyDetails;
-        
-        return $this;
-    }
-    /**
-     * Get InternationalReturnPolicyDetails value
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType|null
-     */
-    public function getInternationalReturnPolicyDetails(): ?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType
-    {
-        return $this->InternationalReturnPolicyDetails;
-    }
-    /**
-     * Set InternationalReturnPolicyDetails value
-     * @param \macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails
-     * @return \macropage\ebaysdk\trading\StructType\GeteBayDetailsResponseType
-     */
-    public function setInternationalReturnPolicyDetails(?\macropage\ebaysdk\trading\StructType\ReturnPolicyDetailsType $internationalReturnPolicyDetails = null): self
-    {
-        $this->InternationalReturnPolicyDetails = $internationalReturnPolicyDetails;
         
         return $this;
     }

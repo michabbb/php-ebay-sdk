@@ -43,8 +43,7 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * The PictureData
      * Meta information extracted from the WSDL
      * - documentation: An optional reference ID to the binary attachment. <br/><br/> The <b>PictureData</b> field does not contain the binary attachment. The binary attachment is image data, including the headers, from a JPG, GIF, PNG, BMP, or TIF format
-     * image file. The binary attachment must be sent as a MIME attachment, in your POST request, after the XML input. <br/><br/> <span class="tablenote"><b>Note: </b> This field is not applicable for eBay Large Merchant Services. Use the
-     * <b>ExternalPictureURL</b> field instead. </span>
+     * image file. The binary attachment must be sent as a MIME attachment, in your POST request, after the XML input.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\Base64BinaryType|null
      */
@@ -62,29 +61,19 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
     /**
      * The ExternalPictureURL
      * Meta information extracted from the WSDL
-     * - documentation: This field is used if the seller wishes to upload a picture to the EPS server that is currently on another external site. The URL of the picture you want to upload is passed in this field. Both http:// and https:// servers are
-     * supported. You can include only one <b>ExternalPictureURL</b> field per call. <br><br> The eBay server uses the information in this field to retrieve a picture from an external web server. Once retrieved, the picture will be copied to eBay Picture
-     * Services and retained for 30 days if not associated with a listing. When associated with a listing, the duration is the length of the listing plus 90 days. <br/><br/> <span class="tablenote"><b>Note: </b> Although both the HTTP and HTTPS protocols
-     * are currently supported, in the near future, eBay will no longer allow the hosting or transfer of images on a server using the the HTTP protocol. </span>
+     * - documentation: This field is used if the seller wishes to upload a picture to the EPS server that is currently on another external site. The URL of the picture you want to upload is passed in this field. Only https:// servers are supported. You can
+     * include only one <b>ExternalPictureURL</b> field per call. <br><br> The eBay server uses the information in this field to retrieve a picture from an external web server. Once retrieved, the picture will be copied to eBay Picture Services and retained
+     * for 30 days if not associated with a listing. When associated with a listing, the duration is the length of the listing plus 90 days.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
      */
     protected ?array $ExternalPictureURL = null;
     /**
-     * The PictureWatermark
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - maxOccurs: unbounded
-     * - minOccurs: 0
-     * @var string[]
-     */
-    protected ?array $PictureWatermark = null;
-    /**
      * The ExtensionInDays
      * Meta information extracted from the WSDL
      * - documentation: By default, an unpublished picture will be hosted on the EPS server for five days before being purged. However, the seller has the option of using this field to set an expiration date further into the future (up to 30 days).
-     * Similarly, when a listing ends or expires, the images associated with the listing remain on the EPS server for an additional 90 days. The value in this field will add on to those 90 days. <br/><br/> <span class="tablenote"><b>Note: </b>This call is
+     * Similarly, when a listing ends or expires, the images associated with the listing remain on the EPS server for an additional 90 days. The value in this field will add on to those 90 days. <br/><br/> <span class="tablenote"><b>Note: </b> This field is
      * restricted to applications that have been granted permission. Contact the eBay Developers Program to request permission. </span>
      * - minOccurs: 0
      * @var int|null
@@ -98,7 +87,6 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @uses UploadSiteHostedPicturesRequestType::setPictureData()
      * @uses UploadSiteHostedPicturesRequestType::setPictureUploadPolicy()
      * @uses UploadSiteHostedPicturesRequestType::setExternalPictureURL()
-     * @uses UploadSiteHostedPicturesRequestType::setPictureWatermark()
      * @uses UploadSiteHostedPicturesRequestType::setExtensionInDays()
      * @param string $pictureName
      * @param int $pictureSystemVersion
@@ -106,10 +94,9 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\Base64BinaryType $pictureData
      * @param string $pictureUploadPolicy
      * @param string[] $externalPictureURL
-     * @param string[] $pictureWatermark
      * @param int $extensionInDays
      */
-    public function __construct(?string $pictureName = null, ?int $pictureSystemVersion = null, ?string $pictureSet = null, ?\macropage\ebaysdk\trading\StructType\Base64BinaryType $pictureData = null, ?string $pictureUploadPolicy = null, ?array $externalPictureURL = null, ?array $pictureWatermark = null, ?int $extensionInDays = null)
+    public function __construct(?string $pictureName = null, ?int $pictureSystemVersion = null, ?string $pictureSet = null, ?\macropage\ebaysdk\trading\StructType\Base64BinaryType $pictureData = null, ?string $pictureUploadPolicy = null, ?array $externalPictureURL = null, ?int $extensionInDays = null)
     {
         $this
             ->setPictureName($pictureName)
@@ -118,7 +105,6 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
             ->setPictureData($pictureData)
             ->setPictureUploadPolicy($pictureUploadPolicy)
             ->setExternalPictureURL($externalPictureURL)
-            ->setPictureWatermark($pictureWatermark)
             ->setExtensionInDays($extensionInDays);
     }
     /**
@@ -301,76 +287,6 @@ class UploadSiteHostedPicturesRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('The ExternalPictureURL property can only contain items of type string, %s given', is_object($item) ? get_class($item) : (is_array($item) ? implode(', ', $item) : gettype($item))), __LINE__);
         }
         $this->ExternalPictureURL[] = $item;
-        
-        return $this;
-    }
-    /**
-     * Get PictureWatermark value
-     * @return string[]
-     */
-    public function getPictureWatermark(): ?array
-    {
-        return $this->PictureWatermark;
-    }
-    /**
-     * This method is responsible for validating the values passed to the setPictureWatermark method
-     * This method is willingly generated in order to preserve the one-line inline validation within the setPictureWatermark method
-     * @param array $values
-     * @return string A non-empty message if the values does not match the validation rules
-     */
-    public static function validatePictureWatermarkForArrayConstraintsFromSetPictureWatermark(?array $values = []): string
-    {
-        if (!is_array($values)) {
-            return '';
-        }
-        $message = '';
-        $invalidValues = [];
-        foreach ($values as $uploadSiteHostedPicturesRequestTypePictureWatermarkItem) {
-            // validation for constraint: enumeration
-            if (!\macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::valueIsValid($uploadSiteHostedPicturesRequestTypePictureWatermarkItem)) {
-                $invalidValues[] = is_object($uploadSiteHostedPicturesRequestTypePictureWatermarkItem) ? get_class($uploadSiteHostedPicturesRequestTypePictureWatermarkItem) : sprintf('%s(%s)', gettype($uploadSiteHostedPicturesRequestTypePictureWatermarkItem), var_export($uploadSiteHostedPicturesRequestTypePictureWatermarkItem, true));
-            }
-        }
-        if (!empty($invalidValues)) {
-            $message = sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType', is_array($invalidValues) ? implode(', ', $invalidValues) : var_export($invalidValues, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::getValidValues()));
-        }
-        unset($invalidValues);
-        
-        return $message;
-    }
-    /**
-     * Set PictureWatermark value
-     * @uses \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string[] $pictureWatermark
-     * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesRequestType
-     */
-    public function setPictureWatermark(?array $pictureWatermark = null): self
-    {
-        // validation for constraint: array
-        if ('' !== ($pictureWatermarkArrayErrorMessage = self::validatePictureWatermarkForArrayConstraintsFromSetPictureWatermark($pictureWatermark))) {
-            throw new InvalidArgumentException($pictureWatermarkArrayErrorMessage, __LINE__);
-        }
-        $this->PictureWatermark = $pictureWatermark;
-        
-        return $this;
-    }
-    /**
-     * Add item to PictureWatermark value
-     * @uses \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $item
-     * @return \macropage\ebaysdk\trading\StructType\UploadSiteHostedPicturesRequestType
-     */
-    public function addToPictureWatermark(string $item): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::valueIsValid($item)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType', is_array($item) ? implode(', ', $item) : var_export($item, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PictureWatermarkCodeType::getValidValues())), __LINE__);
-        }
-        $this->PictureWatermark[] = $item;
         
         return $this;
     }

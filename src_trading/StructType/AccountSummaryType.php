@@ -132,15 +132,6 @@ class AccountSummaryType extends AbstractStructBase
      */
     protected ?\macropage\ebaysdk\trading\StructType\AmountType $CurrentBalance = null;
     /**
-     * The Email
-     * Meta information extracted from the WSDL
-     * - documentation: Email address on file for the user account. You cannot retrieve an email address for any user with whom you do not have a transactional relationship, regardless of site. Email is only returned for applicable calls when you are
-     * retrieving your own user data OR when you and the other user are in a transactional relationship and the call is being executed within a certain amount of time after the transaction is created.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $Email = null;
-    /**
      * The InvoiceBalance
      * Meta information extracted from the WSDL
      * - documentation: This field specifies the balance for the invoice. This field is only returned if the <b>AccountHistorySelection</b> input field's value was set to <code>LastInvoice</code>. This field is not returned if the
@@ -220,7 +211,6 @@ class AccountSummaryType extends AbstractStructBase
      * @uses AccountSummaryType::setCreditCardInfo()
      * @uses AccountSummaryType::setCreditCardModifyDate()
      * @uses AccountSummaryType::setCurrentBalance()
-     * @uses AccountSummaryType::setEmail()
      * @uses AccountSummaryType::setInvoiceBalance()
      * @uses AccountSummaryType::setInvoiceDate()
      * @uses AccountSummaryType::setLastAmountPaid()
@@ -242,7 +232,6 @@ class AccountSummaryType extends AbstractStructBase
      * @param string $creditCardInfo
      * @param string $creditCardModifyDate
      * @param \macropage\ebaysdk\trading\StructType\AmountType $currentBalance
-     * @param string $email
      * @param \macropage\ebaysdk\trading\StructType\AmountType $invoiceBalance
      * @param string $invoiceDate
      * @param \macropage\ebaysdk\trading\StructType\AmountType $lastAmountPaid
@@ -252,7 +241,7 @@ class AccountSummaryType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $accountState = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoicePayment = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceCredit = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceNewFee = null, ?array $additionalAccount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountPastDue = null, ?string $bankAccountInfo = null, ?string $bankModifyDate = null, ?int $billingCycleDate = null, ?string $creditCardExpiration = null, ?string $creditCardInfo = null, ?string $creditCardModifyDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentBalance = null, ?string $email = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceBalance = null, ?string $invoiceDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $lastAmountPaid = null, ?string $lastPaymentDate = null, ?bool $pastDue = null, ?string $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary = null, $any = null)
+    public function __construct(?string $accountState = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoicePayment = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceCredit = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceNewFee = null, ?array $additionalAccount = null, ?\macropage\ebaysdk\trading\StructType\AmountType $amountPastDue = null, ?string $bankAccountInfo = null, ?string $bankModifyDate = null, ?int $billingCycleDate = null, ?string $creditCardExpiration = null, ?string $creditCardInfo = null, ?string $creditCardModifyDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $currentBalance = null, ?\macropage\ebaysdk\trading\StructType\AmountType $invoiceBalance = null, ?string $invoiceDate = null, ?\macropage\ebaysdk\trading\StructType\AmountType $lastAmountPaid = null, ?string $lastPaymentDate = null, ?bool $pastDue = null, ?string $paymentMethod = null, ?\macropage\ebaysdk\trading\StructType\NettedTransactionSummaryType $nettedTransactionSummary = null, $any = null)
     {
         $this
             ->setAccountState($accountState)
@@ -268,7 +257,6 @@ class AccountSummaryType extends AbstractStructBase
             ->setCreditCardInfo($creditCardInfo)
             ->setCreditCardModifyDate($creditCardModifyDate)
             ->setCurrentBalance($currentBalance)
-            ->setEmail($email)
             ->setInvoiceBalance($invoiceBalance)
             ->setInvoiceDate($invoiceDate)
             ->setLastAmountPaid($lastAmountPaid)
@@ -604,29 +592,6 @@ class AccountSummaryType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get Email value
-     * @return string|null
-     */
-    public function getEmail(): ?string
-    {
-        return $this->Email;
-    }
-    /**
-     * Set Email value
-     * @param string $email
-     * @return \macropage\ebaysdk\trading\StructType\AccountSummaryType
-     */
-    public function setEmail(?string $email = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($email) && !is_string($email)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($email, true), gettype($email)), __LINE__);
-        }
-        $this->Email = $email;
-        
-        return $this;
-    }
-    /**
      * Get InvoiceBalance value
      * @return \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -781,7 +746,7 @@ class AccountSummaryType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

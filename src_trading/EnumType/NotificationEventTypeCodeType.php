@@ -95,7 +95,7 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ItemListed'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller each time one of the subscribed seller's items is listed or relisted. This notification is also triggered when the Unpaid Item Assistant mechanism relists an item for the seller.
+     * - documentation: This notification is sent to a subscribed seller each time one of the subscribed seller's items is listed or relisted. This notification is also triggered when the Unpaid Item preferences relists an item for the seller.
      * @return string 'ItemListed'
      */
     const VALUE_ITEM_LISTED = 'ItemListed';
@@ -109,31 +109,32 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'BuyerResponseDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller each time a buyer responds to an Unpaid Item or Cancel Transaction case that the subscribed seller has opened up against the buyer.
+     * - documentation: <span class="tablenote"><b>Note: </b> This notification is no longer supported since the Trading API no longer supports seller-initiated cancellation requests. </span> This notification is sent to a subscribed seller each time a
+     * buyer responds to a Cancel Transaction request.
      * @return string 'BuyerResponseDispute'
      */
     const VALUE_BUYER_RESPONSE_DISPUTE = 'BuyerResponseDispute';
     /**
      * Constant for value 'SellerOpenedDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed buyer if a seller opens up an Unpaid Item or Cancel Transaction case against the subscribed buyer. <br><br> If subscribed to by a buyer and when applicable, this notification will appear
-     * through the <b>GetDispute</b> call response.
+     * - documentation: <span class="tablenote"><b>Note: </b> This notification is no longer supported since the Trading API no longer supports seller-initiated cancellation requests. </span> This notification is sent to a subscribed buyer if a seller
+     * initiates a Cancel Transaction request.
      * @return string 'SellerOpenedDispute'
      */
     const VALUE_SELLER_OPENED_DISPUTE = 'SellerOpenedDispute';
     /**
      * Constant for value 'SellerRespondedToDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed buyer each time a seller responds to an Item Not Received or (Item) Significantly Not As Described case that the subscribed buyer has opened up against the seller. <br><br> If subscribed to
-     * by a buyer and when applicable, this notification will appear in the <b>GetDispute</b> call response.
+     * - documentation: <span class="tablenote"><b>Note: </b> This notification is no longer supported since dispute calls in the Trading API are deprecated. </span> This notification is sent to a subscribed buyer each time a seller responds to an Item Not
+     * Received or Return case that the subscribed buyer has opened up against the seller.
      * @return string 'SellerRespondedToDispute'
      */
     const VALUE_SELLER_RESPONDED_TO_DISPUTE = 'SellerRespondedToDispute';
     /**
      * Constant for value 'SellerClosedDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to the subscribed buyer and seller if the seller closes an Unpaid Item or Cancel Transaction case against the buyer. <br><br> If subscribed to by a buyer or seller, and when applicable, this notification
-     * will appear in the <b>GetDispute</b> call response.
+     * - documentation: <span class="tablenote"><b>Note: </b> This notification is no longer supported since dispute calls in the Trading API are deprecated. </span> This notification is sent to the subscribed buyer and seller if the seller closes a Cancel
+     * Transaction request.
      * @return string 'SellerClosedDispute'
      */
     const VALUE_SELLER_CLOSED_DISPUTE = 'SellerClosedDispute';
@@ -199,32 +200,28 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'INRBuyerOpenedDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when a buyer opens an Item Not Received dispute against that seller. <br><br> If subscribed to by the seller and when applicable, this notification will appear in the <b>GetDispute</b>
-     * call response.
+     * - documentation: This event type has been deprecated along with legacy user disputes. As an alternative, subscribe to <b>EBPMyResponseDue</b> event type.
      * @return string 'INRBuyerOpenedDispute'
      */
     const VALUE_INRBUYER_OPENED_DISPUTE = 'INRBuyerOpenedDispute';
     /**
      * Constant for value 'INRBuyerRespondedToDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when a buyer responds to an Item Not Received dispute opened by that buyer. <br><br> If subscribed to by the seller and when applicable, this notification will appear in the
-     * <b>GetDispute</b> call response.
+     * - documentation: This notification is sent to a subscribed seller when a buyer responds to an Item Not Received case opened by that buyer.
      * @return string 'INRBuyerRespondedToDispute'
      */
     const VALUE_INRBUYER_RESPONDED_TO_DISPUTE = 'INRBuyerRespondedToDispute';
     /**
      * Constant for value 'INRBuyerClosedDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when a buyer closes an Item Not Received dispute opened by that buyer. <br><br> If subscribed to by the seller and when applicable, this notification will appear in the
-     * <b>GetDispute</b> call response.
+     * - documentation: This event type has been deprecated along with legacy user disputes. As an alternative, subscribe to <b>EBPClosedCase</b> event type.
      * @return string 'INRBuyerClosedDispute'
      */
     const VALUE_INRBUYER_CLOSED_DISPUTE = 'INRBuyerClosedDispute';
     /**
      * Constant for value 'INRSellerRespondedToDispute'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed buyer when a seller responds to an Item Not Received dispute opened by the buyer. <br><br> If subscribed to by the buyer and when applicable, this notification will appear in the
-     * <b>GetDispute</b> call response.
+     * - documentation: This event type has been deprecated along with legacy user disputes.
      * @return string 'INRSellerRespondedToDispute'
      */
     const VALUE_INRSELLER_RESPONDED_TO_DISPUTE = 'INRSellerRespondedToDispute';
@@ -273,7 +270,7 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'UserIDChanged'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed buyer or seller when that user has modified their eBay user ID.
+     * - documentation: This notification is no longer applicable.
      * @return string 'UserIDChanged'
      */
     const VALUE_USER_IDCHANGED = 'UserIDChanged';
@@ -531,7 +528,8 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
      * Constant for value 'EBPMyResponseDue'
      * Meta information extracted from the WSDL
      * - documentation: This notification is sent to a subscribing buyer or seller when a response to the eBay Money Back Guarantee case is due from that user. When an eBay Money Back Guarantee case is opened, this notification is only sent to the seller
-     * involved in the case and not the buyer.
+     * involved in the case and not the buyer.<br><br>This notification is also sent to a subscribed seller when the buyer has opened up either of the following:<ul><li>an Item Not Received inquiry against an order line item</li><li>an Item Not Received
+     * case against that seller.</li></ul>
      * @return string 'EBPMyResponseDue'
      */
     const VALUE_EBPMY_RESPONSE_DUE = 'EBPMyResponseDue';
@@ -545,7 +543,8 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'EBPEscalatedCase'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to the subscribed buyer or seller when an eBay Money Back Guarantee case is escalated to eBay customer support.
+     * - documentation: This notification is sent to the subscribed buyer or seller when an eBay Money Back Guarantee case is escalated to eBay customer support.<br>This notification is also sent to a subscribed seller when an Item Not Received inquiry
+     * against an order line item has been escalated to an eBay Money Back Guarantee case.
      * @return string 'EBPEscalatedCase'
      */
     const VALUE_EBPESCALATED_CASE = 'EBPEscalatedCase';
@@ -580,7 +579,8 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'EBPClosedCase'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to the subscribed buyer or seller when an eBay Money Back Guarantee case has been closed.
+     * - documentation: This notification is sent to the subscribed buyer or seller when an eBay Money Back Guarantee case has been closed.<br><br>This notification can also be sent to the subscribed seller when the buyer has closed either of the
+     * following:<ul><li>an Item Not Received inquiry against an order line item</li><li>an Item Not Received case opened by that buyer</li></ul>
      * @return string 'EBPClosedCase'
      */
     const VALUE_EBPCLOSED_CASE = 'EBPClosedCase';
@@ -724,7 +724,7 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'OrderInquiryOpened'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when the buyer has opened up an Item Not Received inquiry against an order line item.
+     * - documentation: This event type has been deprecated along with legacy user disputes. As an alternative, subscribe to <b>EBPMyResponseDue</b> event type.
      * @return string 'OrderInquiryOpened'
      */
     const VALUE_ORDER_INQUIRY_OPENED = 'OrderInquiryOpened';
@@ -738,22 +738,21 @@ class NotificationEventTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'OrderInquiryProvideShipmentInformation'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller alerting the seller that he/she should provide shipment tracking information to the buyer in order to expedite the closure of an Item Not Received inquiry, and to avoid the possibility
-     * that the buyer will escalate the inquiry into an eBay Money Back Guarantee case.
+     * - documentation: This event type has been deprecated along with legacy user disputes.
      * @return string 'OrderInquiryProvideShipmentInformation'
      */
     const VALUE_ORDER_INQUIRY_PROVIDE_SHIPMENT_INFORMATION = 'OrderInquiryProvideShipmentInformation';
     /**
      * Constant for value 'OrderInquiryClosed'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when an Item Not Received inquiry against an order line item has closed.
+     * - documentation: This event type has been deprecated along with legacy user disputes. As an alternative, subscribe to <b>EBPClosedCase</b> event type.
      * @return string 'OrderInquiryClosed'
      */
     const VALUE_ORDER_INQUIRY_CLOSED = 'OrderInquiryClosed';
     /**
      * Constant for value 'OrderInquiryEscalatedToCase'
      * Meta information extracted from the WSDL
-     * - documentation: This notification is sent to a subscribed seller when an Item Not Received inquiry against an order line item has been escalated to an eBay Money Back Guarantee case.
+     * - documentation: This event type has been deprecated along with legacy user disputes. As an alternative, subscribe to <b>EBPEscalatedCase</b> event type.
      * @return string 'OrderInquiryEscalatedToCase'
      */
     const VALUE_ORDER_INQUIRY_ESCALATED_TO_CASE = 'OrderInquiryEscalatedToCase';

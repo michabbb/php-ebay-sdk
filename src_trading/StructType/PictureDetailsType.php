@@ -20,33 +20,31 @@ class PictureDetailsType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: <a name="galleryTypeField"></a> This field is used to specify the type of picture gallery to use for the listing. If this field is omitted, a standard picture gallery is used for the listing. There is no listing fee for a standard
      * picture gallery. <br/><br/> To use the Gallery Plus feature, you must include this field and set its value to <code>Plus</code>. <br/><br/> The Gallery image will be the first URL passed into the first <b>PictureURL</b> field, so if you want a
-     * specific picture to be the Gallery image, you should make sure you pass the URL for this picture in the first <b>PictureURL</b> field. <br/><br/> When revising a listing, if you disable the Gallery Plus or Featured Gallery feature by including the
-     * <b>GalleryType</b> and setting its value to <code>Gallery</code>, the original feature fee for either of these features will not be credited to the seller. <br/>
+     * specific picture to be the Gallery image, you should make sure you pass the URL for this picture in the first <b>PictureURL</b> field. <br/><br/> When revising a listing, if you disable the Gallery Plus feature by including the <b>GalleryType</b>
+     * field and setting its value to <code>Gallery</code>, the original feature fee for this feature will not be credited to the seller. <br/>
      * - minOccurs: 0
      * @var string|null
      */
     protected ?string $GalleryType = null;
     /**
-     * The PhotoDisplay
+     * The GalleryURL
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the type of image display used in a listing. Some options are only available if images are hosted through eBay Picture Services (EPS). eBay determines this by parsing the associated <b>PictureURL</b>. <br><br> Some
-     * <b>PhotoDisplay</b> options can result in listing fees, even when the item is relisted. If you are relisting an item that was originally listed with a <b>PhotoDisplay</b> option, and you do not want that <b>PhotoDisplay</b> enhancement in your
-     * relisted item, you need to specifically remove <b>PhotoDisplay</b> in your <b>RelistItem</b> call (or <b>RelistFixedPriceItem</b>, as applicable) by setting <b>PhotoDisplay</b> to <code>None</code>. Use <b>VerifyRelistItem</b> to review your listing
-     * fees before you relist an item.
+     * - documentation: This field shows the URL for the gallery image of an item returned in <b>GetMyeBayBuying</b><br/> and <b>GetMyeBaySelling</b>.<br/>
      * - minOccurs: 0
      * @var string|null
      */
-    protected ?string $PhotoDisplay = null;
+    protected ?string $GalleryURL = null;
     /**
      * The PictureURL
      * Meta information extracted from the WSDL
-     * - documentation: Contains the URL for a picture of the item. The URL can be from the eBay Picture Services (images previously uploaded) or from a server outside of eBay (self-hosted). You can pass in up to 12 picture URLs (for most categories and
-     * marketplaces) for each listing, but you cannot mix self-hosted and EPS-hosted URLs in the same listing. The <b>UploadSiteHostedPictures</b> call can be used to upload pictures to EPS. Note that if pictures are externally-hosted, they must be hosted
-     * on a site that is using the 'https' protocol. URLs using the 'http' protocol will not be allowed. <br/><br/> <span class="tablenote"><b>Note: </b> If a URL contains spaces, those spaces can be replaced with <code>%20</code>. For example,
-     * <code>https://example.com/my image.jpg</code> must be submitted as <code>https://example.com/my%20image.jpg</code> to replace the space in the image file name. However, a semicolon character (;) cannot be replaced with <code>%20</code>, so a
-     * semicolon cannot be a part of the URL, as an error will occur. </span> On the US and Canada eBay Motors sites (for all vehicle listings) a listing can contain up to 24 pictures. The Gallery image will be the first <b>PictureURL</b> in the array of
-     * <b>PictureURL</b> fields. <br/><br/> <span class="tablenote"><b>Note: </b> All images, whether they are hosted by EPS or self-hosted, must comply with eBay picture requirements, including the requirement that all images must be at least 500 pixels on
-     * its longest side. If the image does not satisfy the 500 pixels requirement, the listing may be blocked. For more information about other requirements and tips for adding pictures to listings, see the <a
+     * - documentation: Contains the URL for a picture of the item. The URL can be from the eBay Picture Services (images previously uploaded) or from a server outside of eBay (self-hosted). You can pass in up to 24 picture URLs for each listing, but you
+     * cannot mix self-hosted and EPS-hosted URLs in the same listing. The <b>UploadSiteHostedPictures</b> call can be used to upload pictures to EPS. Note that if pictures are externally-hosted, they must be hosted on a site that is using the 'https'
+     * protocol. URLs using the 'http' protocol will not be allowed. <br/><br/> Sellers can have up to 24 pictures in almost any category at no cost. Motor vehicle listings are an exception. The number of included pictures in motor vehicle listings depend
+     * on the selected vehicle package (see <a href="https://www.ebay.com/help/selling/fees-credits-invoices/motors-fees?id=4127">Fees for selling vehicles on eBay Motors</a>). <br/><br/> <span class="tablenote"><b>Note: </b> If a URL contains spaces, those
+     * spaces can be replaced with <code>%20</code>. For example, <code>https://example.com/my image.jpg</code> must be submitted as <code>https://example.com/my%20image.jpg</code> to replace the space in the image file name. However, a semicolon character
+     * (;) cannot be replaced with <code>%20</code>, so a semicolon cannot be a part of the URL, as an error will occur. </span> The Gallery image will be the first <b>PictureURL</b> in the array of <b>PictureURL</b> fields. <br/><br/> <span
+     * class="tablenote"><b>Note: </b> All images, whether they are hosted by EPS or self-hosted, must comply with eBay picture requirements, including the requirement that all images must be at least 500 pixels on its longest side. If the image does not
+     * satisfy the 500 pixels requirement, the listing may be blocked. For more information about other requirements and tips for adding pictures to listings, see the <a
      * href="https://www.ebay.com/help/selling/listings/adding-pictures-listings?id=4148">Adding pictures to your listings</a> help page. </span> To specify multiple pictures, send each URL in a separate, <b>PictureDetails.PictureURL</b> element. The first
      * URL passed in defaults to be the 'gallery image', and will be the first picture that is shown when a user lands on the View Item page. <br><br> If a listing uses a single, self-hosted picture (except in the case of a multiple-variation listing), the
      * picture will be copied to eBay Picture Services (EPS) and the <b>PictureDetails.PictureURL</b> value returned by <b>GetItem</b> will be an EPS URL. <br/><br/> <b>For VerifyAddItem only:</b> You must include a picture even when using
@@ -63,8 +61,9 @@ class PictureDetailsType extends AbstractStructBase
     /**
      * The PictureSource
      * Meta information extracted from the WSDL
-     * - documentation: The service hosting the pictures in <b>PictureURL</b>, if any. This information is primarily useful for Picture Manager subscribers, who pay a flat subscription fee instead of individual picture fees per listing. Only returned when
-     * <b>PictureURL</b> is returned. <br/>
+     * - documentation: The value in this field indicates if the listing contains image files uploaded to the eBay Picture Server (EPS), or externally-hosted images for which eBay created EPS equivalents.<br><br>This value defaults to <code>EPS</code>, so
+     * if a seller is going to upload externally-hosted image URLs, this field must be included and set to <code>Vendor</code>. <br/><br/> <span class="tablenote"> <strong>Note:</strong> Original EPS and externally-hosted images cannot be mixed, so this
+     * value cannot be changed if a listing already has one or more images. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -97,7 +96,8 @@ class PictureDetailsType extends AbstractStructBase
     /**
      * The ExtendedPictureDetails
      * Meta information extracted from the WSDL
-     * - documentation: This container returns the URLs of the seller's self-hosted (hosted outside of eBay) pictures and the URL for the corresponding eBay Picture Services (EPS), that was generated when the self-hosted picture was uploaded.
+     * - documentation: The <b>ExtendedPictureDetails</b> container and its child fields are no longer returned under any circumstances, including when self-hosted pictures are used for the item. When self-hosted pictures are used by the seller, only the
+     * external URL of the gallery image is shown in the PictureDetails.ExternalPictureURL field, and only the equivalent eBay Picture Server (EPS) URLs are shown for the rest of the item's images in separate <b>PictureDetails.PictureURL</b> fields.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType|null
@@ -111,7 +111,7 @@ class PictureDetailsType extends AbstractStructBase
     /**
      * Constructor method for PictureDetailsType
      * @uses PictureDetailsType::setGalleryType()
-     * @uses PictureDetailsType::setPhotoDisplay()
+     * @uses PictureDetailsType::setGalleryURL()
      * @uses PictureDetailsType::setPictureURL()
      * @uses PictureDetailsType::setPictureSource()
      * @uses PictureDetailsType::setGalleryStatus()
@@ -120,7 +120,7 @@ class PictureDetailsType extends AbstractStructBase
      * @uses PictureDetailsType::setExtendedPictureDetails()
      * @uses PictureDetailsType::setAny()
      * @param string $galleryType
-     * @param string $photoDisplay
+     * @param string $galleryURL
      * @param string[] $pictureURL
      * @param string $pictureSource
      * @param string $galleryStatus
@@ -129,11 +129,11 @@ class PictureDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $galleryType = null, ?string $photoDisplay = null, ?array $pictureURL = null, ?string $pictureSource = null, ?string $galleryStatus = null, ?string $galleryErrorInfo = null, ?array $externalPictureURL = null, ?\macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails = null, $any = null)
+    public function __construct(?string $galleryType = null, ?string $galleryURL = null, ?array $pictureURL = null, ?string $pictureSource = null, ?string $galleryStatus = null, ?string $galleryErrorInfo = null, ?array $externalPictureURL = null, ?\macropage\ebaysdk\trading\StructType\ExtendedPictureDetailsType $extendedPictureDetails = null, $any = null)
     {
         $this
             ->setGalleryType($galleryType)
-            ->setPhotoDisplay($photoDisplay)
+            ->setGalleryURL($galleryURL)
             ->setPictureURL($pictureURL)
             ->setPictureSource($pictureSource)
             ->setGalleryStatus($galleryStatus)
@@ -169,28 +169,25 @@ class PictureDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get PhotoDisplay value
+     * Get GalleryURL value
      * @return string|null
      */
-    public function getPhotoDisplay(): ?string
+    public function getGalleryURL(): ?string
     {
-        return $this->PhotoDisplay;
+        return $this->GalleryURL;
     }
     /**
-     * Set PhotoDisplay value
-     * @uses \macropage\ebaysdk\trading\EnumType\PhotoDisplayCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\PhotoDisplayCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $photoDisplay
+     * Set GalleryURL value
+     * @param string $galleryURL
      * @return \macropage\ebaysdk\trading\StructType\PictureDetailsType
      */
-    public function setPhotoDisplay(?string $photoDisplay = null): self
+    public function setGalleryURL(?string $galleryURL = null): self
     {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\PhotoDisplayCodeType::valueIsValid($photoDisplay)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\PhotoDisplayCodeType', is_array($photoDisplay) ? implode(', ', $photoDisplay) : var_export($photoDisplay, true), implode(', ', \macropage\ebaysdk\trading\EnumType\PhotoDisplayCodeType::getValidValues())), __LINE__);
+        // validation for constraint: string
+        if (!is_null($galleryURL) && !is_string($galleryURL)) {
+            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($galleryURL, true), gettype($galleryURL)), __LINE__);
         }
-        $this->PhotoDisplay = $photoDisplay;
+        $this->GalleryURL = $galleryURL;
         
         return $this;
     }
@@ -423,7 +420,7 @@ class PictureDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

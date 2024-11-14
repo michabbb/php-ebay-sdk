@@ -51,11 +51,7 @@ class AddFixedPriceItemResponseType extends AbstractResponseType
      * Meta information extracted from the WSDL
      * - documentation: Date and time when the new listing is scheduled to end based on the start time and the listing duration value that was set in the <b>ListingDuration</b> field at listing time. If the value of <b>ListingDuration</b> was set to
      * <code>GTC</code> (Good 'Til Cancelled) this value will be set one month ahead of the start time, and this value will continue to be updated one month ahead each time the GTC listing needs to be renewed. Fixed-price listings get renewed automatically
-     * as long as there is still a quantity of <code>1</code> or above, or even if the quantity is <code>0</code>, but the 'out-of-stock control' feature is enabled. <br><br> <span class="tablenote"><b>Note: </b> As of July 1, 2019, the Good 'Til Cancelled
-     * renewal schedule has been modified from every 30 days to once per calendar month. For example, if a GTC listing is created July 5, the next monthly renewal date will be August 5. If a GTC listing is created on the 31st of the month, but the following
-     * month only has 30 days, the renewal will happen on the 30th in the following month. Finally, if a GTC listing is created on January 29-31, the renewal will happen on February 28th (or 29th during a 'Leap Year'). See the <a
-     * href="https://pages.ebay.com/seller-center/seller-updates/2019-spring/marketplace-updates.html#good-til-cancelled" target="_blank">Good 'Til Cancelled listings update</a> in the <b>Spring 2019 Seller Updates</b> for more information about this
-     * change. </span>
+     * as long as there is still a quantity of <code>1</code> or above, or even if the quantity is <code>0</code>, but the 'out-of-stock control' feature is enabled.
      * - minOccurs: 0
      * @var string|null
      */
@@ -63,7 +59,7 @@ class AddFixedPriceItemResponseType extends AbstractResponseType
     /**
      * The Fees
      * Meta information extracted from the WSDL
-     * - documentation: This container is an array of fees associated with the creation of the listing. The fees in this container will not include any fees that are based on the purchase price (such as Final Value Fee) and only come into play when the
+     * - documentation: This container is an array of fees associated with the creation of the listing. The fees in this container will not include any fees that are based on the purchase price (such as transaction fees) and only come into play when the
      * listing has a sale. <br> <br> All listing fee types are returned, even if those fees are not applicable for the new listing and are '0.0'. <br> <br> <span class="tablenote"><b>Note:</b> The currency used for all fees returned under the <b>Fees</b>
      * container reflects the currency used for the listing site, and not necessarily in the seller's default/home currency. For example, if a Canadian seller is using the <b>AddFixedPriceItem</b> call to list an item on the eBay US site, the currency type
      * shown for each fee will be <code>USD</code> and not <code>CAD</code>. </span>
@@ -75,9 +71,7 @@ class AddFixedPriceItemResponseType extends AbstractResponseType
      * The CategoryID
      * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the primary category in which the item was listed. This field is only returned if the <b>Item.CategoryMappingAllowed</b> boolean field is set to <code>true</code> in the request (or omitted) and the Category
-     * ID passed in as the primary listing category was automatically mapped to a new Category ID by eBay. If the primary category ID passed in the request is still active/valid, this field is not returned. <br/><br/> <span class="tablenote"><b>Note: </b>
-     * The <b>Item.CategoryMappingAllowed</b> field value in the request now defaults to <code>true</code> if omitted. Previously, the default value was <code>false</code>, so a user had to include this field and set it to <code>true</code> in order for
-     * eBay to map an outdated Primary or Secondary Category ID to the updated Category ID. </span>
+     * ID passed in as the primary listing category was automatically mapped to a new Category ID by eBay. If the primary category ID passed in the request is still active/valid, this field is not returned.
      * - minOccurs: 0
      * @var string|null
      */
@@ -86,9 +80,7 @@ class AddFixedPriceItemResponseType extends AbstractResponseType
      * The Category2ID
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier of the secondary category in which the item was listed. This field is only returned if the <b>Item.CategoryMappingAllowed</b> boolean field is set to <code>true</code> in the request (or omitted) and the Category ID
-     * passed in as the secondary listing category was automatically mapped to a new Category ID by eBay. If the secondary category ID passed in the request is still active/valid, this field is not returned. <br/><br/> <span class="tablenote"><b>Note: </b>
-     * The <b>Item.CategoryMappingAllowed</b> field value in the request now defaults to <code>true</code> if omitted. Previously, the default value was <code>false</code>, so a user had to include this field and set it to <code>true</code> in order for
-     * eBay to map an outdated Primary or Secondary Category ID to the updated Category ID. </span>
+     * passed in as the secondary listing category was automatically mapped to a new Category ID by eBay. If the secondary category ID passed in the request is still active/valid, this field is not returned.
      * - minOccurs: 0
      * @var string|null
      */

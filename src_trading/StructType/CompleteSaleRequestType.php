@@ -35,7 +35,8 @@ class CompleteSaleRequestType extends AbstractRequestType
      * <b>TransactionID</b> can be paired up with the corresponding <b>ItemID</b> value in a <b>CompleteSale</b> request to identify a single order line item. Alternatively, the <b>OrderLineItemID</b> value for the order line item can be used. <br><br>
      * Unless an <b>OrderLineItemID</b> value is used to identify a single order line item, or the <b>OrderID</b> value is used to identify a single or multiple line item order, the <b>ItemID</b>/<b>TransactionID</b> pair must be specified. To perform an
      * action on an entire multiple line item order, the <b>OrderID</b> field must be used. If an <b>OrderID</b> or <b>OrderLineItemID</b> value is specified, an <b>ItemID</b>/<b>TransactionID</b> pair will be ignored (if present in the same request). <br>
-     * <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing.
+     * <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero
+     * transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -66,8 +67,8 @@ class CompleteSaleRequestType extends AbstractRequestType
     /**
      * The Paid
      * Meta information extracted from the WSDL
-     * - documentation: The seller includes and sets this field to true if the order has been paid for by the buyer. If the call is successful, the order line item(s) are marked as 'Paid' in eBay's system. <br><br> If the seller includes and sets this field
-     * to <code>false</code>, the order line item(s) are marked (or remain) as 'Not Paid' in eBay's system. <br><br> If this field is not included, the paid status of the order line item(s) remain unchanged in eBay's system.
+     * - documentation: The seller includes and sets this field to <code>true</code> to mark an unpaid order as paid. If the call is successful, the order line item(s) are marked as 'Paid' in eBay's system. <br> <span class="tablenote"><b>Note:</b> The
+     * seller is not allowed to set this field to <code>false</code>.</span>
      * - minOccurs: 0
      * @var bool|null
      */
@@ -100,14 +101,8 @@ class CompleteSaleRequestType extends AbstractRequestType
      * - documentation: A unique identifier for an eBay order. This field can be used to make an 'order-level' update. If an order has multiple line items, and the <b>CompleteSale</b> call is being used to update the status of, or provide feedback for a
      * single line item within the order, the <b>OrderLineItemID</b> field or <b>ItemID</b>/<b>TransactionID</b> pair must be used to identify this order line item instead of the <b>OrderID</b> field. If the order only has one line item, it the
      * <b>OrderID</b> field can be used to make any updates with the <b>CompleteSale</b> call. <br><br> <b>OrderID</b> overrides an <b>OrderLineItemID</b> or <b>ItemID</b>/<b>TransactionID</b> pair if these fields are also specified in the same request.
-     * <br><br> <span class="tablenote"><b>Note: </b> In June 2019, eBay introduced a new order ID format, but allowed developers/sellers to decide whether to immediately adopt the new format, or to continue working with the old format. Users who wanted to
-     * adopt the new format, could either use a Trading WSDL Version 1113 (or newer), or they could even use an older Trading WSDL but set the <b>X-EBAY-API-COMPATIBILITY-LEVEL</b> HTTP header value to <code>1113</code> in API calls. <b>Beginning in June
-     * 2020, only the new order ID format will be returned in response payloads for paid orders, regardless of the WSDL version number or compatibility level.</b> <br><br> Note that the unique identifier of a 'non-immediate payment' order will change as it
-     * goes from an unpaid order to a paid order. Due to this scenario, all calls that accept Order ID values as filters in the request payload, including the <b>CompleteSale</b> call, will support the identifiers for both unpaid and paid orders. The new
-     * order ID format is a non-parsable string, globally unique across all eBay marketplaces, and consistent for both single line item and multiple line item orders. Unlike in the past, instead of just being known and exposed to the seller, these unique
-     * order identifiers will also be known and used/referenced by the buyer and eBay customer support. <br><br> Sellers can check to see if an order has been paid by looking for a value of 'Complete' in the <b>CheckoutStatus.Status</b> field in the
-     * response of <b>GetOrders</b> or <b>GetOrderTransactions</b> call, or in the <b>Status.CompleteStatus</b> field in the response of <b>GetItemTransactions</b> or <b>GetSellerTransactions</b> call. Sellers should not fulfill orders until buyer has made
-     * payment. </span>
+     * <br><br> <span class="tablenote"><b>Note: </b> Note that the unique identifier of a 'non-immediate payment' order will change as it goes from an unpaid order to a paid order. Due to this scenario, all calls that accept Order ID values as request
+     * filters/parameters, including the <b>CompleteSale</b> call, will support the identifiers for both unpaid and paid orders. </span>
      * - minOccurs: 0
      * @var string|null
      */

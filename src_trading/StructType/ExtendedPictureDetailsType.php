@@ -10,7 +10,9 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for ExtendedPictureDetailsType StructType
  * Meta information extracted from the WSDL
- * - documentation: This container returns the URLs of the seller's self-hosted (hosted outside of eBay) pictures and the URL for the corresponding eBay Picture Services (EPS), that was generated when the self-hosted picture was uploaded.
+ * - documentation: This type is used by the <b>ExtendedPictureDetails</b> container, which is no longer returned under any circumstances, including when self-hosted pictures are used for the item. When self-hosted pictures are used by the seller, only
+ * the external URL of the gallery image is shown in the <b>PictureDetails.ExternalPictureURL</b> field, and only the equivalent eBay Picture Server (EPS) URLs are shown for the rest of the item's images in separate <b>PictureDetails.PictureURL</b>
+ * fields.
  * @subpackage Structs
  */
 class ExtendedPictureDetailsType extends AbstractStructBase
@@ -18,7 +20,8 @@ class ExtendedPictureDetailsType extends AbstractStructBase
     /**
      * The PictureURLs
      * Meta information extracted from the WSDL
-     * - documentation: This container returns the <b>eBayPictureURL</b> (images hosted by eBay Picture Services) and the <b>ExternalPictureURL</b> (images hosted outside of eBay) fields.
+     * - documentation: The <b>ExtendedPictureDetails</b> container and its child fields are no longer returned under any circumstances, including when self-hosted pictures are used for the item. When self-hosted pictures are used by the seller, only the
+     * external URL of the gallery image is shown in the <b>PictureDetails.ExternalPictureURL</b> field, and only the equivalent eBay Picture Server (EPS) URLs are shown for the rest of the item's images in separate <b>PictureDetails.PictureURL</b> fields.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\PictureURLsType[]
@@ -111,7 +114,7 @@ class ExtendedPictureDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

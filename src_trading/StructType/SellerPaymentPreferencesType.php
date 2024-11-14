@@ -10,7 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for SellerPaymentPreferencesType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>SellerPaymentPreferences</b> container, which consists of the seller's payment preferences. Payment preferences specified in a <b>SetUserPreferences</b> call override the settings in My eBay payment preferences.
+ * - documentation: Type defining the <b>SellerPaymentPreferences</b> container, which consists of the seller's payment preferences. Payment preferences specified in a <b>SetUserPreferences</b> call override the current corresponding settings in the
+ * seller's account.
  * @subpackage Structs
  */
 class SellerPaymentPreferencesType extends AbstractStructBase
@@ -27,8 +28,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The DisplayPayNowButton
      * Meta information extracted from the WSDL
-     * - documentation: If set, this field determines whether a Pay Now button is displayed for all of the user's listings. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>DisplayPayNowButton</b> value can still be set in
-     * <b>SetUserPreferences</b> and returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span> <br>
+     * - documentation: This field is deprecated. If it is used in a <b>SetUserPreferences</b> call, it is ignored.
      * - minOccurs: 0
      * @var string|null
      */
@@ -36,8 +36,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The PayPalPreferred
      * Meta information extracted from the WSDL
-     * - documentation: Specifies whether a seller wants to let buyers know that PayPal payments are preferred. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>PayPalPreferred</b> boolean value can still be set in <b>SetUserPreferences</b> and
-     * returned in <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span>
+     * - documentation: This field is deprecated. If it is used in a <b>SetUserPreferences</b> call, it is ignored.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -45,8 +44,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The DefaultPayPalEmailAddress
      * Meta information extracted from the WSDL
-     * - documentation: Specifies the default email address the seller uses for receiving PayPal payments. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>DefaultPayPalEmailAddress</b> value can still be set in <b>SetUserPreferences</b> and
-     * returned in <b>GetUserPreferences</b>, the seller's PayPal email address is no longer required or applicable. </span>
+     * - documentation: This field is deprecated. If it is used in a <b>SetUserPreferences</b> call, it is ignored. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -54,8 +52,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * The PayPalAlwaysOn
      * Meta information extracted from the WSDL
-     * - documentation: Indicates whether PayPal is always accepted for the seller's listings. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>PayPalAlwaysOn</b> boolean value can still be set in <b>SetUserPreferences</b> and returned in
-     * <b>GetUserPreferences</b>, the setting will not have any affect on any current or future listings for the seller. </span>
+     * - documentation: This field is deprecated. If it is used in a <b>SetUserPreferences</b> call, it is ignored.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -353,7 +350,7 @@ class SellerPaymentPreferencesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -35,14 +35,6 @@ class GetUserRequestType extends AbstractRequestType
      */
     protected ?string $UserID = null;
     /**
-     * The IncludeExpressRequirements
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $IncludeExpressRequirements = null;
-    /**
      * The IncludeFeatureEligibility
      * Meta information extracted from the WSDL
      * - documentation: If the <b>IncludeFeatureEligibility</b> flag is included and set to 'true', the call response will include a <b>QualifiesForSelling</b> flag which indicates if the eBay user is eligible to sell on eBay, and a
@@ -55,19 +47,16 @@ class GetUserRequestType extends AbstractRequestType
      * Constructor method for GetUserRequestType
      * @uses GetUserRequestType::setItemID()
      * @uses GetUserRequestType::setUserID()
-     * @uses GetUserRequestType::setIncludeExpressRequirements()
      * @uses GetUserRequestType::setIncludeFeatureEligibility()
      * @param string $itemID
      * @param string $userID
-     * @param bool $includeExpressRequirements
      * @param bool $includeFeatureEligibility
      */
-    public function __construct(?string $itemID = null, ?string $userID = null, ?bool $includeExpressRequirements = null, ?bool $includeFeatureEligibility = null)
+    public function __construct(?string $itemID = null, ?string $userID = null, ?bool $includeFeatureEligibility = null)
     {
         $this
             ->setItemID($itemID)
             ->setUserID($userID)
-            ->setIncludeExpressRequirements($includeExpressRequirements)
             ->setIncludeFeatureEligibility($includeFeatureEligibility);
     }
     /**
@@ -113,29 +102,6 @@ class GetUserRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
         }
         $this->UserID = $userID;
-        
-        return $this;
-    }
-    /**
-     * Get IncludeExpressRequirements value
-     * @return bool|null
-     */
-    public function getIncludeExpressRequirements(): ?bool
-    {
-        return $this->IncludeExpressRequirements;
-    }
-    /**
-     * Set IncludeExpressRequirements value
-     * @param bool $includeExpressRequirements
-     * @return \macropage\ebaysdk\trading\StructType\GetUserRequestType
-     */
-    public function setIncludeExpressRequirements(?bool $includeExpressRequirements = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($includeExpressRequirements) && !is_bool($includeExpressRequirements)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($includeExpressRequirements, true), gettype($includeExpressRequirements)), __LINE__);
-        }
-        $this->IncludeExpressRequirements = $includeExpressRequirements;
         
         return $this;
     }

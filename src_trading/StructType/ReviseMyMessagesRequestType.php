@@ -26,14 +26,6 @@ class ReviseMyMessagesRequestType extends AbstractRequestType
      */
     protected ?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $MessageIDs = null;
     /**
-     * The AlertIDs
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $AlertIDs = null;
-    /**
      * The Read
      * Meta information extracted from the WSDL
      * - documentation: This boolean field is used to change the 'Read' status of the message(s) in the <b>MessageIDs</b> container. Including this field and setting its value to <code>true</code> will mark all messages in the <b>MessageIDs</b> container as
@@ -68,21 +60,18 @@ class ReviseMyMessagesRequestType extends AbstractRequestType
     /**
      * Constructor method for ReviseMyMessagesRequestType
      * @uses ReviseMyMessagesRequestType::setMessageIDs()
-     * @uses ReviseMyMessagesRequestType::setAlertIDs()
      * @uses ReviseMyMessagesRequestType::setRead()
      * @uses ReviseMyMessagesRequestType::setFlagged()
      * @uses ReviseMyMessagesRequestType::setFolderID()
      * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs
      * @param bool $read
      * @param bool $flagged
      * @param int $folderID
      */
-    public function __construct(?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs = null, ?bool $read = null, ?bool $flagged = null, ?int $folderID = null)
+    public function __construct(?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs = null, ?bool $read = null, ?bool $flagged = null, ?int $folderID = null)
     {
         $this
             ->setMessageIDs($messageIDs)
-            ->setAlertIDs($alertIDs)
             ->setRead($read)
             ->setFlagged($flagged)
             ->setFolderID($folderID);
@@ -103,25 +92,6 @@ class ReviseMyMessagesRequestType extends AbstractRequestType
     public function setMessageIDs(?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageIDArrayType $messageIDs = null): self
     {
         $this->MessageIDs = $messageIDs;
-        
-        return $this;
-    }
-    /**
-     * Get AlertIDs value
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType|null
-     */
-    public function getAlertIDs(): ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType
-    {
-        return $this->AlertIDs;
-    }
-    /**
-     * Set AlertIDs value
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs
-     * @return \macropage\ebaysdk\trading\StructType\ReviseMyMessagesRequestType
-     */
-    public function setAlertIDs(?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertIDArrayType $alertIDs = null): self
-    {
-        $this->AlertIDs = $alertIDs;
         
         return $this;
     }

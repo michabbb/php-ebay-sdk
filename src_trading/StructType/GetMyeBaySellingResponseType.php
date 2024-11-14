@@ -69,34 +69,6 @@ class GetMyeBaySellingResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\StructType\MyeBaySellingSummaryType $Summary = null;
     /**
-     * The BidList
-     * Meta information extracted from the WSDL
-     * - documentation: This container is no longer applicable to <b>GetMyeBaySelling</b>.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $BidList = null;
-    /**
-     * The DeletedFromSoldList
-     * Meta information extracted from the WSDL
-     * - documentation: This container consists of listings that have had sales but have been deleted from My eBay. This container will be returned if the eBay user has one or more listings with sales that have been deleted from My eBay. <br><br> This
-     * container will not be returned in the response (even if there are one or more listings that have sales but have been deleted) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromSoldList.Include</b> field is
-     * omitted or set to <code>false</code>.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $DeletedFromSoldList = null;
-    /**
-     * The DeletedFromUnsoldList
-     * Meta information extracted from the WSDL
-     * - documentation: This container consists of listings that have ended without sales and have been deleted from My eBay. This container will be returned if the eBay user has one or more listings with sales that have been deleted from My eBay. <br><br>
-     * This container will not be returned in the response (even if there are one or more listings that have sales but have been deleted) if the <b>DetailLevel</b> value is set to <code>ReturnSummary</code> and the <b>DeletedFromSoldList.Include</b> field
-     * is omitted or set to <code>false</code>.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $DeletedFromUnsoldList = null;
-    /**
      * Constructor method for GetMyeBaySellingResponseType
      * @uses GetMyeBaySellingResponseType::setSellingSummary()
      * @uses GetMyeBaySellingResponseType::setScheduledList()
@@ -104,20 +76,14 @@ class GetMyeBaySellingResponseType extends AbstractResponseType
      * @uses GetMyeBaySellingResponseType::setSoldList()
      * @uses GetMyeBaySellingResponseType::setUnsoldList()
      * @uses GetMyeBaySellingResponseType::setSummary()
-     * @uses GetMyeBaySellingResponseType::setBidList()
-     * @uses GetMyeBaySellingResponseType::setDeletedFromSoldList()
-     * @uses GetMyeBaySellingResponseType::setDeletedFromUnsoldList()
      * @param \macropage\ebaysdk\trading\StructType\SellingSummaryType $sellingSummary
      * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $scheduledList
      * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $activeList
      * @param \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $soldList
      * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $unsoldList
      * @param \macropage\ebaysdk\trading\StructType\MyeBaySellingSummaryType $summary
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromSoldList
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromUnsoldList
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\SellingSummaryType $sellingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $scheduledList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $activeList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $soldList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $unsoldList = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySellingSummaryType $summary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromSoldList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromUnsoldList = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\SellingSummaryType $sellingSummary = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $scheduledList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $activeList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $soldList = null, ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $unsoldList = null, ?\macropage\ebaysdk\trading\StructType\MyeBaySellingSummaryType $summary = null)
     {
         $this
             ->setSellingSummary($sellingSummary)
@@ -125,10 +91,7 @@ class GetMyeBaySellingResponseType extends AbstractResponseType
             ->setActiveList($activeList)
             ->setSoldList($soldList)
             ->setUnsoldList($unsoldList)
-            ->setSummary($summary)
-            ->setBidList($bidList)
-            ->setDeletedFromSoldList($deletedFromSoldList)
-            ->setDeletedFromUnsoldList($deletedFromUnsoldList);
+            ->setSummary($summary);
     }
     /**
      * Get SellingSummary value
@@ -241,63 +204,6 @@ class GetMyeBaySellingResponseType extends AbstractResponseType
     public function setSummary(?\macropage\ebaysdk\trading\StructType\MyeBaySellingSummaryType $summary = null): self
     {
         $this->Summary = $summary;
-        
-        return $this;
-    }
-    /**
-     * Get BidList value
-     * @return \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType|null
-     */
-    public function getBidList(): ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType
-    {
-        return $this->BidList;
-    }
-    /**
-     * Set BidList value
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType
-     */
-    public function setBidList(?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $bidList = null): self
-    {
-        $this->BidList = $bidList;
-        
-        return $this;
-    }
-    /**
-     * Get DeletedFromSoldList value
-     * @return \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType|null
-     */
-    public function getDeletedFromSoldList(): ?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType
-    {
-        return $this->DeletedFromSoldList;
-    }
-    /**
-     * Set DeletedFromSoldList value
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromSoldList
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType
-     */
-    public function setDeletedFromSoldList(?\macropage\ebaysdk\trading\StructType\PaginatedOrderTransactionArrayType $deletedFromSoldList = null): self
-    {
-        $this->DeletedFromSoldList = $deletedFromSoldList;
-        
-        return $this;
-    }
-    /**
-     * Get DeletedFromUnsoldList value
-     * @return \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType|null
-     */
-    public function getDeletedFromUnsoldList(): ?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType
-    {
-        return $this->DeletedFromUnsoldList;
-    }
-    /**
-     * Set DeletedFromUnsoldList value
-     * @param \macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromUnsoldList
-     * @return \macropage\ebaysdk\trading\StructType\GetMyeBaySellingResponseType
-     */
-    public function setDeletedFromUnsoldList(?\macropage\ebaysdk\trading\StructType\PaginatedItemArrayType $deletedFromUnsoldList = null): self
-    {
-        $this->DeletedFromUnsoldList = $deletedFromUnsoldList;
         
         return $this;
     }

@@ -11,7 +11,7 @@ use WsdlToPhp\PackageBase\AbstractStructArrayBase;
  * This class stands for NotificationDetailsArrayType ArrayType
  * Meta information extracted from the WSDL
  * - documentation: Type used by the <b>NotificationDetailsArray</b> container that is returned by the <b>GetNotificationsUsage</b> call. The <b>NotificationDetailsArray</b> container consists of one or more notifications that match the input criteria
- * in the call request. <br><br> This container is only returned if an <b>ItemID</b> value was specified in the request, and there were notifications related to this listing during the specified time range.
+ * in the call request. <br><br> This container is only returned if there were notifications related to this listing during the specified time range.
  * @subpackage Arrays
  */
 class NotificationDetailsArrayType extends AbstractStructArrayBase
@@ -19,8 +19,8 @@ class NotificationDetailsArrayType extends AbstractStructArrayBase
     /**
      * The NotificationDetails
      * Meta information extracted from the WSDL
-     * - documentation: Each <b>NotificationDetails</b> container consists of detailed information about one notification. <b>NotificationDetails</b> container(s) are only returned if an <b>ItemID</b> value was specified in the request, and there were one
-     * or more notifications related to this listing during the specified time range.
+     * - documentation: Each <b>NotificationDetails</b> container consists of detailed information about one notification. <b>NotificationDetails</b> container(s) are only returned if there were one or more notifications related to this listing during the
+     * specified time range.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\NotificationDetailsType[]

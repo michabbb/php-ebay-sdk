@@ -99,8 +99,8 @@ class CancelReasonCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'BuyerCancelOrAddressIssue'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the seller initiated the cancellation of the order but at the request of the buyer, or if the buyer supplied a bad/incorrect address at purchase time. This is a cancel reason that the seller can give to
-     * avoid a seller defect for the cancellation.
+     * - documentation: THIS ENUMERATION VALUE IS DEPRECATED. This value indicates that the seller initiated the cancellation of the order but at the request of the buyer, or if the buyer supplied a bad/incorrect address at purchase time. This is a cancel
+     * reason that the seller can give to avoid a seller defect for the cancellation. Replacement values are AddressIssues and BuyerCancelOrder.
      * @return string 'BuyerCancelOrAddressIssue'
      */
     const VALUE_BUYER_CANCEL_OR_ADDRESS_ISSUE = 'BuyerCancelOrAddressIssue';
@@ -112,6 +112,14 @@ class CancelReasonCodeType extends AbstractStructEnumBase
      * @return string 'OutOfStockOrCannotFulfill'
      */
     const VALUE_OUT_OF_STOCK_OR_CANNOT_FULFILL = 'OutOfStockOrCannotFulfill';
+    /**
+     * Constant for value 'AddressIssues'
+     * Meta information extracted from the WSDL
+     * - documentation: This enumeration value indicates that the seller initiated the order cancellation request because there are issues with the destination address supplied by the buyer. <br/><br/> This cancellation reason can only be given by the
+     * seller and not the buyer.
+     * @return string 'AddressIssues'
+     */
+    const VALUE_ADDRESS_ISSUES = 'AddressIssues';
     /**
      * Constant for value 'CustomCode'
      * Meta information extracted from the WSDL
@@ -134,6 +142,7 @@ class CancelReasonCodeType extends AbstractStructEnumBase
      * @uses self::VALUE_WONT_ARRIVE_IN_TIME
      * @uses self::VALUE_BUYER_CANCEL_OR_ADDRESS_ISSUE
      * @uses self::VALUE_OUT_OF_STOCK_OR_CANNOT_FULFILL
+     * @uses self::VALUE_ADDRESS_ISSUES
      * @uses self::VALUE_CUSTOM_CODE
      * @return string[]
      */
@@ -153,6 +162,7 @@ class CancelReasonCodeType extends AbstractStructEnumBase
             self::VALUE_WONT_ARRIVE_IN_TIME,
             self::VALUE_BUYER_CANCEL_OR_ADDRESS_ISSUE,
             self::VALUE_OUT_OF_STOCK_OR_CANNOT_FULFILL,
+            self::VALUE_ADDRESS_ISSUES,
             self::VALUE_CUSTOM_CODE,
         ];
     }

@@ -42,7 +42,8 @@ class RespondToFeedbackRequestType extends AbstractRequestType
      * Meta information extracted from the WSDL
      * - documentation: Unique identifier for an eBay order line item. A <b>TransactionID</b> can be paired up with its corresponding <b>ItemID</b> and used as an input filter to respond to a Feedback comment in the <b>RespondToFeedback</b> call. Unless the
      * specific Feedback record is identified by a <b>FeedbackID</b> or an <b>OrderLineItemID</b> in the request, an <b>ItemID</b>/<b>TransactionID</b> pair is required. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code>
-     * since there can be only one winning bidder/one sale for an auction listing.
+     * since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to
+     * handle non-zero transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -51,9 +52,8 @@ class RespondToFeedbackRequestType extends AbstractRequestType
      * The TargetUserID
      * Meta information extracted from the WSDL
      * - documentation: The eBay user ID of the caller's order partner. The caller is either replyting to or following up on this user's Feedback comment. | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several
-     * other types to identify a specific eBay user, such as DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this
-     * API call, the actual IDs of all bidders on the seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized
-     * userIDs.
+     * other types to identify a specific eBay user. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the seller's item will be returned. If a
+     * bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null

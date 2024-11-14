@@ -17,19 +17,6 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 class GetSellerListRequestType extends AbstractRequestType
 {
     /**
-     * The UserID
-     * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><strong>Note:</strong> This field should no longer be used, and will be ignored if it is included in a <b>GetSellerList</b> request. There are plans to remove this field from the public WSDL. The only eBay
-     * user ID that can be used is the one associated with the authentication token. </span> | This is a string wrapper for the eBay ID that uniquely identifies a user. This is used by several other types to identify a specific eBay user, such as
-     * DisputeType.xsd, FeedbackInfoType.xsd, GetAllBidders, OrderType, and so on. <br><br>For GetAllBidders, some bidder information is anonymous, to protect bidders from fraud. If the seller makes this API call, the actual IDs of all bidders on the
-     * seller's item will be returned. If a bidder makes this API call, the bidder's actual ID will be returned, but information for all competing bidders or outside watchers will be returned as anonymized userIDs.
-     * - base: xs:string
-     * - maxOccurs: 1
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $UserID = null;
-    /**
      * The MotorsDealerUsers
      * Meta information extracted from the WSDL
      * - documentation: Specifies the list of Motors Dealer sellers for which a special set of metrics can be requested. Applies to eBay Motors Pro applications only.
@@ -58,7 +45,7 @@ class GetSellerListRequestType extends AbstractRequestType
     /**
      * The Sort
      * Meta information extracted from the WSDL
-     * - documentation: This field can be used to control the order in which returned listings are sorted (based on the listings' actual/scheduled end dates). Valid values are as follows: <ul> <li><code>1</code> (descending order)</li> <li>code>2</code>
+     * - documentation: This field can be used to control the order in which returned listings are sorted (based on the listings' actual/scheduled end dates). Valid values are as follows: <ul> <li><code>1</code> (descending order)</li> <li><code>2</code>
      * (ascending order)</li> </ul>
      * - minOccurs: 0
      * @var int|null
@@ -145,7 +132,6 @@ class GetSellerListRequestType extends AbstractRequestType
     protected ?bool $IncludeVariations = null;
     /**
      * Constructor method for GetSellerListRequestType
-     * @uses GetSellerListRequestType::setUserID()
      * @uses GetSellerListRequestType::setMotorsDealerUsers()
      * @uses GetSellerListRequestType::setEndTimeFrom()
      * @uses GetSellerListRequestType::setEndTimeTo()
@@ -159,7 +145,6 @@ class GetSellerListRequestType extends AbstractRequestType
      * @uses GetSellerListRequestType::setAdminEndedItemsOnly()
      * @uses GetSellerListRequestType::setCategoryID()
      * @uses GetSellerListRequestType::setIncludeVariations()
-     * @param string $userID
      * @param \macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers
      * @param string $endTimeFrom
      * @param string $endTimeTo
@@ -174,10 +159,9 @@ class GetSellerListRequestType extends AbstractRequestType
      * @param int $categoryID
      * @param bool $includeVariations
      */
-    public function __construct(?string $userID = null, ?\macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $sort = null, ?string $startTimeFrom = null, ?string $startTimeTo = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $granularityLevel = null, ?\macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null, ?bool $includeWatchCount = null, ?bool $adminEndedItemsOnly = null, ?int $categoryID = null, ?bool $includeVariations = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\UserIDArrayType $motorsDealerUsers = null, ?string $endTimeFrom = null, ?string $endTimeTo = null, ?int $sort = null, ?string $startTimeFrom = null, ?string $startTimeTo = null, ?\macropage\ebaysdk\trading\StructType\PaginationType $pagination = null, ?string $granularityLevel = null, ?\macropage\ebaysdk\trading\ArrayType\SKUArrayType $sKUArray = null, ?bool $includeWatchCount = null, ?bool $adminEndedItemsOnly = null, ?int $categoryID = null, ?bool $includeVariations = null)
     {
         $this
-            ->setUserID($userID)
             ->setMotorsDealerUsers($motorsDealerUsers)
             ->setEndTimeFrom($endTimeFrom)
             ->setEndTimeTo($endTimeTo)
@@ -191,29 +175,6 @@ class GetSellerListRequestType extends AbstractRequestType
             ->setAdminEndedItemsOnly($adminEndedItemsOnly)
             ->setCategoryID($categoryID)
             ->setIncludeVariations($includeVariations);
-    }
-    /**
-     * Get UserID value
-     * @return string|null
-     */
-    public function getUserID(): ?string
-    {
-        return $this->UserID;
-    }
-    /**
-     * Set UserID value
-     * @param string $userID
-     * @return \macropage\ebaysdk\trading\StructType\GetSellerListRequestType
-     */
-    public function setUserID(?string $userID = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($userID) && !is_string($userID)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userID, true), gettype($userID)), __LINE__);
-        }
-        $this->UserID = $userID;
-        
-        return $this;
     }
     /**
      * Get MotorsDealerUsers value

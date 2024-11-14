@@ -19,9 +19,11 @@ class GetSellerTransactionsRequestType extends AbstractRequestType
     /**
      * The ModTimeFrom
      * Meta information extracted from the WSDL
-     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to specify a date range for retrieving order line items associated with the seller. The <b>ModTimeFrom</b> field is the starting date range. All of the seller's order line
-     * items that were created (or last modified) within this date range are returned in the output. The maximum date range that may be specified is 30 days. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales
-     * older than 90 days. This field is not applicable if the <b>NumberOfDays</b> date filter is used. <br><br> If you don't specify a <b>ModTimeFrom</b>/<b>ModTimeTo</b> filter, the <b>NumberOfDays</b> time filter is used and it defaults to 30 (days).
+     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to retrieve order line items that were created or modified within a specified date range. The <b>ModTimeFrom</b> field is the starting date range. All of the seller's order
+     * line items that were created or modified within this date range are returned in the output. The maximum date range that may be specified is 30 days. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales older
+     * than 90 days. This field is not applicable if the <b>NumberOfDays</b> date filter is used. <br><br> If you don't specify a <b>ModTimeFrom</b>/<b>ModTimeTo</b> filter, the <b>NumberOfDays</b> time filter is used and it defaults to 30 (days). <br>
+     * <span class="tablenote"><b>Note: </b> Please note that for a multiple line item order, all line items of that order that meet the filter criteria may be returned in the responses, even the line item(s) that were not actually modified. In other words,
+     * if any part of the order was modified, all line items of that order may be returned. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -29,10 +31,11 @@ class GetSellerTransactionsRequestType extends AbstractRequestType
     /**
      * The ModTimeTo
      * Meta information extracted from the WSDL
-     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to specify a date range for retrieving order line items associated with the seller. The <b>ModTimeTo</b> field is the ending date range. All of the seller's order line items
-     * that were created (or last modified) within this date range are returned in the output. The maximum date range that may be specified is 30 days. <br/><br/> If the <b>ModTimeFrom</b> field is used and the <b>ModTimeTo</b> field is omitted, the
+     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to retrieve order line items that were created or modified within a specified date range. The <b>ModTimeTo</b> field is the ending date range. All of the seller's order line
+     * items that were created or modified within this date range are returned in the output. The maximum date range that may be specified is 30 days. <br/><br/> If the <b>ModTimeFrom</b> field is used and the <b>ModTimeTo</b> field is omitted, the
      * <b>ModTimeTo</b> value defaults to the present time or to 30 days past the <b>ModTimeFrom</b> value (if <b>ModTimeFrom</b> value is more than 30 days in the past). This field is not applicable if the <b>NumberOfDays</b> date filter is used. <br><br>
-     * If you don't specify a <b>ModTimeFrom</b>/<b>ModTimeTo</b> filter, the <b>NumberOfDays</b> time filter is used and it defaults to 30 (days).
+     * If you don't specify a <b>ModTimeFrom</b>/<b>ModTimeTo</b> filter, the <b>NumberOfDays</b> time filter is used and it defaults to 30 (days). <br> <span class="tablenote"><b>Note: </b> Please note that for a multiple line item order, all line items of
+     * that order that meet the filter criteria may be returned in the responses, even the line item(s) that were not actually modified. In other words, if any part of the order was modified, all line items of that order may be returned. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -70,7 +73,7 @@ class GetSellerTransactionsRequestType extends AbstractRequestType
      * Meta information extracted from the WSDL
      * - documentation: This container is used to search for order line items generated from one or more product SKU values. The response will only include order line items for the seller's product(s) that are represented by the specified SKU value(s). <br>
      * <br> If a user wants to retrieve order line items based on SKUs, the <b>InventoryTrackingMethod</b> must be set to <code>SKU</code>. The <b>InventoryTrackingMethod</b> value can be set when the seller lists the item through an
-     * <b>AddFixedPriceItem</b> call, or it can be set by including the <b>InventoryTrackingMethod</b> field in a <b>GetSellerTransactions</b> call and setting its value to <code>SKU</code>. <br> <br> <span class="tablenote"><b>Note: </b> SKU values must be
+     * <b>AddFixedPriceItem</b> call, or it can be set by including the <b>InventoryTrackingMethod</b> field in a <b>GetSellerTransactions</b> call and setting its value to <code>SKU</code>. <br> <span class="tablenote"><b>Note: </b> SKU values must be
      * defined for products in listings for this container to be applicable. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\SKUArrayType|null

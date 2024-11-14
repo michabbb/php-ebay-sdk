@@ -32,14 +32,6 @@ class MyMessagesResponseDetailsType extends AbstractStructBase
      */
     protected ?string $ResponseURL = null;
     /**
-     * The UserResponseDate
-     * Meta information extracted from the WSDL
-     * - documentation: The date and time the user responded to a message
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $UserResponseDate = null;
-    /**
      * The any
      * @var \DOMDocument|string|null
      */
@@ -48,19 +40,16 @@ class MyMessagesResponseDetailsType extends AbstractStructBase
      * Constructor method for MyMessagesResponseDetailsType
      * @uses MyMessagesResponseDetailsType::setResponseEnabled()
      * @uses MyMessagesResponseDetailsType::setResponseURL()
-     * @uses MyMessagesResponseDetailsType::setUserResponseDate()
      * @uses MyMessagesResponseDetailsType::setAny()
      * @param bool $responseEnabled
      * @param string $responseURL
-     * @param string $userResponseDate
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $responseEnabled = null, ?string $responseURL = null, ?string $userResponseDate = null, $any = null)
+    public function __construct(?bool $responseEnabled = null, ?string $responseURL = null, $any = null)
     {
         $this
             ->setResponseEnabled($responseEnabled)
             ->setResponseURL($responseURL)
-            ->setUserResponseDate($userResponseDate)
             ->setAny($any);
     }
     /**
@@ -110,32 +99,9 @@ class MyMessagesResponseDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get UserResponseDate value
-     * @return string|null
-     */
-    public function getUserResponseDate(): ?string
-    {
-        return $this->UserResponseDate;
-    }
-    /**
-     * Set UserResponseDate value
-     * @param string $userResponseDate
-     * @return \macropage\ebaysdk\trading\StructType\MyMessagesResponseDetailsType
-     */
-    public function setUserResponseDate(?string $userResponseDate = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($userResponseDate) && !is_string($userResponseDate)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($userResponseDate, true), gettype($userResponseDate)), __LINE__);
-        }
-        $this->UserResponseDate = $userResponseDate;
-        
-        return $this;
-    }
-    /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

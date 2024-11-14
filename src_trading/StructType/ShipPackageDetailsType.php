@@ -14,7 +14,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
  * packaging/handling costs. <br/><br/> Also returned with the data for an item's transaction. <br/><br/> <span class="tablenote"><strong>Note:</strong> The <strong>ShippingPackageDetails</strong> container should now be used instead of the
  * <strong>CalculatedShippingRate</strong> container to specify values for the <strong>MeasurementUnit</strong>, <strong>PackageDepth</strong>, <strong>PackageWidth</strong>, <strong>PackageLength</strong>, <strong>ShippingIrregular</strong>,
  * <strong>ShippingPackage</strong>, <strong>WeightMajor</strong>, and/or <strong>WeightMinor</strong> fields. The <strong>CalculatedShippingRate</strong> container should only be used to specify values for the
- * <strong>InternationalPackagingHandlingCosts</strong>, <strong>OriginatingPostalCode</strong>, and/or <strong>PackagingHandlingCosts</strong> fields. </span>
+ * <strong>InternationalPackagingHandlingCosts</strong>, and/or <strong>PackagingHandlingCosts</strong> fields. </span>
  * @subpackage Structs
  */
 class ShipPackageDetailsType extends AbstractStructBase
@@ -33,9 +33,11 @@ class ShipPackageDetailsType extends AbstractStructBase
      * The PackageDepth
      * Meta information extracted from the WSDL
      * - documentation: Depth of the package, in whole number of inches, needed to ship the item. This is validated against the selected shipping service. Upon mismatch, a message is returned, such as, "Package dimensions exceeds maximum allowable limit for
-     * service XXXXX," where XXXXX is the name of the shipping service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.) <br><br> <b>Developer
-     * impact:</b> UPS requires dimensions for any Ground packages that are 3 cubic feet or larger and for all air packages, if they are to provide correct shipping cost. If package dimensions are not included for an item listed with calculated shipping,
-     * the shipping cost returned will be an estimate based on standard dimensions for the defined package type. eBay enforces a dimensions requirement on listings so that buyers receive accurate calculated shipping costs.
+     * service XXXXX," where XXXXX is the name of the shipping service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.) <b>Developer impact:</b> UPS
+     * requires dimensions for any Ground packages that are 3 cubic feet or larger and for all air packages, if they are to provide correct shipping cost. If package dimensions are not included for an item listed with calculated shipping, the shipping cost
+     * returned will be an estimate based on standard dimensions for the defined package type. eBay enforces a dimensions requirement on listings so that buyers receive accurate calculated shipping costs. <br> <span class="tablenote"><b>Note:</b> The
+     * <b>unit</b> and <b>measurementSystem</b> attributes associated with this field will be returned by the <b>GetItem</b> call and are automatically derived based on the <b>MeasurementUnit</b> value specified during listing creation or revision. These
+     * attributes will be ignored if passed into the request of the AddItem family of calls. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -44,7 +46,9 @@ class ShipPackageDetailsType extends AbstractStructBase
      * The PackageLength
      * Meta information extracted from the WSDL
      * - documentation: Length of the package, in whole number of inches, needed to ship the item. Upon mismatch, a message is returned, such as, "Package dimensions exceeds maximum allowable limit for service XXXXX," where XXXXX is the name of the shipping
-     * service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.)
+     * service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.) <br> <span class="tablenote"><b>Note:</b> The <b>unit</b> and <b>measurementSystem</b>
+     * attributes associated with this field will be returned by the <b>GetItem</b> call and are automatically derived based on the <b>MeasurementUnit</b> value specified during listing creation or revision. These attributes will be ignored if passed into
+     * the request of the AddItem family of calls. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -53,7 +57,9 @@ class ShipPackageDetailsType extends AbstractStructBase
      * The PackageWidth
      * Meta information extracted from the WSDL
      * - documentation: Width of the package, in whole number of inches, needed to ship the item. Upon mismatch, a message is returned, such as, "Package dimensions exceeds maximum allowable limit for service XXXXX," where XXXXX is the name of the shipping
-     * service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.)
+     * service. For calculated shipping only. Only returned if the seller specified the value for the item. (In many cases, the seller only specifies the weight fields.) <br> <span class="tablenote"><b>Note:</b> The <b>unit</b> and <b>measurementSystem</b>
+     * attributes associated with this field will be returned by the <b>GetItem</b> call and are automatically derived based on the <b>MeasurementUnit</b> value specified during listing creation or revision. These attributes will be ignored if passed into
+     * the request of the AddItem family of calls. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -85,7 +91,8 @@ class ShipPackageDetailsType extends AbstractStructBase
      * unit="gr"&gt;324&lt;/WeightMinor&gt; </code> <br/><br/> If a package weighed exactly 2 lbs or 105 kg, below is how you would represent this weight: <br/><br/> <code> &lt;WeightMajor unit="lbs"&gt;2&lt;/WeightMajor&gt;<br/> &lt;WeightMinor
      * unit="oz"&gt;0&lt;/WeightMinor&gt;<br/> &lt;WeightMajor unit="kg"&gt;105&lt;/WeightMajor&gt;<br/> &lt;WeightMinor unit="gr"&gt;0&lt;/WeightMinor&gt; </code> <br/><br/> In all cases, both the <b>WeightMajor</b> and <b>WeightMinor</b> should be
      * specified in an Add/Revise/Relist/Verify call, even if either's value is '0'. <br><br> The <b>WeightMajor</b> and <b>WeightMinor</b> are applicable for calculated shipping or for flat-rate shipping if shipping rate tables are specified and the
-     * shipping rate table uses weight surcharges.
+     * shipping rate table uses weight surcharges. <br> <span class="tablenote"><b>Note:</b> The <b>unit</b> and <b>measurementSystem</b> attributes associated with this field will be returned by the <b>GetItem</b> call and are automatically derived based
+     * on the <b>MeasurementUnit</b> value specified during listing creation or revision. These attributes will be ignored if passed into the request of the AddItem family of calls. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -101,7 +108,8 @@ class ShipPackageDetailsType extends AbstractStructBase
      * unit="gr"&gt;324&lt;/WeightMinor&gt; </code> <br/><br/> If a package weighed exactly 2 lbs or 105 kg, below is how you would represent this weight: <br/><br/> <code> &lt;WeightMajor unit="lbs"&gt;2&lt;/WeightMajor&gt;<br/> &lt;WeightMinor
      * unit="oz"&gt;0&lt;/WeightMinor&gt;<br/> &lt;WeightMajor unit="kg"&gt;105&lt;/WeightMajor&gt;<br/> &lt;WeightMinor unit="gr"&gt;0&lt;/WeightMinor&gt; </code> <br/><br/> In all cases, both the <b>WeightMajor</b> and <b>WeightMinor</b> should be
      * specified in an Add/Revise/Relist/Verify call, even if either's value is '0'. <br><br> The <b>WeightMajor</b> and <b>WeightMinor</b> are applicable for calculated shipping or for flat-rate shipping if shipping rate tables are specified and the
-     * shipping rate table uses weight surcharges. <br/><br/>
+     * shipping rate table uses weight surcharges. <br> <span class="tablenote"><b>Note:</b> The <b>unit</b> and <b>measurementSystem</b> attributes associated with this field will be returned by the <b>GetItem</b> call and are automatically derived based
+     * on the <b>MeasurementUnit</b> value specified during listing creation or revision. These attributes will be ignored if passed into the request of the AddItem family of calls. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MeasureType|null
      */
@@ -318,7 +326,7 @@ class ShipPackageDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

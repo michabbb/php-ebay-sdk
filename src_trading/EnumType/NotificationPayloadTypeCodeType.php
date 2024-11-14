@@ -9,7 +9,8 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for NotificationPayloadTypeCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: This type is deprecated.
+ * - documentation: This enumeration type contains the payloads to use for delivering platform notifications. <br> <br> <span class="tablenote"><strong>Note:</strong> The notification payload type defaults to <code>eBLSchemaSOAP</code>, so the
+ * <strong>NotificationPayloadType</strong> field no longer has to be included in a <strong>SetNotificationPreferences</strong> call. </span>
  * @subpackage Enumerations
  */
 class NotificationPayloadTypeCodeType extends AbstractStructEnumBase
@@ -17,7 +18,7 @@ class NotificationPayloadTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'eBLSchemaSOAP'
      * Meta information extracted from the WSDL
-     * - documentation: New Schema format (used by the new schema XML API and SOAP API).
+     * - documentation: The only schema format supported for both standard XML and SOAP API payloads.
      * @return string 'eBLSchemaSOAP'
      */
     const VALUE_E_BLSCHEMA_SOAP = 'eBLSchemaSOAP';

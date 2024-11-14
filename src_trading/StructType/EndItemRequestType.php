@@ -34,28 +34,17 @@ class EndItemRequestType extends AbstractRequestType
      */
     protected ?string $EndingReason = null;
     /**
-     * The SellerInventoryID
-     * Meta information extracted from the WSDL
-     * - documentation: This field was previously only used to identify and end Half.com listings, and since the Half.com site has been shut down, this element is no longer applicable.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $SellerInventoryID = null;
-    /**
      * Constructor method for EndItemRequestType
      * @uses EndItemRequestType::setItemID()
      * @uses EndItemRequestType::setEndingReason()
-     * @uses EndItemRequestType::setSellerInventoryID()
      * @param string $itemID
      * @param string $endingReason
-     * @param string $sellerInventoryID
      */
-    public function __construct(?string $itemID = null, ?string $endingReason = null, ?string $sellerInventoryID = null)
+    public function __construct(?string $itemID = null, ?string $endingReason = null)
     {
         $this
             ->setItemID($itemID)
-            ->setEndingReason($endingReason)
-            ->setSellerInventoryID($sellerInventoryID);
+            ->setEndingReason($endingReason);
     }
     /**
      * Get ItemID value
@@ -103,29 +92,6 @@ class EndItemRequestType extends AbstractRequestType
             throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\EndReasonCodeType', is_array($endingReason) ? implode(', ', $endingReason) : var_export($endingReason, true), implode(', ', \macropage\ebaysdk\trading\EnumType\EndReasonCodeType::getValidValues())), __LINE__);
         }
         $this->EndingReason = $endingReason;
-        
-        return $this;
-    }
-    /**
-     * Get SellerInventoryID value
-     * @return string|null
-     */
-    public function getSellerInventoryID(): ?string
-    {
-        return $this->SellerInventoryID;
-    }
-    /**
-     * Set SellerInventoryID value
-     * @param string $sellerInventoryID
-     * @return \macropage\ebaysdk\trading\StructType\EndItemRequestType
-     */
-    public function setSellerInventoryID(?string $sellerInventoryID = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($sellerInventoryID) && !is_string($sellerInventoryID)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($sellerInventoryID, true), gettype($sellerInventoryID)), __LINE__);
-        }
-        $this->SellerInventoryID = $sellerInventoryID;
         
         return $this;
     }

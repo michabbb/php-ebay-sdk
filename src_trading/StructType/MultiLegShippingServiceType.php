@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for MultiLegShippingServiceType StructType
  * Meta information extracted from the WSDL
- * - documentation: This type specifies the shipping service and cost of the domestic leg of a Global Shipping Program shipment.
+ * - documentation: This type specifies the shipping service and cost of the domestic leg of a Global Shipping Program shipment or an eBay International Shipping shipment.
  * @subpackage Structs
  */
 class MultiLegShippingServiceType extends AbstractStructBase
@@ -18,8 +18,8 @@ class MultiLegShippingServiceType extends AbstractStructBase
     /**
      * The ShippingService
      * Meta information extracted from the WSDL
-     * - documentation: The shipping service specified for the domestic leg of a Global Shipping Program shipment. For the domestic leg, the value of this field can be any available shipping service that ships to the domestic address of the international
-     * shipping provider.
+     * - documentation: The shipping service specified for the domestic leg of a Global Shipping Program shipment or an eBay International Shipping shipment. For the domestic leg, the value of this field can be any available shipping service that ships to
+     * the domestic address of the international shipping provider.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var string|null
@@ -28,7 +28,7 @@ class MultiLegShippingServiceType extends AbstractStructBase
     /**
      * The TotalShippingCost
      * Meta information extracted from the WSDL
-     * - documentation: The total shipping cost of the domestic leg of a Global Shipping Program shipment.
+     * - documentation: The total shipping cost of the domestic leg of a Global Shipping Program shipment or an eBay International Shipping shipment.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
@@ -100,7 +100,7 @@ class MultiLegShippingServiceType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

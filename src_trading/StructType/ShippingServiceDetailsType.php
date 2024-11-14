@@ -84,14 +84,6 @@ class ShippingServiceDetailsType extends AbstractStructBase
      */
     protected ?int $ShippingTimeMin = null;
     /**
-     * The ShippingServiceCode
-     * Meta information extracted from the WSDL
-     * - documentation: For future use.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $ShippingServiceCode = null;
-    /**
      * The ServiceType
      * Meta information extracted from the WSDL
      * - documentation: The shipping cost types that this shipping service option supports, such as flat-rate or calculated. A <strong>ServiceType</strong> field is returned for each shipping cost type supported by the shipping service option.
@@ -147,7 +139,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
     /**
      * The CODService
      * Meta information extracted from the WSDL
-     * - documentation: This field is only returned if'true', and indicates that the corresponding <b>ShippingServiceDetails.ShippingService</b> value is a COD (Cash-On-Delivery) service. <br/><br/> COD shipping services are not supported by all sites.
+     * - documentation: This field is deprecated, as there are longer any shipping services that support cash on delivery.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -236,7 +228,6 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @uses ShippingServiceDetailsType::setShippingServiceID()
      * @uses ShippingServiceDetailsType::setShippingTimeMax()
      * @uses ShippingServiceDetailsType::setShippingTimeMin()
-     * @uses ShippingServiceDetailsType::setShippingServiceCode()
      * @uses ShippingServiceDetailsType::setServiceType()
      * @uses ShippingServiceDetailsType::setShippingPackage()
      * @uses ShippingServiceDetailsType::setDimensionsRequired()
@@ -260,7 +251,6 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param int $shippingServiceID
      * @param int $shippingTimeMax
      * @param int $shippingTimeMin
-     * @param string $shippingServiceCode
      * @param string[] $serviceType
      * @param string[] $shippingPackage
      * @param bool $dimensionsRequired
@@ -278,7 +268,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
      * @param string $shippingCategory
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $description = null, ?bool $expeditedService = null, ?bool $internationalService = null, ?string $shippingService = null, ?int $shippingServiceID = null, ?int $shippingTimeMax = null, ?int $shippingTimeMin = null, ?string $shippingServiceCode = null, ?array $serviceType = null, ?array $shippingPackage = null, ?bool $dimensionsRequired = null, ?bool $validForSellingFlow = null, ?bool $surchargeApplicable = null, ?array $shippingCarrier = null, ?bool $cODService = null, ?array $deprecationDetails = null, ?int $mappedToShippingServiceID = null, ?string $costGroupFlat = null, ?array $shippingServicePackageDetails = null, ?bool $weightRequired = null, ?string $detailVersion = null, ?string $updateTime = null, ?string $shippingCategory = null, $any = null)
+    public function __construct(?string $description = null, ?bool $expeditedService = null, ?bool $internationalService = null, ?string $shippingService = null, ?int $shippingServiceID = null, ?int $shippingTimeMax = null, ?int $shippingTimeMin = null, ?array $serviceType = null, ?array $shippingPackage = null, ?bool $dimensionsRequired = null, ?bool $validForSellingFlow = null, ?bool $surchargeApplicable = null, ?array $shippingCarrier = null, ?bool $cODService = null, ?array $deprecationDetails = null, ?int $mappedToShippingServiceID = null, ?string $costGroupFlat = null, ?array $shippingServicePackageDetails = null, ?bool $weightRequired = null, ?string $detailVersion = null, ?string $updateTime = null, ?string $shippingCategory = null, $any = null)
     {
         $this
             ->setDescription($description)
@@ -288,7 +278,6 @@ class ShippingServiceDetailsType extends AbstractStructBase
             ->setShippingServiceID($shippingServiceID)
             ->setShippingTimeMax($shippingTimeMax)
             ->setShippingTimeMin($shippingTimeMin)
-            ->setShippingServiceCode($shippingServiceCode)
             ->setServiceType($serviceType)
             ->setShippingPackage($shippingPackage)
             ->setDimensionsRequired($dimensionsRequired)
@@ -464,32 +453,6 @@ class ShippingServiceDetailsType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($shippingTimeMin, true), gettype($shippingTimeMin)), __LINE__);
         }
         $this->ShippingTimeMin = $shippingTimeMin;
-        
-        return $this;
-    }
-    /**
-     * Get ShippingServiceCode value
-     * @return string|null
-     */
-    public function getShippingServiceCode(): ?string
-    {
-        return $this->ShippingServiceCode;
-    }
-    /**
-     * Set ShippingServiceCode value
-     * @uses \macropage\ebaysdk\trading\EnumType\ShippingServiceCodeType::valueIsValid()
-     * @uses \macropage\ebaysdk\trading\EnumType\ShippingServiceCodeType::getValidValues()
-     * @throws InvalidArgumentException
-     * @param string $shippingServiceCode
-     * @return \macropage\ebaysdk\trading\StructType\ShippingServiceDetailsType
-     */
-    public function setShippingServiceCode(?string $shippingServiceCode = null): self
-    {
-        // validation for constraint: enumeration
-        if (!\macropage\ebaysdk\trading\EnumType\ShippingServiceCodeType::valueIsValid($shippingServiceCode)) {
-            throw new InvalidArgumentException(sprintf('Invalid value(s) %s, please use one of: %s from enumeration class \macropage\ebaysdk\trading\EnumType\ShippingServiceCodeType', is_array($shippingServiceCode) ? implode(', ', $shippingServiceCode) : var_export($shippingServiceCode, true), implode(', ', \macropage\ebaysdk\trading\EnumType\ShippingServiceCodeType::getValidValues())), __LINE__);
-        }
-        $this->ShippingServiceCode = $shippingServiceCode;
         
         return $this;
     }
@@ -1068,7 +1031,7 @@ class ShippingServiceDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -19,8 +19,7 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
     /**
      * The LinkedPayPalAccount
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> Although this field is currently still returned (always as <code>false</code>), it is no longer applicable since having an eBay account linked to a PayPal account is no longer a requirement of
-     * any eBay user. </span>
+     * - documentation: This field is deprecated.
      * - minOccurs: 0
      * @var bool|null
      */
@@ -67,14 +66,6 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
      */
     protected ?bool $ShipToRegistrationCountry = null;
     /**
-     * The VerifiedUserRequirements
-     * Meta information extracted from the WSDL
-     * - documentation: The Verified User Buyer Requirement has been deprecated, so this field is no longer applicable.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType $VerifiedUserRequirements = null;
-    /**
      * The DetailVersion
      * Meta information extracted from the WSDL
      * - documentation: Returns the latest version number for this field. The version can be used to determine if and when to refresh cached client data.
@@ -103,7 +94,6 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
      * @uses SiteBuyerRequirementDetailsType::setMaximumUnpaidItemStrikesInfo()
      * @uses SiteBuyerRequirementDetailsType::setMinimumFeedbackScore()
      * @uses SiteBuyerRequirementDetailsType::setShipToRegistrationCountry()
-     * @uses SiteBuyerRequirementDetailsType::setVerifiedUserRequirements()
      * @uses SiteBuyerRequirementDetailsType::setDetailVersion()
      * @uses SiteBuyerRequirementDetailsType::setUpdateTime()
      * @uses SiteBuyerRequirementDetailsType::setAny()
@@ -113,12 +103,11 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesInfoDetailsType $maximumUnpaidItemStrikesInfo
      * @param \macropage\ebaysdk\trading\StructType\MinimumFeedbackScoreDetailsType $minimumFeedbackScore
      * @param bool $shipToRegistrationCountry
-     * @param \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType $verifiedUserRequirements
      * @param string $detailVersion
      * @param string $updateTime
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?bool $linkedPayPalAccount = null, ?\macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsDetailsType $maximumBuyerPolicyViolations = null, ?\macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType $maximumItemRequirements = null, ?\macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesInfoDetailsType $maximumUnpaidItemStrikesInfo = null, ?\macropage\ebaysdk\trading\StructType\MinimumFeedbackScoreDetailsType $minimumFeedbackScore = null, ?bool $shipToRegistrationCountry = null, ?\macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType $verifiedUserRequirements = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
+    public function __construct(?bool $linkedPayPalAccount = null, ?\macropage\ebaysdk\trading\StructType\MaximumBuyerPolicyViolationsDetailsType $maximumBuyerPolicyViolations = null, ?\macropage\ebaysdk\trading\StructType\MaximumItemRequirementsDetailsType $maximumItemRequirements = null, ?\macropage\ebaysdk\trading\StructType\MaximumUnpaidItemStrikesInfoDetailsType $maximumUnpaidItemStrikesInfo = null, ?\macropage\ebaysdk\trading\StructType\MinimumFeedbackScoreDetailsType $minimumFeedbackScore = null, ?bool $shipToRegistrationCountry = null, ?string $detailVersion = null, ?string $updateTime = null, $any = null)
     {
         $this
             ->setLinkedPayPalAccount($linkedPayPalAccount)
@@ -127,7 +116,6 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
             ->setMaximumUnpaidItemStrikesInfo($maximumUnpaidItemStrikesInfo)
             ->setMinimumFeedbackScore($minimumFeedbackScore)
             ->setShipToRegistrationCountry($shipToRegistrationCountry)
-            ->setVerifiedUserRequirements($verifiedUserRequirements)
             ->setDetailVersion($detailVersion)
             ->setUpdateTime($updateTime)
             ->setAny($any);
@@ -255,25 +243,6 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get VerifiedUserRequirements value
-     * @return \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType|null
-     */
-    public function getVerifiedUserRequirements(): ?\macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType
-    {
-        return $this->VerifiedUserRequirements;
-    }
-    /**
-     * Set VerifiedUserRequirements value
-     * @param \macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType $verifiedUserRequirements
-     * @return \macropage\ebaysdk\trading\StructType\SiteBuyerRequirementDetailsType
-     */
-    public function setVerifiedUserRequirements(?\macropage\ebaysdk\trading\StructType\VerifiedUserRequirementsDetailsType $verifiedUserRequirements = null): self
-    {
-        $this->VerifiedUserRequirements = $verifiedUserRequirements;
-        
-        return $this;
-    }
-    /**
      * Get DetailVersion value
      * @return string|null
      */
@@ -322,7 +291,7 @@ class SiteBuyerRequirementDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

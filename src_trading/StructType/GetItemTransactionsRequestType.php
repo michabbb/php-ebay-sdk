@@ -27,7 +27,7 @@ class GetItemTransactionsRequestType extends AbstractRequestType
      * pair <b>ItemID</b> with a specific <b>TransactionID</b>, data on a specific order line item is returned. An <b>OrderLineItemID</b> value can be used instead of an <b>ItemID</b>/<b>TransactionID</b> pair to identify an order line item, and if an
      * <b>OrderLineItemID</b> is specified in the request, any <b>ItemID</b>/<b>TransactionID</b> pair specified in the same request is ignored. <br> <br> <span class="tablenote"><b>Note:</b> <b>GetItemTransactions</b> doesn't support SKU as an input
      * because this call requires an identifier that is unique across your active and ended listings. Even when <b>InventoryTrackingMethod</b> is set to <b>SKU</b> in a listing, the SKU is only unique across your active listings (not your ended listings).
-     * To retrieve order line items by SKU, use <b>GetSellerTransactions</b> or <b>GetOrderTransactions</b> instead. </span> | Type that represents the unique identifier for an eBay listing.
+     * To retrieve order line items by SKU, use <b>GetSellerTransactions</b> instead. </span> | Type that represents the unique identifier for an eBay listing.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -36,10 +36,11 @@ class GetItemTransactionsRequestType extends AbstractRequestType
     /**
      * The ModTimeFrom
      * Meta information extracted from the WSDL
-     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields specify a date range for retrieving order line items associated with the specified <b>ItemID</b> value. The <b>ModTimeFrom</b> field is the starting date range. All of the listing's
-     * order line items that were generated (or last modified)within this date range are returned in the output. The maximum date range that may be specified is 30 days. This value cannot be set back more than 90 days in the past, as this call cannot
-     * retrieve sales older than 90 days old. The maximum date range that may be specified is 30 days. This field is not applicable (and is ignored) if the user is looking for a specific order line item by either using an <b>ItemID</b>/<b>TransactionID</b>
-     * pair, or an <b>OrderLineItemID</b> value.
+     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to retrieve order line items that were created or modified within a specified date range. The <b>ModTimeFrom</b> field is the starting date range. All of the listing's order
+     * line items that were generated or modified within this date range are returned in the output. The maximum date range that may be specified is 30 days. This value cannot be set back more than 90 days in the past, as this call cannot retrieve sales
+     * older than 90 days old. The maximum date range that may be specified is 30 days. This field is not applicable (and is ignored) if the user is looking for a specific order line item by either using an <b>ItemID</b>/<b>TransactionID</b> pair, or an
+     * <b>OrderLineItemID</b> value. <br> <span class="tablenote"><b>Note: </b> Please note that for a multiple line item order, all line items of that order that meet the filter criteria may be returned in the responses, even the line item(s) that were not
+     * actually modified. In other words, if any part of the order was modified, all line items of that order may be returned. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -47,10 +48,11 @@ class GetItemTransactionsRequestType extends AbstractRequestType
     /**
      * The ModTimeTo
      * Meta information extracted from the WSDL
-     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields specify a date range for retrieving order line items associated with the specified <b>ItemID</b> value. The <b>ModTimeTo</b> field is the ending date range. All eBay order line items
-     * that were generated (or last modified) within this date range are returned in the output. The maximum date range that may be specified is 30 days. If the <b>ModTimeFrom</b> field is used and the <b>ModTimeTo</b> field is omitted, the <b>ModTimeTo</b>
+     * - documentation: The <b>ModTimeFrom</b> and <b>ModTimeTo</b> fields are used to retrieve order line items that were created or modified within a specified date range. The <b>ModTimeTo</b> field is the ending date range. All eBay order line items that
+     * were generated (or last modified) within this date range are returned in the output. The maximum date range that may be specified is 30 days. If the <b>ModTimeFrom</b> field is used and the <b>ModTimeTo</b> field is omitted, the <b>ModTimeTo</b>
      * value defaults to the present time or to 30 days after the date specified with the <b>ModTimeFrom</b> value (if <b>ModTimeFrom</b> value is more than 30 days in the past). This field is not applicable (and is ignored) if the user is looking for a
-     * specific order line item by either using an <b>ItemID</b>/<b>TransactionID</b> pair, or an <b>OrderLineItemID</b> value.
+     * specific order line item by either using an <b>ItemID</b>/<b>TransactionID</b> pair, or an <b>OrderLineItemID</b> value. <br> <span class="tablenote"><b>Note: </b> Please note that for a multiple line item order, all line items of that order that
+     * meet the filter criteria may be returned in the responses, even the line item(s) that were not actually modified. In other words, if any part of the order was modified, all line items of that order may be returned. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -61,7 +63,8 @@ class GetItemTransactionsRequestType extends AbstractRequestType
      * - documentation: Include a <b>TransactionID</b> field in the request if you want to retrieve the data for a specific order line item for the listing specified in the <b>ItemID</b> field. This field is really only applicable for a multiple-quantity or
      * multiple-variation, fixed-price listing that may have multiple sales. An auction listing or a single-quantity, fixed-price listing will only result in one order line item, so this field is not needed in these two cases. If an <b>OrderLineItemID</b>
      * value is used instead to identify an order line item, this field is ignored. <br><br> If this field is used, any specified date filter is ignored. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code> since there can
-     * be only one winning bidder/one sale for an auction listing.
+     * be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to handle non-zero
+     * transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */

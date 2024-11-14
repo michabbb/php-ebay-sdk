@@ -18,7 +18,7 @@ class TaxIdentifierType extends AbstractStructBase
     /**
      * The Type
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value identifies the type of tax ID that was supplied by the buyer during the checkout process.
+     * - documentation: <br> This enumeration value identifies the type of tax ID that was supplied by the buyer during the checkout process.
      * - minOccurs: 0
      * @var string|null
      */
@@ -26,7 +26,7 @@ class TaxIdentifierType extends AbstractStructBase
     /**
      * The ID
      * Meta information extracted from the WSDL
-     * - documentation: This value is the actual tax ID for the buyer. The type of tax ID is shown in the <b>Type</b> field.
+     * - documentation: <br> This value is the actual tax ID for the buyer. The type of tax ID is shown in the <b>Type</b> field.
      * - minOccurs: 0
      * @var string|null
      */
@@ -34,8 +34,8 @@ class TaxIdentifierType extends AbstractStructBase
     /**
      * The Attribute
      * Meta information extracted from the WSDL
-     * - documentation: This field shows an attribute, and its corresponding value for the buyer's tax identification card. Currently, this field is only used to indicate which country issued the buyer's tax ID, but in the future, other attributes related
-     * to the tax ID may be returned in this field. This field's value will be an <a href="http://en.wikipedia.org/wiki/ISO_3166-1" target="_blank">ISO 3166-1 two-digit code</a> that represents the issuing country.
+     * - documentation: <br> This field shows an attribute, and its corresponding value for the buyer's tax identification card. Currently, this field is only used to indicate which country issued the buyer's tax ID, but in the future, other attributes
+     * related to the tax ID may be returned in this field. This field's value will be an <a href="http://en.wikipedia.org/wiki/ISO_3166-1" target="_blank">ISO 3166-1 two-digit code</a> that represents the issuing country.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\TaxIdentifierAttributeType[]
@@ -183,7 +183,7 @@ class TaxIdentifierType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

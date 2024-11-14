@@ -10,8 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for MultiLegShippingDetailsType StructType
  * Meta information extracted from the WSDL
- * - documentation: This type provides information about the domestic leg of a Global Shipping Program shipment. <br/><br/> <span class="tablenote"> <strong>Note:</strong> The <strong>LogisticsProviderShipmentToBuyer</strong> field is reserved for the
- * exclusive use of the international shipping provider. </span>
+ * - documentation: This type provides information about the domestic leg of a Global Shipping Program shipment or an eBay International Shipping shipment. <br/><br/> <span class="tablenote"> <strong>Note:</strong> The
+ * <strong>LogisticsProviderShipmentToBuyer</strong> field is reserved for the exclusive use of the international shipping provider. </span>
  * @subpackage Structs
  */
 class MultiLegShippingDetailsType extends AbstractStructBase
@@ -19,8 +19,8 @@ class MultiLegShippingDetailsType extends AbstractStructBase
     /**
      * The SellerShipmentToLogisticsProvider
      * Meta information extracted from the WSDL
-     * - documentation: Contains information about the domestic leg of a Global Shipping Programn shipment, including the seller-selected shipping service, the domestic shipping cost, the domestic address of the international shipping provider, and the
-     * estimated shipping time range.
+     * - documentation: Contains information about the domestic leg of a international order being shipped through the Global Shipping Program or eBay International Shipping, including the selected shipping service, the domestic shipping cost, the domestic
+     * address of the international shipping provider, and the estimated shipping time range.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\MultiLegShipmentType|null
@@ -97,7 +97,7 @@ class MultiLegShippingDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

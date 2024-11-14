@@ -9,7 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for ProductCreationEnabledCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: Values indicate whether product creation is enabled, disabled or required for a category.
+ * - documentation: This type is deprecated.
  * @subpackage Enumerations
  */
 class ProductCreationEnabledCodeType extends AbstractStructEnumBase

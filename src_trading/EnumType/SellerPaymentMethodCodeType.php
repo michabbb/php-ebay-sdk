@@ -31,7 +31,7 @@ class SellerPaymentMethodCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'PayPal'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value indicates that eBay will use the user's PayPal account to process the monthly invoice.
+     * - documentation: This enumeration value is deprecated.
      * @return string 'PayPal'
      */
     const VALUE_PAY_PAL = 'PayPal';

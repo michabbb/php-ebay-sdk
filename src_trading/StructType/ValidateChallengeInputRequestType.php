@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for ValidateChallengeInputRequestType StructType
  * Meta information extracted from the WSDL
- * - documentation: Validates the user response to a <b class="con">GetChallengeToken</b> botblock challenge.
+ * - documentation: <p><span class=\"tablenote\"><b>Note:</b> This call is deprecated, and will be decommissioned on January 30th, 2025.</span></p> Validates the user response to a <b class="con">GetChallengeToken</b> botblock challenge.
  * @subpackage Structs
  */
 class ValidateChallengeInputRequestType extends AbstractRequestType

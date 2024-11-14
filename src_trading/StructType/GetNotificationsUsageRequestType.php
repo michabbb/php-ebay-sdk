@@ -39,8 +39,7 @@ class GetNotificationsUsageRequestType extends AbstractRequestType
     /**
      * The ItemID
      * Meta information extracted from the WSDL
-     * - documentation: Specifies an item ID for which detailed notification information will be retrieved. <b>ItemID</b> is optional. If no <b>ItemID</b> is specified, the response will not include any individual notification details. | Type that
-     * represents the unique identifier for an eBay listing.
+     * - documentation: Specifies an item ID for which detailed notification information will be retrieved. | Type that represents the unique identifier for an eBay listing.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null

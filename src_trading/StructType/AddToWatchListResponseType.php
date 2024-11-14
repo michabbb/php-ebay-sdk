@@ -27,8 +27,7 @@ class AddToWatchListResponseType extends AbstractResponseType
     /**
      * The WatchListMaximum
      * Meta information extracted from the WSDL
-     * - documentation: This integer value indicates the maximum number of items allowed in a user's Watch List. This value can vary by site and is subject to change. Currently on the US site, up to 200 items can be on the user's Watch List at any given
-     * time.
+     * - documentation: This integer value indicates the maximum number of items allowed in a user's Watch List. The maximum number of items that can be added to a Watch List is 400, but this can vary by eBay marketplace.
      * - minOccurs: 0
      * @var int|null
      */

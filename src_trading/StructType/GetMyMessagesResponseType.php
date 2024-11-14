@@ -25,14 +25,6 @@ class GetMyMessagesResponseType extends AbstractResponseType
      */
     protected ?\macropage\ebaysdk\trading\StructType\MyMessagesSummaryType $Summary = null;
     /**
-     * The Alerts
-     * Meta information extracted from the WSDL
-     * - documentation: This container is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType|null
-     */
-    protected ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType $Alerts = null;
-    /**
      * The Messages
      * Meta information extracted from the WSDL
      * - documentation: This container consists of an array of one or more messages that match the search criteria in the call request.
@@ -43,17 +35,14 @@ class GetMyMessagesResponseType extends AbstractResponseType
     /**
      * Constructor method for GetMyMessagesResponseType
      * @uses GetMyMessagesResponseType::setSummary()
-     * @uses GetMyMessagesResponseType::setAlerts()
      * @uses GetMyMessagesResponseType::setMessages()
      * @param \macropage\ebaysdk\trading\StructType\MyMessagesSummaryType $summary
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType $alerts
      * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesMessageArrayType $messages
      */
-    public function __construct(?\macropage\ebaysdk\trading\StructType\MyMessagesSummaryType $summary = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType $alerts = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageArrayType $messages = null)
+    public function __construct(?\macropage\ebaysdk\trading\StructType\MyMessagesSummaryType $summary = null, ?\macropage\ebaysdk\trading\ArrayType\MyMessagesMessageArrayType $messages = null)
     {
         $this
             ->setSummary($summary)
-            ->setAlerts($alerts)
             ->setMessages($messages);
     }
     /**
@@ -72,25 +61,6 @@ class GetMyMessagesResponseType extends AbstractResponseType
     public function setSummary(?\macropage\ebaysdk\trading\StructType\MyMessagesSummaryType $summary = null): self
     {
         $this->Summary = $summary;
-        
-        return $this;
-    }
-    /**
-     * Get Alerts value
-     * @return \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType|null
-     */
-    public function getAlerts(): ?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType
-    {
-        return $this->Alerts;
-    }
-    /**
-     * Set Alerts value
-     * @param \macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType $alerts
-     * @return \macropage\ebaysdk\trading\StructType\GetMyMessagesResponseType
-     */
-    public function setAlerts(?\macropage\ebaysdk\trading\ArrayType\MyMessagesAlertArrayType $alerts = null): self
-    {
-        $this->Alerts = $alerts;
         
         return $this;
     }

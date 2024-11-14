@@ -80,22 +80,6 @@ class SetShippingDiscountProfilesRequestType extends AbstractRequestType
      */
     protected ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $PromotionalShippingDiscountDetails = null;
     /**
-     * The ShippingInsurance
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $ShippingInsurance = null;
-    /**
-     * The InternationalShippingInsurance
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable as it is not longer possible for a seller to offer a buyer shipping insurance.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $InternationalShippingInsurance = null;
-    /**
      * Constructor method for SetShippingDiscountProfilesRequestType
      * @uses SetShippingDiscountProfilesRequestType::setCurrencyID()
      * @uses SetShippingDiscountProfilesRequestType::setCombinedDuration()
@@ -104,8 +88,6 @@ class SetShippingDiscountProfilesRequestType extends AbstractRequestType
      * @uses SetShippingDiscountProfilesRequestType::setCalculatedShippingDiscount()
      * @uses SetShippingDiscountProfilesRequestType::setCalculatedHandlingDiscount()
      * @uses SetShippingDiscountProfilesRequestType::setPromotionalShippingDiscountDetails()
-     * @uses SetShippingDiscountProfilesRequestType::setShippingInsurance()
-     * @uses SetShippingDiscountProfilesRequestType::setInternationalShippingInsurance()
      * @param string $currencyID
      * @param string $combinedDuration
      * @param string $modifyActionCode
@@ -113,10 +95,8 @@ class SetShippingDiscountProfilesRequestType extends AbstractRequestType
      * @param \macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount
      * @param \macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount
      * @param \macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails
-     * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance
-     * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance
      */
-    public function __construct(?string $currencyID = null, ?string $combinedDuration = null, ?string $modifyActionCode = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null, ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null, ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null)
+    public function __construct(?string $currencyID = null, ?string $combinedDuration = null, ?string $modifyActionCode = null, ?\macropage\ebaysdk\trading\StructType\FlatShippingDiscountType $flatShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedShippingDiscountType $calculatedShippingDiscount = null, ?\macropage\ebaysdk\trading\StructType\CalculatedHandlingDiscountType $calculatedHandlingDiscount = null, ?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null)
     {
         $this
             ->setCurrencyID($currencyID)
@@ -125,9 +105,7 @@ class SetShippingDiscountProfilesRequestType extends AbstractRequestType
             ->setFlatShippingDiscount($flatShippingDiscount)
             ->setCalculatedShippingDiscount($calculatedShippingDiscount)
             ->setCalculatedHandlingDiscount($calculatedHandlingDiscount)
-            ->setPromotionalShippingDiscountDetails($promotionalShippingDiscountDetails)
-            ->setShippingInsurance($shippingInsurance)
-            ->setInternationalShippingInsurance($internationalShippingInsurance);
+            ->setPromotionalShippingDiscountDetails($promotionalShippingDiscountDetails);
     }
     /**
      * Get CurrencyID value
@@ -280,44 +258,6 @@ class SetShippingDiscountProfilesRequestType extends AbstractRequestType
     public function setPromotionalShippingDiscountDetails(?\macropage\ebaysdk\trading\StructType\PromotionalShippingDiscountDetailsType $promotionalShippingDiscountDetails = null): self
     {
         $this->PromotionalShippingDiscountDetails = $promotionalShippingDiscountDetails;
-        
-        return $this;
-    }
-    /**
-     * Get ShippingInsurance value
-     * @return \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
-     */
-    public function getShippingInsurance(): ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType
-    {
-        return $this->ShippingInsurance;
-    }
-    /**
-     * Set ShippingInsurance value
-     * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance
-     * @return \macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesRequestType
-     */
-    public function setShippingInsurance(?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $shippingInsurance = null): self
-    {
-        $this->ShippingInsurance = $shippingInsurance;
-        
-        return $this;
-    }
-    /**
-     * Get InternationalShippingInsurance value
-     * @return \macropage\ebaysdk\trading\StructType\ShippingInsuranceType|null
-     */
-    public function getInternationalShippingInsurance(): ?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType
-    {
-        return $this->InternationalShippingInsurance;
-    }
-    /**
-     * Set InternationalShippingInsurance value
-     * @param \macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance
-     * @return \macropage\ebaysdk\trading\StructType\SetShippingDiscountProfilesRequestType
-     */
-    public function setInternationalShippingInsurance(?\macropage\ebaysdk\trading\StructType\ShippingInsuranceType $internationalShippingInsurance = null): self
-    {
-        $this->InternationalShippingInsurance = $internationalShippingInsurance;
         
         return $this;
     }

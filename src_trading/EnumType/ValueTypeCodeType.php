@@ -9,8 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for ValueTypeCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: This enumeration type is used by multiple Trading API calls, including <b>GetCategorySpecifics</b> call and order management calls (like <b>GetOrders</b>). <br/><br/> The values used by <b>GetCategorySpecifics</b> is the data type of
- * the recommended Item Specific called out in the <b>NameRecommendation.Name</b> field. <br/><br/> The values used by <b>GetOrders</b> (and other order management calls) is the type of tax ID used in the <strong>BuyerTaxIdentifier</strong> container.
+ * - documentation: This enumeration type is used by the order management calls (like <b>GetOrders</b>), and indicates the type of tax ID used in the <strong>BuyerTaxIdentifier</strong> container..
  * @subpackage Enumerations
  */
 class ValueTypeCodeType extends AbstractStructEnumBase
@@ -18,50 +17,49 @@ class ValueTypeCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'Decimal'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the recommended Item Specific should have numeric values with a decimal point, like 3.14159. Item Specific values cannot be expressed as float or double types.
+     * - documentation: This value is deprecated.
      * @return string 'Decimal'
      */
     const VALUE_DECIMAL = 'Decimal';
     /**
      * Constant for value 'Numeric'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the recommended Item Specific should have integer values (no decimal point), like 3. Item Specific values cannot be expressed as float or double types.
+     * - documentation: This value is deprecated.
      * @return string 'Numeric'
      */
     const VALUE_NUMERIC = 'Numeric';
     /**
      * Constant for value 'Text'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the value(s) of the recommended Item Specific should be free-form text. This is the default value. The maximum length of a text-based Item Specific is general 65 characters, but instance aspects (like
-     * 'Bundle Description' or 'California Prop 65 Warning') are allowed longer lengths.
+     * - documentation: This value is deprecated.
      * @return string 'Text'
      */
     const VALUE_TEXT = 'Text';
     /**
      * Constant for value 'ISBN'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the recommended Item Specific is an International Standard Book Number (ISBN) value. ISBNs can contain either 10 or 13 characters.
+     * - documentation: This value is deprecated.
      * @return string 'ISBN'
      */
     const VALUE_ISBN = 'ISBN';
     /**
      * Constant for value 'UPC'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the recommended Item Specific is a Universal Product Code (UPC) value. UPCs contain 12 characters.
+     * - documentation: This value is deprecated.
      * @return string 'UPC'
      */
     const VALUE_UPC = 'UPC';
     /**
      * Constant for value 'EAN'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the recommended Item Specific is a European Article Number (EAN). EANs contain 13 characters.
+     * - documentation: This value is deprecated.
      * @return string 'EAN'
      */
     const VALUE_EAN = 'EAN';
     /**
      * Constant for value 'Date'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the value(s) of the recommended Item Specific is a date value, which will should use the date format specified in the <b>ValueFormat</b> field.
+     * - documentation: This value is deprecated.
      * @return string 'Date'
      */
     const VALUE_DATE = 'Date';

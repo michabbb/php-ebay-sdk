@@ -71,10 +71,9 @@ class ReturnPolicyType extends AbstractStructBase
      * auction items with Buy It Now and any other fixed price formats) when the category requires a return policy. On some European sites, such as eBay Germany (DE), registered business sellers are required to accept returns. Use the Trading call
      * <b>GetUser</b> to determine the status of an eBay business seller in DE, IE, and UK. Review the <b>User.SellerInfo.SellerBusinessType</b> field in the response. <br> <br> <span class="tablenote"><b>Note:</b> In order for Top-Rated sellers to receive
      * a Top-Rated Plus seal for their listings, returns must be accepted for their items (<b>ReturnsAcceptedOption</b> = <code>ReturnsAccepted</code>) and handling time should be set to zero-day (same-day shipping) or one-day shipping. Set the handling
-     * time (in days) using the <b>Item.DispatchTimeMax</b> field.</span> <br> Top-Rated listings qualify for the greatest average boost in Best Match and for the 20 percent Final Value Fee discount. For more information on eBay's Top-Rated seller program,
-     * see the <a href="https://pages.ebay.com/help/sell/top-rated.html">Seller levels and performance standards</a> page.</p> <br> <b>For ReviseItem only:</b> You cannot change the value of this field if the listing has bids or sales, or if the listing
-     * ends within 12 hours. For more details, see the <b>ReturnPolicy</b> description. <br><br> <span class="tablenote"><b>Note:</b> If a seller ships internationally, and wants to define and use a separate international returns policy, the international
-     * equivalent of this field is the <b>InternationalReturnsAcceptedOption</b> field.</span>
+     * time (in days) using the <b>Item.DispatchTimeMax</b> field.</span> <br> <b>For ReviseItem only:</b> You cannot change the value of this field if the listing has bids or sales, or if the listing ends within 12 hours. For more details, see the
+     * <b>ReturnPolicy</b> description. <br><br> <span class="tablenote"><b>Note:</b> If a seller ships internationally, and wants to define and use a separate international returns policy, the international equivalent of this field is the
+     * <b>InternationalReturnsAcceptedOption</b> field.</span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -95,60 +94,13 @@ class ReturnPolicyType extends AbstractStructBase
      * - documentation: This field contains the seller's detailed explanation for their return policy and is displayed in the Return Policy section of the View Item page. This field is valid in only the following marketplaces (the field is otherwise
      * ignored): <ul> <li>Germany (DE)</li> <li>Austria (AT)</li> <li>France (FR)</li> <li>Italy (IT)</li> <li>Spain (ES)</li> </ul> Where valid, sellers can use this field to add details about their return policies. eBay uses this text string as-is in the
      * additional details section of the View Item page. Avoid HTML and avoid character entity references (such as &amp;pound; or &amp;#163;). If you include special characters in the return policy description, use the literal UTF-8 or ISO-8559-1 character
-     * (e.g. &#163;). <br><br> <b>For AddItem, VerifyAddItem, and RelistItem:</b> If the seller accepts returns (<b>ReturnsAcceptedOption</b> = <code>ReturnsAccepted</code>) but does not specify this field when listing the item, <b>GetItem</b> returns this
-     * as an empty node. <br><br> <b>For ReviseItem only:</b> You cannot change the value of this field if the listing has bids or sales, or if the listing ends within 12 hours. For more details, see the <b>ReturnPolicy</b> description. <br>
+     * (e.g. &#163;). <!-- Do NOT attempt to "fix" the above character entity references. They are INTENTIONALLY showing markup this way in the resulting docs. Do NOT change them. [LT] --> <br><br> <b>For AddItem, VerifyAddItem, and RelistItem:</b> If the
+     * seller accepts returns (<b>ReturnsAcceptedOption</b> = <code>ReturnsAccepted</code>) but does not specify this field when listing the item, <b>GetItem</b> returns this as an empty node. <br><br> <b>For ReviseItem only:</b> You cannot change the value
+     * of this field if the listing has bids or sales, or if the listing ends within 12 hours. For more details, see the <b>ReturnPolicy</b> description. <br>
      * - minOccurs: 0
      * @var string|null
      */
     protected ?string $Description = null;
-    /**
-     * The WarrantyOfferedOption
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyOfferedOption = null;
-    /**
-     * The WarrantyOffered
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyOffered = null;
-    /**
-     * The WarrantyTypeOption
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyTypeOption = null;
-    /**
-     * The WarrantyType
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyType = null;
-    /**
-     * The WarrantyDurationOption
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyDurationOption = null;
-    /**
-     * The WarrantyDuration
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports warranty policies for returns.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $WarrantyDuration = null;
     /**
      * The ShippingCostPaidByOption
      * Meta information extracted from the WSDL
@@ -171,31 +123,6 @@ class ReturnPolicyType extends AbstractStructBase
      * @var string|null
      */
     protected ?string $ShippingCostPaidBy = null;
-    /**
-     * The RestockingFeeValue
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer allows sellers to charge a restocking fee when returning items.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $RestockingFeeValue = null;
-    /**
-     * The RestockingFeeValueOption
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer allows sellers to charge a restocking fee when returning items.
-     * - minOccurs: 0
-     * @var string|null
-     */
-    protected ?string $RestockingFeeValueOption = null;
-    /**
-     * The ExtendedHolidayReturns
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated as of release 1061 and any values supplied in this field are ignored. eBay no longer supports extended holiday returns.
-     * - maxOccurs: 1
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $ExtendedHolidayReturns = null;
     /**
      * The InternationalRefundOption
      * Meta information extracted from the WSDL
@@ -264,17 +191,8 @@ class ReturnPolicyType extends AbstractStructBase
      * @uses ReturnPolicyType::setReturnsAcceptedOption()
      * @uses ReturnPolicyType::setReturnsAccepted()
      * @uses ReturnPolicyType::setDescription()
-     * @uses ReturnPolicyType::setWarrantyOfferedOption()
-     * @uses ReturnPolicyType::setWarrantyOffered()
-     * @uses ReturnPolicyType::setWarrantyTypeOption()
-     * @uses ReturnPolicyType::setWarrantyType()
-     * @uses ReturnPolicyType::setWarrantyDurationOption()
-     * @uses ReturnPolicyType::setWarrantyDuration()
      * @uses ReturnPolicyType::setShippingCostPaidByOption()
      * @uses ReturnPolicyType::setShippingCostPaidBy()
-     * @uses ReturnPolicyType::setRestockingFeeValue()
-     * @uses ReturnPolicyType::setRestockingFeeValueOption()
-     * @uses ReturnPolicyType::setExtendedHolidayReturns()
      * @uses ReturnPolicyType::setInternationalRefundOption()
      * @uses ReturnPolicyType::setInternationalReturnsAcceptedOption()
      * @uses ReturnPolicyType::setInternationalReturnsWithinOption()
@@ -287,24 +205,15 @@ class ReturnPolicyType extends AbstractStructBase
      * @param string $returnsAcceptedOption
      * @param string $returnsAccepted
      * @param string $description
-     * @param string $warrantyOfferedOption
-     * @param string $warrantyOffered
-     * @param string $warrantyTypeOption
-     * @param string $warrantyType
-     * @param string $warrantyDurationOption
-     * @param string $warrantyDuration
      * @param string $shippingCostPaidByOption
      * @param string $shippingCostPaidBy
-     * @param string $restockingFeeValue
-     * @param string $restockingFeeValueOption
-     * @param bool $extendedHolidayReturns
      * @param string $internationalRefundOption
      * @param string $internationalReturnsAcceptedOption
      * @param string $internationalReturnsWithinOption
      * @param string $internationalShippingCostPaidByOption
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $refundOption = null, ?string $refund = null, ?string $returnsWithinOption = null, ?string $returnsWithin = null, ?string $returnsAcceptedOption = null, ?string $returnsAccepted = null, ?string $description = null, ?string $warrantyOfferedOption = null, ?string $warrantyOffered = null, ?string $warrantyTypeOption = null, ?string $warrantyType = null, ?string $warrantyDurationOption = null, ?string $warrantyDuration = null, ?string $shippingCostPaidByOption = null, ?string $shippingCostPaidBy = null, ?string $restockingFeeValue = null, ?string $restockingFeeValueOption = null, ?bool $extendedHolidayReturns = null, ?string $internationalRefundOption = null, ?string $internationalReturnsAcceptedOption = null, ?string $internationalReturnsWithinOption = null, ?string $internationalShippingCostPaidByOption = null, $any = null)
+    public function __construct(?string $refundOption = null, ?string $refund = null, ?string $returnsWithinOption = null, ?string $returnsWithin = null, ?string $returnsAcceptedOption = null, ?string $returnsAccepted = null, ?string $description = null, ?string $shippingCostPaidByOption = null, ?string $shippingCostPaidBy = null, ?string $internationalRefundOption = null, ?string $internationalReturnsAcceptedOption = null, ?string $internationalReturnsWithinOption = null, ?string $internationalShippingCostPaidByOption = null, $any = null)
     {
         $this
             ->setRefundOption($refundOption)
@@ -314,17 +223,8 @@ class ReturnPolicyType extends AbstractStructBase
             ->setReturnsAcceptedOption($returnsAcceptedOption)
             ->setReturnsAccepted($returnsAccepted)
             ->setDescription($description)
-            ->setWarrantyOfferedOption($warrantyOfferedOption)
-            ->setWarrantyOffered($warrantyOffered)
-            ->setWarrantyTypeOption($warrantyTypeOption)
-            ->setWarrantyType($warrantyType)
-            ->setWarrantyDurationOption($warrantyDurationOption)
-            ->setWarrantyDuration($warrantyDuration)
             ->setShippingCostPaidByOption($shippingCostPaidByOption)
             ->setShippingCostPaidBy($shippingCostPaidBy)
-            ->setRestockingFeeValue($restockingFeeValue)
-            ->setRestockingFeeValueOption($restockingFeeValueOption)
-            ->setExtendedHolidayReturns($extendedHolidayReturns)
             ->setInternationalRefundOption($internationalRefundOption)
             ->setInternationalReturnsAcceptedOption($internationalReturnsAcceptedOption)
             ->setInternationalReturnsWithinOption($internationalReturnsWithinOption)
@@ -493,144 +393,6 @@ class ReturnPolicyType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get WarrantyOfferedOption value
-     * @return string|null
-     */
-    public function getWarrantyOfferedOption(): ?string
-    {
-        return $this->WarrantyOfferedOption;
-    }
-    /**
-     * Set WarrantyOfferedOption value
-     * @param string $warrantyOfferedOption
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyOfferedOption(?string $warrantyOfferedOption = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyOfferedOption) && !is_string($warrantyOfferedOption)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyOfferedOption, true), gettype($warrantyOfferedOption)), __LINE__);
-        }
-        $this->WarrantyOfferedOption = $warrantyOfferedOption;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyOffered value
-     * @return string|null
-     */
-    public function getWarrantyOffered(): ?string
-    {
-        return $this->WarrantyOffered;
-    }
-    /**
-     * Set WarrantyOffered value
-     * @param string $warrantyOffered
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyOffered(?string $warrantyOffered = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyOffered) && !is_string($warrantyOffered)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyOffered, true), gettype($warrantyOffered)), __LINE__);
-        }
-        $this->WarrantyOffered = $warrantyOffered;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyTypeOption value
-     * @return string|null
-     */
-    public function getWarrantyTypeOption(): ?string
-    {
-        return $this->WarrantyTypeOption;
-    }
-    /**
-     * Set WarrantyTypeOption value
-     * @param string $warrantyTypeOption
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyTypeOption(?string $warrantyTypeOption = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyTypeOption) && !is_string($warrantyTypeOption)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyTypeOption, true), gettype($warrantyTypeOption)), __LINE__);
-        }
-        $this->WarrantyTypeOption = $warrantyTypeOption;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyType value
-     * @return string|null
-     */
-    public function getWarrantyType(): ?string
-    {
-        return $this->WarrantyType;
-    }
-    /**
-     * Set WarrantyType value
-     * @param string $warrantyType
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyType(?string $warrantyType = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyType) && !is_string($warrantyType)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyType, true), gettype($warrantyType)), __LINE__);
-        }
-        $this->WarrantyType = $warrantyType;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyDurationOption value
-     * @return string|null
-     */
-    public function getWarrantyDurationOption(): ?string
-    {
-        return $this->WarrantyDurationOption;
-    }
-    /**
-     * Set WarrantyDurationOption value
-     * @param string $warrantyDurationOption
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyDurationOption(?string $warrantyDurationOption = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyDurationOption) && !is_string($warrantyDurationOption)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyDurationOption, true), gettype($warrantyDurationOption)), __LINE__);
-        }
-        $this->WarrantyDurationOption = $warrantyDurationOption;
-        
-        return $this;
-    }
-    /**
-     * Get WarrantyDuration value
-     * @return string|null
-     */
-    public function getWarrantyDuration(): ?string
-    {
-        return $this->WarrantyDuration;
-    }
-    /**
-     * Set WarrantyDuration value
-     * @param string $warrantyDuration
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setWarrantyDuration(?string $warrantyDuration = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($warrantyDuration) && !is_string($warrantyDuration)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($warrantyDuration, true), gettype($warrantyDuration)), __LINE__);
-        }
-        $this->WarrantyDuration = $warrantyDuration;
-        
-        return $this;
-    }
-    /**
      * Get ShippingCostPaidByOption value
      * @return string|null
      */
@@ -673,75 +435,6 @@ class ReturnPolicyType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($shippingCostPaidBy, true), gettype($shippingCostPaidBy)), __LINE__);
         }
         $this->ShippingCostPaidBy = $shippingCostPaidBy;
-        
-        return $this;
-    }
-    /**
-     * Get RestockingFeeValue value
-     * @return string|null
-     */
-    public function getRestockingFeeValue(): ?string
-    {
-        return $this->RestockingFeeValue;
-    }
-    /**
-     * Set RestockingFeeValue value
-     * @param string $restockingFeeValue
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setRestockingFeeValue(?string $restockingFeeValue = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($restockingFeeValue) && !is_string($restockingFeeValue)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($restockingFeeValue, true), gettype($restockingFeeValue)), __LINE__);
-        }
-        $this->RestockingFeeValue = $restockingFeeValue;
-        
-        return $this;
-    }
-    /**
-     * Get RestockingFeeValueOption value
-     * @return string|null
-     */
-    public function getRestockingFeeValueOption(): ?string
-    {
-        return $this->RestockingFeeValueOption;
-    }
-    /**
-     * Set RestockingFeeValueOption value
-     * @param string $restockingFeeValueOption
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setRestockingFeeValueOption(?string $restockingFeeValueOption = null): self
-    {
-        // validation for constraint: string
-        if (!is_null($restockingFeeValueOption) && !is_string($restockingFeeValueOption)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a string, %s given', var_export($restockingFeeValueOption, true), gettype($restockingFeeValueOption)), __LINE__);
-        }
-        $this->RestockingFeeValueOption = $restockingFeeValueOption;
-        
-        return $this;
-    }
-    /**
-     * Get ExtendedHolidayReturns value
-     * @return bool|null
-     */
-    public function getExtendedHolidayReturns(): ?bool
-    {
-        return $this->ExtendedHolidayReturns;
-    }
-    /**
-     * Set ExtendedHolidayReturns value
-     * @param bool $extendedHolidayReturns
-     * @return \macropage\ebaysdk\trading\StructType\ReturnPolicyType
-     */
-    public function setExtendedHolidayReturns(?bool $extendedHolidayReturns = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($extendedHolidayReturns) && !is_bool($extendedHolidayReturns)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($extendedHolidayReturns, true), gettype($extendedHolidayReturns)), __LINE__);
-        }
-        $this->ExtendedHolidayReturns = $extendedHolidayReturns;
         
         return $this;
     }
@@ -840,7 +533,7 @@ class ReturnPolicyType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

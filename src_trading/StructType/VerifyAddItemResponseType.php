@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for VerifyAddItemResponseType StructType
  * Meta information extracted from the WSDL
- * - documentation: Returns the listing recommendations (if applicable), the estimated fees for the proposed new listing (except the Final Value Fee, which isn't calculated until the item has sold), and other details.
+ * - documentation: Returns the listing recommendations (if applicable), the estimated fees for the proposed new listing (except the transaction fees, which aren't calculated until the item has sold), and other details.
  * @subpackage Structs
  */
 class VerifyAddItemResponseType extends AbstractResponseType
@@ -28,30 +28,14 @@ class VerifyAddItemResponseType extends AbstractResponseType
     /**
      * The Fees
      * Meta information extracted from the WSDL
-     * - documentation: This container is an array of fees that would incur if the listing defined in request payload of the <b>VerifyAddItem<b> call was published. The fees in this container will not include any fees that are based on the purchase price
-     * (such as Final Value Fee) and only come into play when the listing has a sale. <br> <br> All listing fee types are returned, even if those fees are not applicable for the listing and are '0.0'. <br> <br> <span class="tablenote"><b>Note:</b> The
+     * - documentation: This container is an array of fees that would incur if the listing defined in request payload of the <b>VerifyAddItem</b> call was published. The fees in this container will not include any fees that are based on the purchase price
+     * (such as transaction fees) and only come into play when the listing has a sale. <br> <br> All listing fee types are returned, even if those fees are not applicable for the listing and are '0.0'. <br> <br> <span class="tablenote"><b>Note:</b> The
      * currency used for all fees returned under the <b>Fees</b> container reflects the currency used for the listing site, and not necessarily in the seller's default/home currency. For example, if a Canadian seller is using the <b>VerifyAddItem</b> call
      * to verify a listing on the eBay US site, the currency type shown for each fee will be <code>USD</code> and not <code>CAD</code>. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\FeesType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\FeesType $Fees = null;
-    /**
-     * The ExpressListing
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $ExpressListing = null;
-    /**
-     * The ExpressItemRequirements
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $ExpressItemRequirements = null;
     /**
      * The CategoryID
      * Meta information extracted from the WSDL
@@ -91,28 +75,22 @@ class VerifyAddItemResponseType extends AbstractResponseType
      * Constructor method for VerifyAddItemResponseType
      * @uses VerifyAddItemResponseType::setItemID()
      * @uses VerifyAddItemResponseType::setFees()
-     * @uses VerifyAddItemResponseType::setExpressListing()
-     * @uses VerifyAddItemResponseType::setExpressItemRequirements()
      * @uses VerifyAddItemResponseType::setCategoryID()
      * @uses VerifyAddItemResponseType::setCategory2ID()
      * @uses VerifyAddItemResponseType::setDiscountReason()
      * @uses VerifyAddItemResponseType::setProductSuggestions()
      * @param string $itemID
      * @param \macropage\ebaysdk\trading\StructType\FeesType $fees
-     * @param bool $expressListing
-     * @param \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements
      * @param string $categoryID
      * @param string $category2ID
      * @param string[] $discountReason
      * @param \macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions
      */
-    public function __construct(?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?bool $expressListing = null, ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null, ?string $categoryID = null, ?string $category2ID = null, ?array $discountReason = null, ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null)
+    public function __construct(?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\FeesType $fees = null, ?string $categoryID = null, ?string $category2ID = null, ?array $discountReason = null, ?\macropage\ebaysdk\trading\StructType\ProductSuggestionsType $productSuggestions = null)
     {
         $this
             ->setItemID($itemID)
             ->setFees($fees)
-            ->setExpressListing($expressListing)
-            ->setExpressItemRequirements($expressItemRequirements)
             ->setCategoryID($categoryID)
             ->setCategory2ID($category2ID)
             ->setDiscountReason($discountReason)
@@ -157,48 +135,6 @@ class VerifyAddItemResponseType extends AbstractResponseType
     public function setFees(?\macropage\ebaysdk\trading\StructType\FeesType $fees = null): self
     {
         $this->Fees = $fees;
-        
-        return $this;
-    }
-    /**
-     * Get ExpressListing value
-     * @return bool|null
-     */
-    public function getExpressListing(): ?bool
-    {
-        return $this->ExpressListing;
-    }
-    /**
-     * Set ExpressListing value
-     * @param bool $expressListing
-     * @return \macropage\ebaysdk\trading\StructType\VerifyAddItemResponseType
-     */
-    public function setExpressListing(?bool $expressListing = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($expressListing) && !is_bool($expressListing)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($expressListing, true), gettype($expressListing)), __LINE__);
-        }
-        $this->ExpressListing = $expressListing;
-        
-        return $this;
-    }
-    /**
-     * Get ExpressItemRequirements value
-     * @return \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType|null
-     */
-    public function getExpressItemRequirements(): ?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType
-    {
-        return $this->ExpressItemRequirements;
-    }
-    /**
-     * Set ExpressItemRequirements value
-     * @param \macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements
-     * @return \macropage\ebaysdk\trading\StructType\VerifyAddItemResponseType
-     */
-    public function setExpressItemRequirements(?\macropage\ebaysdk\trading\StructType\ExpressItemRequirementsType $expressItemRequirements = null): self
-    {
-        $this->ExpressItemRequirements = $expressItemRequirements;
         
         return $this;
     }

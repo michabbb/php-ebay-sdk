@@ -18,7 +18,8 @@ class PictureURLsType extends AbstractStructBase
     /**
      * The eBayPictureURL
      * Meta information extracted from the WSDL
-     * - documentation: The URL of an eBay Picture Services (EPS) image. This image is created when a seller uploads a self-hosted image using the <b>UploadSiteHostedPictures</b>, <b>AddItem</b> or <b>AddFixedPriceItem</b> call. <br>
+     * - documentation: The <b>ExtendedPictureDetails</b> container and its child fields are no longer returned under any circumstances, including when self-hosted pictures are used for the item. When self-hosted pictures are used by the seller, only the
+     * external URL of the gallery image is shown in the <b>PictureDetails.ExternalPictureURL</b> field, and only the equivalent eBay Picture Server (EPS) URLs are shown for the rest of the item's images in separate <b>PictureDetails.PictureURL</b> fields.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var string|null
@@ -27,7 +28,8 @@ class PictureURLsType extends AbstractStructBase
     /**
      * The ExternalPictureURL
      * Meta information extracted from the WSDL
-     * - documentation: The URL of a seller's self-hosted image(s). <br>
+     * - documentation: The <b>ExtendedPictureDetails</b> container and its child fields are no longer returned under any circumstances, including when self-hosted pictures are used for the item. When self-hosted pictures are used by the seller, only the
+     * external URL of the gallery image is shown in the <b>PictureDetails.ExternalPictureURL</b> field, and only the equivalent eBay Picture Server (EPS) URLs are shown for the rest of the item's images in separate <b>PictureDetails.PictureURL</b> fields.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var string|null
@@ -103,7 +105,7 @@ class PictureURLsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

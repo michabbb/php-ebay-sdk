@@ -40,14 +40,6 @@ class MemberMessageType extends AbstractStructBase
      */
     protected ?bool $EmailCopyToSender = null;
     /**
-     * The HideSendersEmailAddress
-     * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $HideSendersEmailAddress = null;
-    /**
      * The DisplayToPublic
      * Meta information extracted from the WSDL
      * - documentation: Indicates if the member message is viewable in the item listing.
@@ -134,7 +126,6 @@ class MemberMessageType extends AbstractStructBase
      * @uses MemberMessageType::setMessageType()
      * @uses MemberMessageType::setQuestionType()
      * @uses MemberMessageType::setEmailCopyToSender()
-     * @uses MemberMessageType::setHideSendersEmailAddress()
      * @uses MemberMessageType::setDisplayToPublic()
      * @uses MemberMessageType::setSenderID()
      * @uses MemberMessageType::setSenderEmail()
@@ -148,7 +139,6 @@ class MemberMessageType extends AbstractStructBase
      * @param string $messageType
      * @param string $questionType
      * @param bool $emailCopyToSender
-     * @param bool $hideSendersEmailAddress
      * @param bool $displayToPublic
      * @param string $senderID
      * @param string $senderEmail
@@ -160,13 +150,12 @@ class MemberMessageType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\MessageMediaType[] $messageMedia
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $messageType = null, ?string $questionType = null, ?bool $emailCopyToSender = null, ?bool $hideSendersEmailAddress = null, ?bool $displayToPublic = null, ?string $senderID = null, ?string $senderEmail = null, ?array $recipientID = null, ?string $subject = null, ?string $body = null, ?string $messageID = null, ?string $parentMessageID = null, ?array $messageMedia = null, $any = null)
+    public function __construct(?string $messageType = null, ?string $questionType = null, ?bool $emailCopyToSender = null, ?bool $displayToPublic = null, ?string $senderID = null, ?string $senderEmail = null, ?array $recipientID = null, ?string $subject = null, ?string $body = null, ?string $messageID = null, ?string $parentMessageID = null, ?array $messageMedia = null, $any = null)
     {
         $this
             ->setMessageType($messageType)
             ->setQuestionType($questionType)
             ->setEmailCopyToSender($emailCopyToSender)
-            ->setHideSendersEmailAddress($hideSendersEmailAddress)
             ->setDisplayToPublic($displayToPublic)
             ->setSenderID($senderID)
             ->setSenderEmail($senderEmail)
@@ -250,29 +239,6 @@ class MemberMessageType extends AbstractStructBase
             throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($emailCopyToSender, true), gettype($emailCopyToSender)), __LINE__);
         }
         $this->EmailCopyToSender = $emailCopyToSender;
-        
-        return $this;
-    }
-    /**
-     * Get HideSendersEmailAddress value
-     * @return bool|null
-     */
-    public function getHideSendersEmailAddress(): ?bool
-    {
-        return $this->HideSendersEmailAddress;
-    }
-    /**
-     * Set HideSendersEmailAddress value
-     * @param bool $hideSendersEmailAddress
-     * @return \macropage\ebaysdk\trading\StructType\MemberMessageType
-     */
-    public function setHideSendersEmailAddress(?bool $hideSendersEmailAddress = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($hideSendersEmailAddress) && !is_bool($hideSendersEmailAddress)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($hideSendersEmailAddress, true), gettype($hideSendersEmailAddress)), __LINE__);
-        }
-        $this->HideSendersEmailAddress = $hideSendersEmailAddress;
         
         return $this;
     }
@@ -572,7 +538,7 @@ class MemberMessageType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

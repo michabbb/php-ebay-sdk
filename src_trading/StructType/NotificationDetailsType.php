@@ -43,8 +43,7 @@ class NotificationDetailsType extends AbstractStructBase
     /**
      * The Type
      * Meta information extracted from the WSDL
-     * - documentation: Returns the notification type. Possible values include: AskSellerQuestion, AuctionCheckoutComplete, BestOffer, CheckoutBuyerRequestTotal, EndOfAuction, Feedback, FixedPriceEndOfTransaction, FixedPriceTransaction, ItemNotReceived,
-     * MyMessages, OutBid, SecondChanceOffer, UPIBuyerResponseDispute, UPISellerClosedDispute, UPISellerOpenedDispute, and UPISellerRespondedToDispute.
+     * - documentation: The returned enumeration value indicates the type of platform notification,
      * - minOccurs: 0
      * @var string|null
      */
@@ -381,7 +380,7 @@ class NotificationDetailsType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -52,7 +52,8 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
     /**
      * The NotificationPayloadType
      * Meta information extracted from the WSDL
-     * - documentation: This field is deprecated and should no longer be used.
+     * - documentation: The value in this field indicates the type of schema to use for notification payloads. The only supported value is <code>eBLSchemaSOAP</code>, so this field no longer has to be included in a
+     * <strong>SetNotificationPreferences</strong> call, since it defaults to<code>eBLSchemaSOAP</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -367,7 +368,7 @@ class ApplicationDeliveryPreferencesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

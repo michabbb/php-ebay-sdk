@@ -9,8 +9,7 @@ use WsdlToPhp\PackageBase\AbstractStructEnumBase;
 /**
  * This class stands for DisplayPayNowButtonCodeType EnumType
  * Meta information extracted from the WSDL
- * - documentation: This enumerated type is used to control how the "Buy It Now" button is displayed on a listing. <br><br> <span class="tablenote"><b>Note:</b> Although the <b>DisplayPayNowButton</b> value can still be set in <b>SetUserPreferences</b>
- * and is returned in <b>GetUserPreferences</b>, this setting will not have any affect on any current or future listings. </span> <br>
+ * - documentation: This enumerated type is deprecated, as the seller no longer has control over the 'Buy It Now' button displayed on a listing.
  * @subpackage Enumerations
  */
 class DisplayPayNowButtonCodeType extends AbstractStructEnumBase
@@ -25,7 +24,7 @@ class DisplayPayNowButtonCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ShowPayNowButtonForPayPalOnly'
      * Meta information extracted from the WSDL
-     * - documentation: This enumeration value was formerly used to display the "Pay Now" button only if the buyer was using PayPal as a payment method.
+     * - documentation: This enumeration value is deprecated.
      * @return string 'ShowPayNowButtonForPayPalOnly'
      */
     const VALUE_SHOW_PAY_NOW_BUTTON_FOR_PAY_PAL_ONLY = 'ShowPayNowButtonForPayPalOnly';

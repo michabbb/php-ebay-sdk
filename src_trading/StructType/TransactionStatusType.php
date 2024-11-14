@@ -34,7 +34,8 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The LastTimeModified
      * Meta information extracted from the WSDL
-     * - documentation: Indicates date and time an order's status was last updated (in GMT).
+     * - documentation: Indicates date and time an order's status was last updated (in GMT). <br> <span class="tablenote"><b>Note: </b> Please note that for a multiple line item order, if any part of the order was modified, all line items of that order may
+     * be returned in the response, and each line item of that order should have the same timestamp value in this field. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -42,10 +43,10 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The PaymentMethodUsed
      * Meta information extracted from the WSDL
-     * - documentation: The payment method that the buyer selected to pay for the order. <br><br> <span class="tablenote"><b>Note: </b> Sellers no longer have to specify any electronic payment methods at listing time, but this field is still returned. The
-     * value returned in this field will generally be <code>CreditCard</code>, unless an eBay gift card was used by the buyer to pay a partial or full balance of the order. If this is the case, the value returned in this field will be
-     * <code>CCAccepted</code>. Either of these two values will be returned, but neither accurately reflects the actual payment method that the buyer used. If the order was paid for off of eBay's platform using an 'offline' payment method such as
-     * 'CashOnPickup' or 'MOCC' (money order or cashier's check), and the seller marked the order as paid, either of those values may get returned here. </span>
+     * - documentation: The payment method that the buyer selected to pay for the order. <br> <span class="tablenote"><b>Note: </b> Sellers no longer have to specify any electronic payment methods at listing time, but this field is still returned. The value
+     * returned in this field will generally be <code>CreditCard</code>, unless an eBay gift card was used by the buyer to pay a partial or full balance of the order. If this is the case, the value returned in this field will be <code>CCAccepted</code>.
+     * Either of these two values will be returned, but neither accurately reflects the actual payment method that the buyer used. If the order was paid for off of eBay's platform using an 'offline' payment method such as 'CashOnPickup' or 'MOCC' (money
+     * order or cashier's check), and the seller marked the order as paid, either of those values may get returned here. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -70,32 +71,17 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The PaymentHoldStatus
      * Meta information extracted from the WSDL
-     * - documentation: This field indicates the type and/or status of a payment hold on the item. <br> <br> <span class="tablenote"><b>Note:</b> For the <strong>GetItemTransactions</strong>, <strong>GetOrders</strong>, and
-     * <strong>GetOrderTransactions</strong> calls, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
+     * - documentation: This field indicates the type and/or status of a payment hold on the item. If there is no hold against the item, this field is returned with a value of <code>NotApplicable</code>. <br> <span class="tablenote"><b>Note:</b> For the
+     * <strong>GetItemTransactions</strong> and <strong>GetOrders</strong>, calls, this field is only returned to the seller of the order; this field is not returned for the buyer or third party. </span>
      * - minOccurs: 0
      * @var string|null
      */
     protected ?string $PaymentHoldStatus = null;
     /**
-     * The IntegratedMerchantCreditCardEnabled
-     * Meta information extracted from the WSDL
-     * - documentation: This field is no longer applicable as eBay sellers can no longer use iMCC gateway accounts to handle buyer payments.
-     * - minOccurs: 0
-     * @var bool|null
-     */
-    protected ?bool $IntegratedMerchantCreditCardEnabled = null;
-    /**
-     * The eBayPaymentMismatchDetails
-     * Meta information extracted from the WSDL
-     * - documentation: This container is no longer used.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null;
-    /**
      * The InquiryStatus
      * Meta information extracted from the WSDL
-     * - documentation: This field gives the status of a buyer's Item Not Received (INR) Inquiry. This field is only returned if the buyer has created an INR Inquiry through the site or through the Post-Order API.
+     * - documentation: This field gives the status of a buyer's Item Not Received (INR) Inquiry if the buyer has created an INR Inquiry through the site or through the Post-Order API. If there is no INR inquiry or return request filed against the order,
+     * this field is returned with a value of <code>NotApplicable</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -103,7 +89,8 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * The ReturnStatus
      * Meta information extracted from the WSDL
-     * - documentation: This field gives the status of a buyer's return request. This field is only returned if the buyer has initiated a return request, or has escalated an existing return request into a return case.
+     * - documentation: This field gives the status of a buyer's return request if the buyer has initiated a return request or has escalated an existing return request into a return case. If there is no return request filed against the order or no
+     * escalation, this field is returned with a value of <code>NotApplicable</code>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -149,8 +136,6 @@ class TransactionStatusType extends AbstractStructBase
      * @uses TransactionStatusType::setCompleteStatus()
      * @uses TransactionStatusType::setBuyerSelectedShipping()
      * @uses TransactionStatusType::setPaymentHoldStatus()
-     * @uses TransactionStatusType::setIntegratedMerchantCreditCardEnabled()
-     * @uses TransactionStatusType::setEBayPaymentMismatchDetails()
      * @uses TransactionStatusType::setInquiryStatus()
      * @uses TransactionStatusType::setReturnStatus()
      * @uses TransactionStatusType::setPaymentInstrument()
@@ -164,8 +149,6 @@ class TransactionStatusType extends AbstractStructBase
      * @param string $completeStatus
      * @param bool $buyerSelectedShipping
      * @param string $paymentHoldStatus
-     * @param bool $integratedMerchantCreditCardEnabled
-     * @param \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails
      * @param string $inquiryStatus
      * @param string $returnStatus
      * @param string $paymentInstrument
@@ -173,7 +156,7 @@ class TransactionStatusType extends AbstractStructBase
      * @param string $cancelStatus
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $eBayPaymentStatus = null, ?string $checkoutStatus = null, ?string $lastTimeModified = null, ?string $paymentMethodUsed = null, ?string $completeStatus = null, ?bool $buyerSelectedShipping = null, ?string $paymentHoldStatus = null, ?bool $integratedMerchantCreditCardEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null, ?string $inquiryStatus = null, ?string $returnStatus = null, ?string $paymentInstrument = null, ?string $digitalStatus = null, ?string $cancelStatus = null, $any = null)
+    public function __construct(?string $eBayPaymentStatus = null, ?string $checkoutStatus = null, ?string $lastTimeModified = null, ?string $paymentMethodUsed = null, ?string $completeStatus = null, ?bool $buyerSelectedShipping = null, ?string $paymentHoldStatus = null, ?string $inquiryStatus = null, ?string $returnStatus = null, ?string $paymentInstrument = null, ?string $digitalStatus = null, ?string $cancelStatus = null, $any = null)
     {
         $this
             ->setEBayPaymentStatus($eBayPaymentStatus)
@@ -183,8 +166,6 @@ class TransactionStatusType extends AbstractStructBase
             ->setCompleteStatus($completeStatus)
             ->setBuyerSelectedShipping($buyerSelectedShipping)
             ->setPaymentHoldStatus($paymentHoldStatus)
-            ->setIntegratedMerchantCreditCardEnabled($integratedMerchantCreditCardEnabled)
-            ->setEBayPaymentMismatchDetails($eBayPaymentMismatchDetails)
             ->setInquiryStatus($inquiryStatus)
             ->setReturnStatus($returnStatus)
             ->setPaymentInstrument($paymentInstrument)
@@ -369,48 +350,6 @@ class TransactionStatusType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get IntegratedMerchantCreditCardEnabled value
-     * @return bool|null
-     */
-    public function getIntegratedMerchantCreditCardEnabled(): ?bool
-    {
-        return $this->IntegratedMerchantCreditCardEnabled;
-    }
-    /**
-     * Set IntegratedMerchantCreditCardEnabled value
-     * @param bool $integratedMerchantCreditCardEnabled
-     * @return \macropage\ebaysdk\trading\StructType\TransactionStatusType
-     */
-    public function setIntegratedMerchantCreditCardEnabled(?bool $integratedMerchantCreditCardEnabled = null): self
-    {
-        // validation for constraint: boolean
-        if (!is_null($integratedMerchantCreditCardEnabled) && !is_bool($integratedMerchantCreditCardEnabled)) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide a bool, %s given', var_export($integratedMerchantCreditCardEnabled, true), gettype($integratedMerchantCreditCardEnabled)), __LINE__);
-        }
-        $this->IntegratedMerchantCreditCardEnabled = $integratedMerchantCreditCardEnabled;
-        
-        return $this;
-    }
-    /**
-     * Get eBayPaymentMismatchDetails value
-     * @return \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType|null
-     */
-    public function getEBayPaymentMismatchDetails(): ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType
-    {
-        return $this->eBayPaymentMismatchDetails;
-    }
-    /**
-     * Set eBayPaymentMismatchDetails value
-     * @param \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails
-     * @return \macropage\ebaysdk\trading\StructType\TransactionStatusType
-     */
-    public function setEBayPaymentMismatchDetails(?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null): self
-    {
-        $this->eBayPaymentMismatchDetails = $eBayPaymentMismatchDetails;
-        
-        return $this;
-    }
-    /**
      * Get InquiryStatus value
      * @return string|null
      */
@@ -543,7 +482,7 @@ class TransactionStatusType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

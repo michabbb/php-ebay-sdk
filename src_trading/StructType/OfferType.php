@@ -19,8 +19,8 @@ class OfferType extends AbstractStructBase
      * The Action
      * Meta information extracted from the WSDL
      * - documentation: Indicates the type of offer being made on the specified listing. If the item is Best Offer-enabled and the buyer makes a Best Offer (or a counter offer), then after the <b>PlaceOffer</b> call, the buyer can get the status of the Best
-     * Offer (and a seller-counter-offer, etc.) using the <b>GetBestOffers</b> call. See the <a href="https://developer.ebay.com/DevZone/guides/features-guide/default.html#development/Feature-BestOffer.html">eBay Features Guide</a> for information about
-     * Best Offer-enabled listings and about <b>GetBestOffers</b>.
+     * Offer (and a seller-counter-offer, etc.) using the <b>GetBestOffers</b> call. See <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/best-offers.html" target="_blank">Best Offer</a> for information about Best
+     * Offer-enabled listings and about <b>GetBestOffers</b>.
      * - minOccurs: 0
      * @var string|null
      */
@@ -52,14 +52,6 @@ class OfferType extends AbstractStructBase
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
     protected ?\macropage\ebaysdk\trading\StructType\AmountType $MaxBid = null;
-    /**
-     * The Discounts
-     * Meta information extracted from the WSDL
-     * - documentation: <b>DO NOT USE THIS FIELD</b>. This field is only for internal or future use.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\OfferDiscountsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\OfferDiscountsType $Discounts = null;
     /**
      * The Quantity
      * Meta information extracted from the WSDL
@@ -114,7 +106,8 @@ class OfferType extends AbstractStructBase
      * The TransactionID
      * Meta information extracted from the WSDL
      * - documentation: The unique identifier of the order line item (transaction). An order line item is created when a winning bidder commits to purchasing an item. <br> <br> The <b>TransactionID</b> value for auction listings is always <code>0</code>
-     * since there can be only one winning bidder/one sale for an auction listing.
+     * since there can be only one winning bidder/one sale for an auction listing. <br/><br/> <span class="tablenote"><b>Note: </b> Beginning in July 2024, non-zero transaction IDs will start being returned for auction listings. If necessary, update code to
+     * handle non-zero transaction IDs for auction transactions before this time. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -181,7 +174,6 @@ class OfferType extends AbstractStructBase
      * @uses OfferType::setCurrency()
      * @uses OfferType::setItemID()
      * @uses OfferType::setMaxBid()
-     * @uses OfferType::setDiscounts()
      * @uses OfferType::setQuantity()
      * @uses OfferType::setSecondChanceEnabled()
      * @uses OfferType::setSiteCurrency()
@@ -200,7 +192,6 @@ class OfferType extends AbstractStructBase
      * @param string $currency
      * @param string $itemID
      * @param \macropage\ebaysdk\trading\StructType\AmountType $maxBid
-     * @param \macropage\ebaysdk\trading\StructType\OfferDiscountsType $discounts
      * @param int $quantity
      * @param bool $secondChanceEnabled
      * @param string $siteCurrency
@@ -216,14 +207,13 @@ class OfferType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $myMaxBid
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $action = null, ?string $currency = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxBid = null, ?\macropage\ebaysdk\trading\StructType\OfferDiscountsType $discounts = null, ?int $quantity = null, ?bool $secondChanceEnabled = null, ?string $siteCurrency = null, ?string $timeBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $highestBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedPrice = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\UserType $user = null, ?bool $userConsent = null, ?int $bidCount = null, ?string $message = null, ?string $bestOfferID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $myMaxBid = null, $any = null)
+    public function __construct(?string $action = null, ?string $currency = null, ?string $itemID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $maxBid = null, ?int $quantity = null, ?bool $secondChanceEnabled = null, ?string $siteCurrency = null, ?string $timeBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $highestBid = null, ?\macropage\ebaysdk\trading\StructType\AmountType $convertedPrice = null, ?string $transactionID = null, ?\macropage\ebaysdk\trading\StructType\UserType $user = null, ?bool $userConsent = null, ?int $bidCount = null, ?string $message = null, ?string $bestOfferID = null, ?\macropage\ebaysdk\trading\StructType\AmountType $myMaxBid = null, $any = null)
     {
         $this
             ->setAction($action)
             ->setCurrency($currency)
             ->setItemID($itemID)
             ->setMaxBid($maxBid)
-            ->setDiscounts($discounts)
             ->setQuantity($quantity)
             ->setSecondChanceEnabled($secondChanceEnabled)
             ->setSiteCurrency($siteCurrency)
@@ -330,25 +320,6 @@ class OfferType extends AbstractStructBase
     public function setMaxBid(?\macropage\ebaysdk\trading\StructType\AmountType $maxBid = null): self
     {
         $this->MaxBid = $maxBid;
-        
-        return $this;
-    }
-    /**
-     * Get Discounts value
-     * @return \macropage\ebaysdk\trading\StructType\OfferDiscountsType|null
-     */
-    public function getDiscounts(): ?\macropage\ebaysdk\trading\StructType\OfferDiscountsType
-    {
-        return $this->Discounts;
-    }
-    /**
-     * Set Discounts value
-     * @param \macropage\ebaysdk\trading\StructType\OfferDiscountsType $discounts
-     * @return \macropage\ebaysdk\trading\StructType\OfferType
-     */
-    public function setDiscounts(?\macropage\ebaysdk\trading\StructType\OfferDiscountsType $discounts = null): self
-    {
-        $this->Discounts = $discounts;
         
         return $this;
     }
@@ -641,7 +612,7 @@ class OfferType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

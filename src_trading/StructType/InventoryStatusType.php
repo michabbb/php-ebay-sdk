@@ -23,9 +23,11 @@ class InventoryStatusType extends AbstractStructBase
      * <code>SKU</code>, the <b>SKU</b> field should be used. <code>ItemID</code> is the default value of <b>InventoryTrackingMethod</b>, and its value can only be set/changed to <code>SKU</code> through either an <b>AddFixedPriceItem</b> or
      * <b>RelistFixedPriceItem</b> call. <br> <br> For a multiple-variation listing, the <b>SKU</b> value of the item variation is required in order to identify a specific item variation. An <b>ItemID</b> field is also required if the
      * <b>InventoryTrackingMethod</b> value is set to <code>ItemID</code>. However, if the <b>InventoryTrackingMethod</b> value is set to <code>SKU</code>, only the <b>SKU</b> value of the item variation is needed to identify a specific item variation. Note
-     * that a seller-defined <b>SKU</b> value is required when a seller creates a multiple-variation listing, regardless of whether they decide to track inventory by Item ID or SKU. <br> <br> The <b>SKU</b> field is always returned in the response, and if a
-     * SKU value doesn't exist for a single-variation listing, it is returned as an empty tag. | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts. For usage information and rules, see the
-     * fields that reference this type.
+     * that a seller-defined <b>SKU</b> value is required when a seller creates a multiple-variation listing, regardless of whether they decide to track inventory by Item ID or SKU. <br> <span class="tablenote"><b>Note: </b> When using an
+     * LMS_REVISE_INVENTORY_STATUS upload feed in <b>Sell Feed API</b> to revise the price and/or quantity for multiple SKUs for a multiple-SKU listing, you must include both the <b>ItemID</b> and <b>SKU</b> values for each variation. See the <a
+     * href="/api-docs/sell/static/feed/trading-upload-flow.html#upload-flow">Upload flow</a> and <a href="/api-docs/sell/static/feed/lms-feeds-quick-reference.html#Trading">Inventory upload feed types</a> for more information.</span> The <b>SKU</b> field
+     * is always returned in the response, and if a SKU value doesn't exist for a single-variation listing, it is returned as an empty tag. | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different contexts.
+     * For usage information and rules, see the fields that reference this type.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -39,8 +41,11 @@ class InventoryStatusType extends AbstractStructBase
      * field should be used. <code>ItemID</code> is the default value of <b>InventoryTrackingMethod</b>, and its value can only be set/changed to <code>SKU</code> through either an <b>AddFixedPriceItem</b> or <b>RelistFixedPriceItem</b> call. <br> <br> For
      * a multiple-variation listing, the <b>SKU</b> value of the item variation is required in order to identify a specific item variation. An <b>ItemID</b> field is also required if the <b>InventoryTrackingMethod</b> value is set to <code>ItemID</code>.
      * However, if the <b>InventoryTrackingMethod</b> value is set to <code>SKU</code>, only the <b>SKU</b> value of the item variation is needed to identify a specific item variation. Note that a seller-defined <b>SKU</b> value is required when a seller
-     * creates a multiple-variation listing, regardless of whether they decide to track inventory by Item ID or SKU. <br> <br> Please note that the same <b>ItemID</b> value can be used multiple times in the same call if you revise several item variations
-     * from the same multiple-variation listing. <br> <br> The <b>ItemID</b> field is always returned in the response, even if an <b>ItemID</b> value was not included in the request. | Type that represents the unique identifier for an eBay listing.
+     * creates a multiple-variation listing, regardless of whether they decide to track inventory by Item ID or SKU. <br> <span class="tablenote"><b>Note: </b> When using an LMS_REVISE_INVENTORY_STATUS upload feed in <b>Sell Feed API</b> to revise the price
+     * and/or quantity for multiple SKUs for a multiple-SKU listing, you must include both the <b>ItemID</b> and <b>SKU</b> values for each variation. See the <a href="/api-docs/sell/static/feed/trading-upload-flow.html#upload-flow">Upload flow</a> and <a
+     * href="/api-docs/sell/static/feed/lms-feeds-quick-reference.html#Trading">Inventory upload feed types</a> for more information.</span> Please note that the same <b>ItemID</b> value can be used multiple times in the same call if you revise several item
+     * variations from the same multiple-variation listing. <br> <br> The <b>ItemID</b> field is always returned in the response, even if an <b>ItemID</b> value was not included in the request. | Type that represents the unique identifier for an eBay
+     * listing.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -49,11 +54,10 @@ class InventoryStatusType extends AbstractStructBase
     /**
      * The StartPrice
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> The <b>StartPrice</b> response field is being deprecated, and it will no longer be supported after April 30, 2022. eBay has found that the value returned for this field is not reliably accurate
-     * and recommends that the response for this field be ignored.<br><br>The <b>StartPrice</b> request field can still be used, and sellers can leverage the <a href="https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/GetItem.html">GetItem</a> call
-     * to verify that the requested price updates were successful.</span> <br> This field is used to set the revised price of the listing (or of a variation within a multiple-variation listing). <br> <br> In each <b>InventoryStatus</b> container, either
-     * <b>StartPrice</b> or <b>Quantity</b> (or both) are required. <br> <br> The <b>StartPrice</b> field is always returned in the response and reveals the current price of the item or item variation, regardless of whether the price was changed or not
-     * through a <b>StartPrice</b> field in the call request.
+     * - documentation: This field is used to update the price of a fixed-price item, or to update the price of an item variation within a multiple-variation listing. To update the price of an item variation, both the <b>ItemID</b> and <b>SKU</b> fields are
+     * required to identify the listing and the specific variation within that listing, respectively. <br> <br> In each <b>InventoryStatus</b> container, either <b>StartPrice</b> or <b>Quantity</b> (or both) are required. <br> <span
+     * class="tablenote"><b>Note: </b> The <b>StartPrice</b> field should no longer appear in the response payload. If it does appear, it can be ignored. Sellers can leverage the <a
+     * href="https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/GetItem.html">GetItem</a> call to verify that the requested price updates were successful.</span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -61,16 +65,10 @@ class InventoryStatusType extends AbstractStructBase
     /**
      * The Quantity
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note: </b> The <b>Quantity</b> response field is being deprecated, and it will no longer be supported after April 30, 2022. eBay has found that the value returned for this field is not reliably accurate and
-     * recommends that the response for this field be ignored.<br><br>The <b>Quantity</b> request field can still be used, and sellers can leverage the <a href="https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/GetItem.html">GetItem</a> call to
-     * verify that the requested quantity updates were successful.</span> <br> This field is used to set the revised quantity of the listing (or of a variation within a multiple-variation listing). <br> <br> In each <b>InventoryStatus</b> container, either
-     * <b>StartPrice</b> or <b>Quantity</b> (or both) are required. <br> <br> The <b>Quantity</b> field is always returned in the response, regardless of whether the quantity was changed or not through a <b>Quantity</b> field in the call request. However,
-     * the <b>Quantity</b> field in the response is actually a total of the quantity available for sale plus the quantity already sold for the item or item variation. For example, suppose the item or item variation originally had a quantity of 10, and then
-     * a quantity of 8 was sold. Now, you restock your inventory, and you pass in a quantity of 10 in the <b>ReviseInventoryStatus</b> request. In this case, the response of this <b>ReviseInventoryStatus</b> call would show a quantity of 18 (10 available +
-     * 8 sold). To determine the quantity available, use the <b>GetItem</b> or <b>GetSellerList</b> call, and subtract the <b>SellingStatus.QuantitySold</b> value from the <b>Quantity</b> value. Or, you can also use the <b>GetMyeBaySelling</b> call, search
-     * for the correct item or item variation in the response by <b>ItemID</b> or <b>SKU</b> value, and then look at the <b>QuantityAvailable</b> field for that item or item variation. <br> <br> It is a good idea to maintain an adequate quantity available
-     * for fixed-price GTC listings to prevent the search rankings from dropping. Best Match search ranking is based on buyer activity, and one of the factors affecting search ranking for fixed-price listings is the recent sales score. Fixed-price items
-     * that are selling the fastest are given a relative lift in search results.
+     * - documentation: This field is used to update the quantity of a fixed-price listing, or to update the quantity of a variation within a multiple-variation listing. To update a variation, both the <b>ItemID</b> and <b>SKU</b> fields are required to
+     * identify the listing and the specific variation within that listing, respectively. <br> <br> In each <b>InventoryStatus</b> container, either <b>StartPrice</b> or <b>Quantity</b> (or both) are required. <br> <span class="tablenote"><b>Note: </b> The
+     * <b>Quantity</b> field should no longer appear in the response payload. If it does appear, it can be ignored. Sellers can leverage the <a href="https://developer.ebay.com/Devzone/XML/docs/Reference/eBay/GetItem.html">GetItem</a> call to verify that
+     * the requested quantity updates were successful.</span>
      * - minOccurs: 0
      * @var int|null
      */
@@ -193,7 +191,7 @@ class InventoryStatusType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

@@ -10,8 +10,8 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for MaximumUnpaidItemStrikesInfoType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>MaximumUnpaidItemStrikesInfo</b> container, which is used by the seller as a mechanism to block prospective buyers who have unpaid item strikes on their account exceeding the value set in the <b>Count</b> field
- * during a specified time period (set in the <b>Period</b> field).
+ * - documentation: Type defining the <b>MaximumUnpaidItemStrikesInfo</b> container, which indicates if the seller has enabled a setting to block prospective buyers who have unpaid items and/or buyer-inititated cancellations on their account exceeding
+ * the value set in the <b>Count</b> field during a specified time period (set in the <b>Period</b> field).
  * @subpackage Structs
  */
 class MaximumUnpaidItemStrikesInfoType extends AbstractStructBase
@@ -19,9 +19,8 @@ class MaximumUnpaidItemStrikesInfoType extends AbstractStructBase
     /**
      * The Count
      * Meta information extracted from the WSDL
-     * - documentation: This integer value sets the maximum number of unpaid item strikes that a prospective buyer is allowed to have during a specified time period (<b>MaximumUnpaidItemStrikesInfo.Period</b>) before being blocked from buying/bidding on the
-     * item. <br><br> To retrieve a list of allowed values for this field, the seller should call <b>GeteBayDetails</b>, including <b>BuyerRequirementDetails</b> in the <b>DetailName</b> field of the request, and then look for the
-     * <b>BuyerRequirementDetails.MaximumUnpaidItemStrikesInfo.MaximumUnpaidItemStrikesCount.Count</b> fields in the response. <br>
+     * - documentation: This integer value indicates the maximum number of unpaid items and/or buyer-initiated cancellations that a prospective buyer is allowed to have during a specified time period (<b>MaximumUnpaidItemStrikesInfo.Period</b>) before being
+     * blocked from buying or bidding on the item.
      * - minOccurs: 0
      * @var int|null
      */
@@ -29,9 +28,9 @@ class MaximumUnpaidItemStrikesInfoType extends AbstractStructBase
     /**
      * The Period
      * Meta information extracted from the WSDL
-     * - documentation: This enumerated value defines the length of time over which a prospective buyer's unpaid item strikes will be counted. If the prospective buyer's number of unpaid item strikes during this defined period exceeds the value set in the
-     * <b>Count</b> field, that prospective buyer is blocked from buying/bidding on the item. <br/><br/> If the <b>Count</b> value is 2, and the specified <b>Period</b> is 'Days_30' (counting back 30 days from the present day), any prospective buyer that
-     * has had three or more unpaid item strikes is blocked from buying/bidding on the item. <br>
+     * - documentation: This enumerated value defines the length of time over which a prospective buyer's unpaid items and/or buyer-initiated cancellations will be counted. If the prospective buyer's number of unpaid items and/or buyer-initiated
+     * cancellations during this defined period exceeds the value set in the <b>MaximumUnpaidItemStrikesInfo.Count</b> field, that prospective buyer is blocked from buying/bidding on the item. <br/><br/> If the <b>Count</b> value is 2, and the specified
+     * <b>Period</b> is <code>Days_30</code> (counting back 30 days from the present day), any prospective buyer that has had three or more unpaid items and/or buyer-initiated cancellations is blocked from buying/bidding on the item.
      * - minOccurs: 0
      * @var string|null
      */
@@ -109,7 +108,7 @@ class MaximumUnpaidItemStrikesInfoType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

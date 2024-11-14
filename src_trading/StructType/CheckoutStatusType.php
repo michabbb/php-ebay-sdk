@@ -10,7 +10,7 @@ use WsdlToPhp\PackageBase\AbstractStructBase;
 /**
  * This class stands for CheckoutStatusType StructType
  * Meta information extracted from the WSDL
- * - documentation: Type defining the <b>CheckoutStatus</b> container that is returned in <b>GetOrders</b> and <b>GetOrderTransactions</b> to indicate the current checkout status of the order.
+ * - documentation: Type defining the <b>CheckoutStatus</b> container that is returned in <b>GetOrders</b> to indicate the current checkout status of the order.
  * @subpackage Structs
  */
 class CheckoutStatusType extends AbstractStructBase
@@ -26,7 +26,7 @@ class CheckoutStatusType extends AbstractStructBase
     /**
      * The LastModifiedTime
      * Meta information extracted from the WSDL
-     * - documentation: Indicates the last time that there was a change in value of the <b>CheckoutStatus.Status</b> field, such as 'Pending' to 'Complete'.
+     * - documentation: This timestamp indicates when the order was last modified.
      * - minOccurs: 0
      * @var string|null
      */
@@ -62,14 +62,6 @@ class CheckoutStatusType extends AbstractStructBase
      */
     protected ?bool $IntegratedMerchantCreditCardEnabled = null;
     /**
-     * The eBayPaymentMismatchDetails
-     * Meta information extracted from the WSDL
-     * - documentation: This container is no longer used.
-     * - minOccurs: 0
-     * @var \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType|null
-     */
-    protected ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null;
-    /**
      * The PaymentInstrument
      * Meta information extracted from the WSDL
      * - documentation: The enumeration value in this field indicates which payment method was used by the German buyer who was offered the 'Pay Upon Invoice' option. This field will only be returned if a German buyer was offered the 'Pay Upon Invoice'
@@ -90,7 +82,6 @@ class CheckoutStatusType extends AbstractStructBase
      * @uses CheckoutStatusType::setPaymentMethod()
      * @uses CheckoutStatusType::setStatus()
      * @uses CheckoutStatusType::setIntegratedMerchantCreditCardEnabled()
-     * @uses CheckoutStatusType::setEBayPaymentMismatchDetails()
      * @uses CheckoutStatusType::setPaymentInstrument()
      * @uses CheckoutStatusType::setAny()
      * @param string $eBayPaymentStatus
@@ -98,11 +89,10 @@ class CheckoutStatusType extends AbstractStructBase
      * @param string $paymentMethod
      * @param string $status
      * @param bool $integratedMerchantCreditCardEnabled
-     * @param \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails
      * @param string $paymentInstrument
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $eBayPaymentStatus = null, ?string $lastModifiedTime = null, ?string $paymentMethod = null, ?string $status = null, ?bool $integratedMerchantCreditCardEnabled = null, ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null, ?string $paymentInstrument = null, $any = null)
+    public function __construct(?string $eBayPaymentStatus = null, ?string $lastModifiedTime = null, ?string $paymentMethod = null, ?string $status = null, ?bool $integratedMerchantCreditCardEnabled = null, ?string $paymentInstrument = null, $any = null)
     {
         $this
             ->setEBayPaymentStatus($eBayPaymentStatus)
@@ -110,7 +100,6 @@ class CheckoutStatusType extends AbstractStructBase
             ->setPaymentMethod($paymentMethod)
             ->setStatus($status)
             ->setIntegratedMerchantCreditCardEnabled($integratedMerchantCreditCardEnabled)
-            ->setEBayPaymentMismatchDetails($eBayPaymentMismatchDetails)
             ->setPaymentInstrument($paymentInstrument)
             ->setAny($any);
     }
@@ -239,25 +228,6 @@ class CheckoutStatusType extends AbstractStructBase
         return $this;
     }
     /**
-     * Get eBayPaymentMismatchDetails value
-     * @return \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType|null
-     */
-    public function getEBayPaymentMismatchDetails(): ?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType
-    {
-        return $this->eBayPaymentMismatchDetails;
-    }
-    /**
-     * Set eBayPaymentMismatchDetails value
-     * @param \macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails
-     * @return \macropage\ebaysdk\trading\StructType\CheckoutStatusType
-     */
-    public function setEBayPaymentMismatchDetails(?\macropage\ebaysdk\trading\StructType\EBayPaymentMismatchDetailsType $eBayPaymentMismatchDetails = null): self
-    {
-        $this->eBayPaymentMismatchDetails = $eBayPaymentMismatchDetails;
-        
-        return $this;
-    }
-    /**
      * Get PaymentInstrument value
      * @return string|null
      */
@@ -286,7 +256,7 @@ class CheckoutStatusType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

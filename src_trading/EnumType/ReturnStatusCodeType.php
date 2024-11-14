@@ -38,7 +38,7 @@ class ReturnStatusCodeType extends AbstractStructEnumBase
     /**
      * Constant for value 'ReturnRequestRejected'
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates that the buyer's return request was rejected by the seller.
+     * - documentation: This value indicates that the buyer's return request was rejected by the seller or other authorized party.
      * @return string 'ReturnRequestRejected'
      */
     const VALUE_RETURN_REQUEST_REJECTED = 'ReturnRequestRejected';

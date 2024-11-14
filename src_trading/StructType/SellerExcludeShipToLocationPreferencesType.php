@@ -20,12 +20,11 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
      * The ExcludeShipToLocation
      * Meta information extracted from the WSDL
      * - documentation: One <b>ExcludeShipToLocation</b> field is returned for each geographical region or country excluded as a possible shipping location in the seller's My eBay Shipping Preferences. Sellers can also exclude Alaska/Hawaii and Army Post
-     * Office/Fleet Post Office as possible shipping locations. For excluded countries, "http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm">ISO 3166</a> country codes are returned. <br><br> Domestically,
-     * the seller can specify Alaska/Hawaii, US Protectorates (including American Samoa, Guam, Mariana Island, Marshall Islands, Micronesia, Palau, Puerto Rico, and U.S. Virgin Islands) as places he/she will not ship to. Internationally, the sellers can
-     * exclude entire regions (including Africa, Asia, Central America and Caribbean, Europe, Middle East, North America, Oceania, Southeast Asia, and South America) or specific countries within those regions. <br><br> If a buyer's primary ship-to location
-     * is a location that you have listed as an excluded ship-to location (or if the buyer does not have a primary ship-to location), they will receive an error message if they attempt to buy or place a bid on your item. <br><br> To see the valid exclude
-     * ship-to locations for a specified site, call <b>GeteBayDetails</b> with a <b>DetailName</b> field set to <b>ExcludeShippingLocationDetails</b>. <br><br> <span class="tablenote"><strong>Note:</strong> To enable your default Exclude Ship-To List, you
-     * must enable Exclude Shipping Locations and Buyer Requirements in your My eBay Site Preferences. For details, see the KnowledgeBase Article <a href= "https://ebaydts.com/eBayKBDetails?KBid=1495" >HowTo: ExcludeShipToLocation</a>. </span>
+     * Office/Fleet Post Office as possible shipping locations. For excluded countries, <a href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm">ISO 3166</a> country codes are returned. <br><br>
+     * Domestically, the seller can specify Alaska/Hawaii, US Protectorates (including American Samoa, Guam, Mariana Island, Marshall Islands, Micronesia, Palau, Puerto Rico, and U.S. Virgin Islands) as places he/she will not ship to. Internationally, the
+     * sellers can exclude entire regions (including Africa, Asia, Central America and Caribbean, Europe, Middle East, North America, Oceania, Southeast Asia, and South America) or specific countries within those regions. <br><br> If a buyer's primary
+     * ship-to location is a location that you have listed as an excluded ship-to location (or if the buyer does not have a primary ship-to location), they will receive an error message if they attempt to buy or place a bid on your item. <br><br> To see the
+     * valid exclude ship-to locations for a specified site, call <b>GeteBayDetails</b> with a <b>DetailName</b> field set to <b>ExcludeShippingLocationDetails</b>.
      * - maxOccurs: unbounded
      * - minOccurs: 0
      * @var string[]
@@ -118,7 +117,7 @@ class SellerExcludeShipToLocationPreferencesType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)

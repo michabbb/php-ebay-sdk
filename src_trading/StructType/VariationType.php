@@ -18,11 +18,12 @@ class VariationType extends AbstractStructBase
     /**
      * The SKU
      * Meta information extracted from the WSDL
-     * - documentation: A SKU (stock keeping unit) is a seller-defined identifier. It is only intended for the seller's use (not for buyers). A SKU value is not required, but many large sellers like to add SKU value to their listings. If defined on a
+     * - documentation: <br> A SKU (stock keeping unit) is a seller-defined identifier. It is only intended for the seller's use (not for buyers). A SKU value is not required, but many large sellers like to add SKU value to their listings. If defined on a
      * listing, a SKU value can be used by sellers to reconcile their eBay inventory with your own inventory system, instead of using the <b>VariationSpecifics</b> identifying values. <br> <br> If specified, all SKU values must be unique within the
      * <b>Variations</b> node. That is, no two variations within the same listing can have the same SKU. <br> <br> If you include the <b>Item.InventoryTrackingMethod</b> field in an 'FixedPriceItem' call and set its value to <code>SKU</code>, the
-     * <b>Variation.SKU</b> values become required for each variation..<br> <br> <b>For GetItem, GetOrders and other 'Get' calls:</b> Only returned if the seller specified a SKU for the variation. | Primitive type that represents a stock-keeping unit (SKU).
-     * The usage of this string may vary in different contexts. For usage information and rules, see the fields that reference this type.
+     * <b>Variation.SKU</b> values become required for each variation..<br> <br> <b>For GetItem, GetOrders and other 'Get' calls:</b> Only returned if the seller specified a SKU for the variation. <br> <span class="tablenote"><b>Note: </b> The
+     * <b>Item.Variations</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> on January 31, 2024. </span> | Primitive type that represents a stock-keeping unit (SKU). The usage of this string may vary in different
+     * contexts. For usage information and rules, see the fields that reference this type.
      * - base: xs:string
      * - minOccurs: 0
      * @var string|null
@@ -31,9 +32,10 @@ class VariationType extends AbstractStructBase
     /**
      * The StartPrice
      * Meta information extracted from the WSDL
-     * - documentation: The fixed price for this item variation. For example, a "Blue, Large" variation price could be USD 10.00, and a "Black, Medium" variation price could be USD 5.00.<br> <br> Each variation requires this field, and the prices can be the
-     * same for all variations, or be different for each variation. This enables sellers to provide discounts on certain variations without affecting the price of others. Required (and always returned) for listings with variations.<br> <br> You can revise a
-     * variation's price at any time (even if it has purchases). When you modify a variation during revise or relist, you need to include both its <b>StartPrice</b> and <b>Quantity</b>.
+     * - documentation: <br> The fixed price for this item variation. For example, a "Blue, Large" variation price could be USD 10.00, and a "Black, Medium" variation price could be USD 5.00.<br> <br> Each variation requires this field, and the prices can
+     * be the same for all variations, or be different for each variation. This enables sellers to provide discounts on certain variations without affecting the price of others. Required (and always returned) for listings with variations.<br> <br> You can
+     * revise a variation's price at any time (even if it has purchases). When you modify a variation during revise or relist, you need to include both its <b>StartPrice</b> and <b>Quantity</b>. <br> <span class="tablenote"><b>Note: </b> The
+     * <b>Item.Variations</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\AmountType|null
      */
@@ -41,14 +43,14 @@ class VariationType extends AbstractStructBase
     /**
      * The Quantity
      * Meta information extracted from the WSDL
-     * - documentation: This value indicates the quantity of the specific variation that are available for purchase. If you set <b>Variation.Quantity</b> to <code>0</code> when you create, revise, or relist an item listing, the variation is dropped from the
-     * listing. To prevent this, you can set <a href="https://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences.OutOfStockControlPreference</a> to <code>true</code>. <br/><br/>
-     * For <b>GetItem</b> (and other related calls that retrieve the Item object), the <b>Variation.Quantity</b> value indicates the total quantity associated with the variation, including the quantity available and the quantity sold. To calculate the
-     * quantity available for sale, subtract <b>SellingStatus.QuantitySold</b> from this value.<br> <br> <b>For RelistFixedPriceItem:</b> <ul> <li>For an item variation that had an available quantity greater than <code>0</code> when the listing ended, the
-     * <b>Quantity</b> value of the item variation for the newly relisted item is set to the actual quantity available. For item variations, there is actually no <b>QuantityAvailable</b> field, but this value may be derived if you look at the corresponding
-     * item variation in a <b>GetMyeBaySelling</b>) response and subtract the <b>Variation.QuantitySold</b> value from the <b>Variation.Quantity</b> value, which represents the original <b>Variation.Quantity</b> value at creation time of the previous
-     * listing. </li> <li>For item variations with an available quantity of <code>0</code> when the listing ended, the relisted item will retain the <b>Variaton.Quantity</b> value that was passed in at creation time of the previous listing. </li> </ul> So,
-     * if you are relisting an item that had one or more item variations with an available quantity of <code>0</code> when the listing ended, we strongly recommend that you pass in the correct available quantity through the corresponding
+     * - documentation: <br/> This value indicates the quantity of the specific variation that are available for purchase. If you set <b>Variation.Quantity</b> to <code>0</code> when you create, revise, or relist an item listing, the variation is dropped
+     * from the listing. To prevent this, you can set <a href="https://developer.ebay.com/DevZone/XML/docs/Reference/ebay/SetUserPreferences.html#Request.OutOfStockControlPreference">SetUserPreferences.OutOfStockControlPreference</a> to <code>true</code>.
+     * <br/><br/> For <b>GetItem</b> (and other related calls that retrieve the Item object), the <b>Variation.Quantity</b> value indicates the total quantity associated with the variation, including the quantity available and the quantity sold. To
+     * calculate the quantity available for sale, subtract <b>SellingStatus.QuantitySold</b> from this value.<br> <br> <b>For RelistFixedPriceItem:</b> <ul> <li>For an item variation that had an available quantity greater than <code>0</code> when the
+     * listing ended, the <b>Quantity</b> value of the item variation for the newly relisted item is set to the actual quantity available. For item variations, there is actually no <b>QuantityAvailable</b> field, but this value may be derived if you look at
+     * the corresponding item variation in a <b>GetMyeBaySelling</b>) response and subtract the <b>Variation.QuantitySold</b> value from the <b>Variation.Quantity</b> value, which represents the original <b>Variation.Quantity</b> value at creation time of
+     * the previous listing. </li> <li>For item variations with an available quantity of <code>0</code> when the listing ended, the relisted item will retain the <b>Variaton.Quantity</b> value that was passed in at creation time of the previous listing.
+     * </li> </ul> So, if you are relisting an item that had one or more item variations with an available quantity of <code>0</code> when the listing ended, we strongly recommend that you pass in the correct available quantity through the corresponding
      * <b>Variation.Quantity</b> field of a relist call. Alternatively, you can update the correct quantity available by using a <b>ReviseInventoryStatus</b> call and passing in a <b>Quantity</b> value, while also making sure to pass in the correct
      * <b>SKU</b> value(s) to identify the correct item variation. A <b>ReviseInventoryStatus</b> call can be used to revise the quantity of up to four single item listings and/or item variations (from the same or different listings). <br> <br> <b>For
      * ReviseFixedPriceItem:</b> You can revise a variation's quantity at any time, even if it has purchases. However, unless you set the <a
@@ -56,11 +58,12 @@ class VariationType extends AbstractStructBase
      * variation must remain with a non-zero quantity in order for the listing to remain active. If you set the <b>OutOfStockControlPreference</b> field to <code>true</code>, a multiple-variation listing will remain active but hidden from search even if the
      * quantity of all variations in the listing is set to <code>0</code>. When you modify a variation during revise or relist, you need to include both its <b>StartPrice</b> and <b>Quantity</b>. If you revise the <b>Quantity</b> value for a variation after
      * items have already sold, specify the quantity available for sale. (eBay will automatically add the quantity sold to the value you specify.) If you set the quantity to <code>0</code> and the variation has no purchases, the variation may be dropped
-     * from the listing. <br> <br> <b>For GetSellerTransactions:</b> See <b>Item.Quantity</b> instead.<br> <br> See the <a href="https://developer.ebay.com/Devzone/guides/features-guide/default.html#development/Variations-Updating.html">eBay Features
-     * Guide</a> for more details about setting and modifying a variation's quantity. <br><br> <span class="tablenote"><b>Note:</b> The number in the <b>Variation.Quantity</b> field represents the current quantity of the item variation that is available
-     * using the "Ship to home" fulfillment method. This number does not take into account any quantity of the item variation that is available through "local" fulfillment methods such as In-Store Pickup or Click and Collect. This is due to the fact that
-     * there is no current implementation (or API field) where the seller informs eBay about the quantity of item variations available through each local fulfillment method. In the case where a listing is only offering the item variations through a local
-     * fulfillment method, this value should default to <code>0</code>, and the <b>Item.IgnoreQuantity</b> will also be returned as <code>True</code>. </span> <br>
+     * from the listing. <br> <br> <b>For GetSellerTransactions:</b> See <b>Item.Quantity</b> instead.<br> <br> See the <a href="https://developer.ebay.com/api-docs/user-guides/static/trading-user-guide/update-variations.html" target="_blank">Trading API
+     * User Guide</a> for more details about setting and modifying a variation's quantity. <br><br> <span class="tablenote"><b>Note:</b> The number in the <b>Variation.Quantity</b> field represents the current quantity of the item variation that is
+     * available using the "Ship to home" fulfillment method. This number does not take into account any quantity of the item variation that is available through "local" fulfillment methods such as In-Store Pickup or Click and Collect. This is due to the
+     * fact that there is no current implementation (or API field) where the seller informs eBay about the quantity of item variations available through each local fulfillment method. In the case where a listing is only offering the item variations through
+     * a local fulfillment method, this value should default to <code>0</code>, and the <b>Item.IgnoreQuantity</b> will also be returned as <code>True</code>. </span> <br> <span class="tablenote"><b>Note: </b> The <b>Item.Variations</b> container and its
+     * child fields will stop being returned in <b>GetItemTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var int|null
      */
@@ -68,28 +71,22 @@ class VariationType extends AbstractStructBase
     /**
      * The VariationSpecifics
      * Meta information extracted from the WSDL
-     * - documentation: A list of name/value pairs that uniquely identify the variation within the listing. All variations must specify the same set of Item Specific names, but each variation must provide a unique combination of values for those Item
+     * - documentation: <br> A list of name/value pairs that uniquely identify the variation within the listing. All variations must specify the same set of Item Specific names, but each variation must provide a unique combination of values for those Item
      * Specific names. For example, if the items vary by color and size, then every variation must specify 'Color' and 'Size' as Item Specific names, but no two variations can specify the same combination of 'Color' and 'Size' values.<br> <br> When you
      * revise a listing that includes variations, you can change names of <b>Variationpecifics</b> by using the <b>Variations.ModifyNameList</b> container. You can also add, delete, or replace individual variations as needed to match your current inventory.
      * Use the <b>Variation.Delete</b> field to delete a variation that has no sales (order line items). If the variation has sales, then set the Quantity to 0.<br> <br> <b>For GetSellerEvents</b> To keep the <b>GetSellerEvents</b> response smaller,
      * <b>Variationpecifics</b> are not returned if the variation has a SKU. If the variation has no SKU, then <b>Variationpecifics</b> are returned instead. Optionally, you can pass <b>IncludeVariationSpecifics</b> as <code>true</code> in the request to
-     * force <b>Variationpecifics</b> to be returned, even when the SKU is returned.
+     * force <b>Variationpecifics</b> to be returned, even when the SKU is returned. <br> <span class="tablenote"><b>Note: </b> The <b>Item.Variations</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> on January 31,
+     * 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType|null
      */
     protected ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $VariationSpecifics = null;
     /**
-     * The UnitsAvailable
-     * Meta information extracted from the WSDL
-     * - documentation: Quantity of items in the seller's inventory for this Selling Manager product. This is not the same as the quantity available in a listed item. Required when a Selling Manager product defines variations.
-     * - minOccurs: 0
-     * @var int|null
-     */
-    protected ?int $UnitsAvailable = null;
-    /**
      * The SellingStatus
      * Meta information extracted from the WSDL
-     * - documentation: Contains the variation's quantity sold. Always returned when variations are present.
+     * - documentation: Contains the variation's quantity sold. Always returned when variations are present. <br> <span class="tablenote"><b>Note: </b> The <b>Item.Variations</b> container and its child fields will stop being returned in
+     * <b>GetItemTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\SellingStatusType|null
      */
@@ -98,7 +95,7 @@ class VariationType extends AbstractStructBase
      * The VariationTitle
      * Meta information extracted from the WSDL
      * - documentation: The title of the variation. This is a concatenation of the listing title plus the values (no names) from <b>Variationpecifics</b>. For example, if the Title is "Polo Shirt" and the variation is for a medium pink shirt, the variation
-     * title could be "Polo Shirt[Pink,M]. <br/>
+     * title could be "Polo Shirt[Pink,M]. <br> <span class="tablenote"><b>Note: </b> The <b>Item.Variations</b> container and its child fields will stop being returned in <b>GetItemTransactions</b> on January 31, 2024. </span>
      * - minOccurs: 0
      * @var string|null
      */
@@ -147,9 +144,9 @@ class VariationType extends AbstractStructBase
      * Meta information extracted from the WSDL
      * - documentation: This container provides information for a single variation (within a multiple-variation listing) that has a Strikethrough Price (STP) or a Minimum Advertised Price (MAP) discount pricing treatment. For a multiple-variation listing,
      * the discount pricing information should be set at the variation level and not at the item level (e.g. <b>Item.DiscountPriceInfo</b>). STP and MAP apply only to fixed-price listings. STP is available on the US, eBay Motors, UK, Germany, Canada
-     * (English and French), France, Italy, and Spain sites, while MAP is available only on the US site. <br><br> Discount pricing is available to qualified sellers (and their associated developers) who participate in the Discount Pricing Program. Once
-     * qualified, sellers receive a 'special account flag' (SAF) that allows them to apply Discount Pricing to both single-variation and multi-variation items. STP is intended for eBay partners and their sellers only. <br><br> As a seller listing Discount
-     * Price items, you are required to maintain records of your discount pricing in the event you are called upon to substantiate your item pricing.
+     * (English and French), France, Italy, Spain, and Ireland sites, while MAP is available only on the US site. <br><br> Discount pricing is available to qualified sellers (and their associated developers) who participate in the Discount Pricing Program.
+     * Once qualified, sellers receive a 'special account flag' (SAF) that allows them to apply Discount Pricing to both single-variation and multi-variation items. STP is intended for eBay partners and their sellers only. <br><br> As a seller listing
+     * Discount Price items, you are required to maintain records of your discount pricing in the event you are called upon to substantiate your item pricing.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\DiscountPriceInfoType|null
      */
@@ -158,11 +155,9 @@ class VariationType extends AbstractStructBase
      * The VariationProductListingDetails
      * Meta information extracted from the WSDL
      * - documentation: This container is used to provide one or more product identifiers for a product variation within a multiple-variation, fixed-price listing. The same product identifier type(s) must be used for all product variations within the
-     * listing. For instance, if one product variation uses ISBNs, all product variations must use ISBN values. <br> <br> <span class="tablenote"><b>Note:</b> Currently, the <b>EAN</b>, <b>ISBN</b>, or <b>UPC</b> fields are used to specify a Global Trade
-     * Item Number (GTIN), and the <b>GetCategoryFeatures</b> call is used to see if particular product identifier types are supported/required. The <b>ProductReferenceID</b> field can only be used to specify an ePID for an eBay Catalog product that is part
-     * of the Product-Based Shopping Experience mandate. For more information about PBSE, see the <a href="https://developer.ebay.com/pbse/" target="_blank">Product-Based Shopping Experience</a> page. </span> <br> When you include the
-     * <b>VariationProductListingDetails</b> container in a call, you must specify at least one GTIN or ePID. If an ePID is provided, a matching eBay catalog product must exist for the value that is passed in. <br> <br> <b>For ReviseItem and RelistItem
-     * only:</b> When you revise a listing, if it ends within 12 hours, you cannot change the product identifier and you cannot remove existing product variation listing details data.
+     * listing. For instance, if one product variation uses ISBNs, all product variations must use ISBN values. <br> <br> When you include the <b>VariationProductListingDetails</b> container in a call, you must specify at least one GTIN or ePID. If an ePID
+     * is provided, a matching eBay catalog product must exist for the value that is passed in. <br> <br> <b>For ReviseItem and RelistItem only:</b> When you revise a listing, if it ends within 12 hours, you cannot change the product identifier and you
+     * cannot remove existing product variation listing details data.
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType|null
      */
@@ -170,9 +165,8 @@ class VariationType extends AbstractStructBase
     /**
      * The VariationExtendedProducerResponsibility
      * Meta information extracted from the WSDL
-     * - documentation: <span class="tablenote"><b>Note:</b> Support for extended producer responsibility regulations and custom policies will become active mid-December 2021. Additional resources such as the custom policies resource (for the <b>Account
-     * API</b>), the <b>getExtendedProducerResponsibilityPolicies</b> method (for the <b>Sell Metadata API</b>), and the <a href="https://www.ebay.com/help/selling/custom-policies/custom-policies?id=5311" target="_blank">Custom Policies</a> help page will
-     * also become active.</span> This container defines variation-specific Extended Producer Responsibility information, specifically the <strong>EcoParticipationFee</strong>.
+     * - documentation: This container defines variation-specific Extended Producer Responsibility information, specifically the <strong>EcoParticipationFee</strong>. <br/><br/>For <b>GetItem</b> calls, this container is only returned to the listing owner,
+     * if the container is available.
      * - maxOccurs: 1
      * - minOccurs: 0
      * @var \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType|null
@@ -189,7 +183,6 @@ class VariationType extends AbstractStructBase
      * @uses VariationType::setStartPrice()
      * @uses VariationType::setQuantity()
      * @uses VariationType::setVariationSpecifics()
-     * @uses VariationType::setUnitsAvailable()
      * @uses VariationType::setSellingStatus()
      * @uses VariationType::setVariationTitle()
      * @uses VariationType::setVariationViewItemURL()
@@ -204,7 +197,6 @@ class VariationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\AmountType $startPrice
      * @param int $quantity
      * @param \macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics
-     * @param int $unitsAvailable
      * @param \macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus
      * @param string $variationTitle
      * @param string $variationViewItemURL
@@ -216,14 +208,13 @@ class VariationType extends AbstractStructBase
      * @param \macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility
      * @param \DOMDocument|string|null $any
      */
-    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?int $unitsAvailable = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility = null, $any = null)
+    public function __construct(?string $sKU = null, ?\macropage\ebaysdk\trading\StructType\AmountType $startPrice = null, ?int $quantity = null, ?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null, ?\macropage\ebaysdk\trading\StructType\SellingStatusType $sellingStatus = null, ?string $variationTitle = null, ?string $variationViewItemURL = null, ?bool $delete = false, ?int $watchCount = null, ?string $privateNotes = null, ?\macropage\ebaysdk\trading\StructType\DiscountPriceInfoType $discountPriceInfo = null, ?\macropage\ebaysdk\trading\StructType\VariationProductListingDetailsType $variationProductListingDetails = null, ?\macropage\ebaysdk\trading\StructType\VariationExtendedProducerResponsibilityType $variationExtendedProducerResponsibility = null, $any = null)
     {
         $this
             ->setSKU($sKU)
             ->setStartPrice($startPrice)
             ->setQuantity($quantity)
             ->setVariationSpecifics($variationSpecifics)
-            ->setUnitsAvailable($unitsAvailable)
             ->setSellingStatus($sellingStatus)
             ->setVariationTitle($variationTitle)
             ->setVariationViewItemURL($variationViewItemURL)
@@ -316,29 +307,6 @@ class VariationType extends AbstractStructBase
     public function setVariationSpecifics(?\macropage\ebaysdk\trading\ArrayType\NameValueListArrayType $variationSpecifics = null): self
     {
         $this->VariationSpecifics = $variationSpecifics;
-        
-        return $this;
-    }
-    /**
-     * Get UnitsAvailable value
-     * @return int|null
-     */
-    public function getUnitsAvailable(): ?int
-    {
-        return $this->UnitsAvailable;
-    }
-    /**
-     * Set UnitsAvailable value
-     * @param int $unitsAvailable
-     * @return \macropage\ebaysdk\trading\StructType\VariationType
-     */
-    public function setUnitsAvailable(?int $unitsAvailable = null): self
-    {
-        // validation for constraint: int
-        if (!is_null($unitsAvailable) && !(is_int($unitsAvailable) || ctype_digit($unitsAvailable))) {
-            throw new InvalidArgumentException(sprintf('Invalid value %s, please provide an integer value, %s given', var_export($unitsAvailable, true), gettype($unitsAvailable)), __LINE__);
-        }
-        $this->UnitsAvailable = $unitsAvailable;
         
         return $this;
     }
@@ -536,7 +504,7 @@ class VariationType extends AbstractStructBase
     /**
      * Get any value
      * @uses \DOMDocument::loadXML()
-     * @param bool $asString true: returns XML string, false: returns \DOMDocument
+     * @param bool $asDomDocument true: returns \DOMDocument, false: returns XML string
      * @return \DOMDocument|string|null
      */
     public function getAny(bool $asDomDocument = false)
