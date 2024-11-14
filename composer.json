@@ -5,7 +5,7 @@
         "roave/security-advisories": "dev-master",
         "php": ">=7.4",
         "ext-soap": "*",
-        "wsdltophp/packagebase": "~2.0",
+        "wsdltophp/packagebase": "~5.0",
         "psr/log": "1.*",
         "ext-dom": "*",
         "guzzlehttp/guzzle": "^7.3 || ^7.8"
