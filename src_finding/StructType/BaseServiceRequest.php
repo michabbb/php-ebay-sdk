@@ -26,7 +26,7 @@ abstract class BaseServiceRequest extends AbstractStructBase
      * @param array $array the exported values
      * @return \macropage\ebaysdk\finding\StructType\BaseServiceRequest
      */
-    public static function __set_state(array $array)
+    public static function __set_state(array $array): \WsdlToPhp\PackageBase\StructInterface
     {
         return parent::__set_state($array);
     }
@@ -34,7 +34,7 @@ abstract class BaseServiceRequest extends AbstractStructBase
      * Method returning the class name
      * @return string __CLASS__
      */
-    public function __toString()
+    public function __toString(): string
     {
         return __CLASS__;
     }

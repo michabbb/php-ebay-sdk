@@ -3,6 +3,7 @@
 namespace macropage\ebaysdk\finding\StructType;
 
 use \WsdlToPhp\PackageBase\AbstractStructBase;
+use WsdlToPhp\PackageBase\StructInterface;
 
 /**
  * This class stands for Affiliate StructType
@@ -234,7 +235,7 @@ class Affiliate extends AbstractStructBase
      * @param array $array the exported values
      * @return \macropage\ebaysdk\finding\StructType\Affiliate
      */
-    public static function __set_state(array $array)
+    public static function __set_state(array $array): StructInterface
     {
         return parent::__set_state($array);
     }
@@ -242,7 +243,7 @@ class Affiliate extends AbstractStructBase
      * Method returning the class name
      * @return string __CLASS__
      */
-    public function __toString()
+    public function __toString(): string
     {
         return __CLASS__;
     }

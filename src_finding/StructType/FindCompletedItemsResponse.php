@@ -120,7 +120,7 @@ class FindCompletedItemsResponse extends BaseFindingServiceResponse
      * @param array $array the exported values
      * @return \macropage\ebaysdk\finding\StructType\FindCompletedItemsResponse
      */
-    public static function __set_state(array $array)
+    public static function __set_state(array $array): \WsdlToPhp\PackageBase\StructInterface
     {
         return parent::__set_state($array);
     }
@@ -128,7 +128,7 @@ class FindCompletedItemsResponse extends BaseFindingServiceResponse
      * Method returning the class name
      * @return string __CLASS__
      */
-    public function __toString()
+    public function __toString(): string
     {
         return __CLASS__;
     }
